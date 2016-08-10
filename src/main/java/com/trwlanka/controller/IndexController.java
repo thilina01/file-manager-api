@@ -10,9 +10,9 @@ import com.trwlanka.Dummy;
 import com.trwlanka.entity.Folder;
 
 @RestController
+@CrossOrigin
 public class IndexController {
 	
-	@CrossOrigin
     @GetMapping("/")
     public ArrayList <Folder> root() {
 		
