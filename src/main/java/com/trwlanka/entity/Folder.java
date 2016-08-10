@@ -1,19 +1,33 @@
 package com.trwlanka.entity;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
+@Entity
 @Data
 public class Folder {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	String name;
+	
+	@ManyToOne
 	Folder folder;
-	ArrayList<Folder> folders;
-	ArrayList<File> files;
+	
+	@OneToMany(mappedBy="folder")
+	List<Folder> folders;
+
+	@ManyToMany
+	@JoinTable(name = "folder_file")
+	private List<File> files;
 }

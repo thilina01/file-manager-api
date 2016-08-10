@@ -15,7 +15,7 @@ public class IndexController {
 	@CrossOrigin
     @GetMapping("/")
     public ArrayList <Folder> root() {
-    	
+		
     	return Dummy.getFolders();
 
     }

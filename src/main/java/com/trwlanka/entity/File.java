@@ -1,21 +1,30 @@
 package com.trwlanka.entity;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
+@Entity
 @Data
 public class File {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	String name;
 	String note;
 	String Link;
+	
+	@ManyToOne
 	FileType fileType;
-	ArrayList<Folder>folders;
+
+	@ManyToMany(mappedBy = "files")
+	private List<Folder> folders;
 
 }
