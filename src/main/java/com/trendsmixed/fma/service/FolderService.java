@@ -17,8 +17,16 @@ public class FolderService {
 	public List<Folder> findAll() {
 		return folderRepository.findAll();
 	}
+
+	public Folder save(Folder folder) {
+		return folderRepository.save(folder);
+	}
+
+	public Folder findOne(int id) {
+		return folderRepository.findOne(id);
+	}
 	
-	public void save(Folder folder) {
-		folderRepository.save(folder);
+	public void delete(int id) {
+		folderRepository.delete(id);
 	}
 }
