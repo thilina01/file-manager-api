@@ -6,4 +6,5 @@ import com.trendsmixed.fma.entity.Folder;
 
 public interface FolderRepository extends JpaRepository<Folder, Integer> {
 
+
 }
