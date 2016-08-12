@@ -1,4 +1,4 @@
-package com.trwlanka.entity;
+package com.trendsmixed.fma.entity;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package com.trwlanka;
+package com.trendsmixed.fma;
 
 import java.util.ArrayList;
 
-import com.trwlanka.entity.File;
-import com.trwlanka.entity.FileType;
-import com.trwlanka.entity.Folder;
+import com.trendsmixed.fma.entity.File;
+import com.trendsmixed.fma.entity.FileType;
+import com.trendsmixed.fma.entity.Folder;
 
 public class Dummy {
 	

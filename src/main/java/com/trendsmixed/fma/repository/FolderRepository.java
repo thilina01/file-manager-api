@@ -1,8 +1,8 @@
-package com.trwlanka.repository;
+package com.trendsmixed.fma.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.trwlanka.entity.Folder;
+import com.trendsmixed.fma.entity.Folder;
 
 public interface FolderRepository extends JpaRepository<Folder, Integer> {
 

@@ -1,12 +1,12 @@
-package com.trwlanka.service;
+package com.trendsmixed.fma.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trwlanka.entity.Folder;
-import com.trwlanka.repository.FolderRepository;
+import com.trendsmixed.fma.entity.Folder;
+import com.trendsmixed.fma.repository.FolderRepository;
 
 @Service
 public class FolderService {

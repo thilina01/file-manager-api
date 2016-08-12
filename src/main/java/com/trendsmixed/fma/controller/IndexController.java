@@ -1,4 +1,4 @@
-package com.trwlanka.controller;
+package com.trendsmixed.fma.controller;
 
 import java.util.ArrayList;
 
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trwlanka.Dummy;
-import com.trwlanka.entity.Folder;
+import com.trendsmixed.fma.Dummy;
+import com.trendsmixed.fma.entity.Folder;
 
 @RestController
 @CrossOrigin

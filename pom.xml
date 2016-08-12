@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.trwlanka</groupId>
+	<groupId>com.trendsmixed</groupId>
 	<artifactId>file-manager-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>file-manager-api</name>
-	<description>Demo project for Spring Boot</description>
+	<description>API for file management system</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

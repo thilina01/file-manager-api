@@ -1,4 +1,4 @@
-package com.trwlanka;
+package com.trendsmixed.fma;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
