@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.entity;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ public class File {
 	String name;
 	String note;
 	String Link;
+        Date uploadDate;
 	
 	@ManyToOne
 	FileType fileType;
