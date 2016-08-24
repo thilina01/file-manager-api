@@ -29,4 +29,8 @@ public class FolderService {
 	public void delete(int id) {
 		folderRepository.delete(id);
 	}
+
+    public List<Folder> findByFolderIsNull() {
+		return folderRepository.findByFolderIsNull();
+    }
 }
