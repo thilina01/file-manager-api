@@ -9,5 +9,4 @@ public interface FolderRepository extends JpaRepository<Folder, Integer> {
 
     public List<Folder> findByFolderIsNull();
 
-
 }
