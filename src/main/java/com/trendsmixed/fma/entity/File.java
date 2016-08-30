@@ -1,6 +1,8 @@
 package com.trendsmixed.fma.entity;
 
-import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.Views;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -14,19 +16,29 @@ import lombok.Data;
 @Entity
 @Data
 public class File {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-	String name;
-	String note;
-	String Link;
-        Date uploadDate;
-	
-	@ManyToOne
-	FileType fileType;
 
-	@ManyToMany(mappedBy = "files")
-	private List<Folder> folders;
+    @Id
+    @GeneratedValue
+    @JsonView(Views.FolderOnly.class)
+    private Integer id;
+
+    @JsonView(Views.FolderOnly.class)
+    String name;
+    @JsonView(Views.FolderOnly.class)
+    String extension;
+    @JsonView(Views.FolderOnly.class)
+    String originalFileName;
+    @JsonView(Views.FolderOnly.class)
+    String description;
+    @JsonView(Views.FolderOnly.class)
+    String Link;
+    @JsonView(Views.FolderOnly.class)
+    Date uploadDate;
+
+    @ManyToOne
+    FileType fileType;
+
+    @ManyToMany(mappedBy = "files")
+    private List<Folder> folders;
 
 }
