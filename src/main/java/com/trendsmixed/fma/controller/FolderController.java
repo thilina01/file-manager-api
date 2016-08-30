@@ -26,15 +26,27 @@ public class FolderController {
 
     @PostMapping
     public Folder save(@RequestBody Folder folder) {
-        return folderService.save(folder);
+        try {
+            folder = folderService.save(folder);
+            return folder;
+
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
     }
 
     @GetMapping//("/top")
-    public @JsonView(Views.FolderOnly.class) List<Folder> all() {
+    public @JsonView(Views.FolderOnly.class)
+    List<Folder> all() {
         return folderService.findAll();
     }
+
     @GetMapping("/top")
-    public @JsonView(Views.FolderOnly.class) List<Folder> top() {
+    public @JsonView(Views.FolderOnly.class)
+    List<Folder> top() {
         return folderService.findByFolderIsNull();
     }
 
@@ -43,37 +55,38 @@ public class FolderController {
     Folder one(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
-    
+
     @GetMapping("/{id}/with-parent")
     public @JsonView(Views.FolderWithParent.class)
     Folder oneWithParent(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
-    
+
     @GetMapping("/{id}/with-sub-folders")
     public @JsonView(Views.FolderWithSubFolders.class)
     Folder oneWithSubFolders(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
-    
+
     @GetMapping("/{id}/with-files")
     public @JsonView(Views.FolderWithFiles.class)
     Folder oneWithFiles(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
-    
+
     @GetMapping("/{id}/with-sub-folders-and-files")
     public @JsonView(Views.FolderWithSubFoldersAndFiles.class)
     Folder oneWithSubFoldersAndFiles(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
-/*
+
+    /*
     @GetMapping("/{id}/with-parent-and-sub-folders-and-files")
     public @JsonView(Views.FolderParentAndWithSubFoldersAndFiles.class)
     Folder oneWithParentAndSubFoldersAndFiles(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
-*/
+     */
     @GetMapping("/delete/{id}")
     public void delete(@PathVariable("id") int id) {
         folderService.delete(id);
