@@ -1,9 +1,11 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.entity.Download;
 import com.trendsmixed.fma.entity.File;
 import com.trendsmixed.fma.entity.Folder;
+import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.FileService;
 import com.trendsmixed.fma.service.FolderService;
 import java.io.BufferedOutputStream;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +41,8 @@ public class FileController {
     private FileService fileService;
     @Autowired
     private FolderService folderService;
+    @Autowired
+    private AppSessionService appSessionService;
 
     @GetMapping//("/top")
     public List<File> all() {
@@ -45,8 +50,13 @@ public class FileController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable("id") int id) {
-        deleteFile(id);
+    public void delete(@PathVariable("id") int id, @RequestHeader(value = "email", defaultValue = "") String email) {
+        AppSession appSession = appSessionService.findOne(email);
+        if (appSession == null) {
+            throw new Error("Unauthorized access");
+        } else {
+            deleteFile(id);
+        }
     }
 
     @GetMapping(value = "/{id}/download")
