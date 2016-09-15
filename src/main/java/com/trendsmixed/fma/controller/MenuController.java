@@ -23,9 +23,7 @@ public class MenuController {
     @GetMapping
     public ArrayList<Menu> getMenus(@RequestHeader(value = "email", defaultValue = "") String email) {
         ArrayList<Menu> menus = new ArrayList<>();
-
-        System.out.println(email);
-        
+        //System.out.println(email);      
         //AppSession appSession = null;
         //if (!email.equals("")) {}
         AppSession appSession = appSessionService.findOne(email);
