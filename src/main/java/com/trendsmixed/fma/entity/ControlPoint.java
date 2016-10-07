@@ -18,6 +18,8 @@ public class ControlPoint {
 
     @JsonView(ControlPointView.Code.class)
     String code;
+    
+    @JsonView(ControlPointView.Name.class)
     String name;
 
 }
