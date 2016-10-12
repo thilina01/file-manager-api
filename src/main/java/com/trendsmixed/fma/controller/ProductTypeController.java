@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.Customer;
 import com.trendsmixed.fma.entity.ProductType;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ProductTypeService;

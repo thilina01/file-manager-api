@@ -5,10 +5,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.Customer;
 import com.trendsmixed.fma.entity.Job;
 import com.trendsmixed.fma.service.AppSessionService;
-import com.trendsmixed.fma.service.CustomerService;
 import com.trendsmixed.fma.service.JobService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
