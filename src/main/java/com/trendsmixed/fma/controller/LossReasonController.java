@@ -10,6 +10,7 @@ import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.LossReasonService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,4 +56,11 @@ public class LossReasonController {
         return lossReasonService.findOne(id);
     }
 
+    @DeleteMapping(value = "/{id}")
+    
+    public String delete(@PathVariable int id) {
+        lossReasonService.delete(id);
+        return "Deleted";
+
+    }
 }
