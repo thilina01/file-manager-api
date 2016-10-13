@@ -12,11 +12,11 @@ import com.trendsmixed.fma.entity.Folder;
 @RestController
 @CrossOrigin
 public class IndexController {
-	
+
     @GetMapping("/")
-    public ArrayList <Folder> root() {
-		
-    	return Dummy.getFolders();
+    public ArrayList<Folder> root() {
+
+        return Dummy.getFolders();
 
     }
 }

@@ -14,13 +14,14 @@ import lombok.Data;
 @Entity
 @Data
 public class FileType {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-	String name;
-	
-	@JsonIgnore	
-	@OneToMany(mappedBy="fileType")
-	private List<File> files;
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    String name;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "fileType")
+    private List<File> files;
 }

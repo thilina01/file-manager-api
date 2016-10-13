@@ -13,13 +13,17 @@ public class ItemView {
 
     public static interface Weight {
     }
-     public static interface Volume {
+
+    public static interface Volume {
     }
-      public static interface ProductionToolAvalibility {
+
+    public static interface ProductionToolAvalibility {
     }
-       public static interface Description {
+
+    public static interface Description {
     }
-        public static interface DrawingVersion {
+
+    public static interface DrawingVersion {
     }
-     
+
 }

@@ -11,14 +11,15 @@ import lombok.Data;
 @Entity
 @Data
 public class Paint {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        @JsonView(PaintView.Code.class)
-        String code;
-        
-        @JsonView(PaintView.Description.class)
-        String description;
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(PaintView.Code.class)
+    String code;
+
+    @JsonView(PaintView.Description.class)
+    String description;
 
 }

@@ -11,16 +11,15 @@ import lombok.Data;
 @Entity
 @Data
 public class CostCenter {
-	@Id
-	@GeneratedValue
-	private Integer id;
-        
-	@JsonView(CostCenterView.Code.class)
-        String code;
-        
-         @JsonView(CostCenterView.Name.class)
-        String name;
-       
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(CostCenterView.Code.class)
+    String code;
+
+    @JsonView(CostCenterView.Name.class)
+    String name;
 
 }

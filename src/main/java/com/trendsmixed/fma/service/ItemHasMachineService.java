@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.ItemHasMachineRepository;
 @Service
 public class ItemHasMachineService {
 
-	@Autowired
-	private ItemHasMachineRepository defectTypeRepository;
+    @Autowired
+    private ItemHasMachineRepository defectTypeRepository;
 
-	public List<ItemHasMachine> findAll() {
-		return defectTypeRepository.findAll();
-	}
+    public List<ItemHasMachine> findAll() {
+        return defectTypeRepository.findAll();
+    }
 
-	public ItemHasMachine save(ItemHasMachine itemHasMachine) {
-		return defectTypeRepository.save(itemHasMachine);
-	}
+    public ItemHasMachine save(ItemHasMachine itemHasMachine) {
+        return defectTypeRepository.save(itemHasMachine);
+    }
 
-	public ItemHasMachine findOne(int id) {
-		return defectTypeRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		defectTypeRepository.delete(id);
-	}
+    public ItemHasMachine findOne(int id) {
+        return defectTypeRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        defectTypeRepository.delete(id);
+    }
 }

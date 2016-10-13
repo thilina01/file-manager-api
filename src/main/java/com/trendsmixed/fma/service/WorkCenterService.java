@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.WorkCenterRepository;
 @Service
 public class WorkCenterService {
 
-	@Autowired
-	private WorkCenterRepository workCenterRepository;
+    @Autowired
+    private WorkCenterRepository workCenterRepository;
 
-	public List<WorkCenter> findAll() {
-		return workCenterRepository.findAll();
-	}
+    public List<WorkCenter> findAll() {
+        return workCenterRepository.findAll();
+    }
 
-	public WorkCenter save(WorkCenter workCenter) {
-		return workCenterRepository.save(workCenter);
-	}
+    public WorkCenter save(WorkCenter workCenter) {
+        return workCenterRepository.save(workCenter);
+    }
 
-	public WorkCenter findOne(int id) {
-		return workCenterRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		workCenterRepository.delete(id);
-	}
+    public WorkCenter findOne(int id) {
+        return workCenterRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        workCenterRepository.delete(id);
+    }
 }

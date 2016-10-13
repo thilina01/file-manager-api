@@ -50,7 +50,7 @@ public class ProductTypeController {
             }
         }
     }
-    
+
     @GetMapping("/{id}")
     public ProductType findOne(@PathVariable("id") int id) {
         return productTypeService.findOne(id);

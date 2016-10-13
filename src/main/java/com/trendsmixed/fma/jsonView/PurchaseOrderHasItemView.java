@@ -8,5 +8,4 @@ public class PurchaseOrderHasItemView {
     public static interface Qty {
     }
 
-  
 }

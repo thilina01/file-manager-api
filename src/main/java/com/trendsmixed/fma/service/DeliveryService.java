@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.DeliveryRepository;
 @Service
 public class DeliveryService {
 
-	@Autowired
-	private DeliveryRepository deliveryRepository;
+    @Autowired
+    private DeliveryRepository deliveryRepository;
 
-	public List< Delivery> findAll() {
-		return deliveryRepository.findAll();
-	}
+    public List< Delivery> findAll() {
+        return deliveryRepository.findAll();
+    }
 
-	public  Delivery save( Delivery  delivery) {
-		return deliveryRepository.save( delivery);
-	}
+    public Delivery save(Delivery delivery) {
+        return deliveryRepository.save(delivery);
+    }
 
-	public  Delivery findOne(int id) {
-		return deliveryRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		deliveryRepository.delete(id);
-	}
+    public Delivery findOne(int id) {
+        return deliveryRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        deliveryRepository.delete(id);
+    }
 }

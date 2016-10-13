@@ -11,5 +11,4 @@ public class CustomerItemView {
     public static interface Price {
     }
 
-   
 }

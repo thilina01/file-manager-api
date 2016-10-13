@@ -50,7 +50,7 @@ public class WorkCenterController {
             }
         }
     }
-    
+
     @GetMapping("/{id}")
     public WorkCenter findOne(@PathVariable("id") int id) {
         return workCenterService.findOne(id);

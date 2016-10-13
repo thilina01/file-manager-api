@@ -19,10 +19,10 @@ public class Delivery {
 
     @JsonView(DeliveryView.DeliverdQuantity.class)
     double deliverdQuantity;
-    
+
     @JsonView(DeliveryView.DeliveryDate.class)
     Date deliveryDate;
-    
+
     @JsonView(DeliveryView.Location.class)
     String locaton;
 

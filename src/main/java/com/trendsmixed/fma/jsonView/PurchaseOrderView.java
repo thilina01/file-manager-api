@@ -10,8 +10,10 @@ public class PurchaseOrderView {
 
     public static interface OrderQty {
     }
+
     public static interface CustomerRequestedDate {
     }
+
     public static interface TrwConfirmedDate {
     }
 

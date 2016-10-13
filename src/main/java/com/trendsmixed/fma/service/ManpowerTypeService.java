@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.ManpowerTypeRepository;
 @Service
 public class ManpowerTypeService {
 
-	@Autowired
-	private ManpowerTypeRepository manpowerTypeRepository;
+    @Autowired
+    private ManpowerTypeRepository manpowerTypeRepository;
 
-	public List<ManpowerType> findAll() {
-		return manpowerTypeRepository.findAll();
-	}
+    public List<ManpowerType> findAll() {
+        return manpowerTypeRepository.findAll();
+    }
 
-	public ManpowerType save(ManpowerType manpowerType) {
-		return manpowerTypeRepository.save(manpowerType);
-	}
+    public ManpowerType save(ManpowerType manpowerType) {
+        return manpowerTypeRepository.save(manpowerType);
+    }
 
-	public ManpowerType findOne(int id) {
-		return manpowerTypeRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		manpowerTypeRepository.delete(id);
-	}
+    public ManpowerType findOne(int id) {
+        return manpowerTypeRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        manpowerTypeRepository.delete(id);
+    }
 }

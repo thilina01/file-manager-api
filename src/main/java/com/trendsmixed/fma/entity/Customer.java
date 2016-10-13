@@ -12,19 +12,18 @@ import lombok.Data;
 @Entity
 @Data
 public class Customer {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        
-        @JsonView(CustomerView.Code.class)
-        String code;
-        
-        @JsonView(CustomerView.Name.class)
-        String name;
-        
-        @JsonView(CustomerView.Code.class)
-        String currency;
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(CustomerView.Code.class)
+    String code;
+
+    @JsonView(CustomerView.Name.class)
+    String name;
+
+    @JsonView(CustomerView.Code.class)
+    String currency;
 
 }

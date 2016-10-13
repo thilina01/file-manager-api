@@ -9,9 +9,9 @@ import lombok.Data;
 @Entity
 @Data
 public class Template {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
+
+    @Id
+    @GeneratedValue
+    private Integer id;
 
 }

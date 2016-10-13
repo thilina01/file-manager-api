@@ -6,12 +6,13 @@ public class PlanDateView {
     }
 
     public static interface PlanDate {
-        
-    }
-      public static interface Quantity {
-    }
-    public static interface Shift{
+
     }
 
-    
+    public static interface Quantity {
+    }
+
+    public static interface Shift {
+    }
+
 }

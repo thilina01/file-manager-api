@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.ProductTypeRepository;
 @Service
 public class ProductTypeService {
 
-	@Autowired
-	private ProductTypeRepository productTypeRepository;
+    @Autowired
+    private ProductTypeRepository productTypeRepository;
 
-	public List<ProductType> findAll() {
-		return productTypeRepository.findAll();
-	}
+    public List<ProductType> findAll() {
+        return productTypeRepository.findAll();
+    }
 
-	public ProductType save(ProductType productType) {
-		return productTypeRepository.save(productType);
-	}
+    public ProductType save(ProductType productType) {
+        return productTypeRepository.save(productType);
+    }
 
-	public ProductType findOne(int id) {
-		return productTypeRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		productTypeRepository.delete(id);
-	}
+    public ProductType findOne(int id) {
+        return productTypeRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        productTypeRepository.delete(id);
+    }
 }

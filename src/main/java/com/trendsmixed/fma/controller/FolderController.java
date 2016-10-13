@@ -93,11 +93,11 @@ public class FolderController {
     }
 
     /*
-    @GetMapping("/{id}/with-parent-and-sub-folders-and-files")
-    public @JsonView(Views.FolderParentAndWithSubFoldersAndFiles.class)
-    Folder oneWithParentAndSubFoldersAndFiles(@PathVariable("id") int id) {
-        return folderService.findOne(id);
-    }
+     @GetMapping("/{id}/with-parent-and-sub-folders-and-files")
+     public @JsonView(Views.FolderParentAndWithSubFoldersAndFiles.class)
+     Folder oneWithParentAndSubFoldersAndFiles(@PathVariable("id") int id) {
+     return folderService.findOne(id);
+     }
      */
     @GetMapping("/delete/{id}")
     public void delete(@PathVariable("id") int id) {

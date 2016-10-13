@@ -8,7 +8,4 @@ public class WorkCenterView {
     public static interface Code {
     }
 
-   
-
-    
 }

@@ -19,14 +19,14 @@ public class PurchaseOrder {
 
     @JsonView(PurchaseOrderView.PoNumber.class)
     String poNumber;
-    
-     @JsonView(PurchaseOrderView.OrderQty.class)
+
+    @JsonView(PurchaseOrderView.OrderQty.class)
     double orderQty;
-     
-      @JsonView(PurchaseOrderView.CustomerRequestedDate.class)
+
+    @JsonView(PurchaseOrderView.CustomerRequestedDate.class)
     Date customerRequestedDate;
-      
-       @JsonView(PurchaseOrderView.TrwConfirmedDate.class)
+
+    @JsonView(PurchaseOrderView.TrwConfirmedDate.class)
     Date trwConfirmedDate;
 
 }

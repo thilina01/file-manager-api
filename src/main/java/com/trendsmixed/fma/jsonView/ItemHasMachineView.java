@@ -8,5 +8,4 @@ public class ItemHasMachineView {
     public static interface ConsumptionRate {
     }
 
-     
 }

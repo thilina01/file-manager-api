@@ -7,27 +7,27 @@ import com.trendsmixed.fma.entity.FileType;
 import com.trendsmixed.fma.entity.Folder;
 
 public class Dummy {
-	
-	public static  ArrayList<Folder> getFolders() {
-		ArrayList<Folder> folders = new ArrayList<>();
-		for(int i= 0;i<10;i++){
-			FileType fileType = new FileType();
-			fileType.setName("Filetype "+i);
 
-			File file = new File();
-			file.setName("File "+i);
-			file.setFileType(fileType);
+    public static ArrayList<Folder> getFolders() {
+        ArrayList<Folder> folders = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            FileType fileType = new FileType();
+            fileType.setName("Filetype " + i);
 
-			Folder folder = new Folder();
-			folder.setName("Folder "+i);
-			ArrayList<File> files = new ArrayList<>();
-			files.add(file);
-			folder.setFiles(files);
-			folders.add(folder);			
-		}
-		
-		return folders;
-		
-	}
+            File file = new File();
+            file.setName("File " + i);
+            file.setFileType(fileType);
+
+            Folder folder = new Folder();
+            folder.setName("Folder " + i);
+            ArrayList<File> files = new ArrayList<>();
+            files.add(file);
+            folder.setFiles(files);
+            folders.add(folder);
+        }
+
+        return folders;
+
+    }
 
 }

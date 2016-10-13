@@ -9,13 +9,11 @@ import lombok.Data;
 @Entity
 @Data
 public class RunDateHasManpowerType {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        int quantity;
-       
-       
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    int quantity;
 
 }

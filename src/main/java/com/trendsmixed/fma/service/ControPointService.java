@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.ControlPointRepository;
 @Service
 public class ControPointService {
 
-	@Autowired
-	private ControlPointRepository controlPointRepository;
+    @Autowired
+    private ControlPointRepository controlPointRepository;
 
-	public List<ControlPoint> findAll() {
-		return controlPointRepository.findAll();
-	}
+    public List<ControlPoint> findAll() {
+        return controlPointRepository.findAll();
+    }
 
-	public ControlPoint save(ControlPoint ControlPoint) {
-		return controlPointRepository.save(ControlPoint);
-	}
+    public ControlPoint save(ControlPoint ControlPoint) {
+        return controlPointRepository.save(ControlPoint);
+    }
 
-	public ControlPoint findOne(int id) {
-		return controlPointRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		controlPointRepository.delete(id);
-	}
+    public ControlPoint findOne(int id) {
+        return controlPointRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        controlPointRepository.delete(id);
+    }
 }

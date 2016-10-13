@@ -11,18 +11,18 @@ import lombok.Data;
 @Entity
 @Data
 public class ScrapType {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-         @JsonView(ScrapTypeView.Code.class)
-        String code;
-         
-         @JsonView(ScrapTypeView.Type.class)
-        String type;
-         
-         @JsonView(ScrapTypeView.TypeInShinhala.class)
-        String typeInShinhala;
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(ScrapTypeView.Code.class)
+    String code;
+
+    @JsonView(ScrapTypeView.Type.class)
+    String type;
+
+    @JsonView(ScrapTypeView.TypeInShinhala.class)
+    String typeInShinhala;
 
 }

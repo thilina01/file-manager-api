@@ -11,32 +11,30 @@ import lombok.Data;
 @Entity
 @Data
 public class Item {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-         @JsonView(ItemView.Code.class)
-        String code;
-         
-        @JsonView(ItemView.Size.class)
-        String size;
-         
-         @JsonView(ItemView.Weight.class)
-        int weight;
-         
-         @JsonView(ItemView.Volume.class)
-        String volume;
-         
-         @JsonView(ItemView.ProductionToolAvalibility.class)
-        String productionToolAvalibility;
-         
-         @JsonView(ItemView.Description.class)
-        String description;
-         
-         @JsonView(ItemView.DrawingVersion.class)
-        String drawingVersion;
-        
-        
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(ItemView.Code.class)
+    String code;
+
+    @JsonView(ItemView.Size.class)
+    String size;
+
+    @JsonView(ItemView.Weight.class)
+    int weight;
+
+    @JsonView(ItemView.Volume.class)
+    String volume;
+
+    @JsonView(ItemView.ProductionToolAvalibility.class)
+    String productionToolAvalibility;
+
+    @JsonView(ItemView.Description.class)
+    String description;
+
+    @JsonView(ItemView.DrawingVersion.class)
+    String drawingVersion;
 
 }

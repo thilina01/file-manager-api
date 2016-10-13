@@ -82,7 +82,9 @@ public class FileController {
             outStream.write(fileAsBytes);
             outStream.flush();
             outStream.close();/* */
+
             //response.flushBuffer();
+
         } catch (IOException ex) {
             Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
         }

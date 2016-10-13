@@ -11,31 +11,32 @@ import com.trendsmixed.fma.repository.UserRepository;
 @Service
 public class UserService {
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	public List<User> findAll() {
-		return userRepository.findAll();
-	}
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
-	public User save(User user) {
-		return userRepository.save(user);
-	}
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 
-	public User findOne(int id) {
-		return userRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		userRepository.delete(id);
-	}
+    public User findOne(int id) {
+        return userRepository.findOne(id);
+    }
 
-	public User findByEmail(String email) {
-		return userRepository.findByEmail(email);
-		
-	}
-	public User findByEmailAndPassword(String email,String password) {
-		return userRepository.findByEmailAndPassword(email,password);
-		
-	}
+    public void delete(int id) {
+        userRepository.delete(id);
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+
+    }
+
+    public User findByEmailAndPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+
+    }
 }

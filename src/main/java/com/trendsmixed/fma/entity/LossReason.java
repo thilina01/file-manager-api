@@ -11,19 +11,18 @@ import lombok.Data;
 @Entity
 @Data
 public class LossReason {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        
-        @JsonView(LossReasonView.Code.class)
-        String code;
-        
-        @JsonView(LossReasonView.Type.class)
-        String type;
-        
-        @JsonView(LossReasonView.TypeInShinhala.class)
-        String typeInShinhala;
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(LossReasonView.Code.class)
+    String code;
+
+    @JsonView(LossReasonView.Type.class)
+    String type;
+
+    @JsonView(LossReasonView.TypeInShinhala.class)
+    String typeInShinhala;
 
 }
