@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.controller;
 
 import com.trendsmixed.fma.entity.AppSession;
-import com.trendsmixed.fma.entity.Section;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.ProductType;
-import com.trendsmixed.fma.entity.Section;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ProductTypeService;
 import java.util.List;

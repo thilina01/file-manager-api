@@ -1,16 +1,13 @@
 package com.trendsmixed.fma.controller;
 
 import com.trendsmixed.fma.entity.AppSession;
-import com.trendsmixed.fma.entity.LossReason;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Machine;
-import com.trendsmixed.fma.entity.WorkCenter;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.MachineService;
-import com.trendsmixed.fma.service.WorkCenterService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
