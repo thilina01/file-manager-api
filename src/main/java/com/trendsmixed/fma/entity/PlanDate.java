@@ -12,18 +12,18 @@ import lombok.Data;
 @Entity
 @Data
 public class PlanDate {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        @JsonView(PlanDateView.PlanDate.class)
-        Date planDate;
-        
-        @JsonView(PlanDateView.Quantity.class)
-        int quantity;
-        
-        @JsonView(PlanDateView.Shift.class)
-        String shift;
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(PlanDateView.PlanDate.class)
+    Date planDate;
+
+    @JsonView(PlanDateView.Quantity.class)
+    int quantity;
+
+    @JsonView(PlanDateView.Shift.class)
+    String shift;
 
 }

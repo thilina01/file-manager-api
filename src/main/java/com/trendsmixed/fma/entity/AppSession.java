@@ -8,9 +8,10 @@ import lombok.Data;
 @Entity
 @Data
 public class AppSession {
-	@Id	
-	String email;
-        String lastIP;
-        long lastTime;
-        
+
+    @Id
+    String email;
+    String lastIP;
+    long lastTime;
+
 }

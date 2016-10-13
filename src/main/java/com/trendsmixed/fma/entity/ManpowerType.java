@@ -11,14 +11,12 @@ import lombok.Data;
 @Entity
 @Data
 public class ManpowerType {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-         @JsonView(ManpowerTypeView.Type.class)
-        String type;
-        
-       
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(ManpowerTypeView.Type.class)
+    String type;
 
 }

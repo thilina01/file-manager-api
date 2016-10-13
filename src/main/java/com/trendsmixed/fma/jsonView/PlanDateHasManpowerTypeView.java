@@ -8,5 +8,4 @@ public class PlanDateHasManpowerTypeView {
     public static interface Quantity {
     }
 
-    
 }

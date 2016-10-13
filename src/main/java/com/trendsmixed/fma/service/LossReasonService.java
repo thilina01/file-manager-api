@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.LossReasonRepository;
 @Service
 public class LossReasonService {
 
-	@Autowired
-	private LossReasonRepository lossReasonRepository;
+    @Autowired
+    private LossReasonRepository lossReasonRepository;
 
-	public List<LossReason> findAll() {
-		return lossReasonRepository.findAll();
-	}
+    public List<LossReason> findAll() {
+        return lossReasonRepository.findAll();
+    }
 
-	public LossReason save(LossReason lossReason) {
-		return lossReasonRepository.save(lossReason);
-	}
+    public LossReason save(LossReason lossReason) {
+        return lossReasonRepository.save(lossReason);
+    }
 
-	public LossReason findOne(int id) {
-		return lossReasonRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		lossReasonRepository.delete(id);
-	}
+    public LossReason findOne(int id) {
+        return lossReasonRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        lossReasonRepository.delete(id);
+    }
 }

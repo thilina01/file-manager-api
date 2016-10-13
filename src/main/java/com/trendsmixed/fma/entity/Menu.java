@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Menu {
+
     String name;
     String target;
 
@@ -11,5 +12,5 @@ public class Menu {
         this.name = name;
         this.target = target;
     }
-    
+
 }

@@ -34,7 +34,7 @@ public class Folder {
     @JsonView(Views.FolderWithSubFolders.class)
     @OneToMany(mappedBy = "folder")
     List<Folder> folders;
-    
+
     @JsonView(Views.FolderWithFiles.class)
     @ManyToMany
     @JoinTable(name = "folder_file")

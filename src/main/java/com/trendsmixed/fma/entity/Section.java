@@ -11,16 +11,15 @@ import lombok.Data;
 @Entity
 @Data
 public class Section {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-         @JsonView(SectionView.Code.class)
-        String code;
-         
-          @JsonView(SectionView.Name.class)
-        String name;
-       
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(SectionView.Code.class)
+    String code;
+
+    @JsonView(SectionView.Name.class)
+    String name;
 
 }

@@ -8,5 +8,4 @@ public class ManpowerTypeView {
     public static interface Type {
     }
 
-    
 }

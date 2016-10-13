@@ -11,14 +11,15 @@ import lombok.Data;
 @Entity
 @Data
 public class ProductType {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        @JsonView(ProductTypeView.Type.class)
-        String type;
-        
-        @JsonView(ProductTypeView.Description.class)
-        String description;
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(ProductTypeView.Type.class)
+    String type;
+
+    @JsonView(ProductTypeView.Description.class)
+    String description;
 
 }

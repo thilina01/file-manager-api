@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.PurchaseOrderRepository;
 @Service
 public class PurchaseOrderService {
 
-	@Autowired
-	private PurchaseOrderRepository purchaseOrdereRepository;
+    @Autowired
+    private PurchaseOrderRepository purchaseOrdereRepository;
 
-	public List<PurchaseOrder> findAll() {
-		return purchaseOrdereRepository.findAll();
-	}
+    public List<PurchaseOrder> findAll() {
+        return purchaseOrdereRepository.findAll();
+    }
 
-	public PurchaseOrder save(PurchaseOrder purchaseOrder) {
-		return purchaseOrdereRepository.save(purchaseOrder);
-	}
+    public PurchaseOrder save(PurchaseOrder purchaseOrder) {
+        return purchaseOrdereRepository.save(purchaseOrder);
+    }
 
-	public PurchaseOrder findOne(int id) {
-		return purchaseOrdereRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		purchaseOrdereRepository.delete(id);
-	}
+    public PurchaseOrder findOne(int id) {
+        return purchaseOrdereRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        purchaseOrdereRepository.delete(id);
+    }
 }

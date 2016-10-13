@@ -11,14 +11,12 @@ import lombok.Data;
 @Entity
 @Data
 public class WorkCenter {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        @JsonView(WorkCenterView.Code.class)
-        String code;
-       
-       
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(WorkCenterView.Code.class)
+    String code;
 
 }

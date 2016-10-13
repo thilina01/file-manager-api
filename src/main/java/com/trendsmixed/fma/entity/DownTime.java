@@ -19,11 +19,11 @@ public class DownTime {
 
     @JsonView(DownTimeView.DownTimeDate.class)
     Date downTimeDate;
-    
-   @JsonView(DownTimeView.Duretion.class) 
+
+    @JsonView(DownTimeView.Duretion.class)
     int duretion;
-   
-   @JsonView(DownTimeView.Reason.class)
+
+    @JsonView(DownTimeView.Reason.class)
     String reason;
 
 }

@@ -11,19 +11,18 @@ import lombok.Data;
 @Entity
 @Data
 public class Machine {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        
-        @JsonView(MachineView.Code.class)
-        String code;
-        
-        @JsonView(MachineView.Name.class)
-        String name;
-        
-        @JsonView(MachineView.EnergyRate.class)
-        double energyRate;
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(MachineView.Code.class)
+    String code;
+
+    @JsonView(MachineView.Name.class)
+    String name;
+
+    @JsonView(MachineView.EnergyRate.class)
+    double energyRate;
 
 }

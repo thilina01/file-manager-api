@@ -11,14 +11,12 @@ import lombok.Data;
 @Entity
 @Data
 public class ItemHasMachine {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        @JsonView(ItemHasMachineView.ConsumptionRate.class)
-        double consumptionRate;
-       
-       
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(ItemHasMachineView.ConsumptionRate.class)
+    double consumptionRate;
 
 }

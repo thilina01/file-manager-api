@@ -11,18 +11,18 @@ import lombok.Data;
 @Entity
 @Data
 public class DefectType {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        @JsonView(DefectTypeView.Type.class)
-        String type;
-        
-        @JsonView(DefectTypeView.Name.class)
-        String name;
-        
-        @JsonView(DefectTypeView.NameInShinhala.class)
-        String nameInShinhala;
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(DefectTypeView.Type.class)
+    String type;
+
+    @JsonView(DefectTypeView.Name.class)
+    String name;
+
+    @JsonView(DefectTypeView.NameInShinhala.class)
+    String nameInShinhala;
 
 }

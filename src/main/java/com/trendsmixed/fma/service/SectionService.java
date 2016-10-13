@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.SectionRepository;
 @Service
 public class SectionService {
 
-	@Autowired
-	private SectionRepository sectionRepository;
+    @Autowired
+    private SectionRepository sectionRepository;
 
-	public List<Section> findAll() {
-		return sectionRepository.findAll();
-	}
+    public List<Section> findAll() {
+        return sectionRepository.findAll();
+    }
 
-	public Section save(Section section) {
-		return sectionRepository.save(section);
-	}
+    public Section save(Section section) {
+        return sectionRepository.save(section);
+    }
 
-	public Section findOne(int id) {
-		return sectionRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		sectionRepository.delete(id);
-	}
+    public Section findOne(int id) {
+        return sectionRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        sectionRepository.delete(id);
+    }
 }

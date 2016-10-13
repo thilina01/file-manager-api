@@ -39,12 +39,12 @@ public class AccountController {
         userDao.setUserService(userService);
         boolean success = userDao.isAuthenticated();
         if (success) {
-                saveAppSession(userDao.getEmail(), request.getRemoteAddr());
-               // Cookie cookie = new Cookie("XXXX", "TTTTTTTTTTTTTTTTTTTT");
-                //cookie.setDomain("http://localhost");
-                //cookie.setPath("/");
-                //response.addCookie(cookie);
-                //response.flushBuffer();
+            saveAppSession(userDao.getEmail(), request.getRemoteAddr());
+            // Cookie cookie = new Cookie("XXXX", "TTTTTTTTTTTTTTTTTTTT");
+            //cookie.setDomain("http://localhost");
+            //cookie.setPath("/");
+            //response.addCookie(cookie);
+            //response.flushBuffer();
         }
         return success;
     }

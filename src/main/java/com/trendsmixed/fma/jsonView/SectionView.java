@@ -11,5 +11,4 @@ public class SectionView {
     public static interface Name {
     }
 
-    
 }

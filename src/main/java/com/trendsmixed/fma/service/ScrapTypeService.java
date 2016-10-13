@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.ScrapTypeRepository;
 @Service
 public class ScrapTypeService {
 
-	@Autowired
-	private ScrapTypeRepository scrapTypeRepository;
+    @Autowired
+    private ScrapTypeRepository scrapTypeRepository;
 
-	public List<ScrapType> findAll() {
-		return scrapTypeRepository.findAll();
-	}
+    public List<ScrapType> findAll() {
+        return scrapTypeRepository.findAll();
+    }
 
-	public ScrapType save(ScrapType scrapType) {
-		return scrapTypeRepository.save(scrapType);
-	}
+    public ScrapType save(ScrapType scrapType) {
+        return scrapTypeRepository.save(scrapType);
+    }
 
-	public ScrapType findOne(int id) {
-		return scrapTypeRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		scrapTypeRepository.delete(id);
-	}
+    public ScrapType findOne(int id) {
+        return scrapTypeRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        scrapTypeRepository.delete(id);
+    }
 }

@@ -28,5 +28,5 @@ public class FileService {
 
     public void delete(int id) {
         fileRepository.delete(id);
-    }    
+    }
 }

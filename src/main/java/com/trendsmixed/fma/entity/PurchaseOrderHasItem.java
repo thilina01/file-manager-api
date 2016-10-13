@@ -11,16 +11,12 @@ import lombok.Data;
 @Entity
 @Data
 public class PurchaseOrderHasItem {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        @JsonView(PurchaseOrderHasItemView.Qty.class)
-        double Qty;
-       
-        
-    
-       
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(PurchaseOrderHasItemView.Qty.class)
+    double Qty;
 
 }

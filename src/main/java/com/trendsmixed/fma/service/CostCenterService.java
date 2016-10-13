@@ -11,22 +11,22 @@ import com.trendsmixed.fma.repository.CostCenterRepository;
 @Service
 public class CostCenterService {
 
-	@Autowired
-	private CostCenterRepository costCenterRepository;
+    @Autowired
+    private CostCenterRepository costCenterRepository;
 
-	public List<CostCenter> findAll() {
-		return costCenterRepository.findAll();
-	}
+    public List<CostCenter> findAll() {
+        return costCenterRepository.findAll();
+    }
 
-	public CostCenter save(CostCenter costCenter) {
-		return costCenterRepository.save(costCenter);
-	}
+    public CostCenter save(CostCenter costCenter) {
+        return costCenterRepository.save(costCenter);
+    }
 
-	public CostCenter findOne(int id) {
-		return costCenterRepository.findOne(id);
-	}
-	
-	public void delete(int id) {
-		costCenterRepository.delete(id);
-	}
+    public CostCenter findOne(int id) {
+        return costCenterRepository.findOne(id);
+    }
+
+    public void delete(int id) {
+        costCenterRepository.delete(id);
+    }
 }

@@ -12,16 +12,15 @@ import lombok.Data;
 @Entity
 @Data
 public class CustomerItem {
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-        @JsonView(CustomerItemView.CustomerPartNo.class)
-        String customerPartNo;
-        
-        @JsonView(CustomerItemView.Price.class)
-        double price;
-        
-        
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @JsonView(CustomerItemView.CustomerPartNo.class)
+    String customerPartNo;
+
+    @JsonView(CustomerItemView.Price.class)
+    double price;
 
 }
