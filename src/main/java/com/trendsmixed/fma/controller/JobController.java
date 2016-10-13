@@ -11,6 +11,7 @@ import com.trendsmixed.fma.service.JobService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -26,7 +27,7 @@ public class JobController {
     private JobService jobService;
 
     @GetMapping
-    public List<Job> getMenus() {
+    public List<Job> findAll() {
         return jobService.findAll();
     }
 
@@ -48,4 +49,6 @@ public class JobController {
             }
         }
     }
+
+
 }

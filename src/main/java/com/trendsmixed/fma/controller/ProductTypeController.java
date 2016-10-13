@@ -26,7 +26,7 @@ public class ProductTypeController {
     private ProductTypeService productTypeService;
 
     @GetMapping
-    public List<ProductType> getMenus() {
+    public List<ProductType> findAll() {
         return productTypeService.findAll();
     }
 
