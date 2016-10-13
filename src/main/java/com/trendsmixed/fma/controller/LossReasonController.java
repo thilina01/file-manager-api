@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.controller;
 
 import com.trendsmixed.fma.entity.AppSession;
+import com.trendsmixed.fma.entity.Job;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.trendsmixed.fma.entity.LossReason;
 import com.trendsmixed.fma.entity.Section;
 import com.trendsmixed.fma.service.AppSessionService;
+import com.trendsmixed.fma.service.JobService;
 import com.trendsmixed.fma.service.LossReasonService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +53,9 @@ public class LossReasonController {
         }
     }
 
+    @GetMapping("/{id}")
+    public LossReason findOne(@PathVariable("id") int id) {
+        return lossReasonService.findOne(id);
+    }
 
 }

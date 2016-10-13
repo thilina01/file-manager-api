@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Job;
+import com.trendsmixed.fma.entity.Section;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.JobService;
 import java.util.List;
@@ -50,5 +51,8 @@ public class JobController {
         }
     }
 
-
+    @GetMapping("/{id}")
+    public Job findOne(@PathVariable("id") int id) {
+        return jobService.findOne(id);
+    }
 }

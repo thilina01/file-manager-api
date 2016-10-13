@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.controller;
 
 import com.trendsmixed.fma.entity.AppSession;
+import com.trendsmixed.fma.entity.LossReason;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +53,8 @@ public class MachineController {
         }
     }
 
-
+    @GetMapping("/{id}")
+    public Machine findOne(@PathVariable("id") int id) {
+        return machineService.findOne(id);
+    }
 }

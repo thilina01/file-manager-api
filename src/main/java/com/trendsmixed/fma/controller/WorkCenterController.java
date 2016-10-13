@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.controller;
 
 import com.trendsmixed.fma.entity.AppSession;
+import com.trendsmixed.fma.entity.Section;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +49,11 @@ public class WorkCenterController {
                 throw new Error(e.getMessage());
             }
         }
+    }
+    
+    @GetMapping("/{id}")
+    public WorkCenter findOne(@PathVariable("id") int id) {
+        return workCenterService.findOne(id);
     }
 
 }
