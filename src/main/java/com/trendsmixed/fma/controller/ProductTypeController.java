@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
@@ -61,5 +62,12 @@ public class ProductTypeController {
         productTypeService.delete(id);
         return "Deleted";
 
+    }
+
+    @PutMapping("/{id}")
+    public ProductType updateCustomer(@PathVariable int id, @RequestBody ProductType productType) {
+        productType.setId(id);
+        productType = productTypeService.save(productType);
+        return productType;
     }
 }

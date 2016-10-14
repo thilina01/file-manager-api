@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
@@ -57,10 +58,17 @@ public class LossReasonController {
     }
 
     @DeleteMapping(value = "/{id}")
-    
+
     public String delete(@PathVariable int id) {
         lossReasonService.delete(id);
         return "Deleted";
 
+    }
+
+    @PutMapping("/{id}")
+    public LossReason updateCustomer(@PathVariable int id, @RequestBody LossReason lossReason) {
+        lossReason.setId(id);
+        lossReason = lossReasonService.save(lossReason);
+        return lossReason;
     }
 }

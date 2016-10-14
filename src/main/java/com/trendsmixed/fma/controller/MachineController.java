@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
@@ -55,11 +56,18 @@ public class MachineController {
     public Machine findOne(@PathVariable("id") int id) {
         return machineService.findOne(id);
     }
-    
+
     @DeleteMapping(value = "/{id}")
     public String delete(@PathVariable int id) {
         machineService.delete(id);
         return "Deleted";
 
+    }
+
+    @PutMapping("/{id}")
+    public Machine updateCustomer(@PathVariable int id, @RequestBody Machine machine) {
+        machine.setId(id);
+        machine = machineService.save(machine);
+        return machine;
     }
 }

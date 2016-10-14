@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,5 +62,12 @@ public class SectionController {
         sectionService.delete(id);
         return "Deleted";
 
+    }
+
+    @PutMapping("/{id}")
+    public Section updateCustomer(@PathVariable int id, @RequestBody Section section) {
+        section.setId(id);
+        section = sectionService.save(section);
+        return section;
     }
 }
