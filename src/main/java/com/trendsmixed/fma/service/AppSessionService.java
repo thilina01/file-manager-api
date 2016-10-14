@@ -29,4 +29,12 @@ public class AppSessionService {
     public void delete(String email) {
         appSessionRepository.delete(email);
     }
+
+    public AppSession findOne(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

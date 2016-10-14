@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.trendsmixed.fma.repository.ControlPointRepository;
 
 @Service
-public class ControPointService {
+public class ControlPointService {
 
     @Autowired
     private ControlPointRepository controlPointRepository;
@@ -30,3 +30,4 @@ public class ControPointService {
         controlPointRepository.delete(id);
     }
 }
+
