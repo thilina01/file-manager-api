@@ -14,8 +14,4 @@ public class AppSession {
     String lastIP;
     long lastTime;
 
-    public void setId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
