@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.ItemType;
 import com.trendsmixed.fma.service.AppSessionService;
+import com.trendsmixed.fma.service.ItemTypeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,24 +20,28 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/itemTypes")
 public class ItemTypeController {
 
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
+    private ItemTypeService itemTypeService;
 
     @GetMapping
     public List<ItemType> findAll() {
+        return itemTypeService.findAll();
     }
 
     @PostMapping
-    public ItemType save(@RequestBody ItemType ItemType, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public ItemType save(@RequestBody ItemType itemType, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");
         } else {
             try {
-                return ItemType;
+                itemType = itemTypeService.save(itemType);
+                return itemType;
 
             } catch (Throwable e) {
                 while (e.getCause() != null) {
@@ -49,17 +54,20 @@ public class ItemTypeController {
 
     @GetMapping("/{id}")
     public ItemType findOne(@PathVariable("id") int id) {
+        return itemTypeService.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public String delete(@PathVariable int id) {
+        itemTypeService.delete(id);
         return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public ItemType updateCustomer(@PathVariable int id, @RequestBody ItemType ItemType) {
-        ItemType.setId(id);
-        return ItemType;
+    public ItemType updateCustomer(@PathVariable int id, @RequestBody ItemType itemType) {
+        itemType.setId(id);
+        itemType = itemTypeService.save(itemType);
+        return itemType;
     }
 }

@@ -18,8 +18,8 @@ public class ItemTypeService {
         return ItemTypeRepository.findAll();
     }
 
-    public ItemType save(ItemType ItemType) {
-        return ItemTypeRepository.save(ItemType);
+    public ItemType save(ItemType itemType) {
+        return ItemTypeRepository.save(itemType);
     }
 
     public ItemType findOne(int id) {
