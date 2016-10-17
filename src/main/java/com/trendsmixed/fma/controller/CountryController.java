@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.Customer;
+import com.trendsmixed.fma.entity.Country;
 import com.trendsmixed.fma.service.AppSessionService;
-import com.trendsmixed.fma.service.CustomerService;
+import com.trendsmixed.fma.service.CountryService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,28 +20,28 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/customers")
-public class CustomerController {
+@RequestMapping("/countrys")
+public class CountryController {
 
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private CustomerService customerService;
+    private CountryService countryService;
 
     @GetMapping
-    public List<Customer> getMenus() {
-        return customerService.findAll();
+    public List<Country> findAll() {
+        return countryService.findAll();
     }
 
     @PostMapping
-    public Customer save(@RequestBody Customer customer, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public Country save(@RequestBody Country country, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");
         } else {
             try {
-                customer = customerService.save(customer);
-                return customer;
+                country = countryService.save(country);
+                return country;
 
             } catch (Throwable e) {
                 while (e.getCause() != null) {
@@ -53,21 +53,22 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public Customer findOne(@PathVariable("id") int id) {
-        return customerService.findOne(id);
+    public Country findOne(@PathVariable("id") int id) {
+        return countryService.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public String delete(@PathVariable int id) {
-        customerService.delete(id);
+        countryService.delete(id);
         return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable int id, @RequestBody Customer customer) {
-        customer.setId(id);
-        customer = customerService.save(customer);
-        return customer;
+    public Country updateCustomer(@PathVariable int id, @RequestBody Country country) {
+        country.setId(id);
+        country = countryService.save(country);
+        return country;
     }
+
 }

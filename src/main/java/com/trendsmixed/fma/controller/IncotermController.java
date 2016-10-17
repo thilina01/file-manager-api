@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.Customer;
+import com.trendsmixed.fma.entity.Incoterm;
+import com.trendsmixed.fma.entity.Incoterm;
 import com.trendsmixed.fma.service.AppSessionService;
-import com.trendsmixed.fma.service.CustomerService;
+import com.trendsmixed.fma.service.IncotermService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,28 +21,25 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/customers")
-public class CustomerController {
+@RequestMapping("/incoterms")
+public class IncotermController {
 
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private CustomerService customerService;
+    private IncotermService incotermService;
 
-    @GetMapping
-    public List<Customer> getMenus() {
-        return customerService.findAll();
-    }
+
 
     @PostMapping
-    public Customer save(@RequestBody Customer customer, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public Incoterm save(@RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");
         } else {
             try {
-                customer = customerService.save(customer);
-                return customer;
+                incoterm = incotermService.save(incoterm);
+                return incoterm;
 
             } catch (Throwable e) {
                 while (e.getCause() != null) {
@@ -52,22 +50,27 @@ public class CustomerController {
         }
     }
 
+    @GetMapping
+    public List<Incoterm> findAll() {
+        return incotermService.findAll();
+    }
+
     @GetMapping("/{id}")
-    public Customer findOne(@PathVariable("id") int id) {
-        return customerService.findOne(id);
+    public Incoterm findOne(@PathVariable("id") int id) {
+        return incotermService.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public String delete(@PathVariable int id) {
-        customerService.delete(id);
+        incotermService.delete(id);
         return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable int id, @RequestBody Customer customer) {
-        customer.setId(id);
-        customer = customerService.save(customer);
-        return customer;
+    public Incoterm updateCustomer(@PathVariable int id, @RequestBody Incoterm incoterm) {
+        incoterm.setId(id);
+        incoterm = incotermService.save(incoterm);
+        return incoterm;
     }
 }

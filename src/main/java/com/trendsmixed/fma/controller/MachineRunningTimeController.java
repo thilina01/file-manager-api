@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.Customer;
+import com.trendsmixed.fma.entity.MachineRunningTime;
 import com.trendsmixed.fma.service.AppSessionService;
-import com.trendsmixed.fma.service.CustomerService;
+import com.trendsmixed.fma.service.MachineRunningTimeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,28 +20,25 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/customers")
-public class CustomerController {
+@RequestMapping("/machineRunningTimes")
+public class MachineRunningTimeController {
 
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private CustomerService customerService;
+    private MachineRunningTimeService machineRunningTimeService;
 
-    @GetMapping
-    public List<Customer> getMenus() {
-        return customerService.findAll();
-    }
+
 
     @PostMapping
-    public Customer save(@RequestBody Customer customer, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public MachineRunningTime save(@RequestBody MachineRunningTime machineRunningTime, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");
         } else {
             try {
-                customer = customerService.save(customer);
-                return customer;
+                machineRunningTime = machineRunningTimeService.save(machineRunningTime);
+                return machineRunningTime;
 
             } catch (Throwable e) {
                 while (e.getCause() != null) {
@@ -52,22 +49,27 @@ public class CustomerController {
         }
     }
 
+    @GetMapping
+    public List<MachineRunningTime> findAll() {
+        return machineRunningTimeService.findAll();
+    }
+
     @GetMapping("/{id}")
-    public Customer findOne(@PathVariable("id") int id) {
-        return customerService.findOne(id);
+    public MachineRunningTime findOne(@PathVariable("id") int id) {
+        return machineRunningTimeService.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public String delete(@PathVariable int id) {
-        customerService.delete(id);
+        machineRunningTimeService.delete(id);
         return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable int id, @RequestBody Customer customer) {
-        customer.setId(id);
-        customer = customerService.save(customer);
-        return customer;
+    public MachineRunningTime updateCustomer(@PathVariable int id, @RequestBody MachineRunningTime machineRunningTime) {
+        machineRunningTime.setId(id);
+        machineRunningTime = machineRunningTimeService.save(machineRunningTime);
+        return machineRunningTime;
     }
 }
