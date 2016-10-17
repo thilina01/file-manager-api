@@ -57,7 +57,7 @@ public class SectionController {
         return sectionService.findOne(id);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public String delete(@PathVariable int id) {
         sectionService.delete(id);
         return "Deleted";
