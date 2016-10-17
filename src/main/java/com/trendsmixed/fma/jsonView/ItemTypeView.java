@@ -1,6 +1,6 @@
 package com.trendsmixed.fma.jsonView;
 
-public class ProductTypeView {
+public class ItemTypeView {
 
     public static interface Id {
     }

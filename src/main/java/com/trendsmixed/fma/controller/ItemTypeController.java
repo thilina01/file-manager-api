@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.ProductType;
+import com.trendsmixed.fma.entity.ItemType;
 import com.trendsmixed.fma.service.AppSessionService;
-import com.trendsmixed.fma.service.ProductTypeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,28 +19,24 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/productTypes")
-public class ProductTypeController {
+public class ItemTypeController {
 
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private ProductTypeService productTypeService;
 
     @GetMapping
-    public List<ProductType> findAll() {
-        return productTypeService.findAll();
+    public List<ItemType> findAll() {
     }
 
     @PostMapping
-    public ProductType save(@RequestBody ProductType productType, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public ItemType save(@RequestBody ItemType ItemType, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");
         } else {
             try {
-                productType = productTypeService.save(productType);
-                return productType;
+                return ItemType;
 
             } catch (Throwable e) {
                 while (e.getCause() != null) {
@@ -53,21 +48,18 @@ public class ProductTypeController {
     }
 
     @GetMapping("/{id}")
-    public ProductType findOne(@PathVariable("id") int id) {
-        return productTypeService.findOne(id);
+    public ItemType findOne(@PathVariable("id") int id) {
     }
 
     @DeleteMapping(value = "/{id}")
     public String delete(@PathVariable int id) {
-        productTypeService.delete(id);
         return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public ProductType updateCustomer(@PathVariable int id, @RequestBody ProductType productType) {
-        productType.setId(id);
-        productType = productTypeService.save(productType);
-        return productType;
+    public ItemType updateCustomer(@PathVariable int id, @RequestBody ItemType ItemType) {
+        ItemType.setId(id);
+        return ItemType;
     }
 }

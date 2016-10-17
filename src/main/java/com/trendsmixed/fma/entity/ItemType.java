@@ -24,10 +24,10 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "section")
+@Table(name = "item_type")
 @NamedQueries({
-    @NamedQuery(name = "Section.findAll", query = "SELECT s FROM Section s")})
-public class Section implements Serializable {
+    @NamedQuery(name = "ItemType.findAll", query = "SELECT i FROM ItemType i")})
+public class ItemType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -35,17 +35,17 @@ public class Section implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "name")
-    private String name;
     @Column(name = "code")
     private String code;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
-    private Collection<CostCenter> costCenterCollection;
+    @Column(name = "type")
+    private String type;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemType")
+    private Collection<Item> itemCollection;
 
-    public Section() {
+    public ItemType() {
     }
 
-    public Section(Integer id) {
+    public ItemType(Integer id) {
         this.id = id;
     }
 
@@ -57,14 +57,6 @@ public class Section implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getCode() {
         return code;
     }
@@ -73,12 +65,20 @@ public class Section implements Serializable {
         this.code = code;
     }
 
-    public Collection<CostCenter> getCostCenterCollection() {
-        return costCenterCollection;
+    public String getType() {
+        return type;
     }
 
-    public void setCostCenterCollection(Collection<CostCenter> costCenterCollection) {
-        this.costCenterCollection = costCenterCollection;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Collection<Item> getItemCollection() {
+        return itemCollection;
+    }
+
+    public void setItemCollection(Collection<Item> itemCollection) {
+        this.itemCollection = itemCollection;
     }
 
     @Override
@@ -91,10 +91,10 @@ public class Section implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Section)) {
+        if (!(object instanceof ItemType)) {
             return false;
         }
-        Section other = (Section) object;
+        ItemType other = (ItemType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,7 +103,7 @@ public class Section implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.Section[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.ItemType[ id=" + id + " ]";
     }
     
 }

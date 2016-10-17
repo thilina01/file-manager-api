@@ -24,10 +24,10 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "section")
+@Table(name = "cust_type")
 @NamedQueries({
-    @NamedQuery(name = "Section.findAll", query = "SELECT s FROM Section s")})
-public class Section implements Serializable {
+    @NamedQuery(name = "CustType.findAll", query = "SELECT c FROM CustType c")})
+public class CustType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -35,17 +35,15 @@ public class Section implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "code")
-    private String code;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
-    private Collection<CostCenter> costCenterCollection;
+    @Column(name = "type")
+    private String type;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "custType")
+    private Collection<Customer> customerCollection;
 
-    public Section() {
+    public CustType() {
     }
 
-    public Section(Integer id) {
+    public CustType(Integer id) {
         this.id = id;
     }
 
@@ -57,28 +55,20 @@ public class Section implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getCode() {
-        return code;
+    public Collection<Customer> getCustomerCollection() {
+        return customerCollection;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Collection<CostCenter> getCostCenterCollection() {
-        return costCenterCollection;
-    }
-
-    public void setCostCenterCollection(Collection<CostCenter> costCenterCollection) {
-        this.costCenterCollection = costCenterCollection;
+    public void setCustomerCollection(Collection<Customer> customerCollection) {
+        this.customerCollection = customerCollection;
     }
 
     @Override
@@ -91,10 +81,10 @@ public class Section implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Section)) {
+        if (!(object instanceof CustType)) {
             return false;
         }
-        Section other = (Section) object;
+        CustType other = (CustType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,7 +93,7 @@ public class Section implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.Section[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.CustType[ id=" + id + " ]";
     }
     
 }
