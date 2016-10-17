@@ -44,8 +44,8 @@ public class RunDateHasManpowerType implements Serializable {
         this.runDateHasManpowerTypePK = runDateHasManpowerTypePK;
     }
 
-    public RunDateHasManpowerType(int runDateId, int manpowerTypeId) {
-        this.runDateHasManpowerTypePK = new RunDateHasManpowerTypePK(runDateId, manpowerTypeId);
+    public RunDateHasManpowerType(int manpowerTypeId, int runDateId) {
+        this.runDateHasManpowerTypePK = new RunDateHasManpowerTypePK(manpowerTypeId, runDateId);
     }
 
     public RunDateHasManpowerTypePK getRunDateHasManpowerTypePK() {

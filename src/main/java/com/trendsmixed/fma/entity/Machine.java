@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,18 +39,18 @@ public class Machine implements Serializable {
     private Integer id;
     @Column(name = "code")
     private String code;
-    @Column(name = "name")
-    private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "energy_rate")
     private Double energyRate;
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private Collection<DownTime> downTimeCollection;
+    private List<DownTime> downTimeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private Collection<ItemHasMachine> itemHasMachineCollection;
+    private List<ItemHasMachine> itemHasMachineList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private Collection<MachineRunningTime> machineRunningTimeCollection;
-    @JoinColumn(name = "Control_point_id", referencedColumnName = "id")
+    private List<MachineRunningTime> machineRunningTimeList;
+    @JoinColumn(name = "control_point_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ControlPoint controlPoint;
 
@@ -77,14 +77,6 @@ public class Machine implements Serializable {
         this.code = code;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Double getEnergyRate() {
         return energyRate;
     }
@@ -93,28 +85,36 @@ public class Machine implements Serializable {
         this.energyRate = energyRate;
     }
 
-    public Collection<DownTime> getDownTimeCollection() {
-        return downTimeCollection;
+    public String getName() {
+        return name;
     }
 
-    public void setDownTimeCollection(Collection<DownTime> downTimeCollection) {
-        this.downTimeCollection = downTimeCollection;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Collection<ItemHasMachine> getItemHasMachineCollection() {
-        return itemHasMachineCollection;
+    public List<DownTime> getDownTimeList() {
+        return downTimeList;
     }
 
-    public void setItemHasMachineCollection(Collection<ItemHasMachine> itemHasMachineCollection) {
-        this.itemHasMachineCollection = itemHasMachineCollection;
+    public void setDownTimeList(List<DownTime> downTimeList) {
+        this.downTimeList = downTimeList;
     }
 
-    public Collection<MachineRunningTime> getMachineRunningTimeCollection() {
-        return machineRunningTimeCollection;
+    public List<ItemHasMachine> getItemHasMachineList() {
+        return itemHasMachineList;
     }
 
-    public void setMachineRunningTimeCollection(Collection<MachineRunningTime> machineRunningTimeCollection) {
-        this.machineRunningTimeCollection = machineRunningTimeCollection;
+    public void setItemHasMachineList(List<ItemHasMachine> itemHasMachineList) {
+        this.itemHasMachineList = itemHasMachineList;
+    }
+
+    public List<MachineRunningTime> getMachineRunningTimeList() {
+        return machineRunningTimeList;
+    }
+
+    public void setMachineRunningTimeList(List<MachineRunningTime> machineRunningTimeList) {
+        this.machineRunningTimeList = machineRunningTimeList;
     }
 
     public ControlPoint getControlPoint() {

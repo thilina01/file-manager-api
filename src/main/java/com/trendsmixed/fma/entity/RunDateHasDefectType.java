@@ -44,8 +44,8 @@ public class RunDateHasDefectType implements Serializable {
         this.runDateHasDefectTypePK = runDateHasDefectTypePK;
     }
 
-    public RunDateHasDefectType(int runDateId, int defectTypeId) {
-        this.runDateHasDefectTypePK = new RunDateHasDefectTypePK(runDateId, defectTypeId);
+    public RunDateHasDefectType(int defectTypeId, int runDateId) {
+        this.runDateHasDefectTypePK = new RunDateHasDefectTypePK(defectTypeId, runDateId);
     }
 
     public RunDateHasDefectTypePK getRunDateHasDefectTypePK() {

@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,14 +35,14 @@ public class DefectType implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "type")
-    private String type;
     @Column(name = "name")
     private String name;
+    @Column(name = "type")
+    private String type;
     @Column(name = "type_in_shinhala")
     private String typeInShinhala;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "defectType")
-    private Collection<RunDateHasDefectType> runDateHasDefectTypeCollection;
+    private List<RunDateHasDefectType> runDateHasDefectTypeList;
 
     public DefectType() {
     }
@@ -59,20 +59,20 @@ public class DefectType implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getTypeInShinhala() {
@@ -83,12 +83,12 @@ public class DefectType implements Serializable {
         this.typeInShinhala = typeInShinhala;
     }
 
-    public Collection<RunDateHasDefectType> getRunDateHasDefectTypeCollection() {
-        return runDateHasDefectTypeCollection;
+    public List<RunDateHasDefectType> getRunDateHasDefectTypeList() {
+        return runDateHasDefectTypeList;
     }
 
-    public void setRunDateHasDefectTypeCollection(Collection<RunDateHasDefectType> runDateHasDefectTypeCollection) {
-        this.runDateHasDefectTypeCollection = runDateHasDefectTypeCollection;
+    public void setRunDateHasDefectTypeList(List<RunDateHasDefectType> runDateHasDefectTypeList) {
+        this.runDateHasDefectTypeList = runDateHasDefectTypeList;
     }
 
     @Override

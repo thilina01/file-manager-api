@@ -6,8 +6,8 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -41,29 +41,29 @@ public class Job implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "job_no")
-    private String jobNo;
     @Column(name = "actual_sipped_date")
     @Temporal(TemporalType.DATE)
     private Date actualSippedDate;
+    @Column(name = "comment")
+    private String comment;
     @Column(name = "confirm_shipped_date")
     @Temporal(TemporalType.DATE)
     private Date confirmShippedDate;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "job_quantity")
-    private Double jobQuantity;
     @Column(name = "job_date")
     @Temporal(TemporalType.DATE)
     private Date jobDate;
-    @Column(name = "comment")
-    private String comment;
+    @Column(name = "job_no")
+    private String jobNo;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "job_quantity")
+    private Double jobQuantity;
     @JoinColumns({
-        @JoinColumn(name = "purchase_order_has_item_purchase_order_id", referencedColumnName = "purchase_order_id")
-        , @JoinColumn(name = "purchase_order_has_item_item_id", referencedColumnName = "item_id")})
+        @JoinColumn(name = "purchase_order_has_item_item_id", referencedColumnName = "item_id")
+        , @JoinColumn(name = "purchase_order_has_item_purchase_order_id", referencedColumnName = "purchase_order_id")})
     @ManyToOne(optional = false)
     private PurchaseOrderHasItem purchaseOrderHasItem;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
-    private Collection<JobHasControlPoint> jobHasControlPointCollection;
+    private List<JobHasControlPoint> jobHasControlPointList;
 
     public Job() {
     }
@@ -80,44 +80,12 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public String getJobNo() {
-        return jobNo;
-    }
-
-    public void setJobNo(String jobNo) {
-        this.jobNo = jobNo;
-    }
-
     public Date getActualSippedDate() {
         return actualSippedDate;
     }
 
     public void setActualSippedDate(Date actualSippedDate) {
         this.actualSippedDate = actualSippedDate;
-    }
-
-    public Date getConfirmShippedDate() {
-        return confirmShippedDate;
-    }
-
-    public void setConfirmShippedDate(Date confirmShippedDate) {
-        this.confirmShippedDate = confirmShippedDate;
-    }
-
-    public Double getJobQuantity() {
-        return jobQuantity;
-    }
-
-    public void setJobQuantity(Double jobQuantity) {
-        this.jobQuantity = jobQuantity;
-    }
-
-    public Date getJobDate() {
-        return jobDate;
-    }
-
-    public void setJobDate(Date jobDate) {
-        this.jobDate = jobDate;
     }
 
     public String getComment() {
@@ -128,6 +96,38 @@ public class Job implements Serializable {
         this.comment = comment;
     }
 
+    public Date getConfirmShippedDate() {
+        return confirmShippedDate;
+    }
+
+    public void setConfirmShippedDate(Date confirmShippedDate) {
+        this.confirmShippedDate = confirmShippedDate;
+    }
+
+    public Date getJobDate() {
+        return jobDate;
+    }
+
+    public void setJobDate(Date jobDate) {
+        this.jobDate = jobDate;
+    }
+
+    public String getJobNo() {
+        return jobNo;
+    }
+
+    public void setJobNo(String jobNo) {
+        this.jobNo = jobNo;
+    }
+
+    public Double getJobQuantity() {
+        return jobQuantity;
+    }
+
+    public void setJobQuantity(Double jobQuantity) {
+        this.jobQuantity = jobQuantity;
+    }
+
     public PurchaseOrderHasItem getPurchaseOrderHasItem() {
         return purchaseOrderHasItem;
     }
@@ -136,12 +136,12 @@ public class Job implements Serializable {
         this.purchaseOrderHasItem = purchaseOrderHasItem;
     }
 
-    public Collection<JobHasControlPoint> getJobHasControlPointCollection() {
-        return jobHasControlPointCollection;
+    public List<JobHasControlPoint> getJobHasControlPointList() {
+        return jobHasControlPointList;
     }
 
-    public void setJobHasControlPointCollection(Collection<JobHasControlPoint> jobHasControlPointCollection) {
-        this.jobHasControlPointCollection = jobHasControlPointCollection;
+    public void setJobHasControlPointList(List<JobHasControlPoint> jobHasControlPointList) {
+        this.jobHasControlPointList = jobHasControlPointList;
     }
 
     @Override

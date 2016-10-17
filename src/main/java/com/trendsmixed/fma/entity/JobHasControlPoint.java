@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -31,15 +31,15 @@ public class JobHasControlPoint implements Serializable {
     @EmbeddedId
     protected JobHasControlPointPK jobHasControlPointPK;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobHasControlPoint")
-    private Collection<PlanDate> planDateCollection;
-    @JoinColumn(name = "control_point_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private ControlPoint controlPoint;
+    private List<PlanDate> planDateList;
     @JoinColumn(name = "job_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Job job;
+    @JoinColumn(name = "control_point_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private ControlPoint controlPoint;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobHasControlPoint")
-    private Collection<RunDate> runDateCollection;
+    private List<RunDate> runDateList;
 
     public JobHasControlPoint() {
     }
@@ -48,8 +48,8 @@ public class JobHasControlPoint implements Serializable {
         this.jobHasControlPointPK = jobHasControlPointPK;
     }
 
-    public JobHasControlPoint(int jobId, int controlPointId) {
-        this.jobHasControlPointPK = new JobHasControlPointPK(jobId, controlPointId);
+    public JobHasControlPoint(int controlPointId, int jobId) {
+        this.jobHasControlPointPK = new JobHasControlPointPK(controlPointId, jobId);
     }
 
     public JobHasControlPointPK getJobHasControlPointPK() {
@@ -60,20 +60,12 @@ public class JobHasControlPoint implements Serializable {
         this.jobHasControlPointPK = jobHasControlPointPK;
     }
 
-    public Collection<PlanDate> getPlanDateCollection() {
-        return planDateCollection;
+    public List<PlanDate> getPlanDateList() {
+        return planDateList;
     }
 
-    public void setPlanDateCollection(Collection<PlanDate> planDateCollection) {
-        this.planDateCollection = planDateCollection;
-    }
-
-    public ControlPoint getControlPoint() {
-        return controlPoint;
-    }
-
-    public void setControlPoint(ControlPoint controlPoint) {
-        this.controlPoint = controlPoint;
+    public void setPlanDateList(List<PlanDate> planDateList) {
+        this.planDateList = planDateList;
     }
 
     public Job getJob() {
@@ -84,12 +76,20 @@ public class JobHasControlPoint implements Serializable {
         this.job = job;
     }
 
-    public Collection<RunDate> getRunDateCollection() {
-        return runDateCollection;
+    public ControlPoint getControlPoint() {
+        return controlPoint;
     }
 
-    public void setRunDateCollection(Collection<RunDate> runDateCollection) {
-        this.runDateCollection = runDateCollection;
+    public void setControlPoint(ControlPoint controlPoint) {
+        this.controlPoint = controlPoint;
+    }
+
+    public List<RunDate> getRunDateList() {
+        return runDateList;
+    }
+
+    public void setRunDateList(List<RunDate> runDateList) {
+        this.runDateList = runDateList;
     }
 
     @Override

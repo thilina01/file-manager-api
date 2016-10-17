@@ -18,25 +18,17 @@ import javax.persistence.Embeddable;
 public class RunDateHasDefectTypePK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "run_date_id")
-    private int runDateId;
-    @Basic(optional = false)
     @Column(name = "defect_type_id")
     private int defectTypeId;
+    @Basic(optional = false)
+    @Column(name = "run_date_id")
+    private int runDateId;
 
     public RunDateHasDefectTypePK() {
     }
 
-    public RunDateHasDefectTypePK(int runDateId, int defectTypeId) {
-        this.runDateId = runDateId;
+    public RunDateHasDefectTypePK(int defectTypeId, int runDateId) {
         this.defectTypeId = defectTypeId;
-    }
-
-    public int getRunDateId() {
-        return runDateId;
-    }
-
-    public void setRunDateId(int runDateId) {
         this.runDateId = runDateId;
     }
 
@@ -48,11 +40,19 @@ public class RunDateHasDefectTypePK implements Serializable {
         this.defectTypeId = defectTypeId;
     }
 
+    public int getRunDateId() {
+        return runDateId;
+    }
+
+    public void setRunDateId(int runDateId) {
+        this.runDateId = runDateId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) runDateId;
         hash += (int) defectTypeId;
+        hash += (int) runDateId;
         return hash;
     }
 
@@ -63,10 +63,10 @@ public class RunDateHasDefectTypePK implements Serializable {
             return false;
         }
         RunDateHasDefectTypePK other = (RunDateHasDefectTypePK) object;
-        if (this.runDateId != other.runDateId) {
+        if (this.defectTypeId != other.defectTypeId) {
             return false;
         }
-        if (this.defectTypeId != other.defectTypeId) {
+        if (this.runDateId != other.runDateId) {
             return false;
         }
         return true;
@@ -74,7 +74,7 @@ public class RunDateHasDefectTypePK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.RunDateHasDefectTypePK[ runDateId=" + runDateId + ", defectTypeId=" + defectTypeId + " ]";
+        return "com.trendsmixed.fma.entity.RunDateHasDefectTypePK[ defectTypeId=" + defectTypeId + ", runDateId=" + runDateId + " ]";
     }
     
 }

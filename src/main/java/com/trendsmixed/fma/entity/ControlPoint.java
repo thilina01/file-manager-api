@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,9 +45,9 @@ public class ControlPoint implements Serializable {
     @ManyToOne(optional = false)
     private WorkCenter workCenter;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
-    private Collection<Machine> machineCollection;
+    private List<Machine> machineList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
-    private Collection<JobHasControlPoint> jobHasControlPointCollection;
+    private List<JobHasControlPoint> jobHasControlPointList;
 
     public ControlPoint() {
     }
@@ -88,20 +88,20 @@ public class ControlPoint implements Serializable {
         this.workCenter = workCenter;
     }
 
-    public Collection<Machine> getMachineCollection() {
-        return machineCollection;
+    public List<Machine> getMachineList() {
+        return machineList;
     }
 
-    public void setMachineCollection(Collection<Machine> machineCollection) {
-        this.machineCollection = machineCollection;
+    public void setMachineList(List<Machine> machineList) {
+        this.machineList = machineList;
     }
 
-    public Collection<JobHasControlPoint> getJobHasControlPointCollection() {
-        return jobHasControlPointCollection;
+    public List<JobHasControlPoint> getJobHasControlPointList() {
+        return jobHasControlPointList;
     }
 
-    public void setJobHasControlPointCollection(Collection<JobHasControlPoint> jobHasControlPointCollection) {
-        this.jobHasControlPointCollection = jobHasControlPointCollection;
+    public void setJobHasControlPointList(List<JobHasControlPoint> jobHasControlPointList) {
+        this.jobHasControlPointList = jobHasControlPointList;
     }
 
     @Override

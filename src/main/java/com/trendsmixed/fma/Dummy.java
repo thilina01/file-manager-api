@@ -22,7 +22,7 @@ public class Dummy {
             folder.setName("Folder " + i);
             ArrayList<File> files = new ArrayList<>();
             files.add(file);
-            folder.setFiles(files);
+            folder.setFileList(files);
             folders.add(folder);
         }
 

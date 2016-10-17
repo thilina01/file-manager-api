@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,7 +42,7 @@ public class ScrapType implements Serializable {
     @Column(name = "type_in_shinhala")
     private String typeInShinhala;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "scrapType")
-    private Collection<RunDateHasScrapType> runDateHasScrapTypeCollection;
+    private List<RunDateHasScrapType> runDateHasScrapTypeList;
 
     public ScrapType() {
     }
@@ -83,12 +83,12 @@ public class ScrapType implements Serializable {
         this.typeInShinhala = typeInShinhala;
     }
 
-    public Collection<RunDateHasScrapType> getRunDateHasScrapTypeCollection() {
-        return runDateHasScrapTypeCollection;
+    public List<RunDateHasScrapType> getRunDateHasScrapTypeList() {
+        return runDateHasScrapTypeList;
     }
 
-    public void setRunDateHasScrapTypeCollection(Collection<RunDateHasScrapType> runDateHasScrapTypeCollection) {
-        this.runDateHasScrapTypeCollection = runDateHasScrapTypeCollection;
+    public void setRunDateHasScrapTypeList(List<RunDateHasScrapType> runDateHasScrapTypeList) {
+        this.runDateHasScrapTypeList = runDateHasScrapTypeList;
     }
 
     @Override

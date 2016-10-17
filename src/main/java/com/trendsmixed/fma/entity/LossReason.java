@@ -6,15 +6,13 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -42,11 +40,8 @@ public class LossReason implements Serializable {
     private String type;
     @Column(name = "type_in_shinhala")
     private String typeInShinhala;
-    @JoinTable(name = "run_date_has_loss_reason", joinColumns = {
-        @JoinColumn(name = "loss_reason_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "run_date_id", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<RunDate> runDateCollection;
+    @ManyToMany(mappedBy = "lossReasonList")
+    private List<RunDate> runDateList;
 
     public LossReason() {
     }
@@ -87,12 +82,12 @@ public class LossReason implements Serializable {
         this.typeInShinhala = typeInShinhala;
     }
 
-    public Collection<RunDate> getRunDateCollection() {
-        return runDateCollection;
+    public List<RunDate> getRunDateList() {
+        return runDateList;
     }
 
-    public void setRunDateCollection(Collection<RunDate> runDateCollection) {
-        this.runDateCollection = runDateCollection;
+    public void setRunDateList(List<RunDate> runDateList) {
+        this.runDateList = runDateList;
     }
 
     @Override

@@ -61,7 +61,7 @@ public class AccountController {
         AppSession appSession = new AppSession();
         appSession.setEmail(email);
         appSession.setLastTime(System.currentTimeMillis());
-        appSession.setLastIP(ip);
+        appSession.setIp(ip);
         appSessionService.save(appSession);
     }
 }

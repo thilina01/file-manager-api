@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -41,9 +41,9 @@ public class PurchaseOrderHasItem implements Serializable {
     @ManyToOne(optional = false)
     private PurchaseOrder purchaseOrder;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrderHasItem")
-    private Collection<Delivery> deliveryCollection;
+    private List<Delivery> deliveryList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrderHasItem")
-    private Collection<Job> jobCollection;
+    private List<Job> jobList;
 
     public PurchaseOrderHasItem() {
     }
@@ -52,8 +52,8 @@ public class PurchaseOrderHasItem implements Serializable {
         this.purchaseOrderHasItemPK = purchaseOrderHasItemPK;
     }
 
-    public PurchaseOrderHasItem(int purchaseOrderId, int itemId) {
-        this.purchaseOrderHasItemPK = new PurchaseOrderHasItemPK(purchaseOrderId, itemId);
+    public PurchaseOrderHasItem(int itemId, int purchaseOrderId) {
+        this.purchaseOrderHasItemPK = new PurchaseOrderHasItemPK(itemId, purchaseOrderId);
     }
 
     public PurchaseOrderHasItemPK getPurchaseOrderHasItemPK() {
@@ -88,20 +88,20 @@ public class PurchaseOrderHasItem implements Serializable {
         this.purchaseOrder = purchaseOrder;
     }
 
-    public Collection<Delivery> getDeliveryCollection() {
-        return deliveryCollection;
+    public List<Delivery> getDeliveryList() {
+        return deliveryList;
     }
 
-    public void setDeliveryCollection(Collection<Delivery> deliveryCollection) {
-        this.deliveryCollection = deliveryCollection;
+    public void setDeliveryList(List<Delivery> deliveryList) {
+        this.deliveryList = deliveryList;
     }
 
-    public Collection<Job> getJobCollection() {
-        return jobCollection;
+    public List<Job> getJobList() {
+        return jobList;
     }
 
-    public void setJobCollection(Collection<Job> jobCollection) {
-        this.jobCollection = jobCollection;
+    public void setJobList(List<Job> jobList) {
+        this.jobList = jobList;
     }
 
     @Override

@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,48 +39,48 @@ public class Customer implements Serializable {
     private Integer id;
     @Column(name = "code")
     private String code;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "office_addres")
-    private String officeAddres;
     @Column(name = "consignee")
     private String consignee;
-    @Column(name = "nortify_party")
-    private String nortifyParty;
     @Column(name = "contact")
     private String contact;
-    @Column(name = "phone_no")
-    private String phoneNo;
-    @Column(name = "fax")
-    private String fax;
-    @Column(name = "payment_term")
-    private String paymentTerm;
-    @Column(name = "vat_no")
-    private String vatNo;
-    @Column(name = "s_vat_no")
-    private String sVatNo;
-    @Column(name = "final_destination")
-    private String finalDestination;
     @Column(name = "continent")
     private String continent;
+    @Column(name = "fax")
+    private String fax;
+    @Column(name = "final_destination")
+    private String finalDestination;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "nortify_party")
+    private String nortifyParty;
     @Column(name = "note")
     private String note;
+    @Column(name = "office_addres")
+    private String officeAddres;
+    @Column(name = "payment_term")
+    private String paymentTerm;
+    @Column(name = "phone_no")
+    private String phoneNo;
+    @Column(name = "s_vat_no")
+    private String sVatNo;
+    @Column(name = "vat_no")
+    private String vatNo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private Collection<CustomerItem> customerItemCollection;
+    private List<CustomerItem> customerItemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private Collection<PurchaseOrder> purchaseOrderCollection;
-    @JoinColumn(name = "country_id", referencedColumnName = "id")
+    private List<PurchaseOrder> purchaseOrderList;
+    @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Country country;
+    private Incoterm incoterm;
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Currency currency;
     @JoinColumn(name = "cust_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CustType custType;
-    @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Incoterm incoterm;
+    private Country country;
 
     public Customer() {
     }
@@ -105,36 +105,12 @@ public class Customer implements Serializable {
         this.code = code;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getOfficeAddres() {
-        return officeAddres;
-    }
-
-    public void setOfficeAddres(String officeAddres) {
-        this.officeAddres = officeAddres;
-    }
-
     public String getConsignee() {
         return consignee;
     }
 
     public void setConsignee(String consignee) {
         this.consignee = consignee;
-    }
-
-    public String getNortifyParty() {
-        return nortifyParty;
-    }
-
-    public void setNortifyParty(String nortifyParty) {
-        this.nortifyParty = nortifyParty;
     }
 
     public String getContact() {
@@ -145,12 +121,12 @@ public class Customer implements Serializable {
         this.contact = contact;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getContinent() {
+        return continent;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setContinent(String continent) {
+        this.continent = continent;
     }
 
     public String getFax() {
@@ -161,30 +137,6 @@ public class Customer implements Serializable {
         this.fax = fax;
     }
 
-    public String getPaymentTerm() {
-        return paymentTerm;
-    }
-
-    public void setPaymentTerm(String paymentTerm) {
-        this.paymentTerm = paymentTerm;
-    }
-
-    public String getVatNo() {
-        return vatNo;
-    }
-
-    public void setVatNo(String vatNo) {
-        this.vatNo = vatNo;
-    }
-
-    public String getSVatNo() {
-        return sVatNo;
-    }
-
-    public void setSVatNo(String sVatNo) {
-        this.sVatNo = sVatNo;
-    }
-
     public String getFinalDestination() {
         return finalDestination;
     }
@@ -193,12 +145,20 @@ public class Customer implements Serializable {
         this.finalDestination = finalDestination;
     }
 
-    public String getContinent() {
-        return continent;
+    public String getName() {
+        return name;
     }
 
-    public void setContinent(String continent) {
-        this.continent = continent;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNortifyParty() {
+        return nortifyParty;
+    }
+
+    public void setNortifyParty(String nortifyParty) {
+        this.nortifyParty = nortifyParty;
     }
 
     public String getNote() {
@@ -209,28 +169,68 @@ public class Customer implements Serializable {
         this.note = note;
     }
 
-    public Collection<CustomerItem> getCustomerItemCollection() {
-        return customerItemCollection;
+    public String getOfficeAddres() {
+        return officeAddres;
     }
 
-    public void setCustomerItemCollection(Collection<CustomerItem> customerItemCollection) {
-        this.customerItemCollection = customerItemCollection;
+    public void setOfficeAddres(String officeAddres) {
+        this.officeAddres = officeAddres;
     }
 
-    public Collection<PurchaseOrder> getPurchaseOrderCollection() {
-        return purchaseOrderCollection;
+    public String getPaymentTerm() {
+        return paymentTerm;
     }
 
-    public void setPurchaseOrderCollection(Collection<PurchaseOrder> purchaseOrderCollection) {
-        this.purchaseOrderCollection = purchaseOrderCollection;
+    public void setPaymentTerm(String paymentTerm) {
+        this.paymentTerm = paymentTerm;
     }
 
-    public Country getCountry() {
-        return country;
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public String getSVatNo() {
+        return sVatNo;
+    }
+
+    public void setSVatNo(String sVatNo) {
+        this.sVatNo = sVatNo;
+    }
+
+    public String getVatNo() {
+        return vatNo;
+    }
+
+    public void setVatNo(String vatNo) {
+        this.vatNo = vatNo;
+    }
+
+    public List<CustomerItem> getCustomerItemList() {
+        return customerItemList;
+    }
+
+    public void setCustomerItemList(List<CustomerItem> customerItemList) {
+        this.customerItemList = customerItemList;
+    }
+
+    public List<PurchaseOrder> getPurchaseOrderList() {
+        return purchaseOrderList;
+    }
+
+    public void setPurchaseOrderList(List<PurchaseOrder> purchaseOrderList) {
+        this.purchaseOrderList = purchaseOrderList;
+    }
+
+    public Incoterm getIncoterm() {
+        return incoterm;
+    }
+
+    public void setIncoterm(Incoterm incoterm) {
+        this.incoterm = incoterm;
     }
 
     public Currency getCurrency() {
@@ -249,12 +249,12 @@ public class Customer implements Serializable {
         this.custType = custType;
     }
 
-    public Incoterm getIncoterm() {
-        return incoterm;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setIncoterm(Incoterm incoterm) {
-        this.incoterm = incoterm;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     @Override

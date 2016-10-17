@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -42,11 +41,8 @@ public class CustomerItem implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
     private Double price;
-    @JoinTable(name = "item_has_customer_item", joinColumns = {
-        @JoinColumn(name = "customer_item_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "item_id", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Item> itemCollection;
+    @ManyToMany(mappedBy = "customerItemList")
+    private List<Item> itemList;
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
@@ -82,12 +78,12 @@ public class CustomerItem implements Serializable {
         this.price = price;
     }
 
-    public Collection<Item> getItemCollection() {
-        return itemCollection;
+    public List<Item> getItemList() {
+        return itemList;
     }
 
-    public void setItemCollection(Collection<Item> itemCollection) {
-        this.itemCollection = itemCollection;
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 
     public Customer getCustomer() {

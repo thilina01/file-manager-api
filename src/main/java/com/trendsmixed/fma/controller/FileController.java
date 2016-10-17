@@ -2,7 +2,7 @@ package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trendsmixed.fma.entity.AppSession;
-import com.trendsmixed.fma.entity.Download;
+import com.trendsmixed.fma.dao.Download;
 import com.trendsmixed.fma.entity.File;
 import com.trendsmixed.fma.entity.Folder;
 import com.trendsmixed.fma.service.AppSessionService;
@@ -107,13 +107,13 @@ public class FileController {
                 String extension = originalFileName.substring(originalFileName.lastIndexOf('.'));
                 //System.out.println(file.getName());
                 //System.out.println("folder id: " + file.getFolders().get(0).getId());
-                Folder folder = folderService.findOne(file.getFolders().get(0).getId());
+                Folder folder = folderService.findOne(file.getFolderList().get(0).getId());
                 //String name = System.currentTimeMillis() + extension;
                 //System.out.println(name);
                 file.setUploadDate(new Date());
                 file.setExtension(extension);
                 file = fileService.save(file);
-                folder.getFiles().add(file);
+                folder.getFileList().add(file);
                 folderService.save(folder);
                 fileId = file.getId();
                 String name = file.getId() + extension;
@@ -164,9 +164,9 @@ public class FileController {
 
     private void deleteFile(int id) {
         File file = fileService.findOne(id);
-        List<Folder> folders = file.getFolders();
+        List<Folder> folders = file.getFolderList();
         for (Folder folder : folders) {
-            folder.getFiles().remove(file);
+            folder.getFileList().remove(file);
             folderService.save(folder);
         }
         fileService.delete(id);

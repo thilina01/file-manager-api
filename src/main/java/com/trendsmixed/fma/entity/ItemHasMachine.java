@@ -31,12 +31,12 @@ public class ItemHasMachine implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "consumption_rate")
     private Double consumptionRate;
-    @JoinColumn(name = "item_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Item item;
     @JoinColumn(name = "machine_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Machine machine;
+    @JoinColumn(name = "item_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Item item;
 
     public ItemHasMachine() {
     }
@@ -65,20 +65,20 @@ public class ItemHasMachine implements Serializable {
         this.consumptionRate = consumptionRate;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
     public Machine getMachine() {
         return machine;
     }
 
     public void setMachine(Machine machine) {
         this.machine = machine;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     @Override

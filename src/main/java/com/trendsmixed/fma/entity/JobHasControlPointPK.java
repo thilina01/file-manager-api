@@ -18,25 +18,17 @@ import javax.persistence.Embeddable;
 public class JobHasControlPointPK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "job_id")
-    private int jobId;
-    @Basic(optional = false)
     @Column(name = "control_point_id")
     private int controlPointId;
+    @Basic(optional = false)
+    @Column(name = "job_id")
+    private int jobId;
 
     public JobHasControlPointPK() {
     }
 
-    public JobHasControlPointPK(int jobId, int controlPointId) {
-        this.jobId = jobId;
+    public JobHasControlPointPK(int controlPointId, int jobId) {
         this.controlPointId = controlPointId;
-    }
-
-    public int getJobId() {
-        return jobId;
-    }
-
-    public void setJobId(int jobId) {
         this.jobId = jobId;
     }
 
@@ -48,11 +40,19 @@ public class JobHasControlPointPK implements Serializable {
         this.controlPointId = controlPointId;
     }
 
+    public int getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(int jobId) {
+        this.jobId = jobId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) jobId;
         hash += (int) controlPointId;
+        hash += (int) jobId;
         return hash;
     }
 
@@ -63,10 +63,10 @@ public class JobHasControlPointPK implements Serializable {
             return false;
         }
         JobHasControlPointPK other = (JobHasControlPointPK) object;
-        if (this.jobId != other.jobId) {
+        if (this.controlPointId != other.controlPointId) {
             return false;
         }
-        if (this.controlPointId != other.controlPointId) {
+        if (this.jobId != other.jobId) {
             return false;
         }
         return true;
@@ -74,7 +74,7 @@ public class JobHasControlPointPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.JobHasControlPointPK[ jobId=" + jobId + ", controlPointId=" + controlPointId + " ]";
+        return "com.trendsmixed.fma.entity.JobHasControlPointPK[ controlPointId=" + controlPointId + ", jobId=" + jobId + " ]";
     }
     
 }

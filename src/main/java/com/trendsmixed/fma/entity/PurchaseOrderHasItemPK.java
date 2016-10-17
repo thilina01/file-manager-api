@@ -18,25 +18,17 @@ import javax.persistence.Embeddable;
 public class PurchaseOrderHasItemPK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "purchase_order_id")
-    private int purchaseOrderId;
-    @Basic(optional = false)
     @Column(name = "item_id")
     private int itemId;
+    @Basic(optional = false)
+    @Column(name = "purchase_order_id")
+    private int purchaseOrderId;
 
     public PurchaseOrderHasItemPK() {
     }
 
-    public PurchaseOrderHasItemPK(int purchaseOrderId, int itemId) {
-        this.purchaseOrderId = purchaseOrderId;
+    public PurchaseOrderHasItemPK(int itemId, int purchaseOrderId) {
         this.itemId = itemId;
-    }
-
-    public int getPurchaseOrderId() {
-        return purchaseOrderId;
-    }
-
-    public void setPurchaseOrderId(int purchaseOrderId) {
         this.purchaseOrderId = purchaseOrderId;
     }
 
@@ -48,11 +40,19 @@ public class PurchaseOrderHasItemPK implements Serializable {
         this.itemId = itemId;
     }
 
+    public int getPurchaseOrderId() {
+        return purchaseOrderId;
+    }
+
+    public void setPurchaseOrderId(int purchaseOrderId) {
+        this.purchaseOrderId = purchaseOrderId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) purchaseOrderId;
         hash += (int) itemId;
+        hash += (int) purchaseOrderId;
         return hash;
     }
 
@@ -63,10 +63,10 @@ public class PurchaseOrderHasItemPK implements Serializable {
             return false;
         }
         PurchaseOrderHasItemPK other = (PurchaseOrderHasItemPK) object;
-        if (this.purchaseOrderId != other.purchaseOrderId) {
+        if (this.itemId != other.itemId) {
             return false;
         }
-        if (this.itemId != other.itemId) {
+        if (this.purchaseOrderId != other.purchaseOrderId) {
             return false;
         }
         return true;
@@ -74,7 +74,7 @@ public class PurchaseOrderHasItemPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.PurchaseOrderHasItemPK[ purchaseOrderId=" + purchaseOrderId + ", itemId=" + itemId + " ]";
+        return "com.trendsmixed.fma.entity.PurchaseOrderHasItemPK[ itemId=" + itemId + ", purchaseOrderId=" + purchaseOrderId + " ]";
     }
     
 }

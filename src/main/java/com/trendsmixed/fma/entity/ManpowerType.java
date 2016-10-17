@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,9 +38,9 @@ public class ManpowerType implements Serializable {
     @Column(name = "type")
     private String type;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
-    private Collection<RunDateHasManpowerType> runDateHasManpowerTypeCollection;
+    private List<RunDateHasManpowerType> runDateHasManpowerTypeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
-    private Collection<PlanDateHasManpowerType> planDateHasManpowerTypeCollection;
+    private List<PlanDateHasManpowerType> planDateHasManpowerTypeList;
 
     public ManpowerType() {
     }
@@ -65,20 +65,20 @@ public class ManpowerType implements Serializable {
         this.type = type;
     }
 
-    public Collection<RunDateHasManpowerType> getRunDateHasManpowerTypeCollection() {
-        return runDateHasManpowerTypeCollection;
+    public List<RunDateHasManpowerType> getRunDateHasManpowerTypeList() {
+        return runDateHasManpowerTypeList;
     }
 
-    public void setRunDateHasManpowerTypeCollection(Collection<RunDateHasManpowerType> runDateHasManpowerTypeCollection) {
-        this.runDateHasManpowerTypeCollection = runDateHasManpowerTypeCollection;
+    public void setRunDateHasManpowerTypeList(List<RunDateHasManpowerType> runDateHasManpowerTypeList) {
+        this.runDateHasManpowerTypeList = runDateHasManpowerTypeList;
     }
 
-    public Collection<PlanDateHasManpowerType> getPlanDateHasManpowerTypeCollection() {
-        return planDateHasManpowerTypeCollection;
+    public List<PlanDateHasManpowerType> getPlanDateHasManpowerTypeList() {
+        return planDateHasManpowerTypeList;
     }
 
-    public void setPlanDateHasManpowerTypeCollection(Collection<PlanDateHasManpowerType> planDateHasManpowerTypeCollection) {
-        this.planDateHasManpowerTypeCollection = planDateHasManpowerTypeCollection;
+    public void setPlanDateHasManpowerTypeList(List<PlanDateHasManpowerType> planDateHasManpowerTypeList) {
+        this.planDateHasManpowerTypeList = planDateHasManpowerTypeList;
     }
 
     @Override

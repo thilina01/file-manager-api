@@ -44,8 +44,8 @@ public class PlanDateHasManpowerType implements Serializable {
         this.planDateHasManpowerTypePK = planDateHasManpowerTypePK;
     }
 
-    public PlanDateHasManpowerType(int planDateId, int manpowerTypeId) {
-        this.planDateHasManpowerTypePK = new PlanDateHasManpowerTypePK(planDateId, manpowerTypeId);
+    public PlanDateHasManpowerType(int manpowerTypeId, int planDateId) {
+        this.planDateHasManpowerTypePK = new PlanDateHasManpowerTypePK(manpowerTypeId, planDateId);
     }
 
     public PlanDateHasManpowerTypePK getPlanDateHasManpowerTypePK() {

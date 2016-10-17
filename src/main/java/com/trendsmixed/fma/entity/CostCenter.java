@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,7 +42,7 @@ public class CostCenter implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "costCenter")
-    private Collection<WorkCenter> workCenterCollection;
+    private List<WorkCenter> workCenterList;
     @JoinColumn(name = "section_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Section section;
@@ -78,12 +78,12 @@ public class CostCenter implements Serializable {
         this.name = name;
     }
 
-    public Collection<WorkCenter> getWorkCenterCollection() {
-        return workCenterCollection;
+    public List<WorkCenter> getWorkCenterList() {
+        return workCenterList;
     }
 
-    public void setWorkCenterCollection(Collection<WorkCenter> workCenterCollection) {
-        this.workCenterCollection = workCenterCollection;
+    public void setWorkCenterList(List<WorkCenter> workCenterList) {
+        this.workCenterList = workCenterList;
     }
 
     public Section getSection() {

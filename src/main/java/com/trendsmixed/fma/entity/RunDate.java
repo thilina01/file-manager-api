@@ -6,8 +6,8 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -42,32 +43,35 @@ public class RunDate implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "run_date")
-    @Temporal(TemporalType.DATE)
-    private Date runDate;
     @Column(name = "duration")
     private Integer duration;
     @Column(name = "quantity")
     private Integer quantity;
-    @Column(name = "scrap")
-    private Integer scrap;
     @Column(name = "repaierd")
     private Integer repaierd;
     @Column(name = "rework")
     private Integer rework;
+    @Column(name = "run_date")
+    @Temporal(TemporalType.DATE)
+    private Date runDate;
+    @Column(name = "scrap")
+    private Integer scrap;
     @Column(name = "shift")
     private String shift;
-    @ManyToMany(mappedBy = "runDateCollection")
-    private Collection<LossReason> lossReasonCollection;
+    @JoinTable(name = "run_date_has_loss_reason", joinColumns = {
+        @JoinColumn(name = "run_date_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "loss_reason_id", referencedColumnName = "id")})
+    @ManyToMany
+    private List<LossReason> lossReasonList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private Collection<RunDateHasManpowerType> runDateHasManpowerTypeCollection;
+    private List<RunDateHasManpowerType> runDateHasManpowerTypeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private Collection<RunDateHasScrapType> runDateHasScrapTypeCollection;
+    private List<RunDateHasScrapType> runDateHasScrapTypeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private Collection<RunDateHasDefectType> runDateHasDefectTypeCollection;
+    private List<RunDateHasDefectType> runDateHasDefectTypeList;
     @JoinColumns({
-        @JoinColumn(name = "job_has_control_point_job_id", referencedColumnName = "job_id")
-        , @JoinColumn(name = "job_has_control_point_control_point_id", referencedColumnName = "control_point_id")})
+        @JoinColumn(name = "job_has_control_point_control_point_id", referencedColumnName = "control_point_id")
+        , @JoinColumn(name = "job_has_control_point_job_id", referencedColumnName = "job_id")})
     @ManyToOne(optional = false)
     private JobHasControlPoint jobHasControlPoint;
 
@@ -86,14 +90,6 @@ public class RunDate implements Serializable {
         this.id = id;
     }
 
-    public Date getRunDate() {
-        return runDate;
-    }
-
-    public void setRunDate(Date runDate) {
-        this.runDate = runDate;
-    }
-
     public Integer getDuration() {
         return duration;
     }
@@ -108,14 +104,6 @@ public class RunDate implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public Integer getScrap() {
-        return scrap;
-    }
-
-    public void setScrap(Integer scrap) {
-        this.scrap = scrap;
     }
 
     public Integer getRepaierd() {
@@ -134,6 +122,22 @@ public class RunDate implements Serializable {
         this.rework = rework;
     }
 
+    public Date getRunDate() {
+        return runDate;
+    }
+
+    public void setRunDate(Date runDate) {
+        this.runDate = runDate;
+    }
+
+    public Integer getScrap() {
+        return scrap;
+    }
+
+    public void setScrap(Integer scrap) {
+        this.scrap = scrap;
+    }
+
     public String getShift() {
         return shift;
     }
@@ -142,36 +146,36 @@ public class RunDate implements Serializable {
         this.shift = shift;
     }
 
-    public Collection<LossReason> getLossReasonCollection() {
-        return lossReasonCollection;
+    public List<LossReason> getLossReasonList() {
+        return lossReasonList;
     }
 
-    public void setLossReasonCollection(Collection<LossReason> lossReasonCollection) {
-        this.lossReasonCollection = lossReasonCollection;
+    public void setLossReasonList(List<LossReason> lossReasonList) {
+        this.lossReasonList = lossReasonList;
     }
 
-    public Collection<RunDateHasManpowerType> getRunDateHasManpowerTypeCollection() {
-        return runDateHasManpowerTypeCollection;
+    public List<RunDateHasManpowerType> getRunDateHasManpowerTypeList() {
+        return runDateHasManpowerTypeList;
     }
 
-    public void setRunDateHasManpowerTypeCollection(Collection<RunDateHasManpowerType> runDateHasManpowerTypeCollection) {
-        this.runDateHasManpowerTypeCollection = runDateHasManpowerTypeCollection;
+    public void setRunDateHasManpowerTypeList(List<RunDateHasManpowerType> runDateHasManpowerTypeList) {
+        this.runDateHasManpowerTypeList = runDateHasManpowerTypeList;
     }
 
-    public Collection<RunDateHasScrapType> getRunDateHasScrapTypeCollection() {
-        return runDateHasScrapTypeCollection;
+    public List<RunDateHasScrapType> getRunDateHasScrapTypeList() {
+        return runDateHasScrapTypeList;
     }
 
-    public void setRunDateHasScrapTypeCollection(Collection<RunDateHasScrapType> runDateHasScrapTypeCollection) {
-        this.runDateHasScrapTypeCollection = runDateHasScrapTypeCollection;
+    public void setRunDateHasScrapTypeList(List<RunDateHasScrapType> runDateHasScrapTypeList) {
+        this.runDateHasScrapTypeList = runDateHasScrapTypeList;
     }
 
-    public Collection<RunDateHasDefectType> getRunDateHasDefectTypeCollection() {
-        return runDateHasDefectTypeCollection;
+    public List<RunDateHasDefectType> getRunDateHasDefectTypeList() {
+        return runDateHasDefectTypeList;
     }
 
-    public void setRunDateHasDefectTypeCollection(Collection<RunDateHasDefectType> runDateHasDefectTypeCollection) {
-        this.runDateHasDefectTypeCollection = runDateHasDefectTypeCollection;
+    public void setRunDateHasDefectTypeList(List<RunDateHasDefectType> runDateHasDefectTypeList) {
+        this.runDateHasDefectTypeList = runDateHasDefectTypeList;
     }
 
     public JobHasControlPoint getJobHasControlPoint() {

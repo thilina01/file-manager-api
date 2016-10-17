@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,12 +35,12 @@ public class Section implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "name")
-    private String name;
     @Column(name = "code")
     private String code;
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
-    private Collection<CostCenter> costCenterCollection;
+    private List<CostCenter> costCenterList;
 
     public Section() {
     }
@@ -57,14 +57,6 @@ public class Section implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getCode() {
         return code;
     }
@@ -73,12 +65,20 @@ public class Section implements Serializable {
         this.code = code;
     }
 
-    public Collection<CostCenter> getCostCenterCollection() {
-        return costCenterCollection;
+    public String getName() {
+        return name;
     }
 
-    public void setCostCenterCollection(Collection<CostCenter> costCenterCollection) {
-        this.costCenterCollection = costCenterCollection;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<CostCenter> getCostCenterList() {
+        return costCenterList;
+    }
+
+    public void setCostCenterList(List<CostCenter> costCenterList) {
+        this.costCenterList = costCenterList;
     }
 
     @Override

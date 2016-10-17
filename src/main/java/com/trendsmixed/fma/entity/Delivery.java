@@ -47,8 +47,8 @@ public class Delivery implements Serializable {
     @Column(name = "location")
     private String location;
     @JoinColumns({
-        @JoinColumn(name = "purchase_order_has_item_purchase_order_id", referencedColumnName = "purchase_order_id")
-        , @JoinColumn(name = "purchase_order_has_item_item_id", referencedColumnName = "item_id")})
+        @JoinColumn(name = "purchase_order_has_item_item_id", referencedColumnName = "item_id")
+        , @JoinColumn(name = "purchase_order_has_item_purchase_order_id", referencedColumnName = "purchase_order_id")})
     @ManyToOne(optional = false)
     private PurchaseOrderHasItem purchaseOrderHasItem;
 

@@ -6,8 +6,8 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,27 +40,27 @@ public class PurchaseOrder implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "po_number")
-    private String poNumber;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "order_qty")
-    private Double orderQty;
-    @Column(name = "customer_requested_date")
-    @Temporal(TemporalType.DATE)
-    private Date customerRequestedDate;
-    @Column(name = "trw_confirmed_date")
-    @Temporal(TemporalType.DATE)
-    private Date trwConfirmedDate;
-    @Column(name = "order_recived_date")
-    private String orderRecivedDate;
-    @Column(name = "order_type")
-    private String orderType;
     @Column(name = "actual_despatch_date")
     private String actualDespatchDate;
     @Column(name = "comments")
     private String comments;
+    @Column(name = "customer_requested_date")
+    @Temporal(TemporalType.DATE)
+    private Date customerRequestedDate;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "order_qty")
+    private Double orderQty;
+    @Column(name = "order_recived_date")
+    private String orderRecivedDate;
+    @Column(name = "order_type")
+    private String orderType;
+    @Column(name = "po_number")
+    private String poNumber;
+    @Column(name = "trw_confirmed_date")
+    @Temporal(TemporalType.DATE)
+    private Date trwConfirmedDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
-    private Collection<PurchaseOrderHasItem> purchaseOrderHasItemCollection;
+    private List<PurchaseOrderHasItem> purchaseOrderHasItemList;
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
@@ -80,20 +80,20 @@ public class PurchaseOrder implements Serializable {
         this.id = id;
     }
 
-    public String getPoNumber() {
-        return poNumber;
+    public String getActualDespatchDate() {
+        return actualDespatchDate;
     }
 
-    public void setPoNumber(String poNumber) {
-        this.poNumber = poNumber;
+    public void setActualDespatchDate(String actualDespatchDate) {
+        this.actualDespatchDate = actualDespatchDate;
     }
 
-    public Double getOrderQty() {
-        return orderQty;
+    public String getComments() {
+        return comments;
     }
 
-    public void setOrderQty(Double orderQty) {
-        this.orderQty = orderQty;
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
     public Date getCustomerRequestedDate() {
@@ -104,12 +104,12 @@ public class PurchaseOrder implements Serializable {
         this.customerRequestedDate = customerRequestedDate;
     }
 
-    public Date getTrwConfirmedDate() {
-        return trwConfirmedDate;
+    public Double getOrderQty() {
+        return orderQty;
     }
 
-    public void setTrwConfirmedDate(Date trwConfirmedDate) {
-        this.trwConfirmedDate = trwConfirmedDate;
+    public void setOrderQty(Double orderQty) {
+        this.orderQty = orderQty;
     }
 
     public String getOrderRecivedDate() {
@@ -128,28 +128,28 @@ public class PurchaseOrder implements Serializable {
         this.orderType = orderType;
     }
 
-    public String getActualDespatchDate() {
-        return actualDespatchDate;
+    public String getPoNumber() {
+        return poNumber;
     }
 
-    public void setActualDespatchDate(String actualDespatchDate) {
-        this.actualDespatchDate = actualDespatchDate;
+    public void setPoNumber(String poNumber) {
+        this.poNumber = poNumber;
     }
 
-    public String getComments() {
-        return comments;
+    public Date getTrwConfirmedDate() {
+        return trwConfirmedDate;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setTrwConfirmedDate(Date trwConfirmedDate) {
+        this.trwConfirmedDate = trwConfirmedDate;
     }
 
-    public Collection<PurchaseOrderHasItem> getPurchaseOrderHasItemCollection() {
-        return purchaseOrderHasItemCollection;
+    public List<PurchaseOrderHasItem> getPurchaseOrderHasItemList() {
+        return purchaseOrderHasItemList;
     }
 
-    public void setPurchaseOrderHasItemCollection(Collection<PurchaseOrderHasItem> purchaseOrderHasItemCollection) {
-        this.purchaseOrderHasItemCollection = purchaseOrderHasItemCollection;
+    public void setPurchaseOrderHasItemList(List<PurchaseOrderHasItem> purchaseOrderHasItemList) {
+        this.purchaseOrderHasItemList = purchaseOrderHasItemList;
     }
 
     public Customer getCustomer() {

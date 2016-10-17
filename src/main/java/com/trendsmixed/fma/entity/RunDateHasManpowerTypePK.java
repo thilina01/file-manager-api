@@ -18,25 +18,17 @@ import javax.persistence.Embeddable;
 public class RunDateHasManpowerTypePK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "run_date_id")
-    private int runDateId;
-    @Basic(optional = false)
     @Column(name = "manpower_type_id")
     private int manpowerTypeId;
+    @Basic(optional = false)
+    @Column(name = "run_date_id")
+    private int runDateId;
 
     public RunDateHasManpowerTypePK() {
     }
 
-    public RunDateHasManpowerTypePK(int runDateId, int manpowerTypeId) {
-        this.runDateId = runDateId;
+    public RunDateHasManpowerTypePK(int manpowerTypeId, int runDateId) {
         this.manpowerTypeId = manpowerTypeId;
-    }
-
-    public int getRunDateId() {
-        return runDateId;
-    }
-
-    public void setRunDateId(int runDateId) {
         this.runDateId = runDateId;
     }
 
@@ -48,11 +40,19 @@ public class RunDateHasManpowerTypePK implements Serializable {
         this.manpowerTypeId = manpowerTypeId;
     }
 
+    public int getRunDateId() {
+        return runDateId;
+    }
+
+    public void setRunDateId(int runDateId) {
+        this.runDateId = runDateId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) runDateId;
         hash += (int) manpowerTypeId;
+        hash += (int) runDateId;
         return hash;
     }
 
@@ -63,10 +63,10 @@ public class RunDateHasManpowerTypePK implements Serializable {
             return false;
         }
         RunDateHasManpowerTypePK other = (RunDateHasManpowerTypePK) object;
-        if (this.runDateId != other.runDateId) {
+        if (this.manpowerTypeId != other.manpowerTypeId) {
             return false;
         }
-        if (this.manpowerTypeId != other.manpowerTypeId) {
+        if (this.runDateId != other.runDateId) {
             return false;
         }
         return true;
@@ -74,7 +74,7 @@ public class RunDateHasManpowerTypePK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.RunDateHasManpowerTypePK[ runDateId=" + runDateId + ", manpowerTypeId=" + manpowerTypeId + " ]";
+        return "com.trendsmixed.fma.entity.RunDateHasManpowerTypePK[ manpowerTypeId=" + manpowerTypeId + ", runDateId=" + runDateId + " ]";
     }
     
 }

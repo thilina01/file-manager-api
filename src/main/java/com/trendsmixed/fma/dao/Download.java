@@ -1,4 +1,4 @@
-package com.trendsmixed.fma.entity;
+package com.trendsmixed.fma.dao;
 
 import lombok.Data;
 

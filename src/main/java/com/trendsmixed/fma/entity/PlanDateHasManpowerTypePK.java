@@ -18,25 +18,17 @@ import javax.persistence.Embeddable;
 public class PlanDateHasManpowerTypePK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "plan_date_id")
-    private int planDateId;
-    @Basic(optional = false)
     @Column(name = "manpower_type_id")
     private int manpowerTypeId;
+    @Basic(optional = false)
+    @Column(name = "plan_date_id")
+    private int planDateId;
 
     public PlanDateHasManpowerTypePK() {
     }
 
-    public PlanDateHasManpowerTypePK(int planDateId, int manpowerTypeId) {
-        this.planDateId = planDateId;
+    public PlanDateHasManpowerTypePK(int manpowerTypeId, int planDateId) {
         this.manpowerTypeId = manpowerTypeId;
-    }
-
-    public int getPlanDateId() {
-        return planDateId;
-    }
-
-    public void setPlanDateId(int planDateId) {
         this.planDateId = planDateId;
     }
 
@@ -48,11 +40,19 @@ public class PlanDateHasManpowerTypePK implements Serializable {
         this.manpowerTypeId = manpowerTypeId;
     }
 
+    public int getPlanDateId() {
+        return planDateId;
+    }
+
+    public void setPlanDateId(int planDateId) {
+        this.planDateId = planDateId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) planDateId;
         hash += (int) manpowerTypeId;
+        hash += (int) planDateId;
         return hash;
     }
 
@@ -63,10 +63,10 @@ public class PlanDateHasManpowerTypePK implements Serializable {
             return false;
         }
         PlanDateHasManpowerTypePK other = (PlanDateHasManpowerTypePK) object;
-        if (this.planDateId != other.planDateId) {
+        if (this.manpowerTypeId != other.manpowerTypeId) {
             return false;
         }
-        if (this.manpowerTypeId != other.manpowerTypeId) {
+        if (this.planDateId != other.planDateId) {
             return false;
         }
         return true;
@@ -74,7 +74,7 @@ public class PlanDateHasManpowerTypePK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.PlanDateHasManpowerTypePK[ planDateId=" + planDateId + ", manpowerTypeId=" + manpowerTypeId + " ]";
+        return "com.trendsmixed.fma.entity.PlanDateHasManpowerTypePK[ manpowerTypeId=" + manpowerTypeId + ", planDateId=" + planDateId + " ]";
     }
     
 }

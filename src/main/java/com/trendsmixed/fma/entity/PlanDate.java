@@ -6,8 +6,8 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,12 +49,12 @@ public class PlanDate implements Serializable {
     @Column(name = "shift")
     private String shift;
     @JoinColumns({
-        @JoinColumn(name = "job_has_control_point_job_id", referencedColumnName = "job_id")
-        , @JoinColumn(name = "job_has_control_point_control_point_id", referencedColumnName = "control_point_id")})
+        @JoinColumn(name = "job_has_control_point_control_point_id", referencedColumnName = "control_point_id")
+        , @JoinColumn(name = "job_has_control_point_job_id", referencedColumnName = "job_id")})
     @ManyToOne(optional = false)
     private JobHasControlPoint jobHasControlPoint;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "planDate")
-    private Collection<PlanDateHasManpowerType> planDateHasManpowerTypeCollection;
+    private List<PlanDateHasManpowerType> planDateHasManpowerTypeList;
 
     public PlanDate() {
     }
@@ -103,12 +103,12 @@ public class PlanDate implements Serializable {
         this.jobHasControlPoint = jobHasControlPoint;
     }
 
-    public Collection<PlanDateHasManpowerType> getPlanDateHasManpowerTypeCollection() {
-        return planDateHasManpowerTypeCollection;
+    public List<PlanDateHasManpowerType> getPlanDateHasManpowerTypeList() {
+        return planDateHasManpowerTypeList;
     }
 
-    public void setPlanDateHasManpowerTypeCollection(Collection<PlanDateHasManpowerType> planDateHasManpowerTypeCollection) {
-        this.planDateHasManpowerTypeCollection = planDateHasManpowerTypeCollection;
+    public void setPlanDateHasManpowerTypeList(List<PlanDateHasManpowerType> planDateHasManpowerTypeList) {
+        this.planDateHasManpowerTypeList = planDateHasManpowerTypeList;
     }
 
     @Override

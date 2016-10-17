@@ -28,9 +28,8 @@ public class RunDateHasScrapType implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected RunDateHasScrapTypePK runDateHasScrapTypePK;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "quantity")
-    private Double quantity;
+    private String quantity;
     @JoinColumn(name = "run_date_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private RunDate runDate;
@@ -57,11 +56,11 @@ public class RunDateHasScrapType implements Serializable {
         this.runDateHasScrapTypePK = runDateHasScrapTypePK;
     }
 
-    public Double getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Double quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
