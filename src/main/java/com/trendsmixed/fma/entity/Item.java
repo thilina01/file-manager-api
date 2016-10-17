@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -40,33 +41,36 @@ public class Item implements Serializable {
     private Integer id;
     @Column(name = "code")
     private String code;
-    @Column(name = "size")
-    private String size;
-    @Basic(optional = false)
-    @Column(name = "product_type_id")
-    private int ItemTypeId;
-    @Column(name = "weight")
-    private Integer weight;
-    @Column(name = "volume")
-    private String volume;
-    @Column(name = "production_tool_availablity")
-    private String productionToolAvailablity;
     @Column(name = "description")
     private String description;
     @Column(name = "drawing_version")
     private String drawingVersion;
-    @ManyToMany(mappedBy = "itemCollection")
-    private Collection<CustomerItem> customerItemCollection;
+    @Basic(optional = false)
+    @Column(name = "product_type_id")
+    private int productTypeId;
+    @Column(name = "production_tool_availablity")
+    private String productionToolAvailablity;
+    @Column(name = "size")
+    private String size;
+    @Column(name = "volume")
+    private String volume;
+    @Column(name = "weight")
+    private Integer weight;
+    @JoinTable(name = "item_has_customer_item", joinColumns = {
+        @JoinColumn(name = "item_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "customer_item_id", referencedColumnName = "id")})
+    @ManyToMany
+    private List<CustomerItem> customerItemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
-    private Collection<PurchaseOrderHasItem> purchaseOrderHasItemCollection;
+    private List<PurchaseOrderHasItem> purchaseOrderHasItemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
-    private Collection<ItemHasMachine> itemHasMachineCollection;
-    @JoinColumn(name = "item_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private ItemType itemType;
+    private List<ItemHasMachine> itemHasMachineList;
     @JoinColumn(name = "paint_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Paint paint;
+    @JoinColumn(name = "item_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private ItemType itemType;
 
     public Item() {
     }
@@ -75,9 +79,9 @@ public class Item implements Serializable {
         this.id = id;
     }
 
-    public Item(Integer id, int ItemTypeId) {
+    public Item(Integer id, int productTypeId) {
         this.id = id;
-        this.ItemTypeId = ItemTypeId;
+        this.productTypeId = productTypeId;
     }
 
     public Integer getId() {
@@ -96,46 +100,6 @@ public class Item implements Serializable {
         this.code = code;
     }
 
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public int getItemTypeId() {
-        return ItemTypeId;
-    }
-
-    public void setItemTypeId(int ItemTypeId) {
-        this.ItemTypeId = ItemTypeId;
-    }
-
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
-
-    public String getVolume() {
-        return volume;
-    }
-
-    public void setVolume(String volume) {
-        this.volume = volume;
-    }
-
-    public String getProductionToolAvailablity() {
-        return productionToolAvailablity;
-    }
-
-    public void setProductionToolAvailablity(String productionToolAvailablity) {
-        this.productionToolAvailablity = productionToolAvailablity;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -152,36 +116,68 @@ public class Item implements Serializable {
         this.drawingVersion = drawingVersion;
     }
 
-    public Collection<CustomerItem> getCustomerItemCollection() {
-        return customerItemCollection;
+    public int getProductTypeId() {
+        return productTypeId;
     }
 
-    public void setCustomerItemCollection(Collection<CustomerItem> customerItemCollection) {
-        this.customerItemCollection = customerItemCollection;
+    public void setProductTypeId(int productTypeId) {
+        this.productTypeId = productTypeId;
     }
 
-    public Collection<PurchaseOrderHasItem> getPurchaseOrderHasItemCollection() {
-        return purchaseOrderHasItemCollection;
+    public String getProductionToolAvailablity() {
+        return productionToolAvailablity;
     }
 
-    public void setPurchaseOrderHasItemCollection(Collection<PurchaseOrderHasItem> purchaseOrderHasItemCollection) {
-        this.purchaseOrderHasItemCollection = purchaseOrderHasItemCollection;
+    public void setProductionToolAvailablity(String productionToolAvailablity) {
+        this.productionToolAvailablity = productionToolAvailablity;
     }
 
-    public Collection<ItemHasMachine> getItemHasMachineCollection() {
-        return itemHasMachineCollection;
+    public String getSize() {
+        return size;
     }
 
-    public void setItemHasMachineCollection(Collection<ItemHasMachine> itemHasMachineCollection) {
-        this.itemHasMachineCollection = itemHasMachineCollection;
+    public void setSize(String size) {
+        this.size = size;
     }
 
-    public ItemType getItemType() {
-        return itemType;
+    public String getVolume() {
+        return volume;
     }
 
-    public void setItemType(ItemType itemType) {
-        this.itemType = itemType;
+    public void setVolume(String volume) {
+        this.volume = volume;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public List<CustomerItem> getCustomerItemList() {
+        return customerItemList;
+    }
+
+    public void setCustomerItemList(List<CustomerItem> customerItemList) {
+        this.customerItemList = customerItemList;
+    }
+
+    public List<PurchaseOrderHasItem> getPurchaseOrderHasItemList() {
+        return purchaseOrderHasItemList;
+    }
+
+    public void setPurchaseOrderHasItemList(List<PurchaseOrderHasItem> purchaseOrderHasItemList) {
+        this.purchaseOrderHasItemList = purchaseOrderHasItemList;
+    }
+
+    public List<ItemHasMachine> getItemHasMachineList() {
+        return itemHasMachineList;
+    }
+
+    public void setItemHasMachineList(List<ItemHasMachine> itemHasMachineList) {
+        this.itemHasMachineList = itemHasMachineList;
     }
 
     public Paint getPaint() {
@@ -190,6 +186,14 @@ public class Item implements Serializable {
 
     public void setPaint(Paint paint) {
         this.paint = paint;
+    }
+
+    public ItemType getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(ItemType itemType) {
+        this.itemType = itemType;
     }
 
     @Override
