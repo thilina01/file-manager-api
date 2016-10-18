@@ -1,7 +1,10 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.entity.Section;
+import com.trendsmixed.fma.jsonView.SectionView;
+import com.trendsmixed.fma.jsonView.Views;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.SectionService;
 import java.util.List;
@@ -48,6 +51,7 @@ public class SectionController {
     }
 
     @GetMapping
+    @JsonView(SectionView.IdAndCodeAndName.class) 
     public List<Section> findAll() {
         return sectionService.findAll();
     }

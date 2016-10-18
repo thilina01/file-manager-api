@@ -11,4 +11,7 @@ public class SectionView {
     public static interface Name {
     }
 
+    public static interface IdAndCodeAndName extends Id, Code, Name {
+    }
+
 }

@@ -1,13 +1,16 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.CostCenter;
+import com.trendsmixed.fma.jsonView.CostCenterView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.CostCenterService;
+import com.trendsmixed.fma.service.SectionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,11 +32,13 @@ public class CostCenterController {
     private CostCenterService costCenterService;
 
     @GetMapping
+    @JsonView(CostCenterView.IdAndCodeAndName.class)
     public List<CostCenter> findAll() {
         return costCenterService.findAll();
     }
 
     @PostMapping
+    @JsonView(CostCenterView.IdAndCodeAndNameAndSectionId.class)
     public CostCenter save(@RequestBody CostCenter costCenter, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
@@ -72,4 +77,3 @@ public class CostCenterController {
     }
 
 }
-

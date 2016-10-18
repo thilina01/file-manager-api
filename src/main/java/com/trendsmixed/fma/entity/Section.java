@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.SectionView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -33,10 +35,13 @@ public class Section implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(SectionView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(SectionView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(SectionView.Name.class)
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
@@ -105,5 +110,5 @@ public class Section implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Section[ id=" + id + " ]";
     }
-    
+
 }

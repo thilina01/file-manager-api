@@ -11,4 +11,9 @@ public class CostCenterView {
     public static interface Name {
     }
 
+    public static interface IdAndCodeAndName extends Id, Code, Name {
+    }
+
+    public static interface IdAndCodeAndNameAndSectionId extends IdAndCodeAndName, SectionView.Id {
+    }
 }
