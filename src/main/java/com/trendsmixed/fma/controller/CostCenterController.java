@@ -32,7 +32,7 @@ public class CostCenterController {
     private CostCenterService costCenterService;
 
     @GetMapping
-    @JsonView(CostCenterView.IdAndCodeAndName.class)
+    @JsonView(CostCenterView.IdAndCodeAndNameAndSectionIdAndSectionCodeAndSectionName.class)
     public List<CostCenter> findAll() {
         return costCenterService.findAll();
     }
