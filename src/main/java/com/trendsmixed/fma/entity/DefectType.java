@@ -35,8 +35,8 @@ public class DefectType implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "name")
-    private String name;
+    @Column(name = "code")
+    private String code;
     @Column(name = "type")
     private String type;
     @Column(name = "type_in_shinhala")
@@ -59,12 +59,12 @@ public class DefectType implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getType() {
