@@ -35,8 +35,10 @@ public class CustType implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "type")
-    private String type;
+    @Column(name = "code")
+    private String code;
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "custType")
     private List<Customer> customerList;
 
@@ -55,12 +57,20 @@ public class CustType implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getCode() {
+        return code;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Customer> getCustomerList() {
@@ -95,5 +105,5 @@ public class CustType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.CustType[ id=" + id + " ]";
     }
-    
+
 }
