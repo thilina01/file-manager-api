@@ -57,7 +57,7 @@ public class CurrencyController {
         return currencyService.findOne(id);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public String delete(@PathVariable int id) {
         currencyService.delete(id);
         return "Deleted";
