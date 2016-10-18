@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/countrys")
+@RequestMapping("/countries")
 public class CountryController {
 
     @Autowired
