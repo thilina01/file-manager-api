@@ -38,10 +38,10 @@ public class ItemView {
     public static interface Paint {
     }
     
-    public static interface AllAndPaintAll extends All, Paint, PaintView.AlL {
+    public static interface AllAndPaintAll extends All, Paint, PaintView.All {
     }
     
-    public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.AlL,Paint,PaintView.AlL {
+    public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.AlL,Paint,PaintView.All {
     }
 
 }
