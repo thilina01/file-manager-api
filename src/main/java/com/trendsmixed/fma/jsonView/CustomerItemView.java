@@ -15,5 +15,11 @@ public class CustomerItemView {
 
         
     }
+    public static interface All extends Id,CustomerPartNo,Price {
+        
+    }
+    public static interface AllAndCustomerAll extends All,Customer,CustomerView.All{
+        
+    }
 
 }
