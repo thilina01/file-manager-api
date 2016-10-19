@@ -1,11 +1,13 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.WorkCenter;
+import com.trendsmixed.fma.jsonView.WorkCenterView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.WorkCenterService;
 import java.util.List;
@@ -29,6 +31,7 @@ public class WorkCenterController {
     private WorkCenterService workCenterService;
 
     @GetMapping
+    @JsonView(WorkCenterView.IdAndCodeAndCostCenterIdAndCostCenterCodeAndCostCenterName.class)
     public List<WorkCenter> findAll() {
         return workCenterService.findAll();
     }

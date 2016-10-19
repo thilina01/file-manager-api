@@ -1,11 +1,13 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.ItemType;
+import com.trendsmixed.fma.jsonView.ItemTypeView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ItemTypeService;
 import java.util.List;
@@ -28,6 +30,7 @@ public class ItemTypeController {
     @Autowired
     private ItemTypeService itemTypeService;
 
+    @JsonView(ItemTypeView.AlL.class)
     @GetMapping
     public List<ItemType> findAll() {
         return itemTypeService.findAll();

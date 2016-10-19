@@ -20,4 +20,7 @@ public class CurrencyView {
     public static interface Name {
     }
 
+    public static interface All extends Id, Code, Name {
+    }
+
 }
