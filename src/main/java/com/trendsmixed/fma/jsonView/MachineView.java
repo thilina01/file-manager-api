@@ -16,6 +16,13 @@ public class MachineView {
 
     public static interface ControlPoint {
 
-       
     }
+
+    public static interface All extends Id,Code,Name,EnergyRate {
+        
+    }
+    public static interface AllAndControlPointAll extends All,ControlPoint,ControlPointView.All{
+        
+    }
+    
 }

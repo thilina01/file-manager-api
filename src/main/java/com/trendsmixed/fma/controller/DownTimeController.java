@@ -1,11 +1,13 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.DownTime;
+import com.trendsmixed.fma.jsonView.DownTimeView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.DownTimeService;
 import java.util.List;
@@ -28,11 +30,13 @@ public class DownTimeController {
     @Autowired
     private DownTimeService downTimeTypeService;
 
+    @JsonView(DownTimeView.AllAndMachineAll.class)
     @GetMapping
     public List<DownTime> findAll() {
         return downTimeTypeService.findAll();
     }
 
+    @JsonView(DownTimeView.AllAndMachineAll.class)
     @PostMapping
     public DownTime save(@RequestBody DownTime downTimeType, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);

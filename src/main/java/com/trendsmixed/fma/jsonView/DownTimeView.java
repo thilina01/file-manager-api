@@ -16,4 +16,11 @@ public class DownTimeView {
 
     public static interface Machine {
     }
+    
+    public static interface All extends Id,DownTimeDate,Duration,Reason{
+        
+    }
+    public static interface AllAndMachineAll extends All,Machine,MachineView.All {
+        
+    }
 }
