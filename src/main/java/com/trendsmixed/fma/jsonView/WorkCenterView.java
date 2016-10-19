@@ -10,7 +10,11 @@ public class WorkCenterView {
 
     public static interface CostCenter {
 
-       
     }
+    public static interface All extends Id,Code,CostCenter, CostCenterView.IdAndCodeAndName{
+
+    }
+    
+    
 
 }
