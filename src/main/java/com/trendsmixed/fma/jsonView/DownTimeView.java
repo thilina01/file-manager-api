@@ -8,7 +8,7 @@ public class DownTimeView {
     public static interface DownTimeDate {
     }
 
-    public static interface Duretion {
+    public static interface Duration {
     }
 
     public static interface Reason {
