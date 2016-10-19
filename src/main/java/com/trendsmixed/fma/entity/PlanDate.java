@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.PlanDateView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -39,18 +41,22 @@ public class PlanDate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(PlanDateView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(PlanDateView.PlanDate.class)
     @Column(name = "plan_date")
     @Temporal(TemporalType.DATE)
     private Date planDate;
+    @JsonView(PlanDateView.Quantity.class)
     @Column(name = "quantity")
     private Integer quantity;
+    @JsonView(PlanDateView.Shift.class)
     @Column(name = "shift")
     private String shift;
     @JoinColumns({
-        @JoinColumn(name = "job_has_control_point_control_point_id", referencedColumnName = "control_point_id")
-        , @JoinColumn(name = "job_has_control_point_job_id", referencedColumnName = "job_id")})
+        @JoinColumn(name = "job_has_control_point_control_point_id", referencedColumnName = "control_point_id"),
+        @JoinColumn(name = "job_has_control_point_job_id", referencedColumnName = "job_id")})
     @ManyToOne(optional = false)
     private JobHasControlPoint jobHasControlPoint;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "planDate")
@@ -135,5 +141,5 @@ public class PlanDate implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.PlanDate[ id=" + id + " ]";
     }
-    
+
 }

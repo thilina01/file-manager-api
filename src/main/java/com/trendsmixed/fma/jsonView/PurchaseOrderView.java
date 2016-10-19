@@ -17,4 +17,16 @@ public class PurchaseOrderView {
     public static interface TrwConfirmedDate {
     }
 
+    public static interface ActualDespatchDate {
+    }
+
+    public static interface Comments {
+    }
+
+    public static interface OrderRecivedDate {
+    }
+
+    public static interface OrderType {
+    }
+
 }

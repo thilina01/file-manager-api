@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.MachineView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -35,13 +37,17 @@ public class Machine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(MachineView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(MachineView.Code.class)
     @Column(name = "code")
     private String code;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @JsonView(MachineView.EnergyRate.class)
     @Column(name = "energy_rate")
     private Double energyRate;
+    @JsonView(MachineView.Name.class)
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")

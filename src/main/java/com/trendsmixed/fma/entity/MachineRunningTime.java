@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.MachineRunningTimeView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -35,11 +37,14 @@ public class MachineRunningTime implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(MachineRunningTimeView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(MachineRunningTimeView.Date.class)
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
+    @JsonView(MachineRunningTimeView.Duration.class)
     @Column(name = "duration")
     private String duration;
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
@@ -109,5 +114,5 @@ public class MachineRunningTime implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.MachineRunningTime[ id=" + id + " ]";
     }
-    
+
 }

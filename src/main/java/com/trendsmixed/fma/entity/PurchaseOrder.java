@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.PurchaseOrderView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -38,24 +40,33 @@ public class PurchaseOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(PurchaseOrderView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(PurchaseOrderView.ActualDespatchDate.class)
     @Column(name = "actual_despatch_date")
     private String actualDespatchDate;
+    @JsonView(PurchaseOrderView.Comments.class)
     @Column(name = "comments")
     private String comments;
+    @JsonView(PurchaseOrderView.CustomerRequestedDate.class)
     @Column(name = "customer_requested_date")
     @Temporal(TemporalType.DATE)
     private Date customerRequestedDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @JsonView(PurchaseOrderView.OrderQty.class)
     @Column(name = "order_qty")
     private Double orderQty;
+    @JsonView(PurchaseOrderView.OrderRecivedDate.class)
     @Column(name = "order_recived_date")
     private String orderRecivedDate;
+    @JsonView(PurchaseOrderView.OrderType.class)
     @Column(name = "order_type")
     private String orderType;
+    @JsonView(PurchaseOrderView.PoNumber.class)
     @Column(name = "po_number")
     private String poNumber;
+    @JsonView(PurchaseOrderView.TrwConfirmedDate.class)
     @Column(name = "trw_confirmed_date")
     @Temporal(TemporalType.DATE)
     private Date trwConfirmedDate;

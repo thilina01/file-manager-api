@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.RunDateView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -41,21 +43,29 @@ public class RunDate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(RunDateView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(RunDateView.Duration.class)
     @Column(name = "duration")
     private Integer duration;
+    @JsonView(RunDateView.Quantity.class)
     @Column(name = "quantity")
     private Integer quantity;
-    @Column(name = "repaierd")
-    private Integer repaierd;
+    @JsonView(RunDateView.Repaired.class)
+    @Column(name = "repaired")
+    private Integer repaired;
+    @JsonView(RunDateView.Rework.class)
     @Column(name = "rework")
     private Integer rework;
+    @JsonView(RunDateView.RunDate.class)
     @Column(name = "run_date")
     @Temporal(TemporalType.DATE)
     private Date runDate;
+    @JsonView(RunDateView.Scrap.class)
     @Column(name = "scrap")
     private Integer scrap;
+    @JsonView(RunDateView.Shift.class)
     @Column(name = "shift")
     private String shift;
     @JoinTable(name = "run_date_has_loss_reason", joinColumns = {
@@ -70,8 +80,8 @@ public class RunDate implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
     private List<RunDateHasDefectType> runDateHasDefectTypeList;
     @JoinColumns({
-        @JoinColumn(name = "job_has_control_point_control_point_id", referencedColumnName = "control_point_id")
-        , @JoinColumn(name = "job_has_control_point_job_id", referencedColumnName = "job_id")})
+        @JoinColumn(name = "job_has_control_point_control_point_id", referencedColumnName = "control_point_id"),
+        @JoinColumn(name = "job_has_control_point_job_id", referencedColumnName = "job_id")})
     @ManyToOne(optional = false)
     private JobHasControlPoint jobHasControlPoint;
 
@@ -106,12 +116,12 @@ public class RunDate implements Serializable {
         this.quantity = quantity;
     }
 
-    public Integer getRepaierd() {
-        return repaierd;
+    public Integer getRepaired() {
+        return repaired;
     }
 
-    public void setRepaierd(Integer repaierd) {
-        this.repaierd = repaierd;
+    public void setRepaired(Integer repaired) {
+        this.repaired = repaired;
     }
 
     public Integer getRework() {
@@ -210,5 +220,5 @@ public class RunDate implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.RunDate[ id=" + id + " ]";
     }
-    
+
 }
