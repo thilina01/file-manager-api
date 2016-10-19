@@ -8,4 +8,13 @@ public class WorkCenterView {
     public static interface Code {
     }
 
+    public static interface CostCenter {
+
+    }
+    public static interface IdAndCodeAndCostCenterIdAndCostCenterCodeAndCostCenterName extends Id,Code,CostCenter, CostCenterView.IdAndCodeAndName{
+
+    }
+    
+    
+
 }
