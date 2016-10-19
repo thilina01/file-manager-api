@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.UserView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -30,10 +32,13 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(UserView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(UserView.Email.class)
     @Column(name = "email")
     private String email;
+    @JsonView(UserView.Password.class)
     @Column(name = "password")
     private String password;
 
@@ -92,5 +97,5 @@ public class User implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.User[ id=" + id + " ]";
     }
-    
+
 }

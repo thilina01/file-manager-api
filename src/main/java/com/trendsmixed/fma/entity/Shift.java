@@ -5,10 +5,10 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ShiftView;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -33,10 +32,13 @@ public class Shift implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ShiftView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ShiftView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(ShiftView.Name.class)
     @Column(name = "name")
     private String name;
 
@@ -95,5 +97,5 @@ public class Shift implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Shift[ id=" + id + " ]";
     }
-    
+
 }

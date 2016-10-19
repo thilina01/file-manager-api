@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.AppSessionView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -27,11 +29,14 @@ public class AppSession implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @JsonView(AppSessionView.Email.class)
     @Column(name = "email")
     private String email;
+    @JsonView(AppSessionView.Ip.class)
     @Column(name = "ip")
     private String ip;
     @Basic(optional = false)
+    @JsonView(AppSessionView.LastTime.class)
     @Column(name = "last_time")
     private long lastTime;
 

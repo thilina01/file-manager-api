@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.WorkCenterView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -35,8 +37,10 @@ public class WorkCenter implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(WorkCenterView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(WorkCenterView.Code.class)
     @Column(name = "code")
     private String code;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "workCenter")
@@ -108,5 +112,5 @@ public class WorkCenter implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.WorkCenter[ id=" + id + " ]";
     }
-    
+
 }
