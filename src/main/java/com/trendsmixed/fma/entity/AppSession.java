@@ -100,5 +100,5 @@ public class AppSession implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.AppSession[ email=" + email + " ]";
     }
-    
+
 }

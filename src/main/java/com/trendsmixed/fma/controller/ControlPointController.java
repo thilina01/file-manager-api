@@ -11,6 +11,7 @@ import com.trendsmixed.fma.jsonView.ControlPointView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ControlPointService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +36,10 @@ public class ControlPointController {
     public List<ControlPoint> findAll() {
         return controlPointService.findAll();
     }
-    
+
     @JsonView(ControlPointView.AllAndWorkCenterAll.class)
     @PostMapping
-    public ControlPoint save(@RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public ControlPoint save(@RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");
@@ -76,4 +77,3 @@ public class ControlPointController {
     }
 
 }
-

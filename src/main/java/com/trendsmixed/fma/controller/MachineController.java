@@ -9,6 +9,7 @@ import com.trendsmixed.fma.entity.Machine;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.MachineService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ public class MachineController {
     }
 
     @PostMapping
-    public Machine save(@RequestBody Machine machine, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public Machine save(@RequestBody Machine machine, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");

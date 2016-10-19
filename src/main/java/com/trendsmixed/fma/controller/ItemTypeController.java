@@ -11,6 +11,7 @@ import com.trendsmixed.fma.jsonView.ItemTypeView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ItemTypeService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class ItemTypeController {
     }
 
     @PostMapping
-    public ItemType save(@RequestBody ItemType itemType, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public ItemType save(@RequestBody ItemType itemType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");

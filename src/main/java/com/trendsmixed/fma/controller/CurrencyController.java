@@ -9,6 +9,7 @@ import com.trendsmixed.fma.entity.Currency;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.CurrencyService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class CurrencyController {
     private CurrencyService currencyService;
 
     @PostMapping
-    public Currency save(@RequestBody Currency currency, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public Currency save(@RequestBody Currency currency, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");

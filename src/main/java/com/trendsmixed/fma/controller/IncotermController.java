@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Incoterm;
-import com.trendsmixed.fma.entity.Incoterm;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.IncotermService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,10 +29,8 @@ public class IncotermController {
     @Autowired
     private IncotermService incotermService;
 
-
-
     @PostMapping
-    public Incoterm save(@RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public Incoterm save(@RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");

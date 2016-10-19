@@ -9,6 +9,7 @@ import com.trendsmixed.fma.entity.Paint;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.PaintService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ public class PaintController {
     }
 
     @PostMapping
-    public Paint save(@RequestBody Paint paint, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public Paint save(@RequestBody Paint paint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");

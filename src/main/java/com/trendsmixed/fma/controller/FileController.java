@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -50,7 +51,7 @@ public class FileController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable("id") int id, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public void delete(@PathVariable("id") int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");
@@ -92,7 +93,7 @@ public class FileController {
     }
 
     @PostMapping(value = "/upload")
-    public File handleFileUpload(@RequestParam(value = "data") String data, @RequestParam(value = "file") MultipartFile multipartFile, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public File handleFileUpload(@RequestParam(value = "data") String data, @RequestParam(value = "file") MultipartFile multipartFile, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {

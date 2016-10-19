@@ -5,6 +5,7 @@ import com.trendsmixed.fma.entity.Shift;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ShiftService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,7 @@ public class ShiftController {
     private AppSessionService appSessionService;
 
     @PostMapping
-    public Shift save(@RequestBody Shift shift, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public Shift save(@RequestBody Shift shift, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");

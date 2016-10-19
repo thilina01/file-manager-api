@@ -11,6 +11,7 @@ import com.trendsmixed.fma.jsonView.CountryView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.CountryService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class CountryController {
     private AppSessionService appSessionService;
     @Autowired
     private CountryService countryService;
-    
+
     @JsonView(CountryView.All.class)
     @GetMapping
     public List<Country> findAll() {
@@ -37,7 +38,7 @@ public class CountryController {
     }
 
     @PostMapping
-    public Country save(@RequestBody Country country, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public Country save(@RequestBody Country country, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");

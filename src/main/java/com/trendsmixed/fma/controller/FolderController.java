@@ -17,6 +17,7 @@ import com.trendsmixed.fma.entity.Folder;
 import com.trendsmixed.fma.jsonView.Views;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.FolderService;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
@@ -31,7 +32,7 @@ public class FolderController {
     private AppSessionService appSessionService;
 
     @PostMapping
-    public Folder save(@RequestBody Folder folder, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public Folder save(@RequestBody Folder folder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");
@@ -57,7 +58,7 @@ public class FolderController {
 
     @GetMapping("/top")
     public @JsonView(Views.FolderOnly.class)
-    List<Folder> top(@RequestHeader(value = "email", defaultValue = "") String email) {
+    List<Folder> top(@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         //System.out.println(email);
         return folderService.findByFolderIsNull();
     }

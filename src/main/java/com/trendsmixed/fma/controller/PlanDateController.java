@@ -9,6 +9,7 @@ import com.trendsmixed.fma.entity.PlanDate;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.PlanDateService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ public class PlanDateController {
     }
 
     @PostMapping
-    public PlanDate save(@RequestBody PlanDate planDate, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public PlanDate save(@RequestBody PlanDate planDate, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
             throw new Error("Unauthorized access");
