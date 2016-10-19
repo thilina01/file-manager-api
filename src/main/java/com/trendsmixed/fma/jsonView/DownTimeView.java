@@ -13,4 +13,7 @@ public class DownTimeView {
 
     public static interface Reason {
     }
+
+    public static interface Machine {
+    }
 }

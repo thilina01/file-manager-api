@@ -8,4 +8,9 @@ public class WorkCenterView {
     public static interface Code {
     }
 
+    public static interface CostCenter {
+
+       
+    }
+
 }

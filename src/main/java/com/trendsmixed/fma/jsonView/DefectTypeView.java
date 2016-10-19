@@ -11,9 +11,10 @@ public class DefectTypeView {
     public static interface Name {
     }
 
-    public static interface NameInSinhala {
+    public static interface TypeInSinhala {
     }
 
     public static interface Code {
     }
+
 }

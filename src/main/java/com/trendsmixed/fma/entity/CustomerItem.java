@@ -48,6 +48,7 @@ public class CustomerItem implements Serializable {
     private Double price;
     @ManyToMany(mappedBy = "customerItemList")
     private List<Item> itemList;
+    @JsonView(CustomerItemView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;

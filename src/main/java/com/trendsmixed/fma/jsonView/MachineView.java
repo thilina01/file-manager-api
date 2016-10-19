@@ -13,4 +13,9 @@ public class MachineView {
 
     public static interface EnergyRate {
     }
+
+    public static interface ControlPoint {
+
+       
+    }
 }

@@ -56,6 +56,7 @@ public class Machine implements Serializable {
     private List<ItemHasMachine> itemHasMachineList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
     private List<MachineRunningTime> machineRunningTimeList;
+    @JsonView(MachineView.ControlPoint.class)
     @JoinColumn(name = "control_point_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ControlPoint controlPoint;

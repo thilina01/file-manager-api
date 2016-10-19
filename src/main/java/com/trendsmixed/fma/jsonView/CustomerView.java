@@ -11,9 +11,6 @@ public class CustomerView {
     public static interface Name {
     }
 
-    public static interface Currency {
-    }
-
     public static interface Consignee {
 
     }
@@ -60,5 +57,20 @@ public class CustomerView {
 
     public static interface VatNo {
 
+    }
+
+    public static interface Incoterm {
+
+    }
+
+    public static interface CustType {
+
+    }
+
+    public static interface Country {
+
+    }
+
+    public static interface Currency {
     }
 }

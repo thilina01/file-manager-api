@@ -47,6 +47,7 @@ public class MachineRunningTime implements Serializable {
     @JsonView(MachineRunningTimeView.Duration.class)
     @Column(name = "duration")
     private String duration;
+    @JsonView(MachineRunningTimeView.Machine.class)
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Machine machine;

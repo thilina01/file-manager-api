@@ -67,6 +67,7 @@ public class File implements Serializable {
         @JoinColumn(name = "folders_id", referencedColumnName = "id")})
     @ManyToMany
     private List<Folder> folderList;
+    @JsonView(FileView.FileType.class)
     @JoinColumn(name = "file_type_id", referencedColumnName = "id")
     @ManyToOne
     private FileType fileType;

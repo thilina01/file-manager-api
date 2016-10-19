@@ -44,12 +44,9 @@ public class DefectType implements Serializable {
     @JsonView(DefectTypeView.Type.class)
     @Column(name = "type")
     private String type;
-    @JsonView(DefectTypeView.NameInSinhala.class)
+    @JsonView(DefectTypeView.TypeInSinhala.class)
     @Column(name = "type_in_sinhala")
-    private String typeInShinhala;
-    @JsonView(DefectTypeView.Name.class)
-    @Column(name = "name")
-    private String name;
+    private String typeInSinhala;    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "defectType")
     private List<RunDateHasDefectType> runDateHasDefectTypeList;
 
@@ -84,12 +81,12 @@ public class DefectType implements Serializable {
         this.type = type;
     }
 
-    public String getTypeInShinhala() {
-        return typeInShinhala;
+    public String getTypeInSinhala() {
+        return typeInSinhala;
     }
 
-    public void setTypeInShinhala(String typeInShinhala) {
-        this.typeInShinhala = typeInShinhala;
+    public void setTypeInSinhala(String typeInSinhala) {
+        this.typeInSinhala = typeInSinhala;
     }
 
     public List<RunDateHasDefectType> getRunDateHasDefectTypeList() {

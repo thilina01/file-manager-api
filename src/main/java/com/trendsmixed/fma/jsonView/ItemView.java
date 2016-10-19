@@ -31,4 +31,12 @@ public class ItemView {
 
     public static interface ProductionToolAvailability {
     }
+
+    public static interface Paint {
+
+    }
+
+    public static interface ItemType {
+
+    }
 }

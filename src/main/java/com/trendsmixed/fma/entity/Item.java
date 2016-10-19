@@ -76,9 +76,11 @@ public class Item implements Serializable {
     private List<PurchaseOrderHasItem> purchaseOrderHasItemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
     private List<ItemHasMachine> itemHasMachineList;
+    @JsonView(ItemView.Paint.class)
     @JoinColumn(name = "paint_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Paint paint;
+    @JsonView(ItemView.ItemType.class)
     @JoinColumn(name = "item_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ItemType itemType;

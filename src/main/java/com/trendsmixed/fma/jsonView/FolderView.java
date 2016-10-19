@@ -20,4 +20,9 @@ public class FolderView {
     public static interface Name {
     }
 
+    public static interface Folder {
+
+       
+    }
+
 }

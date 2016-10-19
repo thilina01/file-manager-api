@@ -11,4 +11,7 @@ public class ControlPointView {
     public static interface Name {
     }
 
+    public static interface WorkCenter {
+    }
+
 }

@@ -20,4 +20,8 @@ public class MachineRunningTimeView {
     public static interface Duration {
     }
 
+    public static interface Machine {
+
+    }
+
 }

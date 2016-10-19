@@ -32,4 +32,9 @@ public class FileView {
     public static interface UploadDate {
     }
 
+    public static interface FileType {
+
+      
+    }
+
 }

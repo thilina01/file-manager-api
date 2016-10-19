@@ -50,6 +50,7 @@ public class Folder implements Serializable {
     private List<File> fileList;
     @OneToMany(mappedBy = "folder")
     private List<Folder> folderList;
+    @JsonView(FolderView.Folder.class)
     @JoinColumn(name = "folder_id", referencedColumnName = "id")
     @ManyToOne
     private Folder folder;

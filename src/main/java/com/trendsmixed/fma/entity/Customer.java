@@ -86,15 +86,19 @@ public class Customer implements Serializable {
     private List<CustomerItem> customerItemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private List<PurchaseOrder> purchaseOrderList;
+    @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Incoterm incoterm;
+    @JsonView(CustomerView.Currency.class)
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Currency currency;
+    @JsonView(CustomerView.CustType.class)
     @JoinColumn(name = "cust_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CustType custType;
+    @JsonView(CustomerView.Country.class)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Country country;
