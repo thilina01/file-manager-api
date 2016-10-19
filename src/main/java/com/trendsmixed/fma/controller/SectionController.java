@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.entity.Section;
 import com.trendsmixed.fma.jsonView.SectionView;
-import com.trendsmixed.fma.jsonView.Views;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.SectionService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,28 +30,38 @@ public class SectionController {
     @Autowired
     private AppSessionService appSessionService;
 
-    @PostMapping
-    public Section save(@RequestBody Section section, @RequestHeader(value = "email", defaultValue = "") String email) {
+    public boolean isValid(String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
         if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                section = sectionService.save(section);
+            throw new Error("Please Login");
+        }
+        if (!appSession.getIp().equals(request.getRemoteAddr())) {
+            appSessionService.delete(email);
+            throw new Error("Please Login");
+        }
+        if (appSession.getLastTime() < (System.currentTimeMillis() - (1000 * 60 * 10))) {
+            appSessionService.delete(email);
+            throw new Error("Please Login Again");
+        }
+        return true;
+    }
 
-                return section;
-
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+    @PostMapping
+    public Section save(@RequestBody Section section, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        isValid(email, request);
+        try {
+            section = sectionService.save(section);
+            return section;
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 
     @GetMapping
-    @JsonView(SectionView.All.class) 
+    @JsonView(SectionView.All.class)
     public List<Section> findAll() {
         return sectionService.findAll();
     }
@@ -65,7 +75,6 @@ public class SectionController {
     public String delete(@PathVariable int id) {
         sectionService.delete(id);
         return "Deleted";
-
     }
 
     @PutMapping("/{id}")
