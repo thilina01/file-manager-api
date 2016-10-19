@@ -23,5 +23,11 @@ public class MachineRunningTimeView {
     public static interface Machine {
 
     }
+    public static interface All extends Id,Date,Duration {
+        
+    }
+    public static interface AllAndMachineAll extends All,Machine,MachineView.All {
+        
+    }
 
 }

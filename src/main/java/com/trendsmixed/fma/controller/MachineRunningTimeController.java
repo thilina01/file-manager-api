@@ -1,11 +1,13 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.MachineRunningTime;
+import com.trendsmixed.fma.jsonView.MachineRunningTimeView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.MachineRunningTimeService;
 import java.util.List;
@@ -28,8 +30,7 @@ public class MachineRunningTimeController {
     @Autowired
     private MachineRunningTimeService machineRunningTimeService;
 
-
-
+    @JsonView(MachineRunningTimeView.AllAndMachineAll.class)
     @PostMapping
     public MachineRunningTime save(@RequestBody MachineRunningTime machineRunningTime, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);
@@ -49,6 +50,7 @@ public class MachineRunningTimeController {
         }
     }
 
+    @JsonView(MachineRunningTimeView.AllAndMachineAll.class)
     @GetMapping
     public List<MachineRunningTime> findAll() {
         return machineRunningTimeService.findAll();
