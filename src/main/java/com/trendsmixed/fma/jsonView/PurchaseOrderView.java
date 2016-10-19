@@ -29,4 +29,9 @@ public class PurchaseOrderView {
     public static interface OrderType {
     }
 
+    public static interface Customer {
+
+      
+    }
+
 }

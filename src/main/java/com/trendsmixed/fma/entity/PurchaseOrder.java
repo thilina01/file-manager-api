@@ -72,6 +72,7 @@ public class PurchaseOrder implements Serializable {
     private Date trwConfirmedDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
     private List<PurchaseOrderHasItem> purchaseOrderHasItemList;
+    @JsonView(PurchaseOrderView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
