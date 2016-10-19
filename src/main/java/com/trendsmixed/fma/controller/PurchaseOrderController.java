@@ -1,11 +1,13 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.PurchaseOrder;
+import com.trendsmixed.fma.jsonView.PurchaseOrderView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.PurchaseOrderService;
 import java.util.List;
@@ -28,11 +30,13 @@ public class PurchaseOrderController {
     @Autowired
     private PurchaseOrderService purchaseOrderService;
 
+    @JsonView(PurchaseOrderView.AllAndCustomerAll.class)
     @GetMapping
     public List<PurchaseOrder> findAll() {
         return purchaseOrderService.findAll();
     }
 
+    @JsonView(PurchaseOrderView.AllAndCustomerAll.class)
     @PostMapping
     public PurchaseOrder save(@RequestBody PurchaseOrder purchaseOrder, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);

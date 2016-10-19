@@ -30,8 +30,14 @@ public class PurchaseOrderView {
     }
 
     public static interface Customer {
+    }
 
-      
+    public static interface All extends Id, PoNumber, OrderQty, CustomerRequestedDate, TrwConfirmedDate, ActualDespatchDate, Comments, OrderRecivedDate, OrderType {
+
+    }
+
+    public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
+
     }
 
 }
