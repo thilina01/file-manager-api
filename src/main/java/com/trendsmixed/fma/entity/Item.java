@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ItemView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -37,23 +39,32 @@ public class Item implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ItemView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ItemView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(ItemView.Description.class)
     @Column(name = "description")
     private String description;
+    @JsonView(ItemView.DrawingVersion.class)
     @Column(name = "drawing_version")
     private String drawingVersion;
     @Basic(optional = false)
+    @JsonView(ItemView.ProductTypeId.class)
     @Column(name = "product_type_id")
     private int productTypeId;
+    @JsonView(ItemView.ProductionToolAvailability.class)
     @Column(name = "production_tool_availablity")
     private String productionToolAvailablity;
+    @JsonView(ItemView.Size.class)
     @Column(name = "size")
     private String size;
+    @JsonView(ItemView.Volume.class)
     @Column(name = "volume")
     private String volume;
+    @JsonView(ItemView.Weight.class)
     @Column(name = "weight")
     private Integer weight;
     @JoinTable(name = "item_has_customer_item", joinColumns = {
@@ -220,5 +231,5 @@ public class Item implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Item[ id=" + id + " ]";
     }
-    
+
 }

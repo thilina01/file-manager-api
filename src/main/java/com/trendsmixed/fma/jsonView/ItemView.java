@@ -26,4 +26,9 @@ public class ItemView {
     public static interface DrawingVersion {
     }
 
+    public static interface ProductTypeId {
+    }
+
+    public static interface ProductionToolAvailability {
+    }
 }

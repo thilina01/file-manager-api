@@ -23,4 +23,7 @@ public class JobView {
     public static interface Comment {
     }
 
+    public static interface ActualSippedDate {
+    }
+
 }

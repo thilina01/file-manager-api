@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.IncotermView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -33,10 +35,13 @@ public class Incoterm implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(IncotermView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(IncotermView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(IncotermView.Name.class)
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incoterm")
@@ -105,5 +110,5 @@ public class Incoterm implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Incoterm[ id=" + id + " ]";
     }
-    
+
 }
