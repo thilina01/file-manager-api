@@ -8,7 +8,7 @@ public class ItemTypeView {
     public static interface Type {
     }
 
-    public static interface Description {
+    public static interface Code {
     }
 
 }
