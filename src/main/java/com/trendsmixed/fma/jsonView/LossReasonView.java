@@ -11,6 +11,6 @@ public class LossReasonView {
     public static interface Type {
     }
 
-    public static interface TypeInShinhala {
+    public static interface TypeInSinhala {
     }
 }
