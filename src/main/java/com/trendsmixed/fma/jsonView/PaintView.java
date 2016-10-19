@@ -11,4 +11,7 @@ public class PaintView {
     public static interface Description {
     }
 
+    public static interface AlL extends Id, Code, Description {
+    }
+
 }

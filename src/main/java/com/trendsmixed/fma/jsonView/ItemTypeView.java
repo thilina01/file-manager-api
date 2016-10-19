@@ -11,4 +11,7 @@ public class ItemTypeView {
     public static interface Code {
     }
 
+    public static interface AlL extends Id, Type, Code {
+    }
+
 }

@@ -1,11 +1,13 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Item;
+import com.trendsmixed.fma.jsonView.ItemView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ItemService;
 import java.util.List;
@@ -28,11 +30,13 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @GetMapping
     public List<Item> findAll() {
         return itemService.findAll();
     }
 
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @PostMapping
     public Item save(@RequestBody Item item, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);

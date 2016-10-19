@@ -52,9 +52,6 @@ public class Item implements Serializable {
     @Column(name = "drawing_version")
     private String drawingVersion;
     @Basic(optional = false)
-    @JsonView(ItemView.ProductTypeId.class)
-    @Column(name = "product_type_id")
-    private int productTypeId;
     @JsonView(ItemView.ProductionToolAvailability.class)
     @Column(name = "production_tool_availablity")
     private String productionToolAvailablity;
@@ -79,6 +76,7 @@ public class Item implements Serializable {
     @JoinColumn(name = "paint_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Paint paint;
+    @JsonView(ItemView.ItemType.class)
     @JoinColumn(name = "item_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ItemType itemType;
@@ -88,11 +86,6 @@ public class Item implements Serializable {
 
     public Item(Integer id) {
         this.id = id;
-    }
-
-    public Item(Integer id, int productTypeId) {
-        this.id = id;
-        this.productTypeId = productTypeId;
     }
 
     public Integer getId() {
@@ -125,14 +118,6 @@ public class Item implements Serializable {
 
     public void setDrawingVersion(String drawingVersion) {
         this.drawingVersion = drawingVersion;
-    }
-
-    public int getProductTypeId() {
-        return productTypeId;
-    }
-
-    public void setProductTypeId(int productTypeId) {
-        this.productTypeId = productTypeId;
     }
 
     public String getProductionToolAvailablity() {
