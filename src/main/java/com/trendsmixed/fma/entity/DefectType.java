@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.DefectTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -33,14 +35,21 @@ public class DefectType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(DefectTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(DefectTypeView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(DefectTypeView.Type.class)
     @Column(name = "type")
     private String type;
-    @Column(name = "type_in_shinhala")
+    @JsonView(DefectTypeView.NameInSinhala.class)
+    @Column(name = "type_in_sinhala")
     private String typeInShinhala;
+    @JsonView(DefectTypeView.Name.class)
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "defectType")
     private List<RunDateHasDefectType> runDateHasDefectTypeList;
 
@@ -115,5 +124,5 @@ public class DefectType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.DefectType[ id=" + id + " ]";
     }
-    
+
 }
