@@ -17,26 +17,31 @@ public class ItemView {
     public static interface Volume {
     }
 
-    public static interface ProductionToolAvalibility {
-    }
-
     public static interface Description {
     }
 
     public static interface DrawingVersion {
     }
 
-    public static interface ProductTypeId {
-    }
-
     public static interface ProductionToolAvailability {
     }
 
-    public static interface Paint {
-
+    public static interface All extends Id, Code, Size, Weight, Volume, Description, DrawingVersion, ProductionToolAvailability {
     }
 
     public static interface ItemType {
-
     }
+
+    public static interface AllAndItemTypeAll extends All, ItemType, ItemTypeView.AlL {
+    }
+
+    public static interface Paint {
+    }
+    
+    public static interface AllAndPaintAll extends All, Paint, PaintView.AlL {
+    }
+    
+    public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.AlL,Paint,PaintView.AlL {
+    }
+
 }
