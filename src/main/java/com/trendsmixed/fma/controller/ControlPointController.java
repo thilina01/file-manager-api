@@ -1,11 +1,13 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.ControlPoint;
+import com.trendsmixed.fma.jsonView.ControlPointView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ControlPointService;
 import java.util.List;
@@ -28,11 +30,13 @@ public class ControlPointController {
     @Autowired
     private ControlPointService controlPointService;
 
+    @JsonView(ControlPointView.AllAndWorkCenterAll.class)
     @GetMapping
     public List<ControlPoint> findAll() {
         return controlPointService.findAll();
     }
-
+    
+    @JsonView(ControlPointView.AllAndWorkCenterAll.class)
     @PostMapping
     public ControlPoint save(@RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email) {
         AppSession appSession = appSessionService.findOne(email);

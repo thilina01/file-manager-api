@@ -12,6 +12,13 @@ public class ControlPointView {
     }
 
     public static interface WorkCenter {
+        
+    }
+    public static interface All extends Id,Code,Name {
+        
+    }
+    public static interface AllAndWorkCenterAll extends All,WorkCenter,WorkCenterView.All{
+        
     }
 
 }

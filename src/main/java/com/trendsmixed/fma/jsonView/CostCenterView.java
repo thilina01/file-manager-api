@@ -14,12 +14,12 @@ public class CostCenterView {
     public static interface Section {
     }
 
-    public static interface IdAndCodeAndName extends Id, Code, Name {
+    public static interface All extends Id, Code, Name {
     }
 
-    public static interface IdAndCodeAndNameAndSectionId extends IdAndCodeAndName, Section, SectionView.Id {
+    public static interface AllAndSectionId extends All, Section, SectionView.Id {
     }
 
-    public static interface IdAndCodeAndNameAndSectionIdAndSectionCodeAndSectionName extends IdAndCodeAndName, Section, SectionView.IdAndCodeAndName {
+    public static interface AllAndSectionAll extends All, Section, SectionView.All {
     }
 }
