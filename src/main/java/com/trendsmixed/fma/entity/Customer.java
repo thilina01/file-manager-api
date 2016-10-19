@@ -298,5 +298,5 @@ public class Customer implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Customer[ id=" + id + " ]";
     }
-    
+
 }

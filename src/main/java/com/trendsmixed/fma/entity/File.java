@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.FileView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -38,18 +40,25 @@ public class File implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(FileView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(FileView.Link.class)
     @Column(name = "link")
     private String link;
+    @JsonView(FileView.Description.class)
     @Column(name = "description")
     private String description;
+    @JsonView(FileView.Extension.class)
     @Column(name = "extension")
     private String extension;
+    @JsonView(FileView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(FileView.OriginalFileName.class)
     @Column(name = "original_file_name")
     private String originalFileName;
+    @JsonView(FileView.UploadDate.class)
     @Column(name = "upload_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date uploadDate;
@@ -165,5 +174,5 @@ public class File implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.File[ id=" + id + " ]";
     }
-    
+
 }
