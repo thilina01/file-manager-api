@@ -44,6 +44,8 @@ public class AppSessionService {
             delete(email);
             throw new Error("Please Login Again");
         }
+        appSession.setLastTime(System.currentTimeMillis());
+        save(appSession);
         return true;
     }
 }
