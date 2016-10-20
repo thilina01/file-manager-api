@@ -42,9 +42,9 @@ public class Delivery implements Serializable {
     @Column(name = "id")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @JsonView(DeliveryView.DeliverdQuantity.class)
-    @Column(name = "deliverd_quantity")
-    private Double deliverdQuantity;
+    @JsonView(DeliveryView.DeliveredQuantity.class)
+    @Column(name = "delivered_quantity")
+    private Double deliveredQuantity;
     @JsonView(DeliveryView.DeliveryDate.class)
     @Column(name = "delivery_date")
     @Temporal(TemporalType.DATE)
@@ -73,12 +73,12 @@ public class Delivery implements Serializable {
         this.id = id;
     }
 
-    public Double getDeliverdQuantity() {
-        return deliverdQuantity;
+    public Double getDeliveredQuantity() {
+        return deliveredQuantity;
     }
 
-    public void setDeliverdQuantity(Double deliverdQuantity) {
-        this.deliverdQuantity = deliverdQuantity;
+    public void setDeliveredQuantity(Double deliveredQuantity) {
+        this.deliveredQuantity = deliveredQuantity;
     }
 
     public Date getDeliveryDate() {
