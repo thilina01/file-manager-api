@@ -56,10 +56,10 @@ public class Machine implements Serializable {
     private List<ItemHasMachine> itemHasMachineList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
     private List<MachineRunningTime> machineRunningTimeList;
-    @JsonView(MachineView.ControlPoint.class)
-    @JoinColumn(name = "control_point_id", referencedColumnName = "id")
+    @JsonView(MachineView.WorkCenter.class)
+    @JoinColumn(name = "work_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ControlPoint controlPoint;
+    private WorkCenter workCenter;
 
     public Machine() {
     }
@@ -124,13 +124,14 @@ public class Machine implements Serializable {
         this.machineRunningTimeList = machineRunningTimeList;
     }
 
-    public ControlPoint getControlPoint() {
-        return controlPoint;
+    public WorkCenter getWorkCenter() {
+        return workCenter;
     }
 
-    public void setControlPoint(ControlPoint controlPoint) {
-        this.controlPoint = controlPoint;
+    public void setWorkCenter(WorkCenter workCenter) {
+        this.workCenter = workCenter;
     }
+
 
     @Override
     public int hashCode() {

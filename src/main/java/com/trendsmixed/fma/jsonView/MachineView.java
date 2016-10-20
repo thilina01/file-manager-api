@@ -14,14 +14,14 @@ public class MachineView {
     public static interface EnergyRate {
     }
 
-    public static interface ControlPoint {
+    public static interface WorkCenter {
 
     }
 
     public static interface All extends Id,Code,Name,EnergyRate {
         
     }
-    public static interface AllAndControlPointAll extends All,ControlPoint,ControlPointView.All{
+    public static interface AllAndWorkCenterAll extends All,WorkCenter,WorkCenterView.All{
         
     }
     
