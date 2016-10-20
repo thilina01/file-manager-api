@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.LossReason;
+import com.trendsmixed.fma.jsonView.LossReasonView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.LossReasonService;
 import java.util.List;
@@ -29,11 +30,12 @@ public class LossReasonController {
     @Autowired
     private LossReasonService lossReasonService;
 
+    @JsonView(LossReasonView.All.class)
     @GetMapping
     public List<LossReason> findAll() {
         return lossReasonService.findAll();
     }
-
+    @JsonView(LossReasonView.All.class)
     @PostMapping
     public LossReason save(@RequestBody LossReason lossReason, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.RunDate;
+import com.trendsmixed.fma.jsonView.RunDateView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.RunDateService;
 import java.util.List;
@@ -29,11 +30,13 @@ public class RunDateController {
     @Autowired
     private RunDateService runDateService;
 
+    @JsonView(RunDateView.All.class)
     @GetMapping
     public List<RunDate> findAll() {
         return runDateService.findAll();
     }
 
+    @JsonView(RunDateView.All.class)
     @PostMapping
     public RunDate save(@RequestBody RunDate runDate, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

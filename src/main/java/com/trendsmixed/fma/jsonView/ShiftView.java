@@ -18,7 +18,11 @@ public class ShiftView {
     }
 
     public static interface Name {
-        
+
+    }
+
+    public static interface All extends Id, Code, Name {
+
     }
 
 }

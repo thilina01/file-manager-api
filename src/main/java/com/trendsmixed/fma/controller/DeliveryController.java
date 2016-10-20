@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Delivery;
+import com.trendsmixed.fma.jsonView.DeliveryView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.DeliveryService;
 import java.util.List;
@@ -29,11 +30,12 @@ public class DeliveryController {
     @Autowired
     private DeliveryService deliveryService;
 
+    @JsonView(DeliveryView.All.class)
     @GetMapping
     public List<Delivery> findAll() {
         return deliveryService.findAll();
     }
-
+    @JsonView(DeliveryView.All.class)
     @PostMapping
     public Delivery save(@RequestBody Delivery delivery, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

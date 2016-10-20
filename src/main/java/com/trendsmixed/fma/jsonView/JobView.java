@@ -8,7 +8,7 @@ public class JobView {
     public static interface JobNo {
     }
 
-    public static interface AcualShippedDate {
+    public static interface ActualShippedDate {
     }
 
     public static interface ConfirmShippedDate {
@@ -23,7 +23,9 @@ public class JobView {
     public static interface Comment {
     }
 
-    public static interface ActualSippedDate {
+ 
+    public static interface All extends Id,JobNo,ActualShippedDate,ConfirmShippedDate,JobQuantity,JobDate,Comment {
+        
     }
 
 }

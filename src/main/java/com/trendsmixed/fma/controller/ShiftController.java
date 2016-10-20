@@ -1,7 +1,8 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.Shift;
+import com.trendsmixed.fma.jsonView.ShiftView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ShiftService;
 import java.util.List;
@@ -28,6 +29,7 @@ public class ShiftController {
     @Autowired
     private AppSessionService appSessionService;
 
+    @JsonView(ShiftView.All.class)
     @PostMapping
     public Shift save(@RequestBody Shift shift, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -44,8 +46,8 @@ public class ShiftController {
         }
     }
 
-//    @GetMapping
-//    @JsonView(ShiftView.IdAndCodeAndName.class)
+    @GetMapping
+    @JsonView(ShiftView.All.class)
     public List<Shift> findAll() {
         return shiftService.findAll();
     }

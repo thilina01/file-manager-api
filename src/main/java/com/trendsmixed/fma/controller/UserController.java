@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.User;
+import com.trendsmixed.fma.jsonView.UserView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.UserService;
 import java.util.List;
@@ -29,11 +30,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @JsonView(UserView.All.class)
     @GetMapping
     public List<User> findAll() {
         return userService.findAll();
     }
 
+    @JsonView(UserView.All.class)
     @PostMapping
     public User save(@RequestBody User user, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

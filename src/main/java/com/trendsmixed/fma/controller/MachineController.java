@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Machine;
+import com.trendsmixed.fma.jsonView.MachineView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.MachineService;
 import java.util.List;
@@ -29,11 +30,12 @@ public class MachineController {
     @Autowired
     private MachineService machineService;
 
+    @JsonView(MachineView.All.class)
     @GetMapping
     public List<Machine> findAll() {
         return machineService.findAll();
     }
-
+    @JsonView(MachineView.All.class)
     @PostMapping
     public Machine save(@RequestBody Machine machine, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

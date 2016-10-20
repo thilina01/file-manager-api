@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Currency;
+import com.trendsmixed.fma.jsonView.CurrencyView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.CurrencyService;
 import java.util.List;
@@ -29,6 +30,7 @@ public class CurrencyController {
     @Autowired
     private CurrencyService currencyService;
 
+    @JsonView(CurrencyView.All.class)
     @PostMapping
     public Currency save(@RequestBody Currency currency, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -44,6 +46,7 @@ public class CurrencyController {
         }
     }
 
+    @JsonView(CurrencyView.All.class)
     @GetMapping
     public List<Currency> findAll() {
         return currencyService.findAll();

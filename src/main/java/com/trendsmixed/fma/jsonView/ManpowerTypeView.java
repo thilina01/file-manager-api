@@ -8,4 +8,8 @@ public class ManpowerTypeView {
     public static interface Type {
     }
 
+    public static interface All extends Id, Type {
+
+    }
+
 }

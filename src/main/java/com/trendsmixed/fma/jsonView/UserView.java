@@ -19,5 +19,8 @@ public class UserView {
 
     public static interface Password {
     }
+    public static interface All extends Id,Email,Password{
+        
+    }
 
 }

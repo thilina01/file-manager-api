@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.PlanDate;
+import com.trendsmixed.fma.jsonView.PlanDateView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.PlanDateService;
 import java.util.List;
@@ -29,11 +30,12 @@ public class PlanDateController {
     @Autowired
     private PlanDateService planDateService;
 
+    @JsonView(PlanDateView.All.class)
     @GetMapping
     public List<PlanDate> findAll() {
         return planDateService.findAll();
     }
-
+    @JsonView(PlanDateView.All.class)
     @PostMapping
     public PlanDate save(@RequestBody PlanDate planDate, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

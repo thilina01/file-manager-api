@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.ScrapType;
+import com.trendsmixed.fma.jsonView.ScrapTypeView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ScrapTypeService;
 import java.util.List;
@@ -29,11 +30,13 @@ public class ScrapTypeController {
     @Autowired
     private ScrapTypeService scrapTypeService;
 
+    @JsonView(ScrapTypeView.All.class)
     @GetMapping
     public List<ScrapType> findAll() {
         return scrapTypeService.findAll();
     }
 
+    @JsonView(ScrapTypeView.All.class)
     @PostMapping
     public ScrapType save(@RequestBody ScrapType scrapType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Job;
+import com.trendsmixed.fma.jsonView.JobView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.JobService;
 import java.util.List;
@@ -29,11 +30,13 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
+    @JsonView(JobView.All.class)
     @GetMapping
     public List<Job> findAll() {
         return jobService.findAll();
     }
-
+    
+    @JsonView(JobView.All.class)
     @PostMapping
     public Job save(@RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

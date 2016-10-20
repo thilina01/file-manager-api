@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Incoterm;
+import com.trendsmixed.fma.jsonView.IncotermView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.IncotermService;
 import java.util.List;
@@ -28,7 +29,8 @@ public class IncotermController {
     private AppSessionService appSessionService;
     @Autowired
     private IncotermService incotermService;
-
+    
+    @JsonView(IncotermView.All.class)
     @PostMapping
     public Incoterm save(@RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -43,7 +45,7 @@ public class IncotermController {
             throw new Error(e.getMessage());
         }
     }
-
+    @JsonView(IncotermView.All.class)
     @GetMapping
     public List<Incoterm> findAll() {
         return incotermService.findAll();

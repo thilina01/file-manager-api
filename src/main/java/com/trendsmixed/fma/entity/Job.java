@@ -44,10 +44,10 @@ public class Job implements Serializable {
     @JsonView(JobView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(JobView.ActualSippedDate.class)
-    @Column(name = "actual_sipped_date")
+    @JsonView(JobView.ActualShippedDate.class)
+    @Column(name = "actual_shipped_date")
     @Temporal(TemporalType.DATE)
-    private Date actualSippedDate;
+    private Date actualShippedDate;
     @JsonView(JobView.Comment.class)
     @Column(name = "comment")
     private String comment;
@@ -89,12 +89,12 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public Date getActualSippedDate() {
-        return actualSippedDate;
+    public Date getActualShippedDate() {
+        return actualShippedDate;
     }
 
-    public void setActualSippedDate(Date actualSippedDate) {
-        this.actualSippedDate = actualSippedDate;
+    public void setActualShippedDate(Date actualShippedDate) {
+        this.actualShippedDate = actualShippedDate;
     }
 
     public String getComment() {

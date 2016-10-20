@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.CustType;
+import com.trendsmixed.fma.jsonView.CustTypeView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.CustTypeService;
 import java.util.List;
@@ -29,11 +30,13 @@ public class CustTypeController {
     @Autowired
     private CustTypeService custTypeService;
 
+    @JsonView(CustTypeView.All.class)
     @GetMapping
     public List<CustType> findAll() {
         return custTypeService.findAll();
     }
 
+    @JsonView(CustTypeView.All.class)
     @PostMapping
     public CustType save(@RequestBody CustType custType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

@@ -15,4 +15,8 @@ public class PlanDateView {
     public static interface Shift {
     }
 
+    public static interface All extends Id, PlanDate, Quantity, Shift {
+
+    }
+
 }
