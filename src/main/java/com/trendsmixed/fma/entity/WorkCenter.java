@@ -43,6 +43,9 @@ public class WorkCenter implements Serializable {
     @JsonView(WorkCenterView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(WorkCenterView.Name.class)
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "workCenter")
     private List<ControlPoint> controlPointList;
     @JsonView(WorkCenterView.CostCenter.class)
@@ -71,6 +74,14 @@ public class WorkCenter implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<ControlPoint> getControlPointList() {
