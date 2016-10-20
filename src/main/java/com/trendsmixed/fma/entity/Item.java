@@ -60,10 +60,10 @@ public class Item implements Serializable {
     private String size;
     @JsonView(ItemView.Volume.class)
     @Column(name = "volume")
-    private String volume;
+    private double volume;
     @JsonView(ItemView.Weight.class)
     @Column(name = "weight")
-    private Integer weight;
+    private double weight;
     @JoinTable(name = "item_has_customer_item", joinColumns = {
         @JoinColumn(name = "item_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "customer_item_id", referencedColumnName = "id")})
@@ -137,22 +137,6 @@ public class Item implements Serializable {
         this.size = size;
     }
 
-    public String getVolume() {
-        return volume;
-    }
-
-    public void setVolume(String volume) {
-        this.volume = volume;
-    }
-
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
-
     public List<CustomerItem> getCustomerItemList() {
         return customerItemList;
     }
@@ -175,6 +159,22 @@ public class Item implements Serializable {
 
     public void setItemHasMachineList(List<ItemHasMachine> itemHasMachineList) {
         this.itemHasMachineList = itemHasMachineList;
+    }
+
+    public double getVolume() {
+        return volume;
+    }
+
+    public void setVolume(double volume) {
+        this.volume = volume;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public Paint getPaint() {
