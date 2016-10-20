@@ -36,20 +36,16 @@ public class ScrapTypeController {
 
     @PostMapping
     public ScrapType save(@RequestBody ScrapType scrapType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                scrapType = scrapTypeService.save(scrapType);
-                return scrapType;
+        appSessionService.isValid(email, request);
+        try {
+            scrapType = scrapTypeService.save(scrapType);
+            return scrapType;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

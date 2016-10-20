@@ -36,20 +36,16 @@ public class RunDateController {
 
     @PostMapping
     public RunDate save(@RequestBody RunDate runDate, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                runDate = runDateService.save(runDate);
-                return runDate;
+        appSessionService.isValid(email, request);
+        try {
+            runDate = runDateService.save(runDate);
+            return runDate;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

@@ -40,20 +40,16 @@ public class PurchaseOrderController {
     @JsonView(PurchaseOrderView.AllAndCustomerAll.class)
     @PostMapping
     public PurchaseOrder save(@RequestBody PurchaseOrder purchaseOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                purchaseOrder = purchaseOrderService.save(purchaseOrder);
-                return purchaseOrder;
+        appSessionService.isValid(email, request);
+        try {
+            purchaseOrder = purchaseOrderService.save(purchaseOrder);
+            return purchaseOrder;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

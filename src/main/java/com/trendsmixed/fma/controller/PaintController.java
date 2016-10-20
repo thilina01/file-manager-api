@@ -36,20 +36,16 @@ public class PaintController {
 
     @PostMapping
     public Paint save(@RequestBody Paint paint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                paint = paintService.save(paint);
-                return paint;
+        appSessionService.isValid(email, request);
+        try {
+            paint = paintService.save(paint);
+            return paint;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

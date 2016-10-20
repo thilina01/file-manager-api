@@ -40,20 +40,16 @@ public class CostCenterController {
     @PostMapping
     @JsonView(CostCenterView.AllAndSectionId.class)
     public CostCenter save(@RequestBody CostCenter costCenter, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                costCenter = costCenterService.save(costCenter);
-                return costCenter;
+        appSessionService.isValid(email, request);
+        try {
+            costCenter = costCenterService.save(costCenter);
+            return costCenter;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

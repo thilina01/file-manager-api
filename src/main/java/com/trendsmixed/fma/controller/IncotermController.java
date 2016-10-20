@@ -31,20 +31,16 @@ public class IncotermController {
 
     @PostMapping
     public Incoterm save(@RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                incoterm = incotermService.save(incoterm);
-                return incoterm;
+        appSessionService.isValid(email, request);
+        try {
+            incoterm = incotermService.save(incoterm);
+            return incoterm;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

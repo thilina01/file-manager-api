@@ -36,20 +36,16 @@ public class DefectTypeController {
 
     @PostMapping
     public DefectType save(@RequestBody DefectType defectType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                defectType = defectTypeService.save(defectType);
-                return defectType;
+        appSessionService.isValid(email, request);
+        try {
+            defectType = defectTypeService.save(defectType);
+            return defectType;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

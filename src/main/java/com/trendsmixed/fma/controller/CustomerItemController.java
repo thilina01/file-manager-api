@@ -40,20 +40,16 @@ public class CustomerItemController {
     @JsonView(CustomerItemView.AllAndCustomerAll.class)
     @PostMapping
     public CustomerItem save(@RequestBody CustomerItem customerItems, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                customerItems = customerItemsService.save(customerItems);
-                return customerItems;
+        appSessionService.isValid(email, request);
+        try {
+            customerItems = customerItemsService.save(customerItems);
+            return customerItems;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

@@ -36,20 +36,16 @@ public class DeliveryController {
 
     @PostMapping
     public Delivery save(@RequestBody Delivery delivery, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                delivery = deliveryService.save(delivery);
-                return delivery;
+        appSessionService.isValid(email, request);
+        try {
+            delivery = deliveryService.save(delivery);
+            return delivery;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

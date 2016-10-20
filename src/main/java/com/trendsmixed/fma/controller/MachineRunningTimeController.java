@@ -34,20 +34,16 @@ public class MachineRunningTimeController {
     @JsonView(MachineRunningTimeView.AllAndMachineAll.class)
     @PostMapping
     public MachineRunningTime save(@RequestBody MachineRunningTime machineRunningTime, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                machineRunningTime = machineRunningTimeService.save(machineRunningTime);
-                return machineRunningTime;
+        appSessionService.isValid(email, request);
+        try {
+            machineRunningTime = machineRunningTimeService.save(machineRunningTime);
+            return machineRunningTime;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

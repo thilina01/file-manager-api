@@ -36,20 +36,16 @@ public class ManpowerTypeController {
 
     @PostMapping
     public ManpowerType save(@RequestBody ManpowerType manpowerType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                manpowerType = manpowerTypeService.save(manpowerType);
-                return manpowerType;
+        appSessionService.isValid(email, request);
+        try {
+            manpowerType = manpowerTypeService.save(manpowerType);
+            return manpowerType;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

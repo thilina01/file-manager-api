@@ -39,20 +39,16 @@ public class WorkCenterController {
 
     @PostMapping
     public WorkCenter save(@RequestBody WorkCenter workCenter, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                workCenter = workCenterService.save(workCenter);
-                return workCenter;
+        appSessionService.isValid(email, request);
+        try {
+            workCenter = workCenterService.save(workCenter);
+            return workCenter;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

@@ -36,20 +36,16 @@ public class CustTypeController {
 
     @PostMapping
     public CustType save(@RequestBody CustType custType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                custType = custTypeService.save(custType);
-                return custType;
+        appSessionService.isValid(email, request);
+        try {
+            custType = custTypeService.save(custType);
+            return custType;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
     }
 

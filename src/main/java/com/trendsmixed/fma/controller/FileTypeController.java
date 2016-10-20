@@ -36,21 +36,18 @@ public class FileTypeController {
 
     @PostMapping
     public FileType save(@RequestBody FileType fileType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            try {
-                fileType = fileTypeService.save(fileType);
-                return fileType;
+        appSessionService.isValid(email, request);
+        try {
+            fileType = fileTypeService.save(fileType);
+            return fileType;
 
-            } catch (Throwable e) {
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
             }
+            throw new Error(e.getMessage());
         }
+
     }
 
     @GetMapping("/{id}")
