@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.trendsmixed.fma.entity.AppSession;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Paint;
+import com.trendsmixed.fma.jsonView.PaintView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.PaintService;
 import java.util.List;
@@ -29,11 +30,13 @@ public class PaintController {
     @Autowired
     private PaintService paintService;
 
+    @JsonView(PaintView.All.class)
     @GetMapping
     public List<Paint> findAll() {
         return paintService.findAll();
     }
 
+    @JsonView(PaintView.All.class)
     @PostMapping
     public Paint save(@RequestBody Paint paint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
