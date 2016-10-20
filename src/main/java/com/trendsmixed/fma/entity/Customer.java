@@ -63,13 +63,13 @@ public class Customer implements Serializable {
     private String name;
     @JsonView(CustomerView.NortifyParty.class)
     @Column(name = "nortify_party")
-    private String nortifyParty;
+    private String notifyParty;
     @JsonView(CustomerView.Note.class)
     @Column(name = "note")
     private String note;
     @JsonView(CustomerView.OfficeAddress.class)
-    @Column(name = "office_addres")
-    private String officeAddres;
+    @Column(name = "office_address")
+    private String officeAddress;
     @JsonView(CustomerView.PaymentTerm.class)
     @Column(name = "payment_term")
     private String paymentTerm;
@@ -174,12 +174,12 @@ public class Customer implements Serializable {
         this.name = name;
     }
 
-    public String getNortifyParty() {
-        return nortifyParty;
+    public String getNotifyParty() {
+        return notifyParty;
     }
 
-    public void setNortifyParty(String nortifyParty) {
-        this.nortifyParty = nortifyParty;
+    public void setNotifyParty(String notifyParty) {
+        this.notifyParty = notifyParty;
     }
 
     public String getNote() {
@@ -190,12 +190,12 @@ public class Customer implements Serializable {
         this.note = note;
     }
 
-    public String getOfficeAddres() {
-        return officeAddres;
+    public String getOfficeAddress() {
+        return officeAddress;
     }
 
-    public void setOfficeAddres(String officeAddres) {
-        this.officeAddres = officeAddres;
+    public void setOfficeAddress(String officeAddress) {
+        this.officeAddress = officeAddress;
     }
 
     public String getPaymentTerm() {
