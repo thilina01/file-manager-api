@@ -30,25 +30,9 @@ public class SectionController {
     @Autowired
     private AppSessionService appSessionService;
 
-    public boolean isValid(String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Please Login");
-        }
-        if (!appSession.getIp().equals(request.getRemoteAddr())) {
-            appSessionService.delete(email);
-            throw new Error("Please Login");
-        }
-        if (appSession.getLastTime() < (System.currentTimeMillis() - (1000 * 60 * 10))) {
-            appSessionService.delete(email);
-            throw new Error("Please Login Again");
-        }
-        return true;
-    }
-
     @PostMapping
     public Section save(@RequestBody Section section, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        isValid(email, request);
+        appSessionService.isValid(email, request);
         try {
             section = sectionService.save(section);
             return section;

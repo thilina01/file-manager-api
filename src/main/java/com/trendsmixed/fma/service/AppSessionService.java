@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.repository.AppSessionRepository;
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class AppSessionService {
@@ -30,11 +31,19 @@ public class AppSessionService {
         appSessionRepository.delete(email);
     }
 
-    public AppSession findOne(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isValid(String email, HttpServletRequest request) {
+        AppSession appSession = findOne(email);
+        if (appSession == null) {
+            throw new Error("Please Login");
+        }
+        if (!appSession.getIp().equals(request.getRemoteAddr())) {
+            delete(email);
+            throw new Error("Please Login");
+        }
+        if (appSession.getLastTime() < (System.currentTimeMillis() - (1000 * 60 * 10))) {
+            delete(email);
+            throw new Error("Please Login Again");
+        }
+        return true;
     }
 }
