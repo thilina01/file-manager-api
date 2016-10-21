@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/customerItmes")
+@RequestMapping("/customerItems")
 public class CustomerItemController {
 
     @Autowired
