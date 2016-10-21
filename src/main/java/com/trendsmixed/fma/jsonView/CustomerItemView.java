@@ -12,14 +12,21 @@ public class CustomerItemView {
     }
 
     public static interface Customer {
+    }
 
-        
+    public static interface Item {
     }
-    public static interface All extends Id,CustomerPartNo,Price {
-        
+
+    public static interface All extends Id, CustomerPartNo, Price {
     }
-    public static interface AllAndCustomerAll extends All,Customer,CustomerView.All{
-        
+
+    public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
+    }
+
+    public static interface AllAndItemAll extends All, Item, ItemView.All {
+    }
+
+    public static interface AllAndCustomerAllAndItemAll extends All, Customer, CustomerView.All, Item, ItemView.All {
     }
 
 }

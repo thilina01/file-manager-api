@@ -8,7 +8,6 @@ package com.trendsmixed.fma.entity;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.jsonView.CustomerItemView;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -46,12 +44,14 @@ public class CustomerItem implements Serializable {
     @JsonView(CustomerItemView.Price.class)
     @Column(name = "price")
     private Double price;
-    @ManyToMany(mappedBy = "customerItemList")
-    private List<Item> itemList;
     @JsonView(CustomerItemView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
+    @JsonView(CustomerItemView.Item.class)
+    @JoinColumn(name = "item_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Item item;
 
     public CustomerItem() {
     }
@@ -84,12 +84,12 @@ public class CustomerItem implements Serializable {
         this.price = price;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
+    public Item getItem() {
+        return item;
     }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public Customer getCustomer() {
