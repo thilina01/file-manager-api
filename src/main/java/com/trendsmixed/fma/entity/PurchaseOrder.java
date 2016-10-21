@@ -45,7 +45,7 @@ public class PurchaseOrder implements Serializable {
     private Integer id;
     @JsonView(PurchaseOrderView.ActualDispatchedDate.class)
     @Column(name = "actual_dispatched_date")
-    private String actualDispatchedDate;
+    private Date actualDispatchedDate;
     @JsonView(PurchaseOrderView.Comments.class)
     @Column(name = "comments")
     private String comments;
@@ -59,7 +59,7 @@ public class PurchaseOrder implements Serializable {
     private Double orderQty;
     @JsonView(PurchaseOrderView.OrderRecivedDate.class)
     @Column(name = "order_recived_date")
-    private String orderRecivedDate;
+    private Date orderRecivedDate;
     @JsonView(PurchaseOrderView.PoNumber.class)
     @Column(name = "po_number")
     private String poNumber;
@@ -93,11 +93,11 @@ public class PurchaseOrder implements Serializable {
         this.id = id;
     }
 
-    public String getActualDispatchedDate() {
+    public Date getActualDispatchedDate() {
         return actualDispatchedDate;
     }
 
-    public void setActualDispatchedDate(String actualDispatchedDate) {
+    public void setActualDispatchedDate(Date actualDispatchedDate) {
         this.actualDispatchedDate = actualDispatchedDate;
     }
 
@@ -125,11 +125,11 @@ public class PurchaseOrder implements Serializable {
         this.orderQty = orderQty;
     }
 
-    public String getOrderRecivedDate() {
+    public Date getOrderRecivedDate() {
         return orderRecivedDate;
     }
 
-    public void setOrderRecivedDate(String orderRecivedDate) {
+    public void setOrderRecivedDate(Date orderRecivedDate) {
         this.orderRecivedDate = orderRecivedDate;
     }
 
