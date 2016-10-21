@@ -17,7 +17,7 @@ public class PurchaseOrderView {
     public static interface TrwConfirmedDate {
     }
 
-    public static interface ActualDespatchDate {
+    public static interface ActualDispatchedDate {
     }
 
     public static interface Comments {
@@ -31,7 +31,7 @@ public class PurchaseOrderView {
     public static interface Customer {
     }
 
-    public static interface All extends Id, PoNumber, OrderQty, CustomerRequestedDate, TrwConfirmedDate, ActualDespatchDate, Comments, OrderRecivedDate {
+    public static interface All extends Id, PoNumber, OrderQty, CustomerRequestedDate, TrwConfirmedDate, ActualDispatchedDate, Comments, OrderRecivedDate {
 
     }
 

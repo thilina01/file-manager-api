@@ -34,6 +34,8 @@ public class PurchaseOrderHasItem implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "quantity")
     private Double quantity;
+    @Column(name = "price")
+    private Double price;
     @JoinColumn(name = "item_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Item item;
@@ -70,6 +72,14 @@ public class PurchaseOrderHasItem implements Serializable {
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Item getItem() {

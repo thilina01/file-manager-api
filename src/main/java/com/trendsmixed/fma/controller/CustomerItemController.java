@@ -31,13 +31,13 @@ public class CustomerItemController {
     @Autowired
     private CustomerItemService customerItemsService;
 
-    @JsonView(CustomerItemView.AllAndCustomerAll.class)
+    @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @GetMapping
     public List<CustomerItem> findAll() {
         return customerItemsService.findAll();
     }
 
-    @JsonView(CustomerItemView.AllAndCustomerAll.class)
+    @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @PostMapping
     public CustomerItem save(@RequestBody CustomerItem customerItems, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

@@ -43,9 +43,9 @@ public class PurchaseOrder implements Serializable {
     @JsonView(PurchaseOrderView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(PurchaseOrderView.ActualDespatchDate.class)
-    @Column(name = "actual_despatch_date")
-    private String actualDespatchDate;
+    @JsonView(PurchaseOrderView.ActualDispatchedDate.class)
+    @Column(name = "actual_dispatched_date")
+    private String actualDispatchedDate;
     @JsonView(PurchaseOrderView.Comments.class)
     @Column(name = "comments")
     private String comments;
@@ -93,12 +93,12 @@ public class PurchaseOrder implements Serializable {
         this.id = id;
     }
 
-    public String getActualDespatchDate() {
-        return actualDespatchDate;
+    public String getActualDispatchedDate() {
+        return actualDispatchedDate;
     }
 
-    public void setActualDespatchDate(String actualDespatchDate) {
-        this.actualDespatchDate = actualDespatchDate;
+    public void setActualDispatchedDate(String actualDispatchedDate) {
+        this.actualDispatchedDate = actualDispatchedDate;
     }
 
     public String getComments() {
@@ -197,5 +197,5 @@ public class PurchaseOrder implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.PurchaseOrder[ id=" + id + " ]";
     }
-    
+
 }
