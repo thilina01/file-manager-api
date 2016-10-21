@@ -60,9 +60,6 @@ public class PurchaseOrder implements Serializable {
     @JsonView(PurchaseOrderView.OrderRecivedDate.class)
     @Column(name = "order_recived_date")
     private String orderRecivedDate;
-    @JsonView(PurchaseOrderView.OrderType.class)
-    @Column(name = "order_type")
-    private String orderType;
     @JsonView(PurchaseOrderView.PoNumber.class)
     @Column(name = "po_number")
     private String poNumber;
@@ -76,6 +73,10 @@ public class PurchaseOrder implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
+    @JsonView(PurchaseOrderView.PurchaseOrderType.class)
+    @JoinColumn(name = "purchase_order_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private PurchaseOrderType purchaseOrderType;
 
     public PurchaseOrder() {
     }
@@ -132,12 +133,12 @@ public class PurchaseOrder implements Serializable {
         this.orderRecivedDate = orderRecivedDate;
     }
 
-    public String getOrderType() {
-        return orderType;
+    public PurchaseOrderType getPurchaseOrderType() {
+        return purchaseOrderType;
     }
 
-    public void setOrderType(String orderType) {
-        this.orderType = orderType;
+    public void setPurchaseOrderType(PurchaseOrderType purchaseOrderType) {
+        this.purchaseOrderType = purchaseOrderType;
     }
 
     public String getPoNumber() {
