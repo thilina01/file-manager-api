@@ -23,23 +23,22 @@ public class PurchaseOrderView {
     public static interface Comments {
     }
 
-    public static interface OrderRecivedDate {
+    public static interface OrderReceivedDate {
     }
 
-  
+    public static interface PurchaseOrderType {
+    }
 
     public static interface Customer {
     }
 
-    public static interface All extends Id, PoNumber, OrderQty, CustomerRequestedDate, TrwConfirmedDate, ActualDispatchedDate, Comments, OrderRecivedDate {
-
+    public static interface All extends Id, PoNumber, OrderQty, CustomerRequestedDate, TrwConfirmedDate, ActualDispatchedDate, Comments, OrderReceivedDate {
     }
 
     public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
-
     }
 
-    public static interface PurchaseOrderType {
+    public static interface AllAndCustomerAllAndPurchaseOrderTypeAll extends All, Customer, CustomerView.All, PurchaseOrderType, PurchaseOrderTypeView.AlL {
     }
 
 }

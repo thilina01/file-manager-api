@@ -31,13 +31,13 @@ public class PurchaseOrderController {
     @Autowired
     private PurchaseOrderService purchaseOrderService;
 
-    @JsonView(PurchaseOrderView.AllAndCustomerAll.class)
+    @JsonView(PurchaseOrderView.AllAndCustomerAllAndPurchaseOrderTypeAll.class)
     @GetMapping
     public List<PurchaseOrder> findAll() {
         return purchaseOrderService.findAll();
     }
 
-    @JsonView(PurchaseOrderView.AllAndCustomerAll.class)
+    @JsonView(PurchaseOrderView.AllAndCustomerAllAndPurchaseOrderTypeAll.class)
     @PostMapping
     public PurchaseOrder save(@RequestBody PurchaseOrder purchaseOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
