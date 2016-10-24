@@ -58,14 +58,15 @@ public class CurrencyController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         currencyService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public Currency updateCustomer(@PathVariable int id, @RequestBody Currency currency) {
+    public Currency updateCustomer(@PathVariable int id, @RequestBody Currency currency, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         currency.setId(id);
         currency = currencyService.save(currency);
         return currency;

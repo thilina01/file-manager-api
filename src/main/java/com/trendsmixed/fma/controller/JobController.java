@@ -35,7 +35,7 @@ public class JobController {
     public List<Job> findAll() {
         return jobService.findAll();
     }
-    
+
     @JsonView(JobView.All.class)
     @PostMapping
     public Job save(@RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -58,14 +58,15 @@ public class JobController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         jobService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public Job updateCustomer(@PathVariable int id, @RequestBody Job job) {
+    public Job updateCustomer(@PathVariable int id, @RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         job.setId(id);
         job = jobService.save(job);
         return job;

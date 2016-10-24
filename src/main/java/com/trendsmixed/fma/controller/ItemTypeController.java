@@ -58,14 +58,15 @@ public class ItemTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         itemTypeService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public ItemType updateCustomer(@PathVariable int id, @RequestBody ItemType itemType) {
+    public ItemType updateCustomer(@PathVariable int id, @RequestBody ItemType itemType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         itemType.setId(id);
         itemType = itemTypeService.save(itemType);
         return itemType;

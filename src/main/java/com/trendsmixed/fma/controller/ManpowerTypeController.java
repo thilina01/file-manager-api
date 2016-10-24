@@ -58,14 +58,14 @@ public class ManpowerTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         manpowerTypeService.delete(id);
-        return "Deleted";
-
     }
 
     @PutMapping("/{id}")
-    public ManpowerType updateCustomer(@PathVariable int id, @RequestBody ManpowerType manpowerType) {
+    public ManpowerType updateCustomer(@PathVariable int id, @RequestBody ManpowerType manpowerType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         manpowerType.setId(id);
         manpowerType = manpowerTypeService.save(manpowerType);
         return manpowerType;

@@ -58,14 +58,15 @@ public class ScrapTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         scrapTypeService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public ScrapType updateCustomer(@PathVariable int id, @RequestBody ScrapType scrapType) {
+    public ScrapType updateCustomer(@PathVariable int id, @RequestBody ScrapType scrapType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         scrapType.setId(id);
         scrapType = scrapTypeService.save(scrapType);
         return scrapType;

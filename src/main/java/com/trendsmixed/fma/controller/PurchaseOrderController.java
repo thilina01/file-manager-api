@@ -59,14 +59,15 @@ public class PurchaseOrderController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         purchaseOrderService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public PurchaseOrder updateCustomer(@PathVariable int id, @RequestBody PurchaseOrder purchaseOrder) {
+    public PurchaseOrder updateCustomer(@PathVariable int id, @RequestBody PurchaseOrder purchaseOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         purchaseOrder.setId(id);
         purchaseOrder = purchaseOrderService.save(purchaseOrder);
         return purchaseOrder;

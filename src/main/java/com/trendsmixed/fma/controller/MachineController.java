@@ -35,6 +35,7 @@ public class MachineController {
     public List<Machine> findAll() {
         return machineService.findAll();
     }
+
     @JsonView(MachineView.All.class)
     @PostMapping
     public Machine save(@RequestBody Machine machine, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -57,14 +58,15 @@ public class MachineController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         machineService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public Machine updateCustomer(@PathVariable int id, @RequestBody Machine machine) {
+    public Machine updateCustomer(@PathVariable int id, @RequestBody Machine machine, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         machine.setId(id);
         machine = machineService.save(machine);
         return machine;

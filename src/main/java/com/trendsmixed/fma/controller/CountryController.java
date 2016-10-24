@@ -61,11 +61,12 @@ public class CountryController {
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         countryService.delete(id);
-        //return "Deleted";
+
     }
 
     @PutMapping("/{id}")
-    public Country updateCustomer(@PathVariable int id, @RequestBody Country country) {
+    public Country updateCustomer(@PathVariable int id, @RequestBody Country country, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         country.setId(id);
         country = countryService.save(country);
         return country;

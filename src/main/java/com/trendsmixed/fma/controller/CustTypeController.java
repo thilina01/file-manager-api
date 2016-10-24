@@ -58,14 +58,15 @@ public class CustTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         custTypeService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public CustType updateCustomer(@PathVariable int id, @RequestBody CustType custType) {
+    public CustType updateCustomer(@PathVariable int id, @RequestBody CustType custType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         custType.setId(id);
         custType = custTypeService.save(custType);
         return custType;

@@ -59,14 +59,15 @@ public class ControlPointController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         controlPointService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public ControlPoint updateCustomer(@PathVariable int id, @RequestBody ControlPoint controlPoint) {
+    public ControlPoint updateCustomer(@PathVariable int id, @RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         controlPoint.setId(id);
         controlPoint = controlPointService.save(controlPoint);
         return controlPoint;

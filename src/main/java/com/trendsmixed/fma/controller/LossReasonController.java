@@ -35,6 +35,7 @@ public class LossReasonController {
     public List<LossReason> findAll() {
         return lossReasonService.findAll();
     }
+
     @JsonView(LossReasonView.All.class)
     @PostMapping
     public LossReason save(@RequestBody LossReason lossReason, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -57,15 +58,15 @@ public class LossReasonController {
     }
 
     @DeleteMapping(value = "/{id}")
-
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         lossReasonService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public LossReason updateCustomer(@PathVariable int id, @RequestBody LossReason lossReason) {
+    public LossReason updateCustomer(@PathVariable int id, @RequestBody LossReason lossReason, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         lossReason.setId(id);
         lossReason = lossReasonService.save(lossReason);
         return lossReason;

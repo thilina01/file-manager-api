@@ -58,14 +58,15 @@ public class ShiftController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         shiftService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public Shift updateCustomer(@PathVariable int id, @RequestBody Shift shift) {
+    public Shift updateCustomer(@PathVariable int id, @RequestBody Shift shift, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         shift.setId(id);
         shift = shiftService.save(shift);
         return shift;

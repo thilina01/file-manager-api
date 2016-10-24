@@ -58,13 +58,15 @@ public class CustomerController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         customerService.delete(id);
-        return "Deleted";
+
     }
 
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable int id, @RequestBody Customer customer) {
+    public Customer updateCustomer(@PathVariable int id, @RequestBody Customer customer, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         customer.setId(id);
         customer = customerService.save(customer);
         return customer;

@@ -56,13 +56,15 @@ public class SectionController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         sectionService.delete(id);
-        return "Deleted";
+
     }
 
     @PutMapping("/{id}")
-    public Section updateCustomer(@PathVariable int id, @RequestBody Section section) {
+    public Section updateCustomer(@PathVariable int id, @RequestBody Section section, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         section.setId(id);
         section = sectionService.save(section);
         return section;

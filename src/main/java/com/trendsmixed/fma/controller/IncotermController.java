@@ -29,7 +29,7 @@ public class IncotermController {
     private AppSessionService appSessionService;
     @Autowired
     private IncotermService incotermService;
-    
+
     @JsonView(IncotermView.All.class)
     @PostMapping
     public Incoterm save(@RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -45,6 +45,7 @@ public class IncotermController {
             throw new Error(e.getMessage());
         }
     }
+
     @JsonView(IncotermView.All.class)
     @GetMapping
     public List<Incoterm> findAll() {
@@ -57,14 +58,15 @@ public class IncotermController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         incotermService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public Incoterm updateCustomer(@PathVariable int id, @RequestBody Incoterm incoterm) {
+    public Incoterm updateCustomer(@PathVariable int id, @RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         incoterm.setId(id);
         incoterm = incotermService.save(incoterm);
         return incoterm;

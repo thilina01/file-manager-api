@@ -59,14 +59,15 @@ public class DownTimeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         downTimeTypeService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public DownTime updateCustomer(@PathVariable int id, @RequestBody DownTime downTimeType) {
+    public DownTime updateCustomer(@PathVariable int id, @RequestBody DownTime downTimeType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         downTimeType.setId(id);
         downTimeType = downTimeTypeService.save(downTimeType);
         return downTimeType;

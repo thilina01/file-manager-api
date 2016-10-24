@@ -59,14 +59,15 @@ public class MachineRunningTimeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         machineRunningTimeService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public MachineRunningTime updateCustomer(@PathVariable int id, @RequestBody MachineRunningTime machineRunningTime) {
+    public MachineRunningTime updateCustomer(@PathVariable int id, @RequestBody MachineRunningTime machineRunningTime, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         machineRunningTime.setId(id);
         machineRunningTime = machineRunningTimeService.save(machineRunningTime);
         return machineRunningTime;

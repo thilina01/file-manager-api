@@ -58,14 +58,15 @@ public class WorkCenterController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         workCenterService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public WorkCenter updateCustomer(@PathVariable int id, @RequestBody WorkCenter workCenter) {
+    public WorkCenter updateCustomer(@PathVariable int id, @RequestBody WorkCenter workCenter, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         workCenter.setId(id);
         workCenter = workCenterService.save(workCenter);
         return workCenter;

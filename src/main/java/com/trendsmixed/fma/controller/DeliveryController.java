@@ -35,6 +35,7 @@ public class DeliveryController {
     public List<Delivery> findAll() {
         return deliveryService.findAll();
     }
+
     @JsonView(DeliveryView.All.class)
     @PostMapping
     public Delivery save(@RequestBody Delivery delivery, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -57,14 +58,15 @@ public class DeliveryController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         deliveryService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public Delivery updateCustomer(@PathVariable int id, @RequestBody Delivery delivery) {
+    public Delivery updateCustomer(@PathVariable int id, @RequestBody Delivery delivery, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         delivery.setId(id);
         delivery = deliveryService.save(delivery);
         return delivery;

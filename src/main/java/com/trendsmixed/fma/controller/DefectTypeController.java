@@ -29,13 +29,14 @@ public class DefectTypeController {
     private AppSessionService appSessionService;
     @Autowired
     private DefectTypeService defectTypeService;
-    
-@JsonView(DefectTypeView.All.class)
+
+    @JsonView(DefectTypeView.All.class)
     @GetMapping
     public List<DefectType> findAll() {
         return defectTypeService.findAll();
     }
-@JsonView(DefectTypeView.All.class)
+
+    @JsonView(DefectTypeView.All.class)
     @PostMapping
     public DefectType save(@RequestBody DefectType defectType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -57,14 +58,15 @@ public class DefectTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         defectTypeService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public DefectType updateCustomer(@PathVariable int id, @RequestBody DefectType defectType) {
+    public DefectType updateCustomer(@PathVariable int id, @RequestBody DefectType defectType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         defectType.setId(id);
         defectType = defectTypeService.save(defectType);
         return defectType;

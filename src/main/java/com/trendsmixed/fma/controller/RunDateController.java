@@ -58,14 +58,15 @@ public class RunDateController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         runDateService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public RunDate updateCustomer(@PathVariable int id, @RequestBody RunDate runDate) {
+    public RunDate updateCustomer(@PathVariable int id, @RequestBody RunDate runDate, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         runDate.setId(id);
         runDate = runDateService.save(runDate);
         return runDate;

@@ -35,6 +35,7 @@ public class PlanDateController {
     public List<PlanDate> findAll() {
         return planDateService.findAll();
     }
+
     @JsonView(PlanDateView.All.class)
     @PostMapping
     public PlanDate save(@RequestBody PlanDate planDate, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -57,14 +58,15 @@ public class PlanDateController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         planDateService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public PlanDate updateCustomer(@PathVariable int id, @RequestBody PlanDate planDate) {
+    public PlanDate updateCustomer(@PathVariable int id, @RequestBody PlanDate planDate, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         planDate.setId(id);
         planDate = planDateService.save(planDate);
         return planDate;

@@ -58,14 +58,15 @@ public class PaintController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         paintService.delete(id);
-        return "Deleted";
 
     }
 
     @PutMapping("/{id}")
-    public Paint updateCustomer(@PathVariable int id, @RequestBody Paint paint) {
+    public Paint updateCustomer(@PathVariable int id, @RequestBody Paint paint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
         paint.setId(id);
         paint = paintService.save(paint);
         return paint;
