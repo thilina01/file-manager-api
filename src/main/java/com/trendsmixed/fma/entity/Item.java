@@ -53,8 +53,8 @@ public class Item implements Serializable {
     private String drawingVersion;
     @Basic(optional = false)
     @JsonView(ItemView.ProductionToolAvailability.class)
-    @Column(name = "production_tool_availablity")
-    private String productionToolAvailablity;
+    @Column(name = "production_tool_availability")
+    private String productionToolAvailability;
     @JsonView(ItemView.Size.class)
     @Column(name = "size")
     private String size;
@@ -121,12 +121,12 @@ public class Item implements Serializable {
         this.drawingVersion = drawingVersion;
     }
 
-    public String getProductionToolAvailablity() {
-        return productionToolAvailablity;
+    public String getProductionToolAvailability() {
+        return productionToolAvailability;
     }
 
-    public void setProductionToolAvailablity(String productionToolAvailablity) {
-        this.productionToolAvailablity = productionToolAvailablity;
+    public void setProductionToolAvailability(String productionToolAvailability) {
+        this.productionToolAvailability = productionToolAvailability;
     }
 
     public String getSize() {
