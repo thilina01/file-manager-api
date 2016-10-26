@@ -5,10 +5,7 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.DefectTypeView;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -35,20 +32,16 @@ public class DefectType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(DefectTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(DefectTypeView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(DefectTypeView.Type.class)
     @Column(name = "type")
     private String type;
-    @JsonView(DefectTypeView.TypeInSinhala.class)
-    @Column(name = "type_in_sinhala")
-    private String typeInSinhala;    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "defectType")
-    private List<RunDateHasDefectType> runDateHasDefectTypeList;
+    @Column(name = "type_in_shinhala")
+    private String typeInShinhala;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "defectType")
+    private RunDateDefect runDateDefect;
 
     public DefectType() {
     }
@@ -81,20 +74,20 @@ public class DefectType implements Serializable {
         this.type = type;
     }
 
-    public String getTypeInSinhala() {
-        return typeInSinhala;
+    public String getTypeInShinhala() {
+        return typeInShinhala;
     }
 
-    public void setTypeInSinhala(String typeInSinhala) {
-        this.typeInSinhala = typeInSinhala;
+    public void setTypeInShinhala(String typeInShinhala) {
+        this.typeInShinhala = typeInShinhala;
     }
 
-    public List<RunDateHasDefectType> getRunDateHasDefectTypeList() {
-        return runDateHasDefectTypeList;
+    public RunDateDefect getRunDateDefect() {
+        return runDateDefect;
     }
 
-    public void setRunDateHasDefectTypeList(List<RunDateHasDefectType> runDateHasDefectTypeList) {
-        this.runDateHasDefectTypeList = runDateHasDefectTypeList;
+    public void setRunDateDefect(RunDateDefect runDateDefect) {
+        this.runDateDefect = runDateDefect;
     }
 
     @Override
@@ -121,5 +114,5 @@ public class DefectType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.DefectType[ id=" + id + " ]";
     }
-
+    
 }

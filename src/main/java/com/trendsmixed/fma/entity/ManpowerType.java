@@ -5,10 +5,7 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.ManpowerTypeView;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -35,16 +32,14 @@ public class ManpowerType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(ManpowerTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(ManpowerTypeView.Type.class)
     @Column(name = "type")
     private String type;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
-    private List<RunDateHasManpowerType> runDateHasManpowerTypeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
-    private List<PlanDateHasManpowerType> planDateHasManpowerTypeList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "manpowerType")
+    private PlanDateManpower planDateManpower;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "manpowerType")
+    private RunDateManpower runDateManpower;
 
     public ManpowerType() {
     }
@@ -69,20 +64,20 @@ public class ManpowerType implements Serializable {
         this.type = type;
     }
 
-    public List<RunDateHasManpowerType> getRunDateHasManpowerTypeList() {
-        return runDateHasManpowerTypeList;
+    public PlanDateManpower getPlanDateManpower() {
+        return planDateManpower;
     }
 
-    public void setRunDateHasManpowerTypeList(List<RunDateHasManpowerType> runDateHasManpowerTypeList) {
-        this.runDateHasManpowerTypeList = runDateHasManpowerTypeList;
+    public void setPlanDateManpower(PlanDateManpower planDateManpower) {
+        this.planDateManpower = planDateManpower;
     }
 
-    public List<PlanDateHasManpowerType> getPlanDateHasManpowerTypeList() {
-        return planDateHasManpowerTypeList;
+    public RunDateManpower getRunDateManpower() {
+        return runDateManpower;
     }
 
-    public void setPlanDateHasManpowerTypeList(List<PlanDateHasManpowerType> planDateHasManpowerTypeList) {
-        this.planDateHasManpowerTypeList = planDateHasManpowerTypeList;
+    public void setRunDateManpower(RunDateManpower runDateManpower) {
+        this.runDateManpower = runDateManpower;
     }
 
     @Override
@@ -109,5 +104,5 @@ public class ManpowerType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ManpowerType[ id=" + id + " ]";
     }
-
+    
 }

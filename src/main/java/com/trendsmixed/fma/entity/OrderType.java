@@ -5,10 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.PurchaseOrderTypeView;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,31 +24,28 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "purchaseOrder_type")
+@Table(name = "order_type")
 @NamedQueries({
-    @NamedQuery(name = "PurchaseOrderType.findAll", query = "SELECT i FROM PurchaseOrderType i")})
-public class PurchaseOrderType implements Serializable {
+    @NamedQuery(name = "OrderType.findAll", query = "SELECT o FROM OrderType o")})
+public class OrderType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(PurchaseOrderTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(PurchaseOrderTypeView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(PurchaseOrderTypeView.Type.class)
     @Column(name = "type")
     private String type;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrderType")
-    private List<PurchaseOrder> purchaseOrderList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderType")
+    private Collection<SalesOrder> salesOrderCollection;
 
-    public PurchaseOrderType() {
+    public OrderType() {
     }
 
-    public PurchaseOrderType(Integer id) {
+    public OrderType(Integer id) {
         this.id = id;
     }
 
@@ -78,12 +73,12 @@ public class PurchaseOrderType implements Serializable {
         this.type = type;
     }
 
-    public List<PurchaseOrder> getPurchaseOrderList() {
-        return purchaseOrderList;
+    public Collection<SalesOrder> getSalesOrderCollection() {
+        return salesOrderCollection;
     }
 
-    public void setPurchaseOrderList(List<PurchaseOrder> purchaseOrderList) {
-        this.purchaseOrderList = purchaseOrderList;
+    public void setSalesOrderCollection(Collection<SalesOrder> salesOrderCollection) {
+        this.salesOrderCollection = salesOrderCollection;
     }
 
     @Override
@@ -96,10 +91,10 @@ public class PurchaseOrderType implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PurchaseOrderType)) {
+        if (!(object instanceof OrderType)) {
             return false;
         }
-        PurchaseOrderType other = (PurchaseOrderType) object;
+        OrderType other = (OrderType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -108,7 +103,7 @@ public class PurchaseOrderType implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.PurchaseOrderType[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.OrderType[ id=" + id + " ]";
     }
     
 }

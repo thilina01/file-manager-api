@@ -5,8 +5,6 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.DownTimeView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -37,20 +35,15 @@ public class DownTime implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(DownTimeView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(DownTimeView.DownTimeDate.class)
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
-    @JsonView(DownTimeView.Duration.class)
     @Column(name = "duration")
     private Integer duration;
-    @JsonView(DownTimeView.Reason.class)
     @Column(name = "reason")
     private String reason;
-    @JsonView(DownTimeView.Machine.class)
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Machine machine;
@@ -126,5 +119,5 @@ public class DownTime implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.DownTime[ id=" + id + " ]";
     }
-
+    
 }

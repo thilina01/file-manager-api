@@ -5,10 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.MachineView;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -37,26 +36,21 @@ public class Machine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(MachineView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(MachineView.Code.class)
     @Column(name = "code")
     private String code;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @JsonView(MachineView.EnergyRate.class)
     @Column(name = "energy_rate")
     private Double energyRate;
-    @JsonView(MachineView.Name.class)
     @Column(name = "name")
     private String name;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "machine")
+    private ItemMachine itemMachine;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private List<DownTime> downTimeList;
+    private Collection<DownTime> downTimeCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private List<ItemHasMachine> itemHasMachineList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private List<MachineRunningTime> machineRunningTimeList;
-    @JsonView(MachineView.WorkCenter.class)
+    private Collection<MachineRunningTime> machineRunningTimeCollection;
     @JoinColumn(name = "work_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private WorkCenter workCenter;
@@ -100,28 +94,28 @@ public class Machine implements Serializable {
         this.name = name;
     }
 
-    public List<DownTime> getDownTimeList() {
-        return downTimeList;
+    public ItemMachine getItemMachine() {
+        return itemMachine;
     }
 
-    public void setDownTimeList(List<DownTime> downTimeList) {
-        this.downTimeList = downTimeList;
+    public void setItemMachine(ItemMachine itemMachine) {
+        this.itemMachine = itemMachine;
     }
 
-    public List<ItemHasMachine> getItemHasMachineList() {
-        return itemHasMachineList;
+    public Collection<DownTime> getDownTimeCollection() {
+        return downTimeCollection;
     }
 
-    public void setItemHasMachineList(List<ItemHasMachine> itemHasMachineList) {
-        this.itemHasMachineList = itemHasMachineList;
+    public void setDownTimeCollection(Collection<DownTime> downTimeCollection) {
+        this.downTimeCollection = downTimeCollection;
     }
 
-    public List<MachineRunningTime> getMachineRunningTimeList() {
-        return machineRunningTimeList;
+    public Collection<MachineRunningTime> getMachineRunningTimeCollection() {
+        return machineRunningTimeCollection;
     }
 
-    public void setMachineRunningTimeList(List<MachineRunningTime> machineRunningTimeList) {
-        this.machineRunningTimeList = machineRunningTimeList;
+    public void setMachineRunningTimeCollection(Collection<MachineRunningTime> machineRunningTimeCollection) {
+        this.machineRunningTimeCollection = machineRunningTimeCollection;
     }
 
     public WorkCenter getWorkCenter() {
@@ -131,7 +125,6 @@ public class Machine implements Serializable {
     public void setWorkCenter(WorkCenter workCenter) {
         this.workCenter = workCenter;
     }
-
 
     @Override
     public int hashCode() {

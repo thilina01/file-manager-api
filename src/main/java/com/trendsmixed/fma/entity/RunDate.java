@@ -5,11 +5,9 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.RunDateView;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,13 +16,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,47 +40,37 @@ public class RunDate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(RunDateView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(RunDateView.Duration.class)
     @Column(name = "duration")
     private Integer duration;
-    @JsonView(RunDateView.Quantity.class)
     @Column(name = "quantity")
     private Integer quantity;
-    @JsonView(RunDateView.Repaired.class)
-    @Column(name = "repaired")
-    private Integer repaired;
-    @JsonView(RunDateView.Rework.class)
+    @Column(name = "repaierd")
+    private Integer repaierd;
     @Column(name = "rework")
     private Integer rework;
-    @JsonView(RunDateView.RunDate.class)
     @Column(name = "run_date")
     @Temporal(TemporalType.DATE)
     private Date runDate;
-    @JsonView(RunDateView.Scrap.class)
     @Column(name = "scrap")
     private Integer scrap;
-    @JsonView(RunDateView.Shift.class)
     @Column(name = "shift")
     private String shift;
-    @JoinTable(name = "run_date_has_loss_reason", joinColumns = {
+    @JoinTable(name = "run_date_loss", joinColumns = {
         @JoinColumn(name = "run_date_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "loss_reason_id", referencedColumnName = "id")})
     @ManyToMany
-    private List<LossReason> lossReasonList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private List<RunDateHasManpowerType> runDateHasManpowerTypeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private List<RunDateHasScrapType> runDateHasScrapTypeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private List<RunDateHasDefectType> runDateHasDefectTypeList;
-    @JoinColumns({
-        @JoinColumn(name = "job_has_control_point_control_point_id", referencedColumnName = "control_point_id"),
-        @JoinColumn(name = "job_has_control_point_job_id", referencedColumnName = "job_id")})
+    private Collection<LossReason> lossReasonCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
+    private RunDateScrap runDateScrap;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
+    private RunDateDefect runDateDefect;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
+    private RunDateManpower runDateManpower;
+    @JoinColumn(name = "job_control_point_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private JobHasControlPoint jobHasControlPoint;
+    private JobControlPoint jobControlPoint;
 
     public RunDate() {
     }
@@ -116,12 +103,12 @@ public class RunDate implements Serializable {
         this.quantity = quantity;
     }
 
-    public Integer getRepaired() {
-        return repaired;
+    public Integer getRepaierd() {
+        return repaierd;
     }
 
-    public void setRepaired(Integer repaired) {
-        this.repaired = repaired;
+    public void setRepaierd(Integer repaierd) {
+        this.repaierd = repaierd;
     }
 
     public Integer getRework() {
@@ -156,44 +143,44 @@ public class RunDate implements Serializable {
         this.shift = shift;
     }
 
-    public List<LossReason> getLossReasonList() {
-        return lossReasonList;
+    public Collection<LossReason> getLossReasonCollection() {
+        return lossReasonCollection;
     }
 
-    public void setLossReasonList(List<LossReason> lossReasonList) {
-        this.lossReasonList = lossReasonList;
+    public void setLossReasonCollection(Collection<LossReason> lossReasonCollection) {
+        this.lossReasonCollection = lossReasonCollection;
     }
 
-    public List<RunDateHasManpowerType> getRunDateHasManpowerTypeList() {
-        return runDateHasManpowerTypeList;
+    public RunDateScrap getRunDateScrap() {
+        return runDateScrap;
     }
 
-    public void setRunDateHasManpowerTypeList(List<RunDateHasManpowerType> runDateHasManpowerTypeList) {
-        this.runDateHasManpowerTypeList = runDateHasManpowerTypeList;
+    public void setRunDateScrap(RunDateScrap runDateScrap) {
+        this.runDateScrap = runDateScrap;
     }
 
-    public List<RunDateHasScrapType> getRunDateHasScrapTypeList() {
-        return runDateHasScrapTypeList;
+    public RunDateDefect getRunDateDefect() {
+        return runDateDefect;
     }
 
-    public void setRunDateHasScrapTypeList(List<RunDateHasScrapType> runDateHasScrapTypeList) {
-        this.runDateHasScrapTypeList = runDateHasScrapTypeList;
+    public void setRunDateDefect(RunDateDefect runDateDefect) {
+        this.runDateDefect = runDateDefect;
     }
 
-    public List<RunDateHasDefectType> getRunDateHasDefectTypeList() {
-        return runDateHasDefectTypeList;
+    public RunDateManpower getRunDateManpower() {
+        return runDateManpower;
     }
 
-    public void setRunDateHasDefectTypeList(List<RunDateHasDefectType> runDateHasDefectTypeList) {
-        this.runDateHasDefectTypeList = runDateHasDefectTypeList;
+    public void setRunDateManpower(RunDateManpower runDateManpower) {
+        this.runDateManpower = runDateManpower;
     }
 
-    public JobHasControlPoint getJobHasControlPoint() {
-        return jobHasControlPoint;
+    public JobControlPoint getJobControlPoint() {
+        return jobControlPoint;
     }
 
-    public void setJobHasControlPoint(JobHasControlPoint jobHasControlPoint) {
-        this.jobHasControlPoint = jobHasControlPoint;
+    public void setJobControlPoint(JobControlPoint jobControlPoint) {
+        this.jobControlPoint = jobControlPoint;
     }
 
     @Override
@@ -220,5 +207,5 @@ public class RunDate implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.RunDate[ id=" + id + " ]";
     }
-
+    
 }

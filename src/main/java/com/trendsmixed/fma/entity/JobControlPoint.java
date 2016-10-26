@@ -26,10 +26,10 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "control_point")
+@Table(name = "job_control_point")
 @NamedQueries({
-    @NamedQuery(name = "ControlPoint.findAll", query = "SELECT c FROM ControlPoint c")})
-public class ControlPoint implements Serializable {
+    @NamedQuery(name = "JobControlPoint.findAll", query = "SELECT j FROM JobControlPoint j")})
+public class JobControlPoint implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,20 +37,21 @@ public class ControlPoint implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "code")
-    private String code;
-    @Column(name = "name")
-    private String name;
-    @JoinColumn(name = "work_center_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobControlPoint")
+    private Collection<PlanDate> planDateCollection;
+    @JoinColumn(name = "job_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private WorkCenter workCenter;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
-    private Collection<JobControlPoint> jobControlPointCollection;
+    private Job job;
+    @JoinColumn(name = "control_point_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private ControlPoint controlPoint;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobControlPoint")
+    private Collection<RunDate> runDateCollection;
 
-    public ControlPoint() {
+    public JobControlPoint() {
     }
 
-    public ControlPoint(Integer id) {
+    public JobControlPoint(Integer id) {
         this.id = id;
     }
 
@@ -62,36 +63,36 @@ public class ControlPoint implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public Collection<PlanDate> getPlanDateCollection() {
+        return planDateCollection;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setPlanDateCollection(Collection<PlanDate> planDateCollection) {
+        this.planDateCollection = planDateCollection;
     }
 
-    public String getName() {
-        return name;
+    public Job getJob() {
+        return job;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setJob(Job job) {
+        this.job = job;
     }
 
-    public WorkCenter getWorkCenter() {
-        return workCenter;
+    public ControlPoint getControlPoint() {
+        return controlPoint;
     }
 
-    public void setWorkCenter(WorkCenter workCenter) {
-        this.workCenter = workCenter;
+    public void setControlPoint(ControlPoint controlPoint) {
+        this.controlPoint = controlPoint;
     }
 
-    public Collection<JobControlPoint> getJobControlPointCollection() {
-        return jobControlPointCollection;
+    public Collection<RunDate> getRunDateCollection() {
+        return runDateCollection;
     }
 
-    public void setJobControlPointCollection(Collection<JobControlPoint> jobControlPointCollection) {
-        this.jobControlPointCollection = jobControlPointCollection;
+    public void setRunDateCollection(Collection<RunDate> runDateCollection) {
+        this.runDateCollection = runDateCollection;
     }
 
     @Override
@@ -104,10 +105,10 @@ public class ControlPoint implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ControlPoint)) {
+        if (!(object instanceof JobControlPoint)) {
             return false;
         }
-        ControlPoint other = (ControlPoint) object;
+        JobControlPoint other = (JobControlPoint) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -116,7 +117,7 @@ public class ControlPoint implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.ControlPoint[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.JobControlPoint[ id=" + id + " ]";
     }
     
 }

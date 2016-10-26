@@ -5,10 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.ItemTypeView;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,17 +33,14 @@ public class ItemType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(ItemTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(ItemTypeView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(ItemTypeView.Type.class)
     @Column(name = "type")
     private String type;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemType")
-    private List<Item> itemList;
+    private Collection<Item> itemCollection;
 
     public ItemType() {
     }
@@ -78,12 +73,12 @@ public class ItemType implements Serializable {
         this.type = type;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
+    public Collection<Item> getItemCollection() {
+        return itemCollection;
     }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
+    public void setItemCollection(Collection<Item> itemCollection) {
+        this.itemCollection = itemCollection;
     }
 
     @Override

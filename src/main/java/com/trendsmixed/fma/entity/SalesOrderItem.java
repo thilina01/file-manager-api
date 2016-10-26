@@ -6,7 +6,9 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,10 +26,10 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "customer_item")
+@Table(name = "sales_order_item")
 @NamedQueries({
-    @NamedQuery(name = "CustomerItem.findAll", query = "SELECT c FROM CustomerItem c")})
-public class CustomerItem implements Serializable {
+    @NamedQuery(name = "SalesOrderItem.findAll", query = "SELECT s FROM SalesOrderItem s")})
+public class SalesOrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,22 +37,24 @@ public class CustomerItem implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "customer_part_no")
-    private String customerPartNo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "quantity")
+    private Double quantity;
     @Column(name = "price")
     private Double price;
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Customer customer;
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     @OneToOne(optional = false)
     private Item item;
+    @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
+    @OneToOne(optional = false)
+    private SalesOrder salesOrder;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrderItem")
+    private Collection<Delivery> deliveryCollection;
 
-    public CustomerItem() {
+    public SalesOrderItem() {
     }
 
-    public CustomerItem(Integer id) {
+    public SalesOrderItem(Integer id) {
         this.id = id;
     }
 
@@ -61,12 +66,12 @@ public class CustomerItem implements Serializable {
         this.id = id;
     }
 
-    public String getCustomerPartNo() {
-        return customerPartNo;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public void setCustomerPartNo(String customerPartNo) {
-        this.customerPartNo = customerPartNo;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     public Double getPrice() {
@@ -77,20 +82,28 @@ public class CustomerItem implements Serializable {
         this.price = price;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public Item getItem() {
         return item;
     }
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public SalesOrder getSalesOrder() {
+        return salesOrder;
+    }
+
+    public void setSalesOrder(SalesOrder salesOrder) {
+        this.salesOrder = salesOrder;
+    }
+
+    public Collection<Delivery> getDeliveryCollection() {
+        return deliveryCollection;
+    }
+
+    public void setDeliveryCollection(Collection<Delivery> deliveryCollection) {
+        this.deliveryCollection = deliveryCollection;
     }
 
     @Override
@@ -103,10 +116,10 @@ public class CustomerItem implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CustomerItem)) {
+        if (!(object instanceof SalesOrderItem)) {
             return false;
         }
-        CustomerItem other = (CustomerItem) object;
+        SalesOrderItem other = (SalesOrderItem) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -115,7 +128,7 @@ public class CustomerItem implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.CustomerItem[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.SalesOrderItem[ id=" + id + " ]";
     }
     
 }

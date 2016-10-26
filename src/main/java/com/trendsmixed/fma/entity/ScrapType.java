@@ -5,10 +5,7 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.ScrapTypeView;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -35,20 +32,16 @@ public class ScrapType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(ScrapTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(ScrapTypeView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(ScrapTypeView.Type.class)
     @Column(name = "type")
     private String type;
-    @JsonView(ScrapTypeView.TypeInSinhala.class)
-    @Column(name = "type_in_sinhala")
-    private String typeInSinhala;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "scrapType")
-    private List<RunDateHasScrapType> runDateHasScrapTypeList;
+    @Column(name = "type_in_shinhala")
+    private String typeInShinhala;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "scrapType")
+    private RunDateScrap runDateScrap;
 
     public ScrapType() {
     }
@@ -81,20 +74,20 @@ public class ScrapType implements Serializable {
         this.type = type;
     }
 
-    public String getTypeInSinhala() {
-        return typeInSinhala;
+    public String getTypeInShinhala() {
+        return typeInShinhala;
     }
 
-    public void setTypeInSinhala(String typeInSinhala) {
-        this.typeInSinhala = typeInSinhala;
+    public void setTypeInShinhala(String typeInShinhala) {
+        this.typeInShinhala = typeInShinhala;
     }
 
-    public List<RunDateHasScrapType> getRunDateHasScrapTypeList() {
-        return runDateHasScrapTypeList;
+    public RunDateScrap getRunDateScrap() {
+        return runDateScrap;
     }
 
-    public void setRunDateHasScrapTypeList(List<RunDateHasScrapType> runDateHasScrapTypeList) {
-        this.runDateHasScrapTypeList = runDateHasScrapTypeList;
+    public void setRunDateScrap(RunDateScrap runDateScrap) {
+        this.runDateScrap = runDateScrap;
     }
 
     @Override
@@ -121,5 +114,5 @@ public class ScrapType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ScrapType[ id=" + id + " ]";
     }
-
+    
 }

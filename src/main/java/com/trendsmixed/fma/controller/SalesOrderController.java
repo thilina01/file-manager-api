@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.PurchaseOrder;
-import com.trendsmixed.fma.jsonView.PurchaseOrderView;
+import com.trendsmixed.fma.entity.SalesOrder;
+import com.trendsmixed.fma.jsonView.SalesOrderView;
 import com.trendsmixed.fma.service.AppSessionService;
-import com.trendsmixed.fma.service.PurchaseOrderService;
+import com.trendsmixed.fma.service.SalesOrderService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +23,27 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/purchaseOrders")
-public class PurchaseOrderController {
+@RequestMapping("/salesOrders")
+public class SalesOrderController {
 
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private PurchaseOrderService purchaseOrderService;
+    private SalesOrderService salesOrderService;
 
-    @JsonView(PurchaseOrderView.AllAndCustomerAllAndPurchaseOrderTypeAll.class)
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @GetMapping
-    public List<PurchaseOrder> findAll() {
-        return purchaseOrderService.findAll();
+    public List<SalesOrder> findAll() {
+        return salesOrderService.findAll();
     }
 
-    @JsonView(PurchaseOrderView.AllAndCustomerAllAndPurchaseOrderTypeAll.class)
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PostMapping
-    public PurchaseOrder save(@RequestBody PurchaseOrder purchaseOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public SalesOrder save(@RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            purchaseOrder = purchaseOrderService.save(purchaseOrder);
-            return purchaseOrder;
+            salesOrder = salesOrderService.save(salesOrder);
+            return salesOrder;
 
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -54,22 +54,22 @@ public class PurchaseOrderController {
     }
 
     @GetMapping("/{id}")
-    public PurchaseOrder findOne(@PathVariable("id") int id) {
-        return purchaseOrderService.findOne(id);
+    public SalesOrder findOne(@PathVariable("id") int id) {
+        return salesOrderService.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        purchaseOrderService.delete(id);
+        salesOrderService.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public PurchaseOrder updateCustomer(@PathVariable int id, @RequestBody PurchaseOrder purchaseOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public SalesOrder updateCustomer(@PathVariable int id, @RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        purchaseOrder.setId(id);
-        purchaseOrder = purchaseOrderService.save(purchaseOrder);
-        return purchaseOrder;
+        salesOrder.setId(id);
+        salesOrder = salesOrderService.save(salesOrder);
+        return salesOrder;
     }
 }

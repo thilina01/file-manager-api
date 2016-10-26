@@ -1,6 +1,6 @@
 package com.trendsmixed.fma.jsonView;
 
-public class PurchaseOrderView {
+public class SalesOrderView {
 
     public static interface Id {
     }
@@ -26,7 +26,7 @@ public class PurchaseOrderView {
     public static interface OrderReceivedDate {
     }
 
-    public static interface PurchaseOrderType {
+    public static interface SaleType {
     }
 
     public static interface Customer {
@@ -38,7 +38,7 @@ public class PurchaseOrderView {
     public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
     }
 
-    public static interface AllAndCustomerAllAndPurchaseOrderTypeAll extends All, Customer, CustomerView.All, PurchaseOrderType, PurchaseOrderTypeView.AlL {
+    public static interface AllAndCustomerAllAndSalesOrderTypeAll extends All, Customer, CustomerView.All, SaleType, SaleTypeView.All {
     }
 
 }

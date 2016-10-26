@@ -6,17 +6,16 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,10 +23,10 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "country")
+@Table(name = "run_date_manpower")
 @NamedQueries({
-    @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c")})
-public class Country implements Serializable {
+    @NamedQuery(name = "RunDateManpower.findAll", query = "SELECT r FROM RunDateManpower r")})
+public class RunDateManpower implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -35,17 +34,19 @@ public class Country implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "code")
-    private String code;
-    @Column(name = "name")
-    private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
-    private Collection<Customer> customerCollection;
+    @Column(name = "quantity")
+    private Integer quantity;
+    @JoinColumn(name = "manpower_type_id", referencedColumnName = "id")
+    @OneToOne(optional = false)
+    private ManpowerType manpowerType;
+    @JoinColumn(name = "run_date_id", referencedColumnName = "id")
+    @OneToOne(optional = false)
+    private RunDate runDate;
 
-    public Country() {
+    public RunDateManpower() {
     }
 
-    public Country(Integer id) {
+    public RunDateManpower(Integer id) {
         this.id = id;
     }
 
@@ -57,28 +58,28 @@ public class Country implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public String getName() {
-        return name;
+    public ManpowerType getManpowerType() {
+        return manpowerType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setManpowerType(ManpowerType manpowerType) {
+        this.manpowerType = manpowerType;
     }
 
-    public Collection<Customer> getCustomerCollection() {
-        return customerCollection;
+    public RunDate getRunDate() {
+        return runDate;
     }
 
-    public void setCustomerCollection(Collection<Customer> customerCollection) {
-        this.customerCollection = customerCollection;
+    public void setRunDate(RunDate runDate) {
+        this.runDate = runDate;
     }
 
     @Override
@@ -91,10 +92,10 @@ public class Country implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Country)) {
+        if (!(object instanceof RunDateManpower)) {
             return false;
         }
-        Country other = (Country) object;
+        RunDateManpower other = (RunDateManpower) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,7 +104,7 @@ public class Country implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.Country[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.RunDateManpower[ id=" + id + " ]";
     }
     
 }

@@ -6,13 +6,16 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,41 +23,32 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "item_has_machine")
+@Table(name = "item_machine")
 @NamedQueries({
-    @NamedQuery(name = "ItemHasMachine.findAll", query = "SELECT i FROM ItemHasMachine i")})
-public class ItemHasMachine implements Serializable {
+    @NamedQuery(name = "ItemMachine.findAll", query = "SELECT i FROM ItemMachine i")})
+public class ItemMachine implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ItemHasMachinePK itemHasMachinePK;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "consumption_rate")
     private Double consumptionRate;
-    @JoinColumn(name = "machine_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @JoinColumn(name = "machine_id", referencedColumnName = "id")
+    @OneToOne(optional = false)
     private Machine machine;
-    @JoinColumn(name = "item_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "item_id", referencedColumnName = "id")
+    @OneToOne(optional = false)
     private Item item;
 
-    public ItemHasMachine() {
+    public ItemMachine() {
     }
 
-    public ItemHasMachine(ItemHasMachinePK itemHasMachinePK) {
-        this.itemHasMachinePK = itemHasMachinePK;
-    }
-
-    public ItemHasMachine(int itemId, int machineId) {
-        this.itemHasMachinePK = new ItemHasMachinePK(itemId, machineId);
-    }
-
-    public ItemHasMachinePK getItemHasMachinePK() {
-        return itemHasMachinePK;
-    }
-
-    public void setItemHasMachinePK(ItemHasMachinePK itemHasMachinePK) {
-        this.itemHasMachinePK = itemHasMachinePK;
+    public ItemMachine(Integer id) {
+        this.id = id;
     }
 
     public Double getConsumptionRate() {
@@ -63,6 +57,14 @@ public class ItemHasMachine implements Serializable {
 
     public void setConsumptionRate(Double consumptionRate) {
         this.consumptionRate = consumptionRate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Machine getMachine() {
@@ -84,18 +86,18 @@ public class ItemHasMachine implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (itemHasMachinePK != null ? itemHasMachinePK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ItemHasMachine)) {
+        if (!(object instanceof ItemMachine)) {
             return false;
         }
-        ItemHasMachine other = (ItemHasMachine) object;
-        if ((this.itemHasMachinePK == null && other.itemHasMachinePK != null) || (this.itemHasMachinePK != null && !this.itemHasMachinePK.equals(other.itemHasMachinePK))) {
+        ItemMachine other = (ItemMachine) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -103,7 +105,7 @@ public class ItemHasMachine implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.ItemHasMachine[ itemHasMachinePK=" + itemHasMachinePK + " ]";
+        return "com.trendsmixed.fma.entity.ItemMachine[ id=" + id + " ]";
     }
     
 }

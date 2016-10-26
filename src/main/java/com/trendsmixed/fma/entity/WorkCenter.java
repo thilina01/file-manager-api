@@ -5,10 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.WorkCenterView;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,23 +35,19 @@ public class WorkCenter implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(WorkCenterView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(WorkCenterView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(WorkCenterView.Name.class)
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "workCenter")
-    private List<ControlPoint> controlPointList;
-    @JsonView(WorkCenterView.CostCenter.class)
+    private Collection<ControlPoint> controlPointCollection;
     @JoinColumn(name = "cost_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CostCenter costCenter;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "workCenter")
-    private List<Machine> machineList;
+    private Collection<Machine> machineCollection;
 
     public WorkCenter() {
     }
@@ -86,12 +80,12 @@ public class WorkCenter implements Serializable {
         this.name = name;
     }
 
-    public List<ControlPoint> getControlPointList() {
-        return controlPointList;
+    public Collection<ControlPoint> getControlPointCollection() {
+        return controlPointCollection;
     }
 
-    public void setControlPointList(List<ControlPoint> controlPointList) {
-        this.controlPointList = controlPointList;
+    public void setControlPointCollection(Collection<ControlPoint> controlPointCollection) {
+        this.controlPointCollection = controlPointCollection;
     }
 
     public CostCenter getCostCenter() {
@@ -102,12 +96,12 @@ public class WorkCenter implements Serializable {
         this.costCenter = costCenter;
     }
 
-    public List<Machine> getMachineList() {
-        return machineList;
+    public Collection<Machine> getMachineCollection() {
+        return machineCollection;
     }
 
-    public void setMachineList(List<Machine> machineList) {
-        this.machineList = machineList;
+    public void setMachineCollection(Collection<Machine> machineCollection) {
+        this.machineCollection = machineCollection;
     }
 
     @Override
@@ -134,5 +128,5 @@ public class WorkCenter implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.WorkCenter[ id=" + id + " ]";
     }
-
+    
 }

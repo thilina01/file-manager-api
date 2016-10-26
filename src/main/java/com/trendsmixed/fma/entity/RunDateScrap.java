@@ -6,17 +6,16 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,29 +23,39 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "country")
+@Table(name = "run_date_scrap")
 @NamedQueries({
-    @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c")})
-public class Country implements Serializable {
+    @NamedQuery(name = "RunDateScrap.findAll", query = "SELECT r FROM RunDateScrap r")})
+public class RunDateScrap implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Column(name = "quantity")
+    private String quantity;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "code")
-    private String code;
-    @Column(name = "name")
-    private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
-    private Collection<Customer> customerCollection;
+    @JoinColumn(name = "run_date_id", referencedColumnName = "id")
+    @OneToOne(optional = false)
+    private RunDate runDate;
+    @JoinColumn(name = "scrap_type_id", referencedColumnName = "id")
+    @OneToOne(optional = false)
+    private ScrapType scrapType;
 
-    public Country() {
+    public RunDateScrap() {
     }
 
-    public Country(Integer id) {
+    public RunDateScrap(Integer id) {
         this.id = id;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public Integer getId() {
@@ -57,28 +66,20 @@ public class Country implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public RunDate getRunDate() {
+        return runDate;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setRunDate(RunDate runDate) {
+        this.runDate = runDate;
     }
 
-    public String getName() {
-        return name;
+    public ScrapType getScrapType() {
+        return scrapType;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Collection<Customer> getCustomerCollection() {
-        return customerCollection;
-    }
-
-    public void setCustomerCollection(Collection<Customer> customerCollection) {
-        this.customerCollection = customerCollection;
+    public void setScrapType(ScrapType scrapType) {
+        this.scrapType = scrapType;
     }
 
     @Override
@@ -91,10 +92,10 @@ public class Country implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Country)) {
+        if (!(object instanceof RunDateScrap)) {
             return false;
         }
-        Country other = (Country) object;
+        RunDateScrap other = (RunDateScrap) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,7 +104,7 @@ public class Country implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.Country[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.RunDateScrap[ id=" + id + " ]";
     }
     
 }

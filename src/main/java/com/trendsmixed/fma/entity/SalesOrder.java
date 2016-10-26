@@ -5,11 +5,9 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.PurchaseOrderView;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,59 +30,51 @@ import javax.persistence.TemporalType;
  * @author Thilina
  */
 @Entity
-@Table(name = "purchase_order")
+@Table(name = "sales_order")
 @NamedQueries({
-    @NamedQuery(name = "PurchaseOrder.findAll", query = "SELECT p FROM PurchaseOrder p")})
-public class PurchaseOrder implements Serializable {
+    @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s")})
+public class SalesOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(PurchaseOrderView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(PurchaseOrderView.ActualDispatchedDate.class)
     @Column(name = "actual_dispatched_date")
     @Temporal(TemporalType.DATE)
     private Date actualDispatchedDate;
-    @JsonView(PurchaseOrderView.Comments.class)
     @Column(name = "comments")
     private String comments;
-    @JsonView(PurchaseOrderView.CustomerRequestedDate.class)
     @Column(name = "customer_requested_date")
     @Temporal(TemporalType.DATE)
     private Date customerRequestedDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @JsonView(PurchaseOrderView.OrderQty.class)
     @Column(name = "order_qty")
     private Double orderQty;
-    @JsonView(PurchaseOrderView.OrderReceivedDate.class)
-    @Column(name = "order_received_date")
+    @Column(name = "order_recived_date")
     @Temporal(TemporalType.DATE)
-    private Date orderReceivedDate;
-    @JsonView(PurchaseOrderView.PoNumber.class)
+    private Date orderRecivedDate;
     @Column(name = "po_number")
     private String poNumber;
-    @JsonView(PurchaseOrderView.TrwConfirmedDate.class)
     @Column(name = "trw_confirmed_date")
     @Temporal(TemporalType.DATE)
     private Date trwConfirmedDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
-    private List<PurchaseOrderHasItem> purchaseOrderHasItemList;
-    @JsonView(PurchaseOrderView.Customer.class)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "salesOrder")
+    private SalesOrderItem salesOrderItem;
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
-    @JsonView(PurchaseOrderView.PurchaseOrderType.class)
-    @JoinColumn(name = "purchase_order_type_id", referencedColumnName = "id")
+    @JoinColumn(name = "order_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PurchaseOrderType purchaseOrderType;
+    private OrderType orderType;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrder")
+    private Collection<Job> jobCollection;
 
-    public PurchaseOrder() {
+    public SalesOrder() {
     }
 
-    public PurchaseOrder(Integer id) {
+    public SalesOrder(Integer id) {
         this.id = id;
     }
 
@@ -127,20 +118,12 @@ public class PurchaseOrder implements Serializable {
         this.orderQty = orderQty;
     }
 
-    public Date getOrderReceivedDate() {
-        return orderReceivedDate;
+    public Date getOrderRecivedDate() {
+        return orderRecivedDate;
     }
 
-    public void setOrderReceivedDate(Date orderReceivedDate) {
-        this.orderReceivedDate = orderReceivedDate;
-    }
-
-    public PurchaseOrderType getPurchaseOrderType() {
-        return purchaseOrderType;
-    }
-
-    public void setPurchaseOrderType(PurchaseOrderType purchaseOrderType) {
-        this.purchaseOrderType = purchaseOrderType;
+    public void setOrderRecivedDate(Date orderRecivedDate) {
+        this.orderRecivedDate = orderRecivedDate;
     }
 
     public String getPoNumber() {
@@ -159,12 +142,12 @@ public class PurchaseOrder implements Serializable {
         this.trwConfirmedDate = trwConfirmedDate;
     }
 
-    public List<PurchaseOrderHasItem> getPurchaseOrderHasItemList() {
-        return purchaseOrderHasItemList;
+    public SalesOrderItem getSalesOrderItem() {
+        return salesOrderItem;
     }
 
-    public void setPurchaseOrderHasItemList(List<PurchaseOrderHasItem> purchaseOrderHasItemList) {
-        this.purchaseOrderHasItemList = purchaseOrderHasItemList;
+    public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
+        this.salesOrderItem = salesOrderItem;
     }
 
     public Customer getCustomer() {
@@ -173,6 +156,22 @@ public class PurchaseOrder implements Serializable {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public OrderType getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(OrderType orderType) {
+        this.orderType = orderType;
+    }
+
+    public Collection<Job> getJobCollection() {
+        return jobCollection;
+    }
+
+    public void setJobCollection(Collection<Job> jobCollection) {
+        this.jobCollection = jobCollection;
     }
 
     @Override
@@ -185,10 +184,10 @@ public class PurchaseOrder implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PurchaseOrder)) {
+        if (!(object instanceof SalesOrder)) {
             return false;
         }
-        PurchaseOrder other = (PurchaseOrder) object;
+        SalesOrder other = (SalesOrder) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -197,7 +196,7 @@ public class PurchaseOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.PurchaseOrder[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.SalesOrder[ id=" + id + " ]";
     }
-
+    
 }

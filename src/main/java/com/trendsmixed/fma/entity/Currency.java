@@ -5,10 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.CurrencyView;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,17 +33,14 @@ public class Currency implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(CurrencyView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(CurrencyView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(CurrencyView.Name.class)
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "currency")
-    private List<Customer> customerList;
+    private Collection<Customer> customerCollection;
 
     public Currency() {
     }
@@ -78,12 +73,12 @@ public class Currency implements Serializable {
         this.name = name;
     }
 
-    public List<Customer> getCustomerList() {
-        return customerList;
+    public Collection<Customer> getCustomerCollection() {
+        return customerCollection;
     }
 
-    public void setCustomerList(List<Customer> customerList) {
-        this.customerList = customerList;
+    public void setCustomerCollection(Collection<Customer> customerCollection) {
+        this.customerCollection = customerCollection;
     }
 
     @Override

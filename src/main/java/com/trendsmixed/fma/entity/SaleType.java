@@ -5,10 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.SaleTypeView;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,24 +26,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sale_type")
 @NamedQueries({
-    @NamedQuery(name = "SaleType.findAll", query = "SELECT c FROM SaleType c")})
+    @NamedQuery(name = "SaleType.findAll", query = "SELECT s FROM SaleType s")})
 public class SaleType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(SaleTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(SaleTypeView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(SaleTypeView.Name.class)
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "saleType")
-    private List<Customer> customerList;
+    private Collection<Customer> customerCollection;
 
     public SaleType() {
     }
@@ -78,12 +73,12 @@ public class SaleType implements Serializable {
         this.name = name;
     }
 
-    public List<Customer> getCustomerList() {
-        return customerList;
+    public Collection<Customer> getCustomerCollection() {
+        return customerCollection;
     }
 
-    public void setCustomerList(List<Customer> customerList) {
-        this.customerList = customerList;
+    public void setCustomerCollection(Collection<Customer> customerCollection) {
+        this.customerCollection = customerCollection;
     }
 
     @Override
@@ -110,5 +105,5 @@ public class SaleType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.SaleType[ id=" + id + " ]";
     }
-
+    
 }

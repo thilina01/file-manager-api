@@ -5,10 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.ItemView;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,12 +15,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -39,48 +36,37 @@ public class Item implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(ItemView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(ItemView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(ItemView.Description.class)
     @Column(name = "description")
     private String description;
-    @JsonView(ItemView.DrawingVersion.class)
     @Column(name = "drawing_version")
     private String drawingVersion;
-    @Basic(optional = false)
-    @JsonView(ItemView.ProductionToolAvailability.class)
     @Column(name = "production_tool_availability")
     private String productionToolAvailability;
-    @JsonView(ItemView.Size.class)
     @Column(name = "size")
     private String size;
-    @JsonView(ItemView.Volume.class)
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "volume")
-    private double volume;
-    @JsonView(ItemView.Weight.class)
+    private Double volume;
     @Column(name = "weight")
-    private double weight;
-    @JoinTable(name = "item_has_customer_item", joinColumns = {
-        @JoinColumn(name = "item_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "customer_item_id", referencedColumnName = "id")})
-    @ManyToMany
-    private List<CustomerItem> customerItemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
-    private List<PurchaseOrderHasItem> purchaseOrderHasItemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
-    private List<ItemHasMachine> itemHasMachineList;
-    @JsonView(ItemView.Paint.class)
+    private Double weight;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
+    private ItemMachine itemMachine;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
+    private SalesOrderItem salesOrderItem;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
+    private CustomerItem customerItem;
     @JoinColumn(name = "paint_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Paint paint;
-    @JsonView(ItemView.ItemType.class)
     @JoinColumn(name = "item_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ItemType itemType;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+    private Collection<Job> jobCollection;
 
     public Item() {
     }
@@ -137,44 +123,44 @@ public class Item implements Serializable {
         this.size = size;
     }
 
-    public List<CustomerItem> getCustomerItemList() {
-        return customerItemList;
-    }
-
-    public void setCustomerItemList(List<CustomerItem> customerItemList) {
-        this.customerItemList = customerItemList;
-    }
-
-    public List<PurchaseOrderHasItem> getPurchaseOrderHasItemList() {
-        return purchaseOrderHasItemList;
-    }
-
-    public void setPurchaseOrderHasItemList(List<PurchaseOrderHasItem> purchaseOrderHasItemList) {
-        this.purchaseOrderHasItemList = purchaseOrderHasItemList;
-    }
-
-    public List<ItemHasMachine> getItemHasMachineList() {
-        return itemHasMachineList;
-    }
-
-    public void setItemHasMachineList(List<ItemHasMachine> itemHasMachineList) {
-        this.itemHasMachineList = itemHasMachineList;
-    }
-
-    public double getVolume() {
+    public Double getVolume() {
         return volume;
     }
 
-    public void setVolume(double volume) {
+    public void setVolume(Double volume) {
         this.volume = volume;
     }
 
-    public double getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
+    }
+
+    public ItemMachine getItemMachine() {
+        return itemMachine;
+    }
+
+    public void setItemMachine(ItemMachine itemMachine) {
+        this.itemMachine = itemMachine;
+    }
+
+    public SalesOrderItem getSalesOrderItem() {
+        return salesOrderItem;
+    }
+
+    public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
+        this.salesOrderItem = salesOrderItem;
+    }
+
+    public CustomerItem getCustomerItem() {
+        return customerItem;
+    }
+
+    public void setCustomerItem(CustomerItem customerItem) {
+        this.customerItem = customerItem;
     }
 
     public Paint getPaint() {
@@ -191,6 +177,14 @@ public class Item implements Serializable {
 
     public void setItemType(ItemType itemType) {
         this.itemType = itemType;
+    }
+
+    public Collection<Job> getJobCollection() {
+        return jobCollection;
+    }
+
+    public void setJobCollection(Collection<Job> jobCollection) {
+        this.jobCollection = jobCollection;
     }
 
     @Override
@@ -217,5 +211,5 @@ public class Item implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Item[ id=" + id + " ]";
     }
-
+    
 }

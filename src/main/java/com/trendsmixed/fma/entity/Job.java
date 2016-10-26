@@ -5,11 +5,9 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.JobView;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -41,38 +38,32 @@ public class Job implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(JobView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(JobView.ActualShippedDate.class)
-    @Column(name = "actual_shipped_date")
+    @Column(name = "actual_sipped_date")
     @Temporal(TemporalType.DATE)
-    private Date actualShippedDate;
-    @JsonView(JobView.Comment.class)
+    private Date actualSippedDate;
     @Column(name = "comment")
     private String comment;
-    @JsonView(JobView.ConfirmShippedDate.class)
     @Column(name = "confirm_shipped_date")
     @Temporal(TemporalType.DATE)
     private Date confirmShippedDate;
-    @JsonView(JobView.JobDate.class)
     @Column(name = "job_date")
     @Temporal(TemporalType.DATE)
     private Date jobDate;
-    @JsonView(JobView.JobNo.class)
     @Column(name = "job_no")
     private String jobNo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @JsonView(JobView.JobQuantity.class)
     @Column(name = "job_quantity")
     private Double jobQuantity;
-    @JoinColumns({
-        @JoinColumn(name = "purchase_order_has_item_item_id", referencedColumnName = "item_id")
-        , @JoinColumn(name = "purchase_order_has_item_purchase_order_id", referencedColumnName = "purchase_order_id")})
-    @ManyToOne(optional = false)
-    private PurchaseOrderHasItem purchaseOrderHasItem;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
-    private List<JobHasControlPoint> jobHasControlPointList;
+    private Collection<JobControlPoint> jobControlPointCollection;
+    @JoinColumn(name = "item_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Item item;
+    @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private SalesOrder salesOrder;
 
     public Job() {
     }
@@ -89,12 +80,12 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public Date getActualShippedDate() {
-        return actualShippedDate;
+    public Date getActualSippedDate() {
+        return actualSippedDate;
     }
 
-    public void setActualShippedDate(Date actualShippedDate) {
-        this.actualShippedDate = actualShippedDate;
+    public void setActualSippedDate(Date actualSippedDate) {
+        this.actualSippedDate = actualSippedDate;
     }
 
     public String getComment() {
@@ -137,20 +128,28 @@ public class Job implements Serializable {
         this.jobQuantity = jobQuantity;
     }
 
-    public PurchaseOrderHasItem getPurchaseOrderHasItem() {
-        return purchaseOrderHasItem;
+    public Collection<JobControlPoint> getJobControlPointCollection() {
+        return jobControlPointCollection;
     }
 
-    public void setPurchaseOrderHasItem(PurchaseOrderHasItem purchaseOrderHasItem) {
-        this.purchaseOrderHasItem = purchaseOrderHasItem;
+    public void setJobControlPointCollection(Collection<JobControlPoint> jobControlPointCollection) {
+        this.jobControlPointCollection = jobControlPointCollection;
     }
 
-    public List<JobHasControlPoint> getJobHasControlPointList() {
-        return jobHasControlPointList;
+    public Item getItem() {
+        return item;
     }
 
-    public void setJobHasControlPointList(List<JobHasControlPoint> jobHasControlPointList) {
-        this.jobHasControlPointList = jobHasControlPointList;
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public SalesOrder getSalesOrder() {
+        return salesOrder;
+    }
+
+    public void setSalesOrder(SalesOrder salesOrder) {
+        this.salesOrder = salesOrder;
     }
 
     @Override

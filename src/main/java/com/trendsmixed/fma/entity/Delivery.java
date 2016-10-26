@@ -5,8 +5,6 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.DeliveryView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -16,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,25 +35,19 @@ public class Delivery implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(DeliveryView.Id.class)
     @Column(name = "id")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @JsonView(DeliveryView.DeliveredQuantity.class)
-    @Column(name = "delivered_quantity")
-    private Double deliveredQuantity;
-    @JsonView(DeliveryView.DeliveryDate.class)
+    @Column(name = "deliverd_quantity")
+    private Double deliverdQuantity;
     @Column(name = "delivery_date")
     @Temporal(TemporalType.DATE)
     private Date deliveryDate;
-    @JsonView(DeliveryView.Location.class)
     @Column(name = "location")
-    private String location;   
-    @JoinColumns({
-        @JoinColumn(name = "purchase_order_has_item_item_id", referencedColumnName = "item_id"),
-        @JoinColumn(name = "purchase_order_has_item_purchase_order_id", referencedColumnName = "purchase_order_id")})
+    private String location;
+    @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PurchaseOrderHasItem purchaseOrderHasItem;
+    private SalesOrderItem salesOrderItem;
 
     public Delivery() {
     }
@@ -73,12 +64,12 @@ public class Delivery implements Serializable {
         this.id = id;
     }
 
-    public Double getDeliveredQuantity() {
-        return deliveredQuantity;
+    public Double getDeliverdQuantity() {
+        return deliverdQuantity;
     }
 
-    public void setDeliveredQuantity(Double deliveredQuantity) {
-        this.deliveredQuantity = deliveredQuantity;
+    public void setDeliverdQuantity(Double deliverdQuantity) {
+        this.deliverdQuantity = deliverdQuantity;
     }
 
     public Date getDeliveryDate() {
@@ -97,12 +88,12 @@ public class Delivery implements Serializable {
         this.location = location;
     }
 
-    public PurchaseOrderHasItem getPurchaseOrderHasItem() {
-        return purchaseOrderHasItem;
+    public SalesOrderItem getSalesOrderItem() {
+        return salesOrderItem;
     }
 
-    public void setPurchaseOrderHasItem(PurchaseOrderHasItem purchaseOrderHasItem) {
-        this.purchaseOrderHasItem = purchaseOrderHasItem;
+    public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
+        this.salesOrderItem = salesOrderItem;
     }
 
     @Override
@@ -129,5 +120,5 @@ public class Delivery implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Delivery[ id=" + id + " ]";
     }
-
+    
 }
