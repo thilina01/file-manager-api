@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.RunDateDefectView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -32,13 +34,17 @@ public class RunDateDefect implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(RunDateDefectView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(RunDateDefectView.Quantity.class)
     @Column(name = "quantity")
     private Integer quantity;
+    @JsonView(RunDateDefectView.DefectType.class)
     @JoinColumn(name = "defect_type_id", referencedColumnName = "id")
     @OneToOne(optional = false)
     private DefectType defectType;
+    @JsonView(RunDateDefectView.RunDate.class)
     @JoinColumn(name = "run_date_id", referencedColumnName = "id")
     @OneToOne(optional = false)
     private RunDate runDate;

@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.PlanDateManpowerView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -32,13 +34,17 @@ public class PlanDateManpower implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(PlanDateManpowerView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(PlanDateManpowerView.Quantity.class)
     @Column(name = "quantity")
     private Integer quantity;
+    @JsonView(PlanDateManpowerView.ManpowerType.class)
     @JoinColumn(name = "manpower_type_id", referencedColumnName = "id")
     @OneToOne(optional = false)
     private ManpowerType manpowerType;
+    @JsonView(PlanDateManpowerView.PlanDate.class)
     @JoinColumn(name = "plan_date_id", referencedColumnName = "id")
     @OneToOne(optional = false)
     private PlanDate planDate;

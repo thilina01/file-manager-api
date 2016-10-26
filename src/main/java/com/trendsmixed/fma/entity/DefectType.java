@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.DefectTypeView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -32,14 +34,19 @@ public class DefectType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(DefectTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(DefectTypeView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(DefectTypeView.Type.class)
     @Column(name = "type")
     private String type;
-    @Column(name = "type_in_shinhala")
-    private String typeInShinhala;
+    @JsonView(DefectTypeView.TypeInSinhala.class)
+    @Column(name = "type_in_sinhala")
+    private String typeInSinhala;
+    @JsonView(DefectTypeView.RunDateDefect.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "defectType")
     private RunDateDefect runDateDefect;
 
@@ -74,12 +81,12 @@ public class DefectType implements Serializable {
         this.type = type;
     }
 
-    public String getTypeInShinhala() {
-        return typeInShinhala;
+    public String getTypeInSinhala() {
+        return typeInSinhala;
     }
 
-    public void setTypeInShinhala(String typeInShinhala) {
-        this.typeInShinhala = typeInShinhala;
+    public void setTypeInSinhala(String typeInSinhala) {
+        this.typeInSinhala = typeInSinhala;
     }
 
     public RunDateDefect getRunDateDefect() {
@@ -114,5 +121,9 @@ public class DefectType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.DefectType[ id=" + id + " ]";
     }
+
+ 
+
+
     
 }

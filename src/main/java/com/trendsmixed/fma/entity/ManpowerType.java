@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ManpowerTypeView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -32,12 +34,16 @@ public class ManpowerType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ManpowerTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ManpowerTypeView.Type.class)
     @Column(name = "type")
     private String type;
+    @JsonView(ManpowerTypeView.PlanDateManpower.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "manpowerType")
     private PlanDateManpower planDateManpower;
+    @JsonView(ManpowerTypeView.RunDateManpower.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "manpowerType")
     private RunDateManpower runDateManpower;
 

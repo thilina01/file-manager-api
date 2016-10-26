@@ -8,12 +8,17 @@ public class DeliveryView {
     public static interface DeliveryDate {
     }
 
-    public static interface DeliveredQuantity {
+    public static interface DeliverdQuantity {
     }
 
     public static interface Location {
     }
-    public static interface All extends Id,DeliveryDate,DeliveredQuantity,Location{
-        
+
+    public static interface SalesOrderItem {
     }
+
+    public static interface All extends Id, DeliveryDate, DeliverdQuantity, Location {
+
+    }
+
 }

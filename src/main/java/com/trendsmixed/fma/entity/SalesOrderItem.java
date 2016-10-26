@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.SalesOrderItemView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -35,16 +37,21 @@ public class SalesOrderItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(SalesOrderItemView.Id.class)
     @Column(name = "id")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @JsonView(SalesOrderItemView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
+    @JsonView(SalesOrderItemView.Price.class)
     @Column(name = "price")
     private Double price;
+    @JsonView(SalesOrderItemView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     @OneToOne(optional = false)
     private Item item;
+    @JsonView(SalesOrderItemView.SalesOrder.class)
     @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
     @OneToOne(optional = false)
     private SalesOrder salesOrder;

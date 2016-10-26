@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ItemView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -36,32 +38,45 @@ public class Item implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ItemView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ItemView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(ItemView.Description.class)
     @Column(name = "description")
     private String description;
+    @JsonView(ItemView.DrawingVersion.class)
     @Column(name = "drawing_version")
     private String drawingVersion;
+    @JsonView(ItemView.ProductionToolAvailability.class)
     @Column(name = "production_tool_availability")
     private String productionToolAvailability;
+    @JsonView(ItemView.Size.class)
     @Column(name = "size")
     private String size;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @JsonView(ItemView.Volume.class)
     @Column(name = "volume")
     private Double volume;
+    @JsonView(ItemView.Weight.class)
     @Column(name = "weight")
     private Double weight;
+    @JsonView(ItemView.ItemMachine.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
     private ItemMachine itemMachine;
+    @JsonView(ItemView.SalesOrderItem.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
     private SalesOrderItem salesOrderItem;
+    @JsonView(ItemView.CustomerItem.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
     private CustomerItem customerItem;
+    @JsonView(ItemView.Paint.class)
     @JoinColumn(name = "paint_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Paint paint;
+    @JsonView(ItemView.ItemType.class)
     @JoinColumn(name = "item_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ItemType itemType;
@@ -211,5 +226,5 @@ public class Item implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Item[ id=" + id + " ]";
     }
-    
+
 }

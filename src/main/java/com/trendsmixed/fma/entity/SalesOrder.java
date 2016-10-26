@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.SalesOrderView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -39,29 +41,39 @@ public class SalesOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(SalesOrderView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(SalesOrderView.ActualDispatchedDate.class)
     @Column(name = "actual_dispatched_date")
     @Temporal(TemporalType.DATE)
     private Date actualDispatchedDate;
+    @JsonView(SalesOrderView.Comments.class)
     @Column(name = "comments")
     private String comments;
+    @JsonView(SalesOrderView.CustomerRequestedDate.class)
     @Column(name = "customer_requested_date")
     @Temporal(TemporalType.DATE)
     private Date customerRequestedDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @JsonView(SalesOrderView.OrderQty.class)
     @Column(name = "order_qty")
     private Double orderQty;
+    @JsonView(SalesOrderView.OrderReceivedDate.class)
     @Column(name = "order_recived_date")
     @Temporal(TemporalType.DATE)
     private Date orderRecivedDate;
+    @JsonView(SalesOrderView.PoNumber.class)
     @Column(name = "po_number")
     private String poNumber;
+    @JsonView(SalesOrderView.TrwConfirmedDate.class)
     @Column(name = "trw_confirmed_date")
     @Temporal(TemporalType.DATE)
     private Date trwConfirmedDate;
+    @JsonView(SalesOrderView.SalesOrderItem.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "salesOrder")
     private SalesOrderItem salesOrderItem;
+    @JsonView(SalesOrderView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;

@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.PaintView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -33,10 +35,13 @@ public class Paint implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(PaintView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(PaintView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(PaintView.Description.class)
     @Column(name = "description")
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paint")

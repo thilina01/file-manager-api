@@ -14,13 +14,18 @@ public class DownTimeView {
     public static interface Reason {
     }
 
+    public static interface Date {
+    }
+
     public static interface Machine {
     }
-    
-    public static interface All extends Id,DownTimeDate,Duration,Reason{
-        
+
+    public static interface All extends Id, DownTimeDate, Duration, Reason,Date  {
+
     }
-    public static interface AllAndMachineAll extends All,Machine,MachineView.All {
-        
+
+    public static interface AllAndMachineAll extends All, Machine, MachineView.All {
+
     }
+
 }

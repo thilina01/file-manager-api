@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.JobView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -38,29 +40,38 @@ public class Job implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(JobView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(JobView.ActualShippedDate.class)
     @Column(name = "actual_sipped_date")
     @Temporal(TemporalType.DATE)
     private Date actualSippedDate;
+    @JsonView(JobView.Comment.class)
     @Column(name = "comment")
     private String comment;
+    @JsonView(JobView.ConfirmShippedDate.class)
     @Column(name = "confirm_shipped_date")
     @Temporal(TemporalType.DATE)
     private Date confirmShippedDate;
+    @JsonView(JobView.JobDate.class)
     @Column(name = "job_date")
     @Temporal(TemporalType.DATE)
     private Date jobDate;
+    @JsonView(JobView.JobNo.class)
     @Column(name = "job_no")
     private String jobNo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @JsonView(JobView.JobQuantity.class)
     @Column(name = "job_quantity")
     private Double jobQuantity;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
     private List<JobControlPoint> jobControlPointList;
+    @JsonView(JobView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Item item;
+    @JsonView(JobView.SalesOrder.class)
     @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SalesOrder salesOrder;
@@ -176,5 +187,5 @@ public class Job implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Job[ id=" + id + " ]";
     }
-    
+
 }

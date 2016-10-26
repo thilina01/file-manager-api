@@ -13,7 +13,10 @@ public class ScrapTypeView {
 
     public static interface TypeInSinhala {
     }
-    public static interface All extends Id,Code,Type,TypeInSinhala{
-        
+
+    public static interface All extends Id, Code, Type, TypeInSinhala {
+    }
+
+    public static interface RunDateScrap {
     }
 }

@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.LossReasonView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -32,14 +34,18 @@ public class LossReason implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(LossReasonView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(LossReasonView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(LossReasonView.Type.class)
     @Column(name = "type")
     private String type;
-    @Column(name = "type_in_shinhala")
-    private String typeInShinhala;
+    @JsonView(LossReasonView.TypeInSinhala.class)
+    @Column(name = "type_in_sinhala")
+    private String typeInSinhala;
     @ManyToMany(mappedBy = "lossReasonList")
     private List<RunDate> runDateList;
 
@@ -74,12 +80,12 @@ public class LossReason implements Serializable {
         this.type = type;
     }
 
-    public String getTypeInShinhala() {
-        return typeInShinhala;
+    public String getTypeInSinhala() {
+        return typeInSinhala;
     }
 
-    public void setTypeInShinhala(String typeInShinhala) {
-        this.typeInShinhala = typeInShinhala;
+    public void setTypeInSinhala(String typeInSinhala) {
+        this.typeInSinhala = typeInSinhala;
     }
 
     public List<RunDate> getRunDateList() {
@@ -114,5 +120,5 @@ public class LossReason implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.LossReason[ id=" + id + " ]";
     }
-    
+
 }

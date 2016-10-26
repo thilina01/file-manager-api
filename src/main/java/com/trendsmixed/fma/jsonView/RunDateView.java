@@ -34,8 +34,25 @@ public class RunDateView {
 
     public static interface Shift {
     }
-    public static interface All extends Id,Duration,Quantity,Repaired,Rework,RunDate,Scrap,Shift{
-        
+
+    public static interface All extends Id, Duration, Quantity, Repaired, Rework, RunDate, Scrap, Shift {
+
+    }
+
+    public static interface RunDateScrap {
+
+    }
+
+    public static interface RunDateDefect {
+
+    }
+
+    public static interface RunDateManpower {
+
+    }
+
+    public static interface JobControlPoint {
+
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.RunDateView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -40,21 +42,29 @@ public class RunDate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(RunDateView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(RunDateView.Duration.class)
     @Column(name = "duration")
     private Integer duration;
+    @JsonView(RunDateView.Quantity.class)
     @Column(name = "quantity")
     private Integer quantity;
+    @JsonView(RunDateView.Repaired.class)
     @Column(name = "repaierd")
     private Integer repaierd;
+    @JsonView(RunDateView.Rework.class)
     @Column(name = "rework")
     private Integer rework;
+    @JsonView(RunDateView.RunDate.class)
     @Column(name = "run_date")
     @Temporal(TemporalType.DATE)
     private Date runDate;
+    @JsonView(RunDateView.Scrap.class)
     @Column(name = "scrap")
     private Integer scrap;
+    @JsonView(RunDateView.Shift.class)
     @Column(name = "shift")
     private String shift;
     @JoinTable(name = "run_date_loss", joinColumns = {
@@ -62,12 +72,16 @@ public class RunDate implements Serializable {
         @JoinColumn(name = "loss_reason_id", referencedColumnName = "id")})
     @ManyToMany
     private List<LossReason> lossReasonList;
+    @JsonView(RunDateView.RunDateScrap.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
     private RunDateScrap runDateScrap;
+    @JsonView(RunDateView.RunDateDefect.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
     private RunDateDefect runDateDefect;
+    @JsonView(RunDateView.RunDateManpower.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
     private RunDateManpower runDateManpower;
+    @JsonView(RunDateView.JobControlPoint.class)
     @JoinColumn(name = "job_control_point_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private JobControlPoint jobControlPoint;

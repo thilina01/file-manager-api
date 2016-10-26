@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ControlPointView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -35,12 +37,16 @@ public class ControlPoint implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ControlPointView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ControlPointView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(ControlPointView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(ControlPointView.WorkCenter.class)
     @JoinColumn(name = "work_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private WorkCenter workCenter;
@@ -118,5 +124,5 @@ public class ControlPoint implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ControlPoint[ id=" + id + " ]";
     }
-    
+
 }

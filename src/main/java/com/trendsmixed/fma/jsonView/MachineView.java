@@ -24,5 +24,10 @@ public class MachineView {
     public static interface AllAndWorkCenterAll extends All,WorkCenter,WorkCenterView.All{
         
     }
+
+    public static interface ItemMachine {
+
+     
+    }
     
 }

@@ -14,6 +14,9 @@ public class DefectTypeView {
     public static interface TypeInSinhala {
     }
 
+    public static interface RunDateDefect {
+    }
+
     public static interface All extends Id, Code, Type, TypeInSinhala {
 
     }

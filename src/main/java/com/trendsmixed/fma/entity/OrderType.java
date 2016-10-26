@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.OrderTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -33,10 +35,13 @@ public class OrderType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(OrderTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(OrderTypeView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(OrderTypeView.Type.class)
     @Column(name = "type")
     private String type;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderType")

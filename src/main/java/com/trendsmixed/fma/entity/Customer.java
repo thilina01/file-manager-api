@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.CustomerView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -36,49 +38,68 @@ public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(CustomerView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(CustomerView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(CustomerView.Consignee.class)
     @Column(name = "consignee")
     private String consignee;
+    @JsonView(CustomerView.Contact.class)
     @Column(name = "contact")
     private String contact;
+    @JsonView(CustomerView.Continent.class)
     @Column(name = "continent")
     private String continent;
+    @JsonView(CustomerView.Fax.class)
     @Column(name = "fax")
     private String fax;
+    @JsonView(CustomerView.FinalDestination.class)
     @Column(name = "final_destination")
     private String finalDestination;
+    @JsonView(CustomerView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(CustomerView.NotifyParty.class)
     @Column(name = "notify_party")
     private String notifyParty;
+    @JsonView(CustomerView.Note.class)
     @Column(name = "note")
     private String note;
+    @JsonView(CustomerView.OfficeAddress.class)
     @Column(name = "office_address")
     private String officeAddress;
+    @JsonView(CustomerView.PaymentTerm.class)
     @Column(name = "payment_term")
     private String paymentTerm;
+    @JsonView(CustomerView.PhoneNo.class)
     @Column(name = "phone_no")
     private String phoneNo;
+    @JsonView(CustomerView.SVatNo.class)
     @Column(name = "s_vat_no")
     private String sVatNo;
+    @JsonView(CustomerView.VatNo.class)
     @Column(name = "vat_no")
     private String vatNo;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
     private CustomerItem customerItem;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private List<SalesOrder> salesOrderList;
+    @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Incoterm incoterm;
+    @JsonView(CustomerView.Currency.class)
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Currency currency;
+    @JsonView(CustomerView.SaleType.class)
     @JoinColumn(name = "cust_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SaleType saleType;
+    @JsonView(CustomerView.Country.class)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Country country;

@@ -37,11 +37,19 @@ public class ItemView {
 
     public static interface Paint {
     }
-    
+
     public static interface AllAndPaintAll extends All, Paint, PaintView.All {
     }
-    
-    public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.AlL,Paint,PaintView.All {
+
+    public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.AlL, Paint, PaintView.All {
     }
 
+    public static interface ItemMachine {
+    }
+
+    public static interface SalesOrderItem {
+    }
+
+    public static interface CustomerItem {
+    }
 }

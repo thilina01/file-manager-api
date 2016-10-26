@@ -12,4 +12,10 @@ public class ManpowerTypeView {
 
     }
 
+    public static interface PlanDateManpower {  
+    }
+
+    public static interface RunDateManpower {
+    }
+
 }

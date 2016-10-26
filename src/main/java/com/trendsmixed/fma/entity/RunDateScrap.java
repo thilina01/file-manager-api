@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.RunDateScrapView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -29,16 +31,20 @@ import javax.persistence.Table;
 public class RunDateScrap implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @JsonView(RunDateScrapView.Quantity.class)
     @Column(name = "quantity")
     private String quantity;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(RunDateScrapView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(RunDateScrapView.RunDate.class)
     @JoinColumn(name = "run_date_id", referencedColumnName = "id")
     @OneToOne(optional = false)
     private RunDate runDate;
+    @JsonView(RunDateScrapView.ScrapType.class)
     @JoinColumn(name = "scrap_type_id", referencedColumnName = "id")
     @OneToOne(optional = false)
     private ScrapType scrapType;

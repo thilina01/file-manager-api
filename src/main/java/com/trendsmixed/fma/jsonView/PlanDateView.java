@@ -19,4 +19,11 @@ public class PlanDateView {
 
     }
 
+    public static interface PlanDateManpower {
+
+    }
+
+    public static interface JobControlPoint {
+    }
+
 }

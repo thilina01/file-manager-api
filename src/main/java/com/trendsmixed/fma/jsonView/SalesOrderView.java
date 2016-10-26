@@ -41,4 +41,9 @@ public class SalesOrderView {
     public static interface AllAndCustomerAllAndSalesOrderTypeAll extends All, Customer, CustomerView.All, SaleType, SaleTypeView.All {
     }
 
+    public static interface SalesOrderItem {
+
+    }
+
+
 }
