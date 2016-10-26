@@ -31,7 +31,7 @@ public class ControlPointController {
     @Autowired
     private ControlPointService controlPointService;
 
-    @JsonView(ControlPointView.AllAndWorkCenterAll.class)
+    @JsonView(ControlPointView.AllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping
     public List<ControlPoint> findAll() {
         return controlPointService.findAll();
