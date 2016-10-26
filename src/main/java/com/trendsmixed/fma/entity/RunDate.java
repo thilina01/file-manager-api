@@ -6,8 +6,8 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -61,7 +61,7 @@ public class RunDate implements Serializable {
         @JoinColumn(name = "run_date_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "loss_reason_id", referencedColumnName = "id")})
     @ManyToMany
-    private Collection<LossReason> lossReasonCollection;
+    private List<LossReason> lossReasonList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
     private RunDateScrap runDateScrap;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
@@ -143,12 +143,12 @@ public class RunDate implements Serializable {
         this.shift = shift;
     }
 
-    public Collection<LossReason> getLossReasonCollection() {
-        return lossReasonCollection;
+    public List<LossReason> getLossReasonList() {
+        return lossReasonList;
     }
 
-    public void setLossReasonCollection(Collection<LossReason> lossReasonCollection) {
-        this.lossReasonCollection = lossReasonCollection;
+    public void setLossReasonList(List<LossReason> lossReasonList) {
+        this.lossReasonList = lossReasonList;
     }
 
     public RunDateScrap getRunDateScrap() {

@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,7 +45,7 @@ public class ControlPoint implements Serializable {
     @ManyToOne(optional = false)
     private WorkCenter workCenter;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
-    private Collection<JobControlPoint> jobControlPointCollection;
+    private List<JobControlPoint> jobControlPointList;
 
     public ControlPoint() {
     }
@@ -86,12 +86,12 @@ public class ControlPoint implements Serializable {
         this.workCenter = workCenter;
     }
 
-    public Collection<JobControlPoint> getJobControlPointCollection() {
-        return jobControlPointCollection;
+    public List<JobControlPoint> getJobControlPointList() {
+        return jobControlPointList;
     }
 
-    public void setJobControlPointCollection(Collection<JobControlPoint> jobControlPointCollection) {
-        this.jobControlPointCollection = jobControlPointCollection;
+    public void setJobControlPointList(List<JobControlPoint> jobControlPointList) {
+        this.jobControlPointList = jobControlPointList;
     }
 
     @Override

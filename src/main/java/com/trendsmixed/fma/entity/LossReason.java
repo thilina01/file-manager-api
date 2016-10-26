@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,8 +40,8 @@ public class LossReason implements Serializable {
     private String type;
     @Column(name = "type_in_shinhala")
     private String typeInShinhala;
-    @ManyToMany(mappedBy = "lossReasonCollection")
-    private Collection<RunDate> runDateCollection;
+    @ManyToMany(mappedBy = "lossReasonList")
+    private List<RunDate> runDateList;
 
     public LossReason() {
     }
@@ -82,12 +82,12 @@ public class LossReason implements Serializable {
         this.typeInShinhala = typeInShinhala;
     }
 
-    public Collection<RunDate> getRunDateCollection() {
-        return runDateCollection;
+    public List<RunDate> getRunDateList() {
+        return runDateList;
     }
 
-    public void setRunDateCollection(Collection<RunDate> runDateCollection) {
-        this.runDateCollection = runDateCollection;
+    public void setRunDateList(List<RunDate> runDateList) {
+        this.runDateList = runDateList;
     }
 
     @Override

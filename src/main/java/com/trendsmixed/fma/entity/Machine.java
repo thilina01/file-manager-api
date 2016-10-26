@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,9 +48,9 @@ public class Machine implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "machine")
     private ItemMachine itemMachine;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private Collection<DownTime> downTimeCollection;
+    private List<DownTime> downTimeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private Collection<MachineRunningTime> machineRunningTimeCollection;
+    private List<MachineRunningTime> machineRunningTimeList;
     @JoinColumn(name = "work_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private WorkCenter workCenter;
@@ -102,20 +102,20 @@ public class Machine implements Serializable {
         this.itemMachine = itemMachine;
     }
 
-    public Collection<DownTime> getDownTimeCollection() {
-        return downTimeCollection;
+    public List<DownTime> getDownTimeList() {
+        return downTimeList;
     }
 
-    public void setDownTimeCollection(Collection<DownTime> downTimeCollection) {
-        this.downTimeCollection = downTimeCollection;
+    public void setDownTimeList(List<DownTime> downTimeList) {
+        this.downTimeList = downTimeList;
     }
 
-    public Collection<MachineRunningTime> getMachineRunningTimeCollection() {
-        return machineRunningTimeCollection;
+    public List<MachineRunningTime> getMachineRunningTimeList() {
+        return machineRunningTimeList;
     }
 
-    public void setMachineRunningTimeCollection(Collection<MachineRunningTime> machineRunningTimeCollection) {
-        this.machineRunningTimeCollection = machineRunningTimeCollection;
+    public void setMachineRunningTimeList(List<MachineRunningTime> machineRunningTimeList) {
+        this.machineRunningTimeList = machineRunningTimeList;
     }
 
     public WorkCenter getWorkCenter() {

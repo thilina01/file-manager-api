@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,12 +42,12 @@ public class WorkCenter implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "workCenter")
-    private Collection<ControlPoint> controlPointCollection;
+    private List<ControlPoint> controlPointList;
     @JoinColumn(name = "cost_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CostCenter costCenter;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "workCenter")
-    private Collection<Machine> machineCollection;
+    private List<Machine> machineList;
 
     public WorkCenter() {
     }
@@ -80,12 +80,12 @@ public class WorkCenter implements Serializable {
         this.name = name;
     }
 
-    public Collection<ControlPoint> getControlPointCollection() {
-        return controlPointCollection;
+    public List<ControlPoint> getControlPointList() {
+        return controlPointList;
     }
 
-    public void setControlPointCollection(Collection<ControlPoint> controlPointCollection) {
-        this.controlPointCollection = controlPointCollection;
+    public void setControlPointList(List<ControlPoint> controlPointList) {
+        this.controlPointList = controlPointList;
     }
 
     public CostCenter getCostCenter() {
@@ -96,12 +96,12 @@ public class WorkCenter implements Serializable {
         this.costCenter = costCenter;
     }
 
-    public Collection<Machine> getMachineCollection() {
-        return machineCollection;
+    public List<Machine> getMachineList() {
+        return machineList;
     }
 
-    public void setMachineCollection(Collection<Machine> machineCollection) {
-        this.machineCollection = machineCollection;
+    public void setMachineList(List<Machine> machineList) {
+        this.machineList = machineList;
     }
 
     @Override

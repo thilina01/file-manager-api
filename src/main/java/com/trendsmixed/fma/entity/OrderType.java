@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,7 +40,7 @@ public class OrderType implements Serializable {
     @Column(name = "type")
     private String type;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderType")
-    private Collection<SalesOrder> salesOrderCollection;
+    private List<SalesOrder> salesOrderList;
 
     public OrderType() {
     }
@@ -73,12 +73,12 @@ public class OrderType implements Serializable {
         this.type = type;
     }
 
-    public Collection<SalesOrder> getSalesOrderCollection() {
-        return salesOrderCollection;
+    public List<SalesOrder> getSalesOrderList() {
+        return salesOrderList;
     }
 
-    public void setSalesOrderCollection(Collection<SalesOrder> salesOrderCollection) {
-        this.salesOrderCollection = salesOrderCollection;
+    public void setSalesOrderList(List<SalesOrder> salesOrderList) {
+        this.salesOrderList = salesOrderList;
     }
 
     @Override

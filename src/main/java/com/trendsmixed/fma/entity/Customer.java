@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -69,7 +69,7 @@ public class Customer implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
     private CustomerItem customerItem;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private Collection<SalesOrder> salesOrderCollection;
+    private List<SalesOrder> salesOrderList;
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Incoterm incoterm;
@@ -218,12 +218,12 @@ public class Customer implements Serializable {
         this.customerItem = customerItem;
     }
 
-    public Collection<SalesOrder> getSalesOrderCollection() {
-        return salesOrderCollection;
+    public List<SalesOrder> getSalesOrderList() {
+        return salesOrderList;
     }
 
-    public void setSalesOrderCollection(Collection<SalesOrder> salesOrderCollection) {
-        this.salesOrderCollection = salesOrderCollection;
+    public void setSalesOrderList(List<SalesOrder> salesOrderList) {
+        this.salesOrderList = salesOrderList;
     }
 
     public Incoterm getIncoterm() {

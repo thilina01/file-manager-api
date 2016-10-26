@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,7 +38,7 @@ public class JobControlPoint implements Serializable {
     @Column(name = "id")
     private Integer id;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobControlPoint")
-    private Collection<PlanDate> planDateCollection;
+    private List<PlanDate> planDateList;
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Job job;
@@ -46,7 +46,7 @@ public class JobControlPoint implements Serializable {
     @ManyToOne(optional = false)
     private ControlPoint controlPoint;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobControlPoint")
-    private Collection<RunDate> runDateCollection;
+    private List<RunDate> runDateList;
 
     public JobControlPoint() {
     }
@@ -63,12 +63,12 @@ public class JobControlPoint implements Serializable {
         this.id = id;
     }
 
-    public Collection<PlanDate> getPlanDateCollection() {
-        return planDateCollection;
+    public List<PlanDate> getPlanDateList() {
+        return planDateList;
     }
 
-    public void setPlanDateCollection(Collection<PlanDate> planDateCollection) {
-        this.planDateCollection = planDateCollection;
+    public void setPlanDateList(List<PlanDate> planDateList) {
+        this.planDateList = planDateList;
     }
 
     public Job getJob() {
@@ -87,12 +87,12 @@ public class JobControlPoint implements Serializable {
         this.controlPoint = controlPoint;
     }
 
-    public Collection<RunDate> getRunDateCollection() {
-        return runDateCollection;
+    public List<RunDate> getRunDateList() {
+        return runDateList;
     }
 
-    public void setRunDateCollection(Collection<RunDate> runDateCollection) {
-        this.runDateCollection = runDateCollection;
+    public void setRunDateList(List<RunDate> runDateList) {
+        this.runDateList = runDateList;
     }
 
     @Override
