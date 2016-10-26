@@ -50,7 +50,7 @@ public class CustomerView {
     public static interface Incoterm {
     }
 
-    public static interface CustType {
+    public static interface SaleType {
     }
 
     public static interface Country {
@@ -65,7 +65,7 @@ public class CustomerView {
     public static interface AllAndIncotermAll extends All, Incoterm, IncotermView.All {
     }
 
-    public static interface AllAndCustTypeAll extends All, CustType, CustTypeView.All {
+    public static interface AllAndSaleTypeAll extends All, SaleType, SaleTypeView.All {
     }
 
     public static interface AllAndCountryAll extends All, Country, CountryView.All {
@@ -74,7 +74,7 @@ public class CustomerView {
     public static interface AllAndCurrencyAll extends All, Currency, CurrencyView.All {
     }
 
-    public static interface AllAndIncotermAllAndCustTypeAllAndCountryAllAndCurrencyAll extends All, Incoterm, IncotermView.All, CustType, CustTypeView.All, Country, CountryView.All, Currency, CurrencyView.All {
+    public static interface AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAll extends All, Incoterm, IncotermView.All, SaleType, SaleTypeView.All, Country, CountryView.All, Currency, CurrencyView.All {
     }
     
 }

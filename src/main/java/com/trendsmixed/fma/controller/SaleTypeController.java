@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.CustType;
-import com.trendsmixed.fma.jsonView.CustTypeView;
+import com.trendsmixed.fma.entity.SaleType;
+import com.trendsmixed.fma.jsonView.SaleTypeView;
 import com.trendsmixed.fma.service.AppSessionService;
-import com.trendsmixed.fma.service.CustTypeService;
+import com.trendsmixed.fma.service.SaleTypeService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +22,27 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/custTypes")
-public class CustTypeController {
+@RequestMapping("/saleTypes")
+public class SaleTypeController {
 
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private CustTypeService custTypeService;
+    private SaleTypeService saleTypeService;
 
-    @JsonView(CustTypeView.All.class)
+    @JsonView(SaleTypeView.All.class)
     @GetMapping
-    public List<CustType> findAll() {
-        return custTypeService.findAll();
+    public List<SaleType> findAll() {
+        return saleTypeService.findAll();
     }
 
-    @JsonView(CustTypeView.All.class)
+    @JsonView(SaleTypeView.All.class)
     @PostMapping
-    public CustType save(@RequestBody CustType custType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public SaleType save(@RequestBody SaleType saleType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            custType = custTypeService.save(custType);
-            return custType;
+            saleType = saleTypeService.save(saleType);
+            return saleType;
 
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -53,23 +53,23 @@ public class CustTypeController {
     }
 
     @GetMapping("/{id}")
-    public CustType findOne(@PathVariable("id") int id) {
-        return custTypeService.findOne(id);
+    public SaleType findOne(@PathVariable("id") int id) {
+        return saleTypeService.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        custTypeService.delete(id);
+        saleTypeService.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public CustType updateCustomer(@PathVariable int id, @RequestBody CustType custType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public SaleType updateCustomer(@PathVariable int id, @RequestBody SaleType saleType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        custType.setId(id);
-        custType = custTypeService.save(custType);
-        return custType;
+        saleType.setId(id);
+        saleType = saleTypeService.save(saleType);
+        return saleType;
     }
 
 }

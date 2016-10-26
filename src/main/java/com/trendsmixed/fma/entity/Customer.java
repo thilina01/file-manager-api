@@ -94,10 +94,10 @@ public class Customer implements Serializable {
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Currency currency;
-    @JsonView(CustomerView.CustType.class)
+    @JsonView(CustomerView.SaleType.class)
     @JoinColumn(name = "cust_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CustType custType;
+    private SaleType saleType;
     @JsonView(CustomerView.Country.class)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -262,12 +262,12 @@ public class Customer implements Serializable {
         this.currency = currency;
     }
 
-    public CustType getCustType() {
-        return custType;
+    public SaleType getSaleType() {
+        return saleType;
     }
 
-    public void setCustType(CustType custType) {
-        this.custType = custType;
+    public void setSaleType(SaleType saleType) {
+        this.saleType = saleType;
     }
 
     public Country getCountry() {

@@ -30,13 +30,13 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @JsonView(CustomerView.AllAndIncotermAllAndCustTypeAllAndCountryAllAndCurrencyAll.class)
+    @JsonView(CustomerView.AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAll.class)
     @GetMapping
     public List<Customer> findAll() {
         return customerService.findAll();
     }
 
-    @JsonView(CustomerView.AllAndIncotermAllAndCustTypeAllAndCountryAllAndCurrencyAll.class)
+    @JsonView(CustomerView.AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAll.class)
     @PostMapping
     public Customer save(@RequestBody Customer customer, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

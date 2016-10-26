@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.CustTypeView;
+import com.trendsmixed.fma.jsonView.SaleTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -26,31 +26,31 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "cust_type")
+@Table(name = "sale_type")
 @NamedQueries({
-    @NamedQuery(name = "CustType.findAll", query = "SELECT c FROM CustType c")})
-public class CustType implements Serializable {
+    @NamedQuery(name = "SaleType.findAll", query = "SELECT c FROM SaleType c")})
+public class SaleType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(CustTypeView.Id.class)
+    @JsonView(SaleTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(CustTypeView.Code.class)
+    @JsonView(SaleTypeView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(CustTypeView.Name.class)
+    @JsonView(SaleTypeView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "custType")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "saleType")
     private List<Customer> customerList;
 
-    public CustType() {
+    public SaleType() {
     }
 
-    public CustType(Integer id) {
+    public SaleType(Integer id) {
         this.id = id;
     }
 
@@ -96,10 +96,10 @@ public class CustType implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CustType)) {
+        if (!(object instanceof SaleType)) {
             return false;
         }
-        CustType other = (CustType) object;
+        SaleType other = (SaleType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -108,7 +108,7 @@ public class CustType implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.CustType[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.SaleType[ id=" + id + " ]";
     }
 
 }
