@@ -32,6 +32,9 @@ public class SalesOrderView {
     public static interface Customer {
     }
 
+    public static interface SalesOrderItemList {
+    }
+
     public static interface All extends Id, PoNumber, OrderQty, CustomerRequestedDate, TrwConfirmedDate, ActualDispatchedDate, Comments, OrderReceivedDate {
     }
 
@@ -41,9 +44,6 @@ public class SalesOrderView {
     public static interface AllAndCustomerAllAndSalesOrderTypeAll extends All, Customer, CustomerView.All, SaleType, SaleTypeView.All {
     }
 
-    public static interface SalesOrderItem {
-
+    public static interface AllAndSalesOrderItemAll extends All, SalesOrderItemList, SalesOrderItemView.All {
     }
-
-
 }

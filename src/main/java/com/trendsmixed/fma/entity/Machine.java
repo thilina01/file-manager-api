@@ -21,7 +21,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -51,9 +50,8 @@ public class Machine implements Serializable {
     @JsonView(MachineView.Name.class)
     @Column(name = "name")
     private String name;
-    @JsonView(MachineView.ItemMachine.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "machine")
-    private ItemMachine itemMachine;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
+    private List<ItemMachine> itemMachineList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
     private List<DownTime> downTimeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
@@ -102,12 +100,12 @@ public class Machine implements Serializable {
         this.name = name;
     }
 
-    public ItemMachine getItemMachine() {
-        return itemMachine;
+    public List<ItemMachine> getItemMachineList() {
+        return itemMachineList;
     }
 
-    public void setItemMachine(ItemMachine itemMachine) {
-        this.itemMachine = itemMachine;
+    public void setItemMachineList(List<ItemMachine> itemMachineList) {
+        this.itemMachineList = itemMachineList;
     }
 
     public List<DownTime> getDownTimeList() {

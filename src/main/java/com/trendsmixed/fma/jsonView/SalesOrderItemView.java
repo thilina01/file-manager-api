@@ -12,23 +12,24 @@ package com.trendsmixed.fma.jsonView;
 public class SalesOrderItemView {
 
     public static interface Id {
-
     }
 
     public static interface Quantity {
-
     }
 
     public static interface Price {
-
     }
 
     public static interface Item {
-
     }
 
     public static interface SalesOrder {
-
     }
-    
+
+    public static interface All extends Id, Quantity, Price {
+    }
+
+    public static interface AllAndItemAllAndSalesOrderAll extends All, Item, SalesOrder, ItemView.All, SalesOrderView.All {
+    }
+
 }

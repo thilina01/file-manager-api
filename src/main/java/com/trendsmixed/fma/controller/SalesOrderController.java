@@ -1,12 +1,12 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.SalesOrder;
+import com.trendsmixed.fma.entity.SalesOrderItem;
 import com.trendsmixed.fma.jsonView.SalesOrderView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.SalesOrderService;
@@ -37,11 +37,15 @@ public class SalesOrderController {
         return salesOrderService.findAll();
     }
 
-    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @JsonView(SalesOrderView.AllAndSalesOrderItemAll.class)
     @PostMapping
     public SalesOrder save(@RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
+            List<SalesOrderItem> salesOrderItems = salesOrder.getSalesOrderItemList();
+            for (SalesOrderItem salesOrderItem : salesOrderItems) {
+                salesOrderItem.setSalesOrder(salesOrder);
+            }
             salesOrder = salesOrderService.save(salesOrder);
             return salesOrder;
 

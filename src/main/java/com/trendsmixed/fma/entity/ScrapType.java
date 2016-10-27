@@ -8,6 +8,7 @@ package com.trendsmixed.fma.entity;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.jsonView.ScrapTypeView;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -46,9 +47,8 @@ public class ScrapType implements Serializable {
     @JsonView(ScrapTypeView.TypeInSinhala.class)
     @Column(name = "type_in_sinhala")
     private String typeInSinhala;
-    @JsonView(ScrapTypeView.RunDateScrap.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "scrapType")
-    private RunDateScrap runDateScrap;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "scrapType")
+    private List<RunDateScrap> runDateScrapList;
 
     public ScrapType() {
     }
@@ -89,12 +89,12 @@ public class ScrapType implements Serializable {
         this.typeInSinhala = typeInSinhala;
     }
 
-    public RunDateScrap getRunDateScrap() {
-        return runDateScrap;
+    public List<RunDateScrap> getRunDateScrapList() {
+        return runDateScrapList;
     }
 
-    public void setRunDateScrap(RunDateScrap runDateScrap) {
-        this.runDateScrap = runDateScrap;
+    public void setRunDateScrapList(List<RunDateScrap> runDateScrapList) {
+        this.runDateScrapList = runDateScrapList;
     }
 
     @Override

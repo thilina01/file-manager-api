@@ -15,9 +15,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -42,11 +42,11 @@ public class RunDateScrap implements Serializable {
     private Integer id;
     @JsonView(RunDateScrapView.RunDate.class)
     @JoinColumn(name = "run_date_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private RunDate runDate;
     @JsonView(RunDateScrapView.ScrapType.class)
     @JoinColumn(name = "scrap_type_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private ScrapType scrapType;
 
     public RunDateScrap() {

@@ -15,9 +15,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -42,11 +42,11 @@ public class RunDateDefect implements Serializable {
     private Integer quantity;
     @JsonView(RunDateDefectView.DefectType.class)
     @JoinColumn(name = "defect_type_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private DefectType defectType;
     @JsonView(RunDateDefectView.RunDate.class)
     @JoinColumn(name = "run_date_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private RunDate runDate;
 
     public RunDateDefect() {

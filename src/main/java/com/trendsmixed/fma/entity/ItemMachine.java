@@ -15,17 +15,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author Thilina
  */
 @Entity
-@Table(name = "item_machine")
+@Table(name = "item_machine", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"item_id", "machine_id"})})
 @NamedQueries({
     @NamedQuery(name = "ItemMachine.findAll", query = "SELECT i FROM ItemMachine i")})
 public class ItemMachine implements Serializable {
@@ -43,11 +45,11 @@ public class ItemMachine implements Serializable {
     private Integer id;
     @JsonView(ItemMachineView.Machine.class)
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Machine machine;
     @JsonView(ItemMachineView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Item item;
 
     public ItemMachine() {
@@ -113,5 +115,5 @@ public class ItemMachine implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ItemMachine[ id=" + id + " ]";
     }
-    
+
 }

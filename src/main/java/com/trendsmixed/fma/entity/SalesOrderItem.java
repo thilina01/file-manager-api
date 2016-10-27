@@ -17,18 +17,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author Thilina
  */
 @Entity
-@Table(name = "sales_order_item")
+@Table(name = "sales_order_item", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"item_id", "sales_order_id"})})
 @NamedQueries({
     @NamedQuery(name = "SalesOrderItem.findAll", query = "SELECT s FROM SalesOrderItem s")})
 public class SalesOrderItem implements Serializable {
@@ -49,11 +51,11 @@ public class SalesOrderItem implements Serializable {
     private Double price;
     @JsonView(SalesOrderItemView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Item item;
     @JsonView(SalesOrderItemView.SalesOrder.class)
     @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private SalesOrder salesOrder;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrderItem")
     private List<Delivery> deliveryList;

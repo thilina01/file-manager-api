@@ -18,15 +18,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author Thilina
  */
 @Entity
-@Table(name = "customer_item")
+@Table(name = "customer_item", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"item_id", "customer_id"})})
 @NamedQueries({
     @NamedQuery(name = "CustomerItem.findAll", query = "SELECT c FROM CustomerItem c")})
 public class CustomerItem implements Serializable {
@@ -51,7 +52,7 @@ public class CustomerItem implements Serializable {
     private Customer customer;
     @JsonView(CustomerItemView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Item item;
 
     public CustomerItem() {

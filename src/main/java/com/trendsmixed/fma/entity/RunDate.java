@@ -23,7 +23,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -64,27 +64,23 @@ public class RunDate implements Serializable {
     @JsonView(RunDateView.Scrap.class)
     @Column(name = "scrap")
     private Integer scrap;
-    @JsonView(RunDateView.Shift.class)
-    @Column(name = "shift")
-    private String shift;
     @JoinTable(name = "run_date_loss", joinColumns = {
         @JoinColumn(name = "run_date_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "loss_reason_id", referencedColumnName = "id")})
     @ManyToMany
     private List<LossReason> lossReasonList;
-    @JsonView(RunDateView.RunDateScrap.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private RunDateScrap runDateScrap;
-    @JsonView(RunDateView.RunDateDefect.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private RunDateDefect runDateDefect;
-    @JsonView(RunDateView.RunDateManpower.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private RunDateManpower runDateManpower;
-    @JsonView(RunDateView.JobControlPoint.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
+    private List<RunDateScrap> runDateScrapList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
+    private List<RunDateDefect> runDateDefectList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
+    private List<RunDateManpower> runDateManpowerList;
     @JoinColumn(name = "job_control_point_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private JobControlPoint jobControlPoint;
+    @JoinColumn(name = "shift_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Shift shift;
 
     public RunDate() {
     }
@@ -149,14 +145,6 @@ public class RunDate implements Serializable {
         this.scrap = scrap;
     }
 
-    public String getShift() {
-        return shift;
-    }
-
-    public void setShift(String shift) {
-        this.shift = shift;
-    }
-
     public List<LossReason> getLossReasonList() {
         return lossReasonList;
     }
@@ -165,28 +153,28 @@ public class RunDate implements Serializable {
         this.lossReasonList = lossReasonList;
     }
 
-    public RunDateScrap getRunDateScrap() {
-        return runDateScrap;
+    public List<RunDateScrap> getRunDateScrapList() {
+        return runDateScrapList;
     }
 
-    public void setRunDateScrap(RunDateScrap runDateScrap) {
-        this.runDateScrap = runDateScrap;
+    public void setRunDateScrapList(List<RunDateScrap> runDateScrapList) {
+        this.runDateScrapList = runDateScrapList;
     }
 
-    public RunDateDefect getRunDateDefect() {
-        return runDateDefect;
+    public List<RunDateDefect> getRunDateDefectList() {
+        return runDateDefectList;
     }
 
-    public void setRunDateDefect(RunDateDefect runDateDefect) {
-        this.runDateDefect = runDateDefect;
+    public void setRunDateDefectList(List<RunDateDefect> runDateDefectList) {
+        this.runDateDefectList = runDateDefectList;
     }
 
-    public RunDateManpower getRunDateManpower() {
-        return runDateManpower;
+    public List<RunDateManpower> getRunDateManpowerList() {
+        return runDateManpowerList;
     }
 
-    public void setRunDateManpower(RunDateManpower runDateManpower) {
-        this.runDateManpower = runDateManpower;
+    public void setRunDateManpowerList(List<RunDateManpower> runDateManpowerList) {
+        this.runDateManpowerList = runDateManpowerList;
     }
 
     public JobControlPoint getJobControlPoint() {
@@ -220,6 +208,14 @@ public class RunDate implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.RunDate[ id=" + id + " ]";
+    }
+
+    public Shift getShift() {
+        return shift;
+    }
+
+    public void setShift(Shift shift) {
+        this.shift = shift;
     }
     
 }

@@ -8,6 +8,7 @@ package com.trendsmixed.fma.entity;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.jsonView.ManpowerTypeView;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -40,12 +41,10 @@ public class ManpowerType implements Serializable {
     @JsonView(ManpowerTypeView.Type.class)
     @Column(name = "type")
     private String type;
-    @JsonView(ManpowerTypeView.PlanDateManpower.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "manpowerType")
-    private PlanDateManpower planDateManpower;
-    @JsonView(ManpowerTypeView.RunDateManpower.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "manpowerType")
-    private RunDateManpower runDateManpower;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
+    private List<PlanDateManpower> planDateManpowerList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
+    private List<RunDateManpower> runDateManpowerList;
 
     public ManpowerType() {
     }
@@ -70,20 +69,20 @@ public class ManpowerType implements Serializable {
         this.type = type;
     }
 
-    public PlanDateManpower getPlanDateManpower() {
-        return planDateManpower;
+    public List<PlanDateManpower> getPlanDateManpowerList() {
+        return planDateManpowerList;
     }
 
-    public void setPlanDateManpower(PlanDateManpower planDateManpower) {
-        this.planDateManpower = planDateManpower;
+    public void setPlanDateManpowerList(List<PlanDateManpower> planDateManpowerList) {
+        this.planDateManpowerList = planDateManpowerList;
     }
 
-    public RunDateManpower getRunDateManpower() {
-        return runDateManpower;
+    public List<RunDateManpower> getRunDateManpowerList() {
+        return runDateManpowerList;
     }
 
-    public void setRunDateManpower(RunDateManpower runDateManpower) {
-        this.runDateManpower = runDateManpower;
+    public void setRunDateManpowerList(List<RunDateManpower> runDateManpowerList) {
+        this.runDateManpowerList = runDateManpowerList;
     }
 
     @Override

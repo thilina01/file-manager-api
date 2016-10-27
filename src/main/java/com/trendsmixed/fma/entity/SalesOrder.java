@@ -22,7 +22,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -70,9 +69,9 @@ public class SalesOrder implements Serializable {
     @Column(name = "trw_confirmed_date")
     @Temporal(TemporalType.DATE)
     private Date trwConfirmedDate;
-    @JsonView(SalesOrderView.SalesOrderItem.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "salesOrder")
-    private SalesOrderItem salesOrderItem;
+    @JsonView(SalesOrderView.SalesOrderItemList.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrder")
+    private List<SalesOrderItem> salesOrderItemList;
     @JsonView(SalesOrderView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -154,13 +153,14 @@ public class SalesOrder implements Serializable {
         this.trwConfirmedDate = trwConfirmedDate;
     }
 
-    public SalesOrderItem getSalesOrderItem() {
-        return salesOrderItem;
+    public List<SalesOrderItem> getSalesOrderItemList() {
+        return salesOrderItemList;
     }
 
-    public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
-        this.salesOrderItem = salesOrderItem;
+    public void setSalesOrderItemList(List<SalesOrderItem> salesOrderItemList) {
+        this.salesOrderItemList = salesOrderItemList;
     }
+
 
     public Customer getCustomer() {
         return customer;

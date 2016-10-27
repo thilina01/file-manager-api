@@ -15,9 +15,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -42,11 +42,11 @@ public class RunDateManpower implements Serializable {
     private Integer quantity;
     @JsonView(RunDateManpowerView.ManpowerType.class)
     @JoinColumn(name = "manpower_type_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private ManpowerType manpowerType;
     @JsonView(RunDateManpowerView.RunDate.class)
     @JoinColumn(name = "run_date_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private RunDate runDate;
 
     public RunDateManpower() {

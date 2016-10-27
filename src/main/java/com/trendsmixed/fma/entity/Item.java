@@ -21,7 +21,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -64,14 +63,14 @@ public class Item implements Serializable {
     @Column(name = "weight")
     private Double weight;
     @JsonView(ItemView.ItemMachine.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
-    private ItemMachine itemMachine;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+    private List<ItemMachine> itemMachineList;
     @JsonView(ItemView.SalesOrderItem.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
-    private SalesOrderItem salesOrderItem;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+    private List<SalesOrderItem> salesOrderItemList;
     @JsonView(ItemView.CustomerItem.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
-    private CustomerItem customerItem;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+    private List<CustomerItem> customerItemList;
     @JsonView(ItemView.Paint.class)
     @JoinColumn(name = "paint_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -154,29 +153,30 @@ public class Item implements Serializable {
         this.weight = weight;
     }
 
-    public ItemMachine getItemMachine() {
-        return itemMachine;
+    public List<ItemMachine> getItemMachineList() {
+        return itemMachineList;
     }
 
-    public void setItemMachine(ItemMachine itemMachine) {
-        this.itemMachine = itemMachine;
+    public void setItemMachineList(List<ItemMachine> itemMachineList) {
+        this.itemMachineList = itemMachineList;
     }
 
-    public SalesOrderItem getSalesOrderItem() {
-        return salesOrderItem;
+    public List<SalesOrderItem> getSalesOrderItemList() {
+        return salesOrderItemList;
     }
 
-    public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
-        this.salesOrderItem = salesOrderItem;
+    public void setSalesOrderItemList(List<SalesOrderItem> salesOrderItemList) {
+        this.salesOrderItemList = salesOrderItemList;
     }
 
-    public CustomerItem getCustomerItem() {
-        return customerItem;
+    public List<CustomerItem> getCustomerItemList() {
+        return customerItemList;
     }
 
-    public void setCustomerItem(CustomerItem customerItem) {
-        this.customerItem = customerItem;
+    public void setCustomerItemList(List<CustomerItem> customerItemList) {
+        this.customerItemList = customerItemList;
     }
+
 
     public Paint getPaint() {
         return paint;
