@@ -31,7 +31,7 @@ public class MachineRunningTimeController {
     @Autowired
     private MachineRunningTimeService machineRunningTimeService;
 
-    //@JsonView(MachineRunningTimeView.AllAndMachineAll.class)
+    @JsonView(MachineRunningTimeView.AllAndMachineAll.class)
     @PostMapping
     public MachineRunningTime save(@RequestBody MachineRunningTime machineRunningTime, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -47,7 +47,7 @@ public class MachineRunningTimeController {
         }
     }
 
-    //@JsonView(MachineRunningTimeView.AllAndMachineAll.class)
+    @JsonView(MachineRunningTimeView.AllAndMachineAll.class)
     @GetMapping
     public List<MachineRunningTime> findAll() {
         return machineRunningTimeService.findAll();

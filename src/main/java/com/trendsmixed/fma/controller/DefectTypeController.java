@@ -30,13 +30,13 @@ public class DefectTypeController {
     @Autowired
     private DefectTypeService defectTypeService;
 
-    //@JsonView(DefectTypeView.All.class)
+    @JsonView(DefectTypeView.All.class)
     @GetMapping
     public List<DefectType> findAll() {
         return defectTypeService.findAll();
     }
 
-    //@JsonView(DefectTypeView.All.class)
+    @JsonView(DefectTypeView.All.class)
     @PostMapping
     public DefectType save(@RequestBody DefectType defectType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

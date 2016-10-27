@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -46,7 +47,7 @@ public class CustomerItem implements Serializable {
     private Double price;
     @JsonView(CustomerItemView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Customer customer;
     @JsonView(CustomerItemView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")

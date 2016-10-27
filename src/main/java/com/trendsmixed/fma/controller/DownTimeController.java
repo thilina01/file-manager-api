@@ -31,13 +31,13 @@ public class DownTimeController {
     @Autowired
     private DownTimeService downTimeTypeService;
 
-    //@JsonView(DownTimeView.AllAndMachineAll.class)
+    @JsonView(DownTimeView.AllAndMachineAll.class)
     @GetMapping
     public List<DownTime> findAll() {
         return downTimeTypeService.findAll();
     }
 
-    //@JsonView(DownTimeView.AllAndMachineAll.class)
+    @JsonView(DownTimeView.AllAndMachineAll.class)
     @PostMapping
     public DownTime save(@RequestBody DownTime downTimeType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

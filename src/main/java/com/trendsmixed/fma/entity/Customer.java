@@ -82,9 +82,10 @@ public class Customer implements Serializable {
     private String sVatNo;
     @JsonView(CustomerView.VatNo.class)
     @Column(name = "vat_no")
-    private String vatNo;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
-    private CustomerItem customerItem;
+    private String vatNo;    
+    @JsonView(CustomerView.CustomerItemList.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    private List<CustomerItem> customerItemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private List<SalesOrder> salesOrderList;
     @JsonView(CustomerView.Incoterm.class)
@@ -231,14 +232,6 @@ public class Customer implements Serializable {
         this.vatNo = vatNo;
     }
 
-    public CustomerItem getCustomerItem() {
-        return customerItem;
-    }
-
-    public void setCustomerItem(CustomerItem customerItem) {
-        this.customerItem = customerItem;
-    }
-
     public List<SalesOrder> getSalesOrderList() {
         return salesOrderList;
     }
@@ -302,6 +295,22 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.Customer[ id=" + id + " ]";
+    }
+
+    public String getsVatNo() {
+        return sVatNo;
+    }
+
+    public void setsVatNo(String sVatNo) {
+        this.sVatNo = sVatNo;
+    }
+
+    public List<CustomerItem> getCustomerItemList() {
+        return customerItemList;
+    }
+
+    public void setCustomerItemList(List<CustomerItem> customerItemList) {
+        this.customerItemList = customerItemList;
     }
     
 }

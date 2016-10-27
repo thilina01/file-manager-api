@@ -1,10 +1,12 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.SalesOrderType;
+import com.trendsmixed.fma.jsonView.SalesOrderTypeView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.SalesOrderTypeService;
 import java.util.List;
@@ -28,13 +30,13 @@ public class SalesOrderTypeController {
     @Autowired
     private SalesOrderTypeService salesOrderTypeService;
 
-    //@JsonView(SalesOrderTypeView.AllAndCustomerAllAndSalesOrderTypeTypeAll.class)
+    @JsonView(SalesOrderTypeView.All.class)
     @GetMapping
     public List<SalesOrderType> findAll() {
         return salesOrderTypeService.findAll();
     }
 
-    //@JsonView(SalesOrderTypeView.AllAndCustomerAllAndSalesOrderTypeTypeAll.class)
+    @JsonView(SalesOrderTypeView.All.class)
     @PostMapping
     public SalesOrderType save(@RequestBody SalesOrderType salesOrderType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

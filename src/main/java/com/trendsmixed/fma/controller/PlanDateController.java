@@ -30,13 +30,13 @@ public class PlanDateController {
     @Autowired
     private PlanDateService planDateService;
 
-    //@JsonView(PlanDateView.All.class)
+    @JsonView(PlanDateView.All.class)
     @GetMapping
     public List<PlanDate> findAll() {
         return planDateService.findAll();
     }
 
-    //@JsonView(PlanDateView.All.class)
+    @JsonView(PlanDateView.All.class)
     @PostMapping
     public PlanDate save(@RequestBody PlanDate planDate, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

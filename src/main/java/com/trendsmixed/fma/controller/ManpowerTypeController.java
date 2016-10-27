@@ -30,13 +30,13 @@ public class ManpowerTypeController {
     @Autowired
     private ManpowerTypeService manpowerTypeService;
 
-    //@JsonView(ManpowerTypeView.All.class)
+    @JsonView(ManpowerTypeView.All.class)
     @GetMapping
     public List<ManpowerType> findAll() {
         return manpowerTypeService.findAll();
     }
 
-    //@JsonView(ManpowerTypeView.All.class)
+    @JsonView(ManpowerTypeView.All.class)
     @PostMapping
     public ManpowerType save(@RequestBody ManpowerType manpowerType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

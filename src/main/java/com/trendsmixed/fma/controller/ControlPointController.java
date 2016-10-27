@@ -31,13 +31,13 @@ public class ControlPointController {
     @Autowired
     private ControlPointService controlPointService;
 
-    //@JsonView(ControlPointView.AllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
+    @JsonView(ControlPointView.AllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping
     public List<ControlPoint> findAll() {
         return controlPointService.findAll();
     }
 
-    //@JsonView(ControlPointView.AllAndWorkCenterAll.class)
+    @JsonView(ControlPointView.AllAndWorkCenterAll.class)
     @PostMapping
     public ControlPoint save(@RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

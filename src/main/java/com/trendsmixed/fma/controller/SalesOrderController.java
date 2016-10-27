@@ -31,13 +31,13 @@ public class SalesOrderController {
     @Autowired
     private SalesOrderService salesOrderService;
 
-    //@JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @GetMapping
     public List<SalesOrder> findAll() {
         return salesOrderService.findAll();
     }
 
-    //@JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PostMapping
     public SalesOrder save(@RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

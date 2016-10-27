@@ -30,13 +30,13 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
-    //@JsonView(JobView.All.class)
+    @JsonView(JobView.All.class)
     @GetMapping
     public List<Job> findAll() {
         return jobService.findAll();
     }
 
-    //@JsonView(JobView.All.class)
+    @JsonView(JobView.All.class)
     @PostMapping
     public Job save(@RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

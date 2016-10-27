@@ -45,7 +45,7 @@ public class SectionController {
     }
 
     @GetMapping
-    //@JsonView(SectionView.All.class)
+    @JsonView(SectionView.All.class)
     public List<Section> findAll() {
         return sectionService.findAll();
     }

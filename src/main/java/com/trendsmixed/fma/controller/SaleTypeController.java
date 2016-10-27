@@ -30,13 +30,13 @@ public class SaleTypeController {
     @Autowired
     private SaleTypeService saleTypeService;
 
-    //@JsonView(SaleTypeView.All.class)
+    @JsonView(SaleTypeView.All.class)
     @GetMapping
     public List<SaleType> findAll() {
         return saleTypeService.findAll();
     }
 
-    //@JsonView(SaleTypeView.All.class)
+    @JsonView(SaleTypeView.All.class)
     @PostMapping
     public SaleType save(@RequestBody SaleType saleType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
