@@ -30,13 +30,13 @@ public class ScrapTypeController {
     @Autowired
     private ScrapTypeService scrapTypeService;
 
-    @JsonView(ScrapTypeView.All.class)
+    //@JsonView(ScrapTypeView.All.class)
     @GetMapping
     public List<ScrapType> findAll() {
         return scrapTypeService.findAll();
     }
 
-    @JsonView(ScrapTypeView.All.class)
+    //@JsonView(ScrapTypeView.All.class)
     @PostMapping
     public ScrapType save(@RequestBody ScrapType scrapType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

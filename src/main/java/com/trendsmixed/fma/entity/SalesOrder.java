@@ -79,7 +79,7 @@ public class SalesOrder implements Serializable {
     private Customer customer;
     @JoinColumn(name = "order_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private OrderType orderType;
+    private SalesOrderType salesOrderType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrder")
     private List<Job> jobList;
 
@@ -170,12 +170,12 @@ public class SalesOrder implements Serializable {
         this.customer = customer;
     }
 
-    public OrderType getOrderType() {
-        return orderType;
+    public SalesOrderType getSalesOrderType() {
+        return salesOrderType;
     }
 
-    public void setOrderType(OrderType orderType) {
-        this.orderType = orderType;
+    public void setSalesOrderType(SalesOrderType salesOrderType) {
+        this.salesOrderType = salesOrderType;
     }
 
     public List<Job> getJobList() {

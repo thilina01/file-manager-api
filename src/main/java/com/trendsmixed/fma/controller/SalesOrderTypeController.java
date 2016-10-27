@@ -1,15 +1,12 @@
 package com.trendsmixed.fma.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.ControlPoint;
-import com.trendsmixed.fma.jsonView.ControlPointView;
+import com.trendsmixed.fma.entity.SalesOrderType;
 import com.trendsmixed.fma.service.AppSessionService;
-import com.trendsmixed.fma.service.ControlPointService;
+import com.trendsmixed.fma.service.SalesOrderTypeService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +20,27 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/controlPoints")
-public class ControlPointController {
+@RequestMapping("/salesOrderTypes")
+public class SalesOrderTypeController {
 
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private ControlPointService controlPointService;
+    private SalesOrderTypeService salesOrderTypeService;
 
-    //@JsonView(ControlPointView.AllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
+    //@JsonView(SalesOrderTypeView.AllAndCustomerAllAndSalesOrderTypeTypeAll.class)
     @GetMapping
-    public List<ControlPoint> findAll() {
-        return controlPointService.findAll();
+    public List<SalesOrderType> findAll() {
+        return salesOrderTypeService.findAll();
     }
 
-    //@JsonView(ControlPointView.AllAndWorkCenterAll.class)
+    //@JsonView(SalesOrderTypeView.AllAndCustomerAllAndSalesOrderTypeTypeAll.class)
     @PostMapping
-    public ControlPoint save(@RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public SalesOrderType save(@RequestBody SalesOrderType salesOrderType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            controlPoint = controlPointService.save(controlPoint);
-            return controlPoint;
+            salesOrderType = salesOrderTypeService.save(salesOrderType);
+            return salesOrderType;
 
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -54,23 +51,22 @@ public class ControlPointController {
     }
 
     @GetMapping("/{id}")
-    public ControlPoint findOne(@PathVariable("id") int id) {
-        return controlPointService.findOne(id);
+    public SalesOrderType findOne(@PathVariable("id") int id) {
+        return salesOrderTypeService.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        controlPointService.delete(id);
+        salesOrderTypeService.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public ControlPoint updateCustomer(@PathVariable int id, @RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public SalesOrderType updateCustomer(@PathVariable int id, @RequestBody SalesOrderType salesOrderType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        controlPoint.setId(id);
-        controlPoint = controlPointService.save(controlPoint);
-        return controlPoint;
+        salesOrderType.setId(id);
+        salesOrderType = salesOrderTypeService.save(salesOrderType);
+        return salesOrderType;
     }
-
 }

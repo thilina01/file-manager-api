@@ -30,7 +30,7 @@ public class IncotermController {
     @Autowired
     private IncotermService incotermService;
 
-    @JsonView(IncotermView.All.class)
+    //@JsonView(IncotermView.All.class)
     @PostMapping
     public Incoterm save(@RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -46,7 +46,7 @@ public class IncotermController {
         }
     }
 
-    @JsonView(IncotermView.All.class)
+    //@JsonView(IncotermView.All.class)
     @GetMapping
     public List<Incoterm> findAll() {
         return incotermService.findAll();

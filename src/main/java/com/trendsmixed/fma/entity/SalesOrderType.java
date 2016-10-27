@@ -26,10 +26,10 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "order_type")
+@Table(name = "sales_order_type")
 @NamedQueries({
-    @NamedQuery(name = "OrderType.findAll", query = "SELECT o FROM OrderType o")})
-public class OrderType implements Serializable {
+    @NamedQuery(name = "SalesOrderType.findAll", query = "SELECT o FROM SalesOrderType o")})
+public class SalesOrderType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,13 +44,13 @@ public class OrderType implements Serializable {
     @JsonView(OrderTypeView.Type.class)
     @Column(name = "type")
     private String type;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderType")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrderType")
     private List<SalesOrder> salesOrderList;
 
-    public OrderType() {
+    public SalesOrderType() {
     }
 
-    public OrderType(Integer id) {
+    public SalesOrderType(Integer id) {
         this.id = id;
     }
 
@@ -96,10 +96,10 @@ public class OrderType implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OrderType)) {
+        if (!(object instanceof SalesOrderType)) {
             return false;
         }
-        OrderType other = (OrderType) object;
+        SalesOrderType other = (SalesOrderType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -108,7 +108,7 @@ public class OrderType implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.OrderType[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.SalesOrderType[ id=" + id + " ]";
     }
     
 }

@@ -30,13 +30,13 @@ public class LossReasonController {
     @Autowired
     private LossReasonService lossReasonService;
 
-    @JsonView(LossReasonView.All.class)
+    //@JsonView(LossReasonView.All.class)
     @GetMapping
     public List<LossReason> findAll() {
         return lossReasonService.findAll();
     }
 
-    @JsonView(LossReasonView.All.class)
+    //@JsonView(LossReasonView.All.class)
     @PostMapping
     public LossReason save(@RequestBody LossReason lossReason, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

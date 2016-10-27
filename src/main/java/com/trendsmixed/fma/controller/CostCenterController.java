@@ -32,13 +32,13 @@ public class CostCenterController {
     private CostCenterService costCenterService;
 
     @GetMapping
-    @JsonView(CostCenterView.AllAndSectionAll.class)
+    //@JsonView(CostCenterView.AllAndSectionAll.class)
     public List<CostCenter> findAll() {
         return costCenterService.findAll();
     }
 
     @PostMapping
-    @JsonView(CostCenterView.AllAndSectionId.class)
+    //@JsonView(CostCenterView.AllAndSectionId.class)
     public CostCenter save(@RequestBody CostCenter costCenter, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {

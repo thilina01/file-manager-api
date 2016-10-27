@@ -32,7 +32,7 @@ public class WorkCenterController {
     private WorkCenterService workCenterService;
 
     @GetMapping
-    @JsonView(WorkCenterView.AllAndCostCenterAll.class)
+    //@JsonView(WorkCenterView.AllAndCostCenterAll.class)
     public List<WorkCenter> findAll() {
         return workCenterService.findAll();
     }

@@ -30,7 +30,7 @@ public class CurrencyController {
     @Autowired
     private CurrencyService currencyService;
 
-    @JsonView(CurrencyView.All.class)
+    //@JsonView(CurrencyView.All.class)
     @PostMapping
     public Currency save(@RequestBody Currency currency, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -46,7 +46,7 @@ public class CurrencyController {
         }
     }
 
-    @JsonView(CurrencyView.All.class)
+    //@JsonView(CurrencyView.All.class)
     @GetMapping
     public List<Currency> findAll() {
         return currencyService.findAll();

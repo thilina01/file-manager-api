@@ -30,13 +30,13 @@ public class PaintController {
     @Autowired
     private PaintService paintService;
 
-    @JsonView(PaintView.All.class)
+    //@JsonView(PaintView.All.class)
     @GetMapping
     public List<Paint> findAll() {
         return paintService.findAll();
     }
 
-    @JsonView(PaintView.All.class)
+    //@JsonView(PaintView.All.class)
     @PostMapping
     public Paint save(@RequestBody Paint paint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

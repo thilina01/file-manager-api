@@ -31,7 +31,7 @@ public class ItemTypeController {
     @Autowired
     private ItemTypeService itemTypeService;
 
-    @JsonView(ItemTypeView.AlL.class)
+    //@JsonView(ItemTypeView.AlL.class)
     @GetMapping
     public List<ItemType> findAll() {
         return itemTypeService.findAll();

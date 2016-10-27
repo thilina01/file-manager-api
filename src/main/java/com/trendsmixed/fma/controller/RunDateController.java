@@ -30,13 +30,13 @@ public class RunDateController {
     @Autowired
     private RunDateService runDateService;
 
-    @JsonView(RunDateView.All.class)
+    //@JsonView(RunDateView.All.class)
     @GetMapping
     public List<RunDate> findAll() {
         return runDateService.findAll();
     }
 
-    @JsonView(RunDateView.All.class)
+    //@JsonView(RunDateView.All.class)
     @PostMapping
     public RunDate save(@RequestBody RunDate runDate, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

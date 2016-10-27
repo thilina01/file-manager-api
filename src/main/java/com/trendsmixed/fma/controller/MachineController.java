@@ -30,13 +30,13 @@ public class MachineController {
     @Autowired
     private MachineService machineService;
 
-    @JsonView(MachineView.All.class)
+    //@JsonView(MachineView.All.class)
     @GetMapping
     public List<Machine> findAll() {
         return machineService.findAll();
     }
 
-    @JsonView(MachineView.All.class)
+    //@JsonView(MachineView.All.class)
     @PostMapping
     public Machine save(@RequestBody Machine machine, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

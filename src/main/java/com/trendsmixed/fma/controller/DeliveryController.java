@@ -30,13 +30,13 @@ public class DeliveryController {
     @Autowired
     private DeliveryService deliveryService;
 
-    @JsonView(DeliveryView.All.class)
+    //@JsonView(DeliveryView.All.class)
     @GetMapping
     public List<Delivery> findAll() {
         return deliveryService.findAll();
     }
 
-    @JsonView(DeliveryView.All.class)
+    //@JsonView(DeliveryView.All.class)
     @PostMapping
     public Delivery save(@RequestBody Delivery delivery, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

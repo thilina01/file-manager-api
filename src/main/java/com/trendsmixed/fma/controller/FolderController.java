@@ -47,51 +47,51 @@ public class FolderController {
     }
 
     @GetMapping//("/top")
-    public @JsonView(Views.FolderOnly.class)
+    public //@JsonView(Views.FolderOnly.class)
     List<Folder> all() {
         return folderService.findAll();
     }
 
     @GetMapping("/top")
-    public @JsonView(Views.FolderOnly.class)
+    public //@JsonView(Views.FolderOnly.class)
     List<Folder> top(@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         //System.out.println(email);
         return folderService.findByFolderIsNull();
     }
 
     @GetMapping("/{id}")
-    public @JsonView(Views.FolderOnly.class)
+    public //@JsonView(Views.FolderOnly.class)
     Folder one(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
 
     @GetMapping("/{id}/with-parent")
-    public @JsonView(Views.FolderWithParent.class)
+    public //@JsonView(Views.FolderWithParent.class)
     Folder oneWithParent(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
 
     @GetMapping("/{id}/with-sub-folders")
-    public @JsonView(Views.FolderWithSubFolders.class)
+    public //@JsonView(Views.FolderWithSubFolders.class)
     Folder oneWithSubFolders(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
 
     @GetMapping("/{id}/with-files")
-    public @JsonView(Views.FolderWithFiles.class)
+    public //@JsonView(Views.FolderWithFiles.class)
     Folder oneWithFiles(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
 
     @GetMapping("/{id}/with-sub-folders-and-files")
-    public @JsonView(Views.FolderWithSubFoldersAndFiles.class)
+    public //@JsonView(Views.FolderWithSubFoldersAndFiles.class)
     Folder oneWithSubFoldersAndFiles(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
 
     /*
      @GetMapping("/{id}/with-parent-and-sub-folders-and-files")
-     public @JsonView(Views.FolderParentAndWithSubFoldersAndFiles.class)
+     public //@JsonView(Views.FolderParentAndWithSubFoldersAndFiles.class)
      Folder oneWithParentAndSubFoldersAndFiles(@PathVariable("id") int id) {
      return folderService.findOne(id);
      }

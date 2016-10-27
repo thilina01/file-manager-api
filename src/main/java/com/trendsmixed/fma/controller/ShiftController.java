@@ -29,7 +29,7 @@ public class ShiftController {
     @Autowired
     private AppSessionService appSessionService;
 
-    @JsonView(ShiftView.All.class)
+    //@JsonView(ShiftView.All.class)
     @PostMapping
     public Shift save(@RequestBody Shift shift, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -47,7 +47,7 @@ public class ShiftController {
     }
 
     @GetMapping
-    @JsonView(ShiftView.All.class)
+    //@JsonView(ShiftView.All.class)
     public List<Shift> findAll() {
         return shiftService.findAll();
     }
