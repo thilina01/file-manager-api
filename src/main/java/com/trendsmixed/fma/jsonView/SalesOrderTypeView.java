@@ -9,7 +9,7 @@ package com.trendsmixed.fma.jsonView;
  *
  * @author Daminda
  */
-public class OrderTypeView {
+public class SalesOrderTypeView {
 
     public static interface Id {
 
