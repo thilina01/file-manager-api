@@ -71,6 +71,7 @@ public class Job implements Serializable {
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Item item;
+    @JsonView(JobView.JobType.class)
     @JoinColumn(name = "job_type_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private JobType jobType;

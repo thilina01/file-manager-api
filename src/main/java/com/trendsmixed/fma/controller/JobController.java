@@ -30,7 +30,7 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
-    @JsonView(JobView.All.class)
+    @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping
     public List<Job> findAll() {
         return jobService.findAll();
