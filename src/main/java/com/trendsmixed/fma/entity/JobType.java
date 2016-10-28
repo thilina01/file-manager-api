@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.JobTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -35,10 +37,13 @@ public class JobType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(JobTypeView.Id.class)
     @Column(name = "id", nullable = false)
     private Integer id;
+    @JsonView(JobTypeView.Code.class)
     @Column(name = "code", length = 50)
     private String code;
+    @JsonView(JobTypeView.Type.class)
     @Column(name = "type", length = 250)
     private String type;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobType")
@@ -107,5 +112,5 @@ public class JobType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.JobType[ id=" + id + " ]";
     }
-    
+
 }
