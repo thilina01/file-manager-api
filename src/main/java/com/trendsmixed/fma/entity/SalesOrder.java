@@ -61,7 +61,7 @@ public class SalesOrder implements Serializable {
     @JsonView(SalesOrderView.OrderReceivedDate.class)
     @Column(name = "order_recived_date")
     @Temporal(TemporalType.DATE)
-    private Date orderRecivedDate;
+    private Date orderReceivedDate;
     @JsonView(SalesOrderView.PoNumber.class)
     @Column(name = "po_number")
     private String poNumber;
@@ -130,11 +130,11 @@ public class SalesOrder implements Serializable {
     }
 
     public Date getOrderRecivedDate() {
-        return orderRecivedDate;
+        return orderReceivedDate;
     }
 
     public void setOrderRecivedDate(Date orderRecivedDate) {
-        this.orderRecivedDate = orderRecivedDate;
+        this.orderReceivedDate = orderRecivedDate;
     }
 
     public String getPoNumber() {
