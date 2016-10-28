@@ -26,7 +26,7 @@ public class SalesOrderView {
     public static interface OrderReceivedDate {
     }
 
-    public static interface SaleType {
+    public static interface SalesOrderType {
     }
 
     public static interface Customer {
@@ -41,7 +41,7 @@ public class SalesOrderView {
     public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
     }
 
-    public static interface AllAndCustomerAllAndSalesOrderTypeAll extends All, Customer, CustomerView.All, SaleType, SaleTypeView.All {
+    public static interface AllAndCustomerAllAndSalesOrderTypeAll extends All, Customer, CustomerView.All, SalesOrderType, SalesOrderTypeView.All {
     }
 
     public static interface AllAndSalesOrderItemAll extends All, SalesOrderItemList, SalesOrderItemView.All {
