@@ -59,7 +59,7 @@ public class SalesOrder implements Serializable {
     @Column(name = "order_qty")
     private Double orderQty;
     @JsonView(SalesOrderView.OrderReceivedDate.class)
-    @Column(name = "order_recived_date")
+    @Column(name = "order_received_date")
     @Temporal(TemporalType.DATE)
     private Date orderReceivedDate;
     @JsonView(SalesOrderView.PoNumber.class)
@@ -76,6 +76,7 @@ public class SalesOrder implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
+    @JsonView(SalesOrderView.SalesOrderType.class)
     @JoinColumn(name = "order_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SalesOrderType salesOrderType;
