@@ -62,15 +62,18 @@ public class Job implements Serializable {
     @Column(name = "job_no")
     private String jobNo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @JsonView(JobView.JobQuantity.class)
-    @Column(name = "job_quantity")
-    private Double jobQuantity;
+    @JsonView(JobView.Quantity.class)
+    @Column(name = "quantity")
+    private Double quantity;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
     private List<JobControlPoint> jobControlPointList;
     @JsonView(JobView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Item item;
+    @JoinColumn(name = "job_type_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+    private JobType jobType;
     @JsonView(JobView.SalesOrder.class)
     @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -131,12 +134,12 @@ public class Job implements Serializable {
         this.jobNo = jobNo;
     }
 
-    public Double getJobQuantity() {
-        return jobQuantity;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public void setJobQuantity(Double jobQuantity) {
-        this.jobQuantity = jobQuantity;
+    public void setQuantity(Double jobQuantity) {
+        this.quantity = jobQuantity;
     }
 
     public List<JobControlPoint> getJobControlPointList() {
@@ -153,6 +156,14 @@ public class Job implements Serializable {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public JobType getJobType() {
+        return jobType;
+    }
+
+    public void setJobType(JobType jobType) {
+        this.jobType = jobType;
     }
 
     public SalesOrder getSalesOrder() {
