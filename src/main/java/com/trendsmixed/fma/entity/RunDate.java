@@ -70,10 +70,6 @@ public class RunDate implements Serializable {
     @ManyToMany
     private List<LossReason> lossReasonList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private List<RunDateScrap> runDateScrapList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
-    private List<RunDateDefect> runDateDefectList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
     private List<RunDateManpower> runDateManpowerList;
     @JoinColumn(name = "job_control_point_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -151,22 +147,6 @@ public class RunDate implements Serializable {
 
     public void setLossReasonList(List<LossReason> lossReasonList) {
         this.lossReasonList = lossReasonList;
-    }
-
-    public List<RunDateScrap> getRunDateScrapList() {
-        return runDateScrapList;
-    }
-
-    public void setRunDateScrapList(List<RunDateScrap> runDateScrapList) {
-        this.runDateScrapList = runDateScrapList;
-    }
-
-    public List<RunDateDefect> getRunDateDefectList() {
-        return runDateDefectList;
-    }
-
-    public void setRunDateDefectList(List<RunDateDefect> runDateDefectList) {
-        this.runDateDefectList = runDateDefectList;
     }
 
     public List<RunDateManpower> getRunDateManpowerList() {
