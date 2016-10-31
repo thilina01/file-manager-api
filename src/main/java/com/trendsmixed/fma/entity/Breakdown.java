@@ -70,11 +70,11 @@ public class Breakdown implements Serializable {
         this.id = id;
     }
 
-    public Date getDate() {
+    public Date getBreakdownDate() {
         return breakdownDate;
     }
 
-    public void setDate(Date date) {
+    public void setBreakdownDate(Date date) {
         this.breakdownDate = date;
     }
 
@@ -126,5 +126,5 @@ public class Breakdown implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Breakdown[ id=" + id + " ]";
     }
-    
+
 }
