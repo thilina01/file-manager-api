@@ -64,11 +64,8 @@ public class RunDate implements Serializable {
     @JsonView(RunDateView.Scrap.class)
     @Column(name = "scrap")
     private Integer scrap;
-    @JoinTable(name = "run_date_loss", joinColumns = {
-        @JoinColumn(name = "run_date_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "loss_reason_id", referencedColumnName = "id")})
-    @ManyToMany
-    private List<LossReason> lossReasonList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
+    private List<RunDateLoss> runDateLossList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "runDate")
     private List<RunDateManpower> runDateManpowerList;
     @JoinColumn(name = "job_control_point_id", referencedColumnName = "id")
@@ -141,12 +138,12 @@ public class RunDate implements Serializable {
         this.scrap = scrap;
     }
 
-    public List<LossReason> getLossReasonList() {
-        return lossReasonList;
+    public List<RunDateLoss> getRunDateLossList() {
+        return runDateLossList;
     }
 
-    public void setLossReasonList(List<LossReason> lossReasonList) {
-        this.lossReasonList = lossReasonList;
+    public void setRunDateLossList(List<RunDateLoss> runDateLossList) {
+        this.runDateLossList = runDateLossList;
     }
 
     public List<RunDateManpower> getRunDateManpowerList() {
@@ -163,6 +160,14 @@ public class RunDate implements Serializable {
 
     public void setJobControlPoint(JobControlPoint jobControlPoint) {
         this.jobControlPoint = jobControlPoint;
+    }
+
+    public Shift getShift() {
+        return shift;
+    }
+
+    public void setShift(Shift shift) {
+        this.shift = shift;
     }
 
     @Override
@@ -190,12 +195,4 @@ public class RunDate implements Serializable {
         return "com.trendsmixed.fma.entity.RunDate[ id=" + id + " ]";
     }
 
-    public Shift getShift() {
-        return shift;
     }
-
-    public void setShift(Shift shift) {
-        this.shift = shift;
-    }
-    
-}
