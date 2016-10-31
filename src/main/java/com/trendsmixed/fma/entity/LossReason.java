@@ -49,6 +49,8 @@ public class LossReason implements Serializable {
     @JsonView(LossReasonView.ReasonInSinhala.class)
     @Column(name = "reason_in_sinhala")
     private String reasonInSinhala;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lossReason")
+    private List<Breakdown> breakdownList;
     @JsonView(LossReasonView.LossType.class)
     @JoinColumn(name = "loss_type_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
@@ -93,6 +95,14 @@ public class LossReason implements Serializable {
 
     public void setReasonInSinhala(String reasonInSinhala) {
         this.reasonInSinhala = reasonInSinhala;
+    }
+
+    public List<Breakdown> getBreakdownList() {
+        return breakdownList;
+    }
+
+    public void setBreakdownList(List<Breakdown> breakdownList) {
+        this.breakdownList = breakdownList;
     }
 
     public LossType getLossType() {

@@ -53,7 +53,7 @@ public class Machine implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
     private List<ItemMachine> itemMachineList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private List<DownTime> downTimeList;
+    private List<Breakdown> breakdownList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
     private List<MachineRunningTime> machineRunningTimeList;
     @JsonView(MachineView.WorkCenter.class)
@@ -108,12 +108,12 @@ public class Machine implements Serializable {
         this.itemMachineList = itemMachineList;
     }
 
-    public List<DownTime> getDownTimeList() {
-        return downTimeList;
+    public List<Breakdown> getBreakdownList() {
+        return breakdownList;
     }
 
-    public void setDownTimeList(List<DownTime> downTimeList) {
-        this.downTimeList = downTimeList;
+    public void setBreakdownList(List<Breakdown> breakdownList) {
+        this.breakdownList = breakdownList;
     }
 
     public List<MachineRunningTime> getMachineRunningTimeList() {
