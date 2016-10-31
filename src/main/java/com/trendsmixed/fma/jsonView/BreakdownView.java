@@ -13,5 +13,10 @@ public class BreakdownView {
 
     public static interface Machine {
     }
+    public static interface All extends Id,Date,Duration,Machine{
+        
+    }  
+    
+    
 
 }
