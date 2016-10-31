@@ -43,10 +43,13 @@ public class LossReason implements Serializable {
     @JsonView(LossReasonView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(LossReasonView.Reason.class)
     @Column(name = "reason")
     private String reason;
-    @Column(name = "reason_in_shinhala")
-    private String reasonInShinhala;
+    @JsonView(LossReasonView.ReasonInSinhala.class)
+    @Column(name = "reason_in_sinhala")
+    private String reasonInSinhala;
+    @JsonView(LossReasonView.LossType.class)
     @JoinColumn(name = "loss_type_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private LossType lossType;
@@ -84,12 +87,12 @@ public class LossReason implements Serializable {
         this.reason = reason;
     }
 
-    public String getReasonInShinhala() {
-        return reasonInShinhala;
+    public String getReasonInSinhala() {
+        return reasonInSinhala;
     }
 
-    public void setReasonInShinhala(String reasonInShinhala) {
-        this.reasonInShinhala = reasonInShinhala;
+    public void setReasonInSinhala(String reasonInSinhala) {
+        this.reasonInSinhala = reasonInSinhala;
     }
 
     public LossType getLossType() {

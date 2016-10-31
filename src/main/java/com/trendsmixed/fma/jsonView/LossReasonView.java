@@ -8,13 +8,19 @@ public class LossReasonView {
     public static interface Code {
     }
 
-    public static interface Type {
+    public static interface Reason {
     }
 
-    public static interface TypeInSinhala {
+    public static interface ReasonInSinhala {
     }
 
-    public static interface All extends Id, Code, Type, TypeInSinhala {
-
+    public static interface LossType {
     }
+
+    public static interface All extends Id, Code, Reason, ReasonInSinhala {
+    }
+
+    public static interface AllAndLossTypeAll extends All, LossType, LossTypeView.AlL {
+    }
+
 }

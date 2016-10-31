@@ -30,7 +30,7 @@ public class LossReasonController {
     @Autowired
     private LossReasonService lossReasonService;
 
-    @JsonView(LossReasonView.All.class)
+    @JsonView(LossReasonView.AllAndLossTypeAll.class)
     @GetMapping
     public List<LossReason> findAll() {
         return lossReasonService.findAll();
