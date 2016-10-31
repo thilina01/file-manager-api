@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.LossTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -33,12 +35,16 @@ public class LossType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(LossTypeView.Id.class)
     @Column(name = "id", nullable = false)
     private Integer id;
+    @JsonView(LossTypeView.Code.class)
     @Column(name = "code", length = 45)
     private String code;
+    @JsonView(LossTypeView.Type.class)
     @Column(name = "type", length = 250)
     private String type;
+    @JsonView(LossTypeView.TypeInSinhala.class)
     @Column(name = "type_in_sinhala", length = 250)
     private String typeInSinhala;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lossType")
@@ -115,5 +121,5 @@ public class LossType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.LossType[ id=" + id + " ]";
     }
-    
+
 }
