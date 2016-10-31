@@ -10,16 +10,17 @@ import com.trendsmixed.fma.jsonView.LossReasonView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -46,11 +47,11 @@ public class LossReason implements Serializable {
     private String reason;
     @Column(name = "reason_in_shinhala")
     private String reasonInShinhala;
-    @ManyToMany(mappedBy = "lossReasonList")
-    private List<RunDate> runDateList;
     @JoinColumn(name = "loss_type_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private LossType lossType;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lossReason")
+    private List<RunDateLoss> runDateLossList;
 
     public LossReason() {
     }
@@ -91,20 +92,20 @@ public class LossReason implements Serializable {
         this.reasonInShinhala = reasonInShinhala;
     }
 
-    public List<RunDate> getRunDateList() {
-        return runDateList;
-    }
-
-    public void setRunDateList(List<RunDate> runDateList) {
-        this.runDateList = runDateList;
-    }
-
     public LossType getLossType() {
         return lossType;
     }
 
     public void setLossType(LossType lossType) {
         this.lossType = lossType;
+    }
+
+    public List<RunDateLoss> getRunDateLossList() {
+        return runDateLossList;
+    }
+
+    public void setRunDateLossList(List<RunDateLoss> runDateLossList) {
+        this.runDateLossList = runDateLossList;
     }
 
     @Override
