@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -59,6 +60,8 @@ public class SalesOrderItem implements Serializable {
     private SalesOrder salesOrder;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrderItem")
     private List<Delivery> deliveryList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "salesOrderItem")
+    private Job job;
 
     public SalesOrderItem() {
     }
@@ -138,6 +141,14 @@ public class SalesOrderItem implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.SalesOrderItem[ id=" + id + " ]";
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
     }
     
 }

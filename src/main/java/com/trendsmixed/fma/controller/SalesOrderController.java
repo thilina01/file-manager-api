@@ -1,6 +1,8 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.entity.Job;
+import com.trendsmixed.fma.entity.JobType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +11,7 @@ import com.trendsmixed.fma.entity.SalesOrder;
 import com.trendsmixed.fma.entity.SalesOrderItem;
 import com.trendsmixed.fma.jsonView.SalesOrderView;
 import com.trendsmixed.fma.service.AppSessionService;
+import com.trendsmixed.fma.service.JobTypeService;
 import com.trendsmixed.fma.service.SalesOrderService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +33,8 @@ public class SalesOrderController {
     private AppSessionService appSessionService;
     @Autowired
     private SalesOrderService salesOrderService;
+    @Autowired
+    private JobTypeService jobTypeService;
 
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @GetMapping
@@ -41,15 +46,31 @@ public class SalesOrderController {
     @PostMapping
     public SalesOrder save(@RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
+        JobType jobType = jobTypeService.findByCode("SOJ");
+        if (jobType == null) {
+            jobType = new JobType();
+            jobType.setCode("SOJ");
+            jobType.setType("Sales order job");
+            jobType = jobTypeService.save(jobType);
+        }
         try {
             List<SalesOrderItem> salesOrderItems = salesOrder.getSalesOrderItemList();
             for (SalesOrderItem salesOrderItem : salesOrderItems) {
                 salesOrderItem.setSalesOrder(salesOrder);
+                Job job = salesOrderItem.getJob();
+                job = job == null ? new Job() : job;
+                job.setItem(salesOrderItem.getItem());
+                job.setJobDate(salesOrder.getOrderReceivedDate());
+                job.setJobType(jobType);
+                job.setSalesOrderItem(salesOrderItem);
+                job.setQuantity(salesOrderItem.getQuantity());
+                salesOrderItem.setJob(job);
             }
             salesOrder = salesOrderService.save(salesOrder);
             return salesOrder;
 
         } catch (Throwable e) {
+            e.printStackTrace();
             while (e.getCause() != null) {
                 e = e.getCause();
             }

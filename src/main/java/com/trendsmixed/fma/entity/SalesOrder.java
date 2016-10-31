@@ -80,8 +80,6 @@ public class SalesOrder implements Serializable {
     @JoinColumn(name = "order_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SalesOrderType salesOrderType;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrder")
-    private List<Job> jobList;
 
     public SalesOrder() {
     }
@@ -130,12 +128,12 @@ public class SalesOrder implements Serializable {
         this.orderQty = orderQty;
     }
 
-    public Date getOrderRecivedDate() {
+    public Date getOrderReceivedDate() {
         return orderReceivedDate;
     }
 
-    public void setOrderRecivedDate(Date orderRecivedDate) {
-        this.orderReceivedDate = orderRecivedDate;
+    public void setOrderReceivedDate(Date orderReceivedDate) {
+        this.orderReceivedDate = orderReceivedDate;
     }
 
     public String getPoNumber() {
@@ -162,7 +160,6 @@ public class SalesOrder implements Serializable {
         this.salesOrderItemList = salesOrderItemList;
     }
 
-
     public Customer getCustomer() {
         return customer;
     }
@@ -177,14 +174,6 @@ public class SalesOrder implements Serializable {
 
     public void setSalesOrderType(SalesOrderType salesOrderType) {
         this.salesOrderType = salesOrderType;
-    }
-
-    public List<Job> getJobList() {
-        return jobList;
-    }
-
-    public void setJobList(List<Job> jobList) {
-        this.jobList = jobList;
     }
 
     @Override

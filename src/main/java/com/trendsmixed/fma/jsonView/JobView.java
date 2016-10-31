@@ -32,7 +32,7 @@ public class JobView {
     public static interface JobType {
     }
 
-    public static interface SalesOrder {
+    public static interface SalesOrderItem {
     }
     
     public static interface AllAndItemAllAndJobTypeAll extends All,Item,JobType, ItemView.All, JobTypeView.AlL{

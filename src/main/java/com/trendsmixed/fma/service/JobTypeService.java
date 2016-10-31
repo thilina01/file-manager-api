@@ -29,4 +29,8 @@ public class JobTypeService {
     public void delete(int id) {
         JobTypeRepository.delete(id);
     }
+
+    public JobType findByCode(String code) {
+        return JobTypeRepository.findByCode(code);
+    }
 }

@@ -22,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -75,10 +76,10 @@ public class Job implements Serializable {
     @JoinColumn(name = "job_type_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private JobType jobType;
-    @JsonView(JobView.SalesOrder.class)
-    @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private SalesOrder salesOrder;
+    @JsonView(JobView.SalesOrderItem.class)
+    @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id", nullable = false)
+    @OneToOne()
+    private SalesOrderItem salesOrderItem;
 
     public Job() {
     }
@@ -139,8 +140,8 @@ public class Job implements Serializable {
         return quantity;
     }
 
-    public void setQuantity(Double jobQuantity) {
-        this.quantity = jobQuantity;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     public List<JobControlPoint> getJobControlPointList() {
@@ -167,12 +168,12 @@ public class Job implements Serializable {
         this.jobType = jobType;
     }
 
-    public SalesOrder getSalesOrder() {
-        return salesOrder;
+    public SalesOrderItem getSalesOrderItem() {
+        return salesOrderItem;
     }
 
-    public void setSalesOrder(SalesOrder salesOrder) {
-        this.salesOrder = salesOrder;
+    public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
+        this.salesOrderItem = salesOrderItem;
     }
 
     @Override
