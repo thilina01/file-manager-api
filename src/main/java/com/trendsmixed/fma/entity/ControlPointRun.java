@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ControlPointRunView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -38,19 +40,25 @@ public class ControlPointRun implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ControlPointRunView.Id.class)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
+    @JsonView(ControlPointRunView.RunDate.class)
     @Column(name = "run_date")
     @Temporal(TemporalType.DATE)
     private Date runDate;
+    @JsonView(ControlPointRunView.BreakdownCount.class)
     @Column(name = "breakdown_count")
     private Integer breakdownCount;
+    @JsonView(ControlPointRunView.WorkingDuration.class)
     @Column(name = "working_duration")
     private Integer workingDuration;
+    @JsonView(ControlPointRunView.ControlPoint.class)
     @JoinColumn(name = "control_point_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ControlPoint controlPoint;
+    @JsonView(ControlPointRunView.Shift.class)
     @JoinColumn(name = "shift_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Shift shift;
@@ -169,5 +177,5 @@ public class ControlPointRun implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ControlPointRun[ id=" + id + " ]";
     }
-    
+
 }
