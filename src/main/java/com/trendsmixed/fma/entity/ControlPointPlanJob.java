@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ControlPointPlanJobView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -32,13 +34,17 @@ public class ControlPointPlanJob implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ControlPointPlanJobView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ControlPointPlanJobView.Quantity.class)
     @Column(name = "quantity")
     private Integer quantity;
+    @JsonView(ControlPointPlanJobView.ControlPointPlan.class)
     @JoinColumn(name = "control_point_plan_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ControlPointPlan controlPointPlan;
+    @JsonView(ControlPointPlanJobView.Job.class)
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Job job;
