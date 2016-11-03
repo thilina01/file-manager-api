@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +9,7 @@ import com.trendsmixed.fma.entity.ControlPointRun;
 import com.trendsmixed.fma.entity.ControlPointRunJob;
 import com.trendsmixed.fma.entity.ControlPointRunLoss;
 import com.trendsmixed.fma.entity.ControlPointRunManpower;
+import com.trendsmixed.fma.jsonView.ControlPointRunView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ControlPointRunService;
 import java.util.List;
@@ -31,7 +33,7 @@ public class ControlPointRunController {
     @Autowired
     private ControlPointRunService controlPointRunService;
 
-    
+    @JsonView(ControlPointRunView.All.class)
     @GetMapping
     public List<ControlPointRun> findAll() {
         return controlPointRunService.findAll();
