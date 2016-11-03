@@ -1,13 +1,13 @@
 package com.trendsmixed.fma.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.ControlPointRun;
-import com.trendsmixed.fma.jsonView.ControlPointRunView;
+import com.trendsmixed.fma.entity.ControlPointRunJob;
+import com.trendsmixed.fma.entity.ControlPointRunLoss;
+import com.trendsmixed.fma.entity.ControlPointRunManpower;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ControlPointRunService;
 import java.util.List;
@@ -42,6 +42,21 @@ public class ControlPointRunController {
     public ControlPointRun save(@RequestBody ControlPointRun controlPointRun, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
+            List<ControlPointRunManpower> controlPointRunManpowers = controlPointRun.getControlPointRunManpowerList();
+            for (ControlPointRunManpower controlPointRunManpower : controlPointRunManpowers) {
+                controlPointRunManpower.setControlPointRun(controlPointRun);                
+            }
+            
+            List<ControlPointRunJob> controlPointRunJobs = controlPointRun.getControlPointRunJobList();
+            for (ControlPointRunJob controlPointRunJob : controlPointRunJobs) {
+                controlPointRunJob.setControlPointRun(controlPointRun);                
+            }
+            List<ControlPointRunLoss> controlPointRunLosses = controlPointRun.getControlPointRunLossList();
+            for (ControlPointRunLoss controlPointRunLoss : controlPointRunLosses) {
+                controlPointRunLoss.setControlPointRun(controlPointRun);  
+                
+            }
+            
             controlPointRun = controlPointRunService.save(controlPointRun);
             return controlPointRun;
 
