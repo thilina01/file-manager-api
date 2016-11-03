@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ControlPointPlanView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -35,19 +37,23 @@ import javax.persistence.TemporalType;
 public class ControlPointPlan implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @JsonView(ControlPointPlanView.PlanDate.class)
     @Column(name = "plan_date")
     @Temporal(TemporalType.DATE)
     private Date planDate;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ControlPointPlanView.Id.class)
     @Column(name = "id")
     private Integer id;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPointPlan")
     private List<ControlPointPlanManpower> controlPointPlanManpowerList;
+    @JsonView(ControlPointPlanView.ControlPoint.class)
     @JoinColumn(name = "control_point_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ControlPoint controlPoint;
+    @JsonView(ControlPointPlanView.Shift.class)
     @JoinColumn(name = "shift_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Shift shift;
