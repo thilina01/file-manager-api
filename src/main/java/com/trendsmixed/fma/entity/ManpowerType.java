@@ -38,6 +38,9 @@ public class ManpowerType implements Serializable {
     @JsonView(ManpowerTypeView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ManpowerTypeView.Code.class)
+    @Column(name = "code")
+    private String code;
     @JsonView(ManpowerTypeView.Type.class)
     @Column(name = "type")
     private String type;
