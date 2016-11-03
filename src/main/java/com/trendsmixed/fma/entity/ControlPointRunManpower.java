@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ControlPointRunManpowerView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -32,13 +34,17 @@ public class ControlPointRunManpower implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ControlPointRunManpowerView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ControlPointRunManpowerView.Count.class)
     @Column(name = "count")
     private Integer count;
+    @JsonView(ControlPointRunManpowerView.ControlPointRun.class)
     @JoinColumn(name = "control_point_run_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ControlPointRun controlPointRun;
+    @JsonView(ControlPointRunManpowerView.ManpowerType.class)
     @JoinColumn(name = "manpower_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ManpowerType manpowerType;
@@ -106,5 +112,5 @@ public class ControlPointRunManpower implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ControlPointRunManpower[ id=" + id + " ]";
     }
-    
+
 }
