@@ -67,8 +67,7 @@ public class Job implements Serializable {
     @Column(name = "quantity")
     private Double quantity;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
-    private List<JobControlPoint> jobControlPointList;
-    @JsonView(JobView.Item.class)
+    private List<ControlPointRunJob> controlPointRunJobList;
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Item item;
@@ -80,6 +79,8 @@ public class Job implements Serializable {
     @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id", nullable = false)
     @OneToOne()
     private SalesOrderItem salesOrderItem;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
+    private List<ControlPointPlanJob> controlPointPlanJobList;
 
     public Job() {
     }
@@ -144,12 +145,12 @@ public class Job implements Serializable {
         this.quantity = quantity;
     }
 
-    public List<JobControlPoint> getJobControlPointList() {
-        return jobControlPointList;
+    public List<ControlPointRunJob> getControlPointRunJobList() {
+        return controlPointRunJobList;
     }
 
-    public void setJobControlPointList(List<JobControlPoint> jobControlPointList) {
-        this.jobControlPointList = jobControlPointList;
+    public void setControlPointRunJobList(List<ControlPointRunJob> controlPointRunJobList) {
+        this.controlPointRunJobList = controlPointRunJobList;
     }
 
     public Item getItem() {
@@ -174,6 +175,14 @@ public class Job implements Serializable {
 
     public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
         this.salesOrderItem = salesOrderItem;
+    }
+
+    public List<ControlPointPlanJob> getControlPointPlanJobList() {
+        return controlPointPlanJobList;
+    }
+
+    public void setControlPointPlanJobList(List<ControlPointPlanJob> controlPointPlanJobList) {
+        this.controlPointPlanJobList = controlPointPlanJobList;
     }
 
     @Override

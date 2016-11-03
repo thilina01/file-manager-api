@@ -45,9 +45,9 @@ public class ManpowerType implements Serializable {
     @Column(name = "type")
     private String type;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
-    private List<PlanDateManpower> planDateManpowerList;
+    private List<ControlPointPlanManpower> controlPointPlanManpowerList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
-    private List<RunDateManpower> runDateManpowerList;
+    private List<ControlPointRunManpower> controlPointRunManpowerList;
 
     public ManpowerType() {
     }
@@ -64,6 +64,14 @@ public class ManpowerType implements Serializable {
         this.id = id;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public String getType() {
         return type;
     }
@@ -72,20 +80,20 @@ public class ManpowerType implements Serializable {
         this.type = type;
     }
 
-    public List<PlanDateManpower> getPlanDateManpowerList() {
-        return planDateManpowerList;
+    public List<ControlPointPlanManpower> getControlPointPlanManpowerList() {
+        return controlPointPlanManpowerList;
     }
 
-    public void setPlanDateManpowerList(List<PlanDateManpower> planDateManpowerList) {
-        this.planDateManpowerList = planDateManpowerList;
+    public void setControlPointPlanManpowerList(List<ControlPointPlanManpower> controlPointPlanManpowerList) {
+        this.controlPointPlanManpowerList = controlPointPlanManpowerList;
     }
 
-    public List<RunDateManpower> getRunDateManpowerList() {
-        return runDateManpowerList;
+    public List<ControlPointRunManpower> getControlPointRunManpowerList() {
+        return controlPointRunManpowerList;
     }
 
-    public void setRunDateManpowerList(List<RunDateManpower> runDateManpowerList) {
-        this.runDateManpowerList = runDateManpowerList;
+    public void setControlPointRunManpowerList(List<ControlPointRunManpower> controlPointRunManpowerList) {
+        this.controlPointRunManpowerList = controlPointRunManpowerList;
     }
 
     @Override

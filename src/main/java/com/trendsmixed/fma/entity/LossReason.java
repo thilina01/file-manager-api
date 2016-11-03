@@ -56,7 +56,7 @@ public class LossReason implements Serializable {
     @ManyToOne(optional = false)
     private LossType lossType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lossReason")
-    private List<RunDateLoss> runDateLossList;
+    private List<ControlPointRunLoss> controlPointRunLossList;
 
     public LossReason() {
     }
@@ -113,12 +113,12 @@ public class LossReason implements Serializable {
         this.lossType = lossType;
     }
 
-    public List<RunDateLoss> getRunDateLossList() {
-        return runDateLossList;
+    public List<ControlPointRunLoss> getControlPointRunLossList() {
+        return controlPointRunLossList;
     }
 
-    public void setRunDateLossList(List<RunDateLoss> runDateLossList) {
-        this.runDateLossList = runDateLossList;
+    public void setControlPointRunLossList(List<ControlPointRunLoss> controlPointRunLossList) {
+        this.controlPointRunLossList = controlPointRunLossList;
     }
 
     @Override

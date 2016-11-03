@@ -8,7 +8,9 @@ package com.trendsmixed.fma.entity;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.jsonView.ShiftView;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -41,6 +44,10 @@ public class Shift implements Serializable {
     @JsonView(ShiftView.Name.class)
     @Column(name = "name")
     private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shift")
+    private List<ControlPointPlan> controlPointPlanList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shift")
+    private List<ControlPointRun> controlPointRunList;
 
     public Shift() {
     }
@@ -71,6 +78,22 @@ public class Shift implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<ControlPointPlan> getControlPointPlanList() {
+        return controlPointPlanList;
+    }
+
+    public void setControlPointPlanList(List<ControlPointPlan> controlPointPlanList) {
+        this.controlPointPlanList = controlPointPlanList;
+    }
+
+    public List<ControlPointRun> getControlPointRunList() {
+        return controlPointRunList;
+    }
+
+    public void setControlPointRunList(List<ControlPointRun> controlPointRunList) {
+        this.controlPointRunList = controlPointRunList;
     }
 
     @Override

@@ -51,7 +51,9 @@ public class ControlPoint implements Serializable {
     @ManyToOne(optional = false)
     private WorkCenter workCenter;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
-    private List<JobControlPoint> jobControlPointList;
+    private List<ControlPointPlan> controlPointPlanList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
+    private List<ControlPointRun> controlPointRunList;
 
     public ControlPoint() {
     }
@@ -92,12 +94,20 @@ public class ControlPoint implements Serializable {
         this.workCenter = workCenter;
     }
 
-    public List<JobControlPoint> getJobControlPointList() {
-        return jobControlPointList;
+    public List<ControlPointPlan> getControlPointPlanList() {
+        return controlPointPlanList;
     }
 
-    public void setJobControlPointList(List<JobControlPoint> jobControlPointList) {
-        this.jobControlPointList = jobControlPointList;
+    public void setControlPointPlanList(List<ControlPointPlan> controlPointPlanList) {
+        this.controlPointPlanList = controlPointPlanList;
+    }
+
+    public List<ControlPointRun> getControlPointRunList() {
+        return controlPointRunList;
+    }
+
+    public void setControlPointRunList(List<ControlPointRun> controlPointRunList) {
+        this.controlPointRunList = controlPointRunList;
     }
 
     @Override
