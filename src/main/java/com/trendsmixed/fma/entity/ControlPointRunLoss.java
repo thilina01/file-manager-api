@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ControlPointRunLossView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -32,11 +34,14 @@ public class ControlPointRunLoss implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ControlPointRunLossView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ControlPointRunLossView.ControlPointRun.class)
     @JoinColumn(name = "control_point_run_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ControlPointRun controlPointRun;
+    @JsonView(ControlPointRunLossView.LossReason.class)
     @JoinColumn(name = "loss_reason_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LossReason lossReason;
