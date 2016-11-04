@@ -31,6 +31,8 @@ public class ControlPointRunJobController {
     private ControlPointRunJobService controlPointRunJobService;
 
     
+            
+    @JsonView(ControlPointRunJobView.AllAndJobAndControlPointRun.class)
     @GetMapping
     public List<ControlPointRunJob> findAll() {
         return controlPointRunJobService.findAll();

@@ -33,36 +33,42 @@ public class ControlPointRunController {
     @Autowired
     private ControlPointRunService controlPointRunService;
 
-    @JsonView(ControlPointRunView.All.class)
+    @JsonView(ControlPointRunView.AllAndShiftAndControllPoint.class)
     @GetMapping
     public List<ControlPointRun> findAll() {
         return controlPointRunService.findAll();
     }
 
-    
     @PostMapping
     public ControlPointRun save(@RequestBody ControlPointRun controlPointRun, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
+
             List<ControlPointRunManpower> controlPointRunManpowers = controlPointRun.getControlPointRunManpowerList();
-            for (ControlPointRunManpower controlPointRunManpower : controlPointRunManpowers) {
-                controlPointRunManpower.setControlPointRun(controlPointRun);                
+            if (controlPointRunManpowers != null) {
+                for (ControlPointRunManpower controlPointRunManpower : controlPointRunManpowers) {
+                    controlPointRunManpower.setControlPointRun(controlPointRun);
+                }
             }
-            
+            /*  */
             List<ControlPointRunJob> controlPointRunJobs = controlPointRun.getControlPointRunJobList();
-            for (ControlPointRunJob controlPointRunJob : controlPointRunJobs) {
-                controlPointRunJob.setControlPointRun(controlPointRun);                
+            if (controlPointRunJobs != null) {
+                for (ControlPointRunJob controlPointRunJob : controlPointRunJobs) {
+                    controlPointRunJob.setControlPointRun(controlPointRun);
+                }
             }
+            /*
             List<ControlPointRunLoss> controlPointRunLosses = controlPointRun.getControlPointRunLossList();
             for (ControlPointRunLoss controlPointRunLoss : controlPointRunLosses) {
-                controlPointRunLoss.setControlPointRun(controlPointRun);  
-                
+                controlPointRunLoss.setControlPointRun(controlPointRun);
             }
-            
+          
+             */
             controlPointRun = controlPointRunService.save(controlPointRun);
             return controlPointRun;
 
         } catch (Throwable e) {
+            e.printStackTrace();
             while (e.getCause() != null) {
                 e = e.getCause();
             }

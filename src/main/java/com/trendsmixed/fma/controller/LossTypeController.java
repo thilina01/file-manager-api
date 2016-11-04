@@ -31,7 +31,7 @@ public class LossTypeController {
     @Autowired
     private LossTypeService lossTypeService;
 
-    @JsonView(LossTypeView.AlL.class)
+    @JsonView(LossTypeView.AlLAndLossReasonList.class)
     @GetMapping
     public List<LossType> findAll() {
         return lossTypeService.findAll();

@@ -14,7 +14,13 @@ public class LossTypeView {
     public static interface TypeInSinhala {
     }
 
-    public static interface AlL extends Id, Type, Code, TypeInSinhala {
+    public static interface LossReasonList {
+    }
+
+    public static interface All extends Id, Type, Code, TypeInSinhala {
+    }
+
+    public static interface AlLAndLossReasonList extends All, LossReasonList, LossReasonView.All {
     }
 
 }

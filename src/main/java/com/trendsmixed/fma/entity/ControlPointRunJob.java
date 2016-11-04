@@ -37,7 +37,7 @@ public class ControlPointRunJob implements Serializable {
     @JsonView(ControlPointRunJobView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(ControlPointRunJobView.quantity.class)
+    @JsonView(ControlPointRunJobView.Quantity.class)
     @Column(name = "quantity")
     private Integer quantity;
     @JsonView(ControlPointRunJobView.ControlPointRun.class)

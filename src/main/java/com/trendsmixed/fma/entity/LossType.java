@@ -47,6 +47,7 @@ public class LossType implements Serializable {
     @JsonView(LossTypeView.TypeInSinhala.class)
     @Column(name = "type_in_sinhala", length = 250)
     private String typeInSinhala;
+    @JsonView(LossTypeView.LossReasonList.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lossType")
     private List<LossReason> lossReasonList;
 

@@ -20,7 +20,7 @@ public class LossReasonView {
     public static interface All extends Id, Code, Reason, ReasonInSinhala {
     }
 
-    public static interface AllAndLossTypeAll extends All, LossType, LossTypeView.AlL {
+    public static interface AllAndLossTypeAll extends All, LossType, LossTypeView.All {
     }
 
 }

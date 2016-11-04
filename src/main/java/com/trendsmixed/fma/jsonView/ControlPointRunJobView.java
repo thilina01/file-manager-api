@@ -14,13 +14,17 @@ public class ControlPointRunJobView {
     public static interface Id {
     }
 
-    public static interface quantity {
+    public static interface Quantity {
     }
 
-    public static class ControlPointRun {
+    public static interface ControlPointRun {
     }
 
-    public static class Job {
+    public static interface Job {
     }
+    
+    public static interface AllAndJobAndControlPointRun extends Id,Quantity,ControlPointRun,Job,ControlPointRunView.AllAndShiftAndControllPoint,JobView.All{
+    }
+    
     
 }

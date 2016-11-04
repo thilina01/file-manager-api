@@ -68,6 +68,7 @@ public class Job implements Serializable {
     private Double quantity;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
     private List<ControlPointRunJob> controlPointRunJobList;
+    @JsonView(JobView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Item item;

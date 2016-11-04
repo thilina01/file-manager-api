@@ -22,5 +22,8 @@ public class ControlPointRunManpowerView {
 
     public static interface ManpowerType {
     }
-    
+
+    public static interface All extends Id, Count {
+    }
+
 }

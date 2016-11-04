@@ -33,5 +33,7 @@ public class ControlPointRunView {
 
     }
 
+    public static interface AllAndShiftAndControllPoint extends All, Shift, ControlPoint, ShiftView.All, ControlPointView.All {
+    }
 
 }

@@ -68,7 +68,7 @@ public class SalesOrderController {
             }
             salesOrder = salesOrderService.save(salesOrder);
             return salesOrder;
-
+            
         } catch (Throwable e) {
             e.printStackTrace();
             while (e.getCause() != null) {
