@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/controlPointRunLosss")
+@RequestMapping("/controlPointRunLosses")
 public class ControlPointRunLossController {
 
     @Autowired
@@ -30,13 +30,12 @@ public class ControlPointRunLossController {
     @Autowired
     private ControlPointRunLossService controlPointRunLossService;
 
-   
+    @JsonView(ControlPointRunLossView.AllAndControlPointRunAndLossReasonAndLossType.class)
     @GetMapping
     public List<ControlPointRunLoss> findAll() {
         return controlPointRunLossService.findAll();
     }
 
-    
     @PostMapping
     public ControlPointRunLoss save(@RequestBody ControlPointRunLoss controlPointRunLoss, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -55,7 +54,7 @@ public class ControlPointRunLossController {
 //                controlPointRunLossLoss.setControlPointRunLoss(controlPointRunLoss);  
 //                
 //            }
-            
+
             controlPointRunLoss = controlPointRunLossService.save(controlPointRunLoss);
             return controlPointRunLoss;
 

@@ -30,8 +30,6 @@ public class ControlPointRunJobController {
     @Autowired
     private ControlPointRunJobService controlPointRunJobService;
 
-    
-            
     @JsonView(ControlPointRunJobView.AllAndJobAndControlPointRun.class)
     @GetMapping
     public List<ControlPointRunJob> findAll() {

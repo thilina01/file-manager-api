@@ -39,6 +39,7 @@ public class ControlPointRunController {
         return controlPointRunService.findAll();
     }
 
+    @JsonView(ControlPointRunView.AllAndShiftAndControllPoint.class)
     @PostMapping
     public ControlPointRun save(@RequestBody ControlPointRun controlPointRun, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -57,13 +58,14 @@ public class ControlPointRunController {
                     controlPointRunJob.setControlPointRun(controlPointRun);
                 }
             }
-            /*
+
             List<ControlPointRunLoss> controlPointRunLosses = controlPointRun.getControlPointRunLossList();
-            for (ControlPointRunLoss controlPointRunLoss : controlPointRunLosses) {
-                controlPointRunLoss.setControlPointRun(controlPointRun);
+            if (controlPointRunLosses != null) {
+                for (ControlPointRunLoss controlPointRunLoss : controlPointRunLosses) {
+                    controlPointRunLoss.setControlPointRun(controlPointRun);
+                }
             }
-          
-             */
+            /*  */
             controlPointRun = controlPointRunService.save(controlPointRun);
             return controlPointRun;
 

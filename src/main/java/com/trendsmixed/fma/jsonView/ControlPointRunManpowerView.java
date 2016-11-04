@@ -26,4 +26,7 @@ public class ControlPointRunManpowerView {
     public static interface All extends Id, Count {
     }
 
+    public static interface AllAndManpowerTypeAndControlPointRun extends All, ManpowerType, ControlPointRun, ManpowerTypeView.All, ControlPointRunView.AllAndShiftAndControllPoint {
+    }
+
 }
