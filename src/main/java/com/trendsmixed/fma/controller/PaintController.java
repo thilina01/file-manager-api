@@ -52,6 +52,20 @@ public class PaintController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Paint> paints, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+
+        appSessionService.isValid(email, request);
+        try {
+            paintService.save(paints);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+
     @GetMapping("/{id}")
     public Paint findOne(@PathVariable("id") int id) {
         return paintService.findOne(id);

@@ -52,6 +52,20 @@ public class CountryController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Country> countries, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+
+        appSessionService.isValid(email, request);
+        try {
+            countryService.save(countries);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+
     @GetMapping("/{id}")
     public Country findOne(@PathVariable("id") int id) {
         return countryService.findOne(id);

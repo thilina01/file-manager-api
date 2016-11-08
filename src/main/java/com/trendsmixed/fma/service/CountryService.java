@@ -22,6 +22,10 @@ public class CountryService {
         return countryRepository.save(country);
     }
 
+    public void save(List<Country> countries) {
+        countryRepository.save(countries);
+    }
+
     public Country findOne(int id) {
         return countryRepository.findOne(id);
     }

@@ -22,8 +22,16 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
+    public void save(List<Item> items) {
+        itemRepository.save(items);
+    }
+
     public Item findOne(int id) {
         return itemRepository.findOne(id);
+    }
+
+    public Item findByCode(String code) {
+        return itemRepository.findByCode(code);
     }
 
     public void delete(int id) {

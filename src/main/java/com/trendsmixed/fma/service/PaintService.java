@@ -22,6 +22,10 @@ public class PaintService {
         return paintRepository.save(paint);
     }
 
+    public void save(List<Paint> paints) {
+        paintRepository.save(paints);
+    }
+
     public Paint findOne(int id) {
         return paintRepository.findOne(id);
     }

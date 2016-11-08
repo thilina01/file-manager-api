@@ -53,6 +53,20 @@ public class ItemController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Item> items, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        try {
+
+            itemService.save(items);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+
     @GetMapping("/{id}")
     public Item findOne(@PathVariable("id") int id) {
         return itemService.findOne(id);
