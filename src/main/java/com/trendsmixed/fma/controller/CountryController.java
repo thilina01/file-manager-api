@@ -30,6 +30,7 @@ public class CountryController {
     @Autowired
     private CountryService countryService;
 
+    @JsonView(CountryView.All.class)
     @GetMapping
     public List<Country> findAll() {
         return countryService.findAll();
