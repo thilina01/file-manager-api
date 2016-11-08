@@ -59,9 +59,9 @@ public class CostCenterController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id) {
         costCenterService.delete(id);
-        return "Deleted";
+        
 
     }
 

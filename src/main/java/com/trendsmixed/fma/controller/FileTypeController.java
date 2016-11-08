@@ -56,9 +56,9 @@ public class FileTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id) {
         fileTypeService.delete(id);
-        return "Deleted";
+        
 
     }
 

@@ -44,14 +44,14 @@ public class ControlPointRunController {
     public ControlPointRun save(@RequestBody ControlPointRun controlPointRun, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-
+            
             List<ControlPointRunManpower> controlPointRunManpowers = controlPointRun.getControlPointRunManpowerList();
             if (controlPointRunManpowers != null) {
                 for (ControlPointRunManpower controlPointRunManpower : controlPointRunManpowers) {
                     controlPointRunManpower.setControlPointRun(controlPointRun);
                 }
             }
-            /*  */
+            
             List<ControlPointRunJob> controlPointRunJobs = controlPointRun.getControlPointRunJobList();
             if (controlPointRunJobs != null) {
                 for (ControlPointRunJob controlPointRunJob : controlPointRunJobs) {
@@ -65,7 +65,7 @@ public class ControlPointRunController {
                     controlPointRunLoss.setControlPointRun(controlPointRun);
                 }
             }
-            /*  */
+            
             controlPointRun = controlPointRunService.save(controlPointRun);
             return controlPointRun;
 
