@@ -1,8 +1,8 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.entity.Customer;
+import com.trendsmixed.fma.entity.CustomerItem;
 import com.trendsmixed.fma.jsonView.CustomerView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.CustomerService;
@@ -40,6 +40,12 @@ public class CustomerController {
     @PostMapping
     public Customer save(@RequestBody Customer customer, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
+        List<CustomerItem> customerItems = customer.getCustomerItemList();
+        if (customerItems != null) {
+            for (CustomerItem customerItem : customerItems) {
+                customerItem.setCustomer(customer);
+            }
+        }
         try {
             customer = customerService.save(customer);
             return customer;
