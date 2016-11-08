@@ -22,6 +22,10 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
+    public void save(List<Customer> customers) {
+        customerRepository.save(customers);
+    }
+
     public Customer findOne(int id) {
         return customerRepository.findOne(id);
     }

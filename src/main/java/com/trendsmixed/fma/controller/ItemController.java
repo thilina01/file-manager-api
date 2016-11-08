@@ -1,16 +1,21 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Item;
+import com.trendsmixed.fma.entity.ItemType;
+import com.trendsmixed.fma.entity.Paint;
 import com.trendsmixed.fma.jsonView.ItemView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ItemService;
+import com.trendsmixed.fma.service.ItemTypeService;
+import com.trendsmixed.fma.service.PaintService;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +35,10 @@ public class ItemController {
     private AppSessionService appSessionService;
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private ItemTypeService itemTypeService;
+    @Autowired
+    private PaintService paintService;
 
     @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @GetMapping
@@ -57,9 +66,40 @@ public class ItemController {
     public void saveMany(@RequestBody List<Item> items, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
+            //List<Item> itemsToRemove = new ArrayList<>();
+            for (Item item : items) {
+                item.setCode(item.getCode().trim());
+                item.setDescription(item.getDescription().trim());
+                Item existingItem = itemService.findByCode(item.getCode());
+                if (existingItem != null) {
+                    //itemsToRemove.add(item);
+                    item.setId(existingItem.getId());
+                }
 
+                ItemType itemType = item.getItemType();
+                if (itemType != null) {
+                    itemType = itemTypeService.findByType(itemType.getType());
+                    item.setItemType(itemType);
+                }
+
+                Paint paint = item.getPaint();
+                if (paint != null) {
+                    paint = paintService.findByCode(paint.getCode());
+                    item.setPaint(paint);
+                }
+            }
+            /*System.out.println(items.size());
+            System.out.println(itemsToRemove.size());
+            for (Item item : itemsToRemove) {
+                System.out.println(item.getCode());
+                Predicate<Item> itemPredicate = i -> i.getCode() == item.getCode();
+                items.removeIf(itemPredicate);
+            }
+            System.out.println(items.size());
+            //items.removeAll(itemsToRemove);*/
             itemService.save(items);
         } catch (Throwable e) {
+            e.printStackTrace();
             while (e.getCause() != null) {
                 e = e.getCause();
             }

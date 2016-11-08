@@ -58,6 +58,19 @@ public class CustomerController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Customer> customers, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        try {
+            customerService.save(customers);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+
     @GetMapping("/{id}")
     public Customer findOne(@PathVariable("id") int id) {
         return customerService.findOne(id);

@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +43,20 @@ public class ItemTypeController {
             itemType = itemTypeService.save(itemType);
             return itemType;
 
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<ItemType> itemTypes, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        try {
+
+            itemTypeService.save(itemTypes);
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();

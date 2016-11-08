@@ -22,11 +22,19 @@ public class ItemTypeService {
         return ItemTypeRepository.save(itemType);
     }
 
+    public void save(List<ItemType> items) {
+        ItemTypeRepository.save(items);
+    }
+
     public ItemType findOne(int id) {
         return ItemTypeRepository.findOne(id);
     }
 
     public void delete(int id) {
         ItemTypeRepository.delete(id);
+    }
+
+    public ItemType findByType(String type) {
+        return ItemTypeRepository.findByType(type);
     }
 }

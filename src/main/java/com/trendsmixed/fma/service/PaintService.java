@@ -33,4 +33,8 @@ public class PaintService {
     public void delete(int id) {
         paintRepository.delete(id);
     }
+
+    public Paint findByCode(String code) {
+        return paintRepository.findByCode(code);
+    }
 }
