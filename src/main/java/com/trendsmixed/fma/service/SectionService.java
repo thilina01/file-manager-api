@@ -22,11 +22,19 @@ public class SectionService {
         return sectionRepository.save(section);
     }
 
+    public void save(List<Section> sections) {
+        sectionRepository.save(sections);
+    }
+
     public Section findOne(int id) {
         return sectionRepository.findOne(id);
     }
 
     public void delete(int id) {
         sectionRepository.delete(id);
+    }
+
+    public Section findByCode(String code) {
+        return sectionRepository.findByCode(code);
     }
 }

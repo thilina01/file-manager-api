@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Machine;
+import com.trendsmixed.fma.entity.WorkCenter;
 import com.trendsmixed.fma.jsonView.MachineView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.MachineService;
+import com.trendsmixed.fma.service.WorkCenterService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class MachineController {
     private AppSessionService appSessionService;
     @Autowired
     private MachineService machineService;
+    @Autowired
+    private WorkCenterService workCenterService;
 
     @JsonView(MachineView.AllAndWorkCenterAll.class)
     @GetMapping
@@ -52,6 +56,33 @@ public class MachineController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Machine> machines, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+
+        appSessionService.isValid(email, request);
+        try {                        
+            for (Machine machine : machines) {
+                machine.setCode(machine.getCode().trim());
+                machine.setName(machine.getName().trim());
+                Machine existingControlPoint = machineService.findByCode(machine.getCode());
+                if (existingControlPoint != null) {
+                    machine.setId(existingControlPoint.getId());
+                }
+                WorkCenter workCenter = machine.getWorkCenter();
+                if (workCenter != null) {
+                    workCenter = workCenterService.findByCode(workCenter.getCode());
+                    machine.setWorkCenter(workCenter);
+                }
+            }
+            machineService.save(machines);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+    
     @GetMapping("/{id}")
     public Machine findOne(@PathVariable("id") int id) {
         return machineService.findOne(id);

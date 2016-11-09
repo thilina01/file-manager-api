@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface WorkCenterRepository extends JpaRepository<WorkCenter, Integer> {
 
+    public WorkCenter findByCode(String code);
+
 }

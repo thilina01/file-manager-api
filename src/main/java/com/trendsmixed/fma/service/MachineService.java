@@ -22,11 +22,19 @@ public class MachineService {
         return machineRepository.save(machine);
     }
 
+    public void save(List<Machine> machines) {
+        machineRepository.save(machines);
+    }
+
     public Machine findOne(int id) {
         return machineRepository.findOne(id);
     }
 
     public void delete(int id) {
         machineRepository.delete(id);
+    }
+
+    public Machine findByCode(String code) {
+        return machineRepository.findByCode(code);
     }
 }

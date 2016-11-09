@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.entity.Section;
 import com.trendsmixed.fma.jsonView.SectionView;
 import com.trendsmixed.fma.service.AppSessionService;
@@ -44,6 +43,20 @@ public class SectionController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Section> sections, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+
+        appSessionService.isValid(email, request);
+        try {
+            sectionService.save(sections);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+    
     @GetMapping
     @JsonView(SectionView.All.class)
     public List<Section> findAll() {

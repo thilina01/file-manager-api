@@ -22,6 +22,10 @@ public class CostCenterService {
         return costCenterRepository.save(costCenter);
     }
 
+    public void save(List<CostCenter> costCenters) {
+        costCenterRepository.save(costCenters);
+    }
+
     public CostCenter findOne(int id) {
         return costCenterRepository.findOne(id);
     }
@@ -29,4 +33,9 @@ public class CostCenterService {
     public void delete(int id) {
         costCenterRepository.delete(id);
     }
+
+    public CostCenter findByCode(String code) {
+        return costCenterRepository.findByCode(code);
+    }
+
 }

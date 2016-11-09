@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ControlPointRepository extends JpaRepository<ControlPoint, Integer> {
 
+    public ControlPoint findByCode(String code);
+
 }

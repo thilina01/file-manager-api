@@ -22,6 +22,10 @@ public class LossReasonService {
         return lossReasonRepository.save(lossReason);
     }
 
+    public void save(List<LossReason> lossReasons) {
+        lossReasonRepository.save(lossReasons);
+    }
+
     public LossReason findOne(int id) {
         return lossReasonRepository.findOne(id);
     }

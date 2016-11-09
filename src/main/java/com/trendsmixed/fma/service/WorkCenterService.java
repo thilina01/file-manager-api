@@ -22,11 +22,19 @@ public class WorkCenterService {
         return workCenterRepository.save(workCenter);
     }
 
+    public void save(List<WorkCenter> workCenters) {
+        workCenterRepository.save(workCenters);
+    }
+
     public WorkCenter findOne(int id) {
         return workCenterRepository.findOne(id);
     }
 
     public void delete(int id) {
         workCenterRepository.delete(id);
+    }
+
+    public WorkCenter findByCode(String code) {
+        return workCenterRepository.findByCode(code);
     }
 }

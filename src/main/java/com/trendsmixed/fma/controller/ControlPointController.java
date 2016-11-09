@@ -1,15 +1,16 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.ControlPoint;
+import com.trendsmixed.fma.entity.WorkCenter;
 import com.trendsmixed.fma.jsonView.ControlPointView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ControlPointService;
+import com.trendsmixed.fma.service.WorkCenterService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class ControlPointController {
     private AppSessionService appSessionService;
     @Autowired
     private ControlPointService controlPointService;
+    @Autowired
+    private WorkCenterService workCenterService;
 
     @JsonView(ControlPointView.AllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping
@@ -53,6 +56,33 @@ public class ControlPointController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<ControlPoint> controlPoints, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+
+        appSessionService.isValid(email, request);
+        try {            
+            for (ControlPoint controlPoint : controlPoints) {
+                controlPoint.setCode(controlPoint.getCode().trim());
+                controlPoint.setName(controlPoint.getName().trim());
+                ControlPoint existingControlPoint = controlPointService.findByCode(controlPoint.getCode());
+                if (existingControlPoint != null) {
+                    controlPoint.setId(existingControlPoint.getId());
+                }
+                WorkCenter workCenter = controlPoint.getWorkCenter();
+                if (workCenter != null) {
+                    workCenter = workCenterService.findByCode(workCenter.getCode());
+                    controlPoint.setWorkCenter(workCenter);
+                }
+            }
+            controlPointService.save(controlPoints);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+    
     @GetMapping("/{id}")
     public ControlPoint findOne(@PathVariable("id") int id) {
         return controlPointService.findOne(id);

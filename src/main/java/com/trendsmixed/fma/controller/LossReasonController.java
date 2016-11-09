@@ -52,6 +52,20 @@ public class LossReasonController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<LossReason> lossReasons, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+
+        appSessionService.isValid(email, request);
+        try {
+            lossReasonService.save(lossReasons);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+    
     @GetMapping("/{id}")
     public LossReason findOne(@PathVariable("id") int id) {
         return lossReasonService.findOne(id);

@@ -22,6 +22,10 @@ public class ControlPointService {
         return controlPointRepository.save(ControlPoint);
     }
 
+    public void save(List<ControlPoint> controlPoints) {
+        controlPointRepository.save(controlPoints);
+    }
+
     public ControlPoint findOne(int id) {
         return controlPointRepository.findOne(id);
     }
@@ -29,5 +33,8 @@ public class ControlPointService {
     public void delete(int id) {
         controlPointRepository.delete(id);
     }
-}
 
+    public ControlPoint findByCode(String code) {
+        return controlPointRepository.findByCode(code);
+    }
+}

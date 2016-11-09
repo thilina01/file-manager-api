@@ -1,7 +1,8 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
+import com.trendsmixed.fma.entity.CostCenter;
+import com.trendsmixed.fma.entity.Section;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.trendsmixed.fma.entity.WorkCenter;
 import com.trendsmixed.fma.jsonView.WorkCenterView;
 import com.trendsmixed.fma.service.AppSessionService;
+import com.trendsmixed.fma.service.CostCenterService;
 import com.trendsmixed.fma.service.WorkCenterService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +32,8 @@ public class WorkCenterController {
     private AppSessionService appSessionService;
     @Autowired
     private WorkCenterService workCenterService;
+    @Autowired
+    private CostCenterService costCenterService;
 
     @GetMapping
     @JsonView(WorkCenterView.AllAndCostCenterAll.class)
@@ -52,6 +56,33 @@ public class WorkCenterController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<WorkCenter> workCenters, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+
+        appSessionService.isValid(email, request);
+        try {
+            for (WorkCenter workCenter : workCenters) {
+                workCenter.setCode(workCenter.getCode().trim());
+                workCenter.setName(workCenter.getName().trim());
+                WorkCenter existingWorkCenter = workCenterService.findByCode(workCenter.getCode());
+                if (existingWorkCenter != null) {
+                    workCenter.setId(existingWorkCenter.getId());
+                }
+                CostCenter costCenter = workCenter.getCostCenter();
+                if (costCenter != null) {
+                    costCenter = costCenterService.findByCode(costCenter.getCode());
+                    workCenter.setCostCenter(costCenter);
+                }
+            }
+            workCenterService.save(workCenters);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+    
     @GetMapping("/{id}")
     public WorkCenter findOne(@PathVariable("id") int id) {
         return workCenterService.findOne(id);

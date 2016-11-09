@@ -1,15 +1,16 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.CostCenter;
+import com.trendsmixed.fma.entity.Section;
 import com.trendsmixed.fma.jsonView.CostCenterView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.CostCenterService;
+import com.trendsmixed.fma.service.SectionService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class CostCenterController {
     private AppSessionService appSessionService;
     @Autowired
     private CostCenterService costCenterService;
+    @Autowired
+    private SectionService sectionService;
 
     @GetMapping
     @JsonView(CostCenterView.AllAndSectionAll.class)
@@ -53,6 +56,33 @@ public class CostCenterController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<CostCenter> costCenters, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+
+        appSessionService.isValid(email, request);
+        try {
+            for (CostCenter costCenter : costCenters) {
+                costCenter.setCode(costCenter.getCode().trim());
+                costCenter.setName(costCenter.getName().trim());
+                CostCenter existingCostCenter = costCenterService.findByCode(costCenter.getCode());
+                if (existingCostCenter != null) {
+                    costCenter.setId(existingCostCenter.getId());
+                }
+                Section section = costCenter.getSection();
+                if (section != null) {
+                    section = sectionService.findByCode(section.getCode());
+                    costCenter.setSection(section);
+                }
+            }
+            costCenterService.save(costCenters);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+
     @GetMapping("/{id}")
     public CostCenter findOne(@PathVariable("id") int id) {
         return costCenterService.findOne(id);
@@ -61,7 +91,6 @@ public class CostCenterController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         costCenterService.delete(id);
-        
 
     }
 
