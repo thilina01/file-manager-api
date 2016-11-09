@@ -2,7 +2,6 @@ package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.CostCenter;
-import com.trendsmixed.fma.entity.Section;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

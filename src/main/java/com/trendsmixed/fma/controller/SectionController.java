@@ -48,6 +48,14 @@ public class SectionController {
 
         appSessionService.isValid(email, request);
         try {
+            for (Section section : sections) {
+                section.setCode(section.getCode().trim());
+                section.setName(section.getName().trim());
+                Section existingSection = sectionService.findByCode(section.getCode());
+                if (existingSection != null) {
+                    section.setId(existingSection.getId());
+                }
+            }
             sectionService.save(sections);
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -56,7 +64,7 @@ public class SectionController {
             throw new Error(e.getMessage());
         }
     }
-    
+
     @GetMapping
     @JsonView(SectionView.All.class)
     public List<Section> findAll() {
