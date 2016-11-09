@@ -1,14 +1,18 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.entity.Item;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Job;
+import com.trendsmixed.fma.entity.JobType;
 import com.trendsmixed.fma.jsonView.JobView;
 import com.trendsmixed.fma.service.AppSessionService;
+import com.trendsmixed.fma.service.ItemService;
 import com.trendsmixed.fma.service.JobService;
+import com.trendsmixed.fma.service.JobTypeService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,10 @@ public class JobController {
     private AppSessionService appSessionService;
     @Autowired
     private JobService jobService;
+    @Autowired
+    private ItemService itemService;
+    @Autowired
+    private JobTypeService jobTypeService;
 
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping
@@ -52,6 +60,36 @@ public class JobController {
         }
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Job> jobs, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+
+        appSessionService.isValid(email, request);
+        try {
+            for (Job job : jobs) {
+                Job existingJob = jobService.findByJobNo(job.getJobNo());
+                if (existingJob != null) {
+                    job.setId(existingJob.getId());
+                }
+                Item item = job.getItem();
+                if (item != null) {
+                    item = itemService.findByCode(item.getCode());
+                    job.setItem(item);
+                }
+                JobType jobType = job.getJobType();
+                if (jobType != null) {
+                    jobType = jobTypeService.findByCode(jobType.getCode());
+                    job.setJobType(jobType);
+                }
+            }
+            jobService.save(jobs);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+    
     @GetMapping("/{id}")
     public Job findOne(@PathVariable("id") int id) {
         return jobService.findOne(id);

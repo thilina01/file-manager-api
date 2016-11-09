@@ -22,6 +22,10 @@ public class JobService {
         return jobRepository.save(job);
     }
 
+    public List<Job> save(List<Job> jobs) {
+        return jobRepository.save(jobs);
+    }
+
     public Job findOne(int id) {
         return jobRepository.findOne(id);
     }
@@ -29,4 +33,9 @@ public class JobService {
     public void delete(int id) {
         jobRepository.delete(id);
     }
+
+    public Job findByJobNo(String jobNo) {
+        return jobRepository.findByJobNo(jobNo);
+    }
+
 }

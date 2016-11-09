@@ -29,4 +29,8 @@ public class ShiftService {
     public void delete(int id) {
         shiftRepository.delete(id);
     }
+
+    public Shift findByCode(String code) {
+        return shiftRepository.findByCode(code);
+    }
 }
