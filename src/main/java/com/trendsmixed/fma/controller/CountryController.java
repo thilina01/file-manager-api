@@ -57,6 +57,14 @@ public class CountryController {
 
         appSessionService.isValid(email, request);
         try {
+            for (Country country : countries) {
+                country.setCode(country.getCode().trim());
+                country.setName(country.getName().trim());
+                Country existingSection = countryService.findByCode(country.getCode());
+                if (existingSection != null) {
+                    country.setId(existingSection.getId());
+                }
+            }
             countryService.save(countries);
         } catch (Throwable e) {
             while (e.getCause() != null) {
