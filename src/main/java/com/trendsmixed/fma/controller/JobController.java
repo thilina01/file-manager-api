@@ -13,6 +13,7 @@ import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ItemService;
 import com.trendsmixed.fma.service.JobService;
 import com.trendsmixed.fma.service.JobTypeService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,23 +66,25 @@ public class JobController {
 
         appSessionService.isValid(email, request);
         try {
+            List<Job> jobsToSave = new ArrayList<>();
             for (Job job : jobs) {
                 Job existingJob = jobService.findByJobNo(job.getJobNo());
                 if (existingJob != null) {
                     job.setId(existingJob.getId());
-                }
-                Item item = job.getItem();
-                if (item != null) {
-                    item = itemService.findByCode(item.getCode());
-                    job.setItem(item);
                 }
                 JobType jobType = job.getJobType();
                 if (jobType != null) {
                     jobType = jobTypeService.findByCode(jobType.getCode());
                     job.setJobType(jobType);
                 }
+                Item item = job.getItem();
+                if (item != null) {
+                    item = itemService.findByCode(item.getCode());
+                    job.setItem(item);
+                    jobsToSave.add(job);
+                }
             }
-            jobService.save(jobs);
+            jobService.save(jobsToSave);
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
