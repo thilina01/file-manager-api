@@ -33,4 +33,8 @@ public class LossReasonService {
     public void delete(int id) {
         lossReasonRepository.delete(id);
     }
+
+    public LossReason findByCode(String code) {
+        return lossReasonRepository.findByCode(code);
+    }
 }

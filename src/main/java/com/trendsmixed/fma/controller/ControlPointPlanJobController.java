@@ -30,13 +30,11 @@ public class ControlPointPlanJobController {
     private AppSessionService appSessionService;
     @Autowired
     private ControlPointPlanJobService controlPointPlanJobService;
-
    
     @GetMapping
     public List<ControlPointPlanJob> findAll() {
         return controlPointPlanJobService.findAll();
     }
-
 
     @PostMapping
     public ControlPointPlanJob save(@RequestBody ControlPointPlanJob controlPointPlanJob, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

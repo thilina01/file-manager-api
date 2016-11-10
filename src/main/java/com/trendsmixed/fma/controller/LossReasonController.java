@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.LossReason;
+import com.trendsmixed.fma.entity.LossType;
 import com.trendsmixed.fma.jsonView.LossReasonView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.LossReasonService;
+import com.trendsmixed.fma.service.LossTypeService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class LossReasonController {
     private AppSessionService appSessionService;
     @Autowired
     private LossReasonService lossReasonService;
+    @Autowired
+    private LossTypeService lossTypeService;
 
     @JsonView(LossReasonView.AllAndLossTypeAll.class)
     @GetMapping
@@ -57,6 +61,15 @@ public class LossReasonController {
 
         appSessionService.isValid(email, request);
         try {
+            for (LossReason lossReason : lossReasons) {
+                LossType lossType = lossReason.getLossType();
+                lossType = lossTypeService.findByCode(lossType.getCode());
+                lossReason.setLossType(lossType);
+                LossReason existingLossReason = lossReasonService.findByCode(lossReason.getCode());
+                if(existingLossReason!=null){
+                lossReason.setId(existingLossReason.getId());
+                }
+            }
             lossReasonService.save(lossReasons);
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -65,7 +78,7 @@ public class LossReasonController {
             throw new Error(e.getMessage());
         }
     }
-    
+
     @GetMapping("/{id}")
     public LossReason findOne(@PathVariable("id") int id) {
         return lossReasonService.findOne(id);

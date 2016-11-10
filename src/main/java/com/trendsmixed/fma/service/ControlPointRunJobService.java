@@ -29,5 +29,8 @@ public class ControlPointRunJobService {
     public void delete(int id) {
         controlPointRunJobRepository.delete(id);
     }
-}
 
+    public List<ControlPointRunJob> save(List<ControlPointRunJob> controlPointRunJobs) {
+        return controlPointRunJobRepository.save(controlPointRunJobs);
+    }
+}

@@ -29,4 +29,8 @@ public class LossTypeService {
     public void delete(int id) {
         LossTypeRepository.delete(id);
     }
+
+    public LossType findByCode(String code) {
+        return LossTypeRepository.findByCode(code);
+    }
 }
