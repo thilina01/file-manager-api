@@ -77,7 +77,7 @@ public class Job implements Serializable {
     @ManyToOne(optional = false)
     private JobType jobType;
     @JsonView(JobView.SalesOrderItem.class)
-    @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id", nullable = true)
     @OneToOne()
     private SalesOrderItem salesOrderItem;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
