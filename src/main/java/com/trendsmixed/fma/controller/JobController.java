@@ -52,7 +52,6 @@ public class JobController {
         try {
             job = jobService.save(job);
             return job;
-
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
@@ -80,8 +79,10 @@ public class JobController {
                 Item item = job.getItem();
                 if (item != null) {
                     item = itemService.findByCode(item.getCode());
-                    job.setItem(item);
-                    jobsToSave.add(job);
+                    if (item != null) {
+                        job.setItem(item);
+                        jobsToSave.add(job);
+                    }
                 }
             }
             jobService.save(jobsToSave);
@@ -92,7 +93,7 @@ public class JobController {
             throw new Error(e.getMessage());
         }
     }
-    
+
     @GetMapping("/{id}")
     public Job findOne(@PathVariable("id") int id) {
         return jobService.findOne(id);
