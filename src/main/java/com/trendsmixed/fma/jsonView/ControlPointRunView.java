@@ -20,6 +20,9 @@ public class ControlPointRunView {
     public static interface BreakdownCount {
     }
 
+    public static interface BreakdownDuration {
+    }
+
     public static interface WorkingDuration {
     }
 
@@ -29,7 +32,7 @@ public class ControlPointRunView {
     public static interface Shift {
     }
 
-    public static interface All extends Id, RunDate, BreakdownCount, WorkingDuration {
+    public static interface All extends Id, RunDate, BreakdownCount, BreakdownDuration, WorkingDuration {
 
     }
 

@@ -51,6 +51,9 @@ public class ControlPointRun implements Serializable {
     @JsonView(ControlPointRunView.BreakdownCount.class)
     @Column(name = "breakdown_count")
     private Integer breakdownCount;
+    @JsonView(ControlPointRunView.BreakdownDuration.class)
+    @Column(name = "breakdown_duration")
+    private Integer breakdownDuration;
     @JsonView(ControlPointRunView.WorkingDuration.class)
     @Column(name = "working_duration")
     private Integer workingDuration;
@@ -176,6 +179,14 @@ public class ControlPointRun implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.ControlPointRun[ id=" + id + " ]";
+    }
+
+    public Integer getBreakdownDuration() {
+        return breakdownDuration;
+    }
+
+    public void setBreakdownDuration(Integer breakdownDuration) {
+        this.breakdownDuration = breakdownDuration;
     }
 
 }
