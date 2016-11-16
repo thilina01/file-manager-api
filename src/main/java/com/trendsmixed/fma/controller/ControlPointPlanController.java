@@ -1,12 +1,13 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.ControlPointPlan;
+import com.trendsmixed.fma.entity.ControlPointPlanJob;
+import com.trendsmixed.fma.entity.ControlPointPlanManpower;
 import com.trendsmixed.fma.jsonView.ControlPointPlanView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.ControlPointPlanService;
@@ -31,17 +32,31 @@ public class ControlPointPlanController {
     @Autowired
     private ControlPointPlanService controlPointPlanService;
 
-   
     @GetMapping
     public List<ControlPointPlan> findAll() {
         return controlPointPlanService.findAll();
     }
 
-
+    @JsonView(ControlPointPlanView.All.class)
     @PostMapping
     public ControlPointPlan save(@RequestBody ControlPointPlan controlPointPlan, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
+
+            List<ControlPointPlanJob> controlPointPlanJobs = controlPointPlan.getControlPointPlanJobList();
+            if (controlPointPlanJobs != null) {
+                for (ControlPointPlanJob controlPointPlanJob : controlPointPlanJobs) {
+                    controlPointPlanJob.setControlPointPlan(controlPointPlan);
+                }
+            }
+
+            List<ControlPointPlanManpower> controlPointPlanManpowers = controlPointPlan.getControlPointPlanManpowerList();
+            if (controlPointPlanManpowers != null) {
+                for (ControlPointPlanManpower controlPointPlanManpower : controlPointPlanManpowers) {
+                    controlPointPlanManpower.setControlPointPlan(controlPointPlan);
+                }
+            }
+
             controlPointPlan = controlPointPlanService.save(controlPointPlan);
             return controlPointPlan;
 
