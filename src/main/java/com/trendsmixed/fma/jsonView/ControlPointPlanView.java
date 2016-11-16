@@ -23,7 +23,10 @@ public class ControlPointPlanView {
     public static interface Shift {
     }
 
-    public static interface All extends Id,PlanDate {
+    public static interface All extends Id, PlanDate {
+    }
+
+    static interface AllAndControlPointAllAndShiftAll extends All, ControlPoint, ControlPointView.All, Shift, ShiftView.All {
     }
 
 }
