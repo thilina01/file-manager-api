@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +29,8 @@ public class ControlPointPlanJobController {
     private AppSessionService appSessionService;
     @Autowired
     private ControlPointPlanJobService controlPointPlanJobService;
-   
+
+    @JsonView(ControlPointPlanJobView.AllAndJobAllAndControlPointPlanAll.class)
     @GetMapping
     public List<ControlPointPlanJob> findAll() {
         return controlPointPlanJobService.findAll();

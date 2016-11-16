@@ -37,7 +37,7 @@ public class ControlPointPlanManpower implements Serializable {
     @JsonView(ControlPointPlanManpowerView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(ControlPointPlanManpowerView.count.class)
+    @JsonView(ControlPointPlanManpowerView.Count.class)
     @Column(name = "count")
     private Integer count;
     @JsonView(ControlPointPlanManpowerView.ControlPointPlan.class)

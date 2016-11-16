@@ -23,4 +23,9 @@ public class ControlPointPlanJobView {
     public static interface Job {
     }
 
+    public static interface All extends Id, Quantity {
+    }
+
+    public static interface AllAndJobAllAndControlPointPlanAll extends All, Job, JobView.All, ControlPointPlan, ControlPointPlanView.All {
+    }
 }
