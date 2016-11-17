@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.repository.JobRepository;
+import java.util.Date;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class JobService {
@@ -36,6 +38,10 @@ public class JobService {
 
     public Job findByJobNo(String jobNo) {
         return jobRepository.findByJobNo(jobNo);
+    }
+
+    public List findX(Date startDate, Date endDate, Pageable pageable) {
+        return jobRepository.findX(startDate, endDate, pageable);
     }
 
 }

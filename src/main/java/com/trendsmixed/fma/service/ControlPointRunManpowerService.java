@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.repository.ControlPointRunManpowerRepository;
+import java.util.Date;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class ControlPointRunManpowerService {
@@ -29,5 +31,9 @@ public class ControlPointRunManpowerService {
     public void delete(int id) {
         controlPointRunManpowerRepository.delete(id);
     }
-}
 
+    public List findSumByManpowerTypeAndDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return controlPointRunManpowerRepository.findSumByManpowerTypeAndDateBetween(startDate, endDate, pageable);
+    }
+
+}

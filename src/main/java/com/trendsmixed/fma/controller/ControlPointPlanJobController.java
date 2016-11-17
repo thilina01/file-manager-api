@@ -29,7 +29,6 @@ public class ControlPointPlanJobController {
     private AppSessionService appSessionService;
     @Autowired
     private ControlPointPlanJobService controlPointPlanJobService;
-
     
     @JsonView(ControlPointPlanJobView.AllAndJobAllAndControlPointPlanAll.class)
     @GetMapping

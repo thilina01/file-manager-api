@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.repository.ControlPointPlanJobRepository;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class ControlPointPlanJobService {
@@ -29,5 +31,8 @@ public class ControlPointPlanJobService {
     public void delete(int id) {
         controlPointPlanJobRepository.delete(id);
     }
-}
 
+    public ArrayList findSectionWiseQuantityInPlanDateBetween(Date startDate, Date endDate) {
+        return controlPointPlanJobRepository.findSectionWiseQuantityInPlanDateBetween(startDate, endDate);
+    }
+}

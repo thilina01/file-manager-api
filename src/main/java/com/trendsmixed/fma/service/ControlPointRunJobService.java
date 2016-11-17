@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.repository.ControlPointRunJobRepository;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class ControlPointRunJobService {
@@ -32,5 +34,9 @@ public class ControlPointRunJobService {
 
     public List<ControlPointRunJob> save(List<ControlPointRunJob> controlPointRunJobs) {
         return controlPointRunJobRepository.save(controlPointRunJobs);
+    }
+
+    public ArrayList findSectionWiseQuantityInRunDateBetween(Date startDate, Date endDate) {
+        return controlPointRunJobRepository.findSectionWiseQuantityInRunDateBetween(startDate, endDate);
     }
 }
