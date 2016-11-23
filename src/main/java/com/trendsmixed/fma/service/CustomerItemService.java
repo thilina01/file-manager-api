@@ -12,21 +12,25 @@ import com.trendsmixed.fma.repository.CustomerItemRepository;
 public class CustomerItemService {
 
     @Autowired
-    private CustomerItemRepository defectTypeRepository;
+    private CustomerItemRepository customerItemRepository;
 
     public List<CustomerItem> findAll() {
-        return defectTypeRepository.findAll();
+        return customerItemRepository.findAll();
     }
 
     public CustomerItem save(CustomerItem customerItem) {
-        return defectTypeRepository.save(customerItem);
+        return customerItemRepository.save(customerItem);
+    }
+
+    public void save(List<CustomerItem> customerItems) {
+        customerItemRepository.save(customerItems);
     }
 
     public CustomerItem findOne(int id) {
-        return defectTypeRepository.findOne(id);
+        return customerItemRepository.findOne(id);
     }
 
     public void delete(int id) {
-        defectTypeRepository.delete(id);
+        customerItemRepository.delete(id);
     }
 }
