@@ -7,4 +7,6 @@ public interface IncotermRepository extends JpaRepository<Incoterm, Integer> {
 
     public Incoterm findByCode(String code);
 
+    public Incoterm findByName(String name);
+
 }

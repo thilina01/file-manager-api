@@ -93,7 +93,11 @@ public class CustomerController {
                     Incoterm existingIncoterm = null;
                     String incotermCode = incoterm.getCode();
                     String incotermName = incoterm.getName();
-                    existingIncoterm = incotermService.findByCode(incotermCode);
+                    if (incotermCode != null) {
+                        existingIncoterm = incotermService.findByCode(incotermCode);
+                    } else if (incotermName != null) {
+                        existingIncoterm = incotermService.findByName(incotermName);
+                    }
                     if (existingIncoterm != null) {
                         incoterm.setId(existingIncoterm.getId());
                     } else {
