@@ -33,4 +33,8 @@ public class SaleTypeService {
     public SaleType findByCode(String code) {
         return saleTypeRepository.findByCode(code);
     }
+
+    public SaleType findByName(String name) {
+        return saleTypeRepository.findByName(name);
+    }
 }

@@ -7,4 +7,6 @@ public interface SaleTypeRepository extends JpaRepository<SaleType, Integer> {
 
     public SaleType findByCode(String code);
 
+    public SaleType findByName(String name);
+
 }

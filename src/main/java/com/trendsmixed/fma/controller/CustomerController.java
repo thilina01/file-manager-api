@@ -117,8 +117,15 @@ public class CustomerController {
 
                 SaleType saleType = customer.getSaleType();
                 if (saleType != null) {
+                    SaleType existingSaleType = null;
+                    String saleTypeCode = saleType.getCode();
+                    String saleTypeName = saleType.getName();
+                    if (saleTypeCode != null) {
+                        existingSaleType = saleTypeService.findByCode(saleTypeCode);
+                    } else if (saleTypeName != null) {
+                        existingSaleType = saleTypeService.findByName(saleTypeName);
+                    }
 
-                    SaleType existingSaleType = saleTypeService.findByCode(saleType.getCode());
                     if (existingSaleType != null) {
                         saleType.setId(existingSaleType.getId());
                     } else {
