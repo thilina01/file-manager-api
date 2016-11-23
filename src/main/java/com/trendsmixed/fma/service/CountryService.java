@@ -34,7 +34,7 @@ public class CountryService {
         countryRepository.delete(id);
     }
 
-    public Country findByCode(String code) {    
+    public Country findByCode(String code) {
         return countryRepository.findByCode(code);
     }
 }

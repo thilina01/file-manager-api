@@ -29,4 +29,8 @@ public class IncotermService {
     public void delete(int id) {
         incotermRepository.delete(id);
     }
+
+    public Incoterm findByCode(String code) {
+        return incotermRepository.findByCode(code);
+    }
 }

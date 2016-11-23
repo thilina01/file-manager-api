@@ -29,4 +29,8 @@ public class CurrencyService {
     public void delete(int id) {
         currencyRepository.delete(id);
     }
+
+    public Currency findByCode(String code) {
+        return currencyRepository.findByCode(code);
+    }
 }

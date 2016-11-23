@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SaleTypeRepository extends JpaRepository<SaleType, Integer> {
 
+    public SaleType findByCode(String code);
+
 }

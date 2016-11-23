@@ -29,4 +29,8 @@ public class SaleTypeService {
     public void delete(int id) {
         saleTypeRepository.delete(id);
     }
+
+    public SaleType findByCode(String code) {
+        return saleTypeRepository.findByCode(code);
+    }
 }

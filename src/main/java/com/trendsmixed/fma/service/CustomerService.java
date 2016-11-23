@@ -33,4 +33,8 @@ public class CustomerService {
     public void delete(int id) {
         customerRepository.delete(id);
     }
+
+    public Customer findByCode(String code) {
+        return customerRepository.findByCode(code);
+    }
 }

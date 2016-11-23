@@ -1,11 +1,19 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.entity.Country;
+import com.trendsmixed.fma.entity.Currency;
 import com.trendsmixed.fma.entity.Customer;
 import com.trendsmixed.fma.entity.CustomerItem;
+import com.trendsmixed.fma.entity.Incoterm;
+import com.trendsmixed.fma.entity.SaleType;
 import com.trendsmixed.fma.jsonView.CustomerView;
 import com.trendsmixed.fma.service.AppSessionService;
+import com.trendsmixed.fma.service.CountryService;
+import com.trendsmixed.fma.service.CurrencyService;
 import com.trendsmixed.fma.service.CustomerService;
+import com.trendsmixed.fma.service.IncotermService;
+import com.trendsmixed.fma.service.SaleTypeService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +37,14 @@ public class CustomerController {
     private AppSessionService appSessionService;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private IncotermService incotermService;
+    @Autowired
+    private CurrencyService currencyService;
+    @Autowired
+    private SaleTypeService saleTypeService;
+    @Autowired
+    private CountryService countryService;
 
     @JsonView(CustomerView.AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
     @GetMapping
@@ -62,6 +78,48 @@ public class CustomerController {
     public void saveMany(@RequestBody List<Customer> customers, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
+            for (Customer customer : customers) {
+                customer.setCode(customer.getCode().trim());
+
+                Customer existingCustomer = customerService.findByCode(customer.getCode());
+                if (existingCustomer != null) {
+                    //itemsToRemove.add(item);
+                    customer.setId(existingCustomer.getId());
+                }
+
+                Incoterm incoterm = customer.getIncoterm();
+                if (incoterm != null) {
+                    Incoterm existingIncoterm = incotermService.findByCode(incoterm.getCode());
+                    if (existingIncoterm != null) {
+                        incoterm.setId(existingIncoterm.getId());
+                    }
+                }
+                
+                Currency currency = customer.getCurrency();
+                if (currency != null) {
+                    Currency existingCurrency = currencyService.findByCode(currency.getCode());
+                    if (existingCurrency != null) {
+                        currency.setId(existingCurrency.getId());
+                    }
+                }
+
+                SaleType saleType = customer.getSaleType();
+                if (saleType != null) {
+                    SaleType existingSaleType = saleTypeService.findByCode(saleType.getCode());
+                    if (existingSaleType != null) {
+                        saleType.setId(existingSaleType.getId());                        
+                    }
+                }
+
+                Country country = customer.getCountry();
+                if (country != null) {
+                    Country existingCountry = countryService.findByCode(country.getCode());
+                    if (existingCountry != null) {
+                        country.setId(existingCountry.getId());                        
+                    }
+                }
+
+            }
             customerService.save(customers);
         } catch (Throwable e) {
             while (e.getCause() != null) {
