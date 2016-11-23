@@ -92,14 +92,18 @@ public class CustomerController {
                     Incoterm existingIncoterm = incotermService.findByCode(incoterm.getCode());
                     if (existingIncoterm != null) {
                         incoterm.setId(existingIncoterm.getId());
+                    } else {
+                        customer.setIncoterm(null);
                     }
                 }
-                
+
                 Currency currency = customer.getCurrency();
                 if (currency != null) {
                     Currency existingCurrency = currencyService.findByCode(currency.getCode());
                     if (existingCurrency != null) {
                         currency.setId(existingCurrency.getId());
+                    } else {
+                        customer.setCurrency(null);
                     }
                 }
 
@@ -107,7 +111,9 @@ public class CustomerController {
                 if (saleType != null) {
                     SaleType existingSaleType = saleTypeService.findByCode(saleType.getCode());
                     if (existingSaleType != null) {
-                        saleType.setId(existingSaleType.getId());                        
+                        saleType.setId(existingSaleType.getId());
+                    } else {
+                        customer.setSaleType(null);
                     }
                 }
 
@@ -115,13 +121,16 @@ public class CustomerController {
                 if (country != null) {
                     Country existingCountry = countryService.findByCode(country.getCode());
                     if (existingCountry != null) {
-                        country.setId(existingCountry.getId());                        
+                        country.setId(existingCountry.getId());
+                    } else {
+                        customer.setCountry(null);
                     }
                 }
 
             }
             customerService.save(customers);
         } catch (Throwable e) {
+            e.printStackTrace();
             while (e.getCause() != null) {
                 e = e.getCause();
             }
