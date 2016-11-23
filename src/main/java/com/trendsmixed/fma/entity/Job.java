@@ -67,6 +67,8 @@ public class Job implements Serializable {
     @Column(name = "quantity")
     private Double quantity;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
+    private List<JobDispatch> jobDispatchList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
     private List<ControlPointRunJob> controlPointRunJobList;
     @JsonView(JobView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
@@ -144,6 +146,14 @@ public class Job implements Serializable {
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    public List<JobDispatch> getJobDispatchList() {
+        return jobDispatchList;
+    }
+
+    public void setJobDispatchList(List<JobDispatch> jobDispatchList) {
+        this.jobDispatchList = jobDispatchList;
     }
 
     public List<ControlPointRunJob> getControlPointRunJobList() {
