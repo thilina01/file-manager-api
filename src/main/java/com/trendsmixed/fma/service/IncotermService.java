@@ -33,4 +33,8 @@ public class IncotermService {
     public Incoterm findByCode(String code) {
         return incotermRepository.findByCode(code);
     }
+
+    public Incoterm findByName(String name) {
+        return incotermRepository.findByName(name);
+    }
 }

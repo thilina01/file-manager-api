@@ -37,4 +37,8 @@ public class CountryService {
     public Country findByCode(String code) {
         return countryRepository.findByCode(code);
     }
+
+    public Country findByName(String name) {
+        return countryRepository.findByName(name);
+    }
 }

@@ -79,6 +79,7 @@ public class CustomerController {
         appSessionService.isValid(email, request);
         try {
             for (Customer customer : customers) {
+
                 customer.setCode(customer.getCode().trim());
 
                 Customer existingCustomer = customerService.findByCode(customer.getCode());
@@ -89,7 +90,10 @@ public class CustomerController {
 
                 Incoterm incoterm = customer.getIncoterm();
                 if (incoterm != null) {
-                    Incoterm existingIncoterm = incotermService.findByCode(incoterm.getCode());
+                    Incoterm existingIncoterm = null;
+                    String incotermCode = incoterm.getCode();
+                    String incotermName = incoterm.getName();
+                    existingIncoterm = incotermService.findByCode(incotermCode);
                     if (existingIncoterm != null) {
                         incoterm.setId(existingIncoterm.getId());
                     } else {
@@ -109,6 +113,7 @@ public class CustomerController {
 
                 SaleType saleType = customer.getSaleType();
                 if (saleType != null) {
+
                     SaleType existingSaleType = saleTypeService.findByCode(saleType.getCode());
                     if (existingSaleType != null) {
                         saleType.setId(existingSaleType.getId());
@@ -119,7 +124,14 @@ public class CustomerController {
 
                 Country country = customer.getCountry();
                 if (country != null) {
-                    Country existingCountry = countryService.findByCode(country.getCode());
+                    Country existingCountry = null;
+                    String countryCode = country.getCode();
+                    String countryName = country.getName();
+                    if (countryCode != null) {
+                        existingCountry = countryService.findByCode(countryCode);
+                    } else if (countryName != null) {
+                        existingCountry = countryService.findByName(countryName);
+                    }
                     if (existingCountry != null) {
                         country.setId(existingCountry.getId());
                     } else {
