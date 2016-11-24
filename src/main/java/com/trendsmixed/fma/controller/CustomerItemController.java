@@ -38,7 +38,7 @@ public class CustomerItemController {
     @Autowired
     private ItemService itemService;
 
-    @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
+    @JsonView(CustomerItemView.All.class)
     @GetMapping
     public List<CustomerItem> findAll() {
         return customerItemService.findAll();
@@ -66,7 +66,7 @@ public class CustomerItemController {
         try {
             for (CustomerItem customerItem : customerItems) {
                 Customer customer = customerItem.getCustomer();
-                if (customer != null) {                    
+                if (customer != null) {
                     customerItem.setCustomer(customerService.findByCode(customer.getCode().trim()));
                 }
                 Item item = customerItem.getItem();
