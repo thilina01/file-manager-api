@@ -11,13 +11,12 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -27,9 +26,9 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "customer_item", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"item_id", "customer_id"})})
+    @UniqueConstraint(columnNames = {"item_id", "customer_id"})})/*
 @NamedQueries({
-    @NamedQuery(name = "CustomerItem.findAll", query = "SELECT c FROM CustomerItem c")})
+    @NamedQuery(name = "CustomerItem.findAll", query = "SELECT c FROM CustomerItem c")})*/
 public class CustomerItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,11 +47,11 @@ public class CustomerItem implements Serializable {
     private Double price;
     @JsonView(CustomerItemView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)//, fetch = FetchType.LAZY
     private Customer customer;
     @JsonView(CustomerItemView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)//, fetch = FetchType.LAZY
     private Item item;
 
     public CustomerItem() {
@@ -126,5 +125,5 @@ public class CustomerItem implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.CustomerItem[ id=" + id + " ]";
     }
-    
+
 }

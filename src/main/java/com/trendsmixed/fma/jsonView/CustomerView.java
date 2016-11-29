@@ -59,6 +59,8 @@ public class CustomerView {
     public static interface Currency {
     }
 
+    public static interface CustomerItem {
+    }
     /*public static interface CustomerItemList {
     }
      */

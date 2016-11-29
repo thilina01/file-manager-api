@@ -13,6 +13,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -81,27 +82,27 @@ public class Customer implements Serializable {
     private String sVatNo;
     @JsonView(CustomerView.VatNo.class)
     @Column(name = "vat_no")
-    private String vatNo;    
-    //@JsonView(CustomerView.CustomerItemList.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    private String vatNo;
+    @JsonView(CustomerView.CustomerItem.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<CustomerItem> customerItemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<SalesOrder> salesOrderList;
     @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Incoterm incoterm;
     @JsonView(CustomerView.Currency.class)
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Currency currency;
     @JsonView(CustomerView.SaleType.class)
     @JoinColumn(name = "cust_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private SaleType saleType;
     @JsonView(CustomerView.Country.class)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Country country;
 
     public Customer() {
@@ -311,5 +312,5 @@ public class Customer implements Serializable {
     public void setCustomerItemList(List<CustomerItem> customerItemList) {
         this.customerItemList = customerItemList;
     }
-    
+
 }

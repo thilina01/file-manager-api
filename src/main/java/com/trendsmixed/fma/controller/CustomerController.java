@@ -161,6 +161,7 @@ public class CustomerController {
         }
     }
 
+    @JsonView(CustomerView.AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAll.class)
     @GetMapping("/{id}")
     public Customer findOne(@PathVariable("id") int id) {
         return customerService.findOne(id);

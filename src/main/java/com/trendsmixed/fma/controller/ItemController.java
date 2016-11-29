@@ -105,6 +105,7 @@ public class ItemController {
         }
     }
 
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @GetMapping("/{id}")
     public Item findOne(@PathVariable("id") int id) {
         return itemService.findOne(id);

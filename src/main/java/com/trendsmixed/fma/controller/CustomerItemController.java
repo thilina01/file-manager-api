@@ -38,13 +38,13 @@ public class CustomerItemController {
     @Autowired
     private ItemService itemService;
 
-    @JsonView(CustomerItemView.All.class)
+    @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @GetMapping
     public List<CustomerItem> findAll() {
         return customerItemService.findAll();
     }
 
-    @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
+    //@JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @PostMapping
     public CustomerItem save(@RequestBody CustomerItem customerItems, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -69,12 +69,11 @@ public class CustomerItemController {
                 if (customer != null) {
                     customerItem.setCustomer(customerService.findByCode(customer.getCode().trim()));
                 }
+                
                 Item item = customerItem.getItem();
-
                 if (item != null) {
                     customerItem.setItem(itemService.findByCode(item.getCode().trim()));
                 }
-
             }
             customerItemService.save(customerItems);
         } catch (Throwable e) {
