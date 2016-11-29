@@ -66,6 +66,9 @@ public class Job implements Serializable {
     @JsonView(JobView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
+    @JsonView(JobView.RemainingQuantity.class)
+    @Column(name = "remaining_quantity")
+    private Double remainingQuantity;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
     private List<JobDispatch> jobDispatchList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
@@ -219,6 +222,14 @@ public class Job implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.Job[ id=" + id + " ]";
+    }
+
+    public Double getRemainingQuantity() {
+        return remainingQuantity;
+    }
+
+    public void setRemainingQuantity(Double remainingQuantity) {
+        this.remainingQuantity = remainingQuantity;
     }
 
 }

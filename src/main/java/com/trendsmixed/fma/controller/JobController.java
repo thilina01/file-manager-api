@@ -50,6 +50,7 @@ public class JobController {
     public Job save(@RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
+            job.setRemainingQuantity(job.getQuantity());
             job = jobService.save(job);
             return job;
         } catch (Throwable e) {
