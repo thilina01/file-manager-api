@@ -88,6 +88,8 @@ public class Customer implements Serializable {
     private List<CustomerItem> customerItemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<SalesOrder> salesOrderList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Dispatch> dispatchs;
     @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -311,6 +313,14 @@ public class Customer implements Serializable {
 
     public void setCustomerItemList(List<CustomerItem> customerItemList) {
         this.customerItemList = customerItemList;
+    }
+
+    public List<Dispatch> getDispatchs() {
+        return dispatchs;
+    }
+
+    public void setDispatchs(List<Dispatch> dispatchs) {
+        this.dispatchs = dispatchs;
     }
 
 }

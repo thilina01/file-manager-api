@@ -31,7 +31,7 @@ public class DispatchController {
     @Autowired
     private DispatchService dispatchService;
 
-    @JsonView(DispatchView.All.class)
+    @JsonView(DispatchView.AllAndCustomerAll.class)
     @GetMapping
     public List<Dispatch> findAll() {
         return dispatchService.findAll();

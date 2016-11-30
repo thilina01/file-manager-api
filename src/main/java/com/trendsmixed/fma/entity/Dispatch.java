@@ -17,6 +17,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -42,9 +44,13 @@ public class Dispatch implements Serializable {
     @JsonView(DispatchView.Id.class)
     private Integer id;
     @Column(name = "dispatch_date")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @JsonView(DispatchView.DispatchDate.class)
     private Date dispatchDate;
+    @JsonView(DispatchView.Customer.class)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Customer customer;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dispatch")
     private List<JobDispatch> jobDispatchList;
 
@@ -102,6 +108,14 @@ public class Dispatch implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.Dispatch[ id=" + id + " ]";
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
     
 }
