@@ -51,6 +51,7 @@ public class Dispatch implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
+    @JsonView(DispatchView.JobDispatch.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dispatch")
     private List<JobDispatch> jobDispatchList;
 

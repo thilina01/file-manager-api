@@ -59,6 +59,7 @@ public class DispatchController {
         }
     }
 
+    @JsonView(DispatchView.AllAndCustomerAllAndJobDispatchAll.class)
     @GetMapping("/{id}")
     public Dispatch findOne(@PathVariable("id") int id) {
         return dispatchService.findOne(id);
