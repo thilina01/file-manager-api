@@ -5,6 +5,9 @@
  */
 package com.trendsmixed.fma.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.jsonView.ControlPointRunBreakdownView;
+import com.trendsmixed.fma.jsonView.ControlPointRunView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -32,17 +35,23 @@ public class ControlPointRunBreakdown implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @JsonView(ControlPointRunBreakdownView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ControlPointRunBreakdownView.Duration.class)
     @Column(name = "duration")
     private Integer duration;
+    @JsonView(ControlPointRunBreakdownView.Reason.class)
     @Column(name = "reason")
     private String reason;
+    @JsonView(ControlPointRunBreakdownView.BreakdownNumber.class)
     @Column(name = "breakdown_number")
     private String breakdownNumber;
     @JoinColumn(name = "control_point_run_id", referencedColumnName = "id")
+    @JsonView(ControlPointRunBreakdownView.ControlPointRun.class)
     @ManyToOne(optional = false)
     private ControlPointRun controlPointRun;
+    @JsonView(ControlPointRunBreakdownView.Machine.class)
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Machine machine;
@@ -126,5 +135,5 @@ public class ControlPointRunBreakdown implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ControlPointRunBreakdown[ id=" + id + " ]";
     }
-    
+
 }
