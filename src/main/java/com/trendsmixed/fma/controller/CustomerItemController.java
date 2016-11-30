@@ -69,7 +69,7 @@ public class CustomerItemController {
                 if (customer != null) {
                     customerItem.setCustomer(customerService.findByCode(customer.getCode().trim()));
                 }
-                
+
                 Item item = customerItem.getItem();
                 if (item != null) {
                     customerItem.setItem(itemService.findByCode(item.getCode().trim()));
@@ -85,9 +85,18 @@ public class CustomerItemController {
         }
     }
 
+    @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @GetMapping("/{id}")
     public CustomerItem findOne(@PathVariable("id") int id) {
         return customerItemService.findOne(id);
+    }
+
+    @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
+    @GetMapping("/byCustomerIdAndItemId/{customerId}/{itemId}")
+    public CustomerItem byCustomerIdAndItemId(@PathVariable("customerId") int customerId, @PathVariable("itemId") int itemId) {
+        Customer customer = customerService.findOne(customerId);
+        Item item = itemService.findOne(itemId);
+        return customerItemService.findByCustomerAndItem(customer, item);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -1,6 +1,8 @@
 package com.trendsmixed.fma.service;
 
+import com.trendsmixed.fma.entity.Customer;
 import com.trendsmixed.fma.entity.CustomerItem;
+import com.trendsmixed.fma.entity.Item;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +34,9 @@ public class CustomerItemService {
 
     public void delete(int id) {
         customerItemRepository.delete(id);
+    }
+
+    public CustomerItem findByCustomerAndItem(Customer customer, Item item) {
+        return customerItemRepository.findByCustomerAndItem(customer, item); 
     }
 }
