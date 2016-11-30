@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Dispatch;
+import com.trendsmixed.fma.entity.Job;
 import com.trendsmixed.fma.entity.JobDispatch;
 import com.trendsmixed.fma.jsonView.DispatchView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.DispatchService;
+import com.trendsmixed.fma.service.JobService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class DispatchController {
     private AppSessionService appSessionService;
     @Autowired
     private DispatchService dispatchService;
+    @Autowired
+    private JobService jobService;
 
     @JsonView(DispatchView.AllAndCustomerAll.class)
     @GetMapping
@@ -45,7 +49,12 @@ public class DispatchController {
             List<JobDispatch> jobDispatchs = dispatch.getJobDispatchList();
             for (JobDispatch jobDispatch : jobDispatchs) {
                 jobDispatch.setDispatch(dispatch);
-                //Job job = jobDispatch.getJob();                
+                Job job = jobService.findOne(jobDispatch.getJob().getId());
+
+                double dispatchQuantity = jobDispatch.getQuantity();
+                double remainingQuantity = job.getRemainingQuantity();
+                job.setRemainingQuantity(remainingQuantity - dispatchQuantity);
+                jobService.save(job);
             }
 
             dispatch = dispatchService.save(dispatch);
