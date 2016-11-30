@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.ControlPointRun;
+import com.trendsmixed.fma.entity.ControlPointRunBreakdown;
 import com.trendsmixed.fma.entity.ControlPointRunJob;
 import com.trendsmixed.fma.entity.ControlPointRunLoss;
 import com.trendsmixed.fma.entity.ControlPointRunManpower;
@@ -71,6 +72,13 @@ public class ControlPointRunController {
             if (controlPointRunLosses != null) {
                 for (ControlPointRunLoss controlPointRunLoss : controlPointRunLosses) {
                     controlPointRunLoss.setControlPointRun(controlPointRun);
+                }
+            }
+
+            List<ControlPointRunBreakdown> controlPointRunBreakdowns = controlPointRun.getControlPointRunBreakdownList();
+            if (controlPointRunBreakdowns != null) {
+                for (ControlPointRunBreakdown controlPointRunBreakdown : controlPointRunBreakdowns) {
+                    controlPointRunBreakdown.setControlPointRun(controlPointRun);
                 }
             }
 

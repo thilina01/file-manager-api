@@ -55,6 +55,8 @@ public class Machine implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
     private List<Breakdown> breakdownList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
+    private List<ControlPointRunBreakdown> controlPointRunBreakdownList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
     private List<MachineRunningTime> machineRunningTimeList;
     @JsonView(MachineView.WorkCenter.class)
     @JoinColumn(name = "work_center_id", referencedColumnName = "id")
@@ -114,6 +116,14 @@ public class Machine implements Serializable {
 
     public void setBreakdownList(List<Breakdown> breakdownList) {
         this.breakdownList = breakdownList;
+    }
+
+    public List<ControlPointRunBreakdown> getControlPointRunBreakdownList() {
+        return controlPointRunBreakdownList;
+    }
+
+    public void setControlPointRunBreakdownList(List<ControlPointRunBreakdown> controlPointRunBreakdownList) {
+        this.controlPointRunBreakdownList = controlPointRunBreakdownList;
     }
 
     public List<MachineRunningTime> getMachineRunningTimeList() {

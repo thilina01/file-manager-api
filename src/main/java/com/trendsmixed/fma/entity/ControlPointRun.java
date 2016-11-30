@@ -71,6 +71,8 @@ public class ControlPointRun implements Serializable {
     private List<ControlPointRunManpower> controlPointRunManpowerList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPointRun")
     private List<ControlPointRunJob> controlPointRunJobList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPointRun")
+    private List<ControlPointRunBreakdown> controlPointRunBreakdownList;
 
     public ControlPointRun() {
     }
@@ -122,6 +124,14 @@ public class ControlPointRun implements Serializable {
 
     public void setControlPoint(ControlPoint controlPoint) {
         this.controlPoint = controlPoint;
+    }
+
+    public List<ControlPointRunBreakdown> getControlPointRunBreakdownList() {
+        return controlPointRunBreakdownList;
+    }
+
+    public void setControlPointRunBreakdownList(List<ControlPointRunBreakdown> controlPointRunBreakdownList) {
+        this.controlPointRunBreakdownList = controlPointRunBreakdownList;
     }
 
     public Shift getShift() {
