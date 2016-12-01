@@ -20,7 +20,7 @@ public class FileView {
     public static interface Description {
     }
 
-    public static interface Extension{
+    public static interface Extension {
     }
 
     public static interface Name {
@@ -33,8 +33,9 @@ public class FileView {
     }
 
     public static interface FileType {
+    }
 
-      
+    public static interface All extends Id, Link, Description, Extension, Name, OriginalFileName, UploadDate {
     }
 
 }

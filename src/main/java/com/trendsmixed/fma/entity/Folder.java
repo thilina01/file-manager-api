@@ -46,8 +46,10 @@ public class Folder implements Serializable {
     @JsonView(FolderView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(FolderView.FileList.class)
     @ManyToMany(mappedBy = "folderList")
     private List<File> fileList;
+    @JsonView(FolderView.FolderList.class)
     @OneToMany(mappedBy = "folder")
     private List<Folder> folderList;
     @JsonView(FolderView.Folder.class)

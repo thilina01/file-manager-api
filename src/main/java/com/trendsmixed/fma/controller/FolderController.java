@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Folder;
+import com.trendsmixed.fma.jsonView.FolderView;
 import com.trendsmixed.fma.jsonView.Views;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.FolderService;
@@ -47,44 +47,44 @@ public class FolderController {
     }
 
     @GetMapping//("/top")
-    public @JsonView(Views.FolderOnly.class)
+    public @JsonView(FolderView.All.class)
     List<Folder> all() {
         return folderService.findAll();
     }
 
     @GetMapping("/top")
-    public @JsonView(Views.FolderOnly.class)
+    public @JsonView(FolderView.All.class)
     List<Folder> top(@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         //System.out.println(email);
         return folderService.findByFolderIsNull();
     }
 
     @GetMapping("/{id}")
-    public @JsonView(Views.FolderOnly.class)
+    public @JsonView(FolderView.All.class)
     Folder one(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
 
     @GetMapping("/{id}/with-parent")
-    public @JsonView(Views.FolderWithParent.class)
+    public @JsonView(FolderView.AllAndFolderAll.class)
     Folder oneWithParent(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
 
     @GetMapping("/{id}/with-sub-folders")
-    public @JsonView(Views.FolderWithSubFolders.class)
+    public @JsonView(FolderView.AllAndFolderListAll.class)
     Folder oneWithSubFolders(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
 
     @GetMapping("/{id}/with-files")
-    public @JsonView(Views.FolderWithFiles.class)
+    public @JsonView(FolderView.AllAndFileListAll.class)
     Folder oneWithFiles(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
 
     @GetMapping("/{id}/with-sub-folders-and-files")
-    public @JsonView(Views.FolderWithSubFoldersAndFiles.class)
+    public @JsonView(FolderView.AllAndFolderListAllAndFileListAll.class)
     Folder oneWithSubFoldersAndFiles(@PathVariable("id") int id) {
         return folderService.findOne(id);
     }
