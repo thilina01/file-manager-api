@@ -83,7 +83,7 @@ public class Customer implements Serializable {
     @JsonView(CustomerView.VatNo.class)
     @Column(name = "vat_no")
     private String vatNo;
-    @JsonView(CustomerView.CustomerItem.class)
+    @JsonView(CustomerView.CustomerItemList.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<CustomerItem> customerItemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)

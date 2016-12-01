@@ -46,7 +46,7 @@ public class CustomerController {
     @Autowired
     private CountryService countryService;
 
-    @JsonView(CustomerView.AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAll.class)
+    @JsonView(CustomerView.AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
     @GetMapping
     public List<Customer> findAll() {
         return customerService.findAll();

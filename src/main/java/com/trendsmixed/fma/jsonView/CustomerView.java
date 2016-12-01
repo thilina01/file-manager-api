@@ -59,11 +59,9 @@ public class CustomerView {
     public static interface Currency {
     }
 
-    public static interface CustomerItem {
+    public static interface CustomerItemList {
     }
-    /*public static interface CustomerItemList {
-    }
-     */
+
     public static interface All extends Id, Code, Name, Consignee, Contact, Continent, Fax, FinalDestination, NotifyParty, Note, OfficeAddress, PaymentTerm, PhoneNo, SVatNo, VatNo {
     }
 
@@ -79,16 +77,19 @@ public class CustomerView {
     public static interface AllAndCurrencyAll extends All, Currency, CurrencyView.All {
     }
 
-    /*
     public static interface AllAndCustomerItemList extends All, CustomerItemList, CustomerItemView.All {
     }
 
+    
     public static interface AllAndCustomerItemListAndItemAll extends All, CustomerItemList, CustomerItemView.AllAndItemAll {
     }
-
+    /* */
     public static interface AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAllAndCustomerItemList extends All, Incoterm, IncotermView.All, SaleType, SaleTypeView.All, Country, CountryView.All, Currency, CurrencyView.All, AllAndCustomerItemList {
     }
-     */
+
+    public static interface AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll extends All, Incoterm, IncotermView.All, SaleType, SaleTypeView.All, Country, CountryView.All, Currency, CurrencyView.All, AllAndCustomerItemListAndItemAll {
+    }
+
     public static interface AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAll extends All, Incoterm, IncotermView.All, SaleType, SaleTypeView.All, Country, CountryView.All, Currency, CurrencyView.All {
     }
 
