@@ -39,4 +39,8 @@ public class UserService {
         return userRepository.findByEmailAndPassword(email, password);
 
     }
+
+    public Object findByEmailAndPasswordAndStatus(String email, String password, String status) {
+        return userRepository.findByEmailAndPasswordAndStatus(email, password, status);
+    }
 }
