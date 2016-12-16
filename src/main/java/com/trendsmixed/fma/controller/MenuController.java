@@ -7,9 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Menu;
+import com.trendsmixed.fma.entity.Team;
+import com.trendsmixed.fma.entity.TeamMenu;
+import com.trendsmixed.fma.entity.User;
 import com.trendsmixed.fma.jsonView.MenuView;
 import com.trendsmixed.fma.service.AppSessionService;
 import com.trendsmixed.fma.service.MenuService;
+import com.trendsmixed.fma.service.TeamMenuService;
+import com.trendsmixed.fma.service.TeamService;
+import com.trendsmixed.fma.service.UserService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +37,12 @@ public class MenuController {
     private AppSessionService appSessionService;
     @Autowired
     private MenuService menuService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private TeamService teamService;
+    @Autowired
+    private TeamMenuService teamMenuService;
 
     @JsonView(MenuView.AllAndSubMenu.class)
     @GetMapping
@@ -42,9 +55,50 @@ public class MenuController {
     public List<Menu> findTop(@RequestHeader(value = "email", defaultValue = "") String email) {
 
         AppSession appSession = appSessionService.findOne(email);
-        List<Menu> menus = menuService.findByMenuIsNull();
+        List<Menu> menus = new ArrayList<>();//menuService.findByMenuIsNull();
 
         if (appSession != null) {
+            User user = userService.findByEmail(email);
+            if (user == null) {
+                appSessionService.delete(email);
+                return null;
+            }
+
+            Team team = user.getTeam();
+            if (team == null) {
+                team = teamService.findByName("user");
+                if (team == null) {
+                    team = new Team();
+                    team.setName("user");
+                    //List<User> users = new ArrayList<>();
+                    //users.add(user);
+                    //team.setUserList(users);
+                    team = teamService.save(team);
+                }
+                user.setTeam(team);
+                user = userService.save(user);
+            } else if (team.getName().equalsIgnoreCase("admin")) {
+                if (team.getTeamMenuList().isEmpty()) {
+                    List<Menu> allMenus = menuService.findAll();
+                    List<TeamMenu> teamMenus = new ArrayList<>();
+                    for (Menu menu : allMenus) {
+                        TeamMenu teamMenu = new TeamMenu();
+                        teamMenu.setTeam(team);
+                        teamMenu.setMenu(menu);
+                        teamMenus.add(teamMenu);
+                    }
+                    teamMenus = teamMenuService.save(teamMenus);
+                    team.setTeamMenuList(teamMenus);
+                    team = teamService.save(team);
+                }
+            }
+            if (team.getTeamMenuList() != null) {
+                /*
+                List<Menu> menusForTeam = teamMenuService.findTopMenuByTeam(team);
+                for (Menu menu : menusForTeam) {
+                }*/
+                menus.addAll(teamMenuService.findTopMenuByTeam(team));
+            }
             menus.add(new Menu("Logout", "#logoutModal"));
         } else {
             menus.add(new Menu("Login", "#loginModal"));

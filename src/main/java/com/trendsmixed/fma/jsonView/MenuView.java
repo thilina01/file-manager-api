@@ -23,7 +23,7 @@ public class MenuView {
     public static interface Href {
     }
 
-    public static interface Team {
+    public static interface TeamMenuList {
     }
 
     public static interface SuperMenu {
@@ -35,7 +35,7 @@ public class MenuView {
     public static interface All extends Id, Name,Target,Href {
     }
 
-    public static interface AllAndTeamAll extends All, Team, TeamView.All {
+    public static interface AllAndTeamAll extends All, TeamMenuList, TeamView.All {
     }
     
     public static interface AllAndSubMenu extends All, SubMenu {

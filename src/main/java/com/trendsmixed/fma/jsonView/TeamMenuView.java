@@ -9,23 +9,14 @@ package com.trendsmixed.fma.jsonView;
  *
  * @author Daminda
  */
-public class TeamView {
+public class TeamMenuView {
 
     public static interface Id {
     }
 
-    public static interface Name {
+    public static interface Team {
     }
 
-    public static interface TeamMenuList {
-    }
-
-    public static interface User {
-    }
-
-    public static interface All extends Id, Name {
-    }
-
-    public static interface AllAndMenuAll extends All, TeamMenuList, TeamMenuView.Menu {
+    public static interface Menu {
     }
 }

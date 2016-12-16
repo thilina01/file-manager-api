@@ -17,8 +17,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -51,12 +49,8 @@ public class Menu implements Serializable {
     @JsonView(MenuView.Href.class)
     @Column(name = "href")
     private String href;
-    @JsonView(MenuView.Team.class)
-    @JoinTable(name = "team_has_menu", joinColumns = {
-        @JoinColumn(name = "menu_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "team_id", referencedColumnName = "id")})
-    @ManyToMany
-    private List<Team> teamList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
+    private List<TeamMenu> teamMenuList;
     @JsonView(MenuView.SubMenu.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
     private List<Menu> menuList;
@@ -115,12 +109,12 @@ public class Menu implements Serializable {
         this.href = href;
     }
 
-    public List<Team> getTeamList() {
-        return teamList;
+    public List<TeamMenu> getTeamMenuList() {
+        return teamMenuList;
     }
 
-    public void setTeamList(List<Team> teamList) {
-        this.teamList = teamList;
+    public void setTeamMenuList(List<TeamMenu> teamMenuList) {
+        this.teamMenuList = teamMenuList;
     }
 
     public List<Menu> getMenuList() {
