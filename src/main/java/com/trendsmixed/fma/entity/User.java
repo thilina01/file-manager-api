@@ -40,9 +40,12 @@ public class User implements Serializable {
     @JsonView(UserView.Email.class)
     @Column(name = "email")
     private String email;
-    @JsonView(UserView.Password.class)
+    //@JsonView(UserView.Password.class)
     @Column(name = "password")
     private String password;
+    @JsonView(UserView.Status.class)
+    @Column(name = "status")
+    private String status;
     @JsonView(UserView.Team.class)
     @JoinColumn(name = "team_id", referencedColumnName = "id")
     @ManyToOne(optional = true)
@@ -110,6 +113,14 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.User[ id=" + id + " ]";
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

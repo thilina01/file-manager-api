@@ -20,10 +20,13 @@ public class UserView {
     public static interface Password {
     }
 
+    public static interface Status {
+    }
+
     public static interface Team {
     }
 
-    public static interface All extends Id, Email, Password {
+    public static interface All extends Id, Email, Status {
     }
 
     public static interface AllAndTeamAllAndMenuAll extends All, Team, TeamView.AllAndMenuAll {
