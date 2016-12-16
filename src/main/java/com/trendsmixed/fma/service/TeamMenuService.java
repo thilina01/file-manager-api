@@ -32,12 +32,16 @@ public class TeamMenuService {
         return teamMenuRepository.findOne(id);
     }
 
-    public List<Menu>  findTopMenuByTeam(Team team) {
+    public List<Menu> findTopMenuByTeam(Team team) {
         return teamMenuRepository.findTopMenuByTeam(team);
     }
 
     public void delete(int id) {
         teamMenuRepository.delete(id);
+    }
+
+    public TeamMenu findByTeamAndMenu(Team team, Menu menu) {
+        return teamMenuRepository.findByTeamAndMenu(team, menu);
     }
 
 }

@@ -13,4 +13,6 @@ public interface TeamMenuRepository extends JpaRepository<TeamMenu, Integer> {
     @Query(value = "select teamMenu.menu from TeamMenu teamMenu where teamMenu.team= :team And teamMenu.menu.menu IS NULL ")
     public List<Menu> findTopMenuByTeam(@Param("team") Team team);
 
+    public TeamMenu findByTeamAndMenu(Team team, Menu menu);
+
 }

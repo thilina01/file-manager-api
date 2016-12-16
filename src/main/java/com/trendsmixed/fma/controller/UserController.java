@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @JsonView(UserView.All.class)
+    @JsonView(UserView.AllAndTeamAll.class)
     @GetMapping
     public List<User> findAll() {
         return userService.findAll();

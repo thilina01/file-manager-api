@@ -29,6 +29,9 @@ public class UserView {
     public static interface All extends Id, Email, Status {
     }
 
+    public static interface AllAndTeamAll extends All, Team, TeamView.All {
+    }
+
     public static interface AllAndTeamAllAndMenuAll extends All, Team, TeamView.AllAndMenuAll {
     }
 }

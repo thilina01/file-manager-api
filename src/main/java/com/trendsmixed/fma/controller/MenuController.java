@@ -78,19 +78,21 @@ public class MenuController {
                 user.setTeam(team);
                 user = userService.save(user);
             } else if (team.getName().equalsIgnoreCase("admin")) {
-                if (team.getTeamMenuList().isEmpty()) {
-                    List<Menu> allMenus = menuService.findAll();
-                    List<TeamMenu> teamMenus = new ArrayList<>();
-                    for (Menu menu : allMenus) {
-                        TeamMenu teamMenu = new TeamMenu();
+                List<Menu> allMenus = menuService.findAll();
+                List<TeamMenu> teamMenus = new ArrayList<>();
+                for (Menu menu : allMenus) {
+                    TeamMenu teamMenu = teamMenuService.findByTeamAndMenu(team, menu);
+                    if (teamMenu == null) {
+                        teamMenu = new TeamMenu();
                         teamMenu.setTeam(team);
                         teamMenu.setMenu(menu);
                         teamMenus.add(teamMenu);
                     }
-                    teamMenus = teamMenuService.save(teamMenus);
-                    team.setTeamMenuList(teamMenus);
-                    team = teamService.save(team);
                 }
+                teamMenus = teamMenuService.save(teamMenus);
+                team.setTeamMenuList(teamMenus);
+                team = teamService.save(team);
+
             }
             if (team.getTeamMenuList() != null) {
                 /*
