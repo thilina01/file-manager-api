@@ -31,6 +31,9 @@ public class UserView {
 
     public static interface AllAndTeamAll extends All, Team, TeamView.All {
     }
+    
+    public static interface AllAndTeamAllAndStatusAll extends AllAndTeamAll, Status, StatusView.All {
+    }
 
     public static interface AllAndTeamAllAndMenuAll extends All, Team, TeamView.AllAndMenuAll {
     }

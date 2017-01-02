@@ -1,6 +1,6 @@
 package com.trendsmixed.fma.dao;
 
-import com.trendsmixed.fma.entity.Team;
+import com.trendsmixed.fma.entity.Status;
 import com.trendsmixed.fma.entity.User;
 import com.trendsmixed.fma.service.UserService;
 
@@ -42,12 +42,14 @@ public class UserDao {
         }
         User user = userService.findByEmailAndPassword(email, password);
         if (user != null) {
-            String status = user.getStatus();
+            Status status = user.getStatus();
             if (status == null) {
-                user.setStatus("initial");
-                user = userService.save(user);
+                status = new Status();
+                status.setName("inactive");
+                user.setStatus(status);
+                //user = userService.save(user);
             }
-            return user.getStatus().equalsIgnoreCase("active");
+            return user.getStatus().getName().equalsIgnoreCase("active");
         }
         return false;
     }

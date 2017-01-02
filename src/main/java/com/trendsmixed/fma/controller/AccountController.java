@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.dao.UserDao;
 import com.trendsmixed.fma.entity.AppSession;
+import com.trendsmixed.fma.entity.Status;
 import com.trendsmixed.fma.entity.Team;
 import com.trendsmixed.fma.entity.User;
 import com.trendsmixed.fma.service.AppSessionService;
+import com.trendsmixed.fma.service.StatusService;
 import com.trendsmixed.fma.service.TeamService;
 import com.trendsmixed.fma.service.UserService;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,8 @@ public class AccountController {
 
     @Autowired
     private TeamService teamService;
+    @Autowired
+    private StatusService statusService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -56,7 +60,13 @@ public class AccountController {
                 admin.setTeam(team);
                 admin.setEmail(userDao.getEmail());
                 admin.setPassword(userDao.getPassword());
-                admin.setStatus("active");
+                Status status = statusService.findByName("active");
+                if (status == null) {
+                    status = new Status();
+                    status.setName("active");
+                    status = statusService.save(status);
+                }
+                admin.setStatus(status);
                 userService.save(admin);
             }
             //return true;

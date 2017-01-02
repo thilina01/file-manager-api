@@ -6,18 +6,19 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.UserView;
+import com.trendsmixed.fma.jsonView.StatusView;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,37 +26,28 @@ import javax.persistence.Table;
  * @author Thilina
  */
 @Entity
-@Table(name = "user")
+@Table(name = "status")
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
-public class User implements Serializable {
+    @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s")})
+public class Status implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(UserView.Id.class)
+    @JsonView(StatusView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(UserView.Email.class)
-    @Column(name = "email")
-    private String email;
-    //@JsonView(UserView.Password.class)
-    @Column(name = "password")
-    private String password;
-    @JsonView(UserView.Status.class)
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
-    @ManyToOne(optional = true)
-    private Status status;
-    @JsonView(UserView.Team.class)
-    @JoinColumn(name = "team_id", referencedColumnName = "id")
-    @ManyToOne(optional = true)
-    private Team team;
+    @JsonView(StatusView.Name.class)
+    @Column(name = "name")
+    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "status")
+    private List<User> userList;
 
-    public User() {
+    public Status() {
     }
 
-    public User(Integer id) {
+    public Status(Integer id) {
         this.id = id;
     }
 
@@ -67,36 +59,20 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
     @Override
@@ -109,10 +85,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof Status)) {
             return false;
         }
-        User other = (User) object;
+        Status other = (Status) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -121,7 +97,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trendsmixed.fma.entity.User[ id=" + id + " ]";
+        return "com.trendsmixed.fma.entity.Status[ id=" + id + " ]";
     }
 
 }
