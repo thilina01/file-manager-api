@@ -41,6 +41,7 @@ public class Team implements Serializable {
     @JsonView(TeamView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(TeamView.TeamMenuList.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
     private List<TeamMenu> teamMenuList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")

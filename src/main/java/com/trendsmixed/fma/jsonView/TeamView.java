@@ -26,6 +26,6 @@ public class TeamView {
     public static interface All extends Id, Name {
     }
 
-    public static interface AllAndMenuAll extends All, TeamMenuList, TeamMenuView.Menu {
+    public static interface AllAndMenuAll extends All, TeamMenuList, TeamMenuView.Menu, MenuView.All {
     }
 }

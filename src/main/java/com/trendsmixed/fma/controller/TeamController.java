@@ -30,7 +30,7 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-    @JsonView(TeamView.All.class)
+    @JsonView(TeamView.AllAndMenuAll.class)
     @GetMapping
     public List<Team> findAll() {
         return teamService.findAll();
