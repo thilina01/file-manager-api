@@ -41,6 +41,11 @@ public class UserController {
     public User save(@RequestBody User user, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
+            int userId = user.getId();
+            if (user.getPassword() == null && userId != 0) {
+                User existingUser = userService.findOne(userId);
+                user.setPassword(existingUser.getPassword());
+            }
             user = userService.save(user);
             return user;
 
