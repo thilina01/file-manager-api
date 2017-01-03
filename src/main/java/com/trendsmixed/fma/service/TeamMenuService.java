@@ -40,8 +40,16 @@ public class TeamMenuService {
         teamMenuRepository.delete(id);
     }
 
+    public void delete(List<TeamMenu> teamMenus) {
+        teamMenuRepository.delete(teamMenus);
+    }
+
     public TeamMenu findByTeamAndMenu(Team team, Menu menu) {
         return teamMenuRepository.findByTeamAndMenu(team, menu);
+    }
+
+    public List<TeamMenu> findByTeam(Team team) {
+        return teamMenuRepository.findByTeam(team);
     }
 
 }

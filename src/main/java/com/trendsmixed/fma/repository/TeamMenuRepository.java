@@ -15,4 +15,6 @@ public interface TeamMenuRepository extends JpaRepository<TeamMenu, Integer> {
 
     public TeamMenu findByTeamAndMenu(Team team, Menu menu);
 
+    public List<TeamMenu> findByTeam(Team team);
+
 }
