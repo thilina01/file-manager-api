@@ -50,6 +50,11 @@ public class MenuController {
         return menuService.findAll();
     }
 
+    @JsonView(MenuView.AllAndSuperMenu.class)
+    @GetMapping("/withParent")
+    public List<Menu> findAllWithParent() {
+        return menuService.findAll();
+    }
     @JsonView(MenuView.AllAndSubMenu.class)
     @GetMapping("/top")
     public List<Menu> findTop(@RequestHeader(value = "email", defaultValue = "") String email) {
@@ -102,7 +107,7 @@ public class MenuController {
                 menus.addAll(teamMenuService.findTopMenuByTeam(team));
             }
             menus.add(new Menu("Logout", "#logoutModal"));
-            menus.add(new Menu("⌕", "#searchModal","#/kpi"));
+            menus.add(new Menu("⌕", "#menuGridModal"));
         } else {
             menus.add(new Menu("Login", "#loginModal"));
             menus.add(new Menu("Register", "#registerModal"));
