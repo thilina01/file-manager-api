@@ -33,7 +33,7 @@ public class SalesOrderItemController {
 
 
     @GetMapping
-    @JsonView(SalesOrderItemView.AllAndItemAllAndSalesOrderAll.class)
+    @JsonView(SalesOrderItemView.AllAndItemAllAndSalesOrderAllAndJobAll.class)
     public List<SalesOrderItem> findAll() {
         return salesOrderItemService.findAll();
     }

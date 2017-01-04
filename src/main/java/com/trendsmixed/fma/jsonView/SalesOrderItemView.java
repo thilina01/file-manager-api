@@ -23,6 +23,9 @@ public class SalesOrderItemView {
     public static interface Item {
     }
 
+    public static interface Job {
+    }
+
     public static interface SalesOrder {
     }
 
@@ -30,6 +33,9 @@ public class SalesOrderItemView {
     }
 
     public static interface AllAndItemAllAndSalesOrderAll extends All, Item, SalesOrder, ItemView.All, SalesOrderView.All {
+    }
+
+    public static interface AllAndItemAllAndSalesOrderAllAndJobAll extends AllAndItemAllAndSalesOrderAll, Job, JobView.All {
     }
 
 }

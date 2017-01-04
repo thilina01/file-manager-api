@@ -60,6 +60,7 @@ public class SalesOrderItem implements Serializable {
     private SalesOrder salesOrder;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrderItem")
     private List<Delivery> deliveryList;
+    @JsonView(SalesOrderItemView.Job.class)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "salesOrderItem")
     private Job job;
 
@@ -150,5 +151,5 @@ public class SalesOrderItem implements Serializable {
     public void setJob(Job job) {
         this.job = job;
     }
-    
+
 }
