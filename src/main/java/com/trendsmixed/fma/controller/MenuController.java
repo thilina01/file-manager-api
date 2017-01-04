@@ -102,6 +102,7 @@ public class MenuController {
                 menus.addAll(teamMenuService.findTopMenuByTeam(team));
             }
             menus.add(new Menu("Logout", "#logoutModal"));
+            menus.add(new Menu("⌕", "#searchModal","#/kpi"));
         } else {
             menus.add(new Menu("Login", "#loginModal"));
             menus.add(new Menu("Register", "#registerModal"));
