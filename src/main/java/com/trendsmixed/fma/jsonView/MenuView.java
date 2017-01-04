@@ -32,12 +32,15 @@ public class MenuView {
     public static interface SubMenu {
     }
 
-    public static interface All extends Id, Name,Target,Href {
+    public static interface All extends Id, Name, Target, Href {
     }
 
     public static interface AllAndTeamAll extends All, TeamMenuList, TeamView.All {
     }
-    
+
     public static interface AllAndSubMenu extends All, SubMenu {
+    }
+
+    public static interface AllAndSuperMenu extends All, SuperMenu {
     }
 }
