@@ -74,8 +74,16 @@ public class JobController {
                 }
                 JobType jobType = job.getJobType();
                 if (jobType != null) {
-                    jobType = jobTypeService.findByCode(jobType.getCode());
-                    job.setJobType(jobType);
+                    String jobTypeCode = jobType.getCode().trim();
+                    if (jobTypeCode != null) {
+                        jobType = jobTypeService.findByCode(jobTypeCode);
+                        if (jobType == null) {
+                            jobType = new JobType();
+                            jobType.setCode(jobTypeCode);
+                            jobType = jobTypeService.save(jobType);
+                        }
+                        job.setJobType(jobType);
+                    }
                 }
                 Item item = job.getItem();
                 if (item != null) {
@@ -88,6 +96,7 @@ public class JobController {
             }
             jobService.save(jobsToSave);
         } catch (Throwable e) {
+            e.printStackTrace();
             while (e.getCause() != null) {
                 e = e.getCause();
             }

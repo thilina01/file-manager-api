@@ -7,4 +7,6 @@ public interface PaintRepository extends JpaRepository<Paint, Integer> {
 
     public Paint findByCode(String code);
 
+    public Paint findByDescription(String description);
+
 }

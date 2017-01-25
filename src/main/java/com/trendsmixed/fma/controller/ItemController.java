@@ -66,9 +66,17 @@ public class ItemController {
         try {
             //List<Item> itemsToRemove = new ArrayList<>();
             for (Item item : items) {
-                item.setCode(item.getCode().trim());
-                item.setDescription(item.getDescription().trim());
-                Item existingItem = itemService.findByCode(item.getCode());
+                String code = item.getCode();
+                if (code == null) {
+                    continue;
+                }
+                String description = item.getDescription();
+                if (description == null) {
+                    continue;
+                }
+                item.setCode(code.trim());
+                item.setDescription(description.trim());
+                Item existingItem = itemService.findByCode(code.trim());
                 if (existingItem != null) {
                     //itemsToRemove.add(item);
                     item.setId(existingItem.getId());
@@ -76,13 +84,35 @@ public class ItemController {
 
                 ItemType itemType = item.getItemType();
                 if (itemType != null) {
-                    itemType = itemTypeService.findByType(itemType.getType());
-                    item.setItemType(itemType);
+                    String type = itemType.getType().trim();
+                    ItemType existingItemType = itemTypeService.findByType(type);
+                    if (existingItemType == null) {
+                        existingItemType = new ItemType();
+                        existingItemType.setCode(type);
+                        existingItemType.setType(type);
+                        existingItemType = itemTypeService.save(itemType);
+                    }
+                    item.setItemType(existingItemType);
                 }
 
                 Paint paint = item.getPaint();
                 if (paint != null) {
-                    paint = paintService.findByCode(paint.getCode());
+                    String paintCode = paint.getCode();
+                    String paintDescription = paint.getDescription();
+                    if (paintCode != null) {
+                        paint = paintService.findByCode(paintCode);
+                    } else if (paintDescription != null) {
+                        paint = paintService.findByDescription(paintDescription);
+                    }
+                    if (paint == null) {
+                        paint = paintService.findByCode("NA");
+                        if (paint == null) {
+                            paint = new Paint();
+                            paint.setCode("NA");
+                            paint = paintService.save(paint);
+                        }
+                        
+                    }
                     item.setPaint(paint);
                 }
             }

@@ -37,4 +37,8 @@ public class PaintService {
     public Paint findByCode(String code) {
         return paintRepository.findByCode(code);
     }
+
+    public Paint findByDescription(String description) {
+        return paintRepository.findByDescription(description);
+    }
 }
