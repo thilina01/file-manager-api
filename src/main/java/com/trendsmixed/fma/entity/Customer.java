@@ -99,7 +99,7 @@ public class Customer implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Currency currency;
     @JsonView(CustomerView.SaleType.class)
-    @JoinColumn(name = "cust_type_id", referencedColumnName = "id")
+    @JoinColumn(name = "sale_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private SaleType saleType;
     @JsonView(CustomerView.Country.class)
