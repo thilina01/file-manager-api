@@ -90,65 +90,58 @@ public class CustomerController {
 
                 Incoterm incoterm = customer.getIncoterm();
                 if (incoterm != null) {
-                    Incoterm existingIncoterm = null;
                     String incotermCode = incoterm.getCode();
                     String incotermName = incoterm.getName();
                     if (incotermCode != null) {
-                        existingIncoterm = incotermService.findByCode(incotermCode);
+                        incoterm = incotermService.findByCode(incotermCode);
                     } else if (incotermName != null) {
-                        existingIncoterm = incotermService.findByName(incotermName);
-                    }
-                    if (existingIncoterm != null) {
-                        incoterm.setId(existingIncoterm.getId());
-                    } else {
-                        customer.setIncoterm(null);
+                        incoterm = incotermService.findByName(incotermName);
                     }
                 }
+                if (incoterm == null || incoterm.getId() == null) {
+                    incoterm = incotermService.findByCode("NA");
+                }
+                customer.setIncoterm(incoterm);
 
                 Currency currency = customer.getCurrency();
                 if (currency != null) {
-                    Currency existingCurrency = currencyService.findByCode(currency.getCode());
-                    if (existingCurrency != null) {
-                        currency.setId(existingCurrency.getId());
-                    } else {
-                        customer.setCurrency(null);
-                    }
+                    String currencyCode = currency.getCode() != null ? currency.getCode().trim() : "NA";
+                    currency = currencyService.findByCode(currencyCode);
                 }
+                if (currency == null) {
+                    currency = currencyService.findByCode("NA");
+                }
+                customer.setCurrency(currency);
 
                 SaleType saleType = customer.getSaleType();
                 if (saleType != null) {
-                    SaleType existingSaleType = null;
                     String saleTypeCode = saleType.getCode();
                     String saleTypeName = saleType.getName();
                     if (saleTypeCode != null) {
-                        existingSaleType = saleTypeService.findByCode(saleTypeCode);
+                        saleType = saleTypeService.findByCode(saleTypeCode);
                     } else if (saleTypeName != null) {
-                        existingSaleType = saleTypeService.findByName(saleTypeName);
-                    }
-
-                    if (existingSaleType != null) {
-                        saleType.setId(existingSaleType.getId());
-                    } else {
-                        customer.setSaleType(null);
+                        saleType = saleTypeService.findByName(saleTypeName);
                     }
                 }
+                if (saleType == null || saleType.getId() == null) {
+                    saleType = saleTypeService.findByCode("NA");
+                }
+                customer.setSaleType(saleType);
 
                 Country country = customer.getCountry();
                 if (country != null) {
-                    Country existingCountry = null;
                     String countryCode = country.getCode();
                     String countryName = country.getName();
                     if (countryCode != null) {
-                        existingCountry = countryService.findByCode(countryCode);
+                        country = countryService.findByCode(countryCode);
                     } else if (countryName != null) {
-                        existingCountry = countryService.findByName(countryName);
-                    }
-                    if (existingCountry != null) {
-                        country.setId(existingCountry.getId());
-                    } else {
-                        customer.setCountry(null);
+                        country = countryService.findByName(countryName);
                     }
                 }
+                if (country == null || country.getId() == null) {
+                    country = countryService.findByCode("NA");
+                }
+                customer.setCountry(country);
 
             }
             customerService.save(customers);
@@ -163,19 +156,25 @@ public class CustomerController {
 
     @JsonView(CustomerView.AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAll.class)
     @GetMapping("/{id}")
-    public Customer findOne(@PathVariable("id") int id) {
+    public Customer findOne(@PathVariable("id") int id
+    ) {
         return customerService.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void delete(@PathVariable int id,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request
+    ) {
         appSessionService.isValid(email, request);
         customerService.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable int id, @RequestBody Customer customer, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Customer updateCustomer(@PathVariable int id,
+            @RequestBody Customer customer,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request
+    ) {
         appSessionService.isValid(email, request);
         customer.setId(id);
         customer = customerService.save(customer);
