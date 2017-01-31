@@ -22,9 +22,11 @@ public class ControlPointRunJobView {
 
     public static interface Job {
     }
-    
-    public static interface AllAndJobAndControlPointRun extends Id,Quantity,ControlPointRun,Job,ControlPointRunView.AllAndShiftAndControllPoint,JobView.All{
+
+    public static interface JobType {
     }
-    
-    
+
+    public static interface AllAndJobAndJobTypeAndControlPointRun extends Id, Quantity, ControlPointRun, Job, JobType, JobTypeView.AlL, ControlPointRunView.AllAndShiftAndControllPoint, JobView.All {
+    }
+
 }

@@ -26,6 +26,6 @@ public class ControlPointPlanManpowerView {
     public static interface All extends Id, Count {
     }
 
-    public static interface AllAndManpowerTypeAllAndControlPointPlanAll extends All, ManpowerType, ManpowerTypeView.All, ControlPointPlan, ControlPointPlanView.All {
+    public static interface AllAndManpowerTypeAllAndControlPointPlanAllAndControlPointAllAndShiftAll extends All, ManpowerType, ManpowerTypeView.All, ControlPointPlan, ControlPointPlanView.AllAndControlPointAllAndShiftAll {
     }
 }

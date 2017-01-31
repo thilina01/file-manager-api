@@ -14,13 +14,16 @@ public class ControlPointRunLossView {
     public static interface Id {
     }
 
+    public static interface Quantity {
+    }
+
     public static interface ControlPointRun {
     }
 
     public static interface LossReason {
     }
 
-    public static interface AllAndControlPointRunAndLossReasonAndLossType extends Id, ControlPointRun, LossReason,ControlPointRunView.AllAndShiftAndControllPoint, LossReasonView.AllAndLossTypeAll,LossTypeView.All {
+    public static interface AllAndControlPointRunAndLossReasonAndLossType extends Id, Quantity, ControlPointRun, LossReason, ControlPointRunView.AllAndShiftAndControllPoint, LossReasonView.AllAndLossTypeAll, LossTypeView.All {
     }
 
 }
