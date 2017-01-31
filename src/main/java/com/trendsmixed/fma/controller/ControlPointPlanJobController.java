@@ -30,7 +30,7 @@ public class ControlPointPlanJobController {
     @Autowired
     private ControlPointPlanJobService controlPointPlanJobService;
     
-    @JsonView(ControlPointPlanJobView.AllAndJobAllAndControlPointPlanAll.class)
+    @JsonView(ControlPointPlanJobView.AllAndJobAllAndControlPointPlanAllAndJobTypeAll.class)
     @GetMapping
     public List<ControlPointPlanJob> findAll() {
         return controlPointPlanJobService.findAll();

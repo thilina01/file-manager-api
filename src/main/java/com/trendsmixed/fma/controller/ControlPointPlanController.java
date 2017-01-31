@@ -38,6 +38,7 @@ public class ControlPointPlanController {
         return controlPointPlanService.findAll();
     }
 
+    @JsonView(ControlPointPlanView.All.class)
     @PostMapping
     public ControlPointPlan save(@RequestBody ControlPointPlan controlPointPlan, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -61,6 +62,7 @@ public class ControlPointPlanController {
             return controlPointPlan;
 
         } catch (Throwable e) {
+            e.printStackTrace();
             while (e.getCause() != null) {
                 e = e.getCause();
             }

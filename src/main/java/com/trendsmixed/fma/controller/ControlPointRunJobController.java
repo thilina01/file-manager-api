@@ -43,7 +43,7 @@ public class ControlPointRunJobController {
     @Autowired
     private ShiftService shiftService;
 
-    @JsonView(ControlPointRunJobView.AllAndJobAndControlPointRun.class)
+    @JsonView(ControlPointRunJobView.AllAndJobAndJobTypeAndControlPointRun.class)
     @GetMapping
     public List<ControlPointRunJob> findAll() {
         return controlPointRunJobService.findAll();
