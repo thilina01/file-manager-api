@@ -37,6 +37,9 @@ public class ControlPointRunLoss implements Serializable {
     @JsonView(ControlPointRunLossView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ControlPointRunLossView.Quantity.class)
+    @Column(name = "quantity")
+    private Integer quantity;
     @JsonView(ControlPointRunLossView.ControlPointRun.class)
     @JoinColumn(name = "control_point_run_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
