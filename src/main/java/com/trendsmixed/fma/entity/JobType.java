@@ -48,6 +48,10 @@ public class JobType implements Serializable {
     private String type;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobType")
     private List<Job> jobList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobType")
+    private List<ControlPointPlanJob> controlPointPlanJobList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobType")
+    private List<ControlPointRunJob> controlPointRunJobList;
 
     public JobType() {
     }
@@ -111,6 +115,34 @@ public class JobType implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.JobType[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the controlPointPlanJobList
+     */
+    public List<ControlPointPlanJob> getControlPointPlanJobList() {
+        return controlPointPlanJobList;
+    }
+
+    /**
+     * @param controlPointPlanJobList the controlPointPlanJobList to set
+     */
+    public void setControlPointPlanJobList(List<ControlPointPlanJob> controlPointPlanJobList) {
+        this.controlPointPlanJobList = controlPointPlanJobList;
+    }
+
+    /**
+     * @return the controlPointRunJobList
+     */
+    public List<ControlPointRunJob> getControlPointRunJobList() {
+        return controlPointRunJobList;
+    }
+
+    /**
+     * @param controlPointRunJobList the controlPointRunJobList to set
+     */
+    public void setControlPointRunJobList(List<ControlPointRunJob> controlPointRunJobList) {
+        this.controlPointRunJobList = controlPointRunJobList;
     }
 
 }

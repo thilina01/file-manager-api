@@ -48,6 +48,10 @@ public class ControlPointPlanJob implements Serializable {
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Job job;
+    @JsonView(ControlPointPlanJobView.JobType.class)
+    @JoinColumn(name = "job_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private JobType jobType;
 
     public ControlPointPlanJob() {
     }
@@ -112,5 +116,5 @@ public class ControlPointPlanJob implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ControlPointPlanJob[ id=" + id + " ]";
     }
-    
+
 }
