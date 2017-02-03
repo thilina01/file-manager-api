@@ -52,6 +52,10 @@ public class ControlPointRunJob implements Serializable {
     @JoinColumn(name = "job_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private JobType jobType;
+    @JsonView(ControlPointRunJobView.Operation.class)
+    @JoinColumn(name = "operation_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Operation operation;
 
     public ControlPointRunJob() {
     }
@@ -129,6 +133,20 @@ public class ControlPointRunJob implements Serializable {
      */
     public void setJobType(JobType jobType) {
         this.jobType = jobType;
+    }
+
+    /**
+     * @return the operation
+     */
+    public Operation getOperation() {
+        return operation;
+    }
+
+    /**
+     * @param operation the operation to set
+     */
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
 }

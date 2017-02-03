@@ -26,6 +26,9 @@ public class ControlPointRunJobView {
     public static interface JobType {
     }
 
+    public static interface Operation {
+    }
+
     public static interface AllAndJobAndJobTypeAndControlPointRun extends Id, Quantity, ControlPointRun, Job, JobType, JobTypeView.AlL, ControlPointRunView.AllAndShiftAndControllPoint, JobView.All {
     }
 

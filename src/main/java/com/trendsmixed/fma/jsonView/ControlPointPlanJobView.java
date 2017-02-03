@@ -26,6 +26,9 @@ public class ControlPointPlanJobView {
     public static interface JobType {
     }
 
+    public static interface Operation {
+    }
+
     public static interface All extends Id, Quantity {
     }
 

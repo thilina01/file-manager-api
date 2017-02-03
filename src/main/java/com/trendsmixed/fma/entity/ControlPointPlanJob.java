@@ -52,6 +52,10 @@ public class ControlPointPlanJob implements Serializable {
     @JoinColumn(name = "job_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private JobType jobType;
+    @JsonView(ControlPointPlanJobView.Operation.class)
+    @JoinColumn(name = "operation_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Operation operation;
 
     public ControlPointPlanJob() {
     }
@@ -115,6 +119,34 @@ public class ControlPointPlanJob implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.ControlPointPlanJob[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the jobType
+     */
+    public JobType getJobType() {
+        return jobType;
+    }
+
+    /**
+     * @param jobType the jobType to set
+     */
+    public void setJobType(JobType jobType) {
+        this.jobType = jobType;
+    }
+
+    /**
+     * @return the operation
+     */
+    public Operation getOperation() {
+        return operation;
+    }
+
+    /**
+     * @param operation the operation to set
+     */
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
 }
