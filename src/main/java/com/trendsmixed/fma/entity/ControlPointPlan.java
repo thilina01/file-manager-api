@@ -37,16 +37,19 @@ import javax.persistence.TemporalType;
 public class ControlPointPlan implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @JsonView(ControlPointPlanView.PlanDate.class)
-    @Column(name = "plan_date")
-    @Temporal(TemporalType.DATE)
-    private Date planDate;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @JsonView(ControlPointPlanView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ControlPointPlanView.PlanDate.class)
+    @Column(name = "plan_date")
+    @Temporal(TemporalType.DATE)
+    private Date planDate;    
+    @JsonView(ControlPointPlanView.Duration.class)
+    @Column(name = "duration")
+    private Integer duration;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPointPlan")
     private List<ControlPointPlanManpower> controlPointPlanManpowerList;
     @JsonView(ControlPointPlanView.ControlPoint.class)
@@ -139,5 +142,18 @@ public class ControlPointPlan implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ControlPointPlan[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the duration
+     */
+    public Integer getDuration() {
+        return duration;
+    }
+
+    /**
+     * @param duration the duration to set
+     */
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }    
 }
