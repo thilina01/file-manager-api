@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.ShiftView;
+import com.trendsmixed.fma.module.shift.ShiftView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -45,9 +45,7 @@ public class Shift implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "shift")
-    private List<ControlPointPlan> controlPointPlanList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shift")
-    private List<ControlPointRun> controlPointRunList;
+    private List<Production> productionList;
 
     public Shift() {
     }
@@ -80,20 +78,12 @@ public class Shift implements Serializable {
         this.name = name;
     }
 
-    public List<ControlPointPlan> getControlPointPlanList() {
-        return controlPointPlanList;
+    public List<Production> getProductionList() {
+        return productionList;
     }
 
-    public void setControlPointPlanList(List<ControlPointPlan> controlPointPlanList) {
-        this.controlPointPlanList = controlPointPlanList;
-    }
-
-    public List<ControlPointRun> getControlPointRunList() {
-        return controlPointRunList;
-    }
-
-    public void setControlPointRunList(List<ControlPointRun> controlPointRunList) {
-        this.controlPointRunList = controlPointRunList;
+    public void setProductionList(List<Production> productionList) {
+        this.productionList = productionList;
     }
 
     @Override
@@ -120,5 +110,5 @@ public class Shift implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Shift[ id=" + id + " ]";
     }
-    
+
 }

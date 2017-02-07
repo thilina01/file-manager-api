@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.ItemView;
+import com.trendsmixed.fma.module.item.ItemView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -62,9 +62,6 @@ public class Item implements Serializable {
     @JsonView(ItemView.Weight.class)
     @Column(name = "weight")
     private Double weight;
-    @JsonView(ItemView.ItemMachine.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
-    private List<ItemMachine> itemMachineList;
     @JsonView(ItemView.SalesOrderItem.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
     private List<SalesOrderItem> salesOrderItemList;
@@ -153,14 +150,6 @@ public class Item implements Serializable {
         this.weight = weight;
     }
 
-    public List<ItemMachine> getItemMachineList() {
-        return itemMachineList;
-    }
-
-    public void setItemMachineList(List<ItemMachine> itemMachineList) {
-        this.itemMachineList = itemMachineList;
-    }
-
     public List<SalesOrderItem> getSalesOrderItemList() {
         return salesOrderItemList;
     }
@@ -176,7 +165,6 @@ public class Item implements Serializable {
     public void setCustomerItemList(List<CustomerItem> customerItemList) {
         this.customerItemList = customerItemList;
     }
-
 
     public Paint getPaint() {
         return paint;

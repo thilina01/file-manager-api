@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.LossReasonView;
+import com.trendsmixed.fma.module.lossreason.LossReasonView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -49,14 +49,12 @@ public class LossReason implements Serializable {
     @JsonView(LossReasonView.ReasonInSinhala.class)
     @Column(name = "reason_in_sinhala")
     private String reasonInSinhala;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lossReason")
-    private List<Breakdown> breakdownList;
     @JsonView(LossReasonView.LossType.class)
     @JoinColumn(name = "loss_type_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private LossType lossType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lossReason")
-    private List<ControlPointRunLoss> controlPointRunLossList;
+    private List<Loss> lossList;
 
     public LossReason() {
     }
@@ -97,14 +95,6 @@ public class LossReason implements Serializable {
         this.reasonInSinhala = reasonInSinhala;
     }
 
-    public List<Breakdown> getBreakdownList() {
-        return breakdownList;
-    }
-
-    public void setBreakdownList(List<Breakdown> breakdownList) {
-        this.breakdownList = breakdownList;
-    }
-
     public LossType getLossType() {
         return lossType;
     }
@@ -113,12 +103,12 @@ public class LossReason implements Serializable {
         this.lossType = lossType;
     }
 
-    public List<ControlPointRunLoss> getControlPointRunLossList() {
-        return controlPointRunLossList;
+    public List<Loss> getLossList() {
+        return lossList;
     }
 
-    public void setControlPointRunLossList(List<ControlPointRunLoss> controlPointRunLossList) {
-        this.controlPointRunLossList = controlPointRunLossList;
+    public void setLossList(List<Loss> lossList) {
+        this.lossList = lossList;
     }
 
     @Override

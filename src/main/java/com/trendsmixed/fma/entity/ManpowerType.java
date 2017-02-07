@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.ManpowerTypeView;
+import com.trendsmixed.fma.module.manpowertype.ManpowerTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -45,9 +45,7 @@ public class ManpowerType implements Serializable {
     @Column(name = "type")
     private String type;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
-    private List<ControlPointPlanManpower> controlPointPlanManpowerList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
-    private List<ControlPointRunManpower> controlPointRunManpowerList;
+    private List<Manpower> manpowerList;
 
     public ManpowerType() {
     }
@@ -80,20 +78,12 @@ public class ManpowerType implements Serializable {
         this.type = type;
     }
 
-    public List<ControlPointPlanManpower> getControlPointPlanManpowerList() {
-        return controlPointPlanManpowerList;
+    public List<Manpower> getManpowerList() {
+        return manpowerList;
     }
 
-    public void setControlPointPlanManpowerList(List<ControlPointPlanManpower> controlPointPlanManpowerList) {
-        this.controlPointPlanManpowerList = controlPointPlanManpowerList;
-    }
-
-    public List<ControlPointRunManpower> getControlPointRunManpowerList() {
-        return controlPointRunManpowerList;
-    }
-
-    public void setControlPointRunManpowerList(List<ControlPointRunManpower> controlPointRunManpowerList) {
-        this.controlPointRunManpowerList = controlPointRunManpowerList;
+    public void setManpowerList(List<Manpower> manpowerList) {
+        this.manpowerList = manpowerList;
     }
 
     @Override

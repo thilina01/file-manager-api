@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.ControlPointView;
+import com.trendsmixed.fma.module.controlpoint.ControlPointView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -51,10 +51,8 @@ public class ControlPoint implements Serializable {
     @ManyToOne(optional = false)
     private WorkCenter workCenter;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
-    private List<ControlPointPlan> controlPointPlanList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
-    private List<ControlPointRun> controlPointRunList;
-
+    private List<Production> productionList;
+    
     public ControlPoint() {
     }
 
@@ -86,28 +84,20 @@ public class ControlPoint implements Serializable {
         this.name = name;
     }
 
+        public List<Production> getProductionList() {
+        return productionList;
+    }
+
+    public void setProductionList(List<Production> productionList) {
+        this.productionList = productionList;
+    }
+
     public WorkCenter getWorkCenter() {
         return workCenter;
     }
 
     public void setWorkCenter(WorkCenter workCenter) {
         this.workCenter = workCenter;
-    }
-
-    public List<ControlPointPlan> getControlPointPlanList() {
-        return controlPointPlanList;
-    }
-
-    public void setControlPointPlanList(List<ControlPointPlan> controlPointPlanList) {
-        this.controlPointPlanList = controlPointPlanList;
-    }
-
-    public List<ControlPointRun> getControlPointRunList() {
-        return controlPointRunList;
-    }
-
-    public void setControlPointRunList(List<ControlPointRun> controlPointRunList) {
-        this.controlPointRunList = controlPointRunList;
     }
 
     @Override

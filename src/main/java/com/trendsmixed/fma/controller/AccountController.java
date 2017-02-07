@@ -12,10 +12,10 @@ import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.entity.Status;
 import com.trendsmixed.fma.entity.Team;
 import com.trendsmixed.fma.entity.User;
-import com.trendsmixed.fma.service.AppSessionService;
-import com.trendsmixed.fma.service.StatusService;
-import com.trendsmixed.fma.service.TeamService;
-import com.trendsmixed.fma.service.UserService;
+import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.status.StatusService;
+import com.trendsmixed.fma.module.team.TeamService;
+import com.trendsmixed.fma.module.user.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -81,8 +81,11 @@ public class AccountController {
             //cookie.setPath("/");
             //response.addCookie(cookie);
             //response.flushBuffer();
+            return authenticated;
+        } else {
+            throw new Error("Login Failed");
         }
-        return authenticated;
+
     }
 
     @PostMapping("/logout")

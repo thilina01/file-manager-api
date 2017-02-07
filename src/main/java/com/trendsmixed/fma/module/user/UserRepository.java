@@ -1,0 +1,15 @@
+package com.trendsmixed.fma.module.user;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.trendsmixed.fma.entity.User;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
+
+    User findByEmail(String email);
+
+    User findByEmailAndPassword(String email, String password);
+
+    User findByEmailAndPasswordAndStatus(String email, String password, String status);
+
+}

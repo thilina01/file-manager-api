@@ -2,7 +2,7 @@ package com.trendsmixed.fma.dao;
 
 import com.trendsmixed.fma.entity.Status;
 import com.trendsmixed.fma.entity.User;
-import com.trendsmixed.fma.service.UserService;
+import com.trendsmixed.fma.module.user.UserService;
 
 import lombok.Data;
 

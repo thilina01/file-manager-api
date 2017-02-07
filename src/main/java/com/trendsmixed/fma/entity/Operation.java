@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.OperationView;
+import com.trendsmixed.fma.module.operation.OperationView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -16,6 +16,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,16 +40,35 @@ public class Operation implements Serializable {
     @JsonView(OperationView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(OperationView.Code.class)
-    @Column(name = "code")
-    private String code;
-    @JsonView(OperationView.Description.class)
-    @Column(name = "description")
-    private String description;
+    @JsonView(OperationView.PlannedQuantity.class)
+    @Column(name = "planned_quantity")
+    private Integer plannedQuantity;
+    @JsonView(OperationView.ActualQuantity.class)
+    @Column(name = "actual_quantity")
+    private Integer actualQuantity;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @JsonView(OperationView.UnitWeight.class)
+    @Column(name = "unit_weight")
+    private Double unitWeight;
+    @JsonView(OperationView.Loss.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "operation")
-    private List<ControlPointPlanJob> controlPointPlanJobs;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "operation")
-    private List<ControlPointRunJob> controlPointRunJobs;
+    private List<Loss> lossList;
+    @JsonView(OperationView.Production.class)
+    @JoinColumn(name = "production_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Production production;
+    @JsonView(OperationView.Job.class)
+    @JoinColumn(name = "job_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Job job;
+    @JsonView(OperationView.OperationType.class)
+    @JoinColumn(name = "operation_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private OperationType operationType;
+    @JsonView(OperationView.ProductType.class)
+    @JoinColumn(name = "product_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private ProductType productType;
 
     public Operation() {
     }
@@ -64,20 +85,68 @@ public class Operation implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public Integer getPlannedQuantity() {
+        return plannedQuantity;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setPlannedQuantity(Integer plannedQuantity) {
+        this.plannedQuantity = plannedQuantity;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getActualQuantity() {
+        return actualQuantity;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setActualQuantity(Integer actualQuantity) {
+        this.actualQuantity = actualQuantity;
+    }
+
+    public Double getUnitWeight() {
+        return unitWeight;
+    }
+
+    public void setUnitWeight(Double unitWeight) {
+        this.unitWeight = unitWeight;
+    }
+
+    public List<Loss> getLossList() {
+        return lossList;
+    }
+
+    public void setLossList(List<Loss> lossList) {
+        this.lossList = lossList;
+    }
+
+    public Production getProduction() {
+        return production;
+    }
+
+    public void setProduction(Production production) {
+        this.production = production;
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    }
+
+    public OperationType getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(OperationType operationType) {
+        this.operationType = operationType;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
     }
 
     @Override
@@ -103,34 +172,6 @@ public class Operation implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.Operation[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the controlPointPlanJobs
-     */
-    public List<ControlPointPlanJob> getControlPointPlanJobs() {
-        return controlPointPlanJobs;
-    }
-
-    /**
-     * @param controlPointPlanJobs the controlPointPlanJobs to set
-     */
-    public void setControlPointPlanJobs(List<ControlPointPlanJob> controlPointPlanJobs) {
-        this.controlPointPlanJobs = controlPointPlanJobs;
-    }
-
-    /**
-     * @return the controlPointRunJobs
-     */
-    public List<ControlPointRunJob> getControlPointRunJobs() {
-        return controlPointRunJobs;
-    }
-
-    /**
-     * @param controlPointRunJobs the controlPointRunJobs to set
-     */
-    public void setControlPointRunJobs(List<ControlPointRunJob> controlPointRunJobs) {
-        this.controlPointRunJobs = controlPointRunJobs;
     }
 
 }

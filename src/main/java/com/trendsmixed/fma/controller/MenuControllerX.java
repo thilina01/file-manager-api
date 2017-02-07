@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.dao.Menu;
-import com.trendsmixed.fma.service.AppSessionService;
+import com.trendsmixed.fma.module.appsession.AppSessionService;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

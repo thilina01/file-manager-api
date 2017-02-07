@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.MachineView;
+import com.trendsmixed.fma.module.machine.MachineView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -51,13 +51,7 @@ public class Machine implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private List<ItemMachine> itemMachineList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
     private List<Breakdown> breakdownList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private List<ControlPointRunBreakdown> controlPointRunBreakdownList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-    private List<MachineRunningTime> machineRunningTimeList;
     @JsonView(MachineView.WorkCenter.class)
     @JoinColumn(name = "work_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -102,36 +96,12 @@ public class Machine implements Serializable {
         this.name = name;
     }
 
-    public List<ItemMachine> getItemMachineList() {
-        return itemMachineList;
-    }
-
-    public void setItemMachineList(List<ItemMachine> itemMachineList) {
-        this.itemMachineList = itemMachineList;
-    }
-
     public List<Breakdown> getBreakdownList() {
         return breakdownList;
     }
 
     public void setBreakdownList(List<Breakdown> breakdownList) {
         this.breakdownList = breakdownList;
-    }
-
-    public List<ControlPointRunBreakdown> getControlPointRunBreakdownList() {
-        return controlPointRunBreakdownList;
-    }
-
-    public void setControlPointRunBreakdownList(List<ControlPointRunBreakdown> controlPointRunBreakdownList) {
-        this.controlPointRunBreakdownList = controlPointRunBreakdownList;
-    }
-
-    public List<MachineRunningTime> getMachineRunningTimeList() {
-        return machineRunningTimeList;
-    }
-
-    public void setMachineRunningTimeList(List<MachineRunningTime> machineRunningTimeList) {
-        this.machineRunningTimeList = machineRunningTimeList;
     }
 
     public WorkCenter getWorkCenter() {

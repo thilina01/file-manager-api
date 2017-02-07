@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.CustomerView;
+import com.trendsmixed.fma.module.customer.CustomerView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;

@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.JobView;
+import com.trendsmixed.fma.module.job.JobView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -71,8 +71,6 @@ public class Job implements Serializable {
     private Double remainingQuantity;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
     private List<JobDispatch> jobDispatchList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
-    private List<ControlPointRunJob> controlPointRunJobList;
     @JsonView(JobView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -86,8 +84,8 @@ public class Job implements Serializable {
     @OneToOne()
     private SalesOrderItem salesOrderItem;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
-    private List<ControlPointPlanJob> controlPointPlanJobList;
-
+    private List<Operation> operationList;
+    
     public Job() {
     }
 
@@ -151,20 +149,20 @@ public class Job implements Serializable {
         this.quantity = quantity;
     }
 
+    public Double getRemainingQuantity() {
+        return remainingQuantity;
+    }
+
+    public void setRemainingQuantity(Double remainingQuantity) {
+        this.remainingQuantity = remainingQuantity;
+    }
+
     public List<JobDispatch> getJobDispatchList() {
         return jobDispatchList;
     }
 
     public void setJobDispatchList(List<JobDispatch> jobDispatchList) {
         this.jobDispatchList = jobDispatchList;
-    }
-
-    public List<ControlPointRunJob> getControlPointRunJobList() {
-        return controlPointRunJobList;
-    }
-
-    public void setControlPointRunJobList(List<ControlPointRunJob> controlPointRunJobList) {
-        this.controlPointRunJobList = controlPointRunJobList;
     }
 
     public Item getItem() {
@@ -190,13 +188,13 @@ public class Job implements Serializable {
     public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
         this.salesOrderItem = salesOrderItem;
     }
-
-    public List<ControlPointPlanJob> getControlPointPlanJobList() {
-        return controlPointPlanJobList;
+    
+    public List<Operation> getOperationList() {
+        return operationList;
     }
 
-    public void setControlPointPlanJobList(List<ControlPointPlanJob> controlPointPlanJobList) {
-        this.controlPointPlanJobList = controlPointPlanJobList;
+    public void setOperationList(List<Operation> operationList) {
+        this.operationList = operationList;
     }
 
     @Override
@@ -222,14 +220,6 @@ public class Job implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.Job[ id=" + id + " ]";
-    }
-
-    public Double getRemainingQuantity() {
-        return remainingQuantity;
-    }
-
-    public void setRemainingQuantity(Double remainingQuantity) {
-        this.remainingQuantity = remainingQuantity;
     }
 
 }

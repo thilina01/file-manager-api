@@ -6,7 +6,7 @@
 package com.trendsmixed.fma.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.jsonView.BreakdownView;
+import com.trendsmixed.fma.module.breakdown.BreakdownView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -47,13 +47,16 @@ public class Breakdown implements Serializable {
     @JsonView(BreakdownView.Duration.class)
     @Column(name = "duration")
     private Integer duration;
+    @JsonView(BreakdownView.BreakdownNumber.class)
+    @Column(name = "breakdown_number")
+    private String breakdownNumber;
+    @JsonView(BreakdownView.Description.class)
+    @Column(name = "description")
+    private String description;
     @JsonView(BreakdownView.Machine.class)
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Machine machine;
-    @JoinColumn(name = "loss_reason_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private LossReason lossReason;
 
     public Breakdown() {
     }
@@ -74,8 +77,8 @@ public class Breakdown implements Serializable {
         return breakdownDate;
     }
 
-    public void setBreakdownDate(Date date) {
-        this.breakdownDate = date;
+    public void setBreakdownDate(Date breakdownDate) {
+        this.breakdownDate = breakdownDate;
     }
 
     public Integer getDuration() {
@@ -86,20 +89,28 @@ public class Breakdown implements Serializable {
         this.duration = duration;
     }
 
+    public String getBreakdownNumber() {
+        return breakdownNumber;
+    }
+
+    public void setBreakdownNumber(String breakdownNumber) {
+        this.breakdownNumber = breakdownNumber;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Machine getMachine() {
         return machine;
     }
 
     public void setMachine(Machine machine) {
         this.machine = machine;
-    }
-
-    public LossReason getLossReason() {
-        return lossReason;
-    }
-
-    public void setLossReason(LossReason lossReason) {
-        this.lossReason = lossReason;
     }
 
     @Override
