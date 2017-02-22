@@ -1,12 +1,12 @@
-package com.trendsmixed.fma.module.operation;
+package com.trendsmixed.fma.module.operationtype;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.Operation;
-import com.trendsmixed.fma.module.operation.OperationView;
+import com.trendsmixed.fma.entity.OperationType;
+import com.trendsmixed.fma.module.operationtype.OperationTypeView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -21,27 +21,27 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/operations")
-public class OperationController {
+@RequestMapping("/operationTypes")
+public class OperationTypeController {
 
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private OperationService operationService;
+    private OperationTypeService operationTypeService;
 
-    @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAll.class)
+    @JsonView(OperationTypeView.All.class)
     @GetMapping
-    public List<Operation> findAll() {
-        return operationService.findAll();
+    public List<OperationType> findAll() {
+        return operationTypeService.findAll();
     }
 
-    @JsonView(OperationView.All.class)
+    @JsonView(OperationTypeView.All.class)
     @PostMapping
-    public Operation save(@RequestBody Operation operation, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public OperationType save(@RequestBody OperationType operationType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            operation = operationService.save(operation);
-            return operation;
+            operationType = operationTypeService.save(operationType);
+            return operationType;
 
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -52,11 +52,11 @@ public class OperationController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Operation> operations, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<OperationType> operationTypes, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
         appSessionService.isValid(email, request);
         try {
-            operationService.save(operations);
+            operationTypeService.save(operationTypes);
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
@@ -66,22 +66,22 @@ public class OperationController {
     }
 
     @GetMapping("/{id}")
-    public Operation findOne(@PathVariable("id") int id) {
-        return operationService.findOne(id);
+    public OperationType findOne(@PathVariable("id") int id) {
+        return operationTypeService.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        operationService.delete(id);
+        operationTypeService.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Operation updateCustomer(@PathVariable int id, @RequestBody Operation operation, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public OperationType updateCustomer(@PathVariable int id, @RequestBody OperationType operationType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        operation.setId(id);
-        operation = operationService.save(operation);
-        return operation;
+        operationType.setId(id);
+        operationType = operationTypeService.save(operationType);
+        return operationType;
     }
 }

@@ -44,4 +44,8 @@ public class JobService {
         return jobRepository.findX(startDate, endDate, pageable);
     }
 
+	public List findForTable() {
+        return jobRepository.findForTable();
+	}
+
 }

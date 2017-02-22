@@ -7,6 +7,7 @@ package com.trendsmixed.fma.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.operationtype.OperationTypeView;
+
 /**
  *
  * @author Thilina
@@ -30,13 +34,16 @@ import javax.persistence.Table;
 public class OperationType implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @JsonView(OperationTypeView.Id.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @JsonView(OperationTypeView.Code.class)
     @Column(name = "code")
     private String code;
+    @JsonView(OperationTypeView.Description.class)
     @Column(name = "description")
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "operationType")

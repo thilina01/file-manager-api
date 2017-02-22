@@ -55,7 +55,7 @@ public class Operation implements Serializable {
     private List<Loss> lossList;
     @JsonView(OperationView.Production.class)
     @JoinColumn(name = "production_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.REMOVE, optional = false)
     private Production production;
     @JsonView(OperationView.Job.class)
     @JoinColumn(name = "job_id", referencedColumnName = "id")
@@ -63,11 +63,11 @@ public class Operation implements Serializable {
     private Job job;
     @JsonView(OperationView.OperationType.class)
     @JoinColumn(name = "operation_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.REMOVE)
     private OperationType operationType;
     @JsonView(OperationView.ProductType.class)
     @JoinColumn(name = "product_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.REMOVE)
     private ProductType productType;
 
     public Operation() {

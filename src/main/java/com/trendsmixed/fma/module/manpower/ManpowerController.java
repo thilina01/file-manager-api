@@ -29,7 +29,7 @@ public class ManpowerController {
     @Autowired
     private ManpowerService manpowerService;
 
-    @JsonView(ManpowerView.All.class)
+    @JsonView(ManpowerView.AllManpowerTypeAllProductionAll.class)
     @GetMapping
     public List<Manpower> findAll() {
         return manpowerService.findAll();

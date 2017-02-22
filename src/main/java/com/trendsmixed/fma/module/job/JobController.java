@@ -107,6 +107,11 @@ public class JobController {
     public Job findOne(@PathVariable("id") int id) {
         return jobService.findOne(id);
     }
+    
+    @GetMapping("/table")
+    public List findForTable() {
+        return jobService.findForTable();
+    }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

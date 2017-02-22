@@ -1,0 +1,1 @@
+mvn spring-boot:run -Pdev -Dspring.profiles.active=dev
