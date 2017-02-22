@@ -26,7 +26,7 @@ public class ManpowerView {
 	public static interface ManpowerType extends ManpowerTypeView.All {
 	}
 
-	public static interface Production extends ProductionView.All {
+	public static interface Production extends ProductionView.AllAndShiftAllAndControlPointAll {
 	}
 
 	public static interface All extends Id, PlannedQuantity, ActualQuantity {

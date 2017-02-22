@@ -53,9 +53,11 @@ public class Production implements Serializable {
     @JsonView(ProductionView.ActualDuration.class)
     @Column(name = "actual_duration")
     private Integer actualDuration;
+    @JsonView(ProductionView.ControlPoint.class)
     @JoinColumn(name = "control_point_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ControlPoint controlPoint;
+    @JsonView(ProductionView.Shift.class)
     @JoinColumn(name = "shift_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Shift shift;

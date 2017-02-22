@@ -32,13 +32,13 @@ public class ProductionController {
 	@Autowired
 	private ProductionService productionService;
 
-	@JsonView(ProductionView.All.class)
+	@JsonView(ProductionView.AllAndShiftAllAndControlPointAll.class)
 	@GetMapping
 	public List<Production> findAll() {
 		return productionService.findAll();
 	}
 
-	//@JsonView(ProductionView.All.class)
+	@JsonView(ProductionView.All.class)
 	@PostMapping
 	public Production save(@RequestBody Production production,
 			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

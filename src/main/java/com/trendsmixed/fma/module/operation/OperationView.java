@@ -22,7 +22,7 @@ public class OperationView {
 	public static interface Loss {
 	}
 
-	public static interface Production extends ProductionView.All {
+	public static interface Production extends ProductionView.AllAndShiftAllAndControlPointAll {
 	}
 
 	public static interface Job extends JobView.All {
