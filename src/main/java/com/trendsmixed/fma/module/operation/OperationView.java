@@ -36,8 +36,11 @@ public class OperationView {
 
 	public static interface All extends Id, PlannedQuantity, ActualQuantity, UnitWeight {
 	}
-
+	
+	public static interface AllJobAllProductTypeAllOperationTypeAll
+	extends All, Job, ProductType, OperationType {
+}
 	public static interface AllJobAllProductionAllProductTypeAllOperationTypeAll
-			extends All, Job, Production, ProductType, OperationType {
-	}
+	extends AllJobAllProductTypeAllOperationTypeAll, Production {
+}
 }

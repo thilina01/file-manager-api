@@ -32,7 +32,10 @@ public class ManpowerView {
 	public static interface All extends Id, PlannedQuantity, ActualQuantity {
 	}
 
-	public static interface AllManpowerTypeAllProductionAll extends All, ManpowerType, Production {
+	public static interface AllManpowerTypeAll extends All, ManpowerType {
+	}
+
+	public static interface AllManpowerTypeAllProductionAll extends AllManpowerTypeAll, Production {
 	}
 
 }

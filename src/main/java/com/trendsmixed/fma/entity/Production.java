@@ -61,8 +61,10 @@ public class Production implements Serializable {
     @JoinColumn(name = "shift_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Shift shift;
+    @JsonView(ProductionView.Manpower.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "production")
     private List<Manpower> manpowerList;
+    @JsonView(ProductionView.Operation.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "production")
     private List<Operation> operationList;
 

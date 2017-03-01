@@ -6,7 +6,8 @@
 package com.trendsmixed.fma.module.production;
 
 import com.trendsmixed.fma.module.controlpoint.ControlPointView;
-import com.trendsmixed.fma.module.shift.ShiftRepository;
+import com.trendsmixed.fma.module.manpower.ManpowerView;
+import com.trendsmixed.fma.module.operation.OperationView;
 import com.trendsmixed.fma.module.shift.ShiftView;
 
 /**
@@ -22,7 +23,7 @@ public class ProductionView {
 	}
 
 	public static interface PlannedDuration {
-	}
+	}	
 
 	public static interface ActualDuration {
 	}
@@ -39,7 +40,10 @@ public class ProductionView {
 	public static interface Job {
 	}
 
-	public static interface Operation {
+	public static interface Operation extends OperationView.All {
+	}
+
+	public static interface Manpower extends ManpowerView.AllManpowerTypeAll {
 	}
 
 	public static interface ProductType {
@@ -57,6 +61,10 @@ public class ProductionView {
 
 	public static interface AllAndShiftAllAndControlPointAll
 			extends AllAndShiftAll, ControlPoint, ControlPointView.All {
+	}
+
+	public static interface AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll
+			extends AllAndShiftAllAndControlPointAll, Operation, Manpower,OperationView.AllJobAllProductTypeAllOperationTypeAll {
 	}
 
 }

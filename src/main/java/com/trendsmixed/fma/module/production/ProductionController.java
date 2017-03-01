@@ -46,7 +46,7 @@ public class ProductionController {
 		try {
 			List<Operation> operations = production.getOperationList();
 			if (operations != null) {
-				for (Operation operation : operations) {
+				for (Operation operation : operations) {	
 					operation.setProduction(production);
 				}
 			}
@@ -84,6 +84,7 @@ public class ProductionController {
 		}
 	}
 
+	@JsonView(ProductionView.AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll.class)
 	@GetMapping("/{id}")
 	public Production findOne(@PathVariable("id") int id) {
 		return productionService.findOne(id);
@@ -94,7 +95,6 @@ public class ProductionController {
 			HttpServletRequest request) {
 		appSessionService.isValid(email, request);
 		productionService.delete(id);
-
 	}
 
 	@PutMapping("/{id}")
