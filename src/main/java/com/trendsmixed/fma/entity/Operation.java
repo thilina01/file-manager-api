@@ -63,11 +63,11 @@ public class Operation implements Serializable {
     private Job job;
     @JsonView(OperationView.OperationType.class)
     @JoinColumn(name = "operation_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(optional = false)//, cascade = CascadeType.ALL
     private OperationType operationType;
     @JsonView(OperationView.ProductType.class)
     @JoinColumn(name = "product_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(optional = false)//, cascade = CascadeType.ALL
     private ProductType productType;
 
     public Operation() {
