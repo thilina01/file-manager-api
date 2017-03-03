@@ -47,7 +47,8 @@ public class AccountController {
     @PostMapping("/login")
     public boolean login(@RequestBody UserDao userDao, HttpServletRequest request, HttpServletResponse response) {
 
-        if (userDao.getEmail().equalsIgnoreCase("admin@trwlanka.com") && userDao.getPassword().equalsIgnoreCase("trwadmin")) {
+        if (userDao.getEmail().equalsIgnoreCase("admin@trwlanka.com")
+                && userDao.getPassword().equalsIgnoreCase("trwadmin")) {
             User admin = userService.findByEmail(userDao.getEmail());
             if (admin == null) {
                 admin = new User();
@@ -83,9 +84,9 @@ public class AccountController {
             //response.flushBuffer();
             return authenticated;
         } else {
-            throw new Error("Login Failed");
+            //throw new Error("Login Failed");
         }
-
+        return authenticated;
     }
 
     @PostMapping("/logout")
