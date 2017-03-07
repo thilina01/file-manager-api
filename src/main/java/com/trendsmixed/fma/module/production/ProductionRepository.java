@@ -1,8 +1,13 @@
 package com.trendsmixed.fma.module.production;
 
+import com.trendsmixed.fma.entity.ControlPoint;
 import com.trendsmixed.fma.entity.Production;
+import com.trendsmixed.fma.entity.Shift;
+
+import java.util.Date;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductionRepository extends JpaRepository<Production, Integer> {
-
+Production findByProductionDateAndShiftAndControlPoint(Date productionDate, Shift shift, ControlPoint controlPoint);
 }

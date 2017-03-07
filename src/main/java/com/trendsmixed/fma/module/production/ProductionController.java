@@ -46,7 +46,7 @@ public class ProductionController {
 		try {
 			List<Operation> operations = production.getOperationList();
 			if (operations != null) {
-				for (Operation operation : operations) {	
+				for (Operation operation : operations) {
 					operation.setProduction(production);
 				}
 			}
@@ -67,6 +67,16 @@ public class ProductionController {
 			}
 			throw new Error(e.getMessage());
 		}
+	}
+
+	@JsonView(ProductionView.AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll.class)
+	@PostMapping("/ByProductionDateAndShiftAndControlPoint")
+	public Production ByProductionDateAndShiftAndControlPoint(@RequestBody Production production,
+			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+		appSessionService.isValid(email, request);
+
+		return productionService.findByProductionDateAndShiftAndControlPoint(production.getProductionDate(),
+				production.getShift(), production.getControlPoint());
 	}
 
 	@PostMapping("/many")

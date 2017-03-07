@@ -1,6 +1,10 @@
 package com.trendsmixed.fma.module.production;
 
+import com.trendsmixed.fma.entity.ControlPoint;
 import com.trendsmixed.fma.entity.Production;
+import com.trendsmixed.fma.entity.Shift;
+
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +36,10 @@ public class ProductionService {
 
     public void delete(int id) {
         productionRepository.delete(id);
+    }
+
+    public Production findByProductionDateAndShiftAndControlPoint(Date productionDate, Shift shift, ControlPoint controlPoint){
+        return productionRepository.findByProductionDateAndShiftAndControlPoint(productionDate, shift, controlPoint);
     }
 
 }
