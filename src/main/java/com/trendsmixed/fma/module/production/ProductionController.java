@@ -94,7 +94,7 @@ public class ProductionController {
 		}
 	}
 
-	@JsonView(ProductionView.AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll.class)
+	@JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
 	@GetMapping("/{id}")
 	public Production findOne(@PathVariable("id") int id) {
 		return productionService.findOne(id);

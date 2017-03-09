@@ -6,9 +6,12 @@
 package com.trendsmixed.fma.module.production;
 
 import com.trendsmixed.fma.module.controlpoint.ControlPointView;
+import com.trendsmixed.fma.module.costcenter.CostCenterView;
+import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.manpower.ManpowerView;
 import com.trendsmixed.fma.module.operation.OperationView;
 import com.trendsmixed.fma.module.shift.ShiftView;
+import com.trendsmixed.fma.module.workcenter.WorkCenterView;
 
 /**
  *
@@ -23,7 +26,7 @@ public class ProductionView {
 	}
 
 	public static interface PlannedDuration {
-	}	
+	}
 
 	public static interface ActualDuration {
 	}
@@ -63,8 +66,20 @@ public class ProductionView {
 			extends AllAndShiftAll, ControlPoint, ControlPointView.All {
 	}
 
+	public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection
+			extends AllAndShiftAll, ControlPoint, ControlPointView.AllAndWorkCenterAll,
+			WorkCenterView.AllAndCostCenterAll, CostCenterView.AllAndSectionAll {
+	}
+
 	public static interface AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll
-			extends AllAndShiftAllAndControlPointAll, Operation, Manpower,OperationView.AllJobAllProductTypeAllOperationTypeAll {
+			extends AllAndShiftAllAndControlPointAll, Operation, Manpower,
+			OperationView.AllJobAllProductTypeAllOperationTypeAll {
+	}
+
+	public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll
+			extends AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection,
+			AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll,
+			JobView.AllAndItemAllAndJobTypeAll {
 	}
 
 }
