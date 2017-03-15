@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.operation;
 
 import com.trendsmixed.fma.module.job.JobView;
+import com.trendsmixed.fma.module.loss.LossView;
 import com.trendsmixed.fma.module.operationtype.OperationTypeView;
 import com.trendsmixed.fma.module.production.ProductionView;
 import com.trendsmixed.fma.module.producttype.ProductTypeView;
@@ -19,7 +20,7 @@ public class OperationView {
 	public static interface UnitWeight {
 	}
 
-	public static interface Loss {
+	public static interface Loss extends LossView.All {
 	}
 
 	public static interface Production extends ProductionView.AllAndShiftAllAndControlPointAll {
@@ -37,10 +38,10 @@ public class OperationView {
 	public static interface All extends Id, PlannedQuantity, ActualQuantity, UnitWeight {
 	}
 	
-	public static interface AllJobAllProductTypeAllOperationTypeAll
-	extends All, Job, ProductType, OperationType {
+	public static interface AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
+	extends All, Job, ProductType, OperationType,Loss, LossView.AllLossReasonAllLossTypeAll {
 }
-	public static interface AllJobAllProductionAllProductTypeAllOperationTypeAll
-	extends AllJobAllProductTypeAllOperationTypeAll, Production {
+	public static interface AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
+	extends AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll, Production {
 }
 }

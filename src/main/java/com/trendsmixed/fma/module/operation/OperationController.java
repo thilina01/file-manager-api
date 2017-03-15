@@ -29,7 +29,7 @@ public class OperationController {
     @Autowired
     private OperationService operationService;
 
-    @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAll.class)
+    @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
     @GetMapping
     public List<Operation> findAll() {
         return operationService.findAll();

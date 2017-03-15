@@ -69,7 +69,7 @@ public class ProductionController {
 		}
 	}
 
-	@JsonView(ProductionView.AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll.class)
+	@JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
 	@PostMapping("/ByProductionDateAndShiftAndControlPoint")
 	public Production ByProductionDateAndShiftAndControlPoint(@RequestBody Production production,
 			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

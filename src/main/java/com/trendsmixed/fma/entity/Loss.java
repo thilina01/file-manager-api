@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.loss.LossView;
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,7 +47,7 @@ public class Loss implements Serializable {
     private LossReason lossReason;
     @JsonView(LossView.Operation.class)
     @JoinColumn(name = "operation_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.REMOVE, optional = false)
     private Operation operation;
 
     public Loss() {

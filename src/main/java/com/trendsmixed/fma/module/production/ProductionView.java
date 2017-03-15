@@ -73,7 +73,7 @@ public class ProductionView {
 
 	public static interface AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll
 			extends AllAndShiftAllAndControlPointAll, Operation, Manpower,
-			OperationView.AllJobAllProductTypeAllOperationTypeAll {
+			OperationView.AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll {
 	}
 
 	public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll
