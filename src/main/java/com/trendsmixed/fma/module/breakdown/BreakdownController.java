@@ -31,6 +31,7 @@ public class BreakdownController {
     private AppSessionService appSessionService;
 
     @PostMapping
+    @JsonView(BreakdownView.All.class)
     public Breakdown save(@RequestBody Breakdown breakdown, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
@@ -51,6 +52,7 @@ public class BreakdownController {
     }
 
     @GetMapping("/{id}")
+    @JsonView(BreakdownView.All.class)
     public Breakdown findOne(@PathVariable("id") int id) {
         return breakdownService.findOne(id);
     }
@@ -63,6 +65,7 @@ public class BreakdownController {
     }
 
     @PutMapping("/{id}")
+    @JsonView(BreakdownView.All.class)
     public Breakdown updateCustomer(@PathVariable int id, @RequestBody Breakdown breakdown, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         breakdown.setId(id);

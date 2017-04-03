@@ -9,7 +9,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.breakdown.BreakdownView;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,6 +51,14 @@ public class Breakdown implements Serializable {
     @JsonView(BreakdownView.Duration.class)
     @Column(name = "duration")
     private Integer duration;
+    @JsonView(BreakdownView.BreakdownTime.class)
+    @Column(name = "breakdown_time")
+    //@Temporal(TemporalType.TIMESTAMP)
+    private Date breakdownTime;
+    @JsonView(BreakdownView.RecoveryTime.class)
+    @Column(name = "recovery_time")
+    //@Temporal(TemporalType.TIME)
+    private Date recoveryTime;
     @JsonView(BreakdownView.BreakdownNumber.class)
     @Column(name = "breakdown_number")
     private String breakdownNumber;
@@ -57,6 +69,8 @@ public class Breakdown implements Serializable {
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Machine machine;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "breakdown")
+	private List<OperationBreadown> operationBreadownList;
 
     public Breakdown() {
     }
@@ -120,7 +134,31 @@ public class Breakdown implements Serializable {
         return hash;
     }
 
-    @Override
+    public Date getBreakdownTime() {
+		return breakdownTime;
+	}
+
+	public void setBreakdownTime(Date breakdownTime) {
+		this.breakdownTime = breakdownTime;
+	}
+
+	public Date getRecoveryTime() {
+		return recoveryTime;
+	}
+
+	public void setRecoveryTime(Date recoveryTime) {
+		this.recoveryTime = recoveryTime;
+	}
+
+	public List<OperationBreadown> getOperationBreadownList() {
+		return operationBreadownList;
+	}
+
+	public void setOperationBreadownList(List<OperationBreadown> operationBreadownList) {
+		this.operationBreadownList = operationBreadownList;
+	}
+
+	@Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Breakdown)) {

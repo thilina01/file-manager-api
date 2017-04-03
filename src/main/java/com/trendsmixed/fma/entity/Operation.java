@@ -69,6 +69,8 @@ public class Operation implements Serializable {
     @JoinColumn(name = "product_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)//, cascade = CascadeType.ALL
     private ProductType productType;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operation")
+	private List<OperationBreadown> operationBreadownList;
 
     public Operation() {
     }
@@ -149,7 +151,15 @@ public class Operation implements Serializable {
         this.productType = productType;
     }
 
-    @Override
+    public List<OperationBreadown> getOperationBreadownList() {
+		return operationBreadownList;
+	}
+
+	public void setOperationBreadownList(List<OperationBreadown> operationBreadownList) {
+		this.operationBreadownList = operationBreadownList;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);

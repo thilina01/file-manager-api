@@ -5,10 +5,9 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.machine.MachineView;
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +21,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.machine.MachineView;
 
 /**
  *
@@ -52,10 +54,9 @@ public class Machine implements Serializable {
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
     private List<Breakdown> breakdownList;
-    @JsonView(MachineView.WorkCenter.class)
-    @JoinColumn(name = "work_center_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private WorkCenter workCenter;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
+	private List<ControlPointMachine> controlPointMachineList;
+
 
     public Machine() {
     }
@@ -104,15 +105,15 @@ public class Machine implements Serializable {
         this.breakdownList = breakdownList;
     }
 
-    public WorkCenter getWorkCenter() {
-        return workCenter;
-    }
+    public List<ControlPointMachine> getControlPointMachineList() {
+		return controlPointMachineList;
+	}
 
-    public void setWorkCenter(WorkCenter workCenter) {
-        this.workCenter = workCenter;
-    }
+	public void setControlPointMachineList(List<ControlPointMachine> controlPointMachineList) {
+		this.controlPointMachineList = controlPointMachineList;
+	}
 
-    @Override
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);

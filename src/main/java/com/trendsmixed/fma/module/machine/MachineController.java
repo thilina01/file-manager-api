@@ -5,10 +5,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trendsmixed.fma.entity.ControlPoint;
 import com.trendsmixed.fma.entity.Machine;
 import com.trendsmixed.fma.entity.WorkCenter;
 import com.trendsmixed.fma.module.machine.MachineView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.controlpoint.ControlPointService;
 import com.trendsmixed.fma.module.workcenter.WorkCenterService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +33,7 @@ public class MachineController {
     @Autowired
     private MachineService machineService;
     @Autowired
-    private WorkCenterService workCenterService;
+    private ControlPointService controlPointService;
 
     @JsonView(MachineView.AllAndWorkCenterAll.class)
     @GetMapping
@@ -63,15 +65,10 @@ public class MachineController {
             for (Machine machine : machines) {
                 machine.setCode(machine.getCode().trim());
                 machine.setName(machine.getName().trim());
-                Machine existingControlPoint = machineService.findByCode(machine.getCode());
-                if (existingControlPoint != null) {
-                    machine.setId(existingControlPoint.getId());
-                }
-                WorkCenter workCenter = machine.getWorkCenter();
-                if (workCenter != null) {
-                    workCenter = workCenterService.findByCode(workCenter.getCode());
-                    machine.setWorkCenter(workCenter);
-                }
+                Machine existingMachine = machineService.findByCode(machine.getCode());
+                if (existingMachine != null) {
+                    machine.setId(existingMachine.getId());
+                }                
             }
             machineService.save(machines);
         } catch (Throwable e) {

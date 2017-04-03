@@ -52,8 +52,6 @@ public class WorkCenter implements Serializable {
     @JoinColumn(name = "cost_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CostCenter costCenter;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workCenter")
-    private List<Machine> machineList;
 
     public WorkCenter() {
     }
@@ -100,14 +98,6 @@ public class WorkCenter implements Serializable {
 
     public void setCostCenter(CostCenter costCenter) {
         this.costCenter = costCenter;
-    }
-
-    public List<Machine> getMachineList() {
-        return machineList;
-    }
-
-    public void setMachineList(List<Machine> machineList) {
-        this.machineList = machineList;
     }
 
     @Override
