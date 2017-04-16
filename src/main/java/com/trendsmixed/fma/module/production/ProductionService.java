@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.production;
 
 import com.trendsmixed.fma.entity.ControlPoint;
+import com.trendsmixed.fma.entity.Item;
 import com.trendsmixed.fma.entity.Production;
 import com.trendsmixed.fma.entity.Shift;
 
@@ -8,38 +9,44 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.module.production.ProductionRepository;
+import com.trendsmixed.fma.utility.Page;
 
 @Service
 public class ProductionService {
 
     @Autowired
-    private ProductionRepository productionRepository;
+    private ProductionRepository repository;
 
-    public List<Production> findAll() {
-        return productionRepository.findAll();
+    public Iterable<Production> findAll() {
+        return repository.findAll();
     }
 
+	public Page<Production> findAll(Pageable pageable) {
+		return new Page<Production>(repository.findAll(pageable));
+	}
+
     public Production save(Production production) {
-        return productionRepository.save(production);
+        return repository.save(production);
     }
 
     public void save(List<Production> productions) {
-        productionRepository.save(productions);
+        repository.save(productions);
     }
 
     public Production findOne(int id) {
-        return productionRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public void delete(int id) {
-        productionRepository.delete(id);
+        repository.delete(id);
     }
 
     public Production findByProductionDateAndShiftAndControlPoint(Date productionDate, Shift shift, ControlPoint controlPoint){
-        return productionRepository.findByProductionDateAndShiftAndControlPoint(productionDate, shift, controlPoint);
+        return repository.findByProductionDateAndShiftAndControlPoint(productionDate, shift, controlPoint);
     }
 
 }

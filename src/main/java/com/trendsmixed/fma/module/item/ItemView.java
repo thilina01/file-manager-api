@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.item;
 
 import com.trendsmixed.fma.module.itemtype.ItemTypeView;
 import com.trendsmixed.fma.module.paint.PaintView;
+import com.trendsmixed.fma.utility.PageView;
 
 public class ItemView {
 
@@ -29,7 +30,7 @@ public class ItemView {
     public static interface ProductionToolAvailability {
     }
 
-    public static interface All extends Id, Code, Size, Weight, Volume, Description, DrawingVersion, ProductionToolAvailability {
+    public static interface All extends Id, Code, Size, Weight, Volume, Description, DrawingVersion, ProductionToolAvailability,PageView.All  {
     }
 
     public static interface ItemType {

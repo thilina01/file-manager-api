@@ -1,10 +1,19 @@
 package com.trendsmixed.fma.module.item;
 
-import com.trendsmixed.fma.entity.Item;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-public interface ItemRepository extends JpaRepository<Item, Integer> {
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.Item;
+
+public interface ItemRepository extends PagingAndSortingRepository<Item, Integer> {
 
     public Item findByCode(String code);
-
+    
+	@Query(value = "SELECT"
+			+ " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.description)"
+			+ " FROM Item o")
+	public List<Combo> getCombo();
 }

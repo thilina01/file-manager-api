@@ -5,16 +5,22 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.ControlPoint;
 import com.trendsmixed.fma.entity.Item;
 import com.trendsmixed.fma.entity.ItemType;
 import com.trendsmixed.fma.entity.Paint;
 import com.trendsmixed.fma.module.item.ItemView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.controlpoint.ControlPointView;
 import com.trendsmixed.fma.module.itemtype.ItemTypeService;
 import com.trendsmixed.fma.module.paint.PaintService;
+import com.trendsmixed.fma.utility.Page;
+
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +37,7 @@ public class ItemController {
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private ItemService itemService;
+    private ItemService service;
     @Autowired
     private ItemTypeService itemTypeService;
     @Autowired
@@ -39,16 +45,27 @@ public class ItemController {
 
     @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @GetMapping
-    public List<Item> findAll() {
-        return itemService.findAll();
+    public Iterable<Item> findAll() {
+        return service.findAll();
     }
 
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
+    @GetMapping("/page")
+	Page<Item> page( Pageable pageable){
+    	return service.findAll(pageable);
+	} 
+    
+    @GetMapping("/combo")
+	List<Combo> combo(){
+    	return service.getCombo();
+	} 
+	
     @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @PostMapping
     public Item save(@RequestBody Item item, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            item = itemService.save(item);
+            item = service.save(item);
             return item;
 
         } catch (Throwable e) {
@@ -75,7 +92,7 @@ public class ItemController {
                 }
                 item.setCode(code.trim());
                 item.setDescription(description.trim());
-                Item existingItem = itemService.findByCode(code.trim());
+                Item existingItem = service.findByCode(code.trim());
                 if (existingItem != null) {
                     //itemsToRemove.add(item);
                     item.setId(existingItem.getId());
@@ -124,7 +141,7 @@ public class ItemController {
             }
             System.out.println(items.size());
             //items.removeAll(itemsToRemove);*/
-            itemService.save(items);
+            service.save(items);
         } catch (Throwable e) {
             e.printStackTrace();
             while (e.getCause() != null) {
@@ -137,13 +154,13 @@ public class ItemController {
     @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @GetMapping("/{id}")
     public Item findOne(@PathVariable("id") int id) {
-        return itemService.findOne(id);
+        return service.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        itemService.delete(id);
+        service.delete(id);
 
     }
 
@@ -151,7 +168,7 @@ public class ItemController {
     public Item updateCustomer(@PathVariable int id, @RequestBody Item item, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         item.setId(id);
-        item = itemService.save(item);
+        item = service.save(item);
         return item;
     }
 }

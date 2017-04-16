@@ -12,6 +12,7 @@ import com.trendsmixed.fma.module.manpower.ManpowerView;
 import com.trendsmixed.fma.module.operation.OperationView;
 import com.trendsmixed.fma.module.shift.ShiftView;
 import com.trendsmixed.fma.module.workcenter.WorkCenterView;
+import com.trendsmixed.fma.utility.PageView;
 
 /**
  *
@@ -56,7 +57,7 @@ public class ProductionView {
 	}
 
 	public static interface All
-			extends Id, ProductionDate, PlannedDuration, ActualDuration, PlannedQuantity, ActualQuantity {
+			extends Id, ProductionDate, PlannedDuration, ActualDuration, PlannedQuantity, ActualQuantity, PageView.All {
 	}
 
 	public static interface AllAndShiftAll extends All, Shift, ShiftView.All {

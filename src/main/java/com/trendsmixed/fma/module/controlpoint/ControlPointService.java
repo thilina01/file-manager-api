@@ -1,40 +1,50 @@
 package com.trendsmixed.fma.module.controlpoint;
 
-import com.trendsmixed.fma.entity.ControlPoint;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.module.controlpoint.ControlPointRepository;
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.ControlPoint;
+import com.trendsmixed.fma.utility.Page;
 
 @Service
 public class ControlPointService {
 
-    @Autowired
-    private ControlPointRepository controlPointRepository;
+	@Autowired
+	private ControlPointRepository repository;
 
-    public List<ControlPoint> findAll() {
-        return controlPointRepository.findAll();
-    }
+	public Iterable<ControlPoint> findAll() {
+		return repository.findAll();
+	}
 
-    public ControlPoint save(ControlPoint ControlPoint) {
-        return controlPointRepository.save(ControlPoint);
-    }
+	public Page<ControlPoint> findAll(Pageable pageable) {
+		return new Page<ControlPoint>(repository.findAll(pageable));
+	}
 
-    public void save(List<ControlPoint> controlPoints) {
-        controlPointRepository.save(controlPoints);
-    }
+	public ControlPoint save(ControlPoint ControlPoint) {
+		return repository.save(ControlPoint);
+	}
 
-    public ControlPoint findOne(int id) {
-        return controlPointRepository.findOne(id);
-    }
+	public void save(List<ControlPoint> controlPoints) {
+		repository.save(controlPoints);
+	}
 
-    public void delete(int id) {
-        controlPointRepository.delete(id);
-    }
+	public ControlPoint findOne(int id) {
+		return repository.findOne(id);
+	}
 
-    public ControlPoint findByCode(String code) {
-        return controlPointRepository.findByCode(code);
-    }
+	public void delete(int id) {
+		repository.delete(id);
+	}
+
+	public ControlPoint findByCode(String code) {
+		return repository.findByCode(code);
+	}
+
+	public List<Combo> getCombo() {
+		return repository.getCombo();
+	}
 }

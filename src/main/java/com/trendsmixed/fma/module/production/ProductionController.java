@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.trendsmixed.fma.entity.Manpower;
 import com.trendsmixed.fma.entity.Operation;
 import com.trendsmixed.fma.entity.Production;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.utility.Page;
 
 @RestController
 @CrossOrigin
@@ -30,14 +32,20 @@ public class ProductionController {
 	@Autowired
 	private AppSessionService appSessionService;
 	@Autowired
-	private ProductionService productionService;
+	private ProductionService service;
 
 	@JsonView(ProductionView.AllAndShiftAllAndControlPointAll.class)
 	@GetMapping
-	public List<Production> findAll() {
-		return productionService.findAll();
+	public Iterable<Production> findAll() {
+		return service.findAll();
 	}
 
+	@JsonView(ProductionView.AllAndShiftAllAndControlPointAll.class)
+    @GetMapping("/page")
+	Page<Production> page( Pageable pageable){
+    	return service.findAll(pageable);
+	} 
+    
 	@JsonView(ProductionView.All.class)
 	@PostMapping
 	public Production save(@RequestBody Production production,
@@ -58,7 +66,7 @@ public class ProductionController {
 				}
 			}
 
-			production = productionService.save(production);
+			production = service.save(production);
 			return production;
 
 		} catch (Throwable e) {
@@ -75,7 +83,7 @@ public class ProductionController {
 			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 		appSessionService.isValid(email, request);
 
-		return productionService.findByProductionDateAndShiftAndControlPoint(production.getProductionDate(),
+		return service.findByProductionDateAndShiftAndControlPoint(production.getProductionDate(),
 				production.getShift(), production.getControlPoint());
 	}
 
@@ -85,7 +93,7 @@ public class ProductionController {
 
 		appSessionService.isValid(email, request);
 		try {
-			productionService.save(productions);
+			service.save(productions);
 		} catch (Throwable e) {
 			while (e.getCause() != null) {
 				e = e.getCause();
@@ -97,14 +105,14 @@ public class ProductionController {
 	@JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
 	@GetMapping("/{id}")
 	public Production findOne(@PathVariable("id") int id) {
-		return productionService.findOne(id);
+		return service.findOne(id);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
 			HttpServletRequest request) {
 		appSessionService.isValid(email, request);
-		productionService.delete(id);
+		service.delete(id);
 	}
 
 	@PutMapping("/{id}")
@@ -112,7 +120,7 @@ public class ProductionController {
 			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 		appSessionService.isValid(email, request);
 		production.setId(id);
-		production = productionService.save(production);
+		production = service.save(production);
 		return production;
 	}
 }

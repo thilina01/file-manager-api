@@ -1,19 +1,12 @@
 package com.trendsmixed.fma.module.controlpoint;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.trendsmixed.fma.entity.ControlPoint;
-import com.trendsmixed.fma.entity.WorkCenter;
-import com.trendsmixed.fma.module.controlpoint.ControlPointView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.controlpoint.ControlPointService;
-import com.trendsmixed.fma.module.workcenter.WorkCenterService;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +14,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.ControlPoint;
+import com.trendsmixed.fma.entity.WorkCenter;
+import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.workcenter.WorkCenterService;
+import com.trendsmixed.fma.utility.Page;
 
 @RestController
 @CrossOrigin
@@ -30,22 +33,33 @@ public class ControlPointController {
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private ControlPointService controlPointService;
+    private ControlPointService service;
     @Autowired
     private WorkCenterService workCenterService;
 
     @JsonView(ControlPointView.AllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping
-    public List<ControlPoint> findAll() {
-        return controlPointService.findAll();
+    public Iterable<ControlPoint> findAll() {
+        return service.findAll();
     }
 
+    @JsonView(ControlPointView.AllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
+    @GetMapping("/page")
+	Page<ControlPoint> page( Pageable pageable){
+    	return service.findAll(pageable);
+	} 
+
+    @GetMapping("/combo")
+	List<Combo> combo(){
+    	return service.getCombo();
+	} 
+	
     @JsonView(ControlPointView.AllAndWorkCenterAll.class)
     @PostMapping
     public ControlPoint save(@RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            controlPoint = controlPointService.save(controlPoint);
+            controlPoint = service.save(controlPoint);
             return controlPoint;
 
         } catch (Throwable e) {
@@ -64,7 +78,7 @@ public class ControlPointController {
             for (ControlPoint controlPoint : controlPoints) {
                 controlPoint.setCode(controlPoint.getCode().trim());
                 controlPoint.setName(controlPoint.getName().trim());
-                ControlPoint existingControlPoint = controlPointService.findByCode(controlPoint.getCode());
+                ControlPoint existingControlPoint = service.findByCode(controlPoint.getCode());
                 if (existingControlPoint != null) {
                     controlPoint.setId(existingControlPoint.getId());
                 }
@@ -74,7 +88,7 @@ public class ControlPointController {
                     controlPoint.setWorkCenter(workCenter);
                 }
             }
-            controlPointService.save(controlPoints);
+            service.save(controlPoints);
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
@@ -85,13 +99,13 @@ public class ControlPointController {
     
     @GetMapping("/{id}")
     public ControlPoint findOne(@PathVariable("id") int id) {
-        return controlPointService.findOne(id);
+        return service.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        controlPointService.delete(id);
+        service.delete(id);
 
     }
 
@@ -99,7 +113,7 @@ public class ControlPointController {
     public ControlPoint updateCustomer(@PathVariable int id, @RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         controlPoint.setId(id);
-        controlPoint = controlPointService.save(controlPoint);
+        controlPoint = service.save(controlPoint);
         return controlPoint;
     }
 
