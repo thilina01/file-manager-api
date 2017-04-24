@@ -1,40 +1,44 @@
 package com.trendsmixed.fma.module.workcenter;
 
-import com.trendsmixed.fma.entity.WorkCenter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.module.workcenter.WorkCenterRepository;
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.WorkCenter;
 
 @Service
 public class WorkCenterService {
 
     @Autowired
-    private WorkCenterRepository workCenterRepository;
+    private WorkCenterRepository repository;
 
-    public List<WorkCenter> findAll() {
-        return workCenterRepository.findAll();
+    public Iterable<WorkCenter> findAll() {
+        return repository.findAll();
     }
 
     public WorkCenter save(WorkCenter workCenter) {
-        return workCenterRepository.save(workCenter);
+        return repository.save(workCenter);
     }
 
     public void save(List<WorkCenter> workCenters) {
-        workCenterRepository.save(workCenters);
+        repository.save(workCenters);
     }
 
     public WorkCenter findOne(int id) {
-        return workCenterRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public void delete(int id) {
-        workCenterRepository.delete(id);
+        repository.delete(id);
     }
 
     public WorkCenter findByCode(String code) {
-        return workCenterRepository.findByCode(code);
+        return repository.findByCode(code);
     }
+
+	public List<Combo> getCombo() {
+		return repository.getCombo();
+	}
 }

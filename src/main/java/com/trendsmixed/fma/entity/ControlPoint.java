@@ -5,10 +5,9 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.controlpoint.ControlPointView;
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +21,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.controlpoint.ControlPointView;
 
 /**
  *
@@ -53,7 +55,11 @@ public class ControlPoint implements Serializable {
 	private List<Production> productionList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
 	private List<ControlPointMachine> controlPointMachineList;
-
+    @JsonView(ControlPointView.ControlPointType.class)
+    @JoinColumn(name = "control_point_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)    
+    private ControlPointType controlPointType;
+    
 	public ControlPoint() {
 	}
 

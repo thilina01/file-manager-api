@@ -1,10 +1,20 @@
 package com.trendsmixed.fma.module.workcenter;
 
-import com.trendsmixed.fma.entity.WorkCenter;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-public interface WorkCenterRepository extends JpaRepository<WorkCenter, Integer> {
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.WorkCenter;
+
+public interface WorkCenterRepository extends PagingAndSortingRepository<WorkCenter, Integer> {
 
     public WorkCenter findByCode(String code);
+
+	@Query(value = "SELECT"
+			+ " new com.trendsmixed.fma.dao.Combo(workCenter.id, workCenter.code, workCenter.name)"
+			+ " FROM WorkCenter workCenter")
+	public List<Combo> getCombo();
 
 }

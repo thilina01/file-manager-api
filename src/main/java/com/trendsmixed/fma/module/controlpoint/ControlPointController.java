@@ -37,13 +37,13 @@ public class ControlPointController {
     @Autowired
     private WorkCenterService workCenterService;
 
-    @JsonView(ControlPointView.AllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
+    @JsonView(ControlPointView.AllAndControlPointTypeAllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping
     public Iterable<ControlPoint> findAll() {
         return service.findAll();
     }
 
-    @JsonView(ControlPointView.AllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
+    @JsonView(ControlPointView.AllAndControlPointTypeAllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping("/page")
 	Page<ControlPoint> page( Pageable pageable){
     	return service.findAll(pageable);
@@ -96,7 +96,8 @@ public class ControlPointController {
             throw new Error(e.getMessage());
         }
     }
-    
+
+    @JsonView(ControlPointView.AllAndControlPointTypeAllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping("/{id}")
     public ControlPoint findOne(@PathVariable("id") int id) {
         return service.findOne(id);

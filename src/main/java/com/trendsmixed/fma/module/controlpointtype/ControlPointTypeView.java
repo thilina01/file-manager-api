@@ -1,9 +1,8 @@
-package com.trendsmixed.fma.module.section;
+package com.trendsmixed.fma.module.controlpointtype;
 
-public class SectionView {
+public class ControlPointTypeView {
 
-
-	public static interface Id {
+    public static interface Id {
     }
 
     public static interface Code {
@@ -12,9 +11,6 @@ public class SectionView {
     public static interface Name {
     }
 
-    public static interface SectionType {
-	}
-    
     public static interface All extends Id, Code, Name {
     }
 

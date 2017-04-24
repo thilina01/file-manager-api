@@ -5,10 +5,9 @@
  */
 package com.trendsmixed.fma.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.section.SectionView;
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,10 +15,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.section.SectionView;
 
 /**
  *
@@ -44,6 +48,10 @@ public class Section implements Serializable {
     @JsonView(SectionView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(SectionView.SectionType.class)
+    @JoinColumn(name = "section_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private SectionType sectionType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
     private List<CostCenter> costCenterList;
 
@@ -78,7 +86,15 @@ public class Section implements Serializable {
         this.name = name;
     }
 
-    public List<CostCenter> getCostCenterList() {
+    public SectionType getSectionType() {
+		return sectionType;
+	}
+
+	public void setSectionType(SectionType sectionType) {
+		this.sectionType = sectionType;
+	}
+
+	public List<CostCenter> getCostCenterList() {
         return costCenterList;
     }
 
