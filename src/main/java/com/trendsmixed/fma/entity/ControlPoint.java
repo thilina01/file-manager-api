@@ -57,7 +57,7 @@ public class ControlPoint implements Serializable {
 	private List<ControlPointMachine> controlPointMachineList;
     @JsonView(ControlPointView.ControlPointType.class)
     @JoinColumn(name = "control_point_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)    
+    @ManyToOne(optional = true)    
     private ControlPointType controlPointType;
     
 	public ControlPoint() {

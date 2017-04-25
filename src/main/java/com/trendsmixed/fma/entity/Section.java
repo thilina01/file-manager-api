@@ -50,7 +50,7 @@ public class Section implements Serializable {
     private String name;
     @JsonView(SectionView.SectionType.class)
     @JoinColumn(name = "section_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private SectionType sectionType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
     private List<CostCenter> costCenterList;
