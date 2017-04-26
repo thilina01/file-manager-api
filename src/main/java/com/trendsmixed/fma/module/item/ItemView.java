@@ -36,7 +36,7 @@ public class ItemView {
     public static interface ItemType {
     }
 
-    public static interface AllAndItemTypeAll extends All, ItemType, ItemTypeView.AlL {
+    public static interface AllAndItemTypeAll extends All, ItemType, ItemTypeView.All {
     }
 
     public static interface Paint {
@@ -45,7 +45,7 @@ public class ItemView {
     public static interface AllAndPaintAll extends All, Paint, PaintView.All {
     }
 
-    public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.AlL, Paint, PaintView.All {
+    public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.All, Paint, PaintView.All {
     }
 
     public static interface ItemMachine {
