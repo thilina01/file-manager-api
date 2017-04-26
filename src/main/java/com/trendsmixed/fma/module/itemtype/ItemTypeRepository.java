@@ -1,10 +1,18 @@
 package com.trendsmixed.fma.module.itemtype;
 
-import com.trendsmixed.fma.entity.ItemType;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-public interface ItemTypeRepository extends JpaRepository<ItemType, Integer> {
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.ItemType;
+
+public interface ItemTypeRepository extends PagingAndSortingRepository<ItemType, Integer> {
 
     public ItemType findByType(String type);
-
+	@Query(value = "SELECT"
+			+ " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.type)"
+			+ " FROM ItemType o")
+	public List<Combo> getCombo();
 }
