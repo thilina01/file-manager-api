@@ -27,6 +27,10 @@ public class ChartService {
 	public List getLossReasonSummaryBySection(Date startDate, Date endDate, Section section ) {
 		return chartRepository.getLossReasonSummaryBySection(startDate, endDate, section);
 	}
+	
+	public List getLossReasonSummaryByLossType(Date startDate, Date endDate, LossType lossType ) {
+		return chartRepository.getLossReasonSummaryByLossType(startDate, endDate, lossType);
+	}
 
 	public List getLossReasonSummary(Date startDate, Date endDate ) {
 		return chartRepository.getLossReasonSummary(startDate, endDate);
@@ -34,6 +38,14 @@ public class ChartService {
 
 	public List getLossReasonDailyCountBySection(Date startDate, Date endDate, Section section ) {
 		return chartRepository.getLossReasonDailyCountBySection(startDate, endDate, section);
+	}
+
+	public List getLossReasonDailyCountBySectionAndLossType(Date startDate, Date endDate, Section section, LossType lossType ) {
+		return chartRepository.getLossReasonDailyCountBySectionAndLossType(startDate, endDate, section,lossType);
+	}
+
+	public List getLossReasonDailyCountByLossType(Date startDate, Date endDate, LossType lossType ) {
+		return chartRepository.getLossReasonDailyCountByLossType(startDate, endDate, lossType);
 	}
 	
 	public List getLossReasonDailyCount(Date startDate, Date endDate) {

@@ -42,6 +42,13 @@ public class ChartController {
 		return chartService.getLossReasonSummaryBySection(Format.toStartDate(startDateText), Format.toEndDate(endDateText),new Section(Integer.valueOf(sectionId)));
 	}
 
+	@GetMapping("/lossReasonSummaryByLossType")
+	public List getLossReasonSummaryByLossType(@RequestParam(value = "startDate") String startDateText,
+			@RequestParam(value = "endDate") String endDateText,
+			@RequestParam(value = "lossType") String lossTypeId) {		
+		return chartService.getLossReasonSummaryByLossType(Format.toStartDate(startDateText), Format.toEndDate(endDateText),new LossType(Integer.valueOf(lossTypeId)));
+	}
+
 	@GetMapping("/lossReasonSummary")
 	public List getLossReasonSummary(@RequestParam(value = "startDate") String startDateText,
 			@RequestParam(value = "endDate") String endDateText) {		
@@ -53,6 +60,21 @@ public class ChartController {
 			@RequestParam(value = "endDate") String endDateText,
 			@RequestParam(value = "section") String sectionId) {		
 		return chartService.getLossReasonDailyCountBySection(Format.toStartDate(startDateText), Format.toEndDate(endDateText),new Section(Integer.valueOf(sectionId)));
+	}
+
+	@GetMapping("/lossReasonDailyCountByLossType")
+	public List getLossReasonDailyCountByLossType(@RequestParam(value = "startDate") String startDateText,
+			@RequestParam(value = "endDate") String endDateText,
+			@RequestParam(value = "lossType") String lossTypeId) {		
+		return chartService.getLossReasonDailyCountByLossType(Format.toStartDate(startDateText), Format.toEndDate(endDateText),new LossType(Integer.valueOf(lossTypeId)));
+	}
+
+	@GetMapping("/lossReasonDailyCountBySectionAndLossType")
+	public List getLossReasonDailyCountBySectionAndLossType(@RequestParam(value = "startDate") String startDateText,
+			@RequestParam(value = "endDate") String endDateText,
+			@RequestParam(value = "section") String sectionId,
+			@RequestParam(value = "lossType") String lossTypeId) {		
+		return chartService.getLossReasonDailyCountBySectionAndLossType(Format.toStartDate(startDateText), Format.toEndDate(endDateText),new Section(Integer.valueOf(sectionId)), new LossType(Integer.valueOf(lossTypeId)));
 	}
 	
 	@GetMapping("/lossReasonDailyCount")

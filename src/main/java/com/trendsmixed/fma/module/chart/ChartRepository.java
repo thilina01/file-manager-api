@@ -37,6 +37,14 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
 	@Query(value = "SELECT "
 			+ " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.reason, SUM(loss.quantity)) "
 			+ " FROM Loss loss"
+			+ " WHERE loss.lossReason.lossType = :lossType AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+			+ " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
+	public List getLossReasonSummaryByLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+			@Param("lossType") LossType lossType);
+
+	@Query(value = "SELECT "
+			+ " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.reason, SUM(loss.quantity)) "
+			+ " FROM Loss loss"
 			+ " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
 			+ " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
 	public List getLossReasonSummary(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
@@ -48,6 +56,23 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
 			+ " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
 	public List getLossReasonDailyCountBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
 			@Param("section") Section section);
+
+	@Query(value = "SELECT "
+			+ " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
+			+ " FROM Loss loss"
+			+ " WHERE  loss.lossReason.lossType = :lossType AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+			+ " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
+	public List getLossReasonDailyCountByLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+			@Param("lossType") LossType lossType);
+
+	@Query(value = "SELECT "
+			+ " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
+			+ " FROM Loss loss"
+			+ " WHERE  loss.lossReason.lossType = :lossType AND loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+			+ " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
+	public List getLossReasonDailyCountBySectionAndLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+			@Param("section") Section section,
+			@Param("lossType") LossType lossType);
 
 	@Query(value = "SELECT "
 			+ " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
