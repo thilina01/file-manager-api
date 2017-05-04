@@ -1,17 +1,12 @@
 package com.trendsmixed.fma.module.jobtype;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.trendsmixed.fma.entity.JobType;
-import com.trendsmixed.fma.module.jobtype.JobTypeView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.JobType;
+import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.utility.Page;
 
 @RestController
 @CrossOrigin
@@ -28,19 +31,30 @@ public class JobTypeController {
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private JobTypeService jobTypeService;
+    private JobTypeService service;
 
     @JsonView(JobTypeView.AlL.class)
     @GetMapping
-    public List<JobType> findAll() {
-        return jobTypeService.findAll();
+    public Iterable<JobType> findAll() {
+        return service.findAll();
     }
 
+    @JsonView(JobTypeView.AlL.class)
+    @GetMapping("/page")
+	Page<JobType> page( Pageable pageable){
+    	return service.findAll(pageable);
+	} 
+    
+    @GetMapping("/combo")
+	List<Combo> combo(){
+    	return service.getCombo();
+	} 
+	
     @PostMapping
     public JobType save(@RequestBody JobType jobType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            jobType = jobTypeService.save(jobType);
+            jobType = service.save(jobType);
             return jobType;
 
         } catch (Throwable e) {
@@ -53,13 +67,13 @@ public class JobTypeController {
 
     @GetMapping("/{id}")
     public JobType findOne(@PathVariable("id") int id) {
-        return jobTypeService.findOne(id);
+        return service.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        jobTypeService.delete(id);
+        service.delete(id);
 
     }
 
@@ -67,7 +81,7 @@ public class JobTypeController {
     public JobType updateCustomer(@PathVariable int id, @RequestBody JobType jobType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         jobType.setId(id);
-        jobType = jobTypeService.save(jobType);
+        jobType = service.save(jobType);
         return jobType;
     }
 }

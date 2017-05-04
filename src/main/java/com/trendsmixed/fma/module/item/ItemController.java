@@ -49,15 +49,15 @@ public class ItemController {
 
     @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @GetMapping("/page")
-	Page<Item> page( Pageable pageable){
-    	return service.findAll(pageable);
-	} 
-    
+    Page<Item> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
+
     @GetMapping("/combo")
-	List<Combo> combo(){
-    	return service.getCombo();
-	} 
-	
+    List<Combo> combo() {
+        return service.getCombo();
+    }
+
     @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @PostMapping
     public Item save(@RequestBody Item item, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -125,7 +125,7 @@ public class ItemController {
                             paint.setCode("NA");
                             paint = paintService.save(paint);
                         }
-                        
+
                     }
                     item.setPaint(paint);
                 }
@@ -163,7 +163,7 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
-    public Item updateCustomer(@PathVariable int id, @RequestBody Item item, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Item update(@PathVariable int id, @RequestBody Item item, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         item.setId(id);
         item = service.save(item);
