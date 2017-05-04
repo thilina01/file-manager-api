@@ -68,14 +68,18 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
 //	public List getTotalProductonDurationGroupedBySecton(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.ScheduleAdherence(operation.production.controlPoint.workCenter.costCenter.section.code, SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100) "
-            + " FROM Operation operation" + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " FROM Operation operation" 
+            + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.production.controlPoint.controlPointType.id=1"
             + " GROUP BY operation.production.controlPoint.workCenter.costCenter.section")
     public List getScheduleAdherence(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.ScheduleAdherence(operation.production.productionDate, SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100) "
             + " FROM Operation operation"
-            + " WHERE operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " WHERE operation.production.controlPoint.workCenter.costCenter.section = :section" 
+            + " AND operation.production.controlPoint.controlPointType.id=1"
+            + " AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " GROUP BY operation.production.productionDate")
     public List getScheduleAdherenceBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("section") Section section);
@@ -83,7 +87,9 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.reason, SUM(loss.quantity)) "
             + " FROM Loss loss"
-            + " WHERE loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " WHERE loss.operation.production.controlPoint.workCenter.costCenter.section = :section"
+            + " AND operation.production.controlPoint.controlPointType.id=1"
+            + " AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonSummaryBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("section") Section section);
