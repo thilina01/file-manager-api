@@ -1,16 +1,15 @@
 package com.trendsmixed.fma.module.operation;
 
-import com.trendsmixed.fma.dao.ScheduleAdherence;
 import com.trendsmixed.fma.entity.Operation;
 
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface OperationRepository extends JpaRepository<Operation, Integer> {
+public interface OperationRepository extends PagingAndSortingRepository<Operation, Integer> {
 
     //@Query(value = "select teamMenu.menu from TeamMenu teamMenu where teamMenu.team= :team And teamMenu.menu.menu IS NULL ")
 	/*@Query(value = "SELECT operation.production.controlPoint.workCenter.costCenter.section.code as section,"

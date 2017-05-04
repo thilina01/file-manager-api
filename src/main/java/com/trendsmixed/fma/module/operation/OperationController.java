@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,87 +23,95 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.Operation;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.utility.Page;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/operations")
 public class OperationController {
 
-	@Autowired
-	private AppSessionService appSessionService;
-	@Autowired
-	private OperationService operationService;
+    @Autowired
+    private AppSessionService appSessionService;
+    @Autowired
+    private OperationService service;
 
-	@JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
-	@GetMapping
-	public List<Operation> findAll() {
-		return operationService.findAll();
-	}
+    @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
+    @GetMapping
+    public Iterable<Operation> findAll() {
+        return service.findAll();
+    }
 
-	@JsonView(OperationView.All.class)
-	@PostMapping
-	public Operation save(@RequestBody Operation operation,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		try {
-			operation = operationService.save(operation);
-			return operation;
+    @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
+    @GetMapping("/page")
+    Page<Operation> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
 
-		} catch (Throwable e) {
-			while (e.getCause() != null) {
-				e = e.getCause();
-			}
-			throw new Error(e.getMessage());
-		}
-	}
+    @JsonView(OperationView.All.class)
+    @PostMapping
+    public Operation save(@RequestBody Operation operation,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        try {
+            operation = service.save(operation);
+            return operation;
 
-	@PostMapping("/many")
-	public void saveMany(@RequestBody List<Operation> operations,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
 
-		appSessionService.isValid(email, request);
-		try {
-			operationService.save(operations);
-		} catch (Throwable e) {
-			while (e.getCause() != null) {
-				e = e.getCause();
-			}
-			throw new Error(e.getMessage());
-		}
-	}
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Operation> operations,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
-	@GetMapping("/{id}")
-	public Operation findOne(@PathVariable("id") int id) {
-		return operationService.findOne(id);
-	}
+        appSessionService.isValid(email, request);
+        try {
+            service.save(operations);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
 
-	@DeleteMapping(value = "/{id}")
-	public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
-			HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		operationService.delete(id);
+    @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
+    @GetMapping("/{id}")
+    public Operation findOne(@PathVariable("id") int id) {
+        return service.findOne(id);
+    }
 
-	}
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
+            HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        service.delete(id);
 
-	@PutMapping("/{id}")
-	public Operation updateCustomer(@PathVariable int id, @RequestBody Operation operation,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		operation.setId(id);
-		operation = operationService.save(operation);
-		return operation;
-	}
+    }
 
-	@GetMapping("/test")
-	public List test() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM");
-		Date startDate = new Date(), endDate = new Date();
-		try {
-			startDate = sdf.parse("2017-02-01 00:00");
-			endDate = sdf.parse("2017-02-28 23:59");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return operationService.test(startDate, endDate);
-	}
+    @PutMapping("/{id}")
+    public Operation updateCustomer(@PathVariable int id, @RequestBody Operation operation,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        operation.setId(id);
+        operation = service.save(operation);
+        return operation;
+    }
+
+    @GetMapping("/test")
+    public List test() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM");
+        Date startDate = new Date(), endDate = new Date();
+        try {
+            startDate = sdf.parse("2017-02-01 00:00");
+            endDate = sdf.parse("2017-02-28 23:59");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return service.test(startDate, endDate);
+    }
 }
