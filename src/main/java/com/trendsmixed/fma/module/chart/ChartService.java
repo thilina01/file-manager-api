@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.chart;
 
+import com.trendsmixed.fma.dao.BreakdownChart;
 import java.util.Date;
 import java.util.List;
 
@@ -62,5 +63,15 @@ public class ChartService {
 	public List getLossReasonSummaryBySectionAndLossType(Date startDate, Date endDate, Section section, LossType lossType ) {
 		return chartRepository.getLossReasonSummaryBySectionAndLossType(startDate, endDate, section, lossType);
 	}
+	
+	public List getBreakdown(Date startDate, Date endDate) {
+		return chartRepository.getBreakdown(startDate, endDate);
+	}
+	/**************/
+
+	public List test(Date startDate, Date endDate) {
+		return chartRepository.test(startDate, endDate);
+	}
+
 	
 }
