@@ -1,12 +1,18 @@
 package com.trendsmixed.fma.module.section;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.Machine;
 import com.trendsmixed.fma.entity.Section;
 import com.trendsmixed.fma.module.section.SectionView;
+import com.trendsmixed.fma.utility.Page;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.machine.MachineView;
+
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,15 +30,32 @@ import org.springframework.web.bind.annotation.RestController;
 public class SectionController {
 
     @Autowired
-    private SectionService sectionService;
+    private SectionService service;
     @Autowired
     private AppSessionService appSessionService;
 
+    @GetMapping
+    @JsonView(SectionView.All.class)
+    public Iterable<Section> findAll() {
+        return service.findAll();
+    }
+
+    @JsonView(SectionView.All.class)
+    @GetMapping("/page")
+	Page<Section> page( Pageable pageable){
+    	return service.findAll(pageable);
+	} 
+    
+    @GetMapping("/combo")
+	List<Combo> combo(){
+    	return service.getCombo();
+	} 
+	
     @PostMapping
     public Section save(@RequestBody Section section, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            section = sectionService.save(section);
+            section = service.save(section);
             return section;
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -50,12 +73,12 @@ public class SectionController {
             for (Section section : sections) {
                 section.setCode(section.getCode().trim());
                 section.setName(section.getName().trim());
-                Section existingSection = sectionService.findByCode(section.getCode());
+                Section existingSection = service.findByCode(section.getCode());
                 if (existingSection != null) {
                     section.setId(existingSection.getId());
                 }
             }
-            sectionService.save(sections);
+            service.save(sections);
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
@@ -64,21 +87,16 @@ public class SectionController {
         }
     }
 
-    @GetMapping
     @JsonView(SectionView.All.class)
-    public List<Section> findAll() {
-        return sectionService.findAll();
-    }
-
     @GetMapping("/{id}")
     public Section findOne(@PathVariable("id") int id) {
-        return sectionService.findOne(id);
+        return service.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        sectionService.delete(id);
+        service.delete(id);
 
     }
 
@@ -86,7 +104,7 @@ public class SectionController {
     public Section updateCustomer(@PathVariable int id, @RequestBody Section section, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         section.setId(id);
-        section = sectionService.save(section);
+        section = service.save(section);
         return section;
     }
 }

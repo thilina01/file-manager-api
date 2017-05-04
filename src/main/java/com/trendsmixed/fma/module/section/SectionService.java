@@ -1,40 +1,51 @@
 package com.trendsmixed.fma.module.section;
 
-import com.trendsmixed.fma.entity.Section;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.module.section.SectionRepository;
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.Section;
+import com.trendsmixed.fma.utility.Page;
 
 @Service
 public class SectionService {
 
     @Autowired
-    private SectionRepository sectionRepository;
+    private SectionRepository repository;
 
-    public List<Section> findAll() {
-        return sectionRepository.findAll();
+    public Iterable<Section> findAll() {
+        return repository.findAll();
     }
 
+	public Page<Section> findAll(Pageable pageable) {
+		return new Page<Section>(repository.findAll(pageable));
+	}
+
+	public List<Combo> getCombo() {
+		return repository.getCombo();
+	}
+	
+
     public Section save(Section section) {
-        return sectionRepository.save(section);
+        return repository.save(section);
     }
 
     public void save(List<Section> sections) {
-        sectionRepository.save(sections);
+        repository.save(sections);
     }
 
     public Section findOne(int id) {
-        return sectionRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public void delete(int id) {
-        sectionRepository.delete(id);
+        repository.delete(id);
     }
 
     public Section findByCode(String code) {
-        return sectionRepository.findByCode(code);
+        return repository.findByCode(code);
     }
 }
