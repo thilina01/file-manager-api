@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.job;
 
 import com.trendsmixed.fma.module.item.ItemView;
 import com.trendsmixed.fma.module.jobtype.JobTypeView;
+import com.trendsmixed.fma.utility.PageView;
 
 public class JobView {
 
@@ -29,7 +30,7 @@ public class JobView {
     public static interface Comment {
     }
 
-    public static interface All extends Id, JobNo, ActualShippedDate, ConfirmShippedDate, Quantity, RemainingQuantity, JobDate, Comment {
+    public static interface All extends Id, JobNo, ActualShippedDate, ConfirmShippedDate, Quantity, RemainingQuantity, JobDate, Comment, PageView.All {
     }
 
     public static interface Item {

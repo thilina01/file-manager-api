@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.job;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.entity.Item;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,14 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Job;
 import com.trendsmixed.fma.entity.JobType;
-import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.item.ItemService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
+import com.trendsmixed.fma.utility.Page;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +35,7 @@ public class JobController {
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private JobService jobService;
+    private JobService service;
     @Autowired
     private ItemService itemService;
     @Autowired
@@ -40,17 +43,27 @@ public class JobController {
 
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping
-    public List<Job> findAll() {
-        return jobService.findAll();
+    public Iterable<Job> findAll() {
+        return service.findAll();
     }
-
+    @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
+    @GetMapping("/page")
+	Page<Job> page( Pageable pageable){
+    	return service.findAll(pageable);
+	} 
+    
+    @GetMapping("/combo")
+	List<Combo> combo(){
+    	return service.getCombo();
+	} 
+	
     @JsonView(JobView.All.class)
     @PostMapping
     public Job save(@RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
             job.setRemainingQuantity(job.getQuantity());
-            job = jobService.save(job);
+            job = service.save(job);
             return job;
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -67,7 +80,7 @@ public class JobController {
         try {
             List<Job> jobsToSave = new ArrayList<>();
             for (Job job : jobs) {
-                Job existingJob = jobService.findByJobNo(job.getJobNo());
+                Job existingJob = service.findByJobNo(job.getJobNo());
                 if (existingJob != null) {
                     job.setId(existingJob.getId());
                 }
@@ -93,7 +106,7 @@ public class JobController {
                     }
                 }
             }
-            jobService.save(jobsToSave);
+            service.save(jobsToSave);
         } catch (Throwable e) {
             e.printStackTrace();
             while (e.getCause() != null) {
@@ -102,29 +115,28 @@ public class JobController {
             throw new Error(e.getMessage());
         }
     }
-
+    @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/{id}")
     public Job findOne(@PathVariable("id") int id) {
-        return jobService.findOne(id);
+        return service.findOne(id);
     }
     
     @GetMapping("/table")
     public List findForTable() {
-        return jobService.findForTable();
+        return service.findForTable();
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        jobService.delete(id);
-
+        service.delete(id);
     }
 
     @PutMapping("/{id}")
-    public Job updateCustomer(@PathVariable int id, @RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Job update(@PathVariable int id, @RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         job.setId(id);
-        job = jobService.save(job);
+        job = service.save(job);
         return job;
     }
 }
