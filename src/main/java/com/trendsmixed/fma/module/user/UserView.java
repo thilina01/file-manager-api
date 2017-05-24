@@ -7,6 +7,7 @@ package com.trendsmixed.fma.module.user;
 
 import com.trendsmixed.fma.module.status.StatusView;
 import com.trendsmixed.fma.module.team.TeamView;
+import com.trendsmixed.fma.utility.PageView;
 
 /**
  *
@@ -29,7 +30,7 @@ public class UserView {
     public static interface Team {
     }
 
-    public static interface All extends Id, Email, Status {
+    public static interface All extends Id, Email, Status, PageView.All {
     }
 
     public static interface AllAndTeamAll extends All, Team, TeamView.All {
