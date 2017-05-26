@@ -2,12 +2,9 @@ package com.trendsmixed.fma.module.section;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.Machine;
 import com.trendsmixed.fma.entity.Section;
-import com.trendsmixed.fma.module.section.SectionView;
 import com.trendsmixed.fma.utility.Page;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.machine.MachineView;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -101,7 +98,7 @@ public class SectionController {
     }
 
     @PutMapping("/{id}")
-    public Section updateCustomer(@PathVariable int id, @RequestBody Section section, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Section updateSection(@PathVariable int id, @RequestBody Section section, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         section.setId(id);
         section = service.save(section);
