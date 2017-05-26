@@ -32,13 +32,13 @@ public class EnergyConsumptionController {
     @Autowired
     private EnergyConsumptionService service;
 
-    @JsonView(EnergyConsumptionView.All.class)
+    @JsonView(EnergyConsumptionView.AllAndLocation.class)
     @GetMapping
     public Iterable< EnergyConsumption> findAll() {
         return service.findAll();
     }
 
-    @JsonView(EnergyConsumptionView.All.class)
+    @JsonView(EnergyConsumptionView.AllAndLocation.class)
     @GetMapping("/page")
     Page< EnergyConsumption> page(Pageable pageable) {
         return service.findAll(pageable);
