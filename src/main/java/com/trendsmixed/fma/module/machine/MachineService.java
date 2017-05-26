@@ -20,14 +20,13 @@ public class MachineService {
         return repository.findAll();
     }
 
-	public Page<Machine> findAll(Pageable pageable) {
-		return new Page<Machine>(repository.findAll(pageable));
-	}
+    public Page<Machine> findAll(Pageable pageable) {
+        return new Page<Machine>(repository.findAll(pageable));
+    }
 
-	public List<Combo> getCombo() {
-		return repository.getCombo();
-	}
-	
+    public List<Combo> getCombo() {
+        return repository.getCombo();
+    }
 
     public Machine save(Machine machine) {
         return repository.save(machine);

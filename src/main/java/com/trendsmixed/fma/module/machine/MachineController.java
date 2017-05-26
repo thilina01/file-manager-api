@@ -41,15 +41,15 @@ public class MachineController {
 
     @JsonView(MachineView.AllAndWorkCenterAll.class)
     @GetMapping("/page")
-	Page<Machine> page( Pageable pageable){
-    	return service.findAll(pageable);
-	} 
-    
+    Page<Machine> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
+
     @GetMapping("/combo")
-	List<Combo> combo(){
-    	return service.getCombo();
-	} 
-	
+    List<Combo> combo() {
+        return service.getCombo();
+    }
+
     @JsonView(MachineView.All.class)
     @PostMapping
     public Machine save(@RequestBody Machine machine, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -70,14 +70,14 @@ public class MachineController {
     public void saveMany(@RequestBody List<Machine> machines, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
         appSessionService.isValid(email, request);
-        try {                        
+        try {
             for (Machine machine : machines) {
                 machine.setCode(machine.getCode().trim());
                 machine.setName(machine.getName().trim());
                 Machine existingMachine = service.findByCode(machine.getCode());
                 if (existingMachine != null) {
                     machine.setId(existingMachine.getId());
-                }                
+                }
             }
             service.save(machines);
         } catch (Throwable e) {
