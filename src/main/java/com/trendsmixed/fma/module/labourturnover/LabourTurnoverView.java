@@ -16,6 +16,8 @@ public class LabourTurnoverView {
 
     public static interface Id {
     }
+    public static interface EffectiveMonth {
+    }
 
     public static interface Turnover {
     }
@@ -26,7 +28,7 @@ public class LabourTurnoverView {
     public static interface LabourSource extends LabourSourceView.All {
     }
 
-    public static interface All extends Id, Turnover, Target, PageView.All {
+    public static interface All extends Id, EffectiveMonth, Turnover, Target, PageView.All {
     }
 
     public static interface AllAndLabourSource extends All, LabourSource {
