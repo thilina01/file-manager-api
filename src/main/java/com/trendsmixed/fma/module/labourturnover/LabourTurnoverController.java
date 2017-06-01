@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.LabourTurnover;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,12 +28,18 @@ public class LabourTurnoverController {
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private LabourTurnoverService labourTurnoverService;
+    private LabourTurnoverService service;
 
-    @JsonView(LabourTurnoverView.All.class)
+    @JsonView(LabourTurnoverView.AllAndLabourSource.class)
     @GetMapping
-    public List<LabourTurnover> findAll() {
-        return labourTurnoverService.findAll();
+    public Iterable<LabourTurnover> findAll() {
+        return service.findAll();
+    }
+
+    @JsonView(LabourTurnoverView.AllAndLabourSource.class)
+    @GetMapping("/page")
+    Page<LabourTurnover> page(Pageable pageable) {
+        return service.findAll(pageable);
     }
 
     @PostMapping
@@ -39,7 +47,7 @@ public class LabourTurnoverController {
 
         appSessionService.isValid(email, request);
         try {
-            labourTurnover = labourTurnoverService.save(labourTurnover);
+            labourTurnover = service.save(labourTurnover);
             return labourTurnover;
 
         } catch (Throwable e) {
@@ -55,7 +63,7 @@ public class LabourTurnoverController {
 
         appSessionService.isValid(email, request);
         try {
-            labourTurnoverService.save(labourTurnovers);
+            service.save(labourTurnovers);
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
@@ -65,14 +73,15 @@ public class LabourTurnoverController {
     }
 
     @GetMapping("/{id}")
+    @JsonView(LabourTurnoverView.AllAndLabourSource.class)
     public LabourTurnover findOne(@PathVariable("id") int id) {
-        return labourTurnoverService.findOne(id);
+        return service.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        labourTurnoverService.delete(id);
+        service.delete(id);
 
     }
 
@@ -80,7 +89,7 @@ public class LabourTurnoverController {
     public LabourTurnover updateCustomer(@PathVariable int id, @RequestBody LabourTurnover labourTurnover, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         labourTurnover.setId(id);
-        labourTurnover = labourTurnoverService.save(labourTurnover);
+        labourTurnover = service.save(labourTurnover);
         return labourTurnover;
     }
 
