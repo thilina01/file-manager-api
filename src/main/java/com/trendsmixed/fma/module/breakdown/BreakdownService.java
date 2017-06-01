@@ -1,31 +1,35 @@
 package com.trendsmixed.fma.module.breakdown;
 
 import com.trendsmixed.fma.entity.Breakdown;
-import java.util.List;
+import com.trendsmixed.fma.utility.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class BreakdownService {
 
     @Autowired
-    private BreakdownRepository breakdownRepository;
+    private BreakdownRepository repository;
 
-    public List<Breakdown> findAll() {
-        return breakdownRepository.findAll();
+    public Iterable<Breakdown> findAll() {
+        return repository.findAll();
+    }
+
+    public Page<Breakdown> findAll(Pageable pageable) {
+        return new Page<>(repository.findAll(pageable));
     }
 
     public Breakdown save(Breakdown breakdown) {
-        return breakdownRepository.save(breakdown);
+        return repository.save(breakdown);
     }
 
     public Breakdown findOne(int id) {
-        return breakdownRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public void delete(int id) {
-        breakdownRepository.delete(id);
+        repository.delete(id);
     }
 }

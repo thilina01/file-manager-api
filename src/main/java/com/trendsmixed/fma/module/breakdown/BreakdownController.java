@@ -1,14 +1,12 @@
 package com.trendsmixed.fma.module.breakdown;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.entity.Breakdown;
-import com.trendsmixed.fma.module.breakdown.BreakdownView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.breakdown.BreakdownService;
-import java.util.List;
+import com.trendsmixed.fma.utility.Page;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BreakdownController {
 
     @Autowired
-    private BreakdownService breakdownService;
+    private BreakdownService service;
     @Autowired
     private AppSessionService appSessionService;
 
@@ -35,7 +33,7 @@ public class BreakdownController {
     public Breakdown save(@RequestBody Breakdown breakdown, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            breakdown = breakdownService.save(breakdown);
+            breakdown = service.save(breakdown);
             return breakdown;
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -47,20 +45,26 @@ public class BreakdownController {
 
     @GetMapping
     @JsonView(BreakdownView.All.class)
-    public List<Breakdown> findAll() {
-        return breakdownService.findAll();
+    public Iterable<Breakdown> findAll() {
+        return service.findAll();
+    }
+
+    @JsonView(BreakdownView.All.class)
+    @GetMapping("/page")
+    Page<Breakdown> page(Pageable pageable) {
+        return service.findAll(pageable);
     }
 
     @GetMapping("/{id}")
     @JsonView(BreakdownView.All.class)
     public Breakdown findOne(@PathVariable("id") int id) {
-        return breakdownService.findOne(id);
+        return service.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        breakdownService.delete(id);
+        service.delete(id);
 
     }
 
@@ -69,7 +73,7 @@ public class BreakdownController {
     public Breakdown updateCustomer(@PathVariable int id, @RequestBody Breakdown breakdown, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         breakdown.setId(id);
-        breakdown = breakdownService.save(breakdown);
+        breakdown = service.save(breakdown);
         return breakdown;
     }
 }
