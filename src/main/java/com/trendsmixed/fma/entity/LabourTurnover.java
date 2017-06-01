@@ -8,6 +8,7 @@ package com.trendsmixed.fma.entity;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.labourturnover.LabourTurnoverView;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,6 +40,10 @@ public class LabourTurnover implements Serializable {
     @JsonView(LabourTurnoverView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(LabourTurnoverView.EffectiveMonth.class)
+    @Column(name = "effective_month")
+    //@Temporal(TemporalType.TIMESTAMP)
+    private Date effectiveMonth;
     @JsonView(LabourTurnoverView.Turnover.class)
     @Column(name = "turnover")
     private double turnover;
