@@ -1,8 +1,8 @@
 package com.trendsmixed.fma.module.chart;
 
 import com.trendsmixed.fma.dao.BreakdownChart;
+import com.trendsmixed.fma.entity.Location;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -121,11 +121,31 @@ public class ChartController {
         }
         return breakdownChartList;
     }
-
+    
     @GetMapping("/test")
     public List test(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.test(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+    
+    @GetMapping("/monthlyScheduleAdherenceBySection")
+    public List getMonthlyScheduleAdherenceBySection(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText,
+            @RequestParam(value = "section") String sectionId) {
+        return chartService.getMonthlyScheduleAdherenceBySection(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new Section(Integer.valueOf(sectionId)));
+    }
+    
+    @GetMapping("/monthlyScheduleAdherence")
+    public List getMonthlyScheduleAdherence(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getMonthlyScheduleAdherence(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+    
+    @GetMapping("/monthlyEnergyConsumptionByLocation")
+    public List getMonthlyEnergyConsumptionByLocation(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText,
+            @RequestParam(value = "location") String locationId) {
+        return chartService.getMonthlyEnergyConsumptionByLocation(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new Location(Integer.valueOf(locationId)));
     }
 
 }
