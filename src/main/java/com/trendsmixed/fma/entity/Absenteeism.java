@@ -49,7 +49,7 @@ public class Absenteeism implements Serializable {
     private double absenteeism;
     @JsonView(AbsenteeismView.Target.class)
     @Column(name = "target")
-    private String target;
+    private double target;
     @JsonView(AbsenteeismView.LabourSource.class)
     @JoinColumn(name = "labour_source_id", referencedColumnName = "id")
     @ManyToOne(optional = false)

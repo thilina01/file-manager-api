@@ -49,7 +49,7 @@ public class LabourTurnover implements Serializable {
     private double turnover;
     @JsonView(LabourTurnoverView.Target.class)
     @Column(name = "target")
-    private String target;
+    private double target;
     @JsonView(LabourTurnoverView.LabourSource.class)
     @JoinColumn(name = "labour_source_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
