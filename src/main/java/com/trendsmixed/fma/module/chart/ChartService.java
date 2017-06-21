@@ -88,4 +88,13 @@ public class ChartService {
     public List getMonthlyEnergyConsumptionByLocation(Date startDate, Date endDate, Location location) {
         return chartRepository.getMonthlyEnergyConsumptionByLocation(startDate, endDate, location);
     }
+    
+    public List getMonthlyLabourTurnover(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyLabourTurnover(startDate, endDate);
+    }
+    public List getMonthlyAbsenteeism(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyAbsenteeism(startDate, endDate);
+    }
+
+    
 }
