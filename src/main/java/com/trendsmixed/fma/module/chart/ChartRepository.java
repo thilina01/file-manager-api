@@ -191,14 +191,14 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
     public List getMonthlyEnergyConsumptionByLocation(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("location") Location location);
 
         @Query(value = "SELECT "
-            + " new com.trendsmixed.fma.dao.MonthlyLabourTurnover(DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m'),labourTurnover.labourSource.code, SUM(labourTurnover.turnover), labourTurnover.target)"
+            + " new com.trendsmixed.fma.dao.MonthlyLabourTurnover(DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m'),labourTurnover.labourSource.code, SUM(labourTurnover.turnover), MAX(labourTurnover.target))"
             + " FROM LabourTurnover labourTurnover"
             + " WHERE labourTurnover.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY labourTurnover.labourSource, DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m')")
     public List getMonthlyLabourTurnover(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
     
         @Query(value = "SELECT "
-            + " new com.trendsmixed.fma.dao.MonthlyAbsenteeism(DATE_FORMAT(absenteeism.effectiveMonth,'%Y-%m'),absenteeism.labourSource.code, SUM(absenteeism.absenteeism), absenteeism.target)"
+            + " new com.trendsmixed.fma.dao.MonthlyAbsenteeism(DATE_FORMAT(absenteeism.effectiveMonth,'%Y-%m'),absenteeism.labourSource.code, SUM(absenteeism.absenteeism), MAX(absenteeism.target))"
             + " FROM Absenteeism absenteeism"
             + " WHERE absenteeism.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY absenteeism.labourSource, DATE_FORMAT(absenteeism.effectiveMonth,'%Y-%m')")
