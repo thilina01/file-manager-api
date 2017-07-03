@@ -61,6 +61,10 @@ public class Production implements Serializable {
     @JoinColumn(name = "shift_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Shift shift;
+    @JsonView(ProductionView.ShiftType.class)
+    @JoinColumn(name = "shift_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = true)
+    private ShiftType shiftType;
     @JsonView(ProductionView.Manpower.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "production")
     private List<Manpower> manpowerList;
@@ -162,6 +166,20 @@ public class Production implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.Production[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the shiftType
+     */
+    public ShiftType getShiftType() {
+        return shiftType;
+    }
+
+    /**
+     * @param shiftType the shiftType to set
+     */
+    public void setShiftType(ShiftType shiftType) {
+        this.shiftType = shiftType;
     }
     
 }
