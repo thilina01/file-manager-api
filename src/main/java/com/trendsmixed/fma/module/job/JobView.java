@@ -42,7 +42,7 @@ public class JobView {
     public static interface SalesOrderItem {
     }
 
-    public static interface AllAndItemAllAndJobTypeAll extends All, Item, JobType, ItemView.All, JobTypeView.AlL {
+    public static interface AllAndItemAllAndJobTypeAll extends All, Item, JobType, ItemView.All, JobTypeView.All {
     }
 
 }

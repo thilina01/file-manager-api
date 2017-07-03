@@ -33,13 +33,13 @@ public class JobTypeController {
     @Autowired
     private JobTypeService service;
 
-    @JsonView(JobTypeView.AlL.class)
+    @JsonView(JobTypeView.All.class)
     @GetMapping
     public Iterable<JobType> findAll() {
         return service.findAll();
     }
 
-    @JsonView(JobTypeView.AlL.class)
+    @JsonView(JobTypeView.All.class)
     @GetMapping("/page")
 	Page<JobType> page( Pageable pageable){
     	return service.findAll(pageable);
@@ -65,6 +65,7 @@ public class JobTypeController {
         }
     }
 
+    @JsonView(JobTypeView.All.class)
     @GetMapping("/{id}")
     public JobType findOne(@PathVariable("id") int id) {
         return service.findOne(id);

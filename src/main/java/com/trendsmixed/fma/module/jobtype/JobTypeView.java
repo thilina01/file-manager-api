@@ -5,6 +5,8 @@
  */
 package com.trendsmixed.fma.module.jobtype;
 
+import com.trendsmixed.fma.utility.PageView;
+
 /**
  *
  * @author Daminda
@@ -20,7 +22,7 @@ public class JobTypeView {
     public static interface Type {
     }
 
-    public static interface AlL extends Id, Type, Code {
+    public static interface All extends Id, Type, Code, PageView.All {
     }
 
 }

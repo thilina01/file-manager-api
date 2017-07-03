@@ -9,5 +9,6 @@ import com.trendsmixed.fma.entity.Production;
 import com.trendsmixed.fma.entity.Shift;
 
 public interface ProductionRepository extends PagingAndSortingRepository<Production, Integer> {
-Production findByProductionDateAndShiftAndControlPoint(Date productionDate, Shift shift, ControlPoint controlPoint);
+
+    Production findByProductionDateAndShiftAndControlPoint(Date productionDate, Shift shift, ControlPoint controlPoint);
 }
