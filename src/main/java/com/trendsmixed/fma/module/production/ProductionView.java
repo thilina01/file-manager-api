@@ -11,6 +11,7 @@ import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.manpower.ManpowerView;
 import com.trendsmixed.fma.module.operation.OperationView;
 import com.trendsmixed.fma.module.shift.ShiftView;
+import com.trendsmixed.fma.module.shifttype.ShiftTypeView;
 import com.trendsmixed.fma.module.workcenter.WorkCenterView;
 import com.trendsmixed.fma.utility.PageView;
 
@@ -55,25 +56,27 @@ public class ProductionView {
 
 	public static interface Shift {
 	}
+	public static interface ShiftType {
+	}
 
 	public static interface All
 			extends Id, ProductionDate, PlannedDuration, ActualDuration, PlannedQuantity, ActualQuantity, PageView.All {
 	}
 
-	public static interface AllAndShiftAll extends All, Shift, ShiftView.All {
+	public static interface AllAndShiftAndShiftType extends All, Shift, ShiftView.All,ShiftType,ShiftTypeView.All {
 	}
 
-	public static interface AllAndShiftAllAndControlPointAll
-			extends AllAndShiftAll, ControlPoint, ControlPointView.All {
+	public static interface AllAndShiftAndShiftTypeAndControlPointAll
+			extends AllAndShiftAndShiftType, ControlPoint, ControlPointView.All {
 	}
 
 	public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection
-			extends AllAndShiftAll, ControlPoint, ControlPointView.AllAndWorkCenterAll,
+			extends AllAndShiftAndShiftType, ControlPoint, ControlPointView.AllAndWorkCenterAll,
 			WorkCenterView.AllAndCostCenterAll, CostCenterView.AllAndSectionAll {
 	}
 
 	public static interface AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll
-			extends AllAndShiftAllAndControlPointAll, Operation, Manpower,
+			extends AllAndShiftAndShiftTypeAndControlPointAll, Operation, Manpower,
 			OperationView.AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll {
 	}
 

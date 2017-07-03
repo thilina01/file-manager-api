@@ -29,98 +29,98 @@ import com.trendsmixed.fma.utility.Page;
 @RequestMapping("/productions")
 public class ProductionController {
 
-	@Autowired
-	private AppSessionService appSessionService;
-	@Autowired
-	private ProductionService service;
+    @Autowired
+    private AppSessionService appSessionService;
+    @Autowired
+    private ProductionService service;
 
-	@JsonView(ProductionView.AllAndShiftAllAndControlPointAll.class)
-	@GetMapping
-	public Iterable<Production> findAll() {
-		return service.findAll();
-	}
+    @JsonView(ProductionView.AllAndShiftAndShiftTypeAndControlPointAll.class)
+    @GetMapping
+    public Iterable<Production> findAll() {
+        return service.findAll();
+    }
 
-	@JsonView(ProductionView.AllAndShiftAllAndControlPointAll.class)
+    @JsonView(ProductionView.AllAndShiftAndShiftTypeAndControlPointAll.class)
     @GetMapping("/page")
-	Page<Production> page( Pageable pageable){
-    	return service.findAll(pageable);
-	} 
-    
-	@JsonView(ProductionView.All.class)
-	@PostMapping
-	public Production save(@RequestBody Production production,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-		// appSessionService.isValid(email, request);
-		try {
-			List<Operation> operations = production.getOperationList();
-			if (operations != null) {
-				for (Operation operation : operations) {
-					operation.setProduction(production);
-				}
-			}
+    Page<Production> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
 
-			List<Manpower> manpowers = production.getManpowerList();
-			if (manpowers != null) {
-				for (Manpower manpower : manpowers) {
-					manpower.setProduction(production);
-				}
-			}
+    @JsonView(ProductionView.All.class)
+    @PostMapping
+    public Production save(@RequestBody Production production,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        // appSessionService.isValid(email, request);
+        try {
+            List<Operation> operations = production.getOperationList();
+            if (operations != null) {
+                for (Operation operation : operations) {
+                    operation.setProduction(production);
+                }
+            }
 
-			production = service.save(production);
-			return production;
+            List<Manpower> manpowers = production.getManpowerList();
+            if (manpowers != null) {
+                for (Manpower manpower : manpowers) {
+                    manpower.setProduction(production);
+                }
+            }
 
-		} catch (Throwable e) {
-			while (e.getCause() != null) {
-				e = e.getCause();
-			}
-			throw new Error(e.getMessage());
-		}
-	}
+            production = service.save(production);
+            return production;
 
-	@JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
-	@PostMapping("/ByProductionDateAndShiftAndControlPoint")
-	public Production ByProductionDateAndShiftAndControlPoint(@RequestBody Production production,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-		appSessionService.isValid(email, request);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
 
-		return service.findByProductionDateAndShiftAndControlPoint(production.getProductionDate(),
-				production.getShift(), production.getControlPoint());
-	}
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @PostMapping("/ByProductionDateAndShiftAndControlPoint")
+    public Production ByProductionDateAndShiftAndControlPoint(@RequestBody Production production,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
 
-	@PostMapping("/many")
-	public void saveMany(@RequestBody List<Production> productions,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        return service.findByProductionDateAndShiftAndControlPoint(production.getProductionDate(),
+                production.getShift(), production.getControlPoint());
+    }
 
-		appSessionService.isValid(email, request);
-		try {
-			service.save(productions);
-		} catch (Throwable e) {
-			while (e.getCause() != null) {
-				e = e.getCause();
-			}
-			throw new Error(e.getMessage());
-		}
-	}
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Production> productions,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
-	@JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
-	@GetMapping("/{id}")
-	public Production findOne(@PathVariable("id") int id) {
-		return service.findOne(id);
-	}
+        appSessionService.isValid(email, request);
+        try {
+            service.save(productions);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
 
-	@DeleteMapping(value = "/{id}")
-	public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
-			HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		service.delete(id);
-	}
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @GetMapping("/{id}")
+    public Production findOne(@PathVariable("id") int id) {
+        return service.findOne(id);
+    }
 
-	@PutMapping("/{id}")
-	public Production updateCustomer(@PathVariable int id, @RequestBody Production production,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		production.setId(id);
-		production = service.save(production);
-		return production;
-	}
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
+            HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        service.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public Production updateCustomer(@PathVariable int id, @RequestBody Production production,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        production.setId(id);
+        production = service.save(production);
+        return production;
+    }
 }
