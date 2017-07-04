@@ -1,12 +1,19 @@
 package com.trendsmixed.fma.module.operationtype;
 
-import com.trendsmixed.fma.entity.OperationType;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-public interface OperationTypeRepository extends JpaRepository<OperationType, Integer> {
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.OperationType;
+
+public interface OperationTypeRepository extends PagingAndSortingRepository<OperationType, Integer> {
 
     public OperationType findByCode(String code);
 
-    public OperationType findByDescription(String description);
-
+	@Query(value = "SELECT"
+			+ " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.description)"
+			+ " FROM OperationType o")
+	public List<Combo> getCombo();
 }

@@ -1,44 +1,47 @@
 package com.trendsmixed.fma.module.operationtype;
 
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.entity.OperationType;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.module.operationtype.OperationTypeRepository;
+import com.trendsmixed.fma.utility.Page;
 
 @Service
 public class OperationTypeService {
 
     @Autowired
-    private OperationTypeRepository operationTypeRepository;
+    private OperationTypeRepository repository;
 
-    public List<OperationType> findAll() {
-        return operationTypeRepository.findAll();
+    public Iterable<OperationType> findAll() {
+        return repository.findAll();
+    }
+
+    public Page<OperationType> findAll(Pageable pageable) {
+        return new Page<OperationType>(repository.findAll(pageable));
+    }
+
+    public List<Combo> getCombo() {
+        return repository.getCombo();
     }
 
     public OperationType save(OperationType operationType) {
-        return operationTypeRepository.save(operationType);
-    }
-
-    public void save(List<OperationType> operationTypes) {
-        operationTypeRepository.save(operationTypes);
+        return repository.save(operationType);
     }
 
     public OperationType findOne(int id) {
-        return operationTypeRepository.findOne(id);
-    }
-
-    public void delete(int id) {
-        operationTypeRepository.delete(id);
+        return repository.findOne(id);
     }
 
     public OperationType findByCode(String code) {
-        return operationTypeRepository.findByCode(code);
+        return repository.findByCode(code);
     }
 
-    public OperationType findByDescription(String description) {
-        return operationTypeRepository.findByDescription(description);
+    public void delete(int id) {
+        repository.delete(id);
     }
+
 }
