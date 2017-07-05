@@ -7,8 +7,9 @@ import java.util.Date;
 public class Format {
 
 
-	static SimpleDateFormat yyyy_MM_dd_HH_mm_ss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final  SimpleDateFormat yyyy_MM_dd_HH_mm_ss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static final SimpleDateFormat yyyy_MM = new SimpleDateFormat("yyyy-MM");
+	public static final SimpleDateFormat yyyy_MM_dd = new SimpleDateFormat("yyyy-MM-dd");
 
 	public static Date toStartDate(String dateText) {
 
