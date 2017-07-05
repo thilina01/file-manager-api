@@ -22,8 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.Operation;
+import com.trendsmixed.fma.entity.Section;
+import com.trendsmixed.fma.entity.Shift;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @CrossOrigin
@@ -43,8 +47,18 @@ public class OperationController {
 
     @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
     @GetMapping("/page")
-    Page<Operation> page(Pageable pageable) {
-        return service.findAll(pageable);
+    public Page<Operation> page(Pageable pageable) {
+        return new Page(service.findAll(pageable));
+    }
+
+    @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
+    @GetMapping(value = "/sectionAndProductionDateAndShiftPage", params = {"section", "productionDate", "shift"})
+    public Page<Operation> sectionAndProductionDateAndShiftPage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+        System.out.println(section + " / " + productionDate + " / " + shift);
+        System.out.println(pageable);
+        
+        return new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(new Section(Integer.valueOf(section)),Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)),pageable));
+        //return service.findAll(pageable);
     }
 
     @JsonView(OperationView.All.class)
