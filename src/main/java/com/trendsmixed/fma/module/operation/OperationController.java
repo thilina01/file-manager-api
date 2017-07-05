@@ -61,6 +61,14 @@ public class OperationController {
         //return service.findAll(pageable);
     }
 
+    @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
+    @GetMapping(value = "/productionDateAndShiftPage", params = {"productionDate", "shift"})
+    public Page<Operation> productionDateAndShiftPage(@RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+
+        return new Page(service.findByProductionProductionDateAndProductionShift(Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)),pageable));
+        //return service.findAll(pageable);
+    }
+
     @JsonView(OperationView.All.class)
     @PostMapping
     public Operation save(@RequestBody Operation operation,

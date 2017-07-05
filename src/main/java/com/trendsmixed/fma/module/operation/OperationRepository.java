@@ -39,5 +39,7 @@ public interface OperationRepository extends PagingAndSortingRepository<Operatio
     public Page<Operation> findBySectionAndProductionDateAndShift(@Param("section")Section section, @Param("productionDate")Date productionDate, @Param("shift")Shift shift, Pageable pageable);
      */
     public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(Section section, Date date, Shift shift, Pageable pageable);
+
+    public Page<Operation> findByProductionProductionDateAndProductionShift(Date date, Shift shift, Pageable pageable);
 }
 //com.trendsmixed.fma.dao.ScheduleAdherence

@@ -50,5 +50,9 @@ public class OperationService {
         return repository.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(section, date, shift, pageable);
 
     }
+    public Page<Operation> findByProductionProductionDateAndProductionShift(Date date, Shift shift, Pageable pageable) {
+        return repository.findByProductionProductionDateAndProductionShift(date, shift, pageable);
+
+    }
 
 }
