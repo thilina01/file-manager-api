@@ -42,7 +42,15 @@ public interface OperationRepository extends PagingAndSortingRepository<Operatio
      */
     public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(Section section, Date date, Shift shift, Pageable pageable);
 
+    public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetweenAndProductionShift(Section section, Date startDate, Date endDate, Shift shift, Pageable pageable);
+
+    public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetween(Section section, Date startDate, Date endDate, Pageable pageable);
+
     public Page<Operation> findByProductionProductionDateAndProductionShift(Date date, Shift shift, Pageable pageable);
+
+    public Page<Operation> findByProductionProductionDateBetweenAndProductionShift(Date startDate, Date endDate, Shift shift, Pageable pageable);
+
+    public Page<Operation> findByProductionProductionDateBetween(Date startDate, Date endDate, Pageable pageable);
 
     public Page<Operation> findByJob(Job job, Pageable pageable);
 

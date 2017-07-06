@@ -53,9 +53,24 @@ public class OperationService {
 
     }
 
+    public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetweenAndProductionShift(Section section, Date startDate, Date endDate, Shift shift, Pageable pageable) {
+        return repository.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetweenAndProductionShift(section, startDate, endDate, shift, pageable);
+    }
+
+    public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetween(Section section, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetween(section, startDate, endDate, pageable);
+    }
+
     public Page<Operation> findByProductionProductionDateAndProductionShift(Date date, Shift shift, Pageable pageable) {
         return repository.findByProductionProductionDateAndProductionShift(date, shift, pageable);
+    }
 
+    public Page<Operation> findByProductionProductionDateBetweenAndProductionShift(Date startDate, Date endDate, Shift shift, Pageable pageable) {
+        return repository.findByProductionProductionDateBetweenAndProductionShift(startDate, endDate, shift, pageable);
+    }
+
+    public Page<Operation> findByProductionProductionDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByProductionProductionDateBetween(startDate, endDate, pageable);
     }
 
     public Page<Operation> findByJob(Job job, Pageable pageable) {
