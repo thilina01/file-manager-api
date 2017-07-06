@@ -115,10 +115,17 @@ public class JobController {
             throw new Error(e.getMessage());
         }
     }
+    
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/{id}")
     public Job findOne(@PathVariable("id") int id) {
         return service.findOne(id);
+    }
+    
+    @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
+    @GetMapping("/jobNo/{jobNo}")
+    public Job findByJobNo(@PathVariable("jobNo") String jobNo) {
+        return service.findByJobNo(jobNo);
     }
     
     @GetMapping("/table")

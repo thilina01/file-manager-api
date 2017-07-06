@@ -1,5 +1,7 @@
 package com.trendsmixed.fma.module.operation;
 
+import com.trendsmixed.fma.dao.OperationSummary;
+import com.trendsmixed.fma.entity.Job;
 import java.util.Date;
 import java.util.List;
 
@@ -50,9 +52,17 @@ public class OperationService {
         return repository.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(section, date, shift, pageable);
 
     }
+
     public Page<Operation> findByProductionProductionDateAndProductionShift(Date date, Shift shift, Pageable pageable) {
         return repository.findByProductionProductionDateAndProductionShift(date, shift, pageable);
 
     }
 
+    public Page<Operation> findByJob(Job job, Pageable pageable) {
+        return repository.findByJob(job, pageable);
+    }
+
+    public List<OperationSummary> getSummaryByJob(int jobId) {
+        return repository.getSummaryByJob(jobId);
+    }
 }

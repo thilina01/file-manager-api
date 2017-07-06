@@ -1,5 +1,7 @@
 package com.trendsmixed.fma.module.operation;
 
+import com.trendsmixed.fma.dao.OperationSummary;
+import com.trendsmixed.fma.entity.Job;
 import com.trendsmixed.fma.entity.Operation;
 import com.trendsmixed.fma.entity.Section;
 import com.trendsmixed.fma.entity.Shift;
@@ -41,5 +43,15 @@ public interface OperationRepository extends PagingAndSortingRepository<Operatio
     public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(Section section, Date date, Shift shift, Pageable pageable);
 
     public Page<Operation> findByProductionProductionDateAndProductionShift(Date date, Shift shift, Pageable pageable);
+
+    public Page<Operation> findByJob(Job job, Pageable pageable);
+
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.OperationSummary(operation.productType,operation.operationType,SUM(operation.actualQuantity)) "
+            + " FROM Operation operation"
+            + " WHERE operation.job.id = :jobId AND operation.actualQuantity IS NOT NULL"
+            + " GROUP BY operation.productType, operation.operationType ")
+    public List<OperationSummary> getSummaryByJob(@Param("jobId") int jobId);
+
 }
 //com.trendsmixed.fma.dao.ScheduleAdherence

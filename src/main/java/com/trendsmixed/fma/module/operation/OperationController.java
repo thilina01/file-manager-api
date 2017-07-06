@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.dao.OperationSummary;
+import com.trendsmixed.fma.dao.view.OperationSummaryView;
+import com.trendsmixed.fma.entity.Job;
 import com.trendsmixed.fma.entity.Operation;
 import com.trendsmixed.fma.entity.Section;
 import com.trendsmixed.fma.entity.Shift;
@@ -56,17 +59,27 @@ public class OperationController {
     public Page<Operation> sectionAndProductionDateAndShiftPage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
         System.out.println(section + " / " + productionDate + " / " + shift);
         System.out.println(pageable);
-        
-        return new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(new Section(Integer.valueOf(section)),Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)),pageable));
+
+        return new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
         //return service.findAll(pageable);
     }
 
     @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
     @GetMapping(value = "/productionDateAndShiftPage", params = {"productionDate", "shift"})
     public Page<Operation> productionDateAndShiftPage(@RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionProductionDateAndProductionShift(Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
+    }
 
-        return new Page(service.findByProductionProductionDateAndProductionShift(Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)),pageable));
-        //return service.findAll(pageable);
+    @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
+    @GetMapping(value = "/jobPage", params = {"job"})
+    public Page<Operation> jobPage(@RequestParam("job") String job, Pageable pageable) throws ParseException {
+        return new Page(service.findByJob(new Job(Integer.valueOf(job)), pageable));
+    }
+
+    @JsonView(OperationSummaryView.All.class)
+    @GetMapping(value = "/summaryByJob", params = {"jobId"})
+    public List<OperationSummary> getSummaryByJob(@RequestParam("jobId") int jobId) {
+        return service.getSummaryByJob(jobId);
     }
 
     @JsonView(OperationView.All.class)
@@ -136,4 +149,5 @@ public class OperationController {
         }
         return service.test(startDate, endDate);
     }
+
 }
