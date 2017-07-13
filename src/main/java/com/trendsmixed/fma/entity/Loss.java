@@ -20,13 +20,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author Thilina
  */
 @Entity
-@Table(name = "loss")
+@Table(name = "loss", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"loss_reason_id", "operation_id"})})
 @NamedQueries({
     @NamedQuery(name = "Loss.findAll", query = "SELECT l FROM Loss l")})
 public class Loss implements Serializable {
