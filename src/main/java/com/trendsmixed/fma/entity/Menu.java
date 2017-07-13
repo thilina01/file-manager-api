@@ -43,6 +43,9 @@ public class Menu implements Serializable {
     @JsonView(MenuView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(MenuView.RouterLink.class)
+    @Column(name = "router_link")
+    private String routerLink;
     @JsonView(MenuView.Target.class)
     @Column(name = "target")
     private String target;
@@ -51,6 +54,8 @@ public class Menu implements Serializable {
     private String href;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
     private List<TeamMenu> teamMenuList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
+    private List<UserMenu> userMenuList;
     @JsonView(MenuView.SubMenu.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
     private List<Menu> menuList;
@@ -58,6 +63,10 @@ public class Menu implements Serializable {
     @JoinColumn(name = "menu_id", referencedColumnName = "id")
     @ManyToOne(optional = true)
     private Menu menu;
+    @JsonView(MenuView.MenuType.class)
+    @JoinColumn(name = "menu_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = true)
+    private MenuType menuType;
 
     public Menu() {
     }
@@ -156,6 +165,30 @@ public class Menu implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.Menu[ id=" + id + " ]";
+    }
+
+    public String getRouterLink() {
+        return routerLink;
+    }
+
+    public void setRouterLink(String routerLink) {
+        this.routerLink = routerLink;
+    }
+
+    public MenuType getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(MenuType menuType) {
+        this.menuType = menuType;
+    }
+
+    public List<UserMenu> getUserMenuList() {
+        return userMenuList;
+    }
+
+    public void setUserMenuList(List<UserMenu> userMenuList) {
+        this.userMenuList = userMenuList;
     }
 
 }

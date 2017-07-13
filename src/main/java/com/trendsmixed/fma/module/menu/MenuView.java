@@ -19,6 +19,9 @@ public class MenuView {
     public static interface Name {
     }
 
+    public static interface RouterLink {
+    }
+
     public static interface Target {
     }
 
@@ -33,8 +36,11 @@ public class MenuView {
 
     public static interface SubMenu {
     }
+    
+    public static interface MenuType {
+    }
 
-    public static interface All extends Id, Name, Target, Href {
+    public static interface All extends Id, Name, RouterLink, Target, Href {
     }
 
     public static interface AllAndTeamAll extends All, TeamMenuList, TeamView.All {

@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.Menu;
+import com.trendsmixed.fma.entity.MenuType;
 import com.trendsmixed.fma.entity.Team;
 import com.trendsmixed.fma.entity.TeamMenu;
 import com.trendsmixed.fma.entity.User;
-import com.trendsmixed.fma.module.menu.MenuView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.menutype.MenuTypeService;
 import com.trendsmixed.fma.module.teammenu.TeamMenuService;
 import com.trendsmixed.fma.module.team.TeamService;
 import com.trendsmixed.fma.module.user.UserService;
@@ -37,6 +38,8 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
     @Autowired
+    private MenuTypeService menuTypeService;
+    @Autowired
     private UserService userService;
     @Autowired
     private TeamService teamService;
@@ -54,6 +57,7 @@ public class MenuController {
     public List<Menu> findAllWithParent() {
         return menuService.findAll();
     }
+
     @JsonView(MenuView.AllAndSubMenu.class)
     @GetMapping("/top")
     public List<Menu> findTop(@RequestHeader(value = "email", defaultValue = "") String email) {
@@ -134,13 +138,32 @@ public class MenuController {
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Menu> menus, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         AppSession appSession = appSessionService.findOne(email);
-
         if (appSession != null) {
             appSessionService.isValid(email, request);
             try {
+                int i = 0;
                 for (Menu menu : menus) {
+                    MenuType menuType = menu.getMenuType();
+                    menuType = menuType != null ? menuType : new MenuType() {
+                        String code = "NA";
+                        String name = "NA";
+                    };
+                    MenuType existingMenuType = menuTypeService.findByName(menuType.getName());
+                    if (existingMenuType == null) {
+                        existingMenuType = menuTypeService.save(menuType);
+                    }
+                    menuType.setId(existingMenuType.getId());
+
+                    menu.setMenuType(menuType);
+
+                    Menu existingMenu = menuService.findByNameAndMenuType(menu.getName(), menuType);
+
+                    if (menuType.getName().equalsIgnoreCase("Angular")) {
+                        existingMenu = menuService.findByRouterLink(menu.getRouterLink());
+                    }
+
                     menu.setName(menu.getName().trim());
-                    Menu existingMenu = menuService.findByNameAndMenuIsNull(menu.getName());
+
                     if (existingMenu != null) {
                         menu.setId(existingMenu.getId());
                     }
@@ -154,6 +177,7 @@ public class MenuController {
                             subMenu.setMenu(menu);
                         }
                     }
+                    System.out.println(++i + " : " + menu);
                 }
                 menuService.save(menus);
             } catch (Throwable e) {
@@ -169,6 +193,12 @@ public class MenuController {
     @GetMapping("/{id}")
     public Menu findOne(@PathVariable("id") int id) {
         return menuService.findOne(id);
+    }
+
+    @JsonView(MenuView.AllAndSubMenu.class)
+    @GetMapping("/menuTypeName/{name}")
+    public List<Menu> findByMenuType(@PathVariable("name") String name) {
+        return menuService.findByMenuType(menuTypeService.findByName(name));
     }
 
     @DeleteMapping(value = "/{id}")

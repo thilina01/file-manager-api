@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.entity.Menu;
+import com.trendsmixed.fma.entity.MenuType;
 import com.trendsmixed.fma.entity.Team;
 import com.trendsmixed.fma.module.menu.MenuRepository;
 import java.util.Collection;
@@ -49,8 +50,19 @@ public class MenuService {
         return menuRepository.findByNameAndMenuIsNull(name);
     }
 
+    public Menu findByRouterLink(String routerLink) {
+        return menuRepository.findByRouterLink(routerLink);
+    }
+
     public Menu findByNameAndMenu(String name, Menu menu) {
         return menuRepository.findByNameAndMenu(name, menu);
+    }
+    public Menu findByNameAndMenuType(String name, MenuType menuType) {
+        return menuRepository.findByNameAndMenuType(name, menuType);
+    }
+
+    List<Menu> findByMenuType(MenuType menuType) {
+        return menuRepository.findByMenuType(menuType);
     }
 
 }
