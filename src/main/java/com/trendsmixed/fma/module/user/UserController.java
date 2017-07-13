@@ -2,12 +2,14 @@ package com.trendsmixed.fma.module.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.Status;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.User;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.status.StatusService;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +32,7 @@ public class UserController {
     private AppSessionService appSessionService;
     @Autowired
     private UserService service;
+    private StatusService statusService;
 
     @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
     @GetMapping
@@ -51,12 +54,19 @@ public class UserController {
     @JsonView(UserView.All.class)
     @PostMapping
     public User save(@RequestBody User user, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        //appSessionService.isValid(email, request);
         try {
+            user.setId(user.getId() == null ? 0 : user.getId());
             int userId = user.getId();
-            if (user.getPassword() == null && userId != 0) {
+
+            if (userId > 0) {
                 User existingUser = service.findOne(userId);
-                user.setPassword(existingUser.getPassword());
+                if (user.getPassword() == null) {
+                    user.setPassword(existingUser.getPassword());
+                }
+            } else {
+                Status status = statusService.findByName("inactive");
+                user.setStatus(status);
             }
             user = service.save(user);
             return user;
