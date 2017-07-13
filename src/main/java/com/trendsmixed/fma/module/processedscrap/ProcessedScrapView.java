@@ -15,13 +15,19 @@ public class ProcessedScrapView {
     public static interface SubItemCode {
     }
 
+    public static interface Quantity {
+    }
+
+    public static interface UnitCost {
+    }
+
     public static interface LossReason extends LossReasonView.All {
     }
 
     public static interface Section extends SectionView.All {
     }
 
-    public static interface All extends Id, SubItemCode, ProcessedDate, PageView.All {
+    public static interface All extends Id, SubItemCode, ProcessedDate, Quantity, UnitCost, PageView.All {
     }
 
 }

@@ -48,7 +48,13 @@ public class ProcessedScrap implements Serializable {
     private Date processedDate;
     @JsonView(ProcessedScrapView.SubItemCode.class)
     @Column(name = "sub_item_code")
-    private String subItemCode;
+    private String subItemCode;    
+    @JsonView(ProcessedScrapView.Quantity.class)
+    @Column(name = "quantity")
+    private Double quantity;
+    @JsonView(ProcessedScrapView.UnitCost.class)
+    @Column(name = "unit_cost")
+    private Double unitCost;
     @JsonView(ProcessedScrapView.LossReason.class)
     @JoinColumn(name = "loss_reason_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
