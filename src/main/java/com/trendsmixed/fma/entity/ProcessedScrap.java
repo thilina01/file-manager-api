@@ -88,5 +88,4 @@ public class ProcessedScrap implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ProcessedScrap[ id=" + id + " ]";
     }
-
 }

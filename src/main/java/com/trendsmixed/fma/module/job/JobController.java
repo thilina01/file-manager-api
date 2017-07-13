@@ -46,23 +46,29 @@ public class JobController {
     public Iterable<Job> findAll() {
         return service.findAll();
     }
+
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/page")
-	Page<Job> page( Pageable pageable){
-    	return service.findAll(pageable);
-	} 
-    
+    Page<Job> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
+
     @GetMapping("/combo")
-	List<Combo> combo(){
-    	return service.getCombo();
-	} 
-	
+    List<Combo> combo() {
+        return service.getCombo();
+    }
+
     @JsonView(JobView.All.class)
     @PostMapping
     public Job save(@RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            job.setRemainingQuantity(job.getQuantity());
+            Job existingJob = service.findByJobNo(job.getJobNo());
+            if (existingJob != null) {
+                job.setId(existingJob.getId());
+            } else {
+                job.setRemainingQuantity(job.getQuantity());
+            }
             job = service.save(job);
             return job;
         } catch (Throwable e) {
@@ -115,19 +121,19 @@ public class JobController {
             throw new Error(e.getMessage());
         }
     }
-    
+
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/{id}")
     public Job findOne(@PathVariable("id") int id) {
         return service.findOne(id);
     }
-    
+
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/jobNo/{jobNo}")
     public Job findByJobNo(@PathVariable("jobNo") String jobNo) {
         return service.findByJobNo(jobNo);
     }
-    
+
     @GetMapping("/table")
     public List findForTable() {
         return service.findForTable();
