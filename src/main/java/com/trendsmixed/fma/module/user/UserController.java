@@ -87,6 +87,12 @@ public class UserController {
         return service.findOne(id);
     }
 
+    @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
+    @GetMapping("/own")
+    public User own(@RequestHeader(value = "email", defaultValue = "") String email) {
+        return service.findByEmail(email);
+    }
+
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
