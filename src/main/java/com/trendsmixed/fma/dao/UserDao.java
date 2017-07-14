@@ -49,7 +49,11 @@ public class UserDao {
                 user.setStatus(status);
                 //user = userService.save(user);
             }
-            return user.getStatus().getName().equalsIgnoreCase("active");
+            if (user.getStatus().getName().equalsIgnoreCase("active")) {
+                return true;
+            } else {
+                throw new Error("Account is " + user.getStatus().getName());
+            }
         }
         return false;
     }
