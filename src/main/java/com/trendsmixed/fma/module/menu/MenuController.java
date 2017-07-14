@@ -137,57 +137,59 @@ public class MenuController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Menu> menus, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession != null) {
-            appSessionService.isValid(email, request);
-            try {
-                int i = 0;
-                for (Menu menu : menus) {
-                    MenuType menuType = menu.getMenuType();
-                    menuType = menuType != null ? menuType : new MenuType() {
-                        String code = "NA";
-                        String name = "NA";
-                    };
-                    MenuType existingMenuType = menuTypeService.findByName(menuType.getName());
-                    if (existingMenuType == null) {
-                        existingMenuType = menuTypeService.save(menuType);
-                    }
-                    menuType.setId(existingMenuType.getId());
+        //AppSession appSession = appSessionService.findOne(email);
+        //if (appSession != null) {
+        //appSessionService.isValid(email, request);
+        try {
+            int i = 0;
+            for (Menu menu : menus) {
+                MenuType menuType = menu.getMenuType();
 
-                    menu.setMenuType(menuType);
+                if (menuType == null) {
+                    menuType = new MenuType();
+                    menuType.setCode("NA");
+                    menuType.setName("NA");
+                }
+                MenuType existingMenuType = menuTypeService.findByName(menuType.getName());
+                if (existingMenuType == null) {
+                    existingMenuType = menuTypeService.save(menuType);
+                }
+                menuType.setId(existingMenuType.getId());
 
-                    Menu existingMenu = menuService.findByNameAndMenuType(menu.getName(), menuType);
+                menu.setMenuType(menuType);
 
-                    if (menuType.getName().equalsIgnoreCase("Angular")) {
-                        existingMenu = menuService.findByRouterLink(menu.getRouterLink());
-                    }
+                Menu existingMenu = menuService.findByNameAndMenuType(menu.getName(), menuType);
 
-                    menu.setName(menu.getName().trim());
+                if (menuType.getName().equalsIgnoreCase("Angular")) {
+                    existingMenu = menuService.findByRouterLink(menu.getRouterLink());
+                }
 
-                    if (existingMenu != null) {
-                        menu.setId(existingMenu.getId());
-                    }
-                    List<Menu> subMenus = menu.getMenuList();
-                    if (subMenus != null) {
-                        for (Menu subMenu : subMenus) {
-                            Menu existingSubMenu = menuService.findByNameAndMenu(subMenu.getName(), existingMenu);
-                            if (existingSubMenu != null) {
-                                subMenu.setId(existingSubMenu.getId());
-                            }
-                            subMenu.setMenu(menu);
+                menu.setName(menu.getName().trim());
+
+                if (existingMenu != null) {
+                    menu.setId(existingMenu.getId());
+                }
+                List<Menu> subMenus = menu.getMenuList();
+                if (subMenus != null) {
+                    for (Menu subMenu : subMenus) {
+                        Menu existingSubMenu = menuService.findByNameAndMenu(subMenu.getName(), existingMenu);
+                        if (existingSubMenu != null) {
+                            subMenu.setId(existingSubMenu.getId());
                         }
+                        subMenu.setMenu(menu);
                     }
-                    System.out.println(++i + " : " + menu);
                 }
-                menuService.save(menus);
-            } catch (Throwable e) {
-                e.printStackTrace();
-                while (e.getCause() != null) {
-                    e = e.getCause();
-                }
-                throw new Error(e.getMessage());
+                System.out.println(++i + " : " + menu);
             }
+            menuService.save(menus);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
         }
+        //}
     }
 
     @GetMapping("/{id}")
