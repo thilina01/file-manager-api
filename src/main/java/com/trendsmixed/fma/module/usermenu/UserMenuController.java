@@ -87,9 +87,18 @@ public class UserMenuController {
     @JsonView(UserMenuView.Menu.class)
     @GetMapping("/userEmail/{userEmail}")
     public List<UserMenu> findByUserId(
-            @RequestHeader(value = "email", defaultValue = "") String email,@PathVariable("userEmail") String userEmail) {
+            @RequestHeader(value = "email", defaultValue = "") String email, @PathVariable("userEmail") String userEmail) {
         //System.out.println(userEmail);
         System.out.println(email);
+        User user = userService.findByEmail(email);
+        System.out.println(user != null ? user.getId() : "Null");
+        return userMenuService.findByUser(new User(user != null ? user.getId() : 0));
+    }
+
+    @JsonView(UserMenuView.Menu.class)
+    @GetMapping("/own")
+    public List<UserMenu> own(
+            @RequestHeader(value = "email", defaultValue = "") String email) {
         User user = userService.findByEmail(email);
         System.out.println(user != null ? user.getId() : "Null");
         return userMenuService.findByUser(new User(user != null ? user.getId() : 0));
