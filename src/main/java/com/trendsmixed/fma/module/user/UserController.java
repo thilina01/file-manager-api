@@ -32,6 +32,7 @@ public class UserController {
     private AppSessionService appSessionService;
     @Autowired
     private UserService service;
+    @Autowired
     private StatusService statusService;
 
     @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
