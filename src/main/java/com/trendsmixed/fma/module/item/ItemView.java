@@ -27,25 +27,16 @@ public class ItemView {
     public static interface DrawingVersion {
     }
 
-    public static interface ProductionToolAvailability {
+    public static interface DrawingApproval {
     }
 
-    public static interface All extends Id, Code, Size, Weight, Volume, Description, DrawingVersion, ProductionToolAvailability,PageView.All  {
+    public static interface ProductionToolAvailability {
     }
 
     public static interface ItemType {
     }
 
-    public static interface AllAndItemTypeAll extends All, ItemType, ItemTypeView.All {
-    }
-
     public static interface Paint {
-    }
-
-    public static interface AllAndPaintAll extends All, Paint, PaintView.All {
-    }
-
-    public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.All, Paint, PaintView.All {
     }
 
     public static interface ItemMachine {
@@ -56,4 +47,17 @@ public class ItemView {
 
     public static interface CustomerItem {
     }
+
+    public static interface All extends Id, Code, Size, Weight, Volume, Description, DrawingVersion, ProductionToolAvailability, DrawingApproval, PageView.All {
+    }
+
+    public static interface AllAndItemTypeAll extends All, ItemType, ItemTypeView.All {
+    }
+
+    public static interface AllAndPaintAll extends All, Paint, PaintView.All {
+    }
+
+    public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.All, Paint, PaintView.All {
+    }
+    
 }
