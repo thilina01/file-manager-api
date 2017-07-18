@@ -71,7 +71,6 @@ public class UserController {
             }
             user = service.save(user);
             return user;
-
         } catch (Throwable e) {
             e.printStackTrace();
             while (e.getCause() != null) {
@@ -97,7 +96,6 @@ public class UserController {
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         service.delete(id);
-
     }
 
     @PutMapping("/{id}")

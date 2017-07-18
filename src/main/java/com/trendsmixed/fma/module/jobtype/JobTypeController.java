@@ -41,15 +41,15 @@ public class JobTypeController {
 
     @JsonView(JobTypeView.All.class)
     @GetMapping("/page")
-	Page<JobType> page( Pageable pageable){
-    	return service.findAll(pageable);
-	} 
-    
+    Page<JobType> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
+
     @GetMapping("/combo")
-	List<Combo> combo(){
-    	return service.getCombo();
-	} 
-	
+    List<Combo> combo() {
+        return service.getCombo();
+    }
+
     @PostMapping
     public JobType save(@RequestBody JobType jobType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
