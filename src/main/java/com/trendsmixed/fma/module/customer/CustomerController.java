@@ -6,13 +6,12 @@ import com.trendsmixed.fma.entity.Currency;
 import com.trendsmixed.fma.entity.Customer;
 import com.trendsmixed.fma.entity.CustomerItem;
 import com.trendsmixed.fma.entity.Incoterm;
-import com.trendsmixed.fma.entity.SaleType;
-import com.trendsmixed.fma.module.customer.CustomerView;
+import com.trendsmixed.fma.entity.CustomerType;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.country.CountryService;
 import com.trendsmixed.fma.module.currency.CurrencyService;
 import com.trendsmixed.fma.module.incoterm.IncotermService;
-import com.trendsmixed.fma.module.saletype.SaleTypeService;
+import com.trendsmixed.fma.module.customertype.CustomerTypeService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,17 +40,17 @@ public class CustomerController {
     @Autowired
     private CurrencyService currencyService;
     @Autowired
-    private SaleTypeService saleTypeService;
+    private CustomerTypeService customerTypeService;
     @Autowired
     private CountryService countryService;
 
-    @JsonView(CustomerView.AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
+    @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
     @GetMapping
     public List<Customer> findAll() {
         return customerService.findAll();
     }
 
-    //@JsonView(CustomerView.AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
+    //@JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
     @PostMapping
     public Customer save(@RequestBody Customer customer, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -112,20 +111,20 @@ public class CustomerController {
                 }
                 customer.setCurrency(currency);
 
-                SaleType saleType = customer.getSaleType();
-                if (saleType != null) {
-                    String saleTypeCode = saleType.getCode();
-                    String saleTypeName = saleType.getName();
-                    if (saleTypeCode != null) {
-                        saleType = saleTypeService.findByCode(saleTypeCode);
-                    } else if (saleTypeName != null) {
-                        saleType = saleTypeService.findByName(saleTypeName);
+                CustomerType customerType = customer.getCustomerType();
+                if (customerType != null) {
+                    String customerTypeCode = customerType.getCode();
+                    String customerTypeName = customerType.getName();
+                    if (customerTypeCode != null) {
+                        customerType = customerTypeService.findByCode(customerTypeCode);
+                    } else if (customerTypeName != null) {
+                        customerType = customerTypeService.findByName(customerTypeName);
                     }
                 }
-                if (saleType == null || saleType.getId() == null) {
-                    saleType = saleTypeService.findByCode("NA");
+                if (customerType == null || customerType.getId() == null) {
+                    customerType = customerTypeService.findByCode("NA");
                 }
-                customer.setSaleType(saleType);
+                customer.setCustomerType(customerType);
 
                 Country country = customer.getCountry();
                 if (country != null) {
@@ -153,7 +152,7 @@ public class CustomerController {
         }
     }
 
-    @JsonView(CustomerView.AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAll.class)
+    @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAll.class)
     @GetMapping("/{id}")
     public Customer findOne(@PathVariable("id") int id
     ) {

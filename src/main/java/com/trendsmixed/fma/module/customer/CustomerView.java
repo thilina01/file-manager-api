@@ -4,7 +4,7 @@ import com.trendsmixed.fma.module.country.CountryView;
 import com.trendsmixed.fma.module.currency.CurrencyView;
 import com.trendsmixed.fma.module.customeritem.CustomerItemView;
 import com.trendsmixed.fma.module.incoterm.IncotermView;
-import com.trendsmixed.fma.module.saletype.SaleTypeView;
+import com.trendsmixed.fma.module.customertype.CustomerTypeView;
 
 public class CustomerView {
 
@@ -56,7 +56,7 @@ public class CustomerView {
     public static interface Incoterm {
     }
 
-    public static interface SaleType {
+    public static interface CustomerType {
     }
 
     public static interface Country {
@@ -74,7 +74,7 @@ public class CustomerView {
     public static interface AllAndIncotermAll extends All, Incoterm, IncotermView.All {
     }
 
-    public static interface AllAndSaleTypeAll extends All, SaleType, SaleTypeView.All {
+    public static interface AllAndCustomerTypeAll extends All, CustomerType, CustomerTypeView.All {
     }
 
     public static interface AllAndCountryAll extends All, Country, CountryView.All {
@@ -90,13 +90,13 @@ public class CustomerView {
     public static interface AllAndCustomerItemListAndItemAll extends All, CustomerItemList, CustomerItemView.AllAndItemAll {
     }
     /* */
-    public static interface AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAllAndCustomerItemList extends All, Incoterm, IncotermView.All, SaleType, SaleTypeView.All, Country, CountryView.All, Currency, CurrencyView.All, AllAndCustomerItemList {
+    public static interface AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAllAndCustomerItemList extends All, Incoterm, IncotermView.All, CustomerType, CustomerTypeView.All, Country, CountryView.All, Currency, CurrencyView.All, AllAndCustomerItemList {
     }
 
-    public static interface AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll extends All, Incoterm, IncotermView.All, SaleType, SaleTypeView.All, Country, CountryView.All, Currency, CurrencyView.All, AllAndCustomerItemListAndItemAll {
+    public static interface AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll extends All, Incoterm, IncotermView.All, CustomerType, CustomerTypeView.All, Country, CountryView.All, Currency, CurrencyView.All, AllAndCustomerItemListAndItemAll {
     }
 
-    public static interface AllAndIncotermAllAndSaleTypeAllAndCountryAllAndCurrencyAll extends All, Incoterm, IncotermView.All, SaleType, SaleTypeView.All, Country, CountryView.All, Currency, CurrencyView.All {
+    public static interface AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAll extends All, Incoterm, IncotermView.All, CustomerType, CustomerTypeView.All, Country, CountryView.All, Currency, CurrencyView.All {
     }
 
 }

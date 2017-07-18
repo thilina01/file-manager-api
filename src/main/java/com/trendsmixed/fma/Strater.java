@@ -3,12 +3,12 @@ package com.trendsmixed.fma;
 import com.trendsmixed.fma.entity.Country;
 import com.trendsmixed.fma.entity.Currency;
 import com.trendsmixed.fma.entity.Incoterm;
-import com.trendsmixed.fma.entity.SaleType;
+import com.trendsmixed.fma.entity.CustomerType;
 import com.trendsmixed.fma.entity.Status;
 import com.trendsmixed.fma.module.country.CountryService;
 import com.trendsmixed.fma.module.currency.CurrencyService;
+import com.trendsmixed.fma.module.customertype.CustomerTypeService;
 import com.trendsmixed.fma.module.incoterm.IncotermService;
-import com.trendsmixed.fma.module.saletype.SaleTypeService;
 import com.trendsmixed.fma.module.status.StatusService;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -27,7 +27,7 @@ public class Strater {
     @Autowired
     private IncotermService incotermService;
     @Autowired
-    private SaleTypeService saleTypeService;
+    private CustomerTypeService customerTypeService;
 
     @PostConstruct
     public void afterStarted() {
@@ -36,7 +36,7 @@ public class Strater {
         initCountry();
         initCurrency();
         initIncoterm();
-        initSaleType();
+        initCustomerType();
         System.out.println("Init process finished");
     }
 
@@ -85,13 +85,13 @@ public class Strater {
         }
     }
     
-    private void initSaleType() {
-        SaleType saleType = saleTypeService.findByCode("NA");
-        if (saleType == null) {
-            saleType = new SaleType();
-            saleType.setCode("NA");
-            saleType.setName("NOT AVAILABLE");
-            saleTypeService.save(saleType);
+    private void initCustomerType() {
+        CustomerType customerType = customerTypeService.findByCode("NA");
+        if (customerType == null) {
+            customerType = new CustomerType();
+            customerType.setCode("NA");
+            customerType.setName("NOT AVAILABLE");
+            customerTypeService.save(customerType);
         }
     }
 }

@@ -23,12 +23,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "customer")
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")})
@@ -98,10 +100,10 @@ public class Customer implements Serializable {
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Currency currency;
-    @JsonView(CustomerView.SaleType.class)
-    @JoinColumn(name = "sale_type_id", referencedColumnName = "id")
+    @JsonView(CustomerView.CustomerType.class)
+    @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private SaleType saleType;
+    private CustomerType customerType;
     @JsonView(CustomerView.Country.class)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -112,166 +114,6 @@ public class Customer implements Serializable {
 
     public Customer(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getConsignee() {
-        return consignee;
-    }
-
-    public void setConsignee(String consignee) {
-        this.consignee = consignee;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public String getContinent() {
-        return continent;
-    }
-
-    public void setContinent(String continent) {
-        this.continent = continent;
-    }
-
-    public String getFax() {
-        return fax;
-    }
-
-    public void setFax(String fax) {
-        this.fax = fax;
-    }
-
-    public String getFinalDestination() {
-        return finalDestination;
-    }
-
-    public void setFinalDestination(String finalDestination) {
-        this.finalDestination = finalDestination;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNotifyParty() {
-        return notifyParty;
-    }
-
-    public void setNotifyParty(String notifyParty) {
-        this.notifyParty = notifyParty;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public String getOfficeAddress() {
-        return officeAddress;
-    }
-
-    public void setOfficeAddress(String officeAddress) {
-        this.officeAddress = officeAddress;
-    }
-
-    public String getPaymentTerm() {
-        return paymentTerm;
-    }
-
-    public void setPaymentTerm(String paymentTerm) {
-        this.paymentTerm = paymentTerm;
-    }
-
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
-    public String getSVatNo() {
-        return sVatNo;
-    }
-
-    public void setSVatNo(String sVatNo) {
-        this.sVatNo = sVatNo;
-    }
-
-    public String getVatNo() {
-        return vatNo;
-    }
-
-    public void setVatNo(String vatNo) {
-        this.vatNo = vatNo;
-    }
-
-    public List<SalesOrder> getSalesOrderList() {
-        return salesOrderList;
-    }
-
-    public void setSalesOrderList(List<SalesOrder> salesOrderList) {
-        this.salesOrderList = salesOrderList;
-    }
-
-    public Incoterm getIncoterm() {
-        return incoterm;
-    }
-
-    public void setIncoterm(Incoterm incoterm) {
-        this.incoterm = incoterm;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-
-    public SaleType getSaleType() {
-        return saleType;
-    }
-
-    public void setSaleType(SaleType saleType) {
-        this.saleType = saleType;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
     }
 
     @Override
@@ -297,30 +139,6 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.Customer[ id=" + id + " ]";
-    }
-
-    public String getsVatNo() {
-        return sVatNo;
-    }
-
-    public void setsVatNo(String sVatNo) {
-        this.sVatNo = sVatNo;
-    }
-
-    public List<CustomerItem> getCustomerItemList() {
-        return customerItemList;
-    }
-
-    public void setCustomerItemList(List<CustomerItem> customerItemList) {
-        this.customerItemList = customerItemList;
-    }
-
-    public List<Dispatch> getDispatchs() {
-        return dispatchs;
-    }
-
-    public void setDispatchs(List<Dispatch> dispatchs) {
-        this.dispatchs = dispatchs;
     }
 
 }
