@@ -17,6 +17,9 @@ public class CustomerView {
     public static interface Name {
     }
 
+    public static interface ShortName {
+    }
+
     public static interface Consignee {
     }
 
@@ -36,6 +39,9 @@ public class CustomerView {
     }
 
     public static interface Note {
+    }
+    
+    public static interface SpecialRequirements {
     }
 
     public static interface OfficeAddress {
@@ -68,7 +74,7 @@ public class CustomerView {
     public static interface CustomerItemList {
     }
 
-    public static interface All extends Id, Code, Name, Consignee, Contact, Continent, Fax, FinalDestination, NotifyParty, Note, OfficeAddress, PaymentTerm, PhoneNo, SVatNo, VatNo {
+    public static interface All extends Id, Code, Name, ShortName, Consignee, Contact, Continent, Fax, FinalDestination, NotifyParty, Note, SpecialRequirements, OfficeAddress, PaymentTerm, PhoneNo, SVatNo, VatNo {
     }
 
     public static interface AllAndIncotermAll extends All, Incoterm, IncotermView.All {

@@ -13,7 +13,7 @@ public interface CustomerTypeRepository extends PagingAndSortingRepository<Custo
     public CustomerType findByName(String name);
 
 	@Query(value = "SELECT"
-			+ " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.type)"
-			+ " FROM JobType o")
+			+ " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
+			+ " FROM CustomerType o")
 	public List<Combo> getCombo();
 }

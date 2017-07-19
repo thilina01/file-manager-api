@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.customer;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.entity.Country;
 import com.trendsmixed.fma.entity.Currency;
 import com.trendsmixed.fma.entity.Customer;
@@ -12,9 +13,11 @@ import com.trendsmixed.fma.module.country.CountryService;
 import com.trendsmixed.fma.module.currency.CurrencyService;
 import com.trendsmixed.fma.module.incoterm.IncotermService;
 import com.trendsmixed.fma.module.customertype.CustomerTypeService;
+import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +37,7 @@ public class CustomerController {
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private CustomerService customerService;
+    private CustomerService service;
     @Autowired
     private IncotermService incotermService;
     @Autowired
@@ -46,8 +49,19 @@ public class CustomerController {
 
     @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
     @GetMapping
-    public List<Customer> findAll() {
-        return customerService.findAll();
+    public Iterable<Customer> findAll() {
+        return service.findAll();
+    }
+
+    @JsonView(CustomerView.All.class)
+    @GetMapping("/page")
+    Page<Customer> page(Pageable pageable) {
+        return new Page<>(service.findAll(pageable));
+    }
+
+    @GetMapping("/combo")
+    List<Combo> combo() {
+        return service.getCombo();
     }
 
     //@JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
@@ -61,7 +75,7 @@ public class CustomerController {
             }
         }
         try {
-            customer = customerService.save(customer);
+            customer = service.save(customer);
             return customer;
 
         } catch (Throwable e) {
@@ -80,7 +94,7 @@ public class CustomerController {
 
                 customer.setCode(customer.getCode().trim());
 
-                Customer existingCustomer = customerService.findByCode(customer.getCode());
+                Customer existingCustomer = service.findByCode(customer.getCode());
                 if (existingCustomer != null) {
                     //itemsToRemove.add(item);
                     customer.setId(existingCustomer.getId());
@@ -106,6 +120,7 @@ public class CustomerController {
                     String currencyCode = currency.getCode() != null ? currency.getCode().trim() : "NA";
                     currency = currencyService.findByCode(currencyCode);
                 }
+                
                 if (currency == null) {
                     currency = currencyService.findByCode("NA");
                 }
@@ -142,7 +157,7 @@ public class CustomerController {
                 customer.setCountry(country);
 
             }
-            customerService.save(customers);
+            service.save(customers);
         } catch (Throwable e) {
             e.printStackTrace();
             while (e.getCause() != null) {
@@ -156,7 +171,7 @@ public class CustomerController {
     @GetMapping("/{id}")
     public Customer findOne(@PathVariable("id") int id
     ) {
-        return customerService.findOne(id);
+        return service.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -164,7 +179,7 @@ public class CustomerController {
             @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request
     ) {
         appSessionService.isValid(email, request);
-        customerService.delete(id);
+        service.delete(id);
 
     }
 
@@ -175,7 +190,7 @@ public class CustomerController {
     ) {
         appSessionService.isValid(email, request);
         customer.setId(id);
-        customer = customerService.save(customer);
+        customer = service.save(customer);
         return customer;
     }
 }

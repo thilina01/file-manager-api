@@ -64,12 +64,18 @@ public class Customer implements Serializable {
     @JsonView(CustomerView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(CustomerView.ShortName.class)
+    @Column(name = "short_name")
+    private String shortName;
     @JsonView(CustomerView.NotifyParty.class)
     @Column(name = "notify_party")
     private String notifyParty;
     @JsonView(CustomerView.Note.class)
     @Column(name = "note")
     private String note;
+    @JsonView(CustomerView.SpecialRequirements.class)
+    @Column(name = "special_requirements")
+    private String specialRequirements;
     @JsonView(CustomerView.OfficeAddress.class)
     @Column(name = "office_address")
     private String officeAddress;
