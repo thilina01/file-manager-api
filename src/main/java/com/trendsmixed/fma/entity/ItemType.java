@@ -20,12 +20,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "item_type")
 @NamedQueries({
     @NamedQuery(name = "ItemType.findAll", query = "SELECT i FROM ItemType i")})
@@ -41,9 +43,9 @@ public class ItemType implements Serializable {
     @JsonView(ItemTypeView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(ItemTypeView.Type.class)
-    @Column(name = "type")
-    private String type;
+    @JsonView(ItemTypeView.Name.class)
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemType")
     private List<Item> itemList;
 
@@ -52,38 +54,6 @@ public class ItemType implements Serializable {
 
     public ItemType(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public List<Item> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
     }
 
     @Override
@@ -110,5 +80,5 @@ public class ItemType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ItemType[ id=" + id + " ]";
     }
-    
+
 }

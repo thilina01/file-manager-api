@@ -98,12 +98,12 @@ public class ItemController {
 
                 ItemType itemType = item.getItemType();
                 if (itemType != null) {
-                    String type = itemType.getType().trim();
-                    ItemType existingItemType = itemTypeService.findByType(type);
+                    String name = itemType.getName().trim();
+                    ItemType existingItemType = itemTypeService.findByName(name);
                     if (existingItemType == null) {
                         existingItemType = new ItemType();
-                        existingItemType.setCode(type);
-                        existingItemType.setType(type);
+                        existingItemType.setCode(name);
+                        existingItemType.setName(name);
                         existingItemType = itemTypeService.save(itemType);
                     }
                     item.setItemType(existingItemType);

@@ -21,7 +21,7 @@ public class ItemTypeService {
     }
 
 	public Page<ItemType> findAll(Pageable pageable) {
-		return new Page<ItemType>(repository.findAll(pageable));
+		return new Page<>(repository.findAll(pageable));
 	}
 
 	public List<Combo> getCombo() {
@@ -44,7 +44,7 @@ public class ItemTypeService {
         repository.delete(id);
     }
 
-    public ItemType findByType(String type) {
-        return repository.findByType(type);
+    public ItemType findByName(String name) {
+        return repository.findByName(name);
     }
 }
