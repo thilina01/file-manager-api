@@ -64,6 +64,7 @@ public class IncotermController {
         }
     }
 
+    @JsonView(IncotermView.All.class)
     @GetMapping("/{id}")
     public Incoterm findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -76,6 +77,7 @@ public class IncotermController {
 
     }
 
+    @JsonView(IncotermView.All.class)
     @PutMapping("/{id}")
     public Incoterm updateCustomer(@PathVariable int id, @RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
