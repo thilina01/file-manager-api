@@ -64,6 +64,7 @@ public class CurrencyController {
         }
     }
 
+    @JsonView(CurrencyView.All.class)
     @GetMapping("/{id}")
     public Currency findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -76,6 +77,7 @@ public class CurrencyController {
 
     }
 
+    @JsonView(CurrencyView.All.class)
     @PutMapping("/{id}")
     public Currency updateCustomer(@PathVariable int id, @RequestBody Currency currency, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
