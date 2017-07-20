@@ -20,12 +20,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "currency")
 @NamedQueries({
     @NamedQuery(name = "Currency.findAll", query = "SELECT c FROM Currency c")})
@@ -52,38 +54,6 @@ public class Currency implements Serializable {
 
     public Currency(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Customer> getCustomerList() {
-        return customerList;
-    }
-
-    public void setCustomerList(List<Customer> customerList) {
-        this.customerList = customerList;
     }
 
     @Override
