@@ -77,6 +77,7 @@ public class NotifyPartyController {
 
     }
 
+    @JsonView(NotifyPartyView.All.class)
     @PutMapping("/{id}")
     public NotifyParty updateCustomer(@PathVariable int id, @RequestBody NotifyParty notifyParty, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
