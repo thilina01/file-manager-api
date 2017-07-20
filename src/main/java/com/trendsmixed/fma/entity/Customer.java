@@ -67,9 +67,6 @@ public class Customer implements Serializable {
     @JsonView(CustomerView.ShortName.class)
     @Column(name = "short_name")
     private String shortName;
-    @JsonView(CustomerView.NotifyParty.class)
-    @Column(name = "notify_party")
-    private String notifyParty;
     @JsonView(CustomerView.Note.class)
     @Column(name = "note")
     private String note;
@@ -79,9 +76,6 @@ public class Customer implements Serializable {
     @JsonView(CustomerView.OfficeAddress.class)
     @Column(name = "office_address")
     private String officeAddress;
-    @JsonView(CustomerView.PaymentTerm.class)
-    @Column(name = "payment_term")
-    private String paymentTerm;
     @JsonView(CustomerView.PhoneNo.class)
     @Column(name = "phone_no")
     private String phoneNo;
@@ -114,6 +108,12 @@ public class Customer implements Serializable {
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Country country;
+    @JoinColumn(name = "notify_party_id", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private NotifyParty notifyParty;
+    @JoinColumn(name = "payment_term_id", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private PaymentTerm paymentTerm;
 
     public Customer() {
     }
