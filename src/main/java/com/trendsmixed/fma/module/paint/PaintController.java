@@ -28,79 +28,81 @@ import com.trendsmixed.fma.utility.Page;
 @RequestMapping("/paints")
 public class PaintController {
 
-	@Autowired
-	private AppSessionService appSessionService;
-	@Autowired
-	private PaintService service;
+    @Autowired
+    private AppSessionService appSessionService;
+    @Autowired
+    private PaintService service;
 
-	@JsonView(PaintView.All.class)
-	@GetMapping
-	public Iterable<Paint> findAll() {
-		return service.findAll();
-	}
+    @JsonView(PaintView.All.class)
+    @GetMapping
+    public Iterable<Paint> findAll() {
+        return service.findAll();
+    }
 
-	@JsonView(PaintView.All.class)
-	@GetMapping("/page")
-	Page<Paint> page(Pageable pageable) {
-		return service.findAll(pageable);
-	}
+    @JsonView(PaintView.All.class)
+    @GetMapping("/page")
+    Page<Paint> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
 
-	@GetMapping("/combo")
-	List<Combo> combo() {
-		return service.getCombo();
-	}
+    @GetMapping("/combo")
+    List<Combo> combo() {
+        return service.getCombo();
+    }
 
-	@JsonView(PaintView.All.class)
-	@PostMapping
-	public Paint save(@RequestBody Paint paint, @RequestHeader(value = "email", defaultValue = "") String email,
-			HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		try {
-			paint = service.save(paint);
-			return paint;
+    @JsonView(PaintView.All.class)
+    @PostMapping
+    public Paint save(@RequestBody Paint paint, @RequestHeader(value = "email", defaultValue = "") String email,
+            HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        try {
+            paint = service.save(paint);
+            return paint;
 
-		} catch (Throwable e) {
-			while (e.getCause() != null) {
-				e = e.getCause();
-			}
-			throw new Error(e.getMessage());
-		}
-	}
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
 
-	@PostMapping("/many")
-	public void saveMany(@RequestBody List<Paint> paints,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Paint> paints,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
-		appSessionService.isValid(email, request);
-		try {
-			service.save(paints);
-		} catch (Throwable e) {
-			while (e.getCause() != null) {
-				e = e.getCause();
-			}
-			throw new Error(e.getMessage());
-		}
-	}
+        appSessionService.isValid(email, request);
+        try {
+            service.save(paints);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
 
-	@GetMapping("/{id}")
-	public Paint findOne(@PathVariable("id") int id) {
-		return service.findOne(id);
-	}
+    @JsonView(PaintView.All.class)
+    @GetMapping("/{id}")
+    public Paint findOne(@PathVariable("id") int id) {
+        return service.findOne(id);
+    }
 
-	@DeleteMapping(value = "/{id}")
-	public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
-			HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		service.delete(id);
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
+            HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        service.delete(id);
 
-	}
+    }
 
-	@PutMapping("/{id}")
-	public Paint updateCustomer(@PathVariable int id, @RequestBody Paint paint,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		paint.setId(id);
-		paint = service.save(paint);
-		return paint;
-	}
+    @JsonView(PaintView.All.class)
+    @PutMapping("/{id}")
+    public Paint updateCustomer(@PathVariable int id, @RequestBody Paint paint,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        paint.setId(id);
+        paint = service.save(paint);
+        return paint;
+    }
 }

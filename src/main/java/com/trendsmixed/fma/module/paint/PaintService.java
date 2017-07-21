@@ -20,14 +20,14 @@ public class PaintService {
         return repository.findAll();
     }
 
-	public Page<Paint> findAll(Pageable pageable) {
-		return new Page<Paint>(repository.findAll(pageable));
-	}
+    public Page<Paint> findAll(Pageable pageable) {
+        return new Page<Paint>(repository.findAll(pageable));
+    }
 
-	public List<Combo> getCombo() {
-		return repository.getCombo();
-	}
-	
+    public List<Combo> getCombo() {
+        return repository.getCombo();
+    }
+
     public Paint save(Paint paint) {
         return repository.save(paint);
     }
@@ -48,7 +48,7 @@ public class PaintService {
         return repository.findByCode(code);
     }
 
-    public Paint findByDescription(String description) {
-        return repository.findByDescription(description);
+    public Paint findByName(String name) {
+        return repository.findByName(name);
     }
 }

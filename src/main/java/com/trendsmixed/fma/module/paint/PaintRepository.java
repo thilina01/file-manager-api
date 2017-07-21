@@ -13,10 +13,10 @@ public interface PaintRepository extends PagingAndSortingRepository<Paint, Integ
 
     public Paint findByCode(String code);
 
-    public Paint findByDescription(String description);
+    public Paint findByName(String name);
     
 	@Query(value = "SELECT"
-			+ " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.description)"
+			+ " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
 			+ " FROM Paint o")
 	public List<Combo> getCombo();
 }

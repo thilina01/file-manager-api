@@ -20,12 +20,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "paint")
 @NamedQueries({
     @NamedQuery(name = "Paint.findAll", query = "SELECT p FROM Paint p")})
@@ -41,9 +43,9 @@ public class Paint implements Serializable {
     @JsonView(PaintView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(PaintView.Description.class)
-    @Column(name = "description")
-    private String description;
+    @JsonView(PaintView.Name.class)
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paint")
     private List<Item> itemList;
 
@@ -52,38 +54,6 @@ public class Paint implements Serializable {
 
     public Paint(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Item> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
     }
 
     @Override

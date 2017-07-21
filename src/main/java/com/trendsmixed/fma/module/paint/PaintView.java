@@ -1,5 +1,7 @@
 package com.trendsmixed.fma.module.paint;
 
+import com.trendsmixed.fma.utility.PageView;
+
 public class PaintView {
 
     public static interface Id {
@@ -8,10 +10,10 @@ public class PaintView {
     public static interface Code {
     }
 
-    public static interface Description {
+    public static interface Name {
     }
 
-    public static interface All extends Id, Code, Description {
+    public static interface All extends Id, Code, Name, PageView.All {
     }
 
 }

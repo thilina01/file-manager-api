@@ -112,11 +112,11 @@ public class ItemController {
                 Paint paint = item.getPaint();
                 if (paint != null) {
                     String paintCode = paint.getCode();
-                    String paintDescription = paint.getDescription();
+                    String paintName = paint.getName();
                     if (paintCode != null) {
                         paint = paintService.findByCode(paintCode);
-                    } else if (paintDescription != null) {
-                        paint = paintService.findByDescription(paintDescription);
+                    } else if (paintName != null) {
+                        paint = paintService.findByName(paintName);
                     }
                     if (paint == null) {
                         paint = paintService.findByCode("NA");

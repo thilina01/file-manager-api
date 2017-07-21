@@ -55,7 +55,6 @@ public class NotifyPartyController {
         try {
             notifyParty = service.save(notifyParty);
             return notifyParty;
-
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
@@ -74,7 +73,6 @@ public class NotifyPartyController {
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         service.delete(id);
-
     }
 
     @JsonView(NotifyPartyView.All.class)
@@ -85,5 +83,4 @@ public class NotifyPartyController {
         notifyParty = service.save(notifyParty);
         return notifyParty;
     }
-
 }
