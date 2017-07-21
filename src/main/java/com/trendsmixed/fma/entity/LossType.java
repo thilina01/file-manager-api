@@ -20,12 +20,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "loss_type")
 @NamedQueries({
     @NamedQuery(name = "LossType.findAll", query = "SELECT l FROM LossType l")})
@@ -41,9 +43,9 @@ public class LossType implements Serializable {
     @JsonView(LossTypeView.Code.class)
     @Column(name = "code", length = 45)
     private String code;
-    @JsonView(LossTypeView.Type.class)
-    @Column(name = "type", length = 250)
-    private String type;
+    @JsonView(LossTypeView.Name.class)
+    @Column(name = "name", length = 250)
+    private String name;
     @JsonView(LossTypeView.TypeInSinhala.class)
     @Column(name = "type_in_sinhala", length = 250)
     private String typeInSinhala;
@@ -56,46 +58,6 @@ public class LossType implements Serializable {
 
     public LossType(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getTypeInSinhala() {
-        return typeInSinhala;
-    }
-
-    public void setTypeInSinhala(String typeInSinhala) {
-        this.typeInSinhala = typeInSinhala;
-    }
-
-    public List<LossReason> getLossReasonList() {
-        return lossReasonList;
-    }
-
-    public void setLossReasonList(List<LossReason> lossReasonList) {
-        this.lossReasonList = lossReasonList;
     }
 
     @Override

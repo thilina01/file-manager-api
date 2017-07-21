@@ -1,17 +1,18 @@
 package com.trendsmixed.fma.module.losstype;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
+import com.trendsmixed.fma.dao.Combo;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.entity.LossType;
-import com.trendsmixed.fma.module.losstype.LossTypeView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,19 +29,30 @@ public class LossTypeController {
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private LossTypeService lossTypeService;
+    private LossTypeService service;
 
     @JsonView(LossTypeView.AlLAndLossReasonList.class)
     @GetMapping
-    public List<LossType> findAll() {
-        return lossTypeService.findAll();
+    public Iterable<LossType> findAll() {
+        return service.findAll();
+    }
+
+    @JsonView(LossTypeView.All.class)
+    @GetMapping("/page")
+    Page<LossType> page(Pageable pageable) {
+        return new Page<LossType>(service.findAll(pageable));
+    }
+
+    @GetMapping("/combo")
+    List<Combo> combo() {
+        return service.getCombo();
     }
 
     @PostMapping
     public LossType save(@RequestBody LossType lossType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            lossType = lossTypeService.save(lossType);
+            lossType = service.save(lossType);
             return lossType;
 
         } catch (Throwable e) {
@@ -51,23 +63,25 @@ public class LossTypeController {
         }
     }
 
+    @JsonView(LossTypeView.All.class)
     @GetMapping("/{id}")
     public LossType findOne(@PathVariable("id") int id) {
-        return lossTypeService.findOne(id);
+        return service.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        lossTypeService.delete(id);
+        service.delete(id);
 
     }
 
+    @JsonView(LossTypeView.All.class)
     @PutMapping("/{id}")
     public LossType updateCustomer(@PathVariable int id, @RequestBody LossType lossType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         lossType.setId(id);
-        lossType = lossTypeService.save(lossType);
+        lossType = service.save(lossType);
         return lossType;
     }
 }
