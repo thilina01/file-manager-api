@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.entity.Paint;
-import com.trendsmixed.fma.utility.Page;
+import org.springframework.data.domain.Page;
 
 @Service
 public class PaintService {
@@ -21,7 +21,7 @@ public class PaintService {
     }
 
     public Page<Paint> findAll(Pageable pageable) {
-        return new Page<Paint>(repository.findAll(pageable));
+        return repository.findAll(pageable);
     }
 
     public List<Combo> getCombo() {

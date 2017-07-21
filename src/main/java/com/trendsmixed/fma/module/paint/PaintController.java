@@ -42,7 +42,7 @@ public class PaintController {
     @JsonView(PaintView.All.class)
     @GetMapping("/page")
     Page<Paint> page(Pageable pageable) {
-        return service.findAll(pageable);
+        return new Page<Paint>(service.findAll(pageable));
     }
 
     @GetMapping("/combo")
