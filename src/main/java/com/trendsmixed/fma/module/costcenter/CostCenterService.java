@@ -1,41 +1,51 @@
 package com.trendsmixed.fma.module.costcenter;
 
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.entity.CostCenter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.module.costcenter.CostCenterRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class CostCenterService {
 
     @Autowired
-    private CostCenterRepository costCenterRepository;
+    private CostCenterRepository repository;
 
-    public List<CostCenter> findAll() {
-        return costCenterRepository.findAll();
+    public Iterable<CostCenter> findAll() {
+        return repository.findAll();
+    }
+
+    public Page<CostCenter> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public List<Combo> getCombo() {
+        return repository.getCombo();
     }
 
     public CostCenter save(CostCenter costCenter) {
-        return costCenterRepository.save(costCenter);
+        return repository.save(costCenter);
     }
 
     public void save(List<CostCenter> costCenters) {
-        costCenterRepository.save(costCenters);
+        repository.save(costCenters);
     }
 
     public CostCenter findOne(int id) {
-        return costCenterRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public void delete(int id) {
-        costCenterRepository.delete(id);
+        repository.delete(id);
     }
 
     public CostCenter findByCode(String code) {
-        return costCenterRepository.findByCode(code);
+        return repository.findByCode(code);
     }
 
 }
