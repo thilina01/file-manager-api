@@ -1,44 +1,54 @@
 package com.trendsmixed.fma.module.country;
 
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.entity.Country;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.module.country.CountryRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class CountryService {
 
     @Autowired
-    private CountryRepository countryRepository;
+    private CountryRepository repository;
 
-    public List<Country> findAll() {
-        return countryRepository.findAll();
+    public Iterable<Country> findAll() {
+        return repository.findAll();
+    }
+
+    public Page<Country> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public List<Combo> getCombo() {
+        return repository.getCombo();
     }
 
     public Country save(Country country) {
-        return countryRepository.save(country);
+        return repository.save(country);
     }
 
     public void save(List<Country> countries) {
-        countryRepository.save(countries);
+        repository.save(countries);
     }
 
     public Country findOne(int id) {
-        return countryRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public void delete(int id) {
-        countryRepository.delete(id);
+        repository.delete(id);
     }
 
     public Country findByCode(String code) {
-        return countryRepository.findByCode(code);
+        return repository.findByCode(code);
     }
 
     public Country findByName(String name) {
-        return countryRepository.findByName(name);
+        return repository.findByName(name);
     }
 }
