@@ -49,7 +49,7 @@ public class SalesOrderController {
         if (jobType == null) {
             jobType = new JobType();
             jobType.setCode("SOJ");
-            jobType.setType("Sales order job");
+            jobType.setName("Sales order job");
             jobType = jobTypeService.save(jobType);
         }
         try {
@@ -67,7 +67,7 @@ public class SalesOrderController {
             }
             salesOrder = salesOrderService.save(salesOrder);
             return salesOrder;
-            
+
         } catch (Throwable e) {
             e.printStackTrace();
             while (e.getCause() != null) {
