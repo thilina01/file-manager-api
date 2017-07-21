@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.entity.ItemType;
-import com.trendsmixed.fma.utility.Page;
+import org.springframework.data.domain.Page;
 
 @Service
 public class ItemTypeService {
@@ -20,14 +20,14 @@ public class ItemTypeService {
         return repository.findAll();
     }
 
-	public Page<ItemType> findAll(Pageable pageable) {
-		return new Page<>(repository.findAll(pageable));
-	}
+    public Page<ItemType> findAll(Pageable pageable) {
+        return  repository.findAll(pageable);
+    }
 
-	public List<Combo> getCombo() {
-		return repository.getCombo();
-	}
-	
+    public List<Combo> getCombo() {
+        return repository.getCombo();
+    }
+
     public ItemType save(ItemType itemType) {
         return repository.save(itemType);
     }

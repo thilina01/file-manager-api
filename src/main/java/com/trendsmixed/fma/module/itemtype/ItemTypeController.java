@@ -28,78 +28,81 @@ import com.trendsmixed.fma.utility.Page;
 @RequestMapping("/itemTypes")
 public class ItemTypeController {
 
-	@Autowired
-	private AppSessionService appSessionService;
-	@Autowired
-	private ItemTypeService service;
+    @Autowired
+    private AppSessionService appSessionService;
+    @Autowired
+    private ItemTypeService service;
 
-	@JsonView(ItemTypeView.All.class)
-	@GetMapping
-	public Iterable<ItemType> findAll() {
-		return service.findAll();
-	}
+    @JsonView(ItemTypeView.All.class)
+    @GetMapping
+    public Iterable<ItemType> findAll() {
+        return service.findAll();
+    }
 
-	@JsonView(ItemTypeView.All.class)
-	@GetMapping("/page")
-	Page<ItemType> page(Pageable pageable) {
-		return service.findAll(pageable);
-	}
+    @JsonView(ItemTypeView.All.class)
+    @GetMapping("/page")
+    Page<ItemType> page(Pageable pageable) {
+        return new Page<>(service.findAll(pageable));
+    }
 
-	@GetMapping("/combo")
-	List<Combo> combo() {
-		return service.getCombo();
-	}
+    @GetMapping("/combo")
+    List<Combo> combo() {
+        return service.getCombo();
+    }
 
-	@PostMapping
-	public ItemType save(@RequestBody ItemType itemType,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		try {
-			itemType = service.save(itemType);
-			return itemType;
+    @JsonView(ItemTypeView.All.class)
+    @PostMapping
+    public ItemType save(@RequestBody ItemType itemType,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        try {
+            itemType = service.save(itemType);
+            return itemType;
 
-		} catch (Throwable e) {
-			while (e.getCause() != null) {
-				e = e.getCause();
-			}
-			throw new Error(e.getMessage());
-		}
-	}
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
 
-	@PostMapping("/many")
-	public void saveMany(@RequestBody List<ItemType> itemTypes,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		try {
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<ItemType> itemTypes,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        try {
 
-			service.save(itemTypes);
-		} catch (Throwable e) {
-			while (e.getCause() != null) {
-				e = e.getCause();
-			}
-			throw new Error(e.getMessage());
-		}
-	}
+            service.save(itemTypes);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
 
-	@GetMapping("/{id}")
-	public ItemType findOne(@PathVariable("id") int id) {
-		return service.findOne(id);
-	}
+    @JsonView(ItemTypeView.All.class)
+    @GetMapping("/{id}")
+    public ItemType findOne(@PathVariable("id") int id) {
+        return service.findOne(id);
+    }
 
-	@DeleteMapping(value = "/{id}")
-	public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
-			HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		service.delete(id);
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
+            HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        service.delete(id);
 
-	}
+    }
 
-	@PutMapping("/{id}")
-	public ItemType updateCustomer(@PathVariable int id, @RequestBody ItemType itemType,
-			@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-		appSessionService.isValid(email, request);
-		itemType.setId(id);
-		itemType = service.save(itemType);
-		return itemType;
-	}
+    @JsonView(ItemTypeView.All.class)
+    @PutMapping("/{id}")
+    public ItemType updateCustomer(@PathVariable int id, @RequestBody ItemType itemType,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        itemType.setId(id);
+        itemType = service.save(itemType);
+        return itemType;
+    }
 }
