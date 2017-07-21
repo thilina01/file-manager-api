@@ -12,9 +12,9 @@ public interface WorkCenterRepository extends PagingAndSortingRepository<WorkCen
 
     public WorkCenter findByCode(String code);
 
-	@Query(value = "SELECT"
-			+ " new com.trendsmixed.fma.dao.Combo(workCenter.id, workCenter.code, workCenter.name)"
-			+ " FROM WorkCenter workCenter")
-	public List<Combo> getCombo();
+    @Query(value = "SELECT"
+            + " new com.trendsmixed.fma.dao.Combo(workCenter.id, workCenter.code, workCenter.name)"
+            + " FROM WorkCenter workCenter")
+    public List<Combo> getCombo();
 
 }

@@ -22,6 +22,8 @@ import com.trendsmixed.fma.entity.CostCenter;
 import com.trendsmixed.fma.entity.WorkCenter;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.costcenter.CostCenterService;
+import com.trendsmixed.fma.utility.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.servlet.HandlerMapping;
 
 @RestController
@@ -40,6 +42,12 @@ public class WorkCenterController {
     @JsonView(WorkCenterView.AllAndCostCenterAll.class)
     public Iterable<WorkCenter> findAll() {
         return service.findAll();
+    }
+
+    @JsonView(WorkCenterView.All.class)
+    @GetMapping("/page")
+    Page<WorkCenter> page(Pageable pageable) {
+        return new Page<WorkCenter>(service.findAll(pageable));
     }
 
     @PostMapping
