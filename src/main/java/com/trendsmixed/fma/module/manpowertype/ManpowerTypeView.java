@@ -1,5 +1,7 @@
 package com.trendsmixed.fma.module.manpowertype;
 
+import com.trendsmixed.fma.utility.PageView;
+
 public class ManpowerTypeView {
 
     public static interface Id {
@@ -8,10 +10,10 @@ public class ManpowerTypeView {
     public static interface Code {
     }
 
-    public static interface Type {
+    public static interface Name {
     }
 
-    public static interface All extends Id, Code, Type {
+    public static interface All extends Id, Code, Name, PageView.All {
 
     }
 

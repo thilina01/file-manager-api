@@ -58,7 +58,6 @@ public class PaintController {
         try {
             paint = service.save(paint);
             return paint;
-
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();

@@ -1,32 +1,50 @@
 package com.trendsmixed.fma.module.manpowertype;
 
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.entity.ManpowerType;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.module.manpowertype.ManpowerTypeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class ManpowerTypeService {
 
     @Autowired
-    private ManpowerTypeRepository manpowerTypeRepository;
+    private ManpowerTypeRepository repository;
 
-    public List<ManpowerType> findAll() {
-        return manpowerTypeRepository.findAll();
+    public Iterable<ManpowerType> findAll() {
+        return repository.findAll();
+    }
+
+    public Page<ManpowerType> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public List<Combo> getCombo() {
+        return repository.getCombo();
     }
 
     public ManpowerType save(ManpowerType manpowerType) {
-        return manpowerTypeRepository.save(manpowerType);
+        return repository.save(manpowerType);
     }
 
     public ManpowerType findOne(int id) {
-        return manpowerTypeRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public void delete(int id) {
-        manpowerTypeRepository.delete(id);
+        repository.delete(id);
+    }
+
+    public ManpowerType findByCode(String code) {
+        return repository.findByCode(code);
+    }
+
+    public ManpowerType findByName(String name) {
+        return repository.findByName(name);
     }
 }

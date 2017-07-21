@@ -20,12 +20,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "manpower_type")
 @NamedQueries({
     @NamedQuery(name = "ManpowerType.findAll", query = "SELECT m FROM ManpowerType m")})
@@ -41,9 +43,9 @@ public class ManpowerType implements Serializable {
     @JsonView(ManpowerTypeView.Code.class)
     @Column(name = "code")
     private String code;
-    @JsonView(ManpowerTypeView.Type.class)
-    @Column(name = "type")
-    private String type;
+    @JsonView(ManpowerTypeView.Name.class)
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
     private List<Manpower> manpowerList;
 
@@ -52,38 +54,6 @@ public class ManpowerType implements Serializable {
 
     public ManpowerType(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public List<Manpower> getManpowerList() {
-        return manpowerList;
-    }
-
-    public void setManpowerList(List<Manpower> manpowerList) {
-        this.manpowerList = manpowerList;
     }
 
     @Override
@@ -110,5 +80,5 @@ public class ManpowerType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ManpowerType[ id=" + id + " ]";
     }
-    
+
 }
