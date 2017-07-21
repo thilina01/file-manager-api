@@ -93,7 +93,6 @@ public class ItemTypeController {
             HttpServletRequest request) {
         appSessionService.isValid(email, request);
         service.delete(id);
-
     }
 
     @JsonView(ItemTypeView.All.class)

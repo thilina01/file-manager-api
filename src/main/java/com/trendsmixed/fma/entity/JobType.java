@@ -21,12 +21,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "job_type", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"code"})})
 @NamedQueries({
@@ -43,9 +45,9 @@ public class JobType implements Serializable {
     @JsonView(JobTypeView.Code.class)
     @Column(name = "code", length = 50)
     private String code;
-    @JsonView(JobTypeView.Type.class)
-    @Column(name = "type", length = 250)
-    private String type;
+    @JsonView(JobTypeView.Name.class)
+    @Column(name = "name", length = 250)
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobType")
     private List<Job> jobList;
 
@@ -56,37 +58,6 @@ public class JobType implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public List<Job> getJobList() {
-        return jobList;
-    }
-
-    public void setJobList(List<Job> jobList) {
-        this.jobList = jobList;
-    }
 
     @Override
     public int hashCode() {

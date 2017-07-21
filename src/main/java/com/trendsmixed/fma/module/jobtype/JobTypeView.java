@@ -19,10 +19,10 @@ public class JobTypeView {
     public static interface Code {
     }
 
-    public static interface Type {
+    public static interface Name {
     }
 
-    public static interface All extends Id, Type, Code, PageView.All {
+    public static interface All extends Id, Name, Code, PageView.All {
     }
 
 }
