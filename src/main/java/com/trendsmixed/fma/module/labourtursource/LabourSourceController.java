@@ -50,6 +50,7 @@ public class LabourSourceController {
     }
 
     @PostMapping
+    @JsonView(LabourSourceView.All.class)
     public LabourSource save(@RequestBody LabourSource labourSource, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
         appSessionService.isValid(email, request);
@@ -80,6 +81,7 @@ public class LabourSourceController {
     }
 
     @GetMapping("/{id}")
+    @JsonView(LabourSourceView.All.class)
     public LabourSource findOne(@PathVariable("id") int id) {
         return service.findOne(id);
     }
@@ -92,6 +94,7 @@ public class LabourSourceController {
     }
 
     @PutMapping("/{id}")
+    @JsonView(LabourSourceView.All.class)
     public LabourSource updateCustomer(@PathVariable int id, @RequestBody LabourSource labourSource, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         labourSource.setId(id);
