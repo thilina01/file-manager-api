@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.ControlPoint;
 import com.trendsmixed.fma.entity.ControlPointType;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
@@ -34,6 +33,7 @@ public class ControlPointTypeController {
     @Autowired
     private AppSessionService appSessionService;
 
+    @JsonView(ControlPointTypeView.All.class)
     @PostMapping
     public ControlPointType save(@RequestBody ControlPointType controlPointType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -75,19 +75,20 @@ public class ControlPointTypeController {
     public Iterable<ControlPointType> findAll() {
         return service.findAll();
     }
-    
+
     @GetMapping("/page")
     @JsonView(ControlPointTypeView.All.class)
-	Page<ControlPointType> page( Pageable pageable){
-    	return service.findAll(pageable);
-	} 
+    Page<ControlPointType> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
 
     @GetMapping("/combo")
-	List<Combo> combo(){
-    	return service.getCombo();
-	} 
-	
+    List<Combo> combo() {
+        return service.getCombo();
+    }
+
     @GetMapping("/{id}")
+    @JsonView(ControlPointTypeView.All.class)
     public ControlPointType findOne(@PathVariable("id") int id) {
         return service.findOne(id);
     }
@@ -100,6 +101,7 @@ public class ControlPointTypeController {
     }
 
     @PutMapping("/{id}")
+    @JsonView(ControlPointTypeView.All.class)
     public ControlPointType updateCustomer(@PathVariable int id, @RequestBody ControlPointType controlPointType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         controlPointType.setId(id);
