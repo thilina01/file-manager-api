@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.losstype;
 
 import com.trendsmixed.fma.module.lossreason.LossReasonView;
+import com.trendsmixed.fma.utility.PageView;
 
 public class LossTypeView {
 
@@ -19,10 +20,10 @@ public class LossTypeView {
     public static interface LossReasonList {
     }
 
-    public static interface All extends Id, Name, Code, TypeInSinhala {
+    public static interface All extends Id, Name, Code, TypeInSinhala, PageView.All {
     }
 
-    public static interface AlLAndLossReasonList extends All, LossReasonList, LossReasonView.All {
+    public static interface AllAndLossReasonList extends All, LossReasonList, LossReasonView.All {
     }
 
 }

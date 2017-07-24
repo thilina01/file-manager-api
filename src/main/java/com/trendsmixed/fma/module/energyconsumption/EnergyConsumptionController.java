@@ -82,7 +82,7 @@ public class EnergyConsumptionController {
         }
     }
 
-    @JsonView(EnergyConsumptionView.All.class)
+    @JsonView(EnergyConsumptionView.AllAndLocation.class)
     @GetMapping("/{id}")
     public EnergyConsumption findOne(@PathVariable("id") int id) {
         return service.findOne(id);

@@ -95,7 +95,7 @@ public class CostCenterController {
         }
     }
 
-    @JsonView(CostCenterView.All.class)
+    @JsonView(CostCenterView.AllAndSectionAll.class)
     @GetMapping("/{id}")
     public CostCenter findOne(@PathVariable("id") int id) {
         return service.findOne(id);
