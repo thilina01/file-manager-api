@@ -5,19 +5,19 @@ import com.trendsmixed.fma.module.machine.MachineView;
 
 public class ControlPointMachineView {
 
-	public static interface Id {
-	}
+    public static interface Id {
+    }
 
-	public static interface ControlPoint extends ControlPointView.All {
+    public static interface ControlPoint extends ControlPointView.All {
+    }
 
-	}
+    public static interface Machine extends MachineView.All {
+    }
 
-	public static interface Machine extends MachineView.All {
+    public interface ControlPointAndMachine extends ControlPoint, Machine {
+    }
 
-	}
-
-	public interface ControlPointAndMachine extends ControlPoint, Machine {
-
-	}
+    public interface IdAndControlPointAndMachine extends Id, ControlPoint, Machine {
+    }
 
 }
