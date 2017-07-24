@@ -43,6 +43,7 @@ public class LabourTurnoverController {
     }
 
     @PostMapping
+    @JsonView(LabourTurnoverView.AllAndLabourSource.class)
     public LabourTurnover save(@RequestBody LabourTurnover labourTurnover, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
         appSessionService.isValid(email, request);
@@ -86,6 +87,7 @@ public class LabourTurnoverController {
     }
 
     @PutMapping("/{id}")
+    @JsonView(LabourTurnoverView.AllAndLabourSource.class)
     public LabourTurnover updateCustomer(@PathVariable int id, @RequestBody LabourTurnover labourTurnover, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         labourTurnover.setId(id);
