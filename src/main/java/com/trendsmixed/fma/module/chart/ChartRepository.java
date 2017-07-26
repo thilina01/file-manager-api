@@ -203,6 +203,21 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE absenteeism.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY absenteeism.labourSource, DATE_FORMAT(absenteeism.effectiveMonth,'%Y-%m')")
     public List getMonthlyAbsenteeism(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(salesValue.effectiveMonth,'%Y-%m'),SUM(salesValue.budget), MAX(salesValue.actual))"
+            + " FROM SalesValue salesValue"
+            + " WHERE salesValue.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(salesValue.effectiveMonth,'%Y-%m')")
+    public List getMonthlySalesValue(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(salesWeight.effectiveMonth,'%Y-%m'),SUM(salesWeight.budget), MAX(salesWeight.actual))"
+            + " FROM SalesWeight salesWeight"
+            + " WHERE salesWeight.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(salesWeight.effectiveMonth,'%Y-%m')")
+    public List getMonthlySalesWeight(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
     /* 
     @Query(value = "SELECT "
             + " DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m') ,labourTurnover.labourSource.code, SUM(labourTurnover.turnover), labourTurnover.target"

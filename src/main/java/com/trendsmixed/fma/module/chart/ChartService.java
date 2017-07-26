@@ -92,8 +92,17 @@ public class ChartService {
     public List getMonthlyLabourTurnover(Date startDate, Date endDate) {
         return chartRepository.getMonthlyLabourTurnover(startDate, endDate);
     }
+    
     public List getMonthlyAbsenteeism(Date startDate, Date endDate) {
         return chartRepository.getMonthlyAbsenteeism(startDate, endDate);
+    }
+    
+    public List getMonthlySalesValue(Date startDate, Date endDate) {
+        return chartRepository.getMonthlySalesValue(startDate, endDate);
+    }
+    
+    public List getMonthlySalesWeight(Date startDate, Date endDate) {
+        return chartRepository.getMonthlySalesWeight(startDate, endDate);
     }
 
     

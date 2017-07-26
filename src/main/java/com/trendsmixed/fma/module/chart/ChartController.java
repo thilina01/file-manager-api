@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.module.chart;
 
 import com.trendsmixed.fma.dao.BreakdownChart;
-import com.trendsmixed.fma.dao.MonthlyLabourTurnover;
 import com.trendsmixed.fma.entity.Location;
 import java.util.List;
 
@@ -169,10 +168,23 @@ public class ChartController {
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyLabourTurnover(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
+    
     @GetMapping("/monthlyAbsenteeism")
     public List getMonthlyAbsenteeism(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyAbsenteeism(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+     
+    @GetMapping("/monthlySalesValue")
+    public List getMonthlySalesValue(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getMonthlySalesValue(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+     
+    @GetMapping("/monthlySalesWeight")
+    public List getMonthlySalesWeight(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getMonthlySalesWeight(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
      
 }
