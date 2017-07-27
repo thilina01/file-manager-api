@@ -105,5 +105,33 @@ public class ChartService {
         return chartRepository.getMonthlySalesWeight(startDate, endDate);
     }
 
+    public List getMonthlyLabourCostPerKg(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyLabourCostPerKg(startDate, endDate);
+    }
+
+    public List getMonthlyCumulativeSalesPerKg(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyCumulativeSalesPerKg(startDate, endDate);
+    }
+
+    public List getMonthlyProductionOverheadCostPerKg(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyProductionOverheadCostPerKg(startDate, endDate);
+    }
+
+    public List getMonthlySalesPerKg(Date startDate, Date endDate) {
+        return chartRepository.getMonthlySalesPerKg(startDate, endDate);
+    }
+
+    public List getMonthlyConsumableCostPerKg(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyConsumableCostPerKg(startDate, endDate);
+    }
+
+    public List getMonthlyMaterialCostPerKg(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyMaterialCostPerKg(startDate, endDate);
+    }
+
+    public List getMonthlyElectricityCostPerKg(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyElectricityCostPerKg(startDate, endDate);
+    }
+
     
 }

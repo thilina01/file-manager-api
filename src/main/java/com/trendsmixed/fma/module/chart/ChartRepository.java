@@ -218,6 +218,55 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " GROUP BY DATE_FORMAT(salesWeight.effectiveMonth,'%Y-%m')")
     public List getMonthlySalesWeight(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
     
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(labourCostPerKg.effectiveMonth,'%Y-%m'),SUM(labourCostPerKg.budget), MAX(labourCostPerKg.actual))"
+            + " FROM LabourCostPerKg labourCostPerKg"
+            + " WHERE labourCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(labourCostPerKg.effectiveMonth,'%Y-%m')")
+    public List getMonthlyLabourCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(cumulativeSalesPerKg.effectiveMonth,'%Y-%m'),SUM(cumulativeSalesPerKg.budget), MAX(cumulativeSalesPerKg.actual))"
+            + " FROM CumulativeSalesPerKg cumulativeSalesPerKg"
+            + " WHERE cumulativeSalesPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(cumulativeSalesPerKg.effectiveMonth,'%Y-%m')")
+    public List getMonthlyCumulativeSalesPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(productionOverheadCostPerKg.effectiveMonth,'%Y-%m'),SUM(productionOverheadCostPerKg.budget), MAX(productionOverheadCostPerKg.actual))"
+            + " FROM ProductionOverheadCostPerKg productionOverheadCostPerKg"
+            + " WHERE productionOverheadCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(productionOverheadCostPerKg.effectiveMonth,'%Y-%m')")
+    public List getMonthlyProductionOverheadCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(salesPerKg.effectiveMonth,'%Y-%m'),SUM(salesPerKg.budget), MAX(salesPerKg.actual))"
+            + " FROM SalesPerKg salesPerKg"
+            + " WHERE salesPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(salesPerKg.effectiveMonth,'%Y-%m')")
+    public List getMonthlySalesPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(consumableCostPerKg.effectiveMonth,'%Y-%m'),SUM(consumableCostPerKg.budget), MAX(consumableCostPerKg.actual))"
+            + " FROM ConsumableCostPerKg consumableCostPerKg"
+            + " WHERE consumableCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(consumableCostPerKg.effectiveMonth,'%Y-%m')")
+    public List getMonthlyConsumableCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(materialCostPerKg.effectiveMonth,'%Y-%m'),SUM(materialCostPerKg.budget), MAX(materialCostPerKg.actual))"
+            + " FROM MaterialCostPerKg materialCostPerKg"
+            + " WHERE materialCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(materialCostPerKg.effectiveMonth,'%Y-%m')")
+    public List getMonthlyMaterialCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(electricityCostPerKg.effectiveMonth,'%Y-%m'),SUM(electricityCostPerKg.budget), MAX(electricityCostPerKg.actual))"
+            + " FROM ElectricityCostPerKg electricityCostPerKg"
+            + " WHERE electricityCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(electricityCostPerKg.effectiveMonth,'%Y-%m')")
+    public List getMonthlyElectricityCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
     /* 
     @Query(value = "SELECT "
             + " DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m') ,labourTurnover.labourSource.code, SUM(labourTurnover.turnover), labourTurnover.target"
