@@ -48,7 +48,7 @@ public class UserMenuService {
     }
 
     public List<UserMenu> findByUser(User user) {
-        return userMenuRepository.findByUser(user);
+        return userMenuRepository.findByUserOrderByMenuName(user);
     }
 
 }

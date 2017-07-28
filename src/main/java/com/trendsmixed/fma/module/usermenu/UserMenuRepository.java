@@ -14,6 +14,6 @@ public interface UserMenuRepository extends JpaRepository<UserMenu, Integer> {
 
     public UserMenu findByUserAndMenu(User user, Menu menu);
 
-    public List<UserMenu> findByUser(User user);
+    public List<UserMenu> findByUserOrderByMenuName(User user);
 
 }
