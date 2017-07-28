@@ -267,6 +267,13 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " GROUP BY DATE_FORMAT(electricityCostPerKg.effectiveMonth,'%Y-%m')")
     public List getMonthlyElectricityCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
     
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(scrapCostPerKg.effectiveMonth,'%Y-%m'),SUM(scrapCostPerKg.budget), MAX(scrapCostPerKg.actual))"
+            + " FROM ScrapCostPerKg scrapCostPerKg"
+            + " WHERE scrapCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(scrapCostPerKg.effectiveMonth,'%Y-%m')")
+    public List getMonthlyScrapCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
     /* 
     @Query(value = "SELECT "
             + " DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m') ,labourTurnover.labourSource.code, SUM(labourTurnover.turnover), labourTurnover.target"

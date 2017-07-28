@@ -229,4 +229,10 @@ public class ChartController {
         return chartService.getMonthlyElectricityCostPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
      
+    @GetMapping("/monthlyScrapCostPerKg")
+    public List getMonthlyScrapCostPerKg(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getMonthlyScrapCostPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+     
 }

@@ -134,4 +134,7 @@ public class ChartService {
     }
 
     
+    public List getMonthlyScrapCostPerKg(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyScrapCostPerKg(startDate, endDate);
+    }
 }
