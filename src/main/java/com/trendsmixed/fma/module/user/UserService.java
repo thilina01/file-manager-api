@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.entity.User;
 import com.trendsmixed.fma.utility.Page;
 import org.springframework.data.domain.Pageable;
 

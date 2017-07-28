@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.jobdispatch;
 
-import com.trendsmixed.fma.entity.JobDispatch;
 import com.trendsmixed.fma.module.jobdispatch.JobDispatchRepository;
 import java.util.List;
 

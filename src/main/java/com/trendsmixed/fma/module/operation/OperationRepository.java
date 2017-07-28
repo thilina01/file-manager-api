@@ -1,10 +1,9 @@
 package com.trendsmixed.fma.module.operation;
 
 import com.trendsmixed.fma.dao.OperationSummary;
-import com.trendsmixed.fma.entity.Job;
-import com.trendsmixed.fma.entity.Operation;
-import com.trendsmixed.fma.entity.Section;
-import com.trendsmixed.fma.entity.Shift;
+import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.shift.Shift;
 
 import java.util.Date;
 import java.util.List;

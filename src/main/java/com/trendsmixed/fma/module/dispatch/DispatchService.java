@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.dispatch;
 
-import com.trendsmixed.fma.entity.Dispatch;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

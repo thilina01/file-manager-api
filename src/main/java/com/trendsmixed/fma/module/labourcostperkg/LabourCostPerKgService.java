@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.labourcostperkg;
 
-import com.trendsmixed.fma.entity.LabourCostPerKg;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 

@@ -1,10 +1,10 @@
 package com.trendsmixed.fma;
 
-import com.trendsmixed.fma.entity.File;
+import com.trendsmixed.fma.module.file.File;
 import java.util.ArrayList;
 
-import com.trendsmixed.fma.entity.FileType;
-import com.trendsmixed.fma.entity.Folder;
+import com.trendsmixed.fma.module.filetype.FileType;
+import com.trendsmixed.fma.module.folder.Folder;
 
 public class Dummy {
 

@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.lossreason;
 
-import com.trendsmixed.fma.entity.LossReason;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.module.location;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.Location;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;

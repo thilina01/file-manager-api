@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.team;
 
-import com.trendsmixed.fma.entity.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

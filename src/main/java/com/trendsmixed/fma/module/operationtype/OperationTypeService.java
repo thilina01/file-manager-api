@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.module.operationtype;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.OperationType;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

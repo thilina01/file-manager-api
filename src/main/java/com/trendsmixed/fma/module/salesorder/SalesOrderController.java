@@ -1,14 +1,13 @@
 package com.trendsmixed.fma.module.salesorder;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.Job;
-import com.trendsmixed.fma.entity.JobType;
+import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.jobtype.JobType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.SalesOrder;
-import com.trendsmixed.fma.entity.SalesOrderItem;
+import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;

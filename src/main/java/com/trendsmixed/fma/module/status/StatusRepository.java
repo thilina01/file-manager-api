@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.status;
 
-import com.trendsmixed.fma.entity.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

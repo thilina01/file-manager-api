@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.cumulativesalesperkg;
 
-import com.trendsmixed.fma.entity.CumulativeSalesPerKg;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 

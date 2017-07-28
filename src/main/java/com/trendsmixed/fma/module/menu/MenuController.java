@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.Menu;
-import com.trendsmixed.fma.entity.MenuType;
-import com.trendsmixed.fma.entity.Team;
-import com.trendsmixed.fma.entity.TeamMenu;
-import com.trendsmixed.fma.entity.User;
+import com.trendsmixed.fma.module.menutype.MenuType;
+import com.trendsmixed.fma.module.team.Team;
+import com.trendsmixed.fma.module.teammenu.TeamMenu;
+import com.trendsmixed.fma.module.user.User;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.menutype.MenuTypeService;
 import com.trendsmixed.fma.module.teammenu.TeamMenuService;

@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.CostCenter;
-import com.trendsmixed.fma.entity.Section;
+import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.section.SectionService;
 import com.trendsmixed.fma.utility.Page;

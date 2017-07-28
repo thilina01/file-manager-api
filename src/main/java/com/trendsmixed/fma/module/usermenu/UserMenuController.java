@@ -1,13 +1,12 @@
 package com.trendsmixed.fma.module.usermenu;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.Menu;
-import com.trendsmixed.fma.entity.User;
+import com.trendsmixed.fma.module.menu.Menu;
+import com.trendsmixed.fma.module.user.User;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.UserMenu;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.user.UserService;
 import java.util.List;

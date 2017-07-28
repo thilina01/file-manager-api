@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.manpower;
 
-import com.trendsmixed.fma.entity.Manpower;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 

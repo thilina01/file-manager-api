@@ -7,8 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.ControlPoint;
-import com.trendsmixed.fma.entity.ControlPointType;
+import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.utility.Page;
 
 @Service

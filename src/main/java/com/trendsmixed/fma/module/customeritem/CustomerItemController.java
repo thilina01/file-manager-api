@@ -1,13 +1,12 @@
 package com.trendsmixed.fma.module.customeritem;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.Customer;
+import com.trendsmixed.fma.module.customer.Customer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.CustomerItem;
-import com.trendsmixed.fma.entity.Item;
+import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.customeritem.CustomerItemView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.CustomerService;

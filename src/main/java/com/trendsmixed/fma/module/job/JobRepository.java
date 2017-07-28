@@ -9,7 +9,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.Job;
 
 public interface JobRepository extends PagingAndSortingRepository<Job, Integer> {
 

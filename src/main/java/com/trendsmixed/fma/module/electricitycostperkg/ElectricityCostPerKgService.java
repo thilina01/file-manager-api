@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.electricitycostperkg;
 
-import com.trendsmixed.fma.entity.ElectricityCostPerKg;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 

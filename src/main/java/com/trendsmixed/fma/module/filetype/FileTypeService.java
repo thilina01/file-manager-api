@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.filetype;
 
-import com.trendsmixed.fma.entity.FileType;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

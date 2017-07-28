@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.productionoverheadcostperkg;
 
-import com.trendsmixed.fma.entity.ProductionOverheadCostPerKg;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 

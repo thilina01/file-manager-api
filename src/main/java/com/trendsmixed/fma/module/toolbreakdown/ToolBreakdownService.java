@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.toolbreakdown;
 
-import com.trendsmixed.fma.entity.ToolBreakdown;
 import com.trendsmixed.fma.utility.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;

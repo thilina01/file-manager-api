@@ -19,9 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.Item;
-import com.trendsmixed.fma.entity.ItemType;
-import com.trendsmixed.fma.entity.Paint;
+import com.trendsmixed.fma.module.itemtype.ItemType;
+import com.trendsmixed.fma.module.paint.Paint;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.itemtype.ItemTypeService;
 import com.trendsmixed.fma.module.paint.PaintService;

@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.salesordertype;
 
-import com.trendsmixed.fma.entity.SalesOrderType;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

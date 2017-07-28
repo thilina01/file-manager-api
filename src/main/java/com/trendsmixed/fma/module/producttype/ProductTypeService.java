@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.producttype;
 
-import com.trendsmixed.fma.entity.ProductType;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

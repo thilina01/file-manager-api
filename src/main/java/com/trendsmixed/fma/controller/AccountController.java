@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.dao.UserDao;
 import com.trendsmixed.fma.entity.AppSession;
-import com.trendsmixed.fma.entity.Status;
-import com.trendsmixed.fma.entity.Team;
-import com.trendsmixed.fma.entity.User;
+import com.trendsmixed.fma.module.status.Status;
+import com.trendsmixed.fma.module.team.Team;
+import com.trendsmixed.fma.module.user.User;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.status.StatusService;
 import com.trendsmixed.fma.module.team.TeamService;

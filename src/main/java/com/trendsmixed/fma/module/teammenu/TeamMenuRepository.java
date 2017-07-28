@@ -1,8 +1,7 @@
 package com.trendsmixed.fma.module.teammenu;
 
-import com.trendsmixed.fma.entity.Menu;
-import com.trendsmixed.fma.entity.Team;
-import com.trendsmixed.fma.entity.TeamMenu;
+import com.trendsmixed.fma.module.menu.Menu;
+import com.trendsmixed.fma.module.team.Team;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

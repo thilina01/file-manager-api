@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.ControlPoint;
-import com.trendsmixed.fma.entity.WorkCenter;
+import com.trendsmixed.fma.module.workcenter.WorkCenter;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.workcenter.WorkCenterService;
 import com.trendsmixed.fma.utility.Page;

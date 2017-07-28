@@ -4,9 +4,8 @@ import java.util.Date;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.trendsmixed.fma.entity.ControlPoint;
-import com.trendsmixed.fma.entity.Production;
-import com.trendsmixed.fma.entity.Shift;
+import com.trendsmixed.fma.module.controlpoint.ControlPoint;
+import com.trendsmixed.fma.module.shift.Shift;
 
 public interface ProductionRepository extends PagingAndSortingRepository<Production, Integer> {
 

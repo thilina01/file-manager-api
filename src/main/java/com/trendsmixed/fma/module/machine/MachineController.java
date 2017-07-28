@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.Machine;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 

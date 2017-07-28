@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.Job;
 import com.trendsmixed.fma.utility.Page;
 
 @Service

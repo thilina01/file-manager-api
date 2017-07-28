@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.module.manpowertype;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.ManpowerType;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

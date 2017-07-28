@@ -2,7 +2,6 @@ package com.trendsmixed.fma.module.section;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.Section;
 import com.trendsmixed.fma.utility.Page;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 

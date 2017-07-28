@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.salesvalue;
 
-import com.trendsmixed.fma.entity.SalesValue;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 

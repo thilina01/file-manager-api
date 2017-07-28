@@ -1,9 +1,8 @@
 package com.trendsmixed.fma.module.production;
 
-import com.trendsmixed.fma.entity.ControlPoint;
-import com.trendsmixed.fma.entity.Item;
-import com.trendsmixed.fma.entity.Production;
-import com.trendsmixed.fma.entity.Shift;
+import com.trendsmixed.fma.module.controlpoint.ControlPoint;
+import com.trendsmixed.fma.module.item.Item;
+import com.trendsmixed.fma.module.shift.Shift;
 
 import java.util.Date;
 import java.util.List;

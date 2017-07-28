@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.Loss;
 import com.trendsmixed.fma.module.loss.LossView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import java.util.List;

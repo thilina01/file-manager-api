@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.entity.ControlPoint;
-import com.trendsmixed.fma.entity.ControlPointMachine;
-import com.trendsmixed.fma.entity.Machine;
+import com.trendsmixed.fma.module.controlpoint.ControlPoint;
+import com.trendsmixed.fma.module.machine.Machine;
 import com.trendsmixed.fma.utility.Page;
 
 @Service

@@ -1,8 +1,7 @@
 package com.trendsmixed.fma.module.customeritem;
 
-import com.trendsmixed.fma.entity.Customer;
-import com.trendsmixed.fma.entity.CustomerItem;
-import com.trendsmixed.fma.entity.Item;
+import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.item.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomerItemRepository extends JpaRepository<CustomerItem, Integer> {

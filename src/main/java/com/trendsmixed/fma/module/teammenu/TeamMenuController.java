@@ -1,11 +1,10 @@
 package com.trendsmixed.fma.module.teammenu;
 
-import com.trendsmixed.fma.entity.Team;
+import com.trendsmixed.fma.module.team.Team;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.TeamMenu;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;

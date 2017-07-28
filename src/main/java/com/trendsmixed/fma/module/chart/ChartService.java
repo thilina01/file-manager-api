@@ -1,15 +1,15 @@
 package com.trendsmixed.fma.module.chart;
 
-import com.trendsmixed.fma.entity.Location;
+import com.trendsmixed.fma.module.location.Location;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.entity.LossReason;
-import com.trendsmixed.fma.entity.LossType;
-import com.trendsmixed.fma.entity.Section;
+import com.trendsmixed.fma.module.lossreason.LossReason;
+import com.trendsmixed.fma.module.losstype.LossType;
+import com.trendsmixed.fma.module.section.Section;
 
 @Service
 public class ChartService {

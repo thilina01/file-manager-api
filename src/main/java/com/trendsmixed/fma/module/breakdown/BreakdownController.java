@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.module.breakdown;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.Breakdown;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import javax.servlet.http.HttpServletRequest;

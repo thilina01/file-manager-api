@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.Dispatch;
-import com.trendsmixed.fma.entity.Job;
-import com.trendsmixed.fma.entity.JobDispatch;
+import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.jobdispatch.JobDispatch;
 import com.trendsmixed.fma.module.dispatch.DispatchView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.job.JobService;

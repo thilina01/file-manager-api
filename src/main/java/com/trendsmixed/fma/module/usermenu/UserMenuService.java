@@ -1,8 +1,7 @@
 package com.trendsmixed.fma.module.usermenu;
 
-import com.trendsmixed.fma.entity.Menu;
-import com.trendsmixed.fma.entity.User;
-import com.trendsmixed.fma.entity.UserMenu;
+import com.trendsmixed.fma.module.menu.Menu;
+import com.trendsmixed.fma.module.user.User;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

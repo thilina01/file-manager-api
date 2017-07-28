@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.Paint;
 
 public interface PaintRepository extends PagingAndSortingRepository<Paint, Integer> {
 

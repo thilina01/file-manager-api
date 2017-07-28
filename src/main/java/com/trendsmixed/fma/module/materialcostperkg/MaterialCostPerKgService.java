@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.materialcostperkg;
 
-import com.trendsmixed.fma.entity.MaterialCostPerKg;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 

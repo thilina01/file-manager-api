@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.module.customertype;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.CustomerType;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;

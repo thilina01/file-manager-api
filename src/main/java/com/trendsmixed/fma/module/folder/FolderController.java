@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.Folder;
 import com.trendsmixed.fma.module.folder.FolderView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import javax.servlet.http.HttpServletRequest;

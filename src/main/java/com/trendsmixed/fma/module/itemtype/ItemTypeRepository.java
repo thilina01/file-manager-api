@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.entity.ItemType;
 
 public interface ItemTypeRepository extends PagingAndSortingRepository<ItemType, Integer> {
 

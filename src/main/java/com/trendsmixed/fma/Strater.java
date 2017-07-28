@@ -1,10 +1,10 @@
 package com.trendsmixed.fma;
 
-import com.trendsmixed.fma.entity.Country;
-import com.trendsmixed.fma.entity.Currency;
-import com.trendsmixed.fma.entity.Incoterm;
-import com.trendsmixed.fma.entity.CustomerType;
-import com.trendsmixed.fma.entity.Status;
+import com.trendsmixed.fma.module.country.Country;
+import com.trendsmixed.fma.module.currency.Currency;
+import com.trendsmixed.fma.module.incoterm.Incoterm;
+import com.trendsmixed.fma.module.customertype.CustomerType;
+import com.trendsmixed.fma.module.status.Status;
 import com.trendsmixed.fma.module.country.CountryService;
 import com.trendsmixed.fma.module.currency.CurrencyService;
 import com.trendsmixed.fma.module.customertype.CustomerTypeService;

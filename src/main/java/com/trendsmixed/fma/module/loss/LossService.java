@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.loss;
 
-import com.trendsmixed.fma.entity.Loss;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

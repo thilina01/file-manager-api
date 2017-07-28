@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.module.menu;
 
-import com.trendsmixed.fma.entity.Menu;
-import com.trendsmixed.fma.entity.MenuType;
+import com.trendsmixed.fma.module.menutype.MenuType;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -2,8 +2,8 @@ package com.trendsmixed.fma.dao;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.view.OperationSummaryView;
-import com.trendsmixed.fma.entity.OperationType;
-import com.trendsmixed.fma.entity.ProductType;
+import com.trendsmixed.fma.module.operationtype.OperationType;
+import com.trendsmixed.fma.module.producttype.ProductType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
