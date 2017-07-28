@@ -86,7 +86,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             @Param("section") Section section);
 
     @Query(value = "SELECT "
-            + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.reason, SUM(loss.quantity)) "
+            + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.name, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE loss.operation.production.controlPoint.workCenter.costCenter.section = :section"
             + " AND operation.production.controlPoint.controlPointType.id=1"
@@ -96,7 +96,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             @Param("section") Section section);
 
     @Query(value = "SELECT "
-            + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.reason, SUM(loss.quantity)) "
+            + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.name, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE loss.lossReason.lossType = :lossType AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
@@ -104,7 +104,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             @Param("lossType") LossType lossType);
 
     @Query(value = "SELECT "
-            + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.reason, SUM(loss.quantity)) "
+            + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.name, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
@@ -160,7 +160,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             @Param("lossReason") LossReason lossReason);
 
     @Query(value = "SELECT "
-            + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.reason, SUM(loss.quantity)) "
+            + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.name, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE loss.lossReason.lossType = :lossType AND loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " GROUP BY loss.lossReason ORDER BY SUM(loss.quantity) DESC")

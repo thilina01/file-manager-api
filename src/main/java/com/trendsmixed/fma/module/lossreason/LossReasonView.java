@@ -10,7 +10,7 @@ public class LossReasonView {
     public static interface Code {
     }
 
-    public static interface Reason {
+    public static interface Name {
     }
 
     public static interface ReasonInSinhala {
@@ -19,7 +19,7 @@ public class LossReasonView {
     public static interface LossType {
     }
 
-    public static interface All extends Id, Code, Reason, ReasonInSinhala {
+    public static interface All extends Id, Code, Name, ReasonInSinhala {
     }
 
     public static interface AllAndLossTypeAll extends All, LossType, LossTypeView.All {
