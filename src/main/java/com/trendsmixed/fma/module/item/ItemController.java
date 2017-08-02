@@ -62,6 +62,10 @@ public class ItemController {
     public Item save(@RequestBody Item item, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
+            Item existingItem = service.findByCode(item.getCode());
+            if (existingItem != null) {
+                throw new Error("Already Exists [ " + item.getCode() + " ]");
+            }
             item = service.save(item);
             return item;
 
