@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.team;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.teammenu.TeamMenu;
 import com.trendsmixed.fma.module.user.User;
-import com.trendsmixed.fma.module.team.TeamView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -22,12 +21,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "team")
 @NamedQueries({
     @NamedQuery(name = "Team.findAll", query = "SELECT t FROM Team t")})
@@ -43,6 +44,9 @@ public class Team implements Serializable {
     @JsonView(TeamView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(TeamView.Code.class)
+    @Column(name = "code")
+    private String code;
     @JsonView(TeamView.TeamMenuList.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
     private List<TeamMenu> teamMenuList;
@@ -54,38 +58,6 @@ public class Team implements Serializable {
 
     public Team(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<TeamMenu> getTeamMenuList() {
-        return teamMenuList;
-    }
-
-    public void setTeamMenuList(List<TeamMenu> teamMenuList) {
-        this.teamMenuList = teamMenuList;
-    }
-
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
     }
 
     @Override
@@ -112,5 +84,5 @@ public class Team implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Team[ id=" + id + " ]";
     }
-    
+
 }

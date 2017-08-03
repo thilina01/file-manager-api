@@ -1,10 +1,19 @@
 package com.trendsmixed.fma.module.team;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.trendsmixed.fma.dao.Combo;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 
-public interface TeamRepository extends JpaRepository<Team, Integer> {
+public interface TeamRepository extends PagingAndSortingRepository<Team, Integer> {
 
+    Team findByCode(String code);
+    
     Team findByName(String name);
 
+    @Query(value = "SELECT"
+            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
+            + " FROM ShiftType o")
+    public List<Combo> getCombo();
 }
