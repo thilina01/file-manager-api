@@ -18,6 +18,9 @@ public class UserView {
     public static interface Id {
     }
 
+    public static interface Name {
+    }
+
     public static interface Email {
     }
 
@@ -30,7 +33,7 @@ public class UserView {
     public static interface Team {
     }
 
-    public static interface All extends Id, Email, Status, PageView.All {
+    public static interface All extends Id, Name, Email, Status, PageView.All {
     }
 
     public static interface AllAndTeamAll extends All, Team, TeamView.All {

@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.user;
 import com.trendsmixed.fma.module.team.Team;
 import com.trendsmixed.fma.module.status.Status;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.user.UserView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -21,12 +20,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "user")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
@@ -42,6 +43,9 @@ public class User implements Serializable {
     @JsonView(UserView.Email.class)
     @Column(name = "email")
     private String email;
+    @JsonView(UserView.Name.class)
+    @Column(name = "name")
+    private String name;
     //@JsonView(UserView.Password.class)
     @Column(name = "password")
     private String password;
@@ -59,46 +63,6 @@ public class User implements Serializable {
 
     public User(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
     }
 
     @Override
