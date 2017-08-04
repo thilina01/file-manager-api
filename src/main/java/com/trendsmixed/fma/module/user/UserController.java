@@ -125,11 +125,11 @@ public class UserController {
             emailList.add(admin.getEmail());
         }
         if (!emailList.isEmpty()) {
-            Mail.send(emailList, subject, message);
+            new Mail().send(emailList, subject, message);
         }
     }
 
     private void notifyUser(String email, String subject, String message) {
-        Mail.send(email, subject, message);
+        new Mail().send(email, subject, message);
     }
 }
