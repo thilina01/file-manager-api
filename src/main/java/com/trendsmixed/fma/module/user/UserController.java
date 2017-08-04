@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.status.StatusService;
+import com.trendsmixed.fma.utility.Mail;
 import com.trendsmixed.fma.utility.Page;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,8 @@ public class UserController {
     public User save(@RequestBody User user, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         //appSessionService.isValid(email, request);
         try {
+            boolean isActivation = false;
+            boolean isNew = false;
             user.setId(user.getId() == null ? 0 : user.getId());
             int userId = user.getId();
 
@@ -64,11 +68,20 @@ public class UserController {
                 if (user.getPassword() == null) {
                     user.setPassword(existingUser.getPassword());
                 }
+                isActivation = existingUser.getStatus().getName().equalsIgnoreCase("inactive") && user.getStatus().getName().equalsIgnoreCase("active");
             } else {
                 Status status = statusService.findByName("inactive");
                 user.setStatus(status);
+                isNew = true;
             }
             user = service.save(user);
+            if (isNew) {
+                notifyAdmin("New Account", " Name: " + user.getName() + "<br/>" + " Email: " + user.getEmail() + "<br/>");
+                notifyUser(user.getEmail(), "New Account Created", "<b> Congratulations,  </b> <br/>  <br/> Your Account is creted successfully, Please wait, you will be informed once your account is activated.  <br/>  <br/>  Name: " + user.getName() + "<br/>" + " Email: " + user.getEmail() + "<br/>");
+            }
+            if (isActivation) {
+                notifyUser(user.getEmail(), "Account Activated", "<b> Congratulations,  </b> <br/>  <br/> Your Account is now active, You may login using below link <br/>  <br/>  http://kpi.trwlanka.com/#/login <br/>");
+            }
             return user;
         } catch (Throwable e) {
             e.printStackTrace();
@@ -103,5 +116,20 @@ public class UserController {
         user.setId(id);
         user = service.save(user);
         return user;
+    }
+
+    private void notifyAdmin(String subject, String message) {
+        List<User> admins = service.findByTeamName("admin");
+        List<String> emailList = new ArrayList<>();
+        for (User admin : admins) {
+            emailList.add(admin.getEmail());
+        }
+        if (!emailList.isEmpty()) {
+            Mail.send(emailList, subject, message);
+        }
+    }
+
+    private void notifyUser(String email, String subject, String message) {
+        Mail.send(email, subject, message);
     }
 }

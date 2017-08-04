@@ -52,4 +52,8 @@ public class UserService {
     public Object findByEmailAndPasswordAndStatus(String email, String password, String status) {
         return repository.findByEmailAndPasswordAndStatus(email, password, status);
     }
+    
+    List<User> findByTeamName(String name){
+        return repository.findByTeamName(name);
+    }
 }
