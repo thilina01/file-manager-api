@@ -22,13 +22,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.toolbreakdown.ToolBreakdown;
-import com.trendsmixed.fma.module.tool.ToolView;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "tool")
 @NamedQueries({
     @NamedQuery(name = "Tool.findAll", query = "SELECT m FROM Tool m")})
@@ -55,38 +56,6 @@ public class Tool implements Serializable {
 
     public Tool(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<ToolBreakdown> getToolBreakdownList() {
-        return toolBreakdownList;
-    }
-
-    public void setToolBreakdownList(List<ToolBreakdown> toolBreakdownList) {
-        this.toolBreakdownList = toolBreakdownList;
     }
 
     @Override

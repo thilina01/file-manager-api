@@ -11,7 +11,6 @@ import com.trendsmixed.fma.module.jobdispatch.JobDispatch;
 import com.trendsmixed.fma.module.jobtype.JobType;
 import com.trendsmixed.fma.module.operation.Operation;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
-import com.trendsmixed.fma.module.job.JobView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -31,12 +30,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "job")
 @NamedQueries({
     @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")})
@@ -90,116 +91,12 @@ public class Job implements Serializable {
     private SalesOrderItem salesOrderItem;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
     private List<Operation> operationList;
-    
+
     public Job() {
     }
 
     public Job(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getActualSippedDate() {
-        return actualSippedDate;
-    }
-
-    public void setActualSippedDate(Date actualSippedDate) {
-        this.actualSippedDate = actualSippedDate;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public Date getConfirmShippedDate() {
-        return confirmShippedDate;
-    }
-
-    public void setConfirmShippedDate(Date confirmShippedDate) {
-        this.confirmShippedDate = confirmShippedDate;
-    }
-
-    public Date getJobDate() {
-        return jobDate;
-    }
-
-    public void setJobDate(Date jobDate) {
-        this.jobDate = jobDate;
-    }
-
-    public String getJobNo() {
-        return jobNo;
-    }
-
-    public void setJobNo(String jobNo) {
-        this.jobNo = jobNo;
-    }
-
-    public Double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
-    }
-
-    public Double getRemainingQuantity() {
-        return remainingQuantity;
-    }
-
-    public void setRemainingQuantity(Double remainingQuantity) {
-        this.remainingQuantity = remainingQuantity;
-    }
-
-    public List<JobDispatch> getJobDispatchList() {
-        return jobDispatchList;
-    }
-
-    public void setJobDispatchList(List<JobDispatch> jobDispatchList) {
-        this.jobDispatchList = jobDispatchList;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public JobType getJobType() {
-        return jobType;
-    }
-
-    public void setJobType(JobType jobType) {
-        this.jobType = jobType;
-    }
-
-    public SalesOrderItem getSalesOrderItem() {
-        return salesOrderItem;
-    }
-
-    public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
-        this.salesOrderItem = salesOrderItem;
-    }
-    
-    public List<Operation> getOperationList() {
-        return operationList;
-    }
-
-    public void setOperationList(List<Operation> operationList) {
-        this.operationList = operationList;
     }
 
     @Override

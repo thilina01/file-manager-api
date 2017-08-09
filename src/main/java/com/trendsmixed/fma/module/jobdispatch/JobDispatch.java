@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.jobdispatch;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.jobdispatch.JobDispatchView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -21,12 +20,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "job_dispatch")
 @NamedQueries({
     @NamedQuery(name = "JobDispatch.findAll", query = "SELECT j FROM JobDispatch j")})
@@ -57,38 +58,6 @@ public class JobDispatch implements Serializable {
 
     public JobDispatch(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
-    }
-
-    public Dispatch getDispatch() {
-        return dispatch;
-    }
-
-    public void setDispatch(Dispatch dispatch) {
-        this.dispatch = dispatch;
-    }
-
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
     }
 
     @Override

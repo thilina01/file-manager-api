@@ -48,7 +48,7 @@ public class SalesPerKg implements Serializable {
     @JsonView(SalesPerKgView.Actual.class)
     @Column(name = "actual")
     private double actual;
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -73,5 +73,5 @@ public class SalesPerKg implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.SalesPerKg[ id=" + id + " ]";
     }
-    
+
 }

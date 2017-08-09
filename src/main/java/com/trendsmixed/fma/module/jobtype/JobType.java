@@ -59,7 +59,6 @@ public class JobType implements Serializable {
         this.id = id;
     }
 
-
     @Override
     public int hashCode() {
         int hash = 0;

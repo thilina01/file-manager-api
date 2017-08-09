@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class MonthlyAbsenteeism {
 
-    String month,source;
-    double absenteeism,target;
+    String month, source;
+    double absenteeism, target;
 
 }

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class LabourTurnoverService {
 
@@ -22,7 +20,6 @@ public class LabourTurnoverService {
     public Page<LabourTurnover> findAll(Pageable pageable) {
         return new Page<>(repository.findAll(pageable));
     }
-
 
     public LabourTurnover save(LabourTurnover labourTurnover) {
         return repository.save(labourTurnover);

@@ -26,7 +26,6 @@ public class JobDispatchView {
     public static interface AllAndDispatchAllAndJobAllAndItemAll extends All, Dispatch, Job, DispatchView.All, JobView.AllAndItemAllAndJobTypeAll {
     }
 
-    
     public static interface AllAndDispatchAllAndCustomerAllAndJobAllAndItemAll extends All, Dispatch, Job, DispatchView.AllAndCustomerAll, JobView.AllAndItemAllAndJobTypeAll {
     }
 

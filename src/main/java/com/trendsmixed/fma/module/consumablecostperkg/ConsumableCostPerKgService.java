@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class ConsumableCostPerKgService {
 
@@ -22,7 +20,6 @@ public class ConsumableCostPerKgService {
     public Page<ConsumableCostPerKg> findAll(Pageable pageable) {
         return new Page<>(repository.findAll(pageable));
     }
-
 
     public ConsumableCostPerKg save(ConsumableCostPerKg consumableCostPerKg) {
         return repository.save(consumableCostPerKg);

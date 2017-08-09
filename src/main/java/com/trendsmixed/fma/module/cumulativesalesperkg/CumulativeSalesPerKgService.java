@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class CumulativeSalesPerKgService {
 
@@ -22,7 +20,6 @@ public class CumulativeSalesPerKgService {
     public Page<CumulativeSalesPerKg> findAll(Pageable pageable) {
         return new Page<>(repository.findAll(pageable));
     }
-
 
     public CumulativeSalesPerKg save(CumulativeSalesPerKg cumulativeSalesPerKg) {
         return repository.save(cumulativeSalesPerKg);

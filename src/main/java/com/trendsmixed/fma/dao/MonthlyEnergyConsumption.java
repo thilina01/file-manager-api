@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class MonthlyEnergyConsumption {
 
-    String month,location;
-    double kwh,kva,cost;
+    String month, location;
+    double kwh, kva, cost;
 
 }

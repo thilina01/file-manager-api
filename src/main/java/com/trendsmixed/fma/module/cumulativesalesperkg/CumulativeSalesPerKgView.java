@@ -15,6 +15,7 @@ public class CumulativeSalesPerKgView {
 
     public static interface Id {
     }
+
     public static interface EffectiveMonth {
     }
 
@@ -23,7 +24,7 @@ public class CumulativeSalesPerKgView {
 
     public static interface Budget {
     }
-    
+
     public static interface All extends Id, EffectiveMonth, Actual, Budget, PageView.All {
     }
 

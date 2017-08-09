@@ -44,15 +44,15 @@ public class ControlPointController {
 
     @JsonView(ControlPointView.AllAndControlPointTypeAllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping("/page")
-	Page<ControlPoint> page( Pageable pageable){
-    	return service.findAll(pageable);
-	} 
+    Page<ControlPoint> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
 
     @GetMapping("/combo")
-	List<Combo> combo(){
-    	return service.getCombo();
-	} 
-	
+    List<Combo> combo() {
+        return service.getCombo();
+    }
+
     @JsonView(ControlPointView.AllAndWorkCenterAll.class)
     @PostMapping
     public ControlPoint save(@RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -73,7 +73,7 @@ public class ControlPointController {
     public void saveMany(@RequestBody List<ControlPoint> controlPoints, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
         appSessionService.isValid(email, request);
-        try {            
+        try {
             for (ControlPoint controlPoint : controlPoints) {
                 controlPoint.setCode(controlPoint.getCode().trim());
                 controlPoint.setName(controlPoint.getName().trim());

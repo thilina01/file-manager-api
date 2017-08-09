@@ -48,8 +48,8 @@ public class TeamMenuController {
      */
     @PutMapping
     public List<TeamMenu> saveMany(@RequestBody List<TeamMenu> teamMenus, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-       
-            appSessionService.isValid(email, request);
+
+        appSessionService.isValid(email, request);
         try {
             if (!teamMenus.isEmpty()) {
                 Team team = teamMenus.get(0).getTeam();

@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.file;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.filetype.FileType;
 import com.trendsmixed.fma.module.folder.Folder;
-import com.trendsmixed.fma.module.file.FileView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -27,12 +26,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "file")
 @NamedQueries({
     @NamedQuery(name = "File.findAll", query = "SELECT f FROM File f")})
@@ -79,78 +80,6 @@ public class File implements Serializable {
 
     public File(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getExtension() {
-        return extension;
-    }
-
-    public void setExtension(String extension) {
-        this.extension = extension;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getOriginalFileName() {
-        return originalFileName;
-    }
-
-    public void setOriginalFileName(String originalFileName) {
-        this.originalFileName = originalFileName;
-    }
-
-    public Date getUploadDate() {
-        return uploadDate;
-    }
-
-    public void setUploadDate(Date uploadDate) {
-        this.uploadDate = uploadDate;
-    }
-
-    public List<Folder> getFolderList() {
-        return folderList;
-    }
-
-    public void setFolderList(List<Folder> folderList) {
-        this.folderList = folderList;
-    }
-
-    public FileType getFileType() {
-        return fileType;
-    }
-
-    public void setFileType(FileType fileType) {
-        this.fileType = fileType;
     }
 
     @Override

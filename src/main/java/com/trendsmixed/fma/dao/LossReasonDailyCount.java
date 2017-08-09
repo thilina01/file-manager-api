@@ -7,17 +7,18 @@ import lombok.Data;
 
 @Data
 public class LossReasonDailyCount {
-	Date date;
-	String day;
-	long count;
 
-	public LossReasonDailyCount(Date date, Long count) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		String day = cal.get(Calendar.DAY_OF_MONTH) + "";
-		this.day = day != null ? day : "NA";
-		this.date = date;
-		this.count = count != null ? count : 0;
-	}
+    Date date;
+    String day;
+    long count;
+
+    public LossReasonDailyCount(Date date, Long count) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String day = cal.get(Calendar.DAY_OF_MONTH) + "";
+        this.day = day != null ? day : "NA";
+        this.date = date;
+        this.count = count != null ? count : 0;
+    }
 
 }

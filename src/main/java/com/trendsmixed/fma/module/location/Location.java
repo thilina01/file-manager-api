@@ -81,5 +81,5 @@ public class Location implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Location[ id=" + id + " ]";
     }
-    
+
 }

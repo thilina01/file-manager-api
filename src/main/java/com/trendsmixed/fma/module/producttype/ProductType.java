@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.producttype;
 
 import com.trendsmixed.fma.module.operation.Operation;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.producttype.ProductTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -21,12 +20,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "product_type")
 @NamedQueries({
     @NamedQuery(name = "ProductType.findAll", query = "SELECT p FROM ProductType p")})
@@ -53,38 +54,6 @@ public class ProductType implements Serializable {
 
     public ProductType(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Operation> getOperationList() {
-        return operationList;
-    }
-
-    public void setOperationList(List<Operation> operationList) {
-        this.operationList = operationList;
     }
 
     @Override

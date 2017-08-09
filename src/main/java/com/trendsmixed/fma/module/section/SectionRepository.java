@@ -10,8 +10,9 @@ import com.trendsmixed.fma.dao.Combo;
 public interface SectionRepository extends PagingAndSortingRepository<Section, Integer> {
 
     public Section findByCode(String code);
-	@Query(value = "SELECT"
-			+ " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
-			+ " FROM Section o")
-	public List<Combo> getCombo();
+
+    @Query(value = "SELECT"
+            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
+            + " FROM Section o")
+    public List<Combo> getCombo();
 }

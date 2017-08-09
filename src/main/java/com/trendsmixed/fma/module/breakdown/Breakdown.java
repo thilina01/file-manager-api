@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.breakdown;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.machine.Machine;
 import com.trendsmixed.fma.module.operationbreadown.OperationBreadown;
-import com.trendsmixed.fma.module.breakdown.BreakdownView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -28,12 +27,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "breakdown")
 @NamedQueries({
     @NamedQuery(name = "Breakdown.findAll", query = "SELECT b FROM Breakdown b")})
@@ -71,62 +72,14 @@ public class Breakdown implements Serializable {
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Machine machine;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "breakdown")
-	private List<OperationBreadown> operationBreadownList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "breakdown")
+    private List<OperationBreadown> operationBreadownList;
 
     public Breakdown() {
     }
 
     public Breakdown(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getBreakdownDate() {
-        return breakdownDate;
-    }
-
-    public void setBreakdownDate(Date breakdownDate) {
-        this.breakdownDate = breakdownDate;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-    public String getBreakdownNumber() {
-        return breakdownNumber;
-    }
-
-    public void setBreakdownNumber(String breakdownNumber) {
-        this.breakdownNumber = breakdownNumber;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Machine getMachine() {
-        return machine;
-    }
-
-    public void setMachine(Machine machine) {
-        this.machine = machine;
     }
 
     @Override
@@ -136,31 +89,7 @@ public class Breakdown implements Serializable {
         return hash;
     }
 
-    public Date getBreakdownTime() {
-		return breakdownTime;
-	}
-
-	public void setBreakdownTime(Date breakdownTime) {
-		this.breakdownTime = breakdownTime;
-	}
-
-	public Date getRecoveryTime() {
-		return recoveryTime;
-	}
-
-	public void setRecoveryTime(Date recoveryTime) {
-		this.recoveryTime = recoveryTime;
-	}
-
-	public List<OperationBreadown> getOperationBreadownList() {
-		return operationBreadownList;
-	}
-
-	public void setOperationBreadownList(List<OperationBreadown> operationBreadownList) {
-		this.operationBreadownList = operationBreadownList;
-	}
-
-	@Override
+    @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Breakdown)) {

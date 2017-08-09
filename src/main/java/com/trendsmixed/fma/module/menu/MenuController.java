@@ -178,7 +178,7 @@ public class MenuController {
                         subMenu.setMenu(menu);
                     }
                 }
-                System.out.println(++i + " : " + menu);
+                //System.out.println(++i + " : " + menu);
             }
             menuService.save(menus);
         } catch (Throwable e) {

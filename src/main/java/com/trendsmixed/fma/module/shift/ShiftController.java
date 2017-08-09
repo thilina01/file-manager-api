@@ -3,7 +3,6 @@ package com.trendsmixed.fma.module.shift;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.machine.MachineView;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;

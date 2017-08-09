@@ -20,9 +20,9 @@ public class ControlPointMachineService {
         return repository.findAll();
     }
 
-	public Page<ControlPointMachine> findAll(Pageable pageable) {
-		return new Page<ControlPointMachine>(repository.findAll(pageable));
-	}
+    public Page<ControlPointMachine> findAll(Pageable pageable) {
+        return new Page<ControlPointMachine>(repository.findAll(pageable));
+    }
 
     public ControlPointMachine save(ControlPointMachine controlPointMachine) {
         return repository.save(controlPointMachine);
@@ -41,6 +41,6 @@ public class ControlPointMachineService {
     }
 
     public ControlPointMachine findByControlPointAndMachine(ControlPoint controlPoint, Machine machine) {
-        return repository.findByControlPointAndMachine(controlPoint,machine);
+        return repository.findByControlPointAndMachine(controlPoint, machine);
     }
 }

@@ -21,16 +21,16 @@ public class MachineView {
 
     }
 
-    public static interface All extends Id,Code,Name,EnergyRate, PageView.All {
-        
+    public static interface All extends Id, Code, Name, EnergyRate, PageView.All {
+
     }
-    public static interface AllAndWorkCenterAll extends All,ControlPoint,WorkCenterView.All{
-        
+
+    public static interface AllAndWorkCenterAll extends All, ControlPoint, WorkCenterView.All {
+
     }
 
     public static interface ItemMachine {
 
-     
     }
-    
+
 }

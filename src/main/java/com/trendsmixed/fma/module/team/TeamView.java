@@ -20,7 +20,7 @@ public class TeamView {
 
     public static interface Code {
     }
-    
+
     public static interface Name {
     }
 
@@ -30,7 +30,7 @@ public class TeamView {
     public static interface User {
     }
 
-    public static interface All extends Id, Code, Name,PageView.All {
+    public static interface All extends Id, Code, Name, PageView.All {
     }
 
     public static interface AllAndMenuAll extends All, TeamMenuList, TeamMenuView.Menu, MenuView.All {

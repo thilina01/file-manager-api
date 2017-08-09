@@ -15,6 +15,7 @@ public class ConsumableCostPerKgView {
 
     public static interface Id {
     }
+
     public static interface EffectiveMonth {
     }
 
@@ -23,7 +24,7 @@ public class ConsumableCostPerKgView {
 
     public static interface Budget {
     }
-    
+
     public static interface All extends Id, EffectiveMonth, Actual, Budget, PageView.All {
     }
 

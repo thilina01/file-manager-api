@@ -22,11 +22,11 @@ public class LossReasonService {
     public List<Combo> getCombo() {
         return repository.getCombo();
     }
-    
+
     public Page<LossReason> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
-    
+
     public LossReason save(LossReason lossReason) {
         return repository.save(lossReason);
     }

@@ -147,8 +147,8 @@ public class ChartController {
             @RequestParam(value = "location") String locationId) {
         return chartService.getMonthlyEnergyConsumptionByLocation(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new Location(Integer.valueOf(locationId)));
     }
-    
- /*
+
+    /*
     @GetMapping("/monthlyLabourTurnover")
     public String getMonthlyLabourTurnover(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
@@ -161,78 +161,77 @@ public class ChartController {
         a = a.concat("]");
         return a.replace("},]", "}]");
     }
-   */
-    
+     */
     @GetMapping("/monthlyLabourTurnover")
     public List getMonthlyLabourTurnover(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyLabourTurnover(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-    
+
     @GetMapping("/monthlyAbsenteeism")
     public List getMonthlyAbsenteeism(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyAbsenteeism(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
     @GetMapping("/monthlySalesValue")
     public List getMonthlySalesValue(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlySalesValue(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
     @GetMapping("/monthlySalesWeight")
     public List getMonthlySalesWeight(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlySalesWeight(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
     @GetMapping("/monthlyLabourCostPerKg")
     public List getMonthlyLabourCostPerKg(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyLabourCostPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
     @GetMapping("/monthlyCumulativeSalesPerKg")
     public List getMonthlyCumulativeSalesPerKg(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyCumulativeSalesPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
     @GetMapping("/monthlyProductionOverheadCostPerKg")
     public List getMonthlyProductionOverheadCostPerKg(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyProductionOverheadCostPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
     @GetMapping("/monthlySalesPerKg")
     public List getMonthlySalesPerKg(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlySalesPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
     @GetMapping("/monthlyConsumableCostPerKg")
     public List getMonthlyConsumableCostPerKg(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyConsumableCostPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
     @GetMapping("/monthlyMaterialCostPerKg")
     public List getMonthlyMaterialCostPerKg(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyMaterialCostPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
     @GetMapping("/monthlyElectricityCostPerKg")
     public List getMonthlyElectricityCostPerKg(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyElectricityCostPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
     @GetMapping("/monthlyScrapCostPerKg")
     public List getMonthlyScrapCostPerKg(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyScrapCostPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-     
+
 }

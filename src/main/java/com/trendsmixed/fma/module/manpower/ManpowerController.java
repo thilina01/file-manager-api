@@ -40,6 +40,7 @@ public class ManpowerController {
     Page<Manpower> page(Pageable pageable) {
         return service.findAll(pageable);
     }
+
     @JsonView(ManpowerView.All.class)
     @PostMapping
     public Manpower save(@RequestBody Manpower manpower, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

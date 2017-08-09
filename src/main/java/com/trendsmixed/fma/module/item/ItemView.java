@@ -59,5 +59,5 @@ public class ItemView {
 
     public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.All, Paint, PaintView.All {
     }
-    
+
 }

@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.costcenter;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.workcenter.WorkCenter;
-import com.trendsmixed.fma.module.costcenter.CostCenterView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -24,12 +23,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "cost_center")
 @NamedQueries({
     @NamedQuery(name = "CostCenter.findAll", query = "SELECT c FROM CostCenter c")})
@@ -62,46 +63,6 @@ public class CostCenter implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<WorkCenter> getWorkCenterList() {
-        return workCenterList;
-    }
-
-    public void setWorkCenterList(List<WorkCenter> workCenterList) {
-        this.workCenterList = workCenterList;
-    }
-
-    public Section getSection() {
-        return section;
-    }
-
-    public void setSection(Section section) {
-        this.section = section;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -126,5 +87,5 @@ public class CostCenter implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.CostCenter[ id=" + id + " ]";
     }
-    
+
 }

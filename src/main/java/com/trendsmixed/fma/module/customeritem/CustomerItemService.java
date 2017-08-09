@@ -36,6 +36,6 @@ public class CustomerItemService {
     }
 
     public CustomerItem findByCustomerAndItem(Customer customer, Item item) {
-        return customerItemRepository.findByCustomerAndItem(customer, item); 
+        return customerItemRepository.findByCustomerAndItem(customer, item);
     }
 }

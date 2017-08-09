@@ -18,12 +18,12 @@ public class TeamService {
     public Iterable<Team> findAll() {
         return repository.findAll();
     }
-    
+
     public Page<Team> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
-    
-public List<Combo> getCombo() {
+
+    public List<Combo> getCombo() {
         return repository.getCombo();
     }
 

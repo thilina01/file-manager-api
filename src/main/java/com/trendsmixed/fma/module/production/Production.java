@@ -11,7 +11,6 @@ import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.shift.Shift;
 import com.trendsmixed.fma.module.shifttype.ShiftType;
-import com.trendsmixed.fma.module.production.ProductionView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -30,12 +29,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "production")
 @NamedQueries({
     @NamedQuery(name = "Production.findAll", query = "SELECT p FROM Production p")})
@@ -84,70 +85,6 @@ public class Production implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getProductionDate() {
-        return productionDate;
-    }
-
-    public void setProductionDate(Date productionDate) {
-        this.productionDate = productionDate;
-    }
-
-    public Integer getPlannedDuration() {
-        return plannedDuration;
-    }
-
-    public void setPlannedDuration(Integer plannedDuration) {
-        this.plannedDuration = plannedDuration;
-    }
-
-    public Integer getActualDuration() {
-        return actualDuration;
-    }
-
-    public void setActualDuration(Integer actualDuration) {
-        this.actualDuration = actualDuration;
-    }
-
-    public ControlPoint getControlPoint() {
-        return controlPoint;
-    }
-
-    public void setControlPoint(ControlPoint controlPoint) {
-        this.controlPoint = controlPoint;
-    }
-
-    public Shift getShift() {
-        return shift;
-    }
-
-    public void setShift(Shift shift) {
-        this.shift = shift;
-    }
-
-    public List<Manpower> getManpowerList() {
-        return manpowerList;
-    }
-
-    public void setManpowerList(List<Manpower> manpowerList) {
-        this.manpowerList = manpowerList;
-    }
-
-    public List<Operation> getOperationList() {
-        return operationList;
-    }
-
-    public void setOperationList(List<Operation> operationList) {
-        this.operationList = operationList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -173,18 +110,4 @@ public class Production implements Serializable {
         return "com.trendsmixed.fma.entity.Production[ id=" + id + " ]";
     }
 
-    /**
-     * @return the shiftType
-     */
-    public ShiftType getShiftType() {
-        return shiftType;
-    }
-
-    /**
-     * @param shiftType the shiftType to set
-     */
-    public void setShiftType(ShiftType shiftType) {
-        this.shiftType = shiftType;
-    }
-    
 }

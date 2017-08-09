@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.folder;
 
 import com.trendsmixed.fma.module.file.File;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.folder.FolderView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -23,12 +22,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "folder")
 @NamedQueries({
     @NamedQuery(name = "Folder.findAll", query = "SELECT f FROM Folder f")})
@@ -65,54 +66,6 @@ public class Folder implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<File> getFileList() {
-        return fileList;
-    }
-
-    public void setFileList(List<File> fileList) {
-        this.fileList = fileList;
-    }
-
-    public List<Folder> getFolderList() {
-        return folderList;
-    }
-
-    public void setFolderList(List<Folder> folderList) {
-        this.folderList = folderList;
-    }
-
-    public Folder getFolder() {
-        return folder;
-    }
-
-    public void setFolder(Folder folder) {
-        this.folder = folder;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -137,5 +90,5 @@ public class Folder implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Folder[ id=" + id + " ]";
     }
-    
+
 }

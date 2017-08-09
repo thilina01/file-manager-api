@@ -119,7 +119,7 @@ public class CustomerController {
                     String currencyCode = currency.getCode() != null ? currency.getCode().trim() : "NA";
                     currency = currencyService.findByCode(currencyCode);
                 }
-                
+
                 if (currency == null) {
                     currency = currencyService.findByCode("NA");
                 }

@@ -19,14 +19,13 @@ public class SectionService {
         return repository.findAll();
     }
 
-	public Page<Section> findAll(Pageable pageable) {
-		return new Page<Section>(repository.findAll(pageable));
-	}
+    public Page<Section> findAll(Pageable pageable) {
+        return new Page<Section>(repository.findAll(pageable));
+    }
 
-	public List<Combo> getCombo() {
-		return repository.getCombo();
-	}
-	
+    public List<Combo> getCombo() {
+        return repository.getCombo();
+    }
 
     public Section save(Section section) {
         return repository.save(section);

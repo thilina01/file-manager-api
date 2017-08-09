@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.toolbreakdown;
 
 import com.trendsmixed.fma.module.tool.Tool;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.toolbreakdown.ToolBreakdownView;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,12 +23,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "tool_breakdown")
 @NamedQueries({
     @NamedQuery(name = "ToolBreakdown.findAll", query = "SELECT b FROM ToolBreakdown b")})
@@ -75,75 +76,11 @@ public class ToolBreakdown implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getBreakdownDate() {
-        return toolBreakdownDate;
-    }
-
-    public void setBreakdownDate(Date toolBreakdownDate) {
-        this.toolBreakdownDate = toolBreakdownDate;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-    public String getBreakdownNumber() {
-        return toolBreakdownNumber;
-    }
-
-    public void setBreakdownNumber(String toolBreakdownNumber) {
-        this.toolBreakdownNumber = toolBreakdownNumber;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Tool getTool() {
-        return tool;
-    }
-
-    public void setTool(Tool tool) {
-        this.tool = tool;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
-    }
-
-    public Date getBreakdownTime() {
-        return toolBreakdownTime;
-    }
-
-    public void setBreakdownTime(Date toolBreakdownTime) {
-        this.toolBreakdownTime = toolBreakdownTime;
-    }
-
-    public Date getRecoveryTime() {
-        return recoveryTime;
-    }
-
-    public void setRecoveryTime(Date recoveryTime) {
-        this.recoveryTime = recoveryTime;
     }
 
     @Override

@@ -22,11 +22,11 @@ public class LeaveTypeService {
     public List<Combo> getCombo() {
         return repository.getCombo();
     }
-    
+
     public Page<LeaveType> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
-    
+
     public LeaveType save(LeaveType leaveType) {
         return repository.save(leaveType);
     }

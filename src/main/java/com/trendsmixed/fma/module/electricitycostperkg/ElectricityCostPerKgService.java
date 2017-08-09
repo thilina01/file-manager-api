@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class ElectricityCostPerKgService {
 
@@ -22,7 +20,6 @@ public class ElectricityCostPerKgService {
     public Page<ElectricityCostPerKg> findAll(Pageable pageable) {
         return new Page<>(repository.findAll(pageable));
     }
-
 
     public ElectricityCostPerKg save(ElectricityCostPerKg electricityCostPerKg) {
         return repository.save(electricityCostPerKg);

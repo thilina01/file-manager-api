@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.workcenter;
 import com.trendsmixed.fma.module.costcenter.CostCenter;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.workcenter.WorkCenterView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -24,12 +23,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "work_center")
 @NamedQueries({
     @NamedQuery(name = "WorkCenter.findAll", query = "SELECT w FROM WorkCenter w")})
@@ -62,46 +63,6 @@ public class WorkCenter implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<ControlPoint> getControlPointList() {
-        return controlPointList;
-    }
-
-    public void setControlPointList(List<ControlPoint> controlPointList) {
-        this.controlPointList = controlPointList;
-    }
-
-    public CostCenter getCostCenter() {
-        return costCenter;
-    }
-
-    public void setCostCenter(CostCenter costCenter) {
-        this.costCenter = costCenter;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -126,5 +87,5 @@ public class WorkCenter implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.WorkCenter[ id=" + id + " ]";
     }
-    
+
 }

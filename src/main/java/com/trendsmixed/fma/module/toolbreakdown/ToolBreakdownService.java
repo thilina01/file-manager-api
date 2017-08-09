@@ -19,7 +19,7 @@ public class ToolBreakdownService {
     public Page<ToolBreakdown> findAll(Pageable pageable) {
         return new Page<>(repository.findAll(pageable));
     }
-    
+
     public ToolBreakdown save(ToolBreakdown toolBreakdown) {
         return repository.save(toolBreakdown);
     }

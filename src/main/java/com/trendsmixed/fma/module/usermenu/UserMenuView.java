@@ -19,6 +19,6 @@ public class UserMenuView {
     public static interface User {
     }
 
-    public static interface Menu extends MenuView.All{
+    public static interface Menu extends MenuView.All {
     }
 }

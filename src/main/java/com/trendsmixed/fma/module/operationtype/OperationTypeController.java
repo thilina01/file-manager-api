@@ -40,15 +40,15 @@ public class OperationTypeController {
 
     @JsonView(OperationTypeView.All.class)
     @GetMapping("/page")
-	Page<OperationType> page( Pageable pageable){
-    	return service.findAll(pageable);
-	} 
-    
+    Page<OperationType> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
+
     @GetMapping("/combo")
-	List<Combo> combo(){
-    	return service.getCombo();
-	} 
-	
+    List<Combo> combo() {
+        return service.getCombo();
+    }
+
     @PostMapping
     public OperationType save(@RequestBody OperationType operationType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

@@ -49,7 +49,7 @@ public class LabourSource implements Serializable {
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "labourSource")
     private List<LabourTurnover> labourTurnoverList;
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -74,5 +74,5 @@ public class LabourSource implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.LabourSource[ id=" + id + " ]";
     }
-    
+
 }

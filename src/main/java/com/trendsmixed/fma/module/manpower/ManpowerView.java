@@ -14,28 +14,28 @@ import com.trendsmixed.fma.module.production.ProductionView;
  */
 public class ManpowerView {
 
-	public static interface Id {
-	}
+    public static interface Id {
+    }
 
-	public static interface PlannedQuantity {
-	}
+    public static interface PlannedQuantity {
+    }
 
-	public static interface ActualQuantity {
-	}
+    public static interface ActualQuantity {
+    }
 
-	public static interface ManpowerType extends ManpowerTypeView.All {
-	}
+    public static interface ManpowerType extends ManpowerTypeView.All {
+    }
 
-	public static interface Production extends ProductionView.AllAndShiftAndShiftTypeAndControlPointAll {
-	}
+    public static interface Production extends ProductionView.AllAndShiftAndShiftTypeAndControlPointAll {
+    }
 
-	public static interface All extends Id, PlannedQuantity, ActualQuantity {
-	}
+    public static interface All extends Id, PlannedQuantity, ActualQuantity {
+    }
 
-	public static interface AllManpowerTypeAll extends All, ManpowerType {
-	}
+    public static interface AllManpowerTypeAll extends All, ManpowerType {
+    }
 
-	public static interface AllManpowerTypeAllProductionAll extends AllManpowerTypeAll, Production {
-	}
+    public static interface AllManpowerTypeAllProductionAll extends AllManpowerTypeAll, Production {
+    }
 
 }

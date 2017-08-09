@@ -55,6 +55,7 @@ public class LabourTurnover implements Serializable {
     @JoinColumn(name = "labour_source_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LabourSource labourSource;
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -79,5 +80,5 @@ public class LabourTurnover implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.LabourTurnover[ id=" + id + " ]";
     }
-    
+
 }

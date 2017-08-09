@@ -21,7 +21,7 @@ public class CustomerTypeService {
     public Page<CustomerType> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
-    
+
     public List<Combo> getCombo() {
         return repository.getCombo();
     }

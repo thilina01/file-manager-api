@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.shift;
 
 import com.trendsmixed.fma.module.production.Production;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.shift.ShiftView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -21,12 +20,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "shift")
 @NamedQueries({
     @NamedQuery(name = "Shift.findAll", query = "SELECT s FROM Shift s")})
@@ -53,38 +54,6 @@ public class Shift implements Serializable {
 
     public Shift(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Production> getProductionList() {
-        return productionList;
-    }
-
-    public void setProductionList(List<Production> productionList) {
-        this.productionList = productionList;
     }
 
     @Override

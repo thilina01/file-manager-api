@@ -24,9 +24,9 @@ public class ProductionService {
         return repository.findAll();
     }
 
-	public Page<Production> findAll(Pageable pageable) {
-		return new Page<Production>(repository.findAll(pageable));
-	}
+    public Page<Production> findAll(Pageable pageable) {
+        return new Page<Production>(repository.findAll(pageable));
+    }
 
     public Production save(Production production) {
         return repository.save(production);
@@ -44,7 +44,7 @@ public class ProductionService {
         repository.delete(id);
     }
 
-    public Production findByProductionDateAndShiftAndControlPoint(Date productionDate, Shift shift, ControlPoint controlPoint){
+    public Production findByProductionDateAndShiftAndControlPoint(Date productionDate, Shift shift, ControlPoint controlPoint) {
         return repository.findByProductionDateAndShiftAndControlPoint(productionDate, shift, controlPoint);
     }
 

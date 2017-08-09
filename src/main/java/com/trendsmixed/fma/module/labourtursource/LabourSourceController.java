@@ -30,7 +30,6 @@ public class LabourSourceController {
     @Autowired
     private LabourSourceService service;
 
-
     @JsonView(LabourSourceView.All.class)
     @GetMapping
     public Iterable<LabourSource> findAll() {

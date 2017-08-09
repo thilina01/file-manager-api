@@ -8,6 +8,6 @@ import lombok.Data;
 public class MonthlySummary {
 
     String month;
-    double budget,actual;
+    double budget, actual;
 
 }

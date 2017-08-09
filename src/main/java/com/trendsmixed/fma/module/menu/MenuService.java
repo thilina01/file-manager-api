@@ -56,6 +56,7 @@ public class MenuService {
     public Menu findByNameAndMenu(String name, Menu menu) {
         return menuRepository.findByNameAndMenu(name, menu);
     }
+
     public Menu findByNameAndMenuType(String name, MenuType menuType) {
         return menuRepository.findByNameAndMenuType(name, menuType);
     }

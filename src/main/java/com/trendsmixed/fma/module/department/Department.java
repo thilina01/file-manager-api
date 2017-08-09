@@ -42,7 +42,7 @@ public class Department implements Serializable {
     @JsonView(DepartmentView.Name.class)
     @Column(name = "name")
     private String name;
-    
+
     public Department() {
     }
 
@@ -74,5 +74,5 @@ public class Department implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Department[ id=" + id + " ]";
     }
-    
+
 }

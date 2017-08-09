@@ -84,7 +84,7 @@ public class Strater {
             incotermService.save(incoterm);
         }
     }
-    
+
     private void initCustomerType() {
         CustomerType customerType = customerTypeService.findByCode("NA");
         if (customerType == null) {

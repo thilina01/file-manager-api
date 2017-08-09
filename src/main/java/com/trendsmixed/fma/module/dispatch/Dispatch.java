@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.dispatch;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.jobdispatch.JobDispatch;
-import com.trendsmixed.fma.module.dispatch.DispatchView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -27,12 +26,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "dispatch")
 @NamedQueries({
     @NamedQuery(name = "Dispatch.findAll", query = "SELECT d FROM Dispatch d")})
@@ -64,30 +65,6 @@ public class Dispatch implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getDispatchDate() {
-        return dispatchDate;
-    }
-
-    public void setDispatchDate(Date dispatchDate) {
-        this.dispatchDate = dispatchDate;
-    }
-
-    public List<JobDispatch> getJobDispatchList() {
-        return jobDispatchList;
-    }
-
-    public void setJobDispatchList(List<JobDispatch> jobDispatchList) {
-        this.jobDispatchList = jobDispatchList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -113,12 +90,4 @@ public class Dispatch implements Serializable {
         return "com.trendsmixed.fma.entity.Dispatch[ id=" + id + " ]";
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-    
 }

@@ -19,14 +19,14 @@ public class ItemService {
         return repository.findAll();
     }
 
-	public Page<Item> findAll(Pageable pageable) {
-		return new Page<Item>(repository.findAll(pageable));
-	}
+    public Page<Item> findAll(Pageable pageable) {
+        return new Page<Item>(repository.findAll(pageable));
+    }
 
-	public List<Combo> getCombo() {
-		return repository.getCombo();
-	}
-	
+    public List<Combo> getCombo() {
+        return repository.getCombo();
+    }
+
     public Item save(Item item) {
         return repository.save(item);
     }

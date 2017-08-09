@@ -22,97 +22,66 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.sectiontype.SectionTypeView;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "section_type")
-@NamedQueries({ @NamedQuery(name = "SectionType.findAll", query = "SELECT s FROM SectionType s") })
+@NamedQueries({
+    @NamedQuery(name = "SectionType.findAll", query = "SELECT s FROM SectionType s")})
 public class SectionType implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@JsonView(SectionTypeView.Id.class)
-	@Column(name = "id")
-	private Integer id;
-	@JsonView(SectionTypeView.Code.class)
-	@Column(name = "code")
-	private String code;
-	@JsonView(SectionTypeView.Name.class)
-	@Column(name = "name")
-	private String name;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sectionType")
-	private List<Section> sectionList;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @JsonView(SectionTypeView.Id.class)
+    @Column(name = "id")
+    private Integer id;
+    @JsonView(SectionTypeView.Code.class)
+    @Column(name = "code")
+    private String code;
+    @JsonView(SectionTypeView.Name.class)
+    @Column(name = "name")
+    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sectionType")
+    private List<Section> sectionList;
 
-	public SectionType() {
-	}
+    public SectionType() {
+    }
 
-	public SectionType(Integer id) {
-		this.id = id;
-	}
+    public SectionType(Integer id) {
+        this.id = id;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are
+        // not set
+        if (!(object instanceof SectionType)) {
+            return false;
+        }
+        SectionType other = (SectionType) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public List<Section> getSectionList() {
-		return sectionList;
-	}
-
-	public void setSectionList(List<Section> sectionList) {
-		this.sectionList = sectionList;
-	}
-
-	@Override
-	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are
-		// not set
-		if (!(object instanceof SectionType)) {
-			return false;
-		}
-		SectionType other = (SectionType) object;
-		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "com.trendsmixed.fma.entity.SectionType[ id=" + id + " ]";
-	}
+    @Override
+    public String toString() {
+        return "com.trendsmixed.fma.entity.SectionType[ id=" + id + " ]";
+    }
 
 }

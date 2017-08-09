@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.usermenu;
 import com.trendsmixed.fma.module.user.User;
 import com.trendsmixed.fma.module.menu.Menu;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.usermenu.UserMenuView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -22,12 +21,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "user_menu", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"user_id", "menu_id"})})
 @NamedQueries({
@@ -55,30 +56,6 @@ public class UserMenu implements Serializable {
 
     public UserMenu(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     @Override

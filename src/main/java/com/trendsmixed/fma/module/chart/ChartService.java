@@ -72,7 +72,6 @@ public class ChartService {
     /**
      * ***********
      */
-
     public List test(Date startDate, Date endDate) {
         return chartRepository.test(startDate, endDate);
     }
@@ -88,19 +87,19 @@ public class ChartService {
     public List getMonthlyEnergyConsumptionByLocation(Date startDate, Date endDate, Location location) {
         return chartRepository.getMonthlyEnergyConsumptionByLocation(startDate, endDate, location);
     }
-    
+
     public List getMonthlyLabourTurnover(Date startDate, Date endDate) {
         return chartRepository.getMonthlyLabourTurnover(startDate, endDate);
     }
-    
+
     public List getMonthlyAbsenteeism(Date startDate, Date endDate) {
         return chartRepository.getMonthlyAbsenteeism(startDate, endDate);
     }
-    
+
     public List getMonthlySalesValue(Date startDate, Date endDate) {
         return chartRepository.getMonthlySalesValue(startDate, endDate);
     }
-    
+
     public List getMonthlySalesWeight(Date startDate, Date endDate) {
         return chartRepository.getMonthlySalesWeight(startDate, endDate);
     }
@@ -133,7 +132,6 @@ public class ChartService {
         return chartRepository.getMonthlyElectricityCostPerKg(startDate, endDate);
     }
 
-    
     public List getMonthlyScrapCostPerKg(Date startDate, Date endDate) {
         return chartRepository.getMonthlyScrapCostPerKg(startDate, endDate);
     }

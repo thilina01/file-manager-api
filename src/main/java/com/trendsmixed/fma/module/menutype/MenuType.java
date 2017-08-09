@@ -46,10 +46,10 @@ public class MenuType implements Serializable {
     private String code;
     @JsonView(MenuTypeView.Name.class)
     @Column(name = "name")
-    private String name;    
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "menuType")
     private List<Menu> menuList;
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -74,5 +74,5 @@ public class MenuType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.MenuType[ id=" + id + " ]";
     }
-    
+
 }

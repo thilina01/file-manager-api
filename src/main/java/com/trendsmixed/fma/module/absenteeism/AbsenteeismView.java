@@ -16,6 +16,7 @@ public class AbsenteeismView {
 
     public static interface Id {
     }
+
     public static interface EffectiveMonth {
     }
 

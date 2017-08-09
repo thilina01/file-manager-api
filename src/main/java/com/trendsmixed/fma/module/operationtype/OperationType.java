@@ -22,13 +22,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.operationtype.OperationTypeView;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "operation_type")
 @NamedQueries({
     @NamedQuery(name = "OperationType.findAll", query = "SELECT o FROM OperationType o")})
@@ -57,38 +58,6 @@ public class OperationType implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Operation> getOperationList() {
-        return operationList;
-    }
-
-    public void setOperationList(List<Operation> operationList) {
-        this.operationList = operationList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -113,5 +82,5 @@ public class OperationType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.OperationType[ id=" + id + " ]";
     }
-    
+
 }

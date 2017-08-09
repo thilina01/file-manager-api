@@ -17,7 +17,7 @@ public class LabourSourceService {
     public Iterable<LabourSource> findAll() {
         return repository.findAll();
     }
-    
+
     public Page<LabourSource> findAll(Pageable pageable) {
         return new Page<>(repository.findAll(pageable));
     }
@@ -25,7 +25,6 @@ public class LabourSourceService {
     public List<Combo> getCombo() {
         return repository.getCombo();
     }
-
 
     public LabourSource save(LabourSource labourSource) {
         return repository.save(labourSource);

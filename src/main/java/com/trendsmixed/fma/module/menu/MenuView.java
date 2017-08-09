@@ -36,7 +36,7 @@ public class MenuView {
 
     public static interface SubMenu {
     }
-    
+
     public static interface MenuType {
     }
 

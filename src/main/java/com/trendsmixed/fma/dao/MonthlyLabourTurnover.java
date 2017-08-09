@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class MonthlyLabourTurnover {
 
-    String month,source;
-    double turnover,target;
+    String month, source;
+    double turnover, target;
 
 }

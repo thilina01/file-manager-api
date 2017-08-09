@@ -48,7 +48,7 @@ public class ScrapCostPerKg implements Serializable {
     @JsonView(ScrapCostPerKgView.Actual.class)
     @Column(name = "actual")
     private double actual;
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -73,5 +73,5 @@ public class ScrapCostPerKg implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ScrapCostPerKg[ id=" + id + " ]";
     }
-    
+
 }

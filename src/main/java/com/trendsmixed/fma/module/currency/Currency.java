@@ -81,5 +81,5 @@ public class Currency implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Currency[ id=" + id + " ]";
     }
-    
+
 }

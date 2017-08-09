@@ -29,14 +29,12 @@ public class SalesOrderItemController {
     @Autowired
     private SalesOrderItemService salesOrderItemService;
 
-
     @GetMapping
     @JsonView(SalesOrderItemView.AllAndItemAllAndSalesOrderAllAndJobAll.class)
     public List<SalesOrderItem> findAll() {
         return salesOrderItemService.findAll();
     }
 
-   
     @PostMapping
     public SalesOrderItem save(@RequestBody SalesOrderItem salesOrderItem, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
-import com.trendsmixed.fma.module.salesorder.SalesOrderView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
 import java.util.List;

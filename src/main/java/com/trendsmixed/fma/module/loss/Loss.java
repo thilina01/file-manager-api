@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.loss;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.trendsmixed.fma.module.operation.Operation;
-import com.trendsmixed.fma.module.loss.LossView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -23,12 +22,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "loss", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"loss_reason_id", "operation_id"})})
 @NamedQueries({
@@ -61,38 +62,6 @@ public class Loss implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public LossReason getLossReason() {
-        return lossReason;
-    }
-
-    public void setLossReason(LossReason lossReason) {
-        this.lossReason = lossReason;
-    }
-
-    public Operation getOperation() {
-        return operation;
-    }
-
-    public void setOperation(Operation operation) {
-        this.operation = operation;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -117,5 +86,5 @@ public class Loss implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Loss[ id=" + id + " ]";
     }
-    
+
 }

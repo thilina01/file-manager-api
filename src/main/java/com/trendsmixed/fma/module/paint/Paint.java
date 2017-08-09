@@ -81,5 +81,5 @@ public class Paint implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Paint[ id=" + id + " ]";
     }
-    
+
 }

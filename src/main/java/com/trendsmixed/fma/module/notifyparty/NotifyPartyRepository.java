@@ -11,8 +11,8 @@ public interface NotifyPartyRepository extends PagingAndSortingRepository<Notify
 
     public NotifyParty findByName(String name);
 
-	@Query(value = "SELECT"
-			+ " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
-			+ " FROM NotifyParty o")
-	public List<Combo> getCombo();
+    @Query(value = "SELECT"
+            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
+            + " FROM NotifyParty o")
+    public List<Combo> getCombo();
 }

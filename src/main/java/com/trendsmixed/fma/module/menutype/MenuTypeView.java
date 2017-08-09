@@ -6,7 +6,7 @@ public class MenuTypeView {
 
     public static interface Id {
     }
-    
+
     public static interface Code {
     }
 

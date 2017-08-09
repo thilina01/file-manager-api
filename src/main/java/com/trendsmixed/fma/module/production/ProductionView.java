@@ -21,69 +21,70 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class ProductionView {
 
-	public static interface Id {
-	}
+    public static interface Id {
+    }
 
-	public static interface ProductionDate {
-	}
+    public static interface ProductionDate {
+    }
 
-	public static interface PlannedDuration {
-	}
+    public static interface PlannedDuration {
+    }
 
-	public static interface ActualDuration {
-	}
+    public static interface ActualDuration {
+    }
 
-	public static interface PlannedQuantity {
-	}
+    public static interface PlannedQuantity {
+    }
 
-	public static interface ActualQuantity {
-	}
+    public static interface ActualQuantity {
+    }
 
-	public static interface ControlPoint {
-	}
+    public static interface ControlPoint {
+    }
 
-	public static interface Job {
-	}
+    public static interface Job {
+    }
 
-	public static interface Operation extends OperationView.All {
-	}
+    public static interface Operation extends OperationView.All {
+    }
 
-	public static interface Manpower extends ManpowerView.AllManpowerTypeAll {
-	}
+    public static interface Manpower extends ManpowerView.AllManpowerTypeAll {
+    }
 
-	public static interface ProductType {
-	}
+    public static interface ProductType {
+    }
 
-	public static interface Shift {
-	}
-	public static interface ShiftType {
-	}
+    public static interface Shift {
+    }
 
-	public static interface All
-			extends Id, ProductionDate, PlannedDuration, ActualDuration, PlannedQuantity, ActualQuantity, PageView.All {
-	}
+    public static interface ShiftType {
+    }
 
-	public static interface AllAndShiftAndShiftType extends All, Shift, ShiftView.All,ShiftType,ShiftTypeView.All {
-	}
+    public static interface All
+            extends Id, ProductionDate, PlannedDuration, ActualDuration, PlannedQuantity, ActualQuantity, PageView.All {
+    }
 
-	public static interface AllAndShiftAndShiftTypeAndControlPointAll
-			extends AllAndShiftAndShiftType, ControlPoint, ControlPointView.All {
-	}
+    public static interface AllAndShiftAndShiftType extends All, Shift, ShiftView.All, ShiftType, ShiftTypeView.All {
+    }
 
-	public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection
-			extends AllAndShiftAndShiftType, ControlPoint, ControlPointView.AllAndWorkCenterAll,
-			WorkCenterView.AllAndCostCenterAll, CostCenterView.AllAndSectionAll {
-	}
+    public static interface AllAndShiftAndShiftTypeAndControlPointAll
+            extends AllAndShiftAndShiftType, ControlPoint, ControlPointView.All {
+    }
 
-	public static interface AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll
-			extends AllAndShiftAndShiftTypeAndControlPointAll, Operation, Manpower,
-			OperationView.AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll {
-	}
+    public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection
+            extends AllAndShiftAndShiftType, ControlPoint, ControlPointView.AllAndWorkCenterAll,
+            WorkCenterView.AllAndCostCenterAll, CostCenterView.AllAndSectionAll {
+    }
 
-	public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll
-			extends AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection,
-			AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll,
-			JobView.AllAndItemAllAndJobTypeAll {
-	}
+    public static interface AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll
+            extends AllAndShiftAndShiftTypeAndControlPointAll, Operation, Manpower,
+            OperationView.AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll {
+    }
+
+    public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll
+            extends AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection,
+            AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll,
+            JobView.AllAndItemAllAndJobTypeAll {
+    }
 
 }

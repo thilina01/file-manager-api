@@ -22,97 +22,66 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.controlpointtype.ControlPointTypeView;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "control_point_type")
-@NamedQueries({ @NamedQuery(name = "ControlPointType.findAll", query = "SELECT s FROM ControlPointType s") })
+@NamedQueries({
+    @NamedQuery(name = "ControlPointType.findAll", query = "SELECT s FROM ControlPointType s")})
 public class ControlPointType implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@JsonView(ControlPointTypeView.Id.class)
-	@Column(name = "id")
-	private Integer id;
-	@JsonView(ControlPointTypeView.Code.class)
-	@Column(name = "code")
-	private String code;
-	@JsonView(ControlPointTypeView.Name.class)
-	@Column(name = "name")
-	private String name;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPointType")
-	private List<ControlPoint> controlPointList;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @JsonView(ControlPointTypeView.Id.class)
+    @Column(name = "id")
+    private Integer id;
+    @JsonView(ControlPointTypeView.Code.class)
+    @Column(name = "code")
+    private String code;
+    @JsonView(ControlPointTypeView.Name.class)
+    @Column(name = "name")
+    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPointType")
+    private List<ControlPoint> controlPointList;
 
-	public ControlPointType() {
-	}
+    public ControlPointType() {
+    }
 
-	public ControlPointType(Integer id) {
-		this.id = id;
-	}
+    public ControlPointType(Integer id) {
+        this.id = id;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are
+        // not set
+        if (!(object instanceof ControlPointType)) {
+            return false;
+        }
+        ControlPointType other = (ControlPointType) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public List<ControlPoint> getControlPointList() {
-		return controlPointList;
-	}
-
-	public void setControlPointList(List<ControlPoint> controlPointList) {
-		this.controlPointList = controlPointList;
-	}
-
-	@Override
-	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are
-		// not set
-		if (!(object instanceof ControlPointType)) {
-			return false;
-		}
-		ControlPointType other = (ControlPointType) object;
-		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "com.trendsmixed.fma.entity.ControlPointType[ id=" + id + " ]";
-	}
+    @Override
+    public String toString() {
+        return "com.trendsmixed.fma.entity.ControlPointType[ id=" + id + " ]";
+    }
 
 }

@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.customeritem;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.item.Item;
-import com.trendsmixed.fma.module.customeritem.CustomerItemView;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -21,12 +20,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "customer_item", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"item_id", "customer_id"})})/*
 @NamedQueries({
@@ -61,46 +62,6 @@ public class CustomerItem implements Serializable {
 
     public CustomerItem(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCustomerPartNo() {
-        return customerPartNo;
-    }
-
-    public void setCustomerPartNo(String customerPartNo) {
-        this.customerPartNo = customerPartNo;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
     }
 
     @Override

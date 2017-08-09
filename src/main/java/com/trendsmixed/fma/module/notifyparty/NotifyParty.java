@@ -81,5 +81,5 @@ public class NotifyParty implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.NotifyParty[ id=" + id + " ]";
     }
-    
+
 }

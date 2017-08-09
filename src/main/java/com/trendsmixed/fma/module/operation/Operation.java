@@ -12,7 +12,6 @@ import com.trendsmixed.fma.module.operationbreadown.OperationBreadown;
 import com.trendsmixed.fma.module.operationtype.OperationType;
 import com.trendsmixed.fma.module.producttype.ProductType;
 import com.trendsmixed.fma.module.production.Production;
-import com.trendsmixed.fma.module.operation.OperationView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -28,12 +27,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "operation")
 @NamedQueries({
     @NamedQuery(name = "Operation.findAll", query = "SELECT p FROM Operation p")})
@@ -75,8 +76,8 @@ public class Operation implements Serializable {
     @JoinColumn(name = "product_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)//, cascade = CascadeType.ALL
     private ProductType productType;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operation")
-	private List<OperationBreadown> operationBreadownList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "operation")
+    private List<OperationBreadown> operationBreadownList;
 
     public Operation() {
     }
@@ -85,87 +86,7 @@ public class Operation implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getPlannedQuantity() {
-        return plannedQuantity;
-    }
-
-    public void setPlannedQuantity(Integer plannedQuantity) {
-        this.plannedQuantity = plannedQuantity;
-    }
-
-    public Integer getActualQuantity() {
-        return actualQuantity;
-    }
-
-    public void setActualQuantity(Integer actualQuantity) {
-        this.actualQuantity = actualQuantity;
-    }
-
-    public Double getUnitWeight() {
-        return unitWeight;
-    }
-
-    public void setUnitWeight(Double unitWeight) {
-        this.unitWeight = unitWeight;
-    }
-
-    public List<Loss> getLossList() {
-        return lossList;
-    }
-
-    public void setLossList(List<Loss> lossList) {
-        this.lossList = lossList;
-    }
-
-    public Production getProduction() {
-        return production;
-    }
-
-    public void setProduction(Production production) {
-        this.production = production;
-    }
-
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
-    }
-
-    public OperationType getOperationType() {
-        return operationType;
-    }
-
-    public void setOperationType(OperationType operationType) {
-        this.operationType = operationType;
-    }
-
-    public ProductType getProductType() {
-        return productType;
-    }
-
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
-    }
-
-    public List<OperationBreadown> getOperationBreadownList() {
-		return operationBreadownList;
-	}
-
-	public void setOperationBreadownList(List<OperationBreadown> operationBreadownList) {
-		this.operationBreadownList = operationBreadownList;
-	}
-
-	@Override
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);

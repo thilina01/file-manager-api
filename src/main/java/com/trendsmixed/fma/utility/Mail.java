@@ -66,13 +66,13 @@ public class Mail {
 //        transport.close();
 //    }
 
-    public  void send(String email, String subject, String message) {
+    public void send(String email, String subject, String message) {
         List<String> emailList = new ArrayList<String>();
         emailList.add(email);
         send(emailList, subject, message);
     }
 
-    public  void send(List<String> emailList, String subject, String message) {
+    public void send(List<String> emailList, String subject, String message) {
         new Thread(() -> {
             try {
                 Properties mailServerProperties;

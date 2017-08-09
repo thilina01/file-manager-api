@@ -6,7 +6,7 @@ public class ShiftTypeView {
 
     public static interface Id {
     }
-    
+
     public static interface Code {
     }
 

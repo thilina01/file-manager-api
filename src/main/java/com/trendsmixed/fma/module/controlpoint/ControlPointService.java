@@ -12,38 +12,38 @@ import com.trendsmixed.fma.utility.Page;
 @Service
 public class ControlPointService {
 
-	@Autowired
-	private ControlPointRepository repository;
+    @Autowired
+    private ControlPointRepository repository;
 
-	public Iterable<ControlPoint> findAll() {
-		return repository.findAll();
-	}
+    public Iterable<ControlPoint> findAll() {
+        return repository.findAll();
+    }
 
-	public Page<ControlPoint> findAll(Pageable pageable) {
-		return new Page<ControlPoint>(repository.findAll(pageable));
-	}
+    public Page<ControlPoint> findAll(Pageable pageable) {
+        return new Page<ControlPoint>(repository.findAll(pageable));
+    }
 
-	public ControlPoint save(ControlPoint ControlPoint) {
-		return repository.save(ControlPoint);
-	}
+    public ControlPoint save(ControlPoint ControlPoint) {
+        return repository.save(ControlPoint);
+    }
 
-	public void save(List<ControlPoint> controlPoints) {
-		repository.save(controlPoints);
-	}
+    public void save(List<ControlPoint> controlPoints) {
+        repository.save(controlPoints);
+    }
 
-	public ControlPoint findOne(int id) {
-		return repository.findOne(id);
-	}
+    public ControlPoint findOne(int id) {
+        return repository.findOne(id);
+    }
 
-	public void delete(int id) {
-		repository.delete(id);
-	}
+    public void delete(int id) {
+        repository.delete(id);
+    }
 
-	public ControlPoint findByCode(String code) {
-		return repository.findByCode(code);
-	}
+    public ControlPoint findByCode(String code) {
+        return repository.findByCode(code);
+    }
 
-	public List<Combo> getCombo() {
-		return repository.getCombo();
-	}
+    public List<Combo> getCombo() {
+        return repository.getCombo();
+    }
 }

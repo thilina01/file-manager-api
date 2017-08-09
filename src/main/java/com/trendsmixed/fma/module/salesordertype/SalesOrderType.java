@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.salesordertype;
 
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.salesordertype.SalesOrderTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -21,12 +20,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "sales_order_type")
 @NamedQueries({
     @NamedQuery(name = "SalesOrderType.findAll", query = "SELECT o FROM SalesOrderType o")})
@@ -55,38 +56,6 @@ public class SalesOrderType implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public List<SalesOrder> getSalesOrderList() {
-        return salesOrderList;
-    }
-
-    public void setSalesOrderList(List<SalesOrder> salesOrderList) {
-        this.salesOrderList = salesOrderList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -111,5 +80,5 @@ public class SalesOrderType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.SalesOrderType[ id=" + id + " ]";
     }
-    
+
 }

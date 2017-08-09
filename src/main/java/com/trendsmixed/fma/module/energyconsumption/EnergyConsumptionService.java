@@ -22,7 +22,6 @@ public class EnergyConsumptionService {
         return new Page<>(repository.findAll(pageable));
     }
 
-
     public EnergyConsumption save(EnergyConsumption energyConsumption) {
         return repository.save(energyConsumption);
     }

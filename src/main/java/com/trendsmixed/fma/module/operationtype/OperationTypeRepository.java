@@ -11,8 +11,8 @@ public interface OperationTypeRepository extends PagingAndSortingRepository<Oper
 
     public OperationType findByCode(String code);
 
-	@Query(value = "SELECT"
-			+ " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.description)"
-			+ " FROM OperationType o")
-	public List<Combo> getCombo();
+    @Query(value = "SELECT"
+            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.description)"
+            + " FROM OperationType o")
+    public List<Combo> getCombo();
 }

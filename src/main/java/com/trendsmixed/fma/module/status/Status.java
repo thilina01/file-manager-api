@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.status;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.user.User;
-import com.trendsmixed.fma.module.status.StatusView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -21,12 +20,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "status")
 @NamedQueries({
     @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s")})
@@ -50,30 +51,6 @@ public class Status implements Serializable {
 
     public Status(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
     }
 
     @Override

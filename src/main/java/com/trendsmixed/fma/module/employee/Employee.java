@@ -74,5 +74,5 @@ public class Employee implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Employee[ id=" + id + " ]";
     }
-    
+
 }

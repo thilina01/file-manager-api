@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.menutype.MenuType;
 import com.trendsmixed.fma.module.teammenu.TeamMenu;
 import com.trendsmixed.fma.module.usermenu.UserMenu;
-import com.trendsmixed.fma.module.menu.MenuView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -25,12 +24,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "menu")
 @NamedQueries({
     @NamedQuery(name = "Menu.findAll", query = "SELECT m FROM Menu m")})
@@ -89,62 +90,6 @@ public class Menu implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTarget() {
-        return target;
-    }
-
-    public void setTarget(String target) {
-        this.target = target;
-    }
-
-    public String getHref() {
-        return href;
-    }
-
-    public void setHref(String href) {
-        this.href = href;
-    }
-
-    public List<TeamMenu> getTeamMenuList() {
-        return teamMenuList;
-    }
-
-    public void setTeamMenuList(List<TeamMenu> teamMenuList) {
-        this.teamMenuList = teamMenuList;
-    }
-
-    public List<Menu> getMenuList() {
-        return menuList;
-    }
-
-    public void setMenuList(List<Menu> menuList) {
-        this.menuList = menuList;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -168,30 +113,6 @@ public class Menu implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.Menu[ id=" + id + " ]";
-    }
-
-    public String getRouterLink() {
-        return routerLink;
-    }
-
-    public void setRouterLink(String routerLink) {
-        this.routerLink = routerLink;
-    }
-
-    public MenuType getMenuType() {
-        return menuType;
-    }
-
-    public void setMenuType(MenuType menuType) {
-        this.menuType = menuType;
-    }
-
-    public List<UserMenu> getUserMenuList() {
-        return userMenuList;
-    }
-
-    public void setUserMenuList(List<UserMenu> userMenuList) {
-        this.userMenuList = userMenuList;
     }
 
 }

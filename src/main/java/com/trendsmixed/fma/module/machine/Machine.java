@@ -23,13 +23,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.machine.MachineView;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "machine")
 @NamedQueries({
     @NamedQuery(name = "Machine.findAll", query = "SELECT m FROM Machine m")})
@@ -54,9 +55,8 @@ public class Machine implements Serializable {
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
     private List<Breakdown> breakdownList;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
-	private List<ControlPointMachine> controlPointMachineList;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
+    private List<ControlPointMachine> controlPointMachineList;
 
     public Machine() {
     }
@@ -65,55 +65,7 @@ public class Machine implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Double getEnergyRate() {
-        return energyRate;
-    }
-
-    public void setEnergyRate(Double energyRate) {
-        this.energyRate = energyRate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Breakdown> getBreakdownList() {
-        return breakdownList;
-    }
-
-    public void setBreakdownList(List<Breakdown> breakdownList) {
-        this.breakdownList = breakdownList;
-    }
-
-    public List<ControlPointMachine> getControlPointMachineList() {
-		return controlPointMachineList;
-	}
-
-	public void setControlPointMachineList(List<ControlPointMachine> controlPointMachineList) {
-		this.controlPointMachineList = controlPointMachineList;
-	}
-
-	@Override
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -137,5 +89,5 @@ public class Machine implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Machine[ id=" + id + " ]";
     }
-    
+
 }

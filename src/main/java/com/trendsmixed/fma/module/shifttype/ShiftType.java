@@ -46,10 +46,10 @@ public class ShiftType implements Serializable {
     private String code;
     @JsonView(ShiftTypeView.Name.class)
     @Column(name = "name")
-    private String name;    
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "shiftType")
     private List<Production> productionList;
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -74,5 +74,5 @@ public class ShiftType implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.ShiftType[ id=" + id + " ]";
     }
-    
+
 }

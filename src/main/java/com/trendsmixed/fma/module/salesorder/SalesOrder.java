@@ -9,7 +9,6 @@ import com.trendsmixed.fma.module.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
-import com.trendsmixed.fma.module.salesorder.SalesOrderView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -28,12 +27,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "sales_order")
 @NamedQueries({
     @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s")})
@@ -91,94 +92,6 @@ public class SalesOrder implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getActualDispatchedDate() {
-        return actualDispatchedDate;
-    }
-
-    public void setActualDispatchedDate(Date actualDispatchedDate) {
-        this.actualDispatchedDate = actualDispatchedDate;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    public Date getCustomerRequestedDate() {
-        return customerRequestedDate;
-    }
-
-    public void setCustomerRequestedDate(Date customerRequestedDate) {
-        this.customerRequestedDate = customerRequestedDate;
-    }
-
-    public Double getOrderQty() {
-        return orderQty;
-    }
-
-    public void setOrderQty(Double orderQty) {
-        this.orderQty = orderQty;
-    }
-
-    public Date getOrderReceivedDate() {
-        return orderReceivedDate;
-    }
-
-    public void setOrderReceivedDate(Date orderReceivedDate) {
-        this.orderReceivedDate = orderReceivedDate;
-    }
-
-    public String getPoNumber() {
-        return poNumber;
-    }
-
-    public void setPoNumber(String poNumber) {
-        this.poNumber = poNumber;
-    }
-
-    public Date getTrwConfirmedDate() {
-        return trwConfirmedDate;
-    }
-
-    public void setTrwConfirmedDate(Date trwConfirmedDate) {
-        this.trwConfirmedDate = trwConfirmedDate;
-    }
-
-    public List<SalesOrderItem> getSalesOrderItemList() {
-        return salesOrderItemList;
-    }
-
-    public void setSalesOrderItemList(List<SalesOrderItem> salesOrderItemList) {
-        this.salesOrderItemList = salesOrderItemList;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public SalesOrderType getSalesOrderType() {
-        return salesOrderType;
-    }
-
-    public void setSalesOrderType(SalesOrderType salesOrderType) {
-        this.salesOrderType = salesOrderType;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -203,5 +116,5 @@ public class SalesOrder implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.SalesOrder[ id=" + id + " ]";
     }
-    
+
 }

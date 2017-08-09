@@ -11,9 +11,9 @@ public interface ControlPointTypeRepository extends PagingAndSortingRepository<C
 
     public ControlPointType findByCode(String code);
 
-	@Query(value = "SELECT"
-			+ " new com.trendsmixed.fma.dao.Combo(controlPointType.id, controlPointType.code, controlPointType.name)"
-			+ " FROM ControlPointType controlPointType")
-	public List<Combo> getCombo();
+    @Query(value = "SELECT"
+            + " new com.trendsmixed.fma.dao.Combo(controlPointType.id, controlPointType.code, controlPointType.name)"
+            + " FROM ControlPointType controlPointType")
+    public List<Combo> getCombo();
 
 }

@@ -22,13 +22,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.machine.Machine;
-import com.trendsmixed.fma.module.controlpointmachine.ControlPointMachineView;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "control_point_machine")
 @NamedQueries({
     @NamedQuery(name = "ControlPointMachine.findAll", query = "SELECT m FROM ControlPointMachine m")})
@@ -57,23 +58,6 @@ public class ControlPointMachine implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
-    public ControlPoint getControlPoint() {
-        return controlPoint;
-    }
-
-    public void setControlPoint(ControlPoint controlPoint) {
-        this.controlPoint = controlPoint;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -81,15 +65,7 @@ public class ControlPointMachine implements Serializable {
         return hash;
     }
 
-    public Machine getMachine() {
-		return machine;
-	}
-
-	public void setMachine(Machine machine) {
-		this.machine = machine;
-	}
-
-	@Override
+    @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof ControlPointMachine)) {
@@ -106,5 +82,5 @@ public class ControlPointMachine implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Machine[ id=" + id + " ]";
     }
-    
+
 }

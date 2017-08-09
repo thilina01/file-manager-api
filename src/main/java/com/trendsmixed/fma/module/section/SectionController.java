@@ -38,15 +38,15 @@ public class SectionController {
 
     @JsonView(SectionView.All.class)
     @GetMapping("/page")
-	Page<Section> page( Pageable pageable){
-    	return service.findAll(pageable);
-	} 
-    
+    Page<Section> page(Pageable pageable) {
+        return service.findAll(pageable);
+    }
+
     @GetMapping("/combo")
-	List<Combo> combo(){
-    	return service.getCombo();
-	} 
-	
+    List<Combo> combo() {
+        return service.getCombo();
+    }
+
     @PostMapping
     public Section save(@RequestBody Section section, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

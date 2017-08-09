@@ -12,5 +12,4 @@ public class Column {
         this.name = name;
     }
 
-
 }

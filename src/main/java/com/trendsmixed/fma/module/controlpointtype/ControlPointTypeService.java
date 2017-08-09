@@ -20,14 +20,14 @@ public class ControlPointTypeService {
         return repository.findAll();
     }
 
-	public Page<ControlPointType> findAll(Pageable pageable) {
-		return new Page<ControlPointType>(repository.findAll(pageable));
-	}
+    public Page<ControlPointType> findAll(Pageable pageable) {
+        return new Page<ControlPointType>(repository.findAll(pageable));
+    }
 
-	public List<Combo> getCombo() {
-		return repository.getCombo();
-	}
-	
+    public List<Combo> getCombo() {
+        return repository.getCombo();
+    }
+
     public ControlPointType save(ControlPointType controlPointType) {
         return repository.save(controlPointType);
     }

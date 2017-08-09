@@ -46,7 +46,8 @@ public class OperationView {
     public static interface AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
             extends AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll, Production {
     }
+
     public static interface AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
-    extends AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll, JobView.AllAndItemAllAndJobTypeAll {
-}
+            extends AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll, JobView.AllAndItemAllAndJobTypeAll {
+    }
 }

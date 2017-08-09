@@ -7,6 +7,6 @@ import com.trendsmixed.fma.module.machine.Machine;
 
 public interface ControlPointMachineRepository extends PagingAndSortingRepository<ControlPointMachine, Integer> {
 
-	ControlPointMachine findByControlPointAndMachine(ControlPoint controlPoint, Machine machine);
+    ControlPointMachine findByControlPointAndMachine(ControlPoint controlPoint, Machine machine);
 
 }

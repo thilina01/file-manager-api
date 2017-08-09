@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.absenteeism;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.labourtursource.LabourSource;
-import com.trendsmixed.fma.module.absenteeism.AbsenteeismView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -55,6 +54,7 @@ public class Absenteeism implements Serializable {
     @JoinColumn(name = "labour_source_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LabourSource labourSource;
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -79,5 +79,5 @@ public class Absenteeism implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.Absenteeism[ id=" + id + " ]";
     }
-    
+
 }

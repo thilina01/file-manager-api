@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class AbsenteeismService {
 
@@ -23,7 +21,6 @@ public class AbsenteeismService {
     public Page<Absenteeism> findAll(Pageable pageable) {
         return new Page<>(repository.findAll(pageable));
     }
-
 
     public Absenteeism save(Absenteeism absenteeism) {
         return repository.save(absenteeism);

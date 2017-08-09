@@ -81,5 +81,5 @@ public class PaymentTerm implements Serializable {
     public String toString() {
         return "com.trendsmixed.fma.entity.PaymentTerm[ id=" + id + " ]";
     }
-    
+
 }

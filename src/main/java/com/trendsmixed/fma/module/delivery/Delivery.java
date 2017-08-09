@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.delivery;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
-import com.trendsmixed.fma.module.delivery.DeliveryView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -23,12 +22,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "delivery")
 @NamedQueries({
     @NamedQuery(name = "Delivery.findAll", query = "SELECT d FROM Delivery d")})
@@ -62,46 +63,6 @@ public class Delivery implements Serializable {
 
     public Delivery(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Double getDeliverdQuantity() {
-        return deliverdQuantity;
-    }
-
-    public void setDeliverdQuantity(Double deliverdQuantity) {
-        this.deliverdQuantity = deliverdQuantity;
-    }
-
-    public Date getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    public void setDeliveryDate(Date deliveryDate) {
-        this.deliveryDate = deliveryDate;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public SalesOrderItem getSalesOrderItem() {
-        return salesOrderItem;
-    }
-
-    public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
-        this.salesOrderItem = salesOrderItem;
     }
 
     @Override

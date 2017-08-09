@@ -23,7 +23,7 @@ public class DispatchView {
     public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
     }
 
-    public static interface AllAndCustomerAllAndJobDispatchAll extends All, Customer, CustomerView.All,JobDispatch,JobDispatchView.All {
+    public static interface AllAndCustomerAllAndJobDispatchAll extends All, Customer, CustomerView.All, JobDispatch, JobDispatchView.All {
     }
 
 }

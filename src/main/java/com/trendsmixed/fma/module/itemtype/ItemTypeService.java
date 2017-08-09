@@ -20,7 +20,7 @@ public class ItemTypeService {
     }
 
     public Page<ItemType> findAll(Pageable pageable) {
-        return  repository.findAll(pageable);
+        return repository.findAll(pageable);
     }
 
     public List<Combo> getCombo() {

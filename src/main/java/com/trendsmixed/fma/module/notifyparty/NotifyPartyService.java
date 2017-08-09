@@ -21,7 +21,7 @@ public class NotifyPartyService {
     public Page<NotifyParty> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
-    
+
     public List<Combo> getCombo() {
         return repository.getCombo();
     }

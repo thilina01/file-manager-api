@@ -10,7 +10,6 @@ import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.delivery.Delivery;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -28,12 +27,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "sales_order_item", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"item_id", "sales_order_id"})})
 @NamedQueries({
@@ -75,54 +76,6 @@ public class SalesOrderItem implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public SalesOrder getSalesOrder() {
-        return salesOrder;
-    }
-
-    public void setSalesOrder(SalesOrder salesOrder) {
-        this.salesOrder = salesOrder;
-    }
-
-    public List<Delivery> getDeliveryList() {
-        return deliveryList;
-    }
-
-    public void setDeliveryList(List<Delivery> deliveryList) {
-        this.deliveryList = deliveryList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -146,14 +99,6 @@ public class SalesOrderItem implements Serializable {
     @Override
     public String toString() {
         return "com.trendsmixed.fma.entity.SalesOrderItem[ id=" + id + " ]";
-    }
-
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
     }
 
 }

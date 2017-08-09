@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.filetype;
 
 import com.trendsmixed.fma.module.file.File;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.filetype.FileTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -20,12 +19,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "file_type")
 @NamedQueries({
     @NamedQuery(name = "FileType.findAll", query = "SELECT f FROM FileType f")})
@@ -49,30 +50,6 @@ public class FileType implements Serializable {
 
     public FileType(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<File> getFileList() {
-        return fileList;
-    }
-
-    public void setFileList(List<File> fileList) {
-        this.fileList = fileList;
     }
 
     @Override

@@ -77,8 +77,8 @@ public class LossReasonController {
                 lossType = lossTypeService.findByCode(lossType.getCode());
                 lossReason.setLossType(lossType);
                 LossReason existingLossReason = service.findByCode(lossReason.getCode());
-                if(existingLossReason!=null){
-                lossReason.setId(existingLossReason.getId());
+                if (existingLossReason != null) {
+                    lossReason.setId(existingLossReason.getId());
                 }
             }
             service.save(lossReasons);
