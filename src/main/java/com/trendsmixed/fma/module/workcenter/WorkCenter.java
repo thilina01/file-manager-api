@@ -24,6 +24,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -31,6 +32,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "work_center")
 @NamedQueries({
     @NamedQuery(name = "WorkCenter.findAll", query = "SELECT w FROM WorkCenter w")})
@@ -49,43 +51,11 @@ public class WorkCenter implements Serializable {
     @JsonView(WorkCenterView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "workCenter")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "workCenter")
     private List<ControlPoint> controlPointList;
     @JsonView(WorkCenterView.CostCenter.class)
     @JoinColumn(name = "cost_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CostCenter costCenter;
-
-    public WorkCenter() {
-    }
-
-    public WorkCenter(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof WorkCenter)) {
-            return false;
-        }
-        WorkCenter other = (WorkCenter) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.WorkCenter[ id=" + id + " ]";
-    }
 
 }

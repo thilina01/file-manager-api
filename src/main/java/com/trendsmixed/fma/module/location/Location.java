@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.location;
 
 import com.trendsmixed.fma.module.energyconsumption.EnergyConsumption;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.location.LocationView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -22,6 +21,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 /**
  *
@@ -29,6 +30,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "location")
 @NamedQueries({
     @NamedQuery(name = "Location.findAll", query = "SELECT c FROM Location c")})
@@ -36,6 +38,7 @@ public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @JsonView(LocationView.Id.class)
@@ -49,37 +52,5 @@ public class Location implements Serializable {
     private String name;
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "location")
     private List<EnergyConsumption> energyConsumptionList;
-
-    public Location() {
-    }
-
-    public Location(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Location)) {
-            return false;
-        }
-        Location other = (Location) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.Location[ id=" + id + " ]";
-    }
 
 }

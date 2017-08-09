@@ -19,11 +19,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.location.Location;
-import com.trendsmixed.fma.module.energyconsumption.EnergyConsumptionView;
 import java.util.Date;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -31,6 +31,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "energy_consumption")
 @NamedQueries({
     @NamedQuery(name = "EnergyConsumption.findAll", query = "SELECT m FROM EnergyConsumption m")})
@@ -63,37 +64,5 @@ public class EnergyConsumption implements Serializable {
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Location location;
-
-    public EnergyConsumption() {
-    }
-
-    public EnergyConsumption(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EnergyConsumption)) {
-            return false;
-        }
-        EnergyConsumption other = (EnergyConsumption) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.EnergyConsumption[ id=" + id + " ]";
-    }
 
 }

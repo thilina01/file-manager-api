@@ -26,6 +26,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.sectiontype.SectionType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 /**
  *
@@ -33,6 +35,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "section")
 @NamedQueries({
     @NamedQuery(name = "Section.findAll", query = "SELECT s FROM Section s")})
@@ -40,6 +43,7 @@ public class Section implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @JsonView(SectionView.Id.class)
@@ -64,40 +68,7 @@ public class Section implements Serializable {
     @JoinColumn(name = "section_type_id", referencedColumnName = "id")
     @ManyToOne(optional = true)
     private SectionType sectionType;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "section")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "section")
     private List<CostCenter> costCenterList;
-
-    public Section() {
-    }
-
-    public Section(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are
-        // not set
-        if (!(object instanceof Section)) {
-            return false;
-        }
-        Section other = (Section) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.Section[ id=" + id + " ]";
-    }
 
 }

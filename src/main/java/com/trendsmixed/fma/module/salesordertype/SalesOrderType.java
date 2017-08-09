@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -28,6 +29,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "sales_order_type")
 @NamedQueries({
     @NamedQuery(name = "SalesOrderType.findAll", query = "SELECT o FROM SalesOrderType o")})
@@ -46,39 +48,7 @@ public class SalesOrderType implements Serializable {
     @JsonView(SalesOrderTypeView.Type.class)
     @Column(name = "type")
     private String type;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "salesOrderType")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderType")
     private List<SalesOrder> salesOrderList;
-
-    public SalesOrderType() {
-    }
-
-    public SalesOrderType(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SalesOrderType)) {
-            return false;
-        }
-        SalesOrderType other = (SalesOrderType) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.SalesOrderType[ id=" + id + " ]";
-    }
 
 }

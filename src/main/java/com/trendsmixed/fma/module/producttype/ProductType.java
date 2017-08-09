@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -28,6 +29,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "product_type")
 @NamedQueries({
     @NamedQuery(name = "ProductType.findAll", query = "SELECT p FROM ProductType p")})
@@ -46,39 +48,7 @@ public class ProductType implements Serializable {
     @JsonView(ProductTypeView.Description.class)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "productType")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "productType")
     private List<Operation> operationList;
-
-    public ProductType() {
-    }
-
-    public ProductType(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProductType)) {
-            return false;
-        }
-        ProductType other = (ProductType) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.ProductType[ id=" + id + " ]";
-    }
 
 }

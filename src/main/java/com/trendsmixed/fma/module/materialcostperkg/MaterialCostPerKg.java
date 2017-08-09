@@ -6,7 +6,6 @@
 package com.trendsmixed.fma.module.materialcostperkg;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.materialcostperkg.MaterialCostPerKgView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -19,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -26,6 +26,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "material_cost_per_kg")
 @NamedQueries({
     @NamedQuery(name = "MaterialCostPerKg.findAll", query = "SELECT c FROM MaterialCostPerKg c")})
@@ -48,30 +49,5 @@ public class MaterialCostPerKg implements Serializable {
     @JsonView(MaterialCostPerKgView.Actual.class)
     @Column(name = "actual")
     private double actual;
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MaterialCostPerKg)) {
-            return false;
-        }
-        MaterialCostPerKg other = (MaterialCostPerKg) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.MaterialCostPerKg[ id=" + id + " ]";
-    }
 
 }

@@ -27,6 +27,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -34,6 +35,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "file")
 @NamedQueries({
     @NamedQuery(name = "File.findAll", query = "SELECT f FROM File f")})
@@ -74,37 +76,5 @@ public class File implements Serializable {
     @JoinColumn(name = "file_type_id", referencedColumnName = "id")
     @ManyToOne
     private FileType fileType;
-
-    public File() {
-    }
-
-    public File(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof File)) {
-            return false;
-        }
-        File other = (File) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.File[ id=" + id + " ]";
-    }
 
 }

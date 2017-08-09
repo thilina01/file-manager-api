@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.processedscrap;
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.section.Section;
-import com.trendsmixed.fma.module.processedscrap.ProcessedScrapView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -25,6 +24,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -32,6 +32,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "processed_scrap")
 @NamedQueries({
     @NamedQuery(name = "ProcessedScrap.findAll", query = "SELECT i FROM ProcessedScrap i")})
@@ -66,28 +67,4 @@ public class ProcessedScrap implements Serializable {
     @ManyToOne(optional = false)
     private Section section;
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProcessedScrap)) {
-            return false;
-        }
-        ProcessedScrap other = (ProcessedScrap) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.ProcessedScrap[ id=" + id + " ]";
-    }
 }

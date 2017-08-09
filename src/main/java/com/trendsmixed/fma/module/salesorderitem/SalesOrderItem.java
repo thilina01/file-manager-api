@@ -28,6 +28,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -35,6 +36,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "sales_order_item", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"item_id", "sales_order_id"})})
 @NamedQueries({
@@ -63,42 +65,10 @@ public class SalesOrderItem implements Serializable {
     @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SalesOrder salesOrder;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "salesOrderItem")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
     private List<Delivery> deliveryList;
     @JsonView(SalesOrderItemView.Job.class)
-    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "salesOrderItem")
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
     private Job job;
-
-    public SalesOrderItem() {
-    }
-
-    public SalesOrderItem(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SalesOrderItem)) {
-            return false;
-        }
-        SalesOrderItem other = (SalesOrderItem) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.SalesOrderItem[ id=" + id + " ]";
-    }
 
 }

@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.scrapcostperkg;
 
-import com.trendsmixed.fma.entity.ScrapCostPerKg;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 

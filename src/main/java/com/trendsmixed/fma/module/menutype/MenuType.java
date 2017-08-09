@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.menutype;
 
 import com.trendsmixed.fma.module.menu.Menu;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.menutype.MenuTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -22,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -29,6 +29,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "menu_type")
 @NamedQueries({
     @NamedQuery(name = "MenuType.findAll", query = "SELECT i FROM MenuType i")})
@@ -47,32 +48,7 @@ public class MenuType implements Serializable {
     @JsonView(MenuTypeView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "menuType")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "menuType")
     private List<Menu> menuList;
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MenuType)) {
-            return false;
-        }
-        MenuType other = (MenuType) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.MenuType[ id=" + id + " ]";
-    }
 
 }

@@ -15,7 +15,6 @@ import com.trendsmixed.fma.module.incoterm.Incoterm;
 import com.trendsmixed.fma.module.notifyparty.NotifyParty;
 import com.trendsmixed.fma.module.paymentterm.PaymentTerm;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
-import com.trendsmixed.fma.module.customer.CustomerView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -33,6 +32,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -40,6 +40,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "customer")
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")})
@@ -123,37 +124,5 @@ public class Customer implements Serializable {
     @JoinColumn(name = "payment_term_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private PaymentTerm paymentTerm;
-
-    public Customer() {
-    }
-
-    public Customer(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Customer)) {
-            return false;
-        }
-        Customer other = (Customer) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.Customer[ id=" + id + " ]";
-    }
 
 }

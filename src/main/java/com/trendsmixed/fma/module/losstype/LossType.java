@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.losstype;
 
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.losstype.LossTypeView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -22,6 +21,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 /**
  *
@@ -29,6 +30,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "loss_type")
 @NamedQueries({
     @NamedQuery(name = "LossType.findAll", query = "SELECT l FROM LossType l")})
@@ -36,6 +38,7 @@ public class LossType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @JsonView(LossTypeView.Id.class)
@@ -51,39 +54,7 @@ public class LossType implements Serializable {
     @Column(name = "type_in_sinhala", length = 250)
     private String typeInSinhala;
     @JsonView(LossTypeView.LossReasonList.class)
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "lossType")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "lossType")
     private List<LossReason> lossReasonList;
-
-    public LossType() {
-    }
-
-    public LossType(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof LossType)) {
-            return false;
-        }
-        LossType other = (LossType) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.LossType[ id=" + id + " ]";
-    }
 
 }

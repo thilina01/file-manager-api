@@ -21,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -28,6 +29,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "job_dispatch")
 @NamedQueries({
     @NamedQuery(name = "JobDispatch.findAll", query = "SELECT j FROM JobDispatch j")})
@@ -52,37 +54,5 @@ public class JobDispatch implements Serializable {
     @ManyToOne(optional = false)
     @JsonView(JobDispatchView.Job.class)
     private Job job;
-
-    public JobDispatch() {
-    }
-
-    public JobDispatch(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof JobDispatch)) {
-            return false;
-        }
-        JobDispatch other = (JobDispatch) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.JobDispatch[ id=" + id + " ]";
-    }
 
 }

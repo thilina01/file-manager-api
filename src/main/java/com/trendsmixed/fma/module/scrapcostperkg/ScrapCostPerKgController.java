@@ -1,12 +1,10 @@
 package com.trendsmixed.fma.module.scrapcostperkg;
 
-import com.trendsmixed.fma.module.labourturnover.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.entity.ScrapCostPerKg;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;

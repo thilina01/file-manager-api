@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.manpowertype.ManpowerType;
 import com.trendsmixed.fma.module.production.Production;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -30,6 +31,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "manpower")
 @NamedQueries({
     @NamedQuery(name = "Manpower.findAll", query = "SELECT m FROM Manpower m")})
@@ -56,38 +58,5 @@ public class Manpower implements Serializable {
     @JoinColumn(name = "production_id", referencedColumnName = "id")
     @ManyToOne(optional = false)//, cascade = CascadeType.DETACH
     private Production production;
-
-    public Manpower() {
-    }
-
-    public Manpower(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are
-        // not set
-        if (!(object instanceof Manpower)) {
-            return false;
-        }
-        Manpower other = (Manpower) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.Manpower[ id=" + id + " ]";
-    }
 
 }

@@ -8,7 +8,6 @@ package com.trendsmixed.fma.module.lossreason;
 import com.trendsmixed.fma.module.loss.Loss;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.losstype.LossType;
-import com.trendsmixed.fma.module.lossreason.LossReasonView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -25,6 +24,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 /**
  *
@@ -32,6 +33,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "loss_reason")
 @NamedQueries({
     @NamedQuery(name = "LossReason.findAll", query = "SELECT l FROM LossReason l")})
@@ -43,6 +45,7 @@ public class LossReason implements Serializable {
     @Basic(optional = false)
     @JsonView(LossReasonView.Id.class)
     @Column(name = "id")
+    @NonNull
     private Integer id;
     @JsonView(LossReasonView.Code.class)
     @Column(name = "code")
@@ -57,39 +60,7 @@ public class LossReason implements Serializable {
     @JoinColumn(name = "loss_type_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private LossType lossType;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "lossReason")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "lossReason")
     private List<Loss> lossList;
-
-    public LossReason() {
-    }
-
-    public LossReason(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof LossReason)) {
-            return false;
-        }
-        LossReason other = (LossReason) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.LossReason[ id=" + id + " ]";
-    }
 
 }

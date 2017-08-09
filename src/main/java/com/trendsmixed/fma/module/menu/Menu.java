@@ -25,6 +25,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -32,6 +33,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "menu")
 @NamedQueries({
     @NamedQuery(name = "Menu.findAll", query = "SELECT m FROM Menu m")})
@@ -56,12 +58,12 @@ public class Menu implements Serializable {
     @JsonView(MenuView.Href.class)
     @Column(name = "href")
     private String href;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "menu")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "menu")
     private List<TeamMenu> teamMenuList;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "menu")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "menu")
     private List<UserMenu> userMenuList;
     @JsonView(MenuView.SubMenu.class)
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "menu")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "menu")
     private List<Menu> menuList;
     @JsonView(MenuView.SuperMenu.class)
     @JoinColumn(name = "menu_id", referencedColumnName = "id")
@@ -72,7 +74,8 @@ public class Menu implements Serializable {
     @ManyToOne(optional = true)
     private MenuType menuType;
 
-    public Menu() {
+    public Menu(Integer id) {
+        this.id = id;
     }
 
     public Menu(String name, String target) {
@@ -84,35 +87,6 @@ public class Menu implements Serializable {
         this.name = name;
         this.target = target;
         this.href = href;
-    }
-
-    public Menu(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Menu)) {
-            return false;
-        }
-        Menu other = (Menu) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.Menu[ id=" + id + " ]";
     }
 
 }

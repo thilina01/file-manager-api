@@ -28,6 +28,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -35,6 +36,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "operation")
 @NamedQueries({
     @NamedQuery(name = "Operation.findAll", query = "SELECT p FROM Operation p")})
@@ -58,7 +60,7 @@ public class Operation implements Serializable {
     @Column(name = "unit_weight")
     private Double unitWeight;
     @JsonView(OperationView.Loss.class)
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "operation")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "operation")
     private List<Loss> lossList;
     @JsonView(OperationView.Production.class)
     @JoinColumn(name = "production_id", referencedColumnName = "id")
@@ -76,39 +78,7 @@ public class Operation implements Serializable {
     @JoinColumn(name = "product_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)//, cascade = CascadeType.DETACH
     private ProductType productType;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "operation")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "operation")
     private List<OperationBreadown> operationBreadownList;
-
-    public Operation() {
-    }
-
-    public Operation(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Operation)) {
-            return false;
-        }
-        Operation other = (Operation) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.Operation[ id=" + id + " ]";
-    }
 
 }

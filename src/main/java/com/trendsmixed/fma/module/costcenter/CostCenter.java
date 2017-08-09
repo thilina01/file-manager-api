@@ -24,6 +24,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -31,6 +32,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "cost_center")
 @NamedQueries({
     @NamedQuery(name = "CostCenter.findAll", query = "SELECT c FROM CostCenter c")})
@@ -55,37 +57,5 @@ public class CostCenter implements Serializable {
     @JoinColumn(name = "section_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Section section;
-
-    public CostCenter() {
-    }
-
-    public CostCenter(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CostCenter)) {
-            return false;
-        }
-        CostCenter other = (CostCenter) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.CostCenter[ id=" + id + " ]";
-    }
 
 }

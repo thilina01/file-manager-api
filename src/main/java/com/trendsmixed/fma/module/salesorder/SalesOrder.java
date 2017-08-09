@@ -28,6 +28,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -35,6 +36,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "sales_order")
 @NamedQueries({
     @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s")})
@@ -74,7 +76,7 @@ public class SalesOrder implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date trwConfirmedDate;
     @JsonView(SalesOrderView.SalesOrderItemList.class)
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "salesOrder")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrder")
     private List<SalesOrderItem> salesOrderItemList;
     @JsonView(SalesOrderView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -84,37 +86,5 @@ public class SalesOrder implements Serializable {
     @JoinColumn(name = "order_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SalesOrderType salesOrderType;
-
-    public SalesOrder() {
-    }
-
-    public SalesOrder(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SalesOrder)) {
-            return false;
-        }
-        SalesOrder other = (SalesOrder) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.SalesOrder[ id=" + id + " ]";
-    }
 
 }

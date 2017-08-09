@@ -31,6 +31,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  *
@@ -38,6 +42,9 @@ import lombok.Data;
  */
 @Entity
 @Data
+@NoArgsConstructor
+@RequiredArgsConstructor
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "job")
 @NamedQueries({
     @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")})
@@ -45,6 +52,7 @@ public class Job implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @JsonView(JobView.Id.class)
@@ -75,7 +83,7 @@ public class Job implements Serializable {
     @JsonView(JobView.RemainingQuantity.class)
     @Column(name = "remaining_quantity")
     private Double remainingQuantity;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "job")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job")
     private List<JobDispatch> jobDispatchList;
     @JsonView(JobView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
@@ -89,39 +97,7 @@ public class Job implements Serializable {
     @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id", nullable = true)
     @OneToOne()
     private SalesOrderItem salesOrderItem;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "job")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job")
     private List<Operation> operationList;
-
-    public Job() {
-    }
-
-    public Job(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Job)) {
-            return false;
-        }
-        Job other = (Job) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.Job[ id=" + id + " ]";
-    }
 
 }

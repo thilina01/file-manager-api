@@ -6,7 +6,6 @@
 package com.trendsmixed.fma.module.salesweight;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.salesweight.SalesWeightView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -19,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -26,6 +26,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "sales_weight")
 @NamedQueries({
     @NamedQuery(name = "SalesWeight.findAll", query = "SELECT c FROM SalesWeight c")})
@@ -48,30 +49,5 @@ public class SalesWeight implements Serializable {
     @JsonView(SalesWeightView.Actual.class)
     @Column(name = "actual")
     private double actual;
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SalesWeight)) {
-            return false;
-        }
-        SalesWeight other = (SalesWeight) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.SalesWeight[ id=" + id + " ]";
-    }
 
 }

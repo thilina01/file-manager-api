@@ -21,6 +21,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 /**
  *
@@ -28,6 +30,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "shift")
 @NamedQueries({
     @NamedQuery(name = "Shift.findAll", query = "SELECT s FROM Shift s")})
@@ -35,6 +38,7 @@ public class Shift implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @JsonView(ShiftView.Id.class)
@@ -46,39 +50,7 @@ public class Shift implements Serializable {
     @JsonView(ShiftView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "shift")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "shift")
     private List<Production> productionList;
-
-    public Shift() {
-    }
-
-    public Shift(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Shift)) {
-            return false;
-        }
-        Shift other = (Shift) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.Shift[ id=" + id + " ]";
-    }
 
 }

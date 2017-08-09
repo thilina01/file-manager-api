@@ -23,6 +23,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -30,6 +31,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "operation_breakdown")
 @NamedQueries({
     @NamedQuery(name = "OperationBreadown.findAll", query = "SELECT o FROM OperationBreadown o")})
@@ -50,27 +52,5 @@ public class OperationBreadown implements Serializable {
     @JoinColumn(name = "breakdown_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Breakdown breakdown;
-
-    public OperationBreadown() {
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OperationBreadown)) {
-            return false;
-        }
-
-        OperationBreadown other = (OperationBreadown) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.OperationBreadown[ id=" + id + " ]";
-    }
 
 }

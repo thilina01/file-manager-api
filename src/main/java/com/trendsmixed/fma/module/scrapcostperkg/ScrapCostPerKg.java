@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.trendsmixed.fma.entity;
+package com.trendsmixed.fma.module.scrapcostperkg;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.scrapcostperkg.ScrapCostPerKgView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -19,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -26,6 +26,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "scrap_cost_per_kg")
 @NamedQueries({
     @NamedQuery(name = "ScrapCostPerKg.findAll", query = "SELECT c FROM ScrapCostPerKg c")})
@@ -48,30 +49,5 @@ public class ScrapCostPerKg implements Serializable {
     @JsonView(ScrapCostPerKgView.Actual.class)
     @Column(name = "actual")
     private double actual;
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ScrapCostPerKg)) {
-            return false;
-        }
-        ScrapCostPerKg other = (ScrapCostPerKg) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.ScrapCostPerKg[ id=" + id + " ]";
-    }
 
 }

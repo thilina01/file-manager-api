@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.labourturnover;
 
 import com.trendsmixed.fma.module.labourtursource.LabourSource;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.labourturnover.LabourTurnoverView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -22,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -29,6 +29,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "labour_turnover")
 @NamedQueries({
     @NamedQuery(name = "LabourTurnover.findAll", query = "SELECT c FROM LabourTurnover c")})
@@ -55,30 +56,5 @@ public class LabourTurnover implements Serializable {
     @JoinColumn(name = "labour_source_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LabourSource labourSource;
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof LabourTurnover)) {
-            return false;
-        }
-        LabourTurnover other = (LabourTurnover) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.LabourTurnover[ id=" + id + " ]";
-    }
 
 }

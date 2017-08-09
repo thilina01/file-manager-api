@@ -1,8 +1,10 @@
 package com.trendsmixed.fma.dao;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class Combo {
 
     int id;
@@ -14,13 +16,6 @@ public class Combo {
         this.id = id;
         this.code = code;
         this.name = name;
-    }
-
-    public Combo(int id, String code, String name, String description) {
-        this.id = id;
-        this.code = code;
-        this.name = name;
-        this.description = description;
     }
 
 }

@@ -11,7 +11,6 @@ import com.trendsmixed.fma.module.itemtype.ItemType;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.paint.Paint;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
-import com.trendsmixed.fma.module.item.ItemView;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -88,37 +87,5 @@ public class Item implements Serializable {
     private ItemType itemType;
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "item")
     private List<Job> jobList;
-
-    public Item() {
-    }
-
-    public Item(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Item)) {
-            return false;
-        }
-        Item other = (Item) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.Item[ id=" + id + " ]";
-    }
 
 }

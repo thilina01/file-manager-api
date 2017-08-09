@@ -5,12 +5,9 @@
  */
 package com.trendsmixed.fma.module.leavetype;
 
-import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.fasterxml.jackson.annotation.JsonView;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,9 +15,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -28,6 +25,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "leave_type")
 @NamedQueries({
     @NamedQuery(name = "LeaveType.findAll", query = "SELECT l FROM LeaveType l")})
@@ -49,37 +47,5 @@ public class LeaveType implements Serializable {
     @JsonView(LeaveTypeView.TypeInSinhala.class)
     @Column(name = "type_in_sinhala", length = 250)
     private String typeInSinhala;
-
-    public LeaveType() {
-    }
-
-    public LeaveType(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof LeaveType)) {
-            return false;
-        }
-        LeaveType other = (LeaveType) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.trendsmixed.fma.entity.LeaveType[ id=" + id + " ]";
-    }
 
 }
