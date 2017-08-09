@@ -49,6 +49,7 @@ public class WorkCenterController {
         return new Page<WorkCenter>(service.findAll(pageable));
     }
 
+    @JsonView(WorkCenterView.AllAndCostCenterAll.class)
     @PostMapping
     public WorkCenter save(@RequestBody WorkCenter workCenter,
             @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -115,6 +116,7 @@ public class WorkCenterController {
     }
 
     @PutMapping("/{id}")
+    @JsonView(WorkCenterView.AllAndCostCenterAll.class)
     public WorkCenter updateCustomer(@PathVariable int id, @RequestBody WorkCenter workCenter,
             @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
