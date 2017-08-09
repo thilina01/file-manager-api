@@ -95,11 +95,11 @@ public class Customer implements Serializable {
     @Column(name = "vat_no")
     private String vatNo;
     @JsonView(CustomerView.CustomerItemList.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<CustomerItem> customerItemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<SalesOrder> salesOrderList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Dispatch> dispatchs;
     @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")

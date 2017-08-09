@@ -49,7 +49,7 @@ public class JobType implements Serializable {
     @JsonView(JobTypeView.Name.class)
     @Column(name = "name", length = 250)
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobType")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "jobType")
     private List<Job> jobList;
 
     public JobType() {

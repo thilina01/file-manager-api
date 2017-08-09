@@ -58,7 +58,7 @@ public class Operation implements Serializable {
     @Column(name = "unit_weight")
     private Double unitWeight;
     @JsonView(OperationView.Loss.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "operation")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "operation")
     private List<Loss> lossList;
     @JsonView(OperationView.Production.class)
     @JoinColumn(name = "production_id", referencedColumnName = "id")
@@ -70,13 +70,13 @@ public class Operation implements Serializable {
     private Job job;
     @JsonView(OperationView.OperationType.class)
     @JoinColumn(name = "operation_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)//, cascade = CascadeType.ALL
+    @ManyToOne(optional = false)//, cascade = CascadeType.DETACH
     private OperationType operationType;
     @JsonView(OperationView.ProductType.class)
     @JoinColumn(name = "product_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)//, cascade = CascadeType.ALL
+    @ManyToOne(optional = false)//, cascade = CascadeType.DETACH
     private ProductType productType;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "operation")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "operation")
     private List<OperationBreadown> operationBreadownList;
 
     public Operation() {

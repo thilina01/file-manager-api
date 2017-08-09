@@ -50,11 +50,11 @@ public class Manpower implements Serializable {
     private Integer actualQuantity;
     @JsonView(ManpowerView.ManpowerType.class)
     @JoinColumn(name = "manpower_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)//, cascade = CascadeType.ALL
+    @ManyToOne(optional = false)//, cascade = CascadeType.DETACH
     private ManpowerType manpowerType;
     @JsonView(ManpowerView.Production.class)
     @JoinColumn(name = "production_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)//, cascade = CascadeType.ALL
+    @ManyToOne(optional = false)//, cascade = CascadeType.DETACH
     private Production production;
 
     public Manpower() {

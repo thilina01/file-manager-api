@@ -46,7 +46,7 @@ public class Shift implements Serializable {
     @JsonView(ShiftView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shift")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "shift")
     private List<Production> productionList;
 
     public Shift() {

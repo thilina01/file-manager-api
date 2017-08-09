@@ -48,7 +48,7 @@ public class SectionType implements Serializable {
     @JsonView(SectionTypeView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sectionType")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "sectionType")
     private List<Section> sectionList;
 
     public SectionType() {

@@ -72,10 +72,10 @@ public class Production implements Serializable {
     @ManyToOne(optional = true)
     private ShiftType shiftType;
     @JsonView(ProductionView.Manpower.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "production")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "production")
     private List<Manpower> manpowerList;
     @JsonView(ProductionView.Operation.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "production")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "production")
     private List<Operation> operationList;
 
     public Production() {

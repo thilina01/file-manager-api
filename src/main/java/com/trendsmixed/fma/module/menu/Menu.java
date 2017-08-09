@@ -56,12 +56,12 @@ public class Menu implements Serializable {
     @JsonView(MenuView.Href.class)
     @Column(name = "href")
     private String href;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "menu")
     private List<TeamMenu> teamMenuList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "menu")
     private List<UserMenu> userMenuList;
     @JsonView(MenuView.SubMenu.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "menu")
     private List<Menu> menuList;
     @JsonView(MenuView.SuperMenu.class)
     @JoinColumn(name = "menu_id", referencedColumnName = "id")

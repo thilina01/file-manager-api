@@ -57,7 +57,7 @@ public class LossReason implements Serializable {
     @JoinColumn(name = "loss_type_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private LossType lossType;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lossReason")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "lossReason")
     private List<Loss> lossList;
 
     public LossReason() {

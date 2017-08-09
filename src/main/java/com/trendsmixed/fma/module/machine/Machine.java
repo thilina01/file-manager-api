@@ -53,9 +53,9 @@ public class Machine implements Serializable {
     @JsonView(MachineView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "machine")
     private List<Breakdown> breakdownList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "machine")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "machine")
     private List<ControlPointMachine> controlPointMachineList;
 
     public Machine() {

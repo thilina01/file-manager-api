@@ -47,7 +47,7 @@ public class ManpowerType implements Serializable {
     @JsonView(ManpowerTypeView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manpowerType")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "manpowerType")
     private List<Manpower> manpowerList;
 
     public ManpowerType() {

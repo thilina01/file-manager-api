@@ -49,7 +49,7 @@ public class CostCenter implements Serializable {
     @JsonView(CostCenterView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "costCenter")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "costCenter")
     private List<WorkCenter> workCenterList;
     @JsonView(CostCenterView.Section.class)
     @JoinColumn(name = "section_id", referencedColumnName = "id")

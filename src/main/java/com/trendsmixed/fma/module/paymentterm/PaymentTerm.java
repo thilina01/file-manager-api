@@ -47,7 +47,7 @@ public class PaymentTerm implements Serializable {
     @JsonView(PaymentTermView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paymentTerm")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "paymentTerm")
     private List<Customer> customerList;
 
     public PaymentTerm() {

@@ -72,7 +72,7 @@ public class Breakdown implements Serializable {
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Machine machine;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "breakdown")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "breakdown")
     private List<OperationBreadown> operationBreadownList;
 
     public Breakdown() {

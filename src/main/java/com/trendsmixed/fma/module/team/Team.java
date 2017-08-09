@@ -48,9 +48,9 @@ public class Team implements Serializable {
     @Column(name = "code")
     private String code;
     @JsonView(TeamView.TeamMenuList.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "team")
     private List<TeamMenu> teamMenuList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "team")
     private List<User> userList;
 
     public Team() {

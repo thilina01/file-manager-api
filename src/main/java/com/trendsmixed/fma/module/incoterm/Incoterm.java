@@ -46,7 +46,7 @@ public class Incoterm implements Serializable {
     @JsonView(IncotermView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "incoterm")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "incoterm")
     private List<Customer> customerList;
 
     public Incoterm() {

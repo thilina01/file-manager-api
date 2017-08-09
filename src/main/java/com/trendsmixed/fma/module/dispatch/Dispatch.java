@@ -55,7 +55,7 @@ public class Dispatch implements Serializable {
     @ManyToOne(optional = false)
     private Customer customer;
     @JsonView(DispatchView.JobDispatch.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dispatch")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "dispatch")
     private List<JobDispatch> jobDispatchList;
 
     public Dispatch() {

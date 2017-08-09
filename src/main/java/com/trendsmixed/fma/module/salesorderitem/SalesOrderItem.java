@@ -63,10 +63,10 @@ public class SalesOrderItem implements Serializable {
     @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SalesOrder salesOrder;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrderItem")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "salesOrderItem")
     private List<Delivery> deliveryList;
     @JsonView(SalesOrderItemView.Job.class)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "salesOrderItem")
+    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "salesOrderItem")
     private Job job;
 
     public SalesOrderItem() {

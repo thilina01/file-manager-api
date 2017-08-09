@@ -47,7 +47,7 @@ public class LabourSource implements Serializable {
     @JsonView(LabourSourceView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "labourSource")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "labourSource")
     private List<LabourTurnover> labourTurnoverList;
 
     @Override

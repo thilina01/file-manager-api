@@ -47,7 +47,7 @@ public class MenuType implements Serializable {
     @JsonView(MenuTypeView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menuType")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "menuType")
     private List<Menu> menuList;
 
     @Override

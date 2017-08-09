@@ -47,7 +47,7 @@ public class Currency implements Serializable {
     @JsonView(CurrencyView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "currency")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "currency")
     private List<Customer> customerList;
 
     public Currency() {

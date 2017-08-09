@@ -48,7 +48,7 @@ public class Tool implements Serializable {
     @JsonView(ToolView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tool")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "tool")
     private List<ToolBreakdown> toolBreakdownList;
 
     public Tool() {

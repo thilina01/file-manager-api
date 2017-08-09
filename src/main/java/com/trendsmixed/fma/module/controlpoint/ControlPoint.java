@@ -57,9 +57,9 @@ public class ControlPoint implements Serializable {
     @JoinColumn(name = "work_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private WorkCenter workCenter;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "controlPoint")
     private List<Production> productionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPoint")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "controlPoint")
     private List<ControlPointMachine> controlPointMachineList;
     @JsonView(ControlPointView.ControlPointType.class)
     @JoinColumn(name = "control_point_type_id", referencedColumnName = "id")

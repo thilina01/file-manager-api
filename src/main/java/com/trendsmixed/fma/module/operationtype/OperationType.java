@@ -48,7 +48,7 @@ public class OperationType implements Serializable {
     @JsonView(OperationTypeView.Description.class)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "operationType")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "operationType")
     private List<Operation> operationList;
 
     public OperationType() {

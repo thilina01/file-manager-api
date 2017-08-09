@@ -75,7 +75,7 @@ public class Job implements Serializable {
     @JsonView(JobView.RemainingQuantity.class)
     @Column(name = "remaining_quantity")
     private Double remainingQuantity;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "job")
     private List<JobDispatch> jobDispatchList;
     @JsonView(JobView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
@@ -89,7 +89,7 @@ public class Job implements Serializable {
     @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id", nullable = true)
     @OneToOne()
     private SalesOrderItem salesOrderItem;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "job")
     private List<Operation> operationList;
 
     public Job() {

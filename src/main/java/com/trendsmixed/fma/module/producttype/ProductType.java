@@ -46,7 +46,7 @@ public class ProductType implements Serializable {
     @JsonView(ProductTypeView.Description.class)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productType")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "productType")
     private List<Operation> operationList;
 
     public ProductType() {

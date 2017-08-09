@@ -49,7 +49,7 @@ public class WorkCenter implements Serializable {
     @JsonView(WorkCenterView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workCenter")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "workCenter")
     private List<ControlPoint> controlPointList;
     @JsonView(WorkCenterView.CostCenter.class)
     @JoinColumn(name = "cost_center_id", referencedColumnName = "id")

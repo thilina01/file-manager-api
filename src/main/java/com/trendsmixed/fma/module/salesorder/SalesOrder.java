@@ -74,7 +74,7 @@ public class SalesOrder implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date trwConfirmedDate;
     @JsonView(SalesOrderView.SalesOrderItemList.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesOrder")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "salesOrder")
     private List<SalesOrderItem> salesOrderItemList;
     @JsonView(SalesOrderView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")

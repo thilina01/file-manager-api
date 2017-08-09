@@ -48,7 +48,7 @@ public class ControlPointType implements Serializable {
     @JsonView(ControlPointTypeView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "controlPointType")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "controlPointType")
     private List<ControlPoint> controlPointList;
 
     public ControlPointType() {

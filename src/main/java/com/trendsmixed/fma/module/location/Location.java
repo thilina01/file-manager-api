@@ -47,7 +47,7 @@ public class Location implements Serializable {
     @JsonView(LocationView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "location")
     private List<EnergyConsumption> energyConsumptionList;
 
     public Location() {

@@ -73,10 +73,10 @@ public class Item implements Serializable {
     @Column(name = "weight")
     private Double weight;
     @JsonView(ItemView.SalesOrderItem.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "item")
     private List<SalesOrderItem> salesOrderItemList;
     @JsonView(ItemView.CustomerItem.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "item")
     private List<CustomerItem> customerItemList;
     @JsonView(ItemView.Paint.class)
     @JoinColumn(name = "paint_id", referencedColumnName = "id")
@@ -86,7 +86,7 @@ public class Item implements Serializable {
     @JoinColumn(name = "item_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ItemType itemType;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "item")
     private List<Job> jobList;
 
     public Item() {
