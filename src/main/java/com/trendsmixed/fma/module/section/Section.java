@@ -27,7 +27,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.sectiontype.SectionType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  *
@@ -35,6 +37,8 @@ import lombok.NonNull;
  */
 @Entity
 @Data
+@NoArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "section")
 @NamedQueries({
