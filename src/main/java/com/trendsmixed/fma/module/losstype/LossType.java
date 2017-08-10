@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -30,6 +30,7 @@ import lombok.NonNull;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "loss_type")
 @NamedQueries({
@@ -38,7 +39,6 @@ public class LossType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @JsonView(LossTypeView.Id.class)
@@ -56,5 +56,9 @@ public class LossType implements Serializable {
     @JsonView(LossTypeView.LossReasonList.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "lossType")
     private List<LossReason> lossReasonList;
+
+    public LossType(Integer id) {
+        this.id = id;
+    }
 
 }

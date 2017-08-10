@@ -29,6 +29,7 @@ import com.trendsmixed.fma.module.production.Production;
 import com.trendsmixed.fma.module.workcenter.WorkCenter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -36,6 +37,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "control_point")
 @NamedQueries({
@@ -59,9 +61,9 @@ public class ControlPoint implements Serializable {
     @JoinColumn(name = "work_center_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private WorkCenter workCenter;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "controlPoint")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "controlPoint")
     private List<Production> productionList;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "controlPoint")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "controlPoint")
     private List<ControlPointMachine> controlPointMachineList;
     @JsonView(ControlPointView.ControlPointType.class)
     @JoinColumn(name = "control_point_type_id", referencedColumnName = "id")

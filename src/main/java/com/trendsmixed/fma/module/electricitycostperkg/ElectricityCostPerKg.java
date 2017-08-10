@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -26,6 +27,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "electricity_cost_per_kg")
 @NamedQueries({

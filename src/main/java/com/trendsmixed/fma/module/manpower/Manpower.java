@@ -24,6 +24,7 @@ import com.trendsmixed.fma.module.manpowertype.ManpowerType;
 import com.trendsmixed.fma.module.production.Production;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -31,6 +32,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "manpower")
 @NamedQueries({

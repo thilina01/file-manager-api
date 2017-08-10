@@ -24,6 +24,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -31,6 +32,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "control_point_type")
 @NamedQueries({
@@ -50,7 +52,7 @@ public class ControlPointType implements Serializable {
     @JsonView(ControlPointTypeView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "controlPointType")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "controlPointType")
     private List<ControlPoint> controlPointList;
 
 }

@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.toolbreakdown.ToolBreakdown;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -31,6 +32,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "tool")
 @NamedQueries({

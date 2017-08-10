@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -29,6 +30,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "customer_type")
 @NamedQueries({
@@ -48,7 +50,7 @@ public class CustomerType implements Serializable {
     @JsonView(CustomerTypeView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "customerType")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customerType")
     private List<Customer> customerList;
 
 }

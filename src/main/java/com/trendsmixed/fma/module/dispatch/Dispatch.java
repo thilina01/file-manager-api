@@ -28,6 +28,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -35,6 +36,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "dispatch")
 @NamedQueries({
@@ -57,7 +59,7 @@ public class Dispatch implements Serializable {
     @ManyToOne(optional = false)
     private Customer customer;
     @JsonView(DispatchView.JobDispatch.class)
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "dispatch")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatch")
     private List<JobDispatch> jobDispatchList;
 
 }

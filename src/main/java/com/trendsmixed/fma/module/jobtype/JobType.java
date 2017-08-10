@@ -23,6 +23,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -30,6 +31,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "job_type", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"code"})})
@@ -50,7 +52,7 @@ public class JobType implements Serializable {
     @JsonView(JobTypeView.Name.class)
     @Column(name = "name", length = 250)
     private String name;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "jobType")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "jobType")
     private List<Job> jobList;
 
 }

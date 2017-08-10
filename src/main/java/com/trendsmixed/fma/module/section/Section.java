@@ -28,8 +28,6 @@ import com.trendsmixed.fma.module.sectiontype.SectionType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 /**
  *
@@ -38,7 +36,6 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "section")
 @NamedQueries({
@@ -47,7 +44,6 @@ public class Section implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @JsonView(SectionView.Id.class)
@@ -74,5 +70,9 @@ public class Section implements Serializable {
     private SectionType sectionType;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "section")
     private List<CostCenter> costCenterList;
+
+    public Section(Integer id) {
+        this.id = id;
+    }
 
 }

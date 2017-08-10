@@ -24,6 +24,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -31,6 +32,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "loss", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"loss_reason_id", "operation_id"})})

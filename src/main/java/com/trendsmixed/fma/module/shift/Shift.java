@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -30,6 +30,7 @@ import lombok.NonNull;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "shift")
 @NamedQueries({
@@ -38,7 +39,6 @@ public class Shift implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @JsonView(ShiftView.Id.class)
@@ -52,5 +52,9 @@ public class Shift implements Serializable {
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "shift")
     private List<Production> productionList;
+
+    public Shift(Integer id) {
+        this.id = id;
+    }
 
 }

@@ -5,7 +5,6 @@
  */
 package com.trendsmixed.fma.dao;
 
-import java.math.BigDecimal;
 import lombok.Data;
 
 /**

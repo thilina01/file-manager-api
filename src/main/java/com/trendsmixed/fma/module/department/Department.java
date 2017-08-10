@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -25,6 +26,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "department")
 @NamedQueries({
@@ -44,6 +46,5 @@ public class Department implements Serializable {
     @JsonView(DepartmentView.Name.class)
     @Column(name = "name")
     private String name;
-
 
 }

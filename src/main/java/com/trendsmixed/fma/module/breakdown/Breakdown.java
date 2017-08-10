@@ -29,6 +29,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -36,6 +37,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "breakdown")
 @NamedQueries({
@@ -74,7 +76,7 @@ public class Breakdown implements Serializable {
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Machine machine;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "breakdown")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "breakdown")
     private List<OperationBreadown> operationBreadownList;
 
 }

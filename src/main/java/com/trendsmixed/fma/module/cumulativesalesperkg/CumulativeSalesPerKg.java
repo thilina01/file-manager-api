@@ -6,7 +6,6 @@
 package com.trendsmixed.fma.module.cumulativesalesperkg;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.cumulativesalesperkg.CumulativeSalesPerKgView;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -20,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -27,6 +27,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "cumulative_sales_per_kg")
 @NamedQueries({

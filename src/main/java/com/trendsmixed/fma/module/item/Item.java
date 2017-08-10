@@ -27,6 +27,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -34,6 +35,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "item")
 @NamedQueries({
     @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i")})
@@ -72,10 +74,10 @@ public class Item implements Serializable {
     @Column(name = "weight")
     private Double weight;
     @JsonView(ItemView.SalesOrderItem.class)
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "item")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
     private List<SalesOrderItem> salesOrderItemList;
     @JsonView(ItemView.CustomerItem.class)
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "item")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
     private List<CustomerItem> customerItemList;
     @JsonView(ItemView.Paint.class)
     @JoinColumn(name = "paint_id", referencedColumnName = "id")
@@ -85,7 +87,7 @@ public class Item implements Serializable {
     @JoinColumn(name = "item_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ItemType itemType;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "item")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
     private List<Job> jobList;
 
 }

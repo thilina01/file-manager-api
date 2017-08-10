@@ -25,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -32,6 +33,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "cost_center")
 @NamedQueries({
@@ -51,7 +53,7 @@ public class CostCenter implements Serializable {
     @JsonView(CostCenterView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "costCenter")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "costCenter")
     private List<WorkCenter> workCenterList;
     @JsonView(CostCenterView.Section.class)
     @JoinColumn(name = "section_id", referencedColumnName = "id")

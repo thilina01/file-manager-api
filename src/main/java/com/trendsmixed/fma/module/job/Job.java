@@ -33,8 +33,6 @@ import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 /**
  *
@@ -43,7 +41,6 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "job")
 @NamedQueries({
@@ -52,7 +49,6 @@ public class Job implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @JsonView(JobView.Id.class)
@@ -99,5 +95,9 @@ public class Job implements Serializable {
     private SalesOrderItem salesOrderItem;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job")
     private List<Operation> operationList;
+
+    public Job(Integer id) {
+        this.id = id;
+    }
 
 }
