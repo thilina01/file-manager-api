@@ -54,14 +54,14 @@ public class SalesOrderController {
             List<SalesOrderItem> salesOrderItems = salesOrder.getSalesOrderItemList();
             for (SalesOrderItem salesOrderItem : salesOrderItems) {
                 salesOrderItem.setSalesOrder(salesOrder);
-                Job job = salesOrderItem.getJob();
-                job = job == null ? new Job() : job;
-                job.setItem(salesOrderItem.getItem());
-                job.setJobDate(salesOrder.getOrderReceivedDate());
-                job.setJobType(jobType);
-                job.setSalesOrderItem(salesOrderItem);
-                job.setQuantity(salesOrderItem.getQuantity());
-                salesOrderItem.setJob(job);
+//                Job job = salesOrderItem.getJob();
+//                job = job == null ? new Job() : job;
+//                job.setItem(salesOrderItem.getItem());
+//                job.setJobDate(salesOrder.getOrderReceivedDate());
+//                job.setJobType(jobType);
+//                job.setSalesOrderItem(salesOrderItem);
+//                job.setQuantity(salesOrderItem.getQuantity());
+//                salesOrderItem.setJob(job);
             }
             salesOrder = salesOrderService.save(salesOrder);
             return salesOrder;
