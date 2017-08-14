@@ -1,41 +1,51 @@
 package com.trendsmixed.fma.module.customeritem;
 
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.item.Item;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.module.customeritem.CustomerItemRepository;
 
 @Service
 public class CustomerItemService {
 
     @Autowired
-    private CustomerItemRepository customerItemRepository;
+    private CustomerItemRepository repository;
 
-    public List<CustomerItem> findAll() {
-        return customerItemRepository.findAll();
+    public Iterable<CustomerItem> findAll() {
+        return repository.findAll();
     }
 
+    public Page<CustomerItem> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public List<Combo> getCombo() {
+        return repository.getCombo();
+    }
+    
     public CustomerItem save(CustomerItem customerItem) {
-        return customerItemRepository.save(customerItem);
+        return repository.save(customerItem);
     }
 
     public void save(List<CustomerItem> customerItems) {
-        customerItemRepository.save(customerItems);
+        repository.save(customerItems);
     }
 
     public CustomerItem findOne(int id) {
-        return customerItemRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public void delete(int id) {
-        customerItemRepository.delete(id);
+        repository.delete(id);
     }
 
     public CustomerItem findByCustomerAndItem(Customer customer, Item item) {
-        return customerItemRepository.findByCustomerAndItem(customer, item);
+        return repository.findByCustomerAndItem(customer, item);
     }
 }

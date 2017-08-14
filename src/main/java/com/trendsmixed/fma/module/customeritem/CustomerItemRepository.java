@@ -1,11 +1,17 @@
 package com.trendsmixed.fma.module.customeritem;
 
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.item.Item;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface CustomerItemRepository extends JpaRepository<CustomerItem, Integer> {
+public interface CustomerItemRepository extends PagingAndSortingRepository<CustomerItem, Integer> {
 
     public CustomerItem findByCustomerAndItem(Customer customer, Item item);
-
+@Query(value = "SELECT"
+            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
+            + " FROM CustomerItem o")
+    public List<Combo> getCombo();
 }
