@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.customeritem;
 
 import com.trendsmixed.fma.module.customer.CustomerView;
 import com.trendsmixed.fma.module.item.ItemView;
+import com.trendsmixed.fma.utility.PageView;
 
 public class CustomerItemView {
 
@@ -23,7 +24,7 @@ public class CustomerItemView {
     public static interface Item {
     }
 
-    public static interface All extends Id, Code, Name, Price {
+    public static interface All extends Id, Code, Name, Price, PageView.All {
     }
 
     public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
