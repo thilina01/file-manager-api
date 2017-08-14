@@ -1,19 +1,21 @@
 package com.trendsmixed.fma.module.customeritem;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.module.item.Item;
-import com.trendsmixed.fma.module.customeritem.CustomerItemView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.item.ItemService;
+import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +32,7 @@ public class CustomerItemController {
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private CustomerItemService customerItemService;
+    private CustomerItemService service;
     @Autowired
     private CustomerService customerService;
     @Autowired
@@ -38,8 +40,19 @@ public class CustomerItemController {
 
     @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @GetMapping
-    public List<CustomerItem> findAll() {
-        return customerItemService.findAll();
+    public Iterable<CustomerItem> findAll() {
+        return service.findAll();
+    }
+
+    @JsonView(CustomerItemView.All.class)
+    @GetMapping("/page")
+    Page<CustomerItem> page(Pageable pageable) {
+        return new Page<>(service.findAll(pageable));
+    }
+
+    @GetMapping("/combo")
+    List<Combo> combo() {
+        return service.getCombo();
     }
 
     //@JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
@@ -47,7 +60,7 @@ public class CustomerItemController {
     public CustomerItem save(@RequestBody CustomerItem customerItems, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            customerItems = customerItemService.save(customerItems);
+            customerItems = service.save(customerItems);
             return customerItems;
 
         } catch (Throwable e) {
@@ -73,7 +86,7 @@ public class CustomerItemController {
                     customerItem.setItem(itemService.findByCode(item.getCode().trim()));
                 }
             }
-            customerItemService.save(customerItems);
+            service.save(customerItems);
         } catch (Throwable e) {
             e.printStackTrace();
             while (e.getCause() != null) {
@@ -86,7 +99,7 @@ public class CustomerItemController {
     @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @GetMapping("/{id}")
     public CustomerItem findOne(@PathVariable("id") int id) {
-        return customerItemService.findOne(id);
+        return service.findOne(id);
     }
 
     @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
@@ -94,13 +107,13 @@ public class CustomerItemController {
     public CustomerItem byCustomerIdAndItemId(@PathVariable("customerId") int customerId, @PathVariable("itemId") int itemId) {
         Customer customer = customerService.findOne(customerId);
         Item item = itemService.findOne(itemId);
-        return customerItemService.findByCustomerAndItem(customer, item);
+        return service.findByCustomerAndItem(customer, item);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        customerItemService.delete(id);
+        service.delete(id);
 
     }
 
@@ -108,7 +121,7 @@ public class CustomerItemController {
     public CustomerItem updateCustomer(@PathVariable int id, @RequestBody CustomerItem customerItems, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         customerItems.setId(id);
-        customerItems = customerItemService.save(customerItems);
+        customerItems = service.save(customerItems);
         return customerItems;
     }
 
