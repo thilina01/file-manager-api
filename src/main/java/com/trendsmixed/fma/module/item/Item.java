@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.itemtype.ItemType;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.paint.Paint;
-import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -73,9 +72,9 @@ public class Item implements Serializable {
     @JsonView(ItemView.Weight.class)
     @Column(name = "weight")
     private Double weight;
-    @JsonView(ItemView.SalesOrderItem.class)
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
-    private List<SalesOrderItem> salesOrderItemList;
+//    @JsonView(ItemView.SalesOrderItem.class)
+//    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
+//    private List<SalesOrderItem> salesOrderItemList;
     @JsonView(ItemView.CustomerItem.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
     private List<CustomerItem> customerItemList;
