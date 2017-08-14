@@ -49,7 +49,7 @@ public class Team implements Serializable {
     @Column(name = "name")
     private String name;
     @JsonView(TeamView.Code.class)
-    @Column(name = "code")
+    @Column(name = "code",unique=true)
     private String code;
     @JsonView(TeamView.TeamMenuList.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "team")

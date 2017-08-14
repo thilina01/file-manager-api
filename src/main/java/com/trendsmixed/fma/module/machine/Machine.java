@@ -48,7 +48,7 @@ public class Machine implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(MachineView.Code.class)
-    @Column(name = "code")
+    @Column(name = "code",unique=true)
     private String code;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @JsonView(MachineView.EnergyRate.class)

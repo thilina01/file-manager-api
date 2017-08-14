@@ -45,10 +45,10 @@ public class Currency implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(CurrencyView.Code.class)
-    @Column(name = "code")
+    @Column(name = "code",unique=true)
     private String code;
     @JsonView(CurrencyView.Name.class)
-    @Column(name = "name")
+    @Column(name = "name",unique=true)
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "currency")
     private List<Customer> customerList;

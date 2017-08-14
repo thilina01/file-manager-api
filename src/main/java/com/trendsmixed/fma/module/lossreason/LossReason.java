@@ -48,7 +48,7 @@ public class LossReason implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(LossReasonView.Code.class)
-    @Column(name = "code")
+    @Column(name = "code",unique=true)
     private String code;
     @JsonView(LossReasonView.Name.class)
     @Column(name = "name")

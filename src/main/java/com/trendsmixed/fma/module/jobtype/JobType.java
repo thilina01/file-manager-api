@@ -47,7 +47,7 @@ public class JobType implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
     @JsonView(JobTypeView.Code.class)
-    @Column(name = "code", length = 50)
+    @Column(name = "code", length = 50,unique=true)
     private String code;
     @JsonView(JobTypeView.Name.class)
     @Column(name = "name", length = 250)

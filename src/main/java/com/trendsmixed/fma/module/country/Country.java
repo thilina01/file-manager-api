@@ -45,10 +45,10 @@ public class Country implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(CountryView.Code.class)
-    @Column(name = "code")
+    @Column(name = "code",unique=true)
     private String code;
     @JsonView(CountryView.Name.class)
-    @Column(name = "name")
+    @Column(name = "name",unique=true)
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "country")
     private List<Customer> customerList;

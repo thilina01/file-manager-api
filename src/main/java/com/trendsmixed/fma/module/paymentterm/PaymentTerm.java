@@ -45,7 +45,7 @@ public class PaymentTerm implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(PaymentTermView.Code.class)
-    @Column(name = "code")
+    @Column(name = "code",unique=true)
     private String code;
     @JsonView(PaymentTermView.Name.class)
     @Column(name = "name")

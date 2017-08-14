@@ -56,7 +56,7 @@ public class Customer implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(CustomerView.Code.class)
-    @Column(name = "code")
+    @Column(name = "code",unique=true)
     private String code;
     @JsonView(CustomerView.Consignee.class)
     @Column(name = "consignee")

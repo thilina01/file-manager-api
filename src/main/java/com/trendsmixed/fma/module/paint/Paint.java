@@ -45,7 +45,7 @@ public class Paint implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(PaintView.Code.class)
-    @Column(name = "code")
+    @Column(name = "code",unique=true)
     private String code;
     @JsonView(PaintView.Name.class)
     @Column(name = "name")

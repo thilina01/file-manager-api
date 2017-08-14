@@ -45,7 +45,7 @@ public class LossType implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
     @JsonView(LossTypeView.Code.class)
-    @Column(name = "code", length = 45)
+    @Column(name = "code", length = 45,unique=true)
     private String code;
     @JsonView(LossTypeView.Name.class)
     @Column(name = "name", length = 250)

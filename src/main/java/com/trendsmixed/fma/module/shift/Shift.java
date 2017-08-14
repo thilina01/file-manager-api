@@ -45,7 +45,7 @@ public class Shift implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(ShiftView.Code.class)
-    @Column(name = "code")
+    @Column(name = "code",unique=true)
     private String code;
     @JsonView(ShiftView.Name.class)
     @Column(name = "name")

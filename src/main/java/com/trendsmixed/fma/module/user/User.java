@@ -45,7 +45,7 @@ public class User implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(UserView.Email.class)
-    @Column(name = "email")
+    @Column(name = "email",unique=true)
     private String email;
     @JsonView(UserView.Name.class)
     @Column(name = "name")

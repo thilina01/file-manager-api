@@ -45,7 +45,7 @@ public class Location implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(LocationView.Code.class)
-    @Column(name = "code")
+    @Column(name = "code",unique=true)
     private String code;
     @JsonView(LocationView.Name.class)
     @Column(name = "name")

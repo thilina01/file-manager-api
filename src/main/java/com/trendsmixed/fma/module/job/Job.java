@@ -70,7 +70,7 @@ public class Job implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date jobDate;
     @JsonView(JobView.JobNo.class)
-    @Column(name = "job_no")
+    @Column(name = "job_no",unique=true)
     private String jobNo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @JsonView(JobView.Quantity.class)
