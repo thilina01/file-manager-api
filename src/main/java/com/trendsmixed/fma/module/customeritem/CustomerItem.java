@@ -45,9 +45,12 @@ public class CustomerItem implements Serializable {
     @JsonView(CustomerItemView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(CustomerItemView.CustomerPartNo.class)
-    @Column(name = "customer_part_no")
-    private String customerPartNo;
+    @JsonView(CustomerItemView.Code.class)
+    @Column(name = "code")
+    private String code;
+    @JsonView(CustomerItemView.Name.class)
+    @Column(name = "name")
+    private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @JsonView(CustomerItemView.Price.class)
     @Column(name = "price")
