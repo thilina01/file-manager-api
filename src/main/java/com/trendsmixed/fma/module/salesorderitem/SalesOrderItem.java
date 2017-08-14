@@ -7,9 +7,9 @@ package com.trendsmixed.fma.module.salesorderitem;
 
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import com.trendsmixed.fma.module.job.Job;
-import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.delivery.Delivery;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -40,7 +40,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "sales_order_item", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"item_id", "sales_order_id"})})
+    @UniqueConstraint(columnNames = {"customer_item_id", "sales_order_id"})})
 @NamedQueries({
     @NamedQuery(name = "SalesOrderItem.findAll", query = "SELECT s FROM SalesOrderItem s")})
 public class SalesOrderItem implements Serializable {
@@ -59,10 +59,10 @@ public class SalesOrderItem implements Serializable {
     @JsonView(SalesOrderItemView.Price.class)
     @Column(name = "price")
     private Double price;
-    @JsonView(SalesOrderItemView.Item.class)
-    @JoinColumn(name = "item_id", referencedColumnName = "id")
+    @JsonView(SalesOrderItemView.CustomerItem.class)
+    @JoinColumn(name = "customer_item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Item item;
+    private CustomerItem customerItem;
     @JsonView(SalesOrderItemView.SalesOrder.class)
     @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)

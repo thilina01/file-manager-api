@@ -5,7 +5,7 @@
  */
 package com.trendsmixed.fma.module.salesorderitem;
 
-import com.trendsmixed.fma.module.item.ItemView;
+import com.trendsmixed.fma.module.customeritem.CustomerItemView;
 import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView;
 
@@ -24,7 +24,7 @@ public class SalesOrderItemView {
     public static interface Price {
     }
 
-    public static interface Item {
+    public static interface CustomerItem {
     }
 
     public static interface Job {
@@ -36,10 +36,10 @@ public class SalesOrderItemView {
     public static interface All extends Id, Quantity, Price {
     }
 
-    public static interface AllAndItemAllAndSalesOrderAll extends All, Item, SalesOrder, ItemView.All, SalesOrderView.All {
+    public static interface AllAndCustomerItemAllAndSalesOrderAll extends All, CustomerItem, SalesOrder, CustomerItemView.All, SalesOrderView.All {
     }
 
-    public static interface AllAndItemAllAndSalesOrderAllAndJobAll extends AllAndItemAllAndSalesOrderAll, Job, JobView.All {
+    public static interface AllAndItemAllAndSalesOrderAllAndJobAll extends AllAndCustomerItemAllAndSalesOrderAll, Job, JobView.All {
     }
 
 }
