@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.operation;
 
 import com.trendsmixed.fma.dao.OperationSummary;
 import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.production.Production;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
 
@@ -59,6 +60,8 @@ public interface OperationRepository extends PagingAndSortingRepository<Operatio
             + " WHERE operation.job.id = :jobId AND operation.actualQuantity IS NOT NULL"
             + " GROUP BY operation.productType, operation.operationType ")
     public List<OperationSummary> getSummaryByJob(@Param("jobId") int jobId);
+
+    public List<Operation> findByProduction(Production production);
 
 }
 //com.trendsmixed.fma.dao.ScheduleAdherence

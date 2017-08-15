@@ -82,4 +82,8 @@ public class Production implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "production")
     private List<Operation> operationList;
 
+    Production(Integer id) {
+        this.id = id;
+    }
+
 }

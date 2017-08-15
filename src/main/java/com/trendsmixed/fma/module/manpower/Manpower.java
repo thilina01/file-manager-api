@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.manpowertype.ManpowerType;
 import com.trendsmixed.fma.module.production.Production;
+import javax.persistence.CascadeType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -58,7 +59,7 @@ public class Manpower implements Serializable {
     private ManpowerType manpowerType;
     @JsonView(ManpowerView.Production.class)
     @JoinColumn(name = "production_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)//, cascade = CascadeType.DETACH
+    @ManyToOne(cascade ={CascadeType.MERGE, CascadeType.PERSIST},  optional = false)
     private Production production;
 
 }

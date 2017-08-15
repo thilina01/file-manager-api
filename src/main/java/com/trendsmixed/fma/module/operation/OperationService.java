@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.operation;
 
 import com.trendsmixed.fma.dao.OperationSummary;
 import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.production.Production;
 import java.util.Date;
 import java.util.List;
 
@@ -78,5 +79,9 @@ public class OperationService {
 
     public List<OperationSummary> getSummaryByJob(int jobId) {
         return repository.getSummaryByJob(jobId);
+    }
+
+    public List<Operation> findByProduction(Production production) {
+        return repository.findByProduction(production);
     }
 }

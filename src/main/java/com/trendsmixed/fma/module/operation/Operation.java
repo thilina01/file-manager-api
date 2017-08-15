@@ -66,7 +66,7 @@ public class Operation implements Serializable {
     private List<Loss> lossList;
     @JsonView(OperationView.Production.class)
     @JoinColumn(name = "production_id", referencedColumnName = "id")
-    @ManyToOne(cascade = CascadeType.REMOVE, optional = false)
+    @ManyToOne(cascade ={CascadeType.MERGE, CascadeType.PERSIST},  optional = false)
     private Production production;
     @JsonView(OperationView.Job.class)
     @JoinColumn(name = "job_id", referencedColumnName = "id")

@@ -21,6 +21,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.manpower.Manpower;
 import com.trendsmixed.fma.module.operation.Operation;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.manpower.ManpowerService;
+import com.trendsmixed.fma.module.operation.OperationService;
 import com.trendsmixed.fma.utility.Page;
 
 @RestController
@@ -32,6 +34,10 @@ public class ProductionController {
     private AppSessionService appSessionService;
     @Autowired
     private ProductionService service;
+    @Autowired
+    private OperationService operationService;
+    @Autowired
+    private ManpowerService manpowerService;
 
     @JsonView(ProductionView.AllAndShiftAndShiftTypeAndControlPointAll.class)
     @GetMapping
@@ -52,23 +58,59 @@ public class ProductionController {
         // appSessionService.isValid(email, request);
         try {
             List<Operation> operations = production.getOperationList();
+            List<Manpower> manpowers = production.getManpowerList();
+//
+//            if (production.getId() != null && production.getId() > 0) {
+//                List<Operation> oldOperations = operationService.findByProduction(new Production(production.getId()));
+//                outerloop:
+//                for (Operation oldOperation : oldOperations) {
+//                    for (Operation operation : operations) {
+//                        if (operation.getId() != null && operation.getId() == oldOperation.getId()) {
+//                            continue outerloop;
+//                        }
+//                    }
+//                    operationService.delete(oldOperation.getId());
+//                }
+//
+//                List<Manpower> oldManpowers = manpowerService.findByProduction(new Production(production.getId()));
+//                outerloop:
+//                for (Manpower oldManpower : oldManpowers) {
+//                    for (Manpower manpower : manpowers) {
+//                        if (manpower.getId() != null && manpower.getId() == oldManpower.getId()) {
+//                            continue outerloop;
+//                        }
+//                    }
+//                    manpowerService.delete(oldManpower.getId());
+//                }
+//            }
+
+//                    for (Manpower manpower : manpowers) {
+//                        manpower.setProduction(new Production(production.getId()));
+//                    }
+//                    manpowerService.save(manpowers);
+//                    for (Operation operation : operations) {
+//                        operation.setProduction(new Production(production.getId()));
+//                    }
+//                    operationService.save(operations);
+//                    
+//            production = service.save(production);
+//            } else {
             if (operations != null) {
                 for (Operation operation : operations) {
                     operation.setProduction(production);
                 }
             }
-
-            List<Manpower> manpowers = production.getManpowerList();
             if (manpowers != null) {
                 for (Manpower manpower : manpowers) {
                     manpower.setProduction(production);
                 }
             }
-
             production = service.save(production);
+
             return production;
 
         } catch (Throwable e) {
+            e.printStackTrace();
             while (e.getCause() != null) {
                 e = e.getCause();
             }

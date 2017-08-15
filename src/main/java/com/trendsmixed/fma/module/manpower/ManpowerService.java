@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.manpower;
 
+import com.trendsmixed.fma.module.production.Production;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 
@@ -35,6 +36,10 @@ public class ManpowerService {
 
     public void delete(int id) {
         repository.delete(id);
+    }
+
+    public List<Manpower> findByProduction(Production production) {
+        return repository.findByProduction(production);        
     }
 
 }
