@@ -1,9 +1,9 @@
 package com.trendsmixed.fma.module.salesperkg;
 
-import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +18,15 @@ public class SalesPerKgService {
     }
 
     public Page<SalesPerKg> findAll(Pageable pageable) {
-        return new Page<>(repository.findAll(pageable));
+        return repository.findAll(pageable);
     }
 
     public SalesPerKg save(SalesPerKg salesPerKg) {
         return repository.save(salesPerKg);
     }
 
-    public void save(List<SalesPerKg> countries) {
-        repository.save(countries);
+    public void save(List<SalesPerKg> salesPerKgs) {
+        repository.save(salesPerKgs);
     }
 
     public SalesPerKg findOne(int id) {

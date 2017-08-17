@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.salesperkg;
 
-import com.trendsmixed.fma.module.labourturnover.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,8 +37,8 @@ public class SalesPerKgController {
 
     @JsonView(SalesPerKgView.All.class)
     @GetMapping("/page")
-    Page<SalesPerKg> page(Pageable pageable) {
-        return service.findAll(pageable);
+    public Page<SalesPerKg> page(Pageable pageable) {
+        return new Page(service.findAll(pageable));
     }
 
     @PostMapping
