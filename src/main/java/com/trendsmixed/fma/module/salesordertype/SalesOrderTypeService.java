@@ -1,31 +1,44 @@
 package com.trendsmixed.fma.module.salesordertype;
 
+import com.trendsmixed.fma.dao.Combo;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.module.salesordertype.SalesOrderTypeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class SalesOrderTypeService {
 
     @Autowired
-    private SalesOrderTypeRepository salesOrderTypeRepository;
+    private SalesOrderTypeRepository repository;
 
-    public List<SalesOrderType> findAll() {
-        return salesOrderTypeRepository.findAll();
+    public Iterable<SalesOrderType> findAll() {
+        return repository.findAll();
+    }
+
+    public Page<SalesOrderType> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public List<Combo> getCombo() {
+        return repository.getCombo();
     }
 
     public SalesOrderType save(SalesOrderType salesOrderType) {
-        return salesOrderTypeRepository.save(salesOrderType);
+        return repository.save(salesOrderType);
+    }
+
+    public void save(List<SalesOrderType> salesOrderTypes) {
+        repository.save(salesOrderTypes);
     }
 
     public SalesOrderType findOne(int id) {
-        return salesOrderTypeRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public void delete(int id) {
-        salesOrderTypeRepository.delete(id);
+        repository.delete(id);
     }
 }
