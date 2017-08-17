@@ -65,19 +65,20 @@ public class EmployeeController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Employee> countries, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<Employee> employees, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
         appSessionService.isValid(email, request);
         try {
-            for (Employee employee : countries) {
+            for (Employee employee : employees) {
                 employee.setCode(employee.getCode().trim());
-                employee.setName(employee.getName().trim());
+                employee.setFirstName(employee.getFirstName().trim());
+                employee.setLastName(employee.getLastName().trim());
                 Employee existingSection = service.findByCode(employee.getCode());
                 if (existingSection != null) {
                     employee.setId(existingSection.getId());
                 }
             }
-            service.save(countries);
+            service.save(employees);
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();

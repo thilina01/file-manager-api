@@ -19,9 +19,25 @@ public class EmployeeView {
     public static interface Code {
     }
 
-    public static interface Name {
+    public static interface FirstName {
     }
 
-    public static interface All extends Id, Code, Name, PageView.All {
+    public static interface LastName {
     }
+
+    public static interface DateOfBirth {
+    }
+
+    public static interface ContactNumber {
+    }
+
+    public static interface Address {
+    }
+
+    public static interface NIC {
+    }
+
+    public static interface All extends Id, Code, FirstName, LastName, DateOfBirth, ContactNumber, Address, NIC, PageView.All {
+    }
+
 }

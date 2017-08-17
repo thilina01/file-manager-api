@@ -47,7 +47,4 @@ public class EmployeeService {
         return repository.findByCode(code);
     }
 
-    public Employee findByName(String name) {
-        return repository.findByName(name);
-    }
 }
