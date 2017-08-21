@@ -56,16 +56,19 @@ public class SalesOrderItem implements Serializable {
     @JsonView(SalesOrderItemView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
-    @JsonView(SalesOrderItemView.Price.class)
-    @Column(name = "price")
-    private Double price;
+    @JsonView(SalesOrderItemView.UnitPrice.class)
+    @Column(name = "unit_price")
+    private Double unitPrice;    
+    @JsonView(SalesOrderItemView.Amount.class)
+    @Column(name = "amount")
+    private Double amount;
     @JsonView(SalesOrderItemView.CustomerItem.class)
     @JoinColumn(name = "customer_item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CustomerItem customerItem;
     @JsonView(SalesOrderItemView.SalesOrder.class)
     @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade ={CascadeType.MERGE, CascadeType.PERSIST},  optional = false)
     private SalesOrder salesOrder;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
     private List<Delivery> deliveryList;
