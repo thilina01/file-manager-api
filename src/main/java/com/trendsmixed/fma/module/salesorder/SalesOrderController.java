@@ -41,10 +41,7 @@ public class SalesOrderController {
         return service.findAll();
     }
 
-    /**
-     * ***************************************************************
-     */
-    @JsonView(SalesOrderView.All.class)
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @GetMapping("/page")
     Page<SalesOrder> page(Pageable pageable) {
         return new Page<SalesOrder>(service.findAll(pageable));
@@ -54,10 +51,8 @@ public class SalesOrderController {
     List<Combo> combo() {
         return service.getCombo();
     }
-    /**
-     * ***************************************************************
-     */
-    @JsonView(SalesOrderView.AllAndSalesOrderItemAll.class)
+    
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PostMapping
     public SalesOrder save(@RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -71,6 +66,7 @@ public class SalesOrderController {
         try {
             List<SalesOrderItem> salesOrderItems = salesOrder.getSalesOrderItemList();
             for (SalesOrderItem salesOrderItem : salesOrderItems) {
+                
                 salesOrderItem.setSalesOrder(salesOrder);
 //                Job job = salesOrderItem.getJob();
 //                job = job == null ? new Job() : job;
@@ -93,6 +89,7 @@ public class SalesOrderController {
         }
     }
 
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll.class)
     @GetMapping("/{id}")
     public SalesOrder findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -105,6 +102,7 @@ public class SalesOrderController {
 
     }
 
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PutMapping("/{id}")
     public SalesOrder updateCustomer(@PathVariable int id, @RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
