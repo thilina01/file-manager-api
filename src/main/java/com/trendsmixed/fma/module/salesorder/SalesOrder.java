@@ -64,9 +64,12 @@ public class SalesOrder implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date customerRequestedDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @JsonView(SalesOrderView.OrderQty.class)
-    @Column(name = "order_qty")
-    private Double orderQty;
+    @JsonView(SalesOrderView.Quantity.class)
+    @Column(name = "quantity")
+    private Double quantity;
+    @JsonView(SalesOrderView.Amount.class)
+    @Column(name = "amount")
+    private Double amount;
     @JsonView(SalesOrderView.OrderReceivedDate.class)
     @Column(name = "order_received_date")
     @Temporal(TemporalType.DATE)
@@ -78,7 +81,7 @@ public class SalesOrder implements Serializable {
     @Column(name = "trw_confirmed_date")
     @Temporal(TemporalType.DATE)
     private Date trwConfirmedDate;
-    @JsonView(SalesOrderView.SalesOrderItemList.class)
+    @JsonView(SalesOrderView.SalesOrderItem.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrder")
     private List<SalesOrderItem> salesOrderItemList;
     @JsonView(SalesOrderView.Customer.class)
