@@ -44,7 +44,7 @@ public class CustomerItemController {
         return service.findAll();
     }
 
-    @JsonView(CustomerItemView.All.class)
+    @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @GetMapping("/page")
     Page<CustomerItem> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));

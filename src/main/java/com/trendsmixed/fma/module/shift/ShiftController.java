@@ -35,9 +35,7 @@ public class ShiftController {
         appSessionService.isValid(email, request);
         try {
             shift = service.save(shift);
-
             return shift;
-
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
@@ -76,7 +74,7 @@ public class ShiftController {
     }
 
     @PutMapping("/{id}")
-    public Shift updateCustomer(@PathVariable int id, @RequestBody Shift shift, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Shift update(@PathVariable int id, @RequestBody Shift shift, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         shift.setId(id);
         shift = service.save(shift);
