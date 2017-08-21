@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.salesorder;
 
 import com.trendsmixed.fma.module.customer.CustomerView;
+import com.trendsmixed.fma.module.customeritem.CustomerItemView;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView;
 import com.trendsmixed.fma.module.salesordertype.SalesOrderTypeView;
 
@@ -9,7 +10,7 @@ public class SalesOrderView {
     public static interface Id {
     }
 
-    public static interface PoNumber {
+    public static interface CustomerPONumber {
     }
 
     public static interface OrderQty {
@@ -36,10 +37,16 @@ public class SalesOrderView {
     public static interface Customer {
     }
 
+    public static interface OrderDate {
+    }
+
     public static interface SalesOrderItemList {
     }
 
-    public static interface All extends Id, PoNumber, OrderQty, CustomerRequestedDate, TrwConfirmedDate, ActualDispatchedDate, Comments, OrderReceivedDate {
+    public static interface SalesOrderNumber {
+    }
+
+    public static interface All extends Id, CustomerPONumber, OrderQty, CustomerRequestedDate, TrwConfirmedDate, ActualDispatchedDate, Comments, OrderReceivedDate, SalesOrderNumber, OrderDate {
     }
 
     public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
@@ -48,6 +55,14 @@ public class SalesOrderView {
     public static interface AllAndCustomerAllAndSalesOrderTypeAll extends All, Customer, CustomerView.All, SalesOrderType, SalesOrderTypeView.All {
     }
 
-    public static interface AllAndSalesOrderItemAll extends All, SalesOrderItemList, SalesOrderItemView.All {
+    static class AllAndCustomerAllAndSalesOrderTypeAllAllAnd{
+
+       
+    }
+
+    static class AllAndSalesOrderItemAll {
+
+        public AllAndSalesOrderItemAll() {
+        }
     }
 }

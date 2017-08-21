@@ -7,6 +7,7 @@ package com.trendsmixed.fma.module.salesorder;
 
 import com.trendsmixed.fma.module.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
 import java.io.Serializable;
@@ -70,9 +71,9 @@ public class SalesOrder implements Serializable {
     @Column(name = "order_received_date")
     @Temporal(TemporalType.DATE)
     private Date orderReceivedDate;
-    @JsonView(SalesOrderView.PoNumber.class)
-    @Column(name = "po_number")
-    private String poNumber;
+    @JsonView(SalesOrderView.CustomerPONumber.class)
+    @Column(name = "customer_po_number")
+    private String customerPoNumber;
     @JsonView(SalesOrderView.TrwConfirmedDate.class)
     @Column(name = "trw_confirmed_date")
     @Temporal(TemporalType.DATE)
@@ -88,5 +89,12 @@ public class SalesOrder implements Serializable {
     @JoinColumn(name = "order_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SalesOrderType salesOrderType;
+    @JsonView(SalesOrderView.OrderDate.class)
+    @Column(name = "order_date")
+    @Temporal(TemporalType.DATE)
+    private Date orderDate;
+    @JsonView(SalesOrderView.SalesOrderNumber.class)
+    @Column(name = "sales_order_number")
+    private String salesOrderNumber;
 
 }
