@@ -13,6 +13,6 @@ public interface LossReasonRepository extends PagingAndSortingRepository<LossRea
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
-            + " FROM LossType o")
+            + " FROM LossReason o")
     public List<Combo> getCombo();
 }
