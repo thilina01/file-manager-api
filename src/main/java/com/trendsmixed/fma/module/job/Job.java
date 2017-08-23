@@ -26,7 +26,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -61,10 +60,14 @@ public class Job implements Serializable {
     @JsonView(JobView.Comment.class)
     @Column(name = "comment")
     private String comment;
-    @JsonView(JobView.ConfirmShippedDate.class)
-    @Column(name = "confirm_shipped_date")
+    @JsonView(JobView.ConfirmDate.class)
+    @Column(name = "confirm_date")
     @Temporal(TemporalType.DATE)
-    private Date confirmShippedDate;
+    private Date confirmDate;
+    @JsonView(JobView.RequestDate.class)
+    @Column(name = "request_date")
+    @Temporal(TemporalType.DATE)
+    private Date requestDate;
     @JsonView(JobView.JobDate.class)
     @Column(name = "job_date")
     @Temporal(TemporalType.DATE)
@@ -90,8 +93,8 @@ public class Job implements Serializable {
     @ManyToOne(optional = false)
     private JobType jobType;
     @JsonView(JobView.SalesOrderItem.class)
-    @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id", nullable = true)
-    @OneToOne()
+    @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
     private SalesOrderItem salesOrderItem;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job")
     private List<Operation> operationList;

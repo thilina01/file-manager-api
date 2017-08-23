@@ -15,7 +15,10 @@ public class JobView {
     public static interface ActualShippedDate {
     }
 
-    public static interface ConfirmShippedDate {
+    public static interface ConfirmDate {
+    }
+
+    public static interface RequestDate {
     }
 
     public static interface Quantity {
@@ -30,7 +33,7 @@ public class JobView {
     public static interface Comment {
     }
 
-    public static interface All extends Id, JobNo, ActualShippedDate, ConfirmShippedDate, Quantity, RemainingQuantity, JobDate, Comment, PageView.All {
+    public static interface All extends Id, JobNo, ActualShippedDate, ConfirmDate, RequestDate, Quantity, RemainingQuantity, JobDate, Comment, PageView.All {
     }
 
     public static interface Item {
