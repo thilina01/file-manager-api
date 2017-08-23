@@ -24,7 +24,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.Data;
@@ -56,9 +55,12 @@ public class SalesOrderItem implements Serializable {
     @JsonView(SalesOrderItemView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
+    @JsonView(SalesOrderItemView.Allocated.class)
+    //@Column(name = "allocated")
+    private transient int allocated;
     @JsonView(SalesOrderItemView.UnitPrice.class)
     @Column(name = "unit_price")
-    private Double unitPrice;    
+    private Double unitPrice;
     @JsonView(SalesOrderItemView.Amount.class)
     @Column(name = "amount")
     private Double amount;
@@ -68,12 +70,26 @@ public class SalesOrderItem implements Serializable {
     private CustomerItem customerItem;
     @JsonView(SalesOrderItemView.SalesOrder.class)
     @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
-    @ManyToOne(cascade ={CascadeType.MERGE, CascadeType.PERSIST},  optional = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = false)
     private SalesOrder salesOrder;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
     private List<Delivery> deliveryList;
     @JsonView(SalesOrderItemView.Job.class)
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
-    private Job job;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
+    private List<Job> jobList;
 
+    public SalesOrderItem(Integer anId) {
+        this.id = anId;
+    }
+
+    public void setAllocated(int anAllocated) {
+    }
+
+    public int getAllocated() {
+        allocated = 0;
+        for (Job job : jobList) {
+            allocated += job.getQuantity();
+        }
+        return allocated;
+    }
 }

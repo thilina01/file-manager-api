@@ -1,12 +1,10 @@
 package com.trendsmixed.fma.module.salesorderitem;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.entity.AppSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +28,7 @@ public class SalesOrderItemController {
     private SalesOrderItemService salesOrderItemService;
 
     @GetMapping
-    @JsonView(SalesOrderItemView.AllAndItemAllAndSalesOrderAllAndJobAll.class)
+    @JsonView(SalesOrderItemView.AllAndCustomerItemAllAndSalesOrderAllAndJobAll.class)
     public List<SalesOrderItem> findAll() {
         return salesOrderItemService.findAll();
     }
@@ -50,6 +48,7 @@ public class SalesOrderItemController {
         }
     }
 
+    @JsonView(SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndSalesOrderAllAndJobAll.class)
     @GetMapping("/{id}")
     public SalesOrderItem findOne(@PathVariable("id") int id) {
         return salesOrderItemService.findOne(id);

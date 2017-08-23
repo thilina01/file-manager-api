@@ -21,23 +21,26 @@ public class SalesOrderItemView {
 
     public static interface Quantity {
     }
+    
+    public static interface Allocated {
+    }
 
     public static interface UnitPrice {
     }
 
     public static interface Amount {
     }
-    
-    public static interface CustomerItem extends CustomerItemView.All{
+
+    public static interface CustomerItem extends CustomerItemView.All {
     }
 
-    public static interface Job {
+    public static interface Job extends JobView.All {
     }
 
-    public static interface SalesOrder extends  SalesOrderView.All{
+    public static interface SalesOrder extends SalesOrderView.All {
     }
 
-    public static interface All extends Id, Quantity, UnitPrice, Amount, PageView.All {
+    public static interface All extends Id, Quantity, Allocated, UnitPrice, Amount, PageView.All {
     }
 
     public static interface AllAndCustomerItemAll extends All, CustomerItem {
@@ -46,7 +49,13 @@ public class SalesOrderItemView {
     public static interface AllAndCustomerItemAllAndSalesOrderAll extends AllAndCustomerItemAll, SalesOrder {
     }
 
-    public static interface AllAndItemAllAndSalesOrderAllAndJobAll extends AllAndCustomerItemAllAndSalesOrderAll, Job, JobView.All {
+    public static interface AllAndCustomerItemAllAndSalesOrderAllAndJobAll extends AllAndCustomerItemAllAndSalesOrderAll, Job {
+    }
+
+    public static interface AllAndCustomerItemAllAndItemAllAndSalesOrderAllAndJobAll extends AllAndCustomerItemAllAndSalesOrderAll, Job, CustomerItemView.AllAndItemAll {
+    }
+
+    public static interface AllAndCustomerItemAllAndItemAllAndJobAll extends AllAndCustomerItemAll, Job, CustomerItemView.AllAndItemAll {
     }
 
 }
