@@ -7,10 +7,8 @@ package com.trendsmixed.fma.module.job;
 
 import com.trendsmixed.fma.module.item.Item;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.jobdispatch.JobDispatch;
+import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import com.trendsmixed.fma.module.jobtype.JobType;
-import com.trendsmixed.fma.module.operation.Operation;
-import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -53,21 +51,6 @@ public class Job implements Serializable {
     @JsonView(JobView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(JobView.ActualShippedDate.class)
-    @Column(name = "actual_sipped_date")
-    @Temporal(TemporalType.DATE)
-    private Date actualSippedDate;
-    @JsonView(JobView.Comment.class)
-    @Column(name = "comment")
-    private String comment;
-    @JsonView(JobView.ConfirmDate.class)
-    @Column(name = "confirm_date")
-    @Temporal(TemporalType.DATE)
-    private Date confirmDate;
-    @JsonView(JobView.RequestDate.class)
-    @Column(name = "request_date")
-    @Temporal(TemporalType.DATE)
-    private Date requestDate;
     @JsonView(JobView.JobDate.class)
     @Column(name = "job_date")
     @Temporal(TemporalType.DATE)
@@ -79,11 +62,6 @@ public class Job implements Serializable {
     @JsonView(JobView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
-    @JsonView(JobView.RemainingQuantity.class)
-    @Column(name = "remaining_quantity")
-    private Double remainingQuantity;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job")
-    private List<JobDispatch> jobDispatchList;
     @JsonView(JobView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -92,12 +70,8 @@ public class Job implements Serializable {
     @JoinColumn(name = "job_type_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private JobType jobType;
-    @JsonView(JobView.SalesOrderItem.class)
-    @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private SalesOrderItem salesOrderItem;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job")
-    private List<Operation> operationList;
+    private List<DispatchSchedule> dispatchScheduleList;
 
     public Job(Integer id) {
         this.id = id;

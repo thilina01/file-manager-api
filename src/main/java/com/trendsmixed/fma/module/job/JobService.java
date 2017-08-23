@@ -57,8 +57,4 @@ public class JobService {
         return repository.findForTable();
     }
 
-    Iterable<Job> findBySalesOrderItemSalesOrder(SalesOrder salesOrder) {
-        return repository.findBySalesOrderItemSalesOrder(salesOrder);
-    }
-
 }

@@ -10,6 +10,7 @@ import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.delivery.Delivery;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
+import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -55,9 +56,9 @@ public class SalesOrderItem implements Serializable {
     @JsonView(SalesOrderItemView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
-    @JsonView(SalesOrderItemView.Allocated.class)
+    @JsonView(SalesOrderItemView.Scheduled.class)
     //@Column(name = "allocated")
-    private transient int allocated;
+    private transient int scheduled;
     @JsonView(SalesOrderItemView.UnitPrice.class)
     @Column(name = "unit_price")
     private Double unitPrice;
@@ -76,7 +77,7 @@ public class SalesOrderItem implements Serializable {
     private List<Delivery> deliveryList;
     @JsonView(SalesOrderItemView.Job.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
-    private List<Job> jobList;
+    private List<DispatchSchedule> dispatchScheduleList;
 
     public SalesOrderItem(Integer anId) {
         this.id = anId;
@@ -86,10 +87,10 @@ public class SalesOrderItem implements Serializable {
     }
 
     public int getAllocated() {
-        allocated = 0;
-        for (Job job : jobList) {
-            allocated += job.getQuantity();
+        scheduled = 0;
+        for (DispatchSchedule dispatchSchedule : dispatchScheduleList) {
+            scheduled += dispatchSchedule.getQuantity();
         }
-        return allocated;
+        return scheduled;
     }
 }

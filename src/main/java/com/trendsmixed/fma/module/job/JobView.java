@@ -12,37 +12,19 @@ public class JobView {
     public static interface JobNo {
     }
 
-    public static interface ActualShippedDate {
-    }
-
-    public static interface ConfirmDate {
-    }
-
-    public static interface RequestDate {
-    }
-
     public static interface Quantity {
-    }
-
-    public static interface RemainingQuantity {
     }
 
     public static interface JobDate {
     }
 
-    public static interface Comment {
-    }
-
-    public static interface All extends Id, JobNo, ActualShippedDate, ConfirmDate, RequestDate, Quantity, RemainingQuantity, JobDate, Comment, PageView.All {
+    public static interface All extends Id, JobNo,  Quantity, JobDate,  PageView.All {
     }
 
     public static interface Item {
     }
 
     public static interface JobType {
-    }
-
-    public static interface SalesOrderItem {
     }
 
     public static interface AllAndItemAllAndJobTypeAll extends All, Item, JobType, ItemView.All, JobTypeView.All {
