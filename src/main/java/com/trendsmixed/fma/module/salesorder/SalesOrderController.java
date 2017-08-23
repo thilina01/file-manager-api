@@ -44,7 +44,7 @@ public class SalesOrderController {
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @GetMapping("/page")
     Page<SalesOrder> page(Pageable pageable) {
-        return new Page<SalesOrder>(service.findAll(pageable));
+        return new Page<>(service.findAll(pageable));
     }
     
     @GetMapping("/combo")
@@ -89,7 +89,7 @@ public class SalesOrderController {
         }
     }
 
-    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll.class)
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndJobAll.class)
     @GetMapping("/{id}")
     public SalesOrder findOne(@PathVariable("id") int id) {
         return service.findOne(id);

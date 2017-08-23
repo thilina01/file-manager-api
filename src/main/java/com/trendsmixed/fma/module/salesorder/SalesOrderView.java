@@ -18,6 +18,7 @@ public class SalesOrderView {
 
     public static interface Amount {
     }
+
     public static interface CustomerRequestedDate {
     }
 
@@ -59,8 +60,11 @@ public class SalesOrderView {
 
     public static interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAll extends AllAndCustomerAllAndSalesOrderTypeAll, SalesOrderItem {
     }
-    
+
     public static interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAll, SalesOrderItemView.AllAndCustomerItemAll {
+    }
+
+    public static interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndJobAll extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll, SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndJobAll {
     }
 
 }

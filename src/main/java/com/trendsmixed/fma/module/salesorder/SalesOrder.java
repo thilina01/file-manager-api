@@ -7,7 +7,6 @@ package com.trendsmixed.fma.module.salesorder;
 
 import com.trendsmixed.fma.module.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
 import java.io.Serializable;
@@ -99,5 +98,9 @@ public class SalesOrder implements Serializable {
     @JsonView(SalesOrderView.SalesOrderNumber.class)
     @Column(name = "sales_order_number")
     private String salesOrderNumber;
+
+    public SalesOrder(int anId) {
+        this.id = anId;
+    }
 
 }
