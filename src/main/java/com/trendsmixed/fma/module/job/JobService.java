@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import com.trendsmixed.fma.utility.Page;
 
 @Service
@@ -54,6 +55,10 @@ public class JobService {
 
     public List findForTable() {
         return repository.findForTable();
+    }
+
+    Iterable<Job> findBySalesOrderItemSalesOrder(SalesOrder salesOrder) {
+        return repository.findBySalesOrderItemSalesOrder(salesOrder);
     }
 
 }

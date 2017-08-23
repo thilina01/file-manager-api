@@ -9,6 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.salesorder.SalesOrder;
 
 public interface JobRepository extends PagingAndSortingRepository<Job, Integer> {
 
@@ -24,4 +25,6 @@ public interface JobRepository extends PagingAndSortingRepository<Job, Integer> 
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.jobNo, o.item.description)"
             + " FROM Job o")
     public List<Combo> getCombo();
+
+    public Iterable<Job> findBySalesOrderItemSalesOrder(SalesOrder salesOrder);
 }
