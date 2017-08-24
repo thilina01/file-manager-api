@@ -18,7 +18,7 @@ public class JobView {
     public static interface JobDate {
     }
 
-    public static interface All extends Id, JobNo,  Quantity, JobDate,  PageView.All {
+    public static interface All extends Id, JobNo, Quantity, JobDate, PageView.All {
     }
 
     public static interface Item {
@@ -27,7 +27,10 @@ public class JobView {
     public static interface JobType {
     }
 
-    public static interface AllAndItemAllAndJobTypeAll extends All, Item, JobType, ItemView.All, JobTypeView.All {
+    public static interface AllAndItemAll extends All, Item, ItemView.All {
+    }
+
+    public static interface AllAndItemAllAndJobTypeAll extends AllAndItemAll, JobType, JobTypeView.All {
     }
 
 }

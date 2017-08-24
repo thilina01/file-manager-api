@@ -11,10 +11,10 @@ import com.trendsmixed.fma.module.jobtype.JobType;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.item.ItemService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
-import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemService;
 import com.trendsmixed.fma.utility.Page;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +40,6 @@ public class JobController {
     private ItemService itemService;
     @Autowired
     private JobTypeService jobTypeService;
-    @Autowired
-    private SalesOrderItemService salesOrderItemService;
 
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping
@@ -60,6 +58,11 @@ public class JobController {
         return service.getCombo();
     }
 
+    @GetMapping("/combo/item/{id}")
+    List<Combo> comboByItem(@PathVariable("id") int itemId) {
+        return service.comboByItem(new Item(itemId));
+    }
+
     @JsonView(JobView.All.class)
     @PostMapping
     public Job save(@RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -68,6 +71,11 @@ public class JobController {
             Job existingJob = service.findByJobNo(job.getJobNo());
             if ((job.getId() == null || job.getId() == 0) && existingJob != null) {
                 throw new Error("Job Number Already Used!");
+            }
+
+            if (job.getId() == null) {
+                job.setJobDate(new Date());
+                job.setJobType(jobTypeService.findByCode("Forecast"));
             }
             job = service.save(job);
             return job;
