@@ -6,7 +6,6 @@
 package com.trendsmixed.fma.module.salesorderitem;
 
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
-import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.delivery.Delivery;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
@@ -75,18 +74,18 @@ public class SalesOrderItem implements Serializable {
     private SalesOrder salesOrder;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
     private List<Delivery> deliveryList;
-    @JsonView(SalesOrderItemView.Job.class)
+    @JsonView(SalesOrderItemView.DispatchSchedule.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
     private List<DispatchSchedule> dispatchScheduleList;
-
+    
     public SalesOrderItem(Integer anId) {
         this.id = anId;
     }
 
-    public void setAllocated(int anAllocated) {
+    public void setScheduled(int anAllocated) {
     }
 
-    public int getAllocated() {
+    public int getScheduled() {
         scheduled = 0;
         for (DispatchSchedule dispatchSchedule : dispatchScheduleList) {
             scheduled += dispatchSchedule.getQuantity();

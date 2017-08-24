@@ -28,7 +28,7 @@ public class SalesOrderItemController {
     private SalesOrderItemService salesOrderItemService;
 
     @GetMapping
-    @JsonView(SalesOrderItemView.AllAndCustomerItemAllAndSalesOrderAllAndJobAll.class)
+    @JsonView(SalesOrderItemView.AllAndCustomerItemAllAndSalesOrderAllAndDispatchScheduleAll.class)
     public List<SalesOrderItem> findAll() {
         return salesOrderItemService.findAll();
     }
@@ -48,7 +48,7 @@ public class SalesOrderItemController {
         }
     }
 
-    @JsonView(SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndSalesOrderAllAndJobAll.class)
+    @JsonView(SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndSalesOrderAllAndDispatchScheduleAll.class)
     @GetMapping("/{id}")
     public SalesOrderItem findOne(@PathVariable("id") int id) {
         return salesOrderItemService.findOne(id);
