@@ -22,7 +22,7 @@ public class SalesOrderItemView {
     public static interface Quantity {
     }
     
-    public static interface Allocated {
+    public static interface Scheduled {
     }
 
     public static interface UnitPrice {
@@ -40,7 +40,7 @@ public class SalesOrderItemView {
     public static interface SalesOrder extends SalesOrderView.All {
     }
 
-    public static interface All extends Id, Quantity, Allocated, UnitPrice, Amount, PageView.All {
+    public static interface All extends Id, Quantity, Scheduled, UnitPrice, Amount, PageView.All {
     }
 
     public static interface AllAndCustomerItemAll extends All, CustomerItem {

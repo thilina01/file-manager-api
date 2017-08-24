@@ -72,6 +72,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " FROM Operation operation"
             + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.production.controlPoint.controlPointType.id=1"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.controlPoint.workCenter.costCenter.section")
     public List getScheduleAdherence(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
@@ -80,6 +81,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " FROM Operation operation"
             + " WHERE operation.production.controlPoint.workCenter.costCenter.section = :section"
             + " AND operation.production.controlPoint.controlPointType.id=1"
+            + " AND operation.actualQuantity > 0"
             + " AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " GROUP BY operation.production.productionDate")
     public List getScheduleAdherenceBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
@@ -90,6 +92,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " FROM Loss loss"
             + " WHERE loss.operation.production.controlPoint.workCenter.costCenter.section = :section"
             + " AND operation.production.controlPoint.controlPointType.id=1"
+            + " AND operation.actualQuantity > 0"
             + " AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonSummaryBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
@@ -107,6 +110,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.name, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonSummary(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
@@ -114,6 +118,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonDailyCountBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("section") Section section);
@@ -122,6 +127,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE  loss.lossReason.lossType = :lossType AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonDailyCountByLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("lossType") LossType lossType);
@@ -130,6 +136,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE  loss.lossReason.lossType = :lossType AND loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonDailyCountBySectionAndLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("section") Section section,
@@ -139,6 +146,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonDailyCount(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
@@ -146,6 +154,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE loss.lossReason = :lossReason AND loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonDailyCountBySectionAndLossReason(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("section") Section section,
@@ -155,6 +164,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE loss.lossReason = :lossReason AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonDailyCountByLossReason(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("lossReason") LossReason lossReason);
@@ -163,6 +173,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.name, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE loss.lossReason.lossType = :lossType AND loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY loss.lossReason ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonSummaryBySectionAndLossType(@Param("startDate") Date startDate,
             @Param("endDate") Date endDate, @Param("section") Section section, @Param("lossType") LossType lossType);
@@ -171,6 +182,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " new com.trendsmixed.fma.dao.MonthlyScheduleAdherence(DATE_FORMAT(operation.production.productionDate,'%Y-%m'), SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100) "
             + " FROM Operation operation"
             + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY DATE_FORMAT(operation.production.productionDate,'%Y-%m')")
     public List getMonthlyScheduleAdherence(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
@@ -179,6 +191,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " FROM Operation operation"
             + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.production.controlPoint.workCenter.costCenter.section= :section"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY DATE_FORMAT(operation.production.productionDate,'%Y-%m')")
     public List getMonthlyScheduleAdherenceBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("section") Section section);
 

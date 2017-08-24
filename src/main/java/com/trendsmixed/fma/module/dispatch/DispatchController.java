@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.jobdispatch.JobDispatch;
-import com.trendsmixed.fma.module.dispatch.DispatchView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.job.JobService;
 import java.util.List;
@@ -50,8 +49,6 @@ public class DispatchController {
                 Job job = jobService.findOne(jobDispatch.getJob().getId());
 
                 double dispatchQuantity = jobDispatch.getQuantity();
-                double remainingQuantity = job.getRemainingQuantity();
-                job.setRemainingQuantity(remainingQuantity - dispatchQuantity);
                 jobService.save(job);
             }
 

@@ -11,8 +11,6 @@ import com.trendsmixed.fma.module.jobtype.JobType;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.item.ItemService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
-import com.trendsmixed.fma.module.salesorder.SalesOrder;
-import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemService;
 import com.trendsmixed.fma.utility.Page;
 
@@ -70,9 +68,6 @@ public class JobController {
             Job existingJob = service.findByJobNo(job.getJobNo());
             if ((job.getId() == null || job.getId() == 0) && existingJob != null) {
                 throw new Error("Job Number Already Used!");
-            }
-            if (existingJob == null) {
-                job.setRemainingQuantity(job.getQuantity());
             }
             job = service.save(job);
             return job;
@@ -137,12 +132,6 @@ public class JobController {
     @GetMapping("/jobNo/{jobNo}")
     public Job findByJobNo(@PathVariable("jobNo") String jobNo) {
         return service.findByJobNo(jobNo);
-    }
-
-    @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
-    @GetMapping("/salesOrder/{id}")
-    public Iterable<Job> findBySalesOrder(@PathVariable("id") int id) {
-        return service.findBySalesOrderItemSalesOrder(new SalesOrder(id));
     }
 
     @GetMapping("/table")

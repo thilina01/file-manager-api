@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.trendsmixed.fma.module.job;
+package com.trendsmixed.fma.module.dispatchschedule;
 
 import com.trendsmixed.fma.module.item.Item;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
-import com.trendsmixed.fma.module.jobtype.JobType;
+import com.trendsmixed.fma.module.operation.Operation;
+import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -39,41 +39,47 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@Table(name = "job")
+@Table(name = "dispatch_schedule")
 @NamedQueries({
-    @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")})
-public class Job implements Serializable {
+    @NamedQuery(name = "DispatchSchedule.findAll", query = "SELECT j FROM DispatchSchedule j")})
+public class DispatchSchedule implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(JobView.Id.class)
+    @JsonView(DispatchScheduleView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(JobView.JobDate.class)
-    @Column(name = "job_date")
+    @JsonView(DispatchScheduleView.DispatchDate.class)
+    @Column(name = "dispatch_date")
     @Temporal(TemporalType.DATE)
-    private Date jobDate;
-    @JsonView(JobView.JobNo.class)
-    @Column(name = "job_no",unique=true)
-    private String jobNo;
+    private Date dispatchDate;
+    @JsonView(DispatchScheduleView.Comment.class)
+    @Column(name = "comment")
+    private String comment;
+    @JsonView(DispatchScheduleView.ConfirmDate.class)
+    @Column(name = "confirm_date")
+    @Temporal(TemporalType.DATE)
+    private Date confirmDate;
+    @JsonView(DispatchScheduleView.RequestDate.class)
+    @Column(name = "request_date")
+    @Temporal(TemporalType.DATE)
+    private Date requestDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @JsonView(JobView.Quantity.class)
+    @JsonView(DispatchScheduleView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
-    @JsonView(JobView.Item.class)
-    @JoinColumn(name = "item_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Item item;
-    @JsonView(JobView.JobType.class)
-    @JoinColumn(name = "job_type_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private JobType jobType;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job")
-    private List<DispatchSchedule> dispatchScheduleList;
+    @JsonView(DispatchScheduleView.Job.class)
+    @JoinColumn(name = "job_id", referencedColumnName = "id")
+    @ManyToOne()
+    private Item job;
+    @JsonView(DispatchScheduleView.SalesOrderItem.class)
+    @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id")
+    @ManyToOne()
+    private SalesOrderItem salesOrderItem;
 
-    public Job(Integer id) {
+    public DispatchSchedule(Integer id) {
         this.id = id;
     }
 
