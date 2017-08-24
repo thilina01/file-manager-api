@@ -38,4 +38,7 @@ public class DispatchScheduleView {
 
     public static interface AllAndJobAllAndItemAll extends All, Job, JobView.AllAndItemAll {
     }
+
+    public static interface AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll extends AllAndSalesOrderItemAllAndCustomerItemAll, AllAndJobAllAndItemAll {
+    }
 }

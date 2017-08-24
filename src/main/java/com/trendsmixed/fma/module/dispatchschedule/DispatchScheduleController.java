@@ -148,7 +148,7 @@ public class DispatchScheduleController {
         return dispatchSchedule;
     }
 
-    @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndCustomerItemAll.class)
+    @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping("/salesOrder/{id}")
     public Iterable<DispatchSchedule> findBySalesOrder(@PathVariable("id") int id) {
         return service.findBySalesOrderItemSalesOrder(new SalesOrder(id));
