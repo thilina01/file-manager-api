@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.dispatchschedule;
 
+import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +39,7 @@ public class DispatchScheduleService {
         repository.delete(id);
     }
 
+    public Iterable<DispatchSchedule> findBySalesOrderItemSalesOrder(SalesOrder salesOrder) {
+        return repository.findBySalesOrderItemSalesOrder(salesOrder);
+    }
 }

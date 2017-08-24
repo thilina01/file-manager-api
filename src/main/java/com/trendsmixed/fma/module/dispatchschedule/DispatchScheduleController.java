@@ -6,7 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.job.JobService;
+import com.trendsmixed.fma.module.jobtype.JobTypeService;
+import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import com.trendsmixed.fma.utility.Page;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +34,10 @@ public class DispatchScheduleController {
     private AppSessionService appSessionService;
     @Autowired
     private DispatchScheduleService service;
+    @Autowired
+    private JobTypeService jobTypeService;
+    @Autowired
+    private JobService jobService;
 
     @JsonView(DispatchScheduleView.All.class)
     @GetMapping
@@ -35,7 +45,7 @@ public class DispatchScheduleController {
         return service.findAll();
     }
 
-    @JsonView(DispatchScheduleView.All.class)
+    @JsonView(DispatchScheduleView.AllAndJobAllAndItemAll.class)
     @GetMapping("/page")
     Page<DispatchSchedule> page(Pageable pageable) {
         return service.findAll(pageable);
@@ -53,6 +63,20 @@ public class DispatchScheduleController {
 //            if (existingDispatchSchedule == null) {
 //                dispatchSchedule.setRemainingQuantity(dispatchSchedule.getQuantity());
 //            }
+            Job job = dispatchSchedule.getJob();
+            if (job != null) {
+                if (job.getId() == null) {
+                    job.setJobDate(new Date());
+                    job.setJobType(jobTypeService.findByCode("Order"));
+                    job.setDispatchScheduleList(new ArrayList<>());
+                } else {
+                    job = jobService.findOne(job.getId());
+                }
+            }
+
+            //dispatchSchedule.setSalesOrderItem(new SalesOrderItem(dispatchSchedule.getSalesOrderItem().getId()));
+            dispatchSchedule.setJob(job);
+            job.getDispatchScheduleList().add(dispatchSchedule);
             return service.save(dispatchSchedule);
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -104,7 +128,6 @@ public class DispatchScheduleController {
 //            throw new Error(e.getMessage());
 //        }
 //    }
-
     @JsonView(DispatchScheduleView.All.class)
     @GetMapping("/{id}")
     public DispatchSchedule findOne(@PathVariable("id") int id) {
@@ -123,5 +146,11 @@ public class DispatchScheduleController {
         dispatchSchedule.setId(id);
         dispatchSchedule = service.save(dispatchSchedule);
         return dispatchSchedule;
+    }
+
+    @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndCustomerItemAll.class)
+    @GetMapping("/salesOrder/{id}")
+    public Iterable<DispatchSchedule> findBySalesOrder(@PathVariable("id") int id) {
+        return service.findBySalesOrderItemSalesOrder(new SalesOrder(id));
     }
 }
