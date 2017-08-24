@@ -102,6 +102,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.name, SUM(loss.quantity)) "
             + " FROM Loss loss"
             + " WHERE loss.lossReason.lossType = :lossType AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+            + " AND operation.actualQuantity > 0"
             + " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonSummaryByLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("lossType") LossType lossType);
