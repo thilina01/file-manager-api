@@ -9,6 +9,8 @@ import com.trendsmixed.fma.module.country.CountryService;
 import com.trendsmixed.fma.module.currency.CurrencyService;
 import com.trendsmixed.fma.module.customertype.CustomerTypeService;
 import com.trendsmixed.fma.module.incoterm.IncotermService;
+import com.trendsmixed.fma.module.jobtype.JobType;
+import com.trendsmixed.fma.module.jobtype.JobTypeService;
 import com.trendsmixed.fma.module.status.StatusService;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -23,6 +25,8 @@ public class Strater {
     @Autowired
     private CountryService countryService;
     @Autowired
+    private JobTypeService jobTypeService;
+    @Autowired
     private CurrencyService currencyService;
     @Autowired
     private IncotermService incotermService;
@@ -36,6 +40,7 @@ public class Strater {
         initCountry();
         initCurrency();
         initIncoterm();
+        initJobType();
         initCustomerType();
         System.out.println("Init process finished");
     }
@@ -62,6 +67,16 @@ public class Strater {
             country.setCode("NA");
             country.setName("NOT AVAILABLE");
             countryService.save(country);
+        }
+    }
+    
+    private void initJobType() {
+        JobType jobType = jobTypeService.findByCode("Forecast");
+        if (jobType == null) {
+            jobType = new JobType();
+            jobType.setCode("Forecast");
+            jobType.setName("Forecast");
+            jobTypeService.save(jobType);
         }
     }
 
