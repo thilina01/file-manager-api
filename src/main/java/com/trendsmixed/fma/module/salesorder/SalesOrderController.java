@@ -65,8 +65,7 @@ public class SalesOrderController {
         }
         try {
             List<SalesOrderItem> salesOrderItems = salesOrder.getSalesOrderItemList();
-            for (SalesOrderItem salesOrderItem : salesOrderItems) {
-                
+            for (SalesOrderItem salesOrderItem : salesOrderItems) {                
                 salesOrderItem.setSalesOrder(salesOrder);
 //                Job job = salesOrderItem.getJob();
 //                job = job == null ? new Job() : job;
@@ -89,7 +88,7 @@ public class SalesOrderController {
         }
     }
 
-    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndJobAll.class)
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAll.class)
     @GetMapping("/{id}")
     public SalesOrder findOne(@PathVariable("id") int id) {
         return service.findOne(id);
