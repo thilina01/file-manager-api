@@ -89,4 +89,8 @@ public class Item implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
     private List<Job> jobList;
 
+    public Item(int anId) {
+        this.id = anId;
+    }
+
 }
