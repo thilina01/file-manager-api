@@ -90,7 +90,7 @@ public class LossReasonController {
         }
     }
 
-    @JsonView(LossReasonView.All.class)
+    @JsonView(LossReasonView.AllAndLossTypeAll.class)
     @GetMapping("/{id}")
     public LossReason findOne(@PathVariable("id") int id) {
         return service.findOne(id);

@@ -6,10 +6,10 @@
 package com.trendsmixed.fma.module.scrap;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.itemtype.ItemType;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.trendsmixed.fma.module.operationtype.OperationType;
-import com.trendsmixed.fma.module.producttype.ProductType;
 import com.trendsmixed.fma.module.section.Section;
 import java.io.Serializable;
 import java.util.Date;
@@ -53,9 +53,9 @@ public class Scrap implements Serializable {
     @JsonView(ScrapView.Quantity.class)
     @Column(name = "quantity")
     private Integer quantity;
-    @JsonView(ScrapView.Rate.class)
-    @Column(name = "rate")
-    private Integer rate;
+    @JsonView(ScrapView.UnitValue.class)
+    @Column(name = "unit_value")
+    private Integer unitValue;
     @JsonView(ScrapView.ScrapDate.class)
     @Column(name = "scrap_date")
     @Temporal(TemporalType.DATE)
@@ -64,12 +64,12 @@ public class Scrap implements Serializable {
     @JoinColumn(name = "section_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Section section;
-    @JsonView(ScrapView.ProductType.class)
-    @JoinColumn(name = "Product_Type_id", referencedColumnName = "id")
+    @JsonView(ScrapView.ItemType.class)
+    @JoinColumn(name = "item_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ProductType ProductType;
+    private ItemType itemType;
     @JsonView(ScrapView.LossReason.class)
-    @JoinColumn(name = "loss_Reason_id", referencedColumnName = "id")
+    @JoinColumn(name = "loss_reason_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LossReason lossReason;
     @JsonView(ScrapView.Job.class)
@@ -77,7 +77,7 @@ public class Scrap implements Serializable {
     @ManyToOne(optional = false)
     private Job job;
     @JsonView(ScrapView.OperationType.class)
-    @JoinColumn(name = "Operation_Type_id", referencedColumnName = "id")
+    @JoinColumn(name = "operation_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private OperationType operationType;
 

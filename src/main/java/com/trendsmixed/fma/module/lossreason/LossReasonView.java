@@ -17,13 +17,13 @@ public class LossReasonView {
     public static interface ReasonInSinhala {
     }
 
-    public static interface LossType {
+    public static interface LossType extends LossTypeView.All{
     }
 
     public static interface All extends Id, Code, Name, ReasonInSinhala, PageView.All {
     }
 
-    public static interface AllAndLossTypeAll extends All, LossType, LossTypeView.All {
+    public static interface AllAndLossTypeAll extends All, LossType  {
     }
 
 }

@@ -37,7 +37,7 @@ public class ScrapController {
         return service.findAll();
     }
 
-    @JsonView(ScrapView.All.class)
+    @JsonView(ScrapView.AllAndItemTypeAllAndLossReasonAllAndOperationTypeAllAndSectionAllAndJobAll.class)
     @GetMapping("/page")
     Page<Scrap> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -74,7 +74,7 @@ public class ScrapController {
         }
     }
 
-    @JsonView(ScrapView.All.class)
+    @JsonView(ScrapView.AllAndItemTypeAllAndLossReasonAllAndOperationTypeAllAndSectionAllAndJobAll.class)
     @GetMapping("/{id}")
     public Scrap findOne(@PathVariable("id") int id) {
         return service.findOne(id);
