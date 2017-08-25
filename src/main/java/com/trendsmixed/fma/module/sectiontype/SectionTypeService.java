@@ -45,5 +45,8 @@ public class SectionTypeService {
     public SectionType findByCode(String code) {
         return repository.findByCode(code);
     }
-
+    
+     public SectionType findByName(String name) {
+        return repository.findByName(name);
+    }
 }

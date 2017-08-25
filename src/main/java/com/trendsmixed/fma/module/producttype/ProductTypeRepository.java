@@ -11,7 +11,7 @@ public interface ProductTypeRepository extends PagingAndSortingRepository<Produc
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.description)"
-            + " FROM Item o")
+            + " FROM ProductType o")
     public List<Combo> getCombo();
 
 }
