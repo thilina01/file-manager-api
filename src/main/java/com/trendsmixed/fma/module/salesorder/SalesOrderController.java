@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
+import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemService;
 import com.trendsmixed.fma.utility.Page;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,8 @@ public class SalesOrderController {
     @Autowired
     private SalesOrderService service;
     @Autowired
+    private SalesOrderItemService salesOrderItemService;
+    @Autowired
     private JobTypeService jobTypeService;
 
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
@@ -46,12 +50,12 @@ public class SalesOrderController {
     Page<SalesOrder> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
-    
+
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
-    
+
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PostMapping
     public SalesOrder save(@RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -65,7 +69,11 @@ public class SalesOrderController {
         }
         try {
             List<SalesOrderItem> salesOrderItems = salesOrder.getSalesOrderItemList();
-            for (SalesOrderItem salesOrderItem : salesOrderItems) {                
+            for (SalesOrderItem salesOrderItem : salesOrderItems) {
+                if (salesOrderItem.getId() != null) {
+                    SalesOrderItem existingSalesOrderItem = salesOrderItemService.findOne(salesOrderItem.getId());
+                    salesOrderItem.setDispatchScheduleList(existingSalesOrderItem != null ? existingSalesOrderItem.getDispatchScheduleList() : new ArrayList<>());
+                }
                 salesOrderItem.setSalesOrder(salesOrder);
 //                Job job = salesOrderItem.getJob();
 //                job = job == null ? new Job() : job;
