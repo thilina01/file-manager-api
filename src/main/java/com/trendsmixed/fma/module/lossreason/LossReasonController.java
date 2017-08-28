@@ -50,6 +50,14 @@ public class LossReasonController {
     List<Combo> combo() {
         return service.getCombo();
     }
+    
+    @PostMapping("/comboByLossType")
+    List<Combo> comboByLossType(@RequestBody LossType lossType) {
+        if(lossType.getId()==null){
+            lossType  = lossTypeService.findByCode(lossType.getCode());
+        }
+        return service.getComboByLossType(lossType);
+    }
 
     @JsonView(LossReasonView.All.class)
     @PostMapping

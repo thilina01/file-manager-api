@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.lossreason;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.losstype.LossType;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,10 @@ public class LossReasonService {
 
     public List<Combo> getCombo() {
         return repository.getCombo();
+    }
+
+    public List<Combo> getComboByLossType(LossType lossType) {
+        return repository.getComboByLossType(lossType);
     }
 
     public Page<LossReason> findAll(Pageable pageable) {
