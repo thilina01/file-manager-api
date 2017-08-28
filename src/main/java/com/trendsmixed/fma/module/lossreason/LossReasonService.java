@@ -51,4 +51,8 @@ public class LossReasonService {
     public LossReason findByCode(String code) {
         return repository.findByCode(code);
     }
+
+    Page<LossReason> findByLossType(LossType lossType, Pageable pageable) {
+        return repository.findByLossType(lossType,pageable);
+    }
 }

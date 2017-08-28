@@ -43,7 +43,16 @@ public class LossReasonController {
     @JsonView(LossReasonView.All.class)
     @GetMapping("/page")
     Page<LossReason> page(Pageable pageable) {
-        return new Page<LossReason>(service.findAll(pageable));
+        return new Page<>(service.findAll(pageable));
+    }
+
+    @JsonView(LossReasonView.All.class)
+    @PostMapping("/pageByLossType")
+    Page<LossReason> pageByLossType(Pageable pageable,@RequestBody LossType lossType) {        
+        if(lossType.getId()==null){
+            lossType  = lossTypeService.findByCode(lossType.getCode());
+        }
+        return new Page<>(service.findByLossType(lossType,pageable));
     }
 
     @GetMapping("/combo")
