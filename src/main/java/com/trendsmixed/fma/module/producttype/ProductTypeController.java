@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trendsmixed.fma.utility.Page;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +39,7 @@ public class ProductTypeController {
     @JsonView(ProductTypeView.All.class)
     @GetMapping("/page")
     Page<ProductType> page(Pageable pageable) {
-        return service.findAll(pageable);
+        return new Page<>(service.findAll(pageable));
     }
 
     @GetMapping("/combo")
