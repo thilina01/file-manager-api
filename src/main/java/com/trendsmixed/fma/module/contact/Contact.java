@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.trendsmixed.fma.module.country;
+package com.trendsmixed.fma.module.contact;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.address.Address;
+import com.trendsmixed.fma.module.contacttype.ContactType;
 import com.trendsmixed.fma.module.customer.Customer;
 import java.io.Serializable;
 import java.util.List;
@@ -36,31 +36,27 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@Table(name = "country")
+@Table(name = "contact")
 @NamedQueries({
-    @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c")})
-public class Country implements Serializable {
+    @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c")})
+public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JsonView(CountryView.Id.class)
+    @JsonView(ContactView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(CountryView.Code.class)
-    @Column(name = "code",unique=true)
-    private String code;
-    @JsonView(CountryView.Name.class)
-    @Column(name = "name",unique=true)
-    private String name;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "country")
-    private List<Address> addressList;
-    
-    
-    
-    
-    
-    
-
+    @JsonView(ContactView.ContactNumber.class)
+    @Column(name = "contact_number")
+    private String contactNumber;
+    @JsonView(ContactView.Customer.class)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)//, fetch = FetchType.LAZY
+    private Customer customer;
+    @JsonView(ContactView.ContactType.class)
+    @JoinColumn(name = "contact_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private ContactType contactType; 
 }

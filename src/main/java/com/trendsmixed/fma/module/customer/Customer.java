@@ -8,6 +8,8 @@ package com.trendsmixed.fma.module.customer;
 import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.module.country.Country;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.address.Address;
+import com.trendsmixed.fma.module.contact.Contact;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.customertype.CustomerType;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
@@ -91,6 +93,9 @@ public class Customer implements Serializable {
     @JsonView(CustomerView.PhoneNo.class)
     @Column(name = "phone_no")
     private String phoneNo;
+    @JsonView(CustomerView.ContactNumber.class)
+    @Column(name = "contact_number")
+    private String contactNumber;
     @JsonView(CustomerView.SVatNo.class)
     @Column(name = "s_vat_no")
     private String sVatNo;
@@ -104,6 +109,12 @@ public class Customer implements Serializable {
     private List<SalesOrder> salesOrderList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Dispatch> dispatchs;
+    @JsonView(CustomerView.Contact.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Contact> contactList;
+    @JsonView(CustomerView.Address.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Address> addressList;
     @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -116,15 +127,14 @@ public class Customer implements Serializable {
     @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CustomerType customerType;
-    @JsonView(CustomerView.Country.class)
-    @JoinColumn(name = "country_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Country country;
+    @JsonView(CustomerView.NotifyParty.class)
     @JoinColumn(name = "notify_party_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private NotifyParty notifyParty;
+    @JsonView(CustomerView.PaymentTerm.class)
     @JoinColumn(name = "payment_term_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    private PaymentTerm paymentTerm;
-
+    private PaymentTerm paymentTerm; 
+    
+    
 }

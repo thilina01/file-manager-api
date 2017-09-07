@@ -2,12 +2,14 @@ package com.trendsmixed.fma.module.customer;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.country.Country;
 import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.incoterm.Incoterm;
 import com.trendsmixed.fma.module.customertype.CustomerType;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.contact.Contact;
 import com.trendsmixed.fma.module.country.CountryService;
 import com.trendsmixed.fma.module.currency.CurrencyService;
 import com.trendsmixed.fma.module.incoterm.IncotermService;
@@ -46,7 +48,7 @@ public class CustomerController {
     @Autowired
     private CountryService countryService;
 
-    @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
+    @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
     @GetMapping
     public Iterable<Customer> findAll() {
         return service.findAll();
@@ -74,6 +76,20 @@ public class CustomerController {
             }
         }
         try {
+            
+            List<Contact> contacts = customer.getContactList();
+            List<Address> addresses = customer.getAddressList();
+
+            if (contacts != null) {
+                for (Contact contact : contacts) {
+                    contact.setCustomer(customer);
+                }
+            }
+            if (addresses != null) {
+                for (Address address : addresses) {
+                    address.setCustomer(customer);
+                }
+            }
             customer = service.save(customer);
             return customer;
 
@@ -140,22 +156,8 @@ public class CustomerController {
                 }
                 customer.setCustomerType(customerType);
 
-                Country country = customer.getCountry();
-                if (country != null) {
-                    String countryCode = country.getCode();
-                    String countryName = country.getName();
-                    if (countryCode != null) {
-                        country = countryService.findByCode(countryCode);
-                    } else if (countryName != null) {
-                        country = countryService.findByName(countryName);
-                    }
-                }
-                if (country == null || country.getId() == null) {
-                    country = countryService.findByCode("NA");
-                }
-                customer.setCountry(country);
-
             }
+
             service.save(customers);
         } catch (Throwable e) {
             e.printStackTrace();
@@ -166,7 +168,7 @@ public class CustomerController {
         }
     }
 
-    @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAll.class)
+    @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndNotifyPartyAllAndContactAllAndContactTypeAllAndPaymentTermAllAndAddressAllAndAddressTypeAllAndCountryAll.class)
     @GetMapping("/{id}")
     public Customer findOne(@PathVariable("id") int id
     ) {

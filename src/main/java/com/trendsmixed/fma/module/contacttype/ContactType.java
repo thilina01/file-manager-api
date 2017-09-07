@@ -18,6 +18,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.contact.Contact;
+import com.trendsmixed.fma.module.customer.Customer;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -48,6 +56,6 @@ public class ContactType implements Serializable {
     @JsonView(ContactTypeView.Name.class)
     @Column(name = "name")
     private String name;
-    
-
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "contactType")
+    private List<Contact> contactList;
 }

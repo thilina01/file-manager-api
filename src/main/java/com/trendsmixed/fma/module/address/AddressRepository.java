@@ -1,20 +1,18 @@
-
-package com.trendsmixed.fma.module.addresstype;
+package com.trendsmixed.fma.module.address;
 
 import com.trendsmixed.fma.dao.Combo;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface AddressTypeRepository extends PagingAndSortingRepository<AddressType,Integer> {
+public interface AddressRepository extends PagingAndSortingRepository<Address, Integer> {
 
-    public AddressType findByCode(String code);
-    
-    public AddressType findByName(String name);
+    public Address findByCode(String code);
+
+    public Address findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
-            + " FROM AddressType o")
+            + " FROM Address o")
     public List<Combo> getCombo();
-
 }

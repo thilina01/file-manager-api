@@ -1,5 +1,4 @@
-
-package com.trendsmixed.fma.module.addresstype;
+package com.trendsmixed.fma.module.address;
 
 import com.trendsmixed.fma.dao.Combo;
 import java.util.List;
@@ -10,16 +9,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AddressTypeService {
+public class AddressService {
 
     @Autowired
-    private AddressTypeRepository repository;
+    private AddressRepository repository;
 
-    public Iterable<AddressType> findAll() {
+    public Iterable<Address> findAll() {
         return repository.findAll();
     }
 
-    public Page<AddressType> findAll(Pageable pageable) {
+    public Page<Address> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
@@ -27,15 +26,11 @@ public class AddressTypeService {
         return repository.getCombo();
     }
 
-    public AddressType save(AddressType addressType) {
-        return repository.save(addressType);
+    public Address save(Address address) {
+        return repository.save(address);
     }
 
-    public void save(List<AddressType> countries) {
-        repository.save(countries);
-    }
-
-    public AddressType findOne(int id) {
+    public Address findOne(int id) {
         return repository.findOne(id);
     }
 
@@ -43,11 +38,7 @@ public class AddressTypeService {
         repository.delete(id);
     }
 
-    public AddressType findByCode(String code) {
+    public Address findByCode(String code) {
         return repository.findByCode(code);
-    }
-    
-     public AddressType findByName(String name) {
-        return repository.findByName(name);
     }
 }
