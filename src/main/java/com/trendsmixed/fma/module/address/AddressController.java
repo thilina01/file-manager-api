@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/Addresses")
+@RequestMapping("/addresses")
 public class AddressController {
 
     @Autowired

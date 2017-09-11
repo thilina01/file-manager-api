@@ -12,7 +12,7 @@ public interface AddressRepository extends PagingAndSortingRepository<Address, I
     public Address findByName(String name);
 
     @Query(value = "SELECT"
-            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
+            + " new com.trendsmixed.fma.dao.Combo(o.id,o.line1,o.addressType.name)"
             + " FROM Address o")
     public List<Combo> getCombo();
 }

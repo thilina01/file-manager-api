@@ -6,10 +6,13 @@
 package com.trendsmixed.fma.module.employee;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.job.JobView;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,13 +47,13 @@ public class Employee implements Serializable {
     @Basic(optional = false)
     @JsonView(EmployeeView.Id.class)
     @Column(name = "id")
-    private Integer id;    
+    private Integer id;
     @JsonView(EmployeeView.Code.class)
-    @Column(name = "code",unique=true)
-    private String code;    
+    @Column(name = "code", unique = true)
+    private String code;
     @JsonView(EmployeeView.FirstName.class)
     @Column(name = "first_name")
-    private String firstName;    
+    private String firstName;
     @JsonView(EmployeeView.LastName.class)
     @Column(name = "last_name")
     private String lastName;
@@ -66,5 +70,8 @@ public class Employee implements Serializable {
     @JsonView(EmployeeView.NIC.class)
     @Column(name = "nic")
     private String nic;
+    @JsonView(EmployeeView.DispatchNote.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
+    private List<DispatchNote> dispatchNoteList;
 
 }

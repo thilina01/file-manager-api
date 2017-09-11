@@ -1,31 +1,44 @@
 package com.trendsmixed.fma.module.dispatch;
 
+import com.trendsmixed.fma.dao.Combo;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.module.dispatch.DispatchRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class DispatchService {
 
-    @Autowired
-    private DispatchRepository dispatchRepository;
+   @Autowired
+    private DispatchRepository repository;
 
-    public List< Dispatch> findAll() {
-        return dispatchRepository.findAll();
+    public Iterable<Dispatch> findAll() {
+        return repository.findAll();
+    }
+
+    public Page<Dispatch> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public List<Combo> getCombo() {
+        return repository.getCombo();
     }
 
     public Dispatch save(Dispatch dispatch) {
-        return dispatchRepository.save(dispatch);
+        return repository.save(dispatch);
     }
 
     public Dispatch findOne(int id) {
-        return dispatchRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public void delete(int id) {
-        dispatchRepository.delete(id);
+        repository.delete(id);
     }
+
+   
 }

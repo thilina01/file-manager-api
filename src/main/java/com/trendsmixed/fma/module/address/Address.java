@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.addresstype.AddressType;
 import com.trendsmixed.fma.module.country.Country;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 
 import java.io.Serializable;
 import java.util.List;
@@ -83,16 +84,8 @@ public class Address implements Serializable {
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)//, fetch = FetchType.LAZY
     private Country country;
-    
-    
-    
-    
-    
-    
-    
-    
-   
-    
-    
-   
+    @JsonView(AddressView.DispatchNote.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "address")
+    private List<DispatchNote> dispatchNoteList;
+
 }

@@ -13,6 +13,7 @@ import com.trendsmixed.fma.module.contact.Contact;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.customertype.CustomerType;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.incoterm.Incoterm;
 import com.trendsmixed.fma.module.notifyparty.NotifyParty;
 import com.trendsmixed.fma.module.paymentterm.PaymentTerm;
@@ -107,14 +108,15 @@ public class Customer implements Serializable {
     private List<CustomerItem> customerItemList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<SalesOrder> salesOrderList;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
-    private List<Dispatch> dispatchs;
     @JsonView(CustomerView.Contact.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Contact> contactList;
     @JsonView(CustomerView.Address.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Address> addressList;
+    @JsonView(CustomerView.DispatchNote.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer",fetch = FetchType.LAZY)
+    private List<DispatchNote> dispatchNoteList;
     @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

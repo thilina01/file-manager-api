@@ -7,6 +7,7 @@ import com.trendsmixed.fma.module.currency.CurrencyView;
 import com.trendsmixed.fma.module.customeritem.CustomerItemView;
 import com.trendsmixed.fma.module.incoterm.IncotermView;
 import com.trendsmixed.fma.module.customertype.CustomerTypeView;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
 import com.trendsmixed.fma.module.notifyparty.NotifyPartyView;
 import com.trendsmixed.fma.module.paymentterm.PaymentTermView;
 import com.trendsmixed.fma.utility.PageView;
@@ -85,6 +86,9 @@ public class CustomerView {
     public static interface Address {
     }
 
+    public static interface DispatchNote {
+    }
+
     public static interface All extends Id, Code, Name, ShortName, Consignee, Contact, Continent, Fax, FinalDestination, Note, SpecialRequirements, OfficeAddress, PhoneNo, SVatNo, VatNo, PageView.All {
     }
 
@@ -93,7 +97,6 @@ public class CustomerView {
 
     public static interface AllAndCustomerTypeAll extends All, CustomerType, CustomerTypeView.All {
     }
-
 
     public static interface AllAndPaymentTermAll extends All, PaymentTerm, PaymentTermView.All {
     }
@@ -111,7 +114,10 @@ public class CustomerView {
     }
 
     public static interface AllAndAddressAll extends All, Address, AddressView.All {
-    }    
+    }
+
+    public static interface AllAndDispatchNoteAll extends All, DispatchNote, DispatchNoteView.All {
+    }
 
     public static interface AllAndCustomerItemListAndItemAll extends All, CustomerItemList, CustomerItemView.AllAndItemAll {
     }

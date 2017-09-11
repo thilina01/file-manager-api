@@ -7,6 +7,7 @@ package com.trendsmixed.fma.module.address;
 
 import com.trendsmixed.fma.module.addresstype.AddressTypeView;
 import com.trendsmixed.fma.module.country.CountryView;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -56,7 +57,9 @@ public class AddressView {
 
     public static interface AllAndAddressTypeAllAndCountryAll extends AllAndAddressTypeAll, Country, CountryView.All{
     }
-
+    
+    public static interface DispatchNote extends DispatchNoteView.All {
+    }
    
 
  

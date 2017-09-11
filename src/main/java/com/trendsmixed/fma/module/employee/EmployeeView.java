@@ -5,6 +5,7 @@
  */
 package com.trendsmixed.fma.module.employee;
 
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -38,6 +39,8 @@ public class EmployeeView {
     }
 
     public static interface All extends Id, Code, FirstName, LastName, DateOfBirth, ContactNumber, Address, NIC, PageView.All {
+    }
+    public static interface DispatchNote extends DispatchNoteView.All {
     }
 
 }
