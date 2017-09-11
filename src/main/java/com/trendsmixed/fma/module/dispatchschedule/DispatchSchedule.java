@@ -6,10 +6,12 @@
 package com.trendsmixed.fma.module.dispatchschedule;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.dispatch.Dispatch;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +23,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -63,13 +66,16 @@ public class DispatchSchedule implements Serializable {
     @Column(name = "request_date")
     @Temporal(TemporalType.DATE)
     private Date requestDate;
+    @JsonView(DispatchScheduleView.Dispatch.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchSchedule")
+    private List<Dispatch> dispatchList;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @JsonView(DispatchScheduleView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
     @JsonView(DispatchScheduleView.Job.class)
     @JoinColumn(name = "job_id", referencedColumnName = "id")
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST},optional = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = false)
     private Job job;
     @JsonView(DispatchScheduleView.SalesOrderItem.class)
     @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id")
