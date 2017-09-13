@@ -1,4 +1,5 @@
 package com.trendsmixed.fma.module.dispatchnote;
+
 import com.trendsmixed.fma.module.address.AddressView;
 import com.trendsmixed.fma.module.customer.CustomerView;
 import com.trendsmixed.fma.module.dispatch.DispatchView;
@@ -19,6 +20,18 @@ public class DispatchNoteView {
     public static interface DeliveryTerm {
     }
 
+    public static interface ContainerNumber {
+    }
+
+    public static interface VehicleNumber {
+    }
+
+    public static interface DispatchReleaseTime {
+    }
+
+    public static interface Recipient {
+    }
+
     public static interface Customer {
     }
 
@@ -31,7 +44,7 @@ public class DispatchNoteView {
     public static interface Dispatch {
     }
 
-    public static interface All extends Id, DispatchDate, PageView.All {
+    public static interface All extends Id, DispatchDate,ContainerNumber,VehicleNumber,DispatchReleaseTime,Recipient, PageView.All {
     }
 
     public static interface AllAndDispatchAll extends All, Dispatch, DispatchView.All {
