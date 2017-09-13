@@ -4,7 +4,6 @@ import com.trendsmixed.fma.module.customer.CustomerView;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView;
 import com.trendsmixed.fma.module.jobdispatch.JobDispatchView;
-import static javafx.scene.input.KeyCode.F;
 
 public class DispatchView {
 
