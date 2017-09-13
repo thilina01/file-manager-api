@@ -287,7 +287,36 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE scrapCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(scrapCostPerKg.effectiveMonth,'%Y-%m')")
     public List getMonthlyScrapCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-
+               
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetRevenue), MAX(financeSummary.actualRevenue))"
+            + " FROM FinanceSummary financeSummary"
+            + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
+    public List getMonthlyRevenue(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+               
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetEbitda), MAX(financeSummary.actualEbitda))"
+            + " FROM FinanceSummary financeSummary"
+            + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
+    public List getMonthlyEbitda(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetGrossProfit), MAX(financeSummary.actualGrossProfit))"
+            + " FROM FinanceSummary financeSummary"
+            + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
+    public List getMonthlyGrossProfit(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+                 
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetNetProfit), MAX(financeSummary.actualNetProfit))"
+            + " FROM FinanceSummary financeSummary"
+            + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
+    public List getMonthlyNetProfit(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
+    
     /* 
     @Query(value = "SELECT "
             + " DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m') ,labourTurnover.labourSource.code, SUM(labourTurnover.turnover), labourTurnover.target"

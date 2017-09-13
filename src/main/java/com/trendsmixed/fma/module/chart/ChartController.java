@@ -234,4 +234,29 @@ public class ChartController {
         return chartService.getMonthlyScrapCostPerKg(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
 
+    @GetMapping("/monthlyRevenue")
+    public List getMonthlyRevenue(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getMonthlyRevenue(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+
+    @GetMapping("/monthlyEbitda")
+    public List getMonthlyEbitda(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getMonthlyEbitda(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+    
+    @GetMapping("/monthlyGrossProfit")
+    public List getMonthlyGrossProfit(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getMonthlyGrossProfit(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+    
+    @GetMapping("/monthlyNetProfit")
+    public List getMonthlyNetProfit(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getMonthlyNetProfit(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+    
+
 }

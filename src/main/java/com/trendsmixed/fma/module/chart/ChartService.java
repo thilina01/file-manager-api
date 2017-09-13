@@ -119,7 +119,7 @@ public class ChartService {
     public List getMonthlySalesPerKg(Date startDate, Date endDate) {
         return chartRepository.getMonthlySalesPerKg(startDate, endDate);
     }
-
+    
     public List getMonthlyConsumableCostPerKg(Date startDate, Date endDate) {
         return chartRepository.getMonthlyConsumableCostPerKg(startDate, endDate);
     }
@@ -134,5 +134,21 @@ public class ChartService {
 
     public List getMonthlyScrapCostPerKg(Date startDate, Date endDate) {
         return chartRepository.getMonthlyScrapCostPerKg(startDate, endDate);
+    }
+        
+    public List getMonthlyRevenue(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyRevenue(startDate, endDate);
+    }
+
+    public List getMonthlyEbitda(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyEbitda(startDate, endDate);
+    }
+    
+    public List getMonthlyGrossProfit(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyGrossProfit(startDate, endDate);
+    }
+    
+    public List getMonthlyNetProfit(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyNetProfit(startDate, endDate);
     }
 }
