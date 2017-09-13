@@ -57,6 +57,19 @@ public class DispatchNote implements Serializable {
     @Column(name = "dispatch_date")
     @Temporal(TemporalType.DATE)
     private Date dispatchDate;
+    @JsonView(DispatchNoteView.ContainerNumber.class)
+    @Column(name = "container_number")
+    private String containerNumber;
+    @JsonView(DispatchNoteView.VehicleNumber.class)
+    @Column(name = "vehicle_number")
+    private String vehicleNumber;
+    @JsonView(DispatchNoteView.DispatchReleaseTime.class)
+    @Column(name = "dispatch_release_time")
+    @Temporal(TemporalType.DATE)
+    private Date dispatchReleaseTime;
+     @JsonView(DispatchNoteView.Recipient.class)
+    @Column(name = "recipient")
+    private String recipient;
     @JsonView(DispatchNoteView.Employee.class)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
