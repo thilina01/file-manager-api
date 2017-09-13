@@ -52,4 +52,7 @@ public class DispatchNoteView {
     public static interface AllAndAddressAllAndEmployeeAllAndCustomerAllAndDispatchAllAndDispatchScheduleAll extends AllAndAddressAllAndEmployeeAllAndCustomerAll, AllAndDispatchAll, AllAndDispatchScheduleAll {
     }
 
+    public static interface AllAndAddressAllAndEmployeeAllAndCustomerAllAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll extends AllAndAddressAllAndEmployeeAllAndCustomerAllAndDispatchAllAndDispatchScheduleAll, DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll {
+    }
+
 }
