@@ -75,6 +75,26 @@ public class DispatchNoteController {
         }
     }
 
+    @JsonView(DispatchNoteView.AllAndAddressAllAndEmployeeAllAndCustomerAll.class)
+    @PostMapping("/release")
+    public DispatchNote saveReleaseInformation(@RequestBody DispatchNote dispatchNote, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        try {
+            DispatchNote existingDispatchNote = service.findOne(dispatchNote.getId());
+            existingDispatchNote.setRecipient(dispatchNote.getRecipient());
+            existingDispatchNote.setContainerNumber(dispatchNote.getContainerNumber());
+            existingDispatchNote.setVehicleNumber(dispatchNote.getVehicleNumber());
+            existingDispatchNote.setDispatchReleaseTime(dispatchNote.getDispatchReleaseTime());
+            return service.save(existingDispatchNote);
+
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+
     @PostMapping("/many")
     public void saveMany(@RequestBody List<DispatchNote> dispatchNotes, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
@@ -102,6 +122,7 @@ public class DispatchNoteController {
 
     }
 
+    @JsonView(DispatchNoteView.AllAndAddressAllAndEmployeeAllAndCustomerAll.class)
     @PutMapping("/{id}")
     public DispatchNote updateCustomer(@PathVariable int id, @RequestBody DispatchNote dispatchNote, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
