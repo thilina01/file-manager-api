@@ -80,7 +80,10 @@ public class DispatchNote implements Serializable {
     @JsonView(DispatchNoteView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Customer customer;
+    private Customer customer;    
+    @JsonView(DispatchNoteView.Quantity.class)
+    @Column(name = "quantity")
+    private Double quantity;
     @JsonView(DispatchNoteView.Dispatch.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
     private List<Dispatch> dispatchList;
