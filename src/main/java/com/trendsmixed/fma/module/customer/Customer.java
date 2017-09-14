@@ -137,6 +137,10 @@ public class Customer implements Serializable {
     @JoinColumn(name = "payment_term_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private PaymentTerm paymentTerm; 
+
+    public Customer(int anId) {
+        this.id = anId;
+    }
     
     
 }

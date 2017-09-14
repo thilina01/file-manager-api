@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.job.JobService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
@@ -56,6 +57,11 @@ public class DispatchScheduleController {
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
+    }
+    
+    @GetMapping("/comboByCustomer/{id}")
+    List<Combo> combo(@PathVariable("id") int id) {
+        return service.getComboByCustomer(new Customer(id));
     }
 
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)

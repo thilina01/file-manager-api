@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.address;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.customer.Customer;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class AddressService {
 
     public List<Combo> getCombo() {
         return repository.getCombo();
+    }
+    
+    public List<Combo> getComboByCustomer(Customer customer) {
+        return repository.getComboByCustomer(customer);
     }
 
     public Address save(Address address) {

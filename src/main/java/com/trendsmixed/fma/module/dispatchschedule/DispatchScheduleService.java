@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.dispatchschedule;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import java.util.List;
 
@@ -27,7 +28,10 @@ public class DispatchScheduleService {
      public List<Combo> getCombo() {
         return repository.getCombo();
     }
-
+    
+    public List<Combo> getComboByCustomer(Customer customer) {
+        return repository.getComboByCustomer(customer);
+    }
 
     public DispatchSchedule save(DispatchSchedule dispatchSchedule) {
         return repository.save(dispatchSchedule);

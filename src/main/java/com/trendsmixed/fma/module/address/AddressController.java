@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +46,11 @@ public class AddressController {
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
+    }
+    
+    @GetMapping("/comboByCustomer/{id}")
+    List<Combo> combo(@PathVariable("id") int id) {
+        return service.getComboByCustomer(new Customer(id));
     }
 
     @JsonView(AddressView.All.class)
