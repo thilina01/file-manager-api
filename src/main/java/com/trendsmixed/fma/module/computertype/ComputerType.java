@@ -6,8 +6,11 @@
 package com.trendsmixed.fma.module.computertype;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.computer.Computer;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -46,5 +50,7 @@ public class ComputerType implements Serializable {
     @JsonView(ComputerTypeView.Name.class)
     @Column(name = "name")
     private String name;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "computerType")
+    private List<Computer> computerList;
    
 }
