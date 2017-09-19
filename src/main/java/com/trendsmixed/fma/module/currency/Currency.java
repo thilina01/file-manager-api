@@ -7,6 +7,7 @@ package com.trendsmixed.fma.module.currency;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.supplier.Supplier;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -52,5 +53,7 @@ public class Currency implements Serializable {
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "currency")
     private List<Customer> customerList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "currency")
+    private List<Supplier> supplierList;
 
 }
