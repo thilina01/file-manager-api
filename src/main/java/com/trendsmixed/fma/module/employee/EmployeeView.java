@@ -5,7 +5,13 @@
  */
 package com.trendsmixed.fma.module.employee;
 
+import com.trendsmixed.fma.module.accident.AccidentView;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
+import com.trendsmixed.fma.module.labourtursource.LabourSourceView;
+import com.trendsmixed.fma.module.machine.MachineView;
+import com.trendsmixed.fma.module.section.SectionView;
+import com.trendsmixed.fma.module.shift.ShiftView;
+import com.trendsmixed.fma.module.shifttype.ShiftTypeView;
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -40,7 +46,10 @@ public class EmployeeView {
 
     public static interface All extends Id, Code, FirstName, LastName, DateOfBirth, ContactNumber, Address, NIC, PageView.All {
     }
+
     public static interface DispatchNote extends DispatchNoteView.All {
     }
+
+    
 
 }

@@ -1,4 +1,3 @@
-
 package com.trendsmixed.fma.module.addresstype;
 
 import java.util.List;

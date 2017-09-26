@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/Applications")
+@RequestMapping("/applications")
 public class ApplicationController {
 
     @Autowired

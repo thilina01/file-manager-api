@@ -6,9 +6,9 @@
 package com.trendsmixed.fma.module.employee;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.accident.Accident;
 import com.trendsmixed.fma.module.computer.Computer;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
-import com.trendsmixed.fma.module.job.JobView;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -76,5 +76,7 @@ public class Employee implements Serializable {
     private List<DispatchNote> dispatchNoteList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
     private List<Computer> computerList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
+    private List<Accident> accidentList;
 
 }

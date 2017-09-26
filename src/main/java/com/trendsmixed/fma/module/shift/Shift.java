@@ -7,6 +7,7 @@ package com.trendsmixed.fma.module.shift;
 
 import com.trendsmixed.fma.module.production.Production;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.accident.Accident;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -45,13 +46,15 @@ public class Shift implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(ShiftView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(ShiftView.Name.class)
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "shift")
     private List<Production> productionList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "shift")
+    private List<Accident> accidentList;
 
     public Shift(Integer id) {
         this.id = id;

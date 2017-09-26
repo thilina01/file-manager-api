@@ -41,13 +41,13 @@ public class Application implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(ApplicationView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(ApplicationView.Name.class)
-    @Column(name = "name",unique=true)
+    @Column(name = "name", unique = true)
     private String name;
-     @JsonView(ApplicationView.ShortName.class)
-    @Column(name = "short_name",unique=true)
+    @JsonView(ApplicationView.ShortName.class)
+    @Column(name = "short_name", unique = true)
     private String shortName;
-    
+
 }

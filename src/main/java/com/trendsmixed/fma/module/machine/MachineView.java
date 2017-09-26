@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.machine;
 
+import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.module.workcenter.WorkCenterView;
 import com.trendsmixed.fma.utility.PageView;
 

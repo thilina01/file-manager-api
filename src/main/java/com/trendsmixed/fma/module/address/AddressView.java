@@ -39,29 +39,26 @@ public class AddressView {
 
     public static interface Line5 {
     }
-    
+
     public static interface AddressType {
     }
-    
-     public static interface Country {
+
+    public static interface Country {
     }
-    
+
     public static interface Customer {
     }
-    
+
     public static interface All extends Id, Code, Name, Line1, Line2, Line3, Line4, Line5, PageView.All {
     }
 
-    public static interface AllAndAddressTypeAll extends All, AddressType, AddressTypeView.All{
+    public static interface AllAndAddressTypeAll extends All, AddressType, AddressTypeView.All {
     }
 
-    public static interface AllAndAddressTypeAllAndCountryAll extends AllAndAddressTypeAll, Country, CountryView.All{
+    public static interface AllAndAddressTypeAllAndCountryAll extends AllAndAddressTypeAll, Country, CountryView.All {
     }
-    
+
     public static interface DispatchNote extends DispatchNoteView.All {
     }
-   
 
- 
-   
 }

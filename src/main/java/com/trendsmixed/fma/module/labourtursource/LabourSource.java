@@ -52,5 +52,6 @@ public class LabourSource implements Serializable {
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "labourSource")
     private List<LabourTurnover> labourTurnoverList;
+    
 
 }

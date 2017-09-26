@@ -5,6 +5,7 @@
  */
 package com.trendsmixed.fma.module.labourtursource;
 
+import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -24,4 +25,5 @@ public class LabourSourceView {
 
     public static interface All extends Id, Code, Name, PageView.All {
     }
+
 }

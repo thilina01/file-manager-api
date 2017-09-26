@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.accident.Accident;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -48,7 +49,7 @@ public class Machine implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(MachineView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @JsonView(MachineView.EnergyRate.class)
@@ -61,5 +62,7 @@ public class Machine implements Serializable {
     private List<Breakdown> breakdownList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "machine")
     private List<ControlPointMachine> controlPointMachineList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "machine")
+    private List<Accident> accidentList;
 
 }
