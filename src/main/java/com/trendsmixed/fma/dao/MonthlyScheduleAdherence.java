@@ -10,6 +10,6 @@ public class MonthlyScheduleAdherence {
     String month;
     long actualTotal;
     long plannedTotal;
-    long adherence;
+    double adherence;
 
 }
