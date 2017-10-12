@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.chart;
 
 import com.trendsmixed.fma.dao.BreakdownChart;
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
 import java.util.List;
 
@@ -25,6 +26,19 @@ public class ChartController {
     @Autowired
     private ChartService chartService;
 
+    @GetMapping("/monthlyOnTimeDelivery")
+    public List getMonthlyOnTimeDelivery(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getMonthlyOnTimeDelivery(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+    
+    @GetMapping("/monthlyOnTimeDeliveryByCustomer")
+    public List getMonthlyOnTimeDeliveryByCustomer(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText,
+            @RequestParam(value = "customer") String customerId) {
+        return chartService.getMonthlyOnTimeDeliveryByCustomer(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new Customer(Integer.valueOf(customerId)));
+    }
+    
     @GetMapping("/scheduleAdherence")
     public List getScheduleAdherence(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {

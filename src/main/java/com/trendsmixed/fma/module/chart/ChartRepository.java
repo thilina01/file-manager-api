@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.chart;
 
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
 import java.util.Date;
 import java.util.List;
@@ -178,6 +179,21 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " GROUP BY loss.lossReason ORDER BY SUM(loss.quantity) DESC")
     public List getLossReasonSummaryBySectionAndLossType(@Param("startDate") Date startDate,
             @Param("endDate") Date endDate, @Param("section") Section section, @Param("lossType") LossType lossType);
+
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlyDeliverySummary(DATE_FORMAT(onTimeDelivery.effectiveMonth,'%Y-%m'), SUM(onTimeDelivery.plan), SUM(onTimeDelivery.actual), (SUM(onTimeDelivery.actual)/SUM(onTimeDelivery.plan))*100.0) "
+            + " FROM OnTimeDelivery onTimeDelivery"
+            + " WHERE onTimeDelivery.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " GROUP BY DATE_FORMAT(onTimeDelivery.effectiveMonth,'%Y-%m')")
+    public List getMonthlyOnTimeDelivery(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlyDeliverySummary(DATE_FORMAT(onTimeDelivery.effectiveMonth,'%Y-%m'), SUM(onTimeDelivery.plan), SUM(onTimeDelivery.actual), (SUM(onTimeDelivery.actual)/SUM(onTimeDelivery.plan))*100.0) "
+            + " FROM OnTimeDelivery onTimeDelivery"
+            + " WHERE onTimeDelivery.effectiveMonth BETWEEN :startDate AND :endDate"
+            + " AND onTimeDelivery.customer = :customer"
+            + " GROUP BY DATE_FORMAT(onTimeDelivery.effectiveMonth,'%Y-%m')")
+    public List getMonthlyOnTimeDeliveryByCustomer(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("customer") Customer customer);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlyScheduleAdherence(DATE_FORMAT(operation.production.productionDate,'%Y-%m'), SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100.0) "

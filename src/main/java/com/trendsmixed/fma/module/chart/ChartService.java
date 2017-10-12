@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.chart;
 
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
 import java.util.Date;
 import java.util.List;
@@ -83,7 +84,14 @@ public class ChartService {
     public List getMonthlyScheduleAdherence(Date startDate, Date endDate) {
         return chartRepository.getMonthlyScheduleAdherence(startDate, endDate);
     }
+    
+    public List getMonthlyOnTimeDelivery(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyOnTimeDelivery(startDate, endDate);
+    }
 
+    public List getMonthlyOnTimeDeliveryByCustomer(Date startDate, Date endDate, Customer customer) {
+        return chartRepository.getMonthlyOnTimeDeliveryByCustomer(startDate, endDate, customer);
+    }
     public List getMonthlyEnergyConsumptionByLocation(Date startDate, Date endDate, Location location) {
         return chartRepository.getMonthlyEnergyConsumptionByLocation(startDate, endDate, location);
     }
