@@ -53,5 +53,20 @@ public class Organization implements Serializable {
     @JsonView(OrganizationView.Svat.class)
     @Column(name = "svat", unique = true)
     private String svat;
+    @JsonView(OrganizationView.Address1.class)
+    @Column(name = "address1", unique = true)
+    private String address1;
+    @JsonView(OrganizationView.Address2.class)
+    @Column(name = "address2", unique = true)
+    private String address2;
+    @JsonView(OrganizationView.Address3.class)
+    @Column(name = "address3", unique = true)
+    private String address3;
+    @JsonView(OrganizationView.Address4.class)
+    @Column(name = "address4", unique = true)
+    private String address4;
+    @JsonView(OrganizationView.Address5.class)
+    @Column(name = "address5", unique = true)
+    private String address5;
 
 }
