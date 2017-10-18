@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.trendsmixed.fma.module.menutype;
 
 import com.trendsmixed.fma.module.menu.Menu;
@@ -45,7 +40,7 @@ public class MenuType implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(MenuTypeView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(MenuTypeView.Name.class)
     @Column(name = "name")

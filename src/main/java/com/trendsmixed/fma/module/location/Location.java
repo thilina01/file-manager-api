@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.trendsmixed.fma.module.location;
 
 import com.trendsmixed.fma.module.energyconsumption.EnergyConsumption;
@@ -45,7 +40,7 @@ public class Location implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(LocationView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(LocationView.Name.class)
     @Column(name = "name")

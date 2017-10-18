@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.trendsmixed.fma.module.losstype;
 
 import com.trendsmixed.fma.module.lossreason.LossReason;
@@ -45,7 +40,7 @@ public class LossType implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
     @JsonView(LossTypeView.Code.class)
-    @Column(name = "code", length = 45,unique=true)
+    @Column(name = "code", length = 45, unique = true)
     private String code;
     @JsonView(LossTypeView.Name.class)
     @Column(name = "name", length = 250)
