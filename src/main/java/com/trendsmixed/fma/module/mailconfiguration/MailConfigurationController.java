@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.utility.MailService;
 import com.trendsmixed.fma.utility.Page;
 
 @RestController
@@ -31,6 +32,8 @@ public class MailConfigurationController {
     private AppSessionService appSessionService;
     @Autowired
     private MailConfigurationService service;
+    @Autowired
+    private MailService mailService;
 
     @JsonView(MailConfigurationView.All.class)
     @GetMapping
@@ -102,5 +105,10 @@ public class MailConfigurationController {
         mailConfiguration.setId(id);
         mailConfiguration = service.save(mailConfiguration);
         return mailConfiguration;
+    }
+    
+    @GetMapping("/test")
+    private void test() {
+        mailService.send("r.thilina@gmail.com", "Test", "Mail configuration is okay.");
     }
 }

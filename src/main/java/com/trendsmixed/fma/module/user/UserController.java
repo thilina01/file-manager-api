@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.status.StatusService;
-import com.trendsmixed.fma.utility.Mail;
+import com.trendsmixed.fma.utility.MailService;
 import com.trendsmixed.fma.utility.Page;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,8 @@ public class UserController {
     private AppSessionService appSessionService;
     @Autowired
     private UserService service;
+    @Autowired
+    private MailService mailService;
     @Autowired
     private StatusService statusService;
 
@@ -124,11 +126,11 @@ public class UserController {
             emailList.add(admin.getEmail());
         }
         if (!emailList.isEmpty()) {
-            new Mail().send(emailList, subject, message);
+            mailService.send(emailList, subject, message);
         }
     }
 
     private void notifyUser(String email, String subject, String message) {
-        new Mail().send(email, subject, message);
+        mailService.send(email, subject, message);
     }
 }
