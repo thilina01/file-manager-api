@@ -52,5 +52,5 @@ public class MailConfiguration implements Serializable {
     @JsonView(MailConfigurationView.Password.class)
     @Column(name = "password")
     private String password;
-    
+
 }

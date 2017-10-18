@@ -1,4 +1,4 @@
-package com.trendsmixed.fma.module.financesummary    ;
+package com.trendsmixed.fma.module.financesummary;
 
 import java.util.List;
 
@@ -21,8 +21,8 @@ public class FinanceSummaryService {
         return repository.findAll(pageable);
     }
 
-    public FinanceSummary save(FinanceSummary financeSummary    ) {
-        return repository.save(financeSummary    );
+    public FinanceSummary save(FinanceSummary financeSummary) {
+        return repository.save(financeSummary);
     }
 
     public void save(List<FinanceSummary> financeSummarys) {

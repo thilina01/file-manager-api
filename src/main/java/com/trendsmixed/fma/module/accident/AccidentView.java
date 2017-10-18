@@ -27,9 +27,6 @@ public class AccidentView {
     public static interface Code {
     }
 
-    public static interface Description {
-    }
-
     public static interface ReferenceNo {
     }
 
@@ -63,7 +60,7 @@ public class AccidentView {
     public static interface Shift {
     }
 
-    public static interface All extends Id, Code, Description, ReferenceNo, RootCause, CorrectiveAction, ResponsiblePerson, AccidentDate, PageView.All {
+    public static interface All extends Id, Code, ReferenceNo, RootCause, CorrectiveAction, ResponsiblePerson, AccidentDate, PageView.All {
     }
 
     public static interface AllAndAccidentTypeAll extends All, AccidentType, AccidentTypeView.All {
@@ -83,11 +80,11 @@ public class AccidentView {
 
     public static interface AllAndTreatmentAll extends All, Treatment, TreatmentView.All {
     }
-    
+
     public static interface AllAndTreatmentTypeAll extends All, TreatmentType, TreatmentTypeView.All {
     }
 
-    public static interface AllAndAccidentTypeAllAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll extends All, AccidentType, AccidentTypeView.All, Employee, EmployeeView.All, Machine, MachineView.All, Section, SectionView.All, Shift, ShiftView.All, Treatment, TreatmentView.All,TreatmentType, TreatmentTypeView.All {
+    public static interface AllAndAccidentTypeAllAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll extends All, AccidentType, AccidentTypeView.All, Employee, EmployeeView.All, Machine, MachineView.All, Section, SectionView.All, Shift, ShiftView.All, Treatment, TreatmentView.All, TreatmentType, TreatmentTypeView.All {
     }
 
 }

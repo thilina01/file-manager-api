@@ -39,7 +39,7 @@ public class ManpowerService {
     }
 
     public List<Manpower> findByProduction(Production production) {
-        return repository.findByProduction(production);        
+        return repository.findByProduction(production);
     }
 
 }

@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.module.menutype.MenuType;
-import com.trendsmixed.fma.module.team.Team;
-import com.trendsmixed.fma.module.menu.MenuRepository;
-import java.util.Collection;
 
 @Service
 public class MenuService {

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface DispatchRepository extends PagingAndSortingRepository<Dispatch, Integer> {
-    
+
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id,'','')"
             + " FROM Dispatch o")

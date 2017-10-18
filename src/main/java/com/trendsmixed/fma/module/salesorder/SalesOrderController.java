@@ -75,14 +75,7 @@ public class SalesOrderController {
                     salesOrderItem.setDispatchScheduleList(existingSalesOrderItem != null ? existingSalesOrderItem.getDispatchScheduleList() : new ArrayList<>());
                 }
                 salesOrderItem.setSalesOrder(salesOrder);
-//                Job job = salesOrderItem.getJob();
-//                job = job == null ? new Job() : job;
-//                job.setItem(salesOrderItem.getItem());
-//                job.setJobDate(salesOrder.getOrderReceivedDate());
-//                job.setJobType(jobType);
-//                job.setSalesOrderItem(salesOrderItem);
-//                job.setQuantity(salesOrderItem.getQuantity());
-//                salesOrderItem.setJob(job);
+
             }
             salesOrder = service.save(salesOrder);
             return salesOrder;

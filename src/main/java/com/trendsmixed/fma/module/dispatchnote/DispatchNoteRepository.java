@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface DispatchNoteRepository extends PagingAndSortingRepository<DispatchNote,Integer> {
-
+public interface DispatchNoteRepository extends PagingAndSortingRepository<DispatchNote, Integer> {
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id,'','')"

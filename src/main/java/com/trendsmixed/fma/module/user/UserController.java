@@ -56,7 +56,6 @@ public class UserController {
     @JsonView(UserView.All.class)
     @PostMapping
     public User save(@RequestBody User user, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        //appSessionService.isValid(email, request);
         try {
             boolean isActivation = false;
             boolean isNew = false;

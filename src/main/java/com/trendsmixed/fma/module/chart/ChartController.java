@@ -31,14 +31,14 @@ public class ChartController {
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyOnTimeDelivery(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-    
+
     @GetMapping("/monthlyOnTimeDeliveryByCustomer")
     public List getMonthlyOnTimeDeliveryByCustomer(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText,
             @RequestParam(value = "customer") String customerId) {
         return chartService.getMonthlyOnTimeDeliveryByCustomer(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new Customer(Integer.valueOf(customerId)));
     }
-    
+
     @GetMapping("/scheduleAdherence")
     public List getScheduleAdherence(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
@@ -130,7 +130,6 @@ public class ChartController {
         List resultList = chartService.getBreakdown(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
         for (Object object : resultList) {
             Object[] rowData = (Object[]) object;
-            //System.out.println(rowData[0]+" YYYYYYYYYYYYYYYYYYYYYYYYYy");
             breakdownChartList.add(new BreakdownChart(rowData[0], rowData[1], rowData[2], rowData[3], rowData[4], rowData[5], rowData[6], rowData[7], rowData[8], rowData[9]));
         }
         return breakdownChartList;
@@ -162,20 +161,6 @@ public class ChartController {
         return chartService.getMonthlyEnergyConsumptionByLocation(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new Location(Integer.valueOf(locationId)));
     }
 
-    /*
-    @GetMapping("/monthlyLabourTurnover")
-    public String getMonthlyLabourTurnover(@RequestParam(value = "startDate") String startDateText,
-            @RequestParam(value = "endDate") String endDateText) {
-        List<MonthlyLabourTurnover> monthlyLabourTurnovers = chartService.getMonthlyLabourTurnover(Format.toStartDate(startDateText), Format.toEndDate(endDateText));;
-        String a = "[ \n";
-        for (int i = 0; i < monthlyLabourTurnovers.size(); i++) {
-            MonthlyLabourTurnover monthlyLabourTurnover = monthlyLabourTurnovers.get(i);
-            a=a.concat("{\n month:\""+monthlyLabourTurnover.getMonth()+"\",\n "+monthlyLabourTurnover.getSource()+":"+monthlyLabourTurnover.getTurnover()+",\n target: 1 \n},");
-        }
-        a = a.concat("]");
-        return a.replace("},]", "}]");
-    }
-     */
     @GetMapping("/monthlyLabourTurnover")
     public List getMonthlyLabourTurnover(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
@@ -259,18 +244,17 @@ public class ChartController {
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyEbitda(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-    
+
     @GetMapping("/monthlyGrossProfit")
     public List getMonthlyGrossProfit(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyGrossProfit(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-    
+
     @GetMapping("/monthlyNetProfit")
     public List getMonthlyNetProfit(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyNetProfit(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
     }
-    
 
 }

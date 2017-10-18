@@ -45,7 +45,7 @@ public class ItemType implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(ItemTypeView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(ItemTypeView.Name.class)
     @Column(name = "name")

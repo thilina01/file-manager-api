@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.contacttype.ContactType;
 import com.trendsmixed.fma.module.customer.Customer;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +20,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -53,10 +50,10 @@ public class Contact implements Serializable {
     private String contactNumber;
     @JsonView(ContactView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)//, fetch = FetchType.LAZY
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Customer customer;
     @JsonView(ContactView.ContactType.class)
     @JoinColumn(name = "contact_type_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    private ContactType contactType; 
+    private ContactType contactType;
 }

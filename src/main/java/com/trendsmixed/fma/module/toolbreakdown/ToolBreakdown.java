@@ -56,11 +56,9 @@ public class ToolBreakdown implements Serializable {
     private Integer duration;
     @JsonView(ToolBreakdownView.BreakdownTime.class)
     @Column(name = "toolBreakdown_time")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Date toolBreakdownTime;
     @JsonView(ToolBreakdownView.RecoveryTime.class)
     @Column(name = "recovery_time")
-    //@Temporal(TemporalType.TIME)
     private Date recoveryTime;
     @JsonView(ToolBreakdownView.BreakdownNumber.class)
     @Column(name = "toolBreakdown_number")

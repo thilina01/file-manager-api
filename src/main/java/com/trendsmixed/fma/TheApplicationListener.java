@@ -24,9 +24,6 @@ public class TheApplicationListener implements ApplicationListener<ContextRefres
 
         System.out.println(applicationContext.getBean(RequestMappingHandlerMapping.class).getHandlerMethods().size());
         System.out.println("To Be implemented : Request Mapping URL registory ");
-//        applicationContext.getBean(RequestMappingHandlerMapping.class).getHandlerMethods().forEach((k, v) -> {
-//            //System.out.println(k + " : " + k.getPatternsCondition() + " : " + k.getMethodsCondition() + " : " + v);
-//            System.out.println(k.getPatternsCondition() + " : " + k.getMethodsCondition());
-//        });
+
     }
 }

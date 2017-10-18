@@ -45,7 +45,7 @@ public class Status implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(StatusView.Name.class)
-    @Column(name = "name",unique=true)
+    @Column(name = "name", unique = true)
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "status")
     private List<User> userList;

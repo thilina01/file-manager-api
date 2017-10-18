@@ -45,7 +45,7 @@ public class ProductType implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(ProductTypeView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(ProductTypeView.Description.class)
     @Column(name = "description")

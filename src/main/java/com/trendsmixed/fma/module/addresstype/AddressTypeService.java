@@ -1,4 +1,3 @@
-
 package com.trendsmixed.fma.module.addresstype;
 
 import com.trendsmixed.fma.dao.Combo;
@@ -46,8 +45,8 @@ public class AddressTypeService {
     public AddressType findByCode(String code) {
         return repository.findByCode(code);
     }
-    
-     public AddressType findByName(String name) {
+
+    public AddressType findByName(String name) {
         return repository.findByName(name);
     }
 }

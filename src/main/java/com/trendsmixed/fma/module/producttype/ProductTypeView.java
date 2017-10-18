@@ -19,16 +19,16 @@ public class ProductTypeView {
 
     public static interface Code {
     }
-    
+
     public static interface Description {
     }
-    
+
     public static interface OperationType {
     }
-     
-    public static interface All extends Id, Code,Description,PageView.All  {
+
+    public static interface All extends Id, Code, Description, PageView.All {
     }
-    
+
     public static interface AllAndOperationTypeAll extends All, OperationType, OperationTypeView.All {
     }
-    }
+}

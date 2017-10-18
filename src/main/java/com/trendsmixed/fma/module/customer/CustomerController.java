@@ -3,14 +3,12 @@ package com.trendsmixed.fma.module.customer;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.address.Address;
-import com.trendsmixed.fma.module.country.Country;
 import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.incoterm.Incoterm;
 import com.trendsmixed.fma.module.customertype.CustomerType;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.contact.Contact;
-import com.trendsmixed.fma.module.country.CountryService;
 import com.trendsmixed.fma.module.currency.CurrencyService;
 import com.trendsmixed.fma.module.incoterm.IncotermService;
 import com.trendsmixed.fma.module.customertype.CustomerTypeService;
@@ -45,8 +43,6 @@ public class CustomerController {
     private CurrencyService currencyService;
     @Autowired
     private CustomerTypeService customerTypeService;
-    @Autowired
-    private CountryService countryService;
 
     @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
     @GetMapping
@@ -65,7 +61,6 @@ public class CustomerController {
         return service.getCombo();
     }
 
-    //@JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCountryAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
     @PostMapping
     public Customer save(@RequestBody Customer customer, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -76,7 +71,7 @@ public class CustomerController {
             }
         }
         try {
-            
+
             List<Contact> contacts = customer.getContactList();
             List<Address> addresses = customer.getAddressList();
 
@@ -111,7 +106,6 @@ public class CustomerController {
 
                 Customer existingCustomer = service.findByCode(customer.getCode());
                 if (existingCustomer != null) {
-                    //itemsToRemove.add(item);
                     customer.setId(existingCustomer.getId());
                 }
 

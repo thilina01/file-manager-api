@@ -60,11 +60,9 @@ public class Breakdown implements Serializable {
     private Integer duration;
     @JsonView(BreakdownView.BreakdownTime.class)
     @Column(name = "breakdown_time")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Date breakdownTime;
     @JsonView(BreakdownView.RecoveryTime.class)
     @Column(name = "recovery_time")
-    //@Temporal(TemporalType.TIME)
     private Date recoveryTime;
     @JsonView(BreakdownView.BreakdownNumber.class)
     @Column(name = "breakdown_number")

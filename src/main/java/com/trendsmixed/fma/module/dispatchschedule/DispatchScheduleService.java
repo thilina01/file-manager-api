@@ -24,11 +24,11 @@ public class DispatchScheduleService {
     public Page<DispatchSchedule> findAll(Pageable pageable) {
         return new Page<DispatchSchedule>(repository.findAll(pageable));
     }
-    
-     public List<Combo> getCombo() {
+
+    public List<Combo> getCombo() {
         return repository.getCombo();
     }
-    
+
     public List<Combo> getComboByCustomer(Customer customer) {
         return repository.getComboByCustomer(customer);
     }

@@ -13,7 +13,7 @@ public class SectionTypeView {
     public static interface Name {
     }
 
-    public static interface All extends Id, Code, Name,PageView.All {
+    public static interface All extends Id, Code, Name, PageView.All {
     }
 
 }

@@ -5,7 +5,6 @@
  */
 package com.trendsmixed.fma.module.country;
 
-import com.trendsmixed.fma.module.address.AddressView;
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -22,10 +21,8 @@ public class CountryView {
 
     public static interface Name {
     }
-    
+
     public static interface All extends Id, Code, Name, PageView.All {
     }
-    
-   
 
 }

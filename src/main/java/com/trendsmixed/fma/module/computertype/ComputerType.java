@@ -45,12 +45,12 @@ public class ComputerType implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(ComputerTypeView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(ComputerTypeView.Name.class)
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "computerType")
     private List<Computer> computerList;
-   
+
 }

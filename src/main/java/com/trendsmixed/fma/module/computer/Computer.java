@@ -100,7 +100,5 @@ public class Computer implements Serializable {
     @JoinColumn(name = "computer_type_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private ComputerType computerType;
-    
-    
 
 }

@@ -2,7 +2,6 @@ package com.trendsmixed.fma.module.customer;
 
 import com.trendsmixed.fma.module.address.AddressView;
 import com.trendsmixed.fma.module.contact.ContactView;
-import com.trendsmixed.fma.module.country.CountryView;
 import com.trendsmixed.fma.module.currency.CurrencyView;
 import com.trendsmixed.fma.module.customeritem.CustomerItemView;
 import com.trendsmixed.fma.module.incoterm.IncotermView;

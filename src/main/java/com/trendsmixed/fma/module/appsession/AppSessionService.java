@@ -39,11 +39,7 @@ public class AppSessionService {
             delete(email);
             throw new Error("Please Login");
         }
-        /*
-        if (appSession.getLastTime() < (System.currentTimeMillis() - (1000 * 60 * 10))) {
-            delete(email);
-            throw new Error("Please Login Again");
-        }*/
+
         appSession.setLastTime(System.currentTimeMillis());
         save(appSession);
         return true;

@@ -27,12 +27,12 @@ import org.springframework.data.domain.Pageable;
 @CrossOrigin
 @RequestMapping("/sectionTypes")
 public class SectionTypeController {
-    
+
     @Autowired
-    private AppSessionService appSessionService; 
+    private AppSessionService appSessionService;
     @Autowired
     private SectionTypeService service;
-    
+
     @JsonView(SectionTypeView.All.class)
     @GetMapping
     public Iterable<SectionType> findAll() {
@@ -42,7 +42,7 @@ public class SectionTypeController {
     @JsonView(SectionTypeView.All.class)
     @GetMapping("/page")
     Page<SectionType> page(Pageable pageable) {
-    return new Page<>(service.findAll(pageable));
+        return new Page<>(service.findAll(pageable));
 
     }
 
@@ -50,6 +50,7 @@ public class SectionTypeController {
     List<Combo> combo() {
         return service.getCombo();
     }
+
     @JsonView(SectionTypeView.All.class)
     @PostMapping
     public SectionType save(@RequestBody SectionType sectionType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

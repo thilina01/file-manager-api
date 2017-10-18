@@ -55,11 +55,11 @@ public class Manpower implements Serializable {
     private Integer actualQuantity;
     @JsonView(ManpowerView.ManpowerType.class)
     @JoinColumn(name = "manpower_type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)//, cascade = CascadeType.DETACH
+    @ManyToOne(optional = false)
     private ManpowerType manpowerType;
     @JsonView(ManpowerView.Production.class)
     @JoinColumn(name = "production_id", referencedColumnName = "id")
-    @ManyToOne(cascade ={CascadeType.MERGE, CascadeType.PERSIST},  optional = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = false)
     private Production production;
 
 }

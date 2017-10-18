@@ -23,29 +23,6 @@ public class TeamMenuController {
     @Autowired
     private TeamMenuService teamMenuService;
 
-    /*
-    @JsonView(TeamMenuView.AllAndMenuAll.class)
-    @GetMapping
-    public List<TeamMenu> findAll() {
-        return teamMenuService.findAll();
-    }
-
-    @PostMapping
-    public TeamMenu save(@RequestBody TeamMenu teamMenu, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-
-        appSessionService.isValid(email, request);
-        try {
-            teamMenu = teamMenuService.save(teamMenu);
-            return teamMenu;
-
-        } catch (Throwable e) {
-            while (e.getCause() != null) {
-                e = e.getCause();
-            }
-            throw new Error(e.getMessage());
-        }
-    }
-     */
     @PutMapping
     public List<TeamMenu> saveMany(@RequestBody List<TeamMenu> teamMenus, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
@@ -64,25 +41,5 @@ public class TeamMenuController {
             throw new Error(e.getMessage());
         }
     }
-    /*
-    @GetMapping("/{id}")
-    public TeamMenu findOne(@PathVariable("id") int id) {
-        return teamMenuService.findOne(id);
-    }
 
-    @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
-        teamMenuService.delete(id);
-
-    }
-
-    @PutMapping("/{id}")
-    public TeamMenu updateCustomer(@PathVariable int id, @RequestBody TeamMenu teamMenu, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
-        teamMenu.setId(id);
-        teamMenu = teamMenuService.save(teamMenu);
-        return teamMenu;
-    }
-     */
 }

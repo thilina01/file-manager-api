@@ -33,9 +33,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "customer_item", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"item_id", "customer_id"})})/*
-@NamedQueries({
-    @NamedQuery(name = "CustomerItem.findAll", query = "SELECT c FROM CustomerItem c")})*/
+    @UniqueConstraint(columnNames = {"item_id", "customer_id"})})
+
 public class CustomerItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,11 +56,11 @@ public class CustomerItem implements Serializable {
     private Double price;
     @JsonView(CustomerItemView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)//, fetch = FetchType.LAZY
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Customer customer;
     @JsonView(CustomerItemView.Item.class)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)//, fetch = FetchType.LAZY
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Item item;
 
 }

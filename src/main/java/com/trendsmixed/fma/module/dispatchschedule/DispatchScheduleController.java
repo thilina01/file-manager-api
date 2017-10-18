@@ -58,7 +58,7 @@ public class DispatchScheduleController {
     List<Combo> combo() {
         return service.getCombo();
     }
-    
+
     @GetMapping("/comboByCustomer/{id}")
     List<Combo> combo(@PathVariable("id") int id) {
         return service.getComboByCustomer(new Customer(id));
@@ -69,13 +69,7 @@ public class DispatchScheduleController {
     public DispatchSchedule save(@RequestBody DispatchSchedule dispatchSchedule, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-//            DispatchSchedule existingDispatchSchedule = service.findByDispatchScheduleNo(dispatchSchedule.getDispatchScheduleNo());
-//            if ((dispatchSchedule.getId() == null || dispatchSchedule.getId() == 0) && existingDispatchSchedule != null) {
-//                throw new Error("DispatchSchedule Number Already Used!");
-//            }
-//            if (existingDispatchSchedule == null) {
-//                dispatchSchedule.setRemainingQuantity(dispatchSchedule.getQuantity());
-//            }
+
             Job job = dispatchSchedule.getJob();
             if (job != null) {
                 if (job.getId() == null) {
@@ -87,7 +81,6 @@ public class DispatchScheduleController {
                 }
             }
 
-            //dispatchSchedule.setSalesOrderItem(new SalesOrderItem(dispatchSchedule.getSalesOrderItem().getId()));
             dispatchSchedule.setJob(job);
             job.getDispatchScheduleList().add(dispatchSchedule);
             return service.save(dispatchSchedule);
@@ -99,48 +92,6 @@ public class DispatchScheduleController {
         }
     }
 
-//    @PostMapping("/many")
-//    public void saveMany(@RequestBody List<DispatchSchedule> dispatchSchedules, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-//
-//        appSessionService.isValid(email, request);
-//        try {
-//            List<DispatchSchedule> dispatchSchedulesToSave = new ArrayList<>();
-//            for (DispatchSchedule dispatchSchedule : dispatchSchedules) {
-//                DispatchSchedule existingDispatchSchedule = service.findByDispatchScheduleNo(dispatchSchedule.getDispatchScheduleNo());
-//                if (existingDispatchSchedule != null) {
-//                    dispatchSchedule.setId(existingDispatchSchedule.getId());
-//                }
-//                DispatchScheduleType dispatchScheduleType = dispatchSchedule.getDispatchScheduleType();
-//                if (dispatchScheduleType != null) {
-//                    String dispatchScheduleTypeCode = dispatchScheduleType.getCode().trim();
-//                    if (dispatchScheduleTypeCode != null) {
-//                        dispatchScheduleType = dispatchScheduleTypeService.findByCode(dispatchScheduleTypeCode);
-//                        if (dispatchScheduleType == null) {
-//                            dispatchScheduleType = new DispatchScheduleType();
-//                            dispatchScheduleType.setCode(dispatchScheduleTypeCode);
-//                            dispatchScheduleType = dispatchScheduleTypeService.save(dispatchScheduleType);
-//                        }
-//                        dispatchSchedule.setDispatchScheduleType(dispatchScheduleType);
-//                    }
-//                }
-//                Item item = dispatchSchedule.getItem();
-//                if (item != null) {
-//                    item = itemService.findByCode(item.getCode());
-//                    if (item != null) {
-//                        dispatchSchedule.setItem(item);
-//                        dispatchSchedulesToSave.add(dispatchSchedule);
-//                    }
-//                }
-//            }
-//            service.save(dispatchSchedulesToSave);
-//        } catch (Throwable e) {
-//            e.printStackTrace();
-//            while (e.getCause() != null) {
-//                e = e.getCause();
-//            }
-//            throw new Error(e.getMessage());
-//        }
-//    }
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping("/{id}")
     public DispatchSchedule findOne(@PathVariable("id") int id) {

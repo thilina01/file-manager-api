@@ -10,7 +10,7 @@ public interface AccidentRepository extends PagingAndSortingRepository<Accident,
     public Accident findByCode(String code);
 
     @Query(value = "SELECT"
-            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.description)"
+            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, '')"
             + " FROM Accident o")
     public List<Combo> getCombo();
 }

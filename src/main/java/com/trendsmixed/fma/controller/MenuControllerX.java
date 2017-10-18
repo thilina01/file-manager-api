@@ -24,9 +24,7 @@ public class MenuControllerX {
     @GetMapping
     public ArrayList<Menu> getMenus(@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         ArrayList<Menu> menus = new ArrayList<>();
-        //System.out.println(email);      
-        //AppSession appSession = null;
-        //if (!email.equals("")) {}
+
         AppSession appSession = appSessionService.findOne(email);
 
         Menu planningMenu = new Menu("Planning", "", "#/kpi");

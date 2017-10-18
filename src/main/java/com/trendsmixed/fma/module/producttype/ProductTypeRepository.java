@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface ProductTypeRepository extends PagingAndSortingRepository<ProductType,Integer>  {
+public interface ProductTypeRepository extends PagingAndSortingRepository<ProductType, Integer> {
 
     public ProductType findByCode(String code);
 

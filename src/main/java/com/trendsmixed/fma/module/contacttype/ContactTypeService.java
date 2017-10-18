@@ -45,8 +45,8 @@ public class ContactTypeService {
     public ContactType findByCode(String code) {
         return repository.findByCode(code);
     }
-    
-     public ContactType findByName(String name) {
+
+    public ContactType findByName(String name) {
         return repository.findByName(name);
     }
 }

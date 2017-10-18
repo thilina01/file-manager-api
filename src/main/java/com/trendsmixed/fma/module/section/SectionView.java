@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.section;
 
-import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.utility.PageView;
 
 public class SectionView {

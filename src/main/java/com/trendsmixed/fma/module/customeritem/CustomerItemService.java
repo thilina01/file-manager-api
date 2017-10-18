@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class CustomerItemService {
 
@@ -28,7 +27,7 @@ public class CustomerItemService {
     public List<Combo> getCombo() {
         return repository.getCombo();
     }
-    
+
     public CustomerItem save(CustomerItem customerItem) {
         return repository.save(customerItem);
     }

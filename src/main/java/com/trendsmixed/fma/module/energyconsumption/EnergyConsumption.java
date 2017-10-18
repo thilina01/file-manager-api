@@ -57,7 +57,6 @@ public class EnergyConsumption implements Serializable {
     private Double cost;
     @JsonView(EnergyConsumptionView.EffectiveMonth.class)
     @Column(name = "effective_month")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Date effectiveMonth;
     @JsonView(EnergyConsumptionView.Reference.class)
     @Column(name = "reference")

@@ -43,7 +43,6 @@ public class SalesPerKg implements Serializable {
     private Integer id;
     @JsonView(SalesPerKgView.EffectiveMonth.class)
     @Column(name = "effective_month")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Date effectiveMonth;
     @JsonView(SalesPerKgView.Budget.class)
     @Column(name = "budget")

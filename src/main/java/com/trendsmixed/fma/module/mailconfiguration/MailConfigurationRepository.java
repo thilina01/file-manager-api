@@ -9,7 +9,6 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface MailConfigurationRepository extends PagingAndSortingRepository<MailConfiguration, Integer> {
 
-
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.port,o.user )"
             + " FROM MailConfiguration o")

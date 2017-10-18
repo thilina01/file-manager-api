@@ -47,7 +47,7 @@ public class AddressController {
     List<Combo> combo() {
         return service.getCombo();
     }
-    
+
     @GetMapping("/comboByCustomer/{id}")
     List<Combo> combo(@PathVariable("id") int id) {
         return service.getComboByCustomer(new Customer(id));

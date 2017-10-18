@@ -46,7 +46,6 @@ public class LabourTurnover implements Serializable {
     private Integer id;
     @JsonView(LabourTurnoverView.EffectiveMonth.class)
     @Column(name = "effective_month")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Date effectiveMonth;
     @JsonView(LabourTurnoverView.Turnover.class)
     @Column(name = "turnover")

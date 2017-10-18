@@ -6,14 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trendsmixed.fma.module.dispatch.DispatchRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 @Service
 public class DispatchService {
 
-   @Autowired
+    @Autowired
     private DispatchRepository repository;
 
     public Iterable<Dispatch> findAll() {
@@ -40,5 +39,4 @@ public class DispatchService {
         repository.delete(id);
     }
 
-   
 }

@@ -80,7 +80,6 @@ public class ItemController {
     public void saveMany(@RequestBody List<Item> items, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            //List<Item> itemsToRemove = new ArrayList<>();
             for (Item item : items) {
                 String code = item.getCode();
                 if (code == null) {
@@ -132,15 +131,7 @@ public class ItemController {
                     item.setPaint(paint);
                 }
             }
-            /*System.out.println(items.size());
-            System.out.println(itemsToRemove.size());
-            for (Item item : itemsToRemove) {
-                System.out.println(item.getCode());
-                Predicate<Item> itemPredicate = i -> i.getCode() == item.getCode();
-                items.removeIf(itemPredicate);
-            }
-            System.out.println(items.size());
-            //items.removeAll(itemsToRemove);*/
+
             service.save(items);
         } catch (Throwable e) {
             e.printStackTrace();

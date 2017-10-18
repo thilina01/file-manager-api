@@ -48,7 +48,7 @@ public class CostCenter implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(CostCenterView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(CostCenterView.Name.class)
     @Column(name = "name")

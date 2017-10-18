@@ -77,14 +77,9 @@ public class AccountController {
         boolean authenticated = userDao.isAuthenticated();
         if (authenticated) {
             saveAppSession(userDao.getEmail(), request.getRemoteAddr());
-            // Cookie cookie = new Cookie("XXXX", "TTTTTTTTTTTTTTTTTTTT");
-            //cookie.setDomain("http://localhost");
-            //cookie.setPath("/");
-            //response.addCookie(cookie);
-            //response.flushBuffer();
+
             return authenticated;
         } else {
-            //throw new Error("Login Failed");
         }
         return authenticated;
     }

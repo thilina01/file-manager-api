@@ -63,15 +63,7 @@ public class EnergyConsumptionController {
     public void saveMany(@RequestBody List< EnergyConsumption> energyConsumptions, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
         appSessionService.isValid(email, request);
-        try {/*
-            for (EnergyConsumption energyConsumption : energyConsumptions) {
-                energyConsumption.setCode(energyConsumption.getCode().trim());
-                energyConsumption.setName(energyConsumption.getName().trim());
-                EnergyConsumption existingEnergyConsumption = service.findByCode(energyConsumption.getCode());
-                if (existingEnergyConsumption != null) {
-                    energyConsumption.setId(existingEnergyConsumption.getId());
-                }
-            }*/
+        try {
             service.save(energyConsumptions);
         } catch (Throwable e) {
             while (e.getCause() != null) {

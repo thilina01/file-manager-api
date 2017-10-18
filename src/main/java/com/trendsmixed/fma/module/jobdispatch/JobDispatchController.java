@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.module.jobdispatch.JobDispatchView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -32,28 +31,6 @@ public class JobDispatchController {
     public List<JobDispatch> findAll() {
         return jobDispatchService.findAll();
     }
-//
-//    @JsonView(DispatchView.All.class)
-//    @PostMapping
-//    public Dispatch save(@RequestBody JobDispatch dispatch, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-//        appSessionService.isValid(email, request);
-//        try {
-//            List<JobDispatch> jobDispatchs = dispatch.getJobDispatchList();
-//            for (JobDispatch jobDispatch : jobDispatchs) {
-//                jobDispatch.setDispatch(dispatch);
-//                //Job job = jobDispatch.getJob();                
-//            }
-//
-//            dispatch = jobDispatchService.save(dispatch);
-//            return dispatch;
-//
-//        } catch (Throwable e) {
-//            while (e.getCause() != null) {
-//                e = e.getCause();
-//            }
-//            throw new Error(e.getMessage());
-//        }
-//    }
 
     @GetMapping("/{id}")
     public JobDispatch findOne(@PathVariable("id") int id) {

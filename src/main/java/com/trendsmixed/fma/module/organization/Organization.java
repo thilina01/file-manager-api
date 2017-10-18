@@ -41,22 +41,22 @@ public class Organization implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(OrganizationView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(OrganizationView.Name.class)
-    @Column(name = "name",unique=true)
+    @Column(name = "name", unique = true)
     private String name;
     @JsonView(OrganizationView.Slogan1.class)
-    @Column(name = "slogan1",unique=true)
+    @Column(name = "slogan1", unique = true)
     private String slogan1;
     @JsonView(OrganizationView.Slogan2.class)
-    @Column(name = "slogan2",unique=true)
+    @Column(name = "slogan2", unique = true)
     private String slogan2;
     @JsonView(OrganizationView.Vat.class)
-    @Column(name = "vat",unique=true)
+    @Column(name = "vat", unique = true)
     private String vat;
     @JsonView(OrganizationView.Svat.class)
-    @Column(name = "svat",unique=true)
+    @Column(name = "svat", unique = true)
     private String svat;
-    
+
 }

@@ -45,12 +45,11 @@ public class User implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(UserView.Email.class)
-    @Column(name = "email",unique=true)
+    @Column(name = "email", unique = true)
     private String email;
     @JsonView(UserView.Name.class)
     @Column(name = "name")
     private String name;
-    //@JsonView(UserView.Password.class)
     @Column(name = "password")
     private String password;
     @JsonView(UserView.Status.class)

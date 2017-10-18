@@ -53,7 +53,7 @@ public class AccidentController {
     public Accident save(@RequestBody Accident accident, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            
+
             List<Treatment> treatmentes = accident.getTreatmentList();
             if (treatmentes != null) {
                 for (Treatment treatment : treatmentes) {

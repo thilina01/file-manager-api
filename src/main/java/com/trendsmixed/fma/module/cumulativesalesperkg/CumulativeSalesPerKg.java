@@ -43,7 +43,6 @@ public class CumulativeSalesPerKg implements Serializable {
     private Integer id;
     @JsonView(CumulativeSalesPerKgView.EffectiveMonth.class)
     @Column(name = "effective_month")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Date effectiveMonth;
     @JsonView(CumulativeSalesPerKgView.Budget.class)
     @Column(name = "budget")

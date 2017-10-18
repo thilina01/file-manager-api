@@ -55,9 +55,5 @@ public class AddressType implements Serializable {
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "addressType")
     private List<Address> addressList;
-    
-    
-   
-    
 
 }

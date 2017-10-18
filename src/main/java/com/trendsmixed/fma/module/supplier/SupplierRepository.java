@@ -9,7 +9,6 @@ public interface SupplierRepository extends PagingAndSortingRepository<Supplier,
 
     public Supplier findByCode(String code);
 
-
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code,o.name)"
             + " FROM Supplier o")

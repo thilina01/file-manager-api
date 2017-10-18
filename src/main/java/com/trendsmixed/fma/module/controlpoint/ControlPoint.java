@@ -52,7 +52,7 @@ public class ControlPoint implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(ControlPointView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(ControlPointView.Name.class)
     @Column(name = "name")

@@ -31,7 +31,7 @@ public class DispatchController {
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private DispatchService  service;
+    private DispatchService service;
     @Autowired
     private JobService jobService;
 
@@ -66,9 +66,9 @@ public class DispatchController {
                 jobService.save(job);
             }
 
-             dispatch = service.save(dispatch);
+            dispatch = service.save(dispatch);
             return dispatch;
-      
+
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
@@ -84,14 +84,14 @@ public class DispatchController {
     }
 
     @DeleteMapping(value = "/{id}")
-     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-   public Dispatch updateCustomer(@PathVariable int id, @RequestBody Dispatch dispatch, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Dispatch updateCustomer(@PathVariable int id, @RequestBody Dispatch dispatch, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         dispatch.setId(id);
         dispatch = service.save(dispatch);

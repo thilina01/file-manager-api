@@ -6,13 +6,11 @@
 package com.trendsmixed.fma.module.customer;
 
 import com.trendsmixed.fma.module.currency.Currency;
-import com.trendsmixed.fma.module.country.Country;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.contact.Contact;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.customertype.CustomerType;
-import com.trendsmixed.fma.module.dispatch.Dispatch;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.incoterm.Incoterm;
 import com.trendsmixed.fma.module.notifyparty.NotifyParty;
@@ -59,7 +57,7 @@ public class Customer implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(CustomerView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(CustomerView.Consignee.class)
     @Column(name = "consignee")
@@ -115,7 +113,7 @@ public class Customer implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Address> addressList;
     @JsonView(CustomerView.DispatchNote.class)
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer",fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<DispatchNote> dispatchNoteList;
     @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
@@ -136,11 +134,10 @@ public class Customer implements Serializable {
     @JsonView(CustomerView.PaymentTerm.class)
     @JoinColumn(name = "payment_term_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    private PaymentTerm paymentTerm; 
+    private PaymentTerm paymentTerm;
 
     public Customer(int anId) {
         this.id = anId;
     }
-    
-    
+
 }

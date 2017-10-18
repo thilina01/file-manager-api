@@ -78,11 +78,11 @@ public class Address implements Serializable {
     private AddressType addressType;
     @JsonView(AddressView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)//, fetch = FetchType.LAZY
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Customer customer;
     @JsonView(AddressView.Country.class)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)//, fetch = FetchType.LAZY
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Country country;
     @JsonView(AddressView.DispatchNote.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "address")

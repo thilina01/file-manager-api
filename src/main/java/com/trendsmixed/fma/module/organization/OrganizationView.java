@@ -34,7 +34,7 @@ public class OrganizationView {
     public static interface Svat {
     }
 
-    public static interface All extends Id, Code, Name, Slogan1, Slogan2, Vat,Svat, PageView.All {
+    public static interface All extends Id, Code, Name, Slogan1, Slogan2, Vat, Svat, PageView.All {
     }
 
 }

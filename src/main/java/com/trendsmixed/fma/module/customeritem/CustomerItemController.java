@@ -55,7 +55,6 @@ public class CustomerItemController {
         return service.getCombo();
     }
 
-    //@JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @PostMapping
     public CustomerItem save(@RequestBody CustomerItem customerItems, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

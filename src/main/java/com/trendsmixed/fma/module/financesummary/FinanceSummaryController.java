@@ -1,4 +1,4 @@
-package com.trendsmixed.fma.module.financesummary     ;
+package com.trendsmixed.fma.module.financesummary;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -43,7 +43,7 @@ public class FinanceSummaryController {
 
     @JsonView(FinanceSummaryView.All.class)
     @PostMapping
-    public FinanceSummary save(@RequestBody FinanceSummary financeSummary  , @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public FinanceSummary save(@RequestBody FinanceSummary financeSummary, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
         appSessionService.isValid(email, request);
         try {
@@ -89,7 +89,7 @@ public class FinanceSummaryController {
     public FinanceSummary updateCustomer(@PathVariable int id, @RequestBody FinanceSummary financeSummary, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         financeSummary.setId(id);
-        financeSummary= service.save(financeSummary    );
+        financeSummary = service.save(financeSummary);
         return financeSummary;
     }
 

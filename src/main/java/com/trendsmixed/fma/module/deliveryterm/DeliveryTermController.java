@@ -1,4 +1,4 @@
-package com.trendsmixed.fma.module.deliveryterm ;
+package com.trendsmixed.fma.module.deliveryterm;
 
 import java.util.List;
 

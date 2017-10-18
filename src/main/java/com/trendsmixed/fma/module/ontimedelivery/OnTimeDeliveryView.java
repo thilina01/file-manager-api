@@ -23,16 +23,13 @@ public class OnTimeDeliveryView {
     public static interface Actual {
     }
 
-    public static interface Budget {
-    }
-
     public static interface Plan {
     }
 
     public static interface Customer {
     }
 
-    public static interface All extends Id, EffectiveMonth, Actual, Budget, Plan, PageView.All {
+    public static interface All extends Id, EffectiveMonth, Actual, Plan, PageView.All {
     }
 
     public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {

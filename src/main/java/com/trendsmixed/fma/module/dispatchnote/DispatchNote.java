@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.trendsmixed.fma.module.dispatchnote;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -66,7 +67,7 @@ public class DispatchNote implements Serializable {
     @Column(name = "dispatch_release_time")
     @Temporal(TemporalType.DATE)
     private Date dispatchReleaseTime;
-     @JsonView(DispatchNoteView.Recipient.class)
+    @JsonView(DispatchNoteView.Recipient.class)
     @Column(name = "recipient")
     private String recipient;
     @JsonView(DispatchNoteView.Employee.class)
@@ -80,7 +81,7 @@ public class DispatchNote implements Serializable {
     @JsonView(DispatchNoteView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Customer customer;    
+    private Customer customer;
     @JsonView(DispatchNoteView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;

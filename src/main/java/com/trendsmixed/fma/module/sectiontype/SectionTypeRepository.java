@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface SectionTypeRepository extends PagingAndSortingRepository<SectionType,Integer> {
+public interface SectionTypeRepository extends PagingAndSortingRepository<SectionType, Integer> {
 
     public SectionType findByCode(String code);
-    
+
     public SectionType findByName(String name);
 
     @Query(value = "SELECT"

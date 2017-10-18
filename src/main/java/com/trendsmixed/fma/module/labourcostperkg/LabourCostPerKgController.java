@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.labourcostperkg;
 
-import com.trendsmixed.fma.module.labourturnover.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

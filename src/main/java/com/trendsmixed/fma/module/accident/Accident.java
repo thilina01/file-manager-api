@@ -56,9 +56,6 @@ public class Accident implements Serializable {
     @JsonView(AccidentView.Code.class)
     @Column(name = "code", unique = true)
     private String code;
-    @JsonView(AccidentView.Description.class)
-    @Column(name = "description")
-    private String description;
     @JsonView(AccidentView.ReferenceNo.class)
     @Column(name = "reference_no")
     private String referenceNo;

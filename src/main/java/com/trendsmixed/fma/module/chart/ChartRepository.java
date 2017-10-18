@@ -63,11 +63,6 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " GROUP BY controlPointMachine.controlPoint.workCenter.costCenter.section")
     public List test(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
-//	@Query(value = "SELECT "
-//			+ " production.controlPoint.workCenter.costCenter.section.code , SUM(production.actualDuration) "
-//			+ " FROM Production production" + " WHERE production.productionDate BETWEEN :startDate AND :endDate"
-//			+ " GROUP BY production.controlPoint.workCenter.costCenter.section")
-//	public List getTotalProductonDurationGroupedBySecton(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.ScheduleAdherence(operation.production.controlPoint.workCenter.costCenter.section.code, SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100) "
             + " FROM Operation operation"
@@ -303,42 +298,33 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE scrapCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(scrapCostPerKg.effectiveMonth,'%Y-%m')")
     public List getMonthlyScrapCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-               
+
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetRevenue), MAX(financeSummary.actualRevenue))"
             + " FROM FinanceSummary financeSummary"
             + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
     public List getMonthlyRevenue(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-               
+
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetEbitda), MAX(financeSummary.actualEbitda))"
             + " FROM FinanceSummary financeSummary"
             + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
     public List getMonthlyEbitda(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-    
+
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetGrossProfit), MAX(financeSummary.actualGrossProfit))"
             + " FROM FinanceSummary financeSummary"
             + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
     public List getMonthlyGrossProfit(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-                 
+
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetNetProfit), MAX(financeSummary.actualNetProfit))"
             + " FROM FinanceSummary financeSummary"
             + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
     public List getMonthlyNetProfit(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-    
-    
-    /* 
-    @Query(value = "SELECT "
-            + " DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m') ,labourTurnover.labourSource.code, SUM(labourTurnover.turnover), labourTurnover.target"
-            + " FROM LabourTurnover labourTurnover"
-            + " WHERE labourTurnover.effectiveMonth BETWEEN :startDate AND :endDate"
-            + " GROUP BY labourTurnover.labourSource, DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m')")
-    public List getMonthlyLabourTurnover(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-     */
+
 }

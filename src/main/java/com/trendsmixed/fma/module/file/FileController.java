@@ -43,7 +43,7 @@ public class FileController {
     @Autowired
     private AppSessionService appSessionService;
 
-    @GetMapping//("/top")
+    @GetMapping
     public List<File> all() {
         return fileService.findAll();
     }
@@ -69,20 +69,13 @@ public class FileController {
             byte[] fileAsBytes = Files.readAllBytes(filePath.toPath());
             download.setName(file.getName());
             download.setExtension(file.getExtension());
-            //download.setBytes(fileAsBytes);
-            //System.out.println(fileAsBytes);
-            //InputStream targetStream = new FileInputStream(filePath);
-            // copy it to response's OutputStream
 
-            //org.apache.commons.io.IOUtils.copy(targetStream, response.getOutputStream());
             response.setContentType("application/x-msdownload");
             response.setHeader("Content-disposition", "attachment; filename=\"" + file.getName() + file.getExtension() + "\"");
             ServletOutputStream outStream = response.getOutputStream();
             outStream.write(fileAsBytes);
             outStream.flush();
-            outStream.close();/* */
-
-            //response.flushBuffer();
+            outStream.close();
 
         } catch (IOException ex) {
             Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,11 +97,8 @@ public class FileController {
                 String originalFileName = multipartFile.getOriginalFilename();
                 file.setOriginalFileName(originalFileName);
                 String extension = originalFileName.substring(originalFileName.lastIndexOf('.'));
-                //System.out.println(file.getName());
-                //System.out.println("folder id: " + file.getFolders().get(0).getId());
                 Folder folder = folderService.findOne(file.getFolderList().get(0).getId());
-                //String name = System.currentTimeMillis() + extension;
-                //System.out.println(name);
+
                 file.setUploadDate(new Date());
                 file.setExtension(extension);
                 file = fileService.save(file);

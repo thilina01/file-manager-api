@@ -62,7 +62,7 @@ public class MenuController {
     public List<Menu> findTop(@RequestHeader(value = "email", defaultValue = "") String email) {
 
         AppSession appSession = appSessionService.findOne(email);
-        List<Menu> menus = new ArrayList<>();//menuService.findByMenuIsNull();
+        List<Menu> menus = new ArrayList<>();
 
         if (appSession != null) {
             User user = userService.findByEmail(email);
@@ -77,9 +77,6 @@ public class MenuController {
                 if (team == null) {
                     team = new Team();
                     team.setName("user");
-                    //List<User> users = new ArrayList<>();
-                    //users.add(user);
-                    //team.setUserList(users);
                     team = teamService.save(team);
                 }
                 user.setTeam(team);
@@ -102,10 +99,7 @@ public class MenuController {
 
             }
             if (team.getTeamMenuList() != null) {
-                /*
-                List<Menu> menusForTeam = teamMenuService.findTopMenuByTeam(team);
-                for (Menu menu : menusForTeam) {
-                }*/
+
                 menus.addAll(teamMenuService.findTopMenuByTeam(team));
             }
             menus.add(new Menu("Logout", "#logoutModal"));
@@ -136,9 +130,7 @@ public class MenuController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Menu> menus, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        //AppSession appSession = appSessionService.findOne(email);
-        //if (appSession != null) {
-        //appSessionService.isValid(email, request);
+
         try {
             int i = 0;
             for (Menu menu : menus) {
@@ -178,7 +170,6 @@ public class MenuController {
                         subMenu.setMenu(menu);
                     }
                 }
-                //System.out.println(++i + " : " + menu);
             }
             menuService.save(menus);
         } catch (Throwable e) {
@@ -188,7 +179,7 @@ public class MenuController {
             }
             throw new Error(e.getMessage());
         }
-        //}
+
     }
 
     @GetMapping("/{id}")

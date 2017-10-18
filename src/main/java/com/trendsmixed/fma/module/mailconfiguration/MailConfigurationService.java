@@ -43,5 +43,4 @@ public class MailConfigurationService {
         repository.delete(id);
     }
 
-   
 }

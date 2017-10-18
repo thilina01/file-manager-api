@@ -21,7 +21,7 @@ public class SalesOrderItemView {
 
     public static interface Quantity {
     }
-    
+
     public static interface Scheduled {
     }
 

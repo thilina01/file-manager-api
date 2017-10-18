@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.trendsmixed.fma.module.financesummary ;
+package com.trendsmixed.fma.module.financesummary;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import java.io.Serializable;
@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "finance_summary")
 @NamedQueries({
     @NamedQuery(name = "FinanceSummary.findAll", query = "SELECT c FROM FinanceSummary c")})
-public class FinanceSummary      implements Serializable {
+public class FinanceSummary implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,7 +43,6 @@ public class FinanceSummary      implements Serializable {
     private Integer id;
     @JsonView(FinanceSummaryView.EffectiveMonth.class)
     @Column(name = "effective_month")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Date effectiveMonth;
     @JsonView(FinanceSummaryView.ActualRevenue.class)
     @Column(name = "actual_revenue")

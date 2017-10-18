@@ -71,7 +71,7 @@ public class SupplierView {
     public static interface AllAndSupplierTypeAll extends All, SupplierType, SupplierTypeView.All {
     }
 
-    public static interface AllAndCurrencyAllAndSupplierTypeAllAndDeliveryTermAllAndPaymentTermAll extends All, Currency, CurrencyView.All,PaymentTerm, PaymentTermView.All, SupplierType, SupplierTypeView.All, DeliveryTerm, DeliveryTermView.All {
+    public static interface AllAndCurrencyAllAndSupplierTypeAllAndDeliveryTermAllAndPaymentTermAll extends All, Currency, CurrencyView.All, PaymentTerm, PaymentTermView.All, SupplierType, SupplierTypeView.All, DeliveryTerm, DeliveryTermView.All {
     }
 
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trendsmixed.fma.module.folder.FolderView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -43,7 +42,7 @@ public class FolderController {
         }
     }
 
-    @GetMapping//("/top")
+    @GetMapping
     public @JsonView(FolderView.All.class)
     List<Folder> all() {
         return folderService.findAll();
@@ -52,7 +51,6 @@ public class FolderController {
     @GetMapping("/top")
     public @JsonView(FolderView.All.class)
     List<Folder> top(@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        //System.out.println(email);
         return folderService.findByFolderIsNull();
     }
 
@@ -86,13 +84,6 @@ public class FolderController {
         return folderService.findOne(id);
     }
 
-    /*
-     @GetMapping("/{id}/with-parent-and-sub-folders-and-files")
-     public @JsonView(Views.FolderParentAndWithSubFoldersAndFiles.class)
-     Folder oneWithParentAndSubFoldersAndFiles(@PathVariable("id") int id) {
-     return folderService.findOne(id);
-     }
-     */
     @GetMapping("/delete/{id}")
     public void delete(@PathVariable("id") int id) {
         folderService.delete(id);

@@ -47,9 +47,6 @@ public class OnTimeDelivery implements Serializable {
     @JsonView(OnTimeDeliveryView.EffectiveMonth.class)
     @Column(name = "effective_month")
     private Date effectiveMonth;
-    @JsonView(OnTimeDeliveryView.Budget.class)
-    @Column(name = "budget")
-    private double budget;
     @JsonView(OnTimeDeliveryView.Actual.class)
     @Column(name = "actual")
     private double actual;

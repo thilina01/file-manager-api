@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.leavetype;
 
-import com.trendsmixed.fma.module.lossreason.LossReasonView;
 import com.trendsmixed.fma.utility.PageView;
 
 public class LeaveTypeView {

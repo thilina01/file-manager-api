@@ -48,7 +48,7 @@ public class Item implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(ItemView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(ItemView.Description.class)
     @Column(name = "description")
@@ -72,9 +72,6 @@ public class Item implements Serializable {
     @JsonView(ItemView.Weight.class)
     @Column(name = "weight")
     private Double weight;
-//    @JsonView(ItemView.SalesOrderItem.class)
-//    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
-//    private List<SalesOrderItem> salesOrderItemList;
     @JsonView(ItemView.CustomerItem.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
     private List<CustomerItem> customerItemList;

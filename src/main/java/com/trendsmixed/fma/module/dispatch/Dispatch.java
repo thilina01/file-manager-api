@@ -5,13 +5,11 @@
  */
 package com.trendsmixed.fma.module.dispatch;
 
-import com.trendsmixed.fma.module.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import com.trendsmixed.fma.module.jobdispatch.JobDispatch;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -26,8 +24,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -68,4 +64,3 @@ public class Dispatch implements Serializable {
     private DispatchNote dispatchNote;
 
 }
-

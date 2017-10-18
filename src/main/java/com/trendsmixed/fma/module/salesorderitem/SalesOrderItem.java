@@ -56,7 +56,6 @@ public class SalesOrderItem implements Serializable {
     @Column(name = "quantity")
     private Double quantity;
     @JsonView(SalesOrderItemView.Scheduled.class)
-    //@Column(name = "allocated")
     private transient int scheduled;
     @JsonView(SalesOrderItemView.UnitPrice.class)
     @Column(name = "unit_price")
@@ -77,7 +76,7 @@ public class SalesOrderItem implements Serializable {
     @JsonView(SalesOrderItemView.DispatchSchedule.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
     private List<DispatchSchedule> dispatchScheduleList;
-    
+
     public SalesOrderItem(Integer anId) {
         this.id = anId;
     }

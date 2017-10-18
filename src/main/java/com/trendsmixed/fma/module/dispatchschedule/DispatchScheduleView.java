@@ -34,7 +34,7 @@ public class DispatchScheduleView {
 
     public static interface SalesOrderItem extends SalesOrderItemView.All {
     }
-    
+
     public static interface Dispatch extends DispatchView.All {
     }
 
@@ -46,11 +46,11 @@ public class DispatchScheduleView {
 
     public static interface AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll extends AllAndSalesOrderItemAllAndCustomerItemAll, AllAndJobAllAndItemAll {
     }
-    
+
     public static interface AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll extends AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll, SalesOrderItemView.AllAndCustomerItemAllAndSalesOrderAll {
     }
-    
+
     public static interface AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAllAndPaintAll extends AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll, ItemView.AllAndPaintAll {
     }
-    
+
 }

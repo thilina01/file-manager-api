@@ -43,7 +43,6 @@ public class MaterialCostPerKg implements Serializable {
     private Integer id;
     @JsonView(MaterialCostPerKgView.EffectiveMonth.class)
     @Column(name = "effective_month")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Date effectiveMonth;
     @JsonView(MaterialCostPerKgView.Budget.class)
     @Column(name = "budget")

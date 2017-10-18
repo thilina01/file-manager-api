@@ -45,7 +45,7 @@ public class NotifyParty implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(NotifyPartyView.Code.class)
-    @Column(name = "code",unique=true)
+    @Column(name = "code", unique = true)
     private String code;
     @JsonView(NotifyPartyView.Name.class)
     @Column(name = "name")

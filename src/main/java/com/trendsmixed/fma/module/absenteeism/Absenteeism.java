@@ -46,7 +46,6 @@ public class Absenteeism implements Serializable {
     private Integer id;
     @JsonView(AbsenteeismView.EffectiveMonth.class)
     @Column(name = "effective_month")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Date effectiveMonth;
     @JsonView(AbsenteeismView.Absenteeism.class)
     @Column(name = "absenteeism")

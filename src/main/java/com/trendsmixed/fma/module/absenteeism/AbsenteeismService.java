@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.absenteeism;
 
-import com.trendsmixed.fma.module.labourturnover.*;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 

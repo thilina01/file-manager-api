@@ -1,6 +1,5 @@
 package com.trendsmixed.fma.module.jobdispatch;
 
-import com.trendsmixed.fma.module.jobdispatch.JobDispatchRepository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
