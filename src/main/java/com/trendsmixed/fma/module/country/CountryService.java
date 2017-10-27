@@ -1,18 +1,17 @@
 package com.trendsmixed.fma.module.country;
 
 import com.trendsmixed.fma.dao.Combo;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@AllArgsConstructor
 @Service
 public class CountryService {
 
-    @Autowired
     private CountryRepository repository;
 
     public Iterable<Country> findAll() {

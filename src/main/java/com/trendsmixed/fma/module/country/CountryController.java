@@ -2,33 +2,23 @@ package com.trendsmixed.fma.module.country;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/countries")
 public class CountryController {
 
-    @Autowired
-    private AppSessionService appSessionService;
-    @Autowired
-    private CountryService service;
+    private final AppSessionService appSessionService;
+    private final CountryService service;
 
     @JsonView(CountryView.All.class)
     @GetMapping
@@ -39,7 +29,7 @@ public class CountryController {
     @JsonView(CountryView.All.class)
     @GetMapping("/page")
     Page<Country> page(Pageable pageable) {
-        return new Page<Country>(service.findAll(pageable));
+        return new Page<>(service.findAll(pageable));
     }
 
     @GetMapping("/combo")
@@ -96,7 +86,6 @@ public class CountryController {
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         service.delete(id);
-
     }
 
     @JsonView(CountryView.All.class)
