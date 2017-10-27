@@ -29,7 +29,22 @@ public class OrganizationView {
     public static interface Svat {
     }
 
-    public static interface All extends Id, Code, Name, Slogan1, Slogan2, Vat, Svat, PageView.All {
+    public static interface Address1 {
+    }
+
+    public static interface Address2 {
+    }
+
+    public static interface Address3 {
+    }
+
+    public static interface Address4 {
+    }
+
+    public static interface Address5 {
+    }
+
+    public static interface All extends Id, Code, Name, Slogan1, Slogan2, Vat, Svat, Address1, Address2, Address3, Address4, Address5, PageView.All {
     }
 
 }
