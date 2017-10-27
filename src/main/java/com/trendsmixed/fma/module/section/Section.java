@@ -20,6 +20,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.accident.Accident;
+import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.sectiontype.SectionType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -68,6 +69,8 @@ public class Section implements Serializable {
     private List<CostCenter> costCenterList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "section")
     private List<Accident> accidentList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "section")
+    private List<Employee> employeeList;
 
     public Section(Integer id) {
         this.id = id;

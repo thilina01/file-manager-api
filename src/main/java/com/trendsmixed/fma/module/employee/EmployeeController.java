@@ -30,13 +30,13 @@ public class EmployeeController {
     @Autowired
     private EmployeeService service;
 
-    @JsonView(EmployeeView.All.class)
+    @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @GetMapping
     public Iterable<Employee> findAll() {
         return service.findAll();
     }
 
-    @JsonView(EmployeeView.All.class)
+    @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @GetMapping("/page")
     Page<Employee> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -47,7 +47,7 @@ public class EmployeeController {
         return service.getCombo();
     }
 
-    @JsonView(EmployeeView.All.class)
+    @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @PostMapping
     public Employee save(@RequestBody Employee employee, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 
@@ -71,8 +71,8 @@ public class EmployeeController {
         try {
             for (Employee employee : employees) {
                 employee.setCode(employee.getCode().trim());
-                employee.setFirstName(employee.getFirstName().trim());
-                employee.setLastName(employee.getLastName().trim());
+                employee.setCallingName(employee.getCallingName().trim());
+                employee.setFullName(employee.getFullName().trim());
                 Employee existingSection = service.findByCode(employee.getCode());
                 if (existingSection != null) {
                     employee.setId(existingSection.getId());
@@ -87,7 +87,7 @@ public class EmployeeController {
         }
     }
 
-    @JsonView(EmployeeView.All.class)
+    @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @GetMapping("/{id}")
     public Employee findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -100,7 +100,7 @@ public class EmployeeController {
 
     }
 
-    @JsonView(EmployeeView.All.class)
+    @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @PutMapping("/{id}")
     public Employee updateCustomer(@PathVariable int id, @RequestBody Employee employee, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
