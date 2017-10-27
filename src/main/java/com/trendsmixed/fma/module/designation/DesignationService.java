@@ -1,4 +1,4 @@
-package com.trendsmixed.fma.module.designationtype;
+package com.trendsmixed.fma.module.designation;
 
 import java.util.List;
 
@@ -10,16 +10,16 @@ import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.utility.Page;
 
 @Service
-public class DesignationTypeService {
+public class DesignationService {
 
     @Autowired
-    private DesignationTypeRepository repository;
+    private DesignationRepository repository;
 
-    public Iterable<DesignationType> findAll() {
+    public Iterable<Designation> findAll() {
         return repository.findAll();
     }
 
-    public Page<DesignationType> findAll(Pageable pageable) {
+    public Page<Designation> findAll(Pageable pageable) {
         return new Page<>(repository.findAll(pageable));
     }
 
@@ -27,15 +27,15 @@ public class DesignationTypeService {
         return repository.getCombo();
     }
 
-    public DesignationType save(DesignationType designationType) {
-        return repository.save(designationType);
+    public Designation save(Designation designation) {
+        return repository.save(designation);
     }
 
-    public void save(List<DesignationType> shifts) {
+    public void save(List<Designation> shifts) {
         repository.save(shifts);
     }
 
-    public DesignationType findOne(int id) {
+    public Designation findOne(int id) {
         return repository.findOne(id);
     }
 
@@ -43,7 +43,7 @@ public class DesignationTypeService {
         repository.delete(id);
     }
 
-    public DesignationType findByName(String name) {
+    public Designation findByName(String name) {
         return repository.findByName(name);
     }
 }

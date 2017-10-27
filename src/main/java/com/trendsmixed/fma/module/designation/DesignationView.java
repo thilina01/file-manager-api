@@ -1,8 +1,8 @@
-package com.trendsmixed.fma.module.designationtype;
+package com.trendsmixed.fma.module.designation;
 
 import com.trendsmixed.fma.utility.PageView;
 
-public class DesignationTypeView {
+public class DesignationView {
 
     public static interface Id {
     }

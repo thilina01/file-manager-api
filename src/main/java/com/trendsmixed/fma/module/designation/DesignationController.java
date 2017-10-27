@@ -1,4 +1,4 @@
-package com.trendsmixed.fma.module.designationtype;
+package com.trendsmixed.fma.module.designation;
 
 import java.util.List;
 
@@ -24,23 +24,23 @@ import com.trendsmixed.fma.utility.Page;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/designationTypes")
-public class DesignationTypeController {
+@RequestMapping("/designations")
+public class DesignationController {
 
     @Autowired
     private AppSessionService appSessionService;
     @Autowired
-    private DesignationTypeService service;
+    private DesignationService service;
 
-    @JsonView(DesignationTypeView.All.class)
+    @JsonView(DesignationView.All.class)
     @GetMapping
-    public Iterable<DesignationType> findAll() {
+    public Iterable<Designation> findAll() {
         return service.findAll();
     }
 
-    @JsonView(DesignationTypeView.All.class)
+    @JsonView(DesignationView.All.class)
     @GetMapping("/page")
-    Page<DesignationType> page(Pageable pageable) {
+    Page<Designation> page(Pageable pageable) {
         return service.findAll(pageable);
     }
 
@@ -50,12 +50,12 @@ public class DesignationTypeController {
     }
 
     @PostMapping
-    public DesignationType save(@RequestBody DesignationType designationType,
+    public Designation save(@RequestBody Designation designation,
             @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            designationType = service.save(designationType);
-            return designationType;
+            designation = service.save(designation);
+            return designation;
 
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -66,12 +66,12 @@ public class DesignationTypeController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<DesignationType> designationTypes,
+    public void saveMany(@RequestBody List<Designation> designations,
             @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
 
-            service.save(designationTypes);
+            service.save(designations);
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
@@ -80,9 +80,9 @@ public class DesignationTypeController {
         }
     }
 
-    @JsonView(DesignationTypeView.All.class)
+    @JsonView(DesignationView.All.class)
     @GetMapping("/{id}")
-    public DesignationType findOne(@PathVariable("id") int id) {
+    public Designation findOne(@PathVariable("id") int id) {
         return service.findOne(id);
     }
 
@@ -95,11 +95,11 @@ public class DesignationTypeController {
     }
 
     @PutMapping("/{id}")
-    public DesignationType updateCustomer(@PathVariable int id, @RequestBody DesignationType designationType,
+    public Designation updateCustomer(@PathVariable int id, @RequestBody Designation designation,
             @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        designationType.setId(id);
-        designationType = service.save(designationType);
-        return designationType;
+        designation.setId(id);
+        designation = service.save(designation);
+        return designation;
     }
 }

@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.labourtursource;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.labourturnover.LabourTurnover;
 import java.io.Serializable;
 import java.util.List;
@@ -47,5 +48,7 @@ public class LabourSource implements Serializable {
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "labourSource")
     private List<LabourTurnover> labourTurnoverList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "labourSource")
+    private List<Employee> employeeList;
 
 }
