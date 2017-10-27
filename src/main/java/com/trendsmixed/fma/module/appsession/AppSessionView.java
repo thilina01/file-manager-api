@@ -6,13 +6,13 @@ package com.trendsmixed.fma.module.appsession;
  */
 public class AppSessionView {
 
-    public static interface Email {
+    public interface Email {
     }
 
-    public static interface Ip {
+    public interface Ip {
     }
 
-    public static interface LastTime {
+    public interface LastTime {
     }
 
 }

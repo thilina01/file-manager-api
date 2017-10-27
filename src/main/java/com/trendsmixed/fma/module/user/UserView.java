@@ -10,33 +10,33 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class UserView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface Email {
+    public interface Email {
     }
 
-    public static interface Password {
+    public interface Password {
     }
 
-    public static interface Status {
+    public interface Status {
     }
 
-    public static interface Team {
+    public interface Team {
     }
 
-    public static interface All extends Id, Name, Email, Status, PageView.All {
+    public interface All extends Id, Name, Email, Status, PageView.All {
     }
 
-    public static interface AllAndTeamAll extends All, Team, TeamView.All {
+    public interface AllAndTeamAll extends All, Team, TeamView.All {
     }
 
-    public static interface AllAndTeamAllAndStatusAll extends AllAndTeamAll, Status, StatusView.All {
+    public interface AllAndTeamAllAndStatusAll extends AllAndTeamAll, Status, StatusView.All {
     }
 
-    public static interface AllAndTeamAllAndMenuAll extends All, Team, TeamView.AllAndMenuAll {
+    public interface AllAndTeamAllAndMenuAll extends All, Team, TeamView.AllAndMenuAll {
     }
 }

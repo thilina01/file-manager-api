@@ -8,16 +8,16 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class OperationTypeView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Description {
+    public interface Description {
     }
 
-    public static interface All extends Id, Description, Code, PageView.All {
+    public interface All extends Id, Description, Code, PageView.All {
     }
 
 }

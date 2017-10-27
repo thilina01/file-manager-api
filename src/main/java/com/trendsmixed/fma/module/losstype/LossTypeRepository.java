@@ -7,12 +7,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface LossTypeRepository extends PagingAndSortingRepository<LossType, Integer> {
 
-    public LossType findByCode(String code);
+    LossType findByCode(String code);
 
-    public LossType findByName(String name);
+    LossType findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM LossType o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

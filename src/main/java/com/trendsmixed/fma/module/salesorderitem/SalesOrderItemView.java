@@ -11,46 +11,46 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class SalesOrderItemView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Quantity {
+    public interface Quantity {
     }
 
-    public static interface Scheduled {
+    public interface Scheduled {
     }
 
-    public static interface UnitPrice {
+    public interface UnitPrice {
     }
 
-    public static interface Amount {
+    public interface Amount {
     }
 
-    public static interface CustomerItem extends CustomerItemView.All {
+    public interface CustomerItem extends CustomerItemView.All {
     }
 
-    public static interface DispatchSchedule extends DispatchScheduleView.All {
+    public interface DispatchSchedule extends DispatchScheduleView.All {
     }
 
-    public static interface SalesOrder extends SalesOrderView.All {
+    public interface SalesOrder extends SalesOrderView.All {
     }
 
-    public static interface All extends Id, Quantity, Scheduled, UnitPrice, Amount, PageView.All {
+    public interface All extends Id, Quantity, Scheduled, UnitPrice, Amount, PageView.All {
     }
 
-    public static interface AllAndCustomerItemAll extends All, CustomerItem {
+    public interface AllAndCustomerItemAll extends All, CustomerItem {
     }
 
-    public static interface AllAndCustomerItemAllAndSalesOrderAll extends AllAndCustomerItemAll, SalesOrder {
+    public interface AllAndCustomerItemAllAndSalesOrderAll extends AllAndCustomerItemAll, SalesOrder {
     }
 
-    public static interface AllAndCustomerItemAllAndSalesOrderAllAndDispatchScheduleAll extends AllAndCustomerItemAllAndSalesOrderAll, DispatchSchedule {
+    public interface AllAndCustomerItemAllAndSalesOrderAllAndDispatchScheduleAll extends AllAndCustomerItemAllAndSalesOrderAll, DispatchSchedule {
     }
 
-    public static interface AllAndCustomerItemAllAndItemAllAndSalesOrderAllAndDispatchScheduleAll extends AllAndCustomerItemAllAndSalesOrderAll, DispatchSchedule, CustomerItemView.AllAndItemAll {
+    public interface AllAndCustomerItemAllAndItemAllAndSalesOrderAllAndDispatchScheduleAll extends AllAndCustomerItemAllAndSalesOrderAll, DispatchSchedule, CustomerItemView.AllAndItemAll {
     }
 
-    public static interface AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll extends AllAndCustomerItemAll, DispatchSchedule, CustomerItemView.AllAndItemAll {
+    public interface AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll extends AllAndCustomerItemAll, DispatchSchedule, CustomerItemView.AllAndItemAll {
     }
 
 }

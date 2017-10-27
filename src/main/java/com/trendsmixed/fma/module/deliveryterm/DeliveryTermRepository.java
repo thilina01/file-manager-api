@@ -9,10 +9,10 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface DeliveryTermRepository extends PagingAndSortingRepository<DeliveryTerm, Integer> {
 
-    public DeliveryTerm findByName(String name);
+    DeliveryTerm findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM DeliveryTerm o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

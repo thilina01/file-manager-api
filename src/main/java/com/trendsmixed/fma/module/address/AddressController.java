@@ -11,7 +11,7 @@ import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +21,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/addresses")
 public class AddressController {
 
-    @Autowired
-    private AppSessionService appSessionService;
-    @Autowired
-    private AddressService service;
+    private final AppSessionService appSessionService;
+    private final AddressService service;
 
     @JsonView(AddressView.All.class)
     @GetMapping

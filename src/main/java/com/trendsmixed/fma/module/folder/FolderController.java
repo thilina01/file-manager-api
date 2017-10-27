@@ -2,30 +2,20 @@ package com.trendsmixed.fma.module.folder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import javax.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/folders")
 public class FolderController {
 
-    @Autowired
-    private FolderService folderService;
-
-    @Autowired
-    private AppSessionService appSessionService;
+    private final FolderService folderService;
+    private final AppSessionService appSessionService;
 
     @PostMapping
     public Folder save(@RequestBody Folder folder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

@@ -9,11 +9,11 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface ControlPointTypeRepository extends PagingAndSortingRepository<ControlPointType, Integer> {
 
-    public ControlPointType findByCode(String code);
+    ControlPointType findByCode(String code);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(controlPointType.id, controlPointType.code, controlPointType.name)"
             + " FROM ControlPointType controlPointType")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 
 }

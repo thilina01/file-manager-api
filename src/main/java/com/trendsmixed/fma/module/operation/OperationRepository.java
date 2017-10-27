@@ -22,29 +22,29 @@ public interface OperationRepository extends PagingAndSortingRepository<Operatio
             + " FROM Operation operation"
             + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " GROUP BY operation.production.controlPoint.workCenter.costCenter.section")
-    public List test(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List test(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
-    public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(Section section, Date date, Shift shift, Pageable pageable);
+    Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(Section section, Date date, Shift shift, Pageable pageable);
 
-    public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetweenAndProductionShift(Section section, Date startDate, Date endDate, Shift shift, Pageable pageable);
+    Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetweenAndProductionShift(Section section, Date startDate, Date endDate, Shift shift, Pageable pageable);
 
-    public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetween(Section section, Date startDate, Date endDate, Pageable pageable);
+    Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetween(Section section, Date startDate, Date endDate, Pageable pageable);
 
-    public Page<Operation> findByProductionProductionDateAndProductionShift(Date date, Shift shift, Pageable pageable);
+    Page<Operation> findByProductionProductionDateAndProductionShift(Date date, Shift shift, Pageable pageable);
 
-    public Page<Operation> findByProductionProductionDateBetweenAndProductionShift(Date startDate, Date endDate, Shift shift, Pageable pageable);
+    Page<Operation> findByProductionProductionDateBetweenAndProductionShift(Date startDate, Date endDate, Shift shift, Pageable pageable);
 
-    public Page<Operation> findByProductionProductionDateBetween(Date startDate, Date endDate, Pageable pageable);
+    Page<Operation> findByProductionProductionDateBetween(Date startDate, Date endDate, Pageable pageable);
 
-    public Page<Operation> findByJob(Job job, Pageable pageable);
+    Page<Operation> findByJob(Job job, Pageable pageable);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.OperationSummary(operation.productType,operation.operationType,SUM(operation.actualQuantity)) "
             + " FROM Operation operation"
             + " WHERE operation.job.id = :jobId AND operation.actualQuantity IS NOT NULL"
             + " GROUP BY operation.productType, operation.operationType ")
-    public List<OperationSummary> getSummaryByJob(@Param("jobId") int jobId);
+    List<OperationSummary> getSummaryByJob(@Param("jobId") int jobId);
 
-    public List<Operation> findByProduction(Production production);
+    List<Operation> findByProduction(Production production);
 
 }

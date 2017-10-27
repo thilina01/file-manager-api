@@ -1,18 +1,16 @@
 package com.trendsmixed.fma.module.location;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Service
 public class LocationService {
 
-    @Autowired
     private LocationRepository repository;
 
     public Iterable<Location> findAll() {

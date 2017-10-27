@@ -8,37 +8,37 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class OrganizationView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface Slogan1 {
+    public interface Slogan1 {
     }
 
-    public static interface Slogan2 {
+    public interface Slogan2 {
     }
 
-    public static interface Vat {
+    public interface Vat {
     }
 
-    public static interface Svat {
+    public interface Svat {
     }
 
-    public static interface Address1 {
+    public interface Address1 {
     }
 
-    public static interface Address2 {
+    public interface Address2 {
     }
 
-    public static interface Address3 {
+    public interface Address3 {
     }
 
-    public static interface Address4 {
+    public interface Address4 {
     }
 
     public static interface Address5 {

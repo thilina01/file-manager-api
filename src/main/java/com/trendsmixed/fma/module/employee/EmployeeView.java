@@ -15,37 +15,37 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class EmployeeView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface FullName {
+    public interface FullName {
     }
 
-    public static interface CallingName {
+    public interface CallingName {
     }
 
-    public static interface DateOfBirth {
+    public interface DateOfBirth {
     }
 
-    public static interface ContactNumber {
+    public interface ContactNumber {
     }
 
-    public static interface FirstName {
+    public interface FirstName {
     }
 
-    public static interface LastName {
+    public interface LastName {
     }
 
-    public static interface NIC {
+    public interface NIC {
     }
 
-    public static interface All extends Id, Code, CallingName, FullName, LastName, FirstName, DateOfBirth, ContactNumber, NIC, PageView.All {
+    public interface All extends Id, Code, CallingName, FullName, LastName, FirstName, DateOfBirth, ContactNumber, NIC, PageView.All {
     }
 
-    public static interface DispatchNote extends DispatchNoteView.All {
+    public interface DispatchNote extends DispatchNoteView.All {
     }
 
     public static interface Designation extends DesignationView.All {

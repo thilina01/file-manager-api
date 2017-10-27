@@ -9,10 +9,10 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface SupplierTypeRepository extends PagingAndSortingRepository<SupplierType, Integer> {
 
-    public SupplierType findByName(String name);
+    SupplierType findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM SupplierType o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

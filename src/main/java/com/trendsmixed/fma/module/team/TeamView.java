@@ -10,24 +10,24 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class TeamView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface TeamMenuList {
+    public interface TeamMenuList {
     }
 
-    public static interface User {
+    public interface User {
     }
 
-    public static interface All extends Id, Code, Name, PageView.All {
+    public interface All extends Id, Code, Name, PageView.All {
     }
 
-    public static interface AllAndMenuAll extends All, TeamMenuList, TeamMenuView.Menu, MenuView.All {
+    public interface AllAndMenuAll extends All, TeamMenuList, TeamMenuView.Menu, MenuView.All {
     }
 }

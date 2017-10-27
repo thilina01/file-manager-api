@@ -7,13 +7,13 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ContactTypeRepository extends PagingAndSortingRepository<ContactType, Integer> {
 
-    public ContactType findByCode(String code);
+    ContactType findByCode(String code);
 
-    public ContactType findByName(String name);
+    ContactType findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM ContactType o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 
 }

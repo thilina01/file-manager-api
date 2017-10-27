@@ -14,5 +14,5 @@ public interface TeamRepository extends PagingAndSortingRepository<Team, Integer
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM Team o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

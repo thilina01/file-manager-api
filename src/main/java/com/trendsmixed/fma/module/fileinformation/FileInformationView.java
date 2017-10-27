@@ -6,34 +6,34 @@ package com.trendsmixed.fma.module.fileinformation;
  */
 public class FileInformationView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Link {
-    }
-    
-    public static interface Path {
+    public interface Link {
     }
 
-    public static interface Description {
+    public interface Path {
     }
 
-    public static interface Extension {
+    public interface Description {
     }
 
-    public static interface Name {
+    public interface Extension {
     }
 
-    public static interface OriginalFileName {
+    public interface Name {
     }
 
-    public static interface UploadDate {
+    public interface OriginalFileName {
     }
 
-    public static interface FileType {
+    public interface UploadDate {
     }
 
-    public static interface All extends Id, Link, Path, Description, Extension, Name, OriginalFileName, UploadDate {
+    public interface FileType {
+    }
+
+    public interface All extends Id, Link, Path, Description, Extension, Name, OriginalFileName, UploadDate {
     }
 
 }

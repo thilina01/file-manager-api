@@ -8,19 +8,19 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class MaterialCostPerKgView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface EffectiveMonth {
+    public interface EffectiveMonth {
     }
 
-    public static interface Actual {
+    public interface Actual {
     }
 
-    public static interface Budget {
+    public interface Budget {
     }
 
-    public static interface All extends Id, EffectiveMonth, Actual, Budget, PageView.All {
+    public interface All extends Id, EffectiveMonth, Actual, Budget, PageView.All {
     }
 
 }

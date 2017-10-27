@@ -8,37 +8,37 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class FinanceSummaryView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface EffectiveMonth {
+    public interface EffectiveMonth {
     }
 
-    public static interface ActualRevenue {
+    public interface ActualRevenue {
     }
 
-    public static interface BudgetRevenue {
+    public interface BudgetRevenue {
     }
 
-    public static interface ActualGrossProfit {
+    public interface ActualGrossProfit {
     }
 
-    public static interface BudgetGrossProfit {
+    public interface BudgetGrossProfit {
     }
 
-    public static interface ActualNetProfit {
+    public interface ActualNetProfit {
     }
 
-    public static interface BudgetNetProfit {
+    public interface BudgetNetProfit {
     }
 
-    public static interface ActualEbitda {
+    public interface ActualEbitda {
     }
 
-    public static interface BudgetEbitda {
+    public interface BudgetEbitda {
     }
 
-    public static interface All extends Id, EffectiveMonth, ActualRevenue, BudgetRevenue, ActualGrossProfit, BudgetGrossProfit, ActualNetProfit, BudgetNetProfit, ActualEbitda, BudgetEbitda, PageView.All {
+    public interface All extends Id, EffectiveMonth, ActualRevenue, BudgetRevenue, ActualGrossProfit, BudgetGrossProfit, ActualNetProfit, BudgetNetProfit, ActualEbitda, BudgetEbitda, PageView.All {
     }
 
 }

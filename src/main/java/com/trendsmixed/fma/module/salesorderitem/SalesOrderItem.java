@@ -7,23 +7,10 @@ import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -35,8 +22,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "sales_order_item", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"customer_item_id", "sales_order_id"})})
-@NamedQueries({
-    @NamedQuery(name = "SalesOrderItem.findAll", query = "SELECT s FROM SalesOrderItem s")})
 public class SalesOrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;

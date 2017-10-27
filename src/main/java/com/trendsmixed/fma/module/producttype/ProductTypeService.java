@@ -2,16 +2,16 @@ package com.trendsmixed.fma.module.producttype;
 
 import com.trendsmixed.fma.dao.Combo;
 import java.util.List;
+import lombok.AllArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class ProductTypeService {
 
-    @Autowired
     private ProductTypeRepository repository;
 
     public Iterable<ProductType> findAll() {

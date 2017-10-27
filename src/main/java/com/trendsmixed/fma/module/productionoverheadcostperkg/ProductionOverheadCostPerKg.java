@@ -3,18 +3,10 @@ package com.trendsmixed.fma.module.productionoverheadcostperkg;
 import com.fasterxml.jackson.annotation.JsonView;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -24,9 +16,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@Table(name = "production_overhead_cost_per_kg")
-@NamedQueries({
-    @NamedQuery(name = "ProductionOverheadCostPerKg.findAll", query = "SELECT c FROM ProductionOverheadCostPerKg c")})
 public class ProductionOverheadCostPerKg implements Serializable {
 
     private static final long serialVersionUID = 1L;

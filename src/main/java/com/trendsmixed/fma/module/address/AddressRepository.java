@@ -9,18 +9,18 @@ import org.springframework.data.repository.query.Param;
 
 public interface AddressRepository extends PagingAndSortingRepository<Address, Integer> {
 
-    public Address findByCode(String code);
+    Address findByCode(String code);
 
-    public Address findByName(String name);
+    Address findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id,o.line1,o.addressType.name)"
             + " FROM Address o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id,o.line1,o.addressType.name)"
             + " FROM Address o"
             + " WHERE o.customer = :customer")
-    public List<Combo> getComboByCustomer(@Param("customer") Customer customer);
+    List<Combo> getComboByCustomer(@Param("customer") Customer customer);
 }

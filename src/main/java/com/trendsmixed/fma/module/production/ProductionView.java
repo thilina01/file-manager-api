@@ -16,46 +16,46 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class ProductionView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface ProductionDate {
+    public interface ProductionDate {
     }
 
-    public static interface PlannedDuration {
+    public interface PlannedDuration {
     }
 
-    public static interface ActualDuration {
+    public interface ActualDuration {
     }
 
-    public static interface PlannedQuantity {
+    public interface PlannedQuantity {
     }
 
-    public static interface ActualQuantity {
+    public interface ActualQuantity {
     }
 
-    public static interface ControlPoint {
+    public interface ControlPoint {
     }
 
-    public static interface Job {
+    public interface Job {
     }
 
-    public static interface Operation extends OperationView.All {
+    public interface Operation extends OperationView.All {
     }
 
-    public static interface Manpower extends ManpowerView.AllManpowerTypeAll {
+    public interface Manpower extends ManpowerView.AllManpowerTypeAll {
     }
 
-    public static interface ProductType {
+    public interface ProductType {
     }
 
-    public static interface Shift {
+    public interface Shift {
     }
 
-    public static interface ShiftType {
+    public interface ShiftType {
     }
 
-    public static interface All
+    public interface All
             extends Id, ProductionDate, PlannedDuration, ActualDuration, PlannedQuantity, ActualQuantity, PageView.All {
     }
 

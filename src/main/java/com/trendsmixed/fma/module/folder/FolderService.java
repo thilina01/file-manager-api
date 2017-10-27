@@ -1,14 +1,13 @@
 package com.trendsmixed.fma.module.folder;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class FolderService {
 
-    @Autowired
     private FolderRepository folderRepository;
 
     public List<Folder> findAll() {

@@ -8,42 +8,42 @@ import com.trendsmixed.fma.module.team.TeamView;
  */
 public class MenuView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface RouterLink {
+    public interface RouterLink {
     }
 
-    public static interface Target {
+    public interface Target {
     }
 
-    public static interface Href {
+    public interface Href {
     }
 
-    public static interface TeamMenuList {
+    public interface TeamMenuList {
     }
 
-    public static interface SuperMenu {
+    public interface SuperMenu {
     }
 
-    public static interface SubMenu {
+    public interface SubMenu {
     }
 
-    public static interface MenuType {
+    public interface MenuType {
     }
 
-    public static interface All extends Id, Name, RouterLink, Target, Href {
+    public interface All extends Id, Name, RouterLink, Target, Href {
     }
 
-    public static interface AllAndTeamAll extends All, TeamMenuList, TeamView.All {
+    public interface AllAndTeamAll extends All, TeamMenuList, TeamView.All {
     }
 
-    public static interface AllAndSubMenu extends All, SubMenu {
+    public interface AllAndSubMenu extends All, SubMenu {
     }
 
-    public static interface AllAndSuperMenu extends All, SuperMenu {
+    public interface AllAndSuperMenu extends All, SuperMenu {
     }
 }

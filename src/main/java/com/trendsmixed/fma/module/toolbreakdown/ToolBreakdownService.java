@@ -1,15 +1,14 @@
 package com.trendsmixed.fma.module.toolbreakdown;
 
 import com.trendsmixed.fma.utility.Page;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class ToolBreakdownService {
 
-    @Autowired
     private ToolBreakdownRepository repository;
 
     public Iterable<ToolBreakdown> findAll() {

@@ -10,70 +10,70 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class ComputerView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Ram {
+    public interface Ram {
     }
 
-    public static interface Model {
+    public interface Model {
     }
 
-    public static interface Brand {
+    public interface Brand {
     }
 
-    public static interface Processor {
+    public interface Processor {
     }
 
-    public static interface Hdd1 {
+    public interface Hdd1 {
     }
 
-    public static interface Hdd2 {
+    public interface Hdd2 {
     }
 
-    public static interface LanMac {
+    public interface LanMac {
     }
 
-    public static interface WlanMac {
+    public interface WlanMac {
     }
 
-    public static interface LanIp {
+    public interface LanIp {
     }
 
-    public static interface WlanIp {
+    public interface WlanIp {
     }
 
-    public static interface Value {
+    public interface Value {
     }
 
-    public static interface ShortName {
+    public interface ShortName {
     }
 
-    public static interface PurchaseDate {
+    public interface PurchaseDate {
     }
 
-    public static interface TransferDate {
+    public interface TransferDate {
     }
 
-    public static interface Employee {
+    public interface Employee {
     }
 
-    public static interface ComputerType {
+    public interface ComputerType {
     }
 
-    public static interface All extends Id, Code, Brand, Model, Ram, Processor, Hdd1, Hdd2, LanMac, WlanMac, LanIp, WlanIp, Value, PurchaseDate, TransferDate, PageView.All {
+    public interface All extends Id, Code, Brand, Model, Ram, Processor, Hdd1, Hdd2, LanMac, WlanMac, LanIp, WlanIp, Value, PurchaseDate, TransferDate, PageView.All {
     }
 
-    public static interface AllAndEmployeeAll extends All, Employee, EmployeeView.All {
+    public interface AllAndEmployeeAll extends All, Employee, EmployeeView.All {
     }
 
-    public static interface AllAndComputerTypeAll extends All, ComputerType, ComputerTypeView.All {
+    public interface AllAndComputerTypeAll extends All, ComputerType, ComputerTypeView.All {
     }
 
-    public static interface AllAndEmployeeAllAndComputerTypeAll extends All, Employee, EmployeeView.All, ComputerType, ComputerTypeView.All {
+    public interface AllAndEmployeeAllAndComputerTypeAll extends All, Employee, EmployeeView.All, ComputerType, ComputerTypeView.All {
     }
 
 }

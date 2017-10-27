@@ -9,25 +9,25 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class OnTimeDeliveryView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface EffectiveMonth {
+    public interface EffectiveMonth {
     }
 
-    public static interface Actual {
+    public interface Actual {
     }
 
-    public static interface Plan {
+    public interface Plan {
     }
 
-    public static interface Customer {
+    public interface Customer {
     }
 
-    public static interface All extends Id, EffectiveMonth, Actual, Plan, PageView.All {
+    public interface All extends Id, EffectiveMonth, Actual, Plan, PageView.All {
     }
 
-    public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
+    public interface AllAndCustomerAll extends All, Customer, CustomerView.All {
     }
 
 }

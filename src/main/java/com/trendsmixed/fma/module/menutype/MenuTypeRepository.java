@@ -9,10 +9,10 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface MenuTypeRepository extends PagingAndSortingRepository<MenuType, Integer> {
 
-    public MenuType findByName(String name);
+    MenuType findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM MenuType o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

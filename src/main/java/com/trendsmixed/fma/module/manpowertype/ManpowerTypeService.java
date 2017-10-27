@@ -2,17 +2,15 @@ package com.trendsmixed.fma.module.manpowertype;
 
 import com.trendsmixed.fma.dao.Combo;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+@AllArgsConstructor
 @Service
 public class ManpowerTypeService {
 
-    @Autowired
     private ManpowerTypeRepository repository;
 
     public Iterable<ManpowerType> findAll() {

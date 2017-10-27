@@ -7,12 +7,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface CurrencyRepository extends PagingAndSortingRepository<Currency, Integer> {
 
-    public Currency findByCode(String code);
+    Currency findByCode(String code);
 
-    public Currency findByName(String name);
+    Currency findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM Currency o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

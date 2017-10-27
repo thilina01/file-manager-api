@@ -5,25 +5,25 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class LossReasonView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface ReasonInSinhala {
+    public interface ReasonInSinhala {
     }
 
-    public static interface LossType extends LossTypeView.All{
+    public interface LossType extends LossTypeView.All {
     }
 
-    public static interface All extends Id, Code, Name, ReasonInSinhala, PageView.All {
+    public interface All extends Id, Code, Name, ReasonInSinhala, PageView.All {
     }
 
-    public static interface AllAndLossTypeAll extends All, LossType  {
+    public interface AllAndLossTypeAll extends All, LossType {
     }
 
 }

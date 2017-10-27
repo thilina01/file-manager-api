@@ -11,49 +11,49 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class AddressView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface Line1 {
+    public interface Line1 {
     }
 
-    public static interface Line2 {
+    public interface Line2 {
     }
 
-    public static interface Line3 {
+    public interface Line3 {
     }
 
-    public static interface Line4 {
+    public interface Line4 {
     }
 
-    public static interface Line5 {
+    public interface Line5 {
     }
 
-    public static interface AddressType {
+    public interface AddressType {
     }
 
-    public static interface Country {
+    public interface Country {
     }
 
-    public static interface Customer {
+    public interface Customer {
     }
 
-    public static interface All extends Id, Code, Name, Line1, Line2, Line3, Line4, Line5, PageView.All {
+    public interface All extends Id, Code, Name, Line1, Line2, Line3, Line4, Line5, PageView.All {
     }
 
-    public static interface AllAndAddressTypeAll extends All, AddressType, AddressTypeView.All {
+    public interface AllAndAddressTypeAll extends All, AddressType, AddressTypeView.All {
     }
 
-    public static interface AllAndAddressTypeAllAndCountryAll extends AllAndAddressTypeAll, Country, CountryView.All {
+    public interface AllAndAddressTypeAllAndCountryAll extends AllAndAddressTypeAll, Country, CountryView.All {
     }
 
-    public static interface DispatchNote extends DispatchNoteView.All {
+    public interface DispatchNote extends DispatchNoteView.All {
     }
 
 }

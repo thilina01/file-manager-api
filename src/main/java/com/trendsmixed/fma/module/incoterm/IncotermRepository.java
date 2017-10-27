@@ -7,12 +7,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface IncotermRepository extends PagingAndSortingRepository<Incoterm, Integer> {
 
-    public Incoterm findByCode(String code);
+    Incoterm findByCode(String code);
 
-    public Incoterm findByName(String name);
+    Incoterm findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM Incoterm o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

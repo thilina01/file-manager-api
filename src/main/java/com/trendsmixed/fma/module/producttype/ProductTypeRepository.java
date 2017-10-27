@@ -7,11 +7,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ProductTypeRepository extends PagingAndSortingRepository<ProductType, Integer> {
 
-    public ProductType findByCode(String code);
+    ProductType findByCode(String code);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.description)"
             + " FROM ProductType o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 
 }

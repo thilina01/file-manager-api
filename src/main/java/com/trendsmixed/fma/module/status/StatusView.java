@@ -6,13 +6,13 @@ package com.trendsmixed.fma.module.status;
  */
 public class StatusView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface All extends Id, Name {
+    public interface All extends Id, Name {
     }
 
 }

@@ -5,21 +5,10 @@ import com.trendsmixed.fma.module.accident.Accident;
 import com.trendsmixed.fma.module.treatmenttype.TreatmentType;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -30,8 +19,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "treatment")
-@NamedQueries({
-    @NamedQuery(name = "Treatment.findAll", query = "SELECT c FROM Treatment c")})
 public class Treatment implements Serializable {
 
     private static final long serialVersionUID = 1L;

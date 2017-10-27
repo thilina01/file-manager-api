@@ -6,28 +6,28 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class ProcessedScrapView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface ProcessedDate {
+    public interface ProcessedDate {
     }
 
-    public static interface SubItemCode {
+    public interface SubItemCode {
     }
 
-    public static interface Quantity {
+    public interface Quantity {
     }
 
-    public static interface UnitCost {
+    public interface UnitCost {
     }
 
-    public static interface LossReason extends LossReasonView.All {
+    public interface LossReason extends LossReasonView.All {
     }
 
-    public static interface Section extends SectionView.All {
+    public interface Section extends SectionView.All {
     }
 
-    public static interface All extends Id, SubItemCode, ProcessedDate, Quantity, UnitCost, PageView.All {
+    public interface All extends Id, SubItemCode, ProcessedDate, Quantity, UnitCost, PageView.All {
     }
 
 }

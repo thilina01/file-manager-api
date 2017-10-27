@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface FolderRepository extends JpaRepository<Folder, Integer> {
 
-    public List<Folder> findByFolderIsNull();
+    List<Folder> findByFolderIsNull();
 
 }

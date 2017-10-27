@@ -10,10 +10,10 @@ import org.springframework.data.repository.query.Param;
 public interface UserMenuRepository extends JpaRepository<UserMenu, Integer> {
 
     @Query(value = "select userMenu.menu from UserMenu userMenu where userMenu.user= :user And userMenu.menu.menu IS NULL ")
-    public List<Menu> findTopMenuByUser(@Param("user") User user);
+    List<Menu> findTopMenuByUser(@Param("user") User user);
 
-    public UserMenu findByUserAndMenu(User user, Menu menu);
+    UserMenu findByUserAndMenu(User user, Menu menu);
 
-    public List<UserMenu> findByUserOrderByMenuName(User user);
+    List<UserMenu> findByUserOrderByMenuName(User user);
 
 }

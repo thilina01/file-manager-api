@@ -2,10 +2,6 @@ package com.trendsmixed.fma.module.menu;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.trendsmixed.fma.module.menutype.MenuType;
 import com.trendsmixed.fma.module.team.Team;
 import com.trendsmixed.fma.module.teammenu.TeamMenu;
@@ -18,32 +14,21 @@ import com.trendsmixed.fma.module.user.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/menus")
 public class MenuController {
 
-    @Autowired
-    private AppSessionService appSessionService;
-    @Autowired
-    private MenuService menuService;
-    @Autowired
-    private MenuTypeService menuTypeService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private TeamService teamService;
-    @Autowired
-    private TeamMenuService teamMenuService;
+    private final AppSessionService appSessionService;
+    private final MenuService menuService;
+    private final MenuTypeService menuTypeService;
+    private final UserService userService;
+    private final TeamService teamService;
+    private final TeamMenuService teamMenuService;
 
     @JsonView(MenuView.AllAndSubMenu.class)
     @GetMapping

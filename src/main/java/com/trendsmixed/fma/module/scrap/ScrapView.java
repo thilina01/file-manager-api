@@ -9,25 +9,25 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class ScrapView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface ScrapDate {
+    public interface ScrapDate {
     }
 
-    public static interface Quantity {
+    public interface Quantity {
     }
 
-    public static interface UnitValue {
+    public interface UnitValue {
     }
 
-    public static interface Job extends JobView.All {
+    public interface Job extends JobView.All {
     }
 
     public static interface Section extends SectionView.All {

@@ -9,21 +9,21 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class ProductTypeView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Description {
+    public interface Description {
     }
 
-    public static interface OperationType {
+    public interface OperationType {
     }
 
-    public static interface All extends Id, Code, Description, PageView.All {
+    public interface All extends Id, Code, Description, PageView.All {
     }
 
-    public static interface AllAndOperationTypeAll extends All, OperationType, OperationTypeView.All {
+    public interface AllAndOperationTypeAll extends All, OperationType, OperationTypeView.All {
     }
 }

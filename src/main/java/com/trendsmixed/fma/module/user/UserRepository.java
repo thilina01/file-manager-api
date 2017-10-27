@@ -19,5 +19,5 @@ public interface UserRepository extends PagingAndSortingRepository<User, Integer
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.email, o.email)"
             + " FROM User o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

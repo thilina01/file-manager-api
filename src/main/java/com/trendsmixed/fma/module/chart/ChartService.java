@@ -4,18 +4,16 @@ import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.trendsmixed.fma.module.losstype.LossType;
 import com.trendsmixed.fma.module.section.Section;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Service
 public class ChartService {
 
-    @Autowired
     private ChartRepository chartRepository;
 
     public List getScheduleAdherence(Date startDate, Date endDate) {

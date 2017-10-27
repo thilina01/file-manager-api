@@ -1,14 +1,13 @@
 package com.trendsmixed.fma.module.salesorderitem;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class SalesOrderItemService {
 
-    @Autowired
     private SalesOrderItemRepository salesOrderItemRepository;
 
     public List<SalesOrderItem> findAll() {

@@ -7,37 +7,37 @@ import com.trendsmixed.fma.module.jobdispatch.JobDispatchView;
 
 public class DispatchView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Customer {
+    public interface Customer {
     }
 
-    public static interface JobDispatch {
+    public interface JobDispatch {
     }
 
-    public static interface DispatchSchedule {
+    public interface DispatchSchedule {
     }
 
-    public static interface DispatchNote {
+    public interface DispatchNote {
     }
 
-    public static interface Quantity {
+    public interface Quantity {
     }
 
-    public static interface All extends Id, Quantity {
+    public interface All extends Id, Quantity {
     }
 
-    public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
+    public interface AllAndCustomerAll extends All, Customer, CustomerView.All {
     }
 
-    public static interface AllAndDispatchScheduleAll extends All, DispatchSchedule, DispatchScheduleView.All {
+    public interface AllAndDispatchScheduleAll extends All, DispatchSchedule, DispatchScheduleView.All {
     }
 
-    public static interface AllAndDispatchNoteAll extends All, DispatchNote, DispatchNoteView.All {
+    public interface AllAndDispatchNoteAll extends All, DispatchNote, DispatchNoteView.All {
     }
 
-    public static interface AllAndCustomerAllAndJobDispatchAll extends All, Customer, CustomerView.All, JobDispatch, JobDispatchView.All {
+    public interface AllAndCustomerAllAndJobDispatchAll extends All, Customer, CustomerView.All, JobDispatch, JobDispatchView.All {
     }
 
 }

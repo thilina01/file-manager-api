@@ -8,22 +8,10 @@ import com.trendsmixed.fma.module.operationtype.OperationType;
 import com.trendsmixed.fma.module.section.Section;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -34,8 +22,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "scrap")
-@NamedQueries({
-    @NamedQuery(name = "Scrap.findAll", query = "SELECT p FROM Scrap p")})
 public class Scrap implements Serializable {
 
     private static final long serialVersionUID = 1L;

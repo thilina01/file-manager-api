@@ -4,17 +4,15 @@ import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Service
 public class DispatchScheduleService {
 
-    @Autowired
     private DispatchScheduleRepository repository;
 
     public Iterable<DispatchSchedule> findAll() {

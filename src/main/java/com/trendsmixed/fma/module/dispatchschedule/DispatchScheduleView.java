@@ -8,25 +8,25 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class DispatchScheduleView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface DispatchDate {
+    public interface DispatchDate {
     }
 
-    public static interface ConfirmDate {
+    public interface ConfirmDate {
     }
 
-    public static interface RequestDate {
+    public interface RequestDate {
     }
 
-    public static interface Quantity {
+    public interface Quantity {
     }
 
-    public static interface Comment {
+    public interface Comment {
     }
 
-    public static interface All extends Id, DispatchDate, ConfirmDate, RequestDate, Quantity, Comment, PageView.All {
+    public interface All extends Id, DispatchDate, ConfirmDate, RequestDate, Quantity, Comment, PageView.All {
     }
 
     public static interface Job extends JobView.All {

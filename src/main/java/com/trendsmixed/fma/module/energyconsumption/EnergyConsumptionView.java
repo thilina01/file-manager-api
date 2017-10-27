@@ -5,28 +5,28 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class EnergyConsumptionView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Kwh {
+    public interface Kwh {
     }
 
-    public static interface Kva {
+    public interface Kva {
     }
 
-    public static interface Cost {
+    public interface Cost {
     }
 
-    public static interface EffectiveMonth {
+    public interface EffectiveMonth {
     }
 
-    public static interface Reference {
+    public interface Reference {
     }
 
-    public static interface Location extends LocationView.All {
+    public interface Location extends LocationView.All {
     }
 
-    public static interface All extends Id, Kwh, Kva, Cost, EffectiveMonth, Reference, PageView.All {
+    public interface All extends Id, Kwh, Kva, Cost, EffectiveMonth, Reference, PageView.All {
 
     }
 

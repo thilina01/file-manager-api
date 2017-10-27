@@ -9,22 +9,22 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class ContactView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface ContactNumber {
+    public interface ContactNumber {
     }
 
-    public static interface Customer {
+    public interface Customer {
     }
 
-    public static interface ContactType {
+    public interface ContactType {
     }
 
-    public static interface All extends Id, ContactNumber, PageView.All {
+    public interface All extends Id, ContactNumber, PageView.All {
     }
 
-    public static interface AllAndContactTypeAll extends All, ContactType, ContactTypeView.All {
+    public interface AllAndContactTypeAll extends All, ContactType, ContactTypeView.All {
     }
 
 }

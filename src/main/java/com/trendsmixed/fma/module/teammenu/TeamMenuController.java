@@ -1,27 +1,20 @@
 package com.trendsmixed.fma.module.teammenu;
 
 import com.trendsmixed.fma.module.team.Team;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/teamMenus")
 public class TeamMenuController {
 
-    @Autowired
-    private AppSessionService appSessionService;
-    @Autowired
-    private TeamMenuService teamMenuService;
+    private final AppSessionService appSessionService;
+    private final TeamMenuService teamMenuService;
 
     @PutMapping
     public List<TeamMenu> saveMany(@RequestBody List<TeamMenu> teamMenus, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

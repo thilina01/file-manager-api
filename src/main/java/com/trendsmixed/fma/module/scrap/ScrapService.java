@@ -1,17 +1,16 @@
 package com.trendsmixed.fma.module.scrap;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import org.springframework.data.domain.Page;
 
+@AllArgsConstructor
 @Service
 public class ScrapService {
 
-    @Autowired
     private ScrapRepository repository;
 
     public Iterable<Scrap> findAll() {

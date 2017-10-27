@@ -8,25 +8,25 @@ import com.trendsmixed.fma.module.lossreason.LossReasonView;
  */
 public class LossView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Quantity {
+    public interface Quantity {
     }
 
-    public static interface LossReason extends LossReasonView.All {
+    public interface LossReason extends LossReasonView.All {
     }
 
-    public static interface Operation {
+    public interface Operation {
     }
 
-    public static interface All extends Id, Quantity {
+    public interface All extends Id, Quantity {
     }
 
-    public static interface AllLossReasonAll extends Id, Quantity, LossReason {
+    public interface AllLossReasonAll extends Id, Quantity, LossReason {
     }
 
-    public static interface AllLossReasonAllLossTypeAll extends AllLossReasonAll, LossReasonView.AllAndLossTypeAll {
+    public interface AllLossReasonAllLossTypeAll extends AllLossReasonAll, LossReasonView.AllAndLossTypeAll {
     }
 
 }

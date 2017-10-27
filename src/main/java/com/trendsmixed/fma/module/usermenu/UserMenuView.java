@@ -8,12 +8,12 @@ import com.trendsmixed.fma.module.menu.MenuView;
  */
 public class UserMenuView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface User {
+    public interface User {
     }
 
-    public static interface Menu extends MenuView.All {
+    public interface Menu extends MenuView.All {
     }
 }

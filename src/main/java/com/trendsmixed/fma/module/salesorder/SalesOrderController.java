@@ -3,10 +3,6 @@ package com.trendsmixed.fma.module.salesorder;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.jobtype.JobType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
@@ -15,29 +11,20 @@ import com.trendsmixed.fma.utility.Page;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/salesOrders")
 public class SalesOrderController {
 
-    @Autowired
-    private AppSessionService appSessionService;
-    @Autowired
-    private SalesOrderService service;
-    @Autowired
-    private SalesOrderItemService salesOrderItemService;
-    @Autowired
-    private JobTypeService jobTypeService;
+    private final AppSessionService appSessionService;
+    private final SalesOrderService service;
+    private final SalesOrderItemService salesOrderItemService;
+    private final JobTypeService jobTypeService;
 
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @GetMapping

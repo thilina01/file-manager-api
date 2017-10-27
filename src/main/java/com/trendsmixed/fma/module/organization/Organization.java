@@ -2,18 +2,10 @@ package com.trendsmixed.fma.module.organization;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -24,8 +16,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "organization")
-@NamedQueries({
-    @NamedQuery(name = "Organization.findAll", query = "SELECT c FROM Organization c")})
 public class Organization implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -6,10 +6,10 @@ package com.trendsmixed.fma.module.filetype;
  */
 public class FileTypeView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
 }

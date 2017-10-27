@@ -1,17 +1,7 @@
 package com.trendsmixed.fma.module.addresstype;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.address.Address;
 import java.util.List;
@@ -30,8 +20,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "address_type")
-@NamedQueries({
-    @NamedQuery(name = "AddressType.findAll", query = "SELECT s FROM AddressType s")})
 public class AddressType implements Serializable {
 
     private static final long serialVersionUID = 1L;

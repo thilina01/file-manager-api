@@ -4,22 +4,22 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class MailConfigurationView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Host {
+    public interface Host {
     }
 
-    public static interface Port {
+    public interface Port {
     }
 
-    public static interface User {
+    public interface User {
     }
 
-    public static interface Password {
+    public interface Password {
     }
 
-    public static interface All extends Id, Host, Port, User, Password, PageView.All {
+    public interface All extends Id, Host, Port, User, Password, PageView.All {
     }
 
 }

@@ -9,10 +9,10 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface EmployeeCategoryRepository extends PagingAndSortingRepository<EmployeeCategory, Integer> {
 
-    public EmployeeCategory findByName(String name);
+    EmployeeCategory findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM EmployeeCategory o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

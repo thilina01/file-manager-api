@@ -9,11 +9,11 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface WorkCenterRepository extends PagingAndSortingRepository<WorkCenter, Integer> {
 
-    public WorkCenter findByCode(String code);
+    WorkCenter findByCode(String code);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(workCenter.id, workCenter.code, workCenter.name)"
             + " FROM WorkCenter workCenter")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 
 }

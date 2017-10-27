@@ -3,14 +3,13 @@ package com.trendsmixed.fma.module.teammenu;
 import com.trendsmixed.fma.module.menu.Menu;
 import com.trendsmixed.fma.module.team.Team;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class TeamMenuService {
 
-    @Autowired
     private TeamMenuRepository teamMenuRepository;
 
     public List<TeamMenu> findAll() {

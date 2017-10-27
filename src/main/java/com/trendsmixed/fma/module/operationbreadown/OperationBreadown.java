@@ -3,23 +3,11 @@ package com.trendsmixed.fma.module.operationbreadown;
 import com.trendsmixed.fma.module.operation.Operation;
 import com.trendsmixed.fma.module.breakdown.Breakdown;
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -30,8 +18,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "operation_breakdown")
-@NamedQueries({
-    @NamedQuery(name = "OperationBreadown.findAll", query = "SELECT o FROM OperationBreadown o")})
 public class OperationBreadown implements Serializable {
 
     private static final long serialVersionUID = 1L;

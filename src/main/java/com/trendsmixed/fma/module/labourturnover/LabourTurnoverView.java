@@ -9,24 +9,24 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class LabourTurnoverView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface EffectiveMonth {
+    public interface EffectiveMonth {
     }
 
-    public static interface Turnover {
+    public interface Turnover {
     }
 
-    public static interface Target {
+    public interface Target {
     }
 
-    public static interface LabourSource extends LabourSourceView.All {
+    public interface LabourSource extends LabourSourceView.All {
     }
 
-    public static interface All extends Id, EffectiveMonth, Turnover, Target, PageView.All {
+    public interface All extends Id, EffectiveMonth, Turnover, Target, PageView.All {
     }
 
-    public static interface AllAndLabourSource extends All, LabourSource {
+    public interface AllAndLabourSource extends All, LabourSource {
     }
 }

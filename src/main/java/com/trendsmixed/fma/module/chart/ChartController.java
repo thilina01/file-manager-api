@@ -4,27 +4,21 @@ import com.trendsmixed.fma.dao.BreakdownChart;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.trendsmixed.fma.module.losstype.LossType;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.utility.Format;
 import java.util.ArrayList;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/chart")
 public class ChartController {
 
-    @Autowired
-    private ChartService chartService;
+    private final ChartService chartService;
 
     @GetMapping("/monthlyOnTimeDelivery")
     public List getMonthlyOnTimeDelivery(@RequestParam(value = "startDate") String startDateText,

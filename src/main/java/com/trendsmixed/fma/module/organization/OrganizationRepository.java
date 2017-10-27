@@ -7,9 +7,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface OrganizationRepository extends PagingAndSortingRepository<Organization, Integer> {
 
-    public Organization findByCode(String code);
+    Organization findByCode(String code);
 
-    public Organization findByName(String name);
+    Organization findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"

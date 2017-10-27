@@ -3,16 +3,16 @@ package com.trendsmixed.fma.module.shift;
 import com.trendsmixed.fma.dao.Combo;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 
+@AllArgsConstructor
 @Service
 public class ShiftService {
 
-    @Autowired
     private ShiftRepository repository;
 
     public Iterable<Shift> findAll() {

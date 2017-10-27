@@ -2,16 +2,14 @@ package com.trendsmixed.fma.module.appsession;
 
 import com.trendsmixed.fma.entity.AppSession;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Service
 public class AppSessionService {
 
-    @Autowired
     private AppSessionRepository appSessionRepository;
 
     public List<AppSession> findAll() {

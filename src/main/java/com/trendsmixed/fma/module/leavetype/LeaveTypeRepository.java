@@ -7,12 +7,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface LeaveTypeRepository extends PagingAndSortingRepository<LeaveType, Integer> {
 
-    public LeaveType findByCode(String code);
+    LeaveType findByCode(String code);
 
-    public LeaveType findByName(String name);
+    LeaveType findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM LeaveType o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

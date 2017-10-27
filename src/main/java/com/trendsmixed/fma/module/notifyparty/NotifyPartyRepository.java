@@ -7,12 +7,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface NotifyPartyRepository extends PagingAndSortingRepository<NotifyParty, Integer> {
 
-    public NotifyParty findByCode(String code);
+    NotifyParty findByCode(String code);
 
-    public NotifyParty findByName(String name);
+    NotifyParty findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM NotifyParty o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

@@ -6,52 +6,52 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class ItemView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Size {
+    public interface Size {
     }
 
-    public static interface Weight {
+    public interface Weight {
     }
 
-    public static interface Volume {
+    public interface Volume {
     }
 
-    public static interface Description {
+    public interface Description {
     }
 
-    public static interface DrawingVersion {
+    public interface DrawingVersion {
     }
 
-    public static interface DrawingApproval {
+    public interface DrawingApproval {
     }
 
-    public static interface ProductionToolAvailability {
+    public interface ProductionToolAvailability {
     }
 
-    public static interface ItemType {
+    public interface ItemType {
     }
 
-    public static interface Paint {
+    public interface Paint {
     }
 
-    public static interface ItemMachine {
+    public interface ItemMachine {
     }
 
-    public static interface SalesOrderItem {
+    public interface SalesOrderItem {
     }
 
-    public static interface CustomerItem {
+    public interface CustomerItem {
     }
 
-    public static interface All extends Id, Code, Size, Weight, Volume, Description, DrawingVersion, ProductionToolAvailability, DrawingApproval, PageView.All {
+    public interface All extends Id, Code, Size, Weight, Volume, Description, DrawingVersion, ProductionToolAvailability, DrawingApproval, PageView.All {
     }
 
-    public static interface AllAndItemTypeAll extends All, ItemType, ItemTypeView.All {
+    public interface AllAndItemTypeAll extends All, ItemType, ItemTypeView.All {
     }
 
     public static interface AllAndPaintAll extends All, Paint, PaintView.All {

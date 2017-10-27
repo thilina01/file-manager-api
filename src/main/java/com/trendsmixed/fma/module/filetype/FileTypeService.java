@@ -1,14 +1,13 @@
 package com.trendsmixed.fma.module.filetype;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class FileTypeService {
 
-    @Autowired
     private FileTypeRepository fileTypeRepository;
 
     public List<FileType> findAll() {

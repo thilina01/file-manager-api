@@ -5,31 +5,31 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class MachineView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface EnergyRate {
+    public interface EnergyRate {
     }
 
-    public static interface ControlPoint {
-
-    }
-
-    public static interface All extends Id, Code, Name, EnergyRate, PageView.All {
+    public interface ControlPoint {
 
     }
 
-    public static interface AllAndWorkCenterAll extends All, ControlPoint, WorkCenterView.All {
+    public interface All extends Id, Code, Name, EnergyRate, PageView.All {
 
     }
 
-    public static interface ItemMachine {
+    public interface AllAndWorkCenterAll extends All, ControlPoint, WorkCenterView.All {
+
+    }
+
+    public interface ItemMachine {
 
     }
 

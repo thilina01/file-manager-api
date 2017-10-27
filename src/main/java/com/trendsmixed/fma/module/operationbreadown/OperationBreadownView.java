@@ -2,14 +2,14 @@ package com.trendsmixed.fma.module.operationbreadown;
 
 public class OperationBreadownView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Operation {
+    public interface Operation {
 
     }
 
-    public static interface Breakdown {
+    public interface Breakdown {
 
     }
 

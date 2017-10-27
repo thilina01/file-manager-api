@@ -2,22 +2,22 @@ package com.trendsmixed.fma.module.delivery;
 
 public class DeliveryView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface DeliveryDate {
+    public interface DeliveryDate {
     }
 
-    public static interface DeliverdQuantity {
+    public interface DeliverdQuantity {
     }
 
-    public static interface Location {
+    public interface Location {
     }
 
-    public static interface SalesOrderItem {
+    public interface SalesOrderItem {
     }
 
-    public static interface All extends Id, DeliveryDate, DeliverdQuantity, Location {
+    public interface All extends Id, DeliveryDate, DeliverdQuantity, Location {
 
     }
 

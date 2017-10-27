@@ -5,22 +5,22 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class AddressTypeView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface Address {
+    public interface Address {
 
     }
 
-    public static interface All extends Id, Code, Name, PageView.All {
+    public interface All extends Id, Code, Name, PageView.All {
     }
 
-    public static interface AllAndAddressAll extends All, Address, AddressView.All {
+    public interface AllAndAddressAll extends All, Address, AddressView.All {
     }
 }

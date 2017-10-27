@@ -2,17 +2,17 @@ package com.trendsmixed.fma.module.treatmenttype;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.dao.Combo;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 
+@AllArgsConstructor
 @Service
 public class TreatmentTypeService {
 
-    @Autowired
     private TreatmentTypeRepository repository;
 
     public Iterable<TreatmentType> findAll() {

@@ -4,34 +4,34 @@ import com.trendsmixed.fma.module.machine.MachineView;
 
 public class BreakdownView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Date {
+    public interface Date {
     }
 
-    public static interface Duration {
+    public interface Duration {
     }
 
-    public static interface BreakdownTime {
+    public interface BreakdownTime {
     }
 
-    public static interface RecoveryTime {
+    public interface RecoveryTime {
     }
 
-    public static interface BreakdownNumber {
+    public interface BreakdownNumber {
     }
 
-    public static interface Description {
+    public interface Description {
     }
 
-    public static interface Machine extends MachineView.All {
+    public interface Machine extends MachineView.All {
     }
 
-    public static interface LossReason {
+    public interface LossReason {
     }
 
-    public static interface All
+    public interface All
             extends Id, Date, Duration, BreakdownTime, RecoveryTime, BreakdownNumber, Description, Machine {
 
     }

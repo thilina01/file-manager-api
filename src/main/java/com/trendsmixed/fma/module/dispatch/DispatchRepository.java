@@ -10,5 +10,5 @@ public interface DispatchRepository extends PagingAndSortingRepository<Dispatch,
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id,'','')"
             + " FROM Dispatch o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

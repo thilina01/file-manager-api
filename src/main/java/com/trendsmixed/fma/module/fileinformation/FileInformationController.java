@@ -1,4 +1,5 @@
 package com.trendsmixed.fma.module.fileinformation;
+
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,36 +8,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/fileInformations")
 public class FileInformationController {
 
-    @Autowired
-    private FileInformationService fileInformationService;
-//    @Autowired
-//    private FolderService folderService;
-    @Autowired
-    private AppSessionService appSessionService;
+    private final FileInformationService fileInformationService;
+    private final AppSessionService appSessionService;
 
     @GetMapping
     public List<FileInformation> all() {
@@ -77,7 +64,6 @@ public class FileInformationController {
 //        }
 //        return download;
 //    }
-
     @PostMapping(value = "/upload")
     public FileInformation handleFileUpload(@RequestParam(value = "data") String data, @RequestParam(value = "file") MultipartFile multipartFile, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
 

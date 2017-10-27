@@ -1,17 +1,7 @@
 package com.trendsmixed.fma.module.contacttype;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.contact.Contact;
 import java.util.List;
@@ -30,8 +20,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "contact_type")
-@NamedQueries({
-    @NamedQuery(name = "ContactType.findAll", query = "SELECT s FROM ContactType s")})
 public class ContactType implements Serializable {
 
     private static final long serialVersionUID = 1L;

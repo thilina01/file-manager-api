@@ -6,28 +6,28 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class CustomerItemView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface Price {
+    public interface Price {
     }
 
-    public static interface Customer {
+    public interface Customer {
     }
 
-    public static interface Item {
+    public interface Item {
     }
 
-    public static interface All extends Id, Code, Name, Price, PageView.All {
+    public interface All extends Id, Code, Name, Price, PageView.All {
     }
 
-    public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
+    public interface AllAndCustomerAll extends All, Customer, CustomerView.All {
     }
 
     public static interface AllAndItemAll extends All, Item, ItemView.All {

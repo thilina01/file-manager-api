@@ -16,70 +16,70 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class AccidentView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface ReferenceNo {
+    public interface ReferenceNo {
     }
 
-    public static interface RootCause {
+    public interface RootCause {
     }
 
-    public static interface CorrectiveAction {
+    public interface CorrectiveAction {
     }
 
-    public static interface ResponsiblePerson {
+    public interface ResponsiblePerson {
     }
 
-    public static interface AccidentDate {
+    public interface AccidentDate {
     }
 
-    public static interface AccidentType {
+    public interface AccidentType {
     }
 
-    public static interface Treatment {
+    public interface Treatment {
     }
 
-    public static interface Employee {
+    public interface Employee {
     }
 
-    public static interface Machine {
+    public interface Machine {
     }
 
-    public static interface Section {
+    public interface Section {
     }
 
-    public static interface Shift {
+    public interface Shift {
     }
 
-    public static interface All extends Id, Code, ReferenceNo, RootCause, CorrectiveAction, ResponsiblePerson, AccidentDate, PageView.All {
+    public interface All extends Id, Code, ReferenceNo, RootCause, CorrectiveAction, ResponsiblePerson, AccidentDate, PageView.All {
     }
 
-    public static interface AllAndAccidentTypeAll extends All, AccidentType, AccidentTypeView.All {
+    public interface AllAndAccidentTypeAll extends All, AccidentType, AccidentTypeView.All {
     }
 
-    public static interface AllAndEmployeeAll extends All, Employee, EmployeeView.All {
+    public interface AllAndEmployeeAll extends All, Employee, EmployeeView.All {
     }
 
-    public static interface AllAndMachineAll extends All, Machine, MachineView.All {
+    public interface AllAndMachineAll extends All, Machine, MachineView.All {
     }
 
-    public static interface AllAndSectionAll extends All, Section, SectionView.All {
+    public interface AllAndSectionAll extends All, Section, SectionView.All {
     }
 
-    public static interface AllAndShiftAll extends All, Shift, ShiftView.All {
+    public interface AllAndShiftAll extends All, Shift, ShiftView.All {
     }
 
-    public static interface AllAndTreatmentAll extends All, Treatment, TreatmentView.All {
+    public interface AllAndTreatmentAll extends All, Treatment, TreatmentView.All {
     }
 
-    public static interface AllAndTreatmentTypeAll extends All, TreatmentType, TreatmentTypeView.All {
+    public interface AllAndTreatmentTypeAll extends All, TreatmentType, TreatmentTypeView.All {
     }
 
-    public static interface AllAndAccidentTypeAllAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll extends All, AccidentType, AccidentTypeView.All, Employee, EmployeeView.All, Machine, MachineView.All, Section, SectionView.All, Shift, ShiftView.All, Treatment, TreatmentView.All, TreatmentType, TreatmentTypeView.All {
+    public interface AllAndAccidentTypeAllAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll extends All, AccidentType, AccidentTypeView.All, Employee, EmployeeView.All, Machine, MachineView.All, Section, SectionView.All, Shift, ShiftView.All, Treatment, TreatmentView.All, TreatmentType, TreatmentTypeView.All {
     }
 
 }

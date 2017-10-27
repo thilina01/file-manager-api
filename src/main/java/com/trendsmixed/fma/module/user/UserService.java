@@ -3,16 +3,16 @@ package com.trendsmixed.fma.module.user;
 import com.trendsmixed.fma.dao.Combo;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 
+@AllArgsConstructor
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository repository;
 
     public Iterable<User> findAll() {

@@ -7,9 +7,9 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface PaintRepository extends PagingAndSortingRepository<Paint, Integer> {
 
-    public Paint findByCode(String code);
+    Paint findByCode(String code);
 
-    public Paint findByName(String name);
+    Paint findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"

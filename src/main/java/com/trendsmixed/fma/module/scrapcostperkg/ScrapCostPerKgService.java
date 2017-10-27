@@ -2,15 +2,14 @@ package com.trendsmixed.fma.module.scrapcostperkg;
 
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class ScrapCostPerKgService {
 
-    @Autowired
     private ScrapCostPerKgRepository repository;
 
     public Iterable<ScrapCostPerKg> findAll() {

@@ -3,14 +3,14 @@ package com.trendsmixed.fma.module.usermenu;
 import com.trendsmixed.fma.module.menu.Menu;
 import com.trendsmixed.fma.module.user.User;
 import java.util.List;
+import lombok.AllArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class UserMenuService {
 
-    @Autowired
     private UserMenuRepository userMenuRepository;
 
     public List<UserMenu> findAll() {

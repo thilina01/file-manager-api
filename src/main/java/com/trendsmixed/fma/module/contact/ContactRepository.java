@@ -10,5 +10,5 @@ public interface ContactRepository extends PagingAndSortingRepository<Contact, I
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.contactNumber, o.contactType.code)"
             + " FROM Contact o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

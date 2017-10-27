@@ -3,16 +3,16 @@ package com.trendsmixed.fma.module.address;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import java.util.List;
+import lombok.AllArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class AddressService {
 
-    @Autowired
     private AddressRepository repository;
 
     public Iterable<Address> findAll() {

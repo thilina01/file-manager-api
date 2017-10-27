@@ -3,15 +3,14 @@ package com.trendsmixed.fma.module.ontimedelivery;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class OnTimeDeliveryService {
 
-    @Autowired
     private OnTimeDeliveryRepository repository;
 
     public Iterable<OnTimeDelivery> findAll() {

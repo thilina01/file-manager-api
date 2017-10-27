@@ -6,6 +6,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ManpowerRepository extends PagingAndSortingRepository<Manpower, Integer> {
 
-    public List<Manpower> findByProduction(Production production);
+    List<Manpower> findByProduction(Production production);
 
 }

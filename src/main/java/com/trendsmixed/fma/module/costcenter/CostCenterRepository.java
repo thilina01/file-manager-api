@@ -7,13 +7,13 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface CostCenterRepository extends PagingAndSortingRepository<CostCenter, Integer> {
 
-    public CostCenter findByCode(String code);
+    CostCenter findByCode(String code);
 
-    public CostCenter findByName(String name);
+    CostCenter findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM CostCenter o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 
 }

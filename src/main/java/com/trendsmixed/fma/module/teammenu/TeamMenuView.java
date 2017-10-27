@@ -6,12 +6,12 @@ package com.trendsmixed.fma.module.teammenu;
  */
 public class TeamMenuView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Team {
+    public interface Team {
     }
 
-    public static interface Menu {
+    public interface Menu {
     }
 }

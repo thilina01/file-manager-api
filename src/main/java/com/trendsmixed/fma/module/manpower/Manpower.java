@@ -1,19 +1,6 @@
 package com.trendsmixed.fma.module.manpower;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.manpowertype.ManpowerType;
 import com.trendsmixed.fma.module.production.Production;
@@ -21,6 +8,7 @@ import javax.persistence.CascadeType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -31,8 +19,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "manpower")
-@NamedQueries({
-    @NamedQuery(name = "Manpower.findAll", query = "SELECT m FROM Manpower m")})
 public class Manpower implements Serializable {
 
     private static final long serialVersionUID = 1L;

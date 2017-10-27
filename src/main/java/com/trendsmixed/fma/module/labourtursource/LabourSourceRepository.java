@@ -7,12 +7,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface LabourSourceRepository extends PagingAndSortingRepository<LabourSource, Integer> {
 
-    public LabourSource findByCode(String code);
+    LabourSource findByCode(String code);
 
-    public LabourSource findByName(String name);
+    LabourSource findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM LabourSource o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

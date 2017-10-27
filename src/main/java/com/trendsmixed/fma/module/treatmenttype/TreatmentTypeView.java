@@ -5,19 +5,19 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class TreatmentTypeView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface All extends Id, Code, Name, PageView.All {
+    public interface All extends Id, Code, Name, PageView.All {
     }
 
-    public static interface Treatment extends TreatmentView.All {
+    public interface Treatment extends TreatmentView.All {
     }
 
 }

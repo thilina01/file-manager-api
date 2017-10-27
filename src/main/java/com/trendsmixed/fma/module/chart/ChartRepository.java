@@ -53,7 +53,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + "WHERE breakdown.breakdown_time BETWEEN  ?1 AND  ?2 "
             + "GROUP BY section.id) AS z ON  "
             + "x.section = z.section", nativeQuery = true)
-    public List getBreakdown(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getBreakdown(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " controlPointMachine.controlPoint.workCenter.costCenter.section.code , (SUM((breakdown.recoveryTime - breakdown.breakdownTime)*0.6))/60 "
@@ -61,7 +61,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " JOIN controlPointMachine.machine machine"
             + " WHERE machine = breakdown.machine AND breakdown.breakdownTime BETWEEN :startDate AND :endDate"
             + " GROUP BY controlPointMachine.controlPoint.workCenter.costCenter.section")
-    public List test(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List test(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.ScheduleAdherence(operation.production.controlPoint.workCenter.costCenter.section.code, SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100) "
@@ -70,7 +70,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " AND operation.production.controlPoint.controlPointType.id=1"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.controlPoint.workCenter.costCenter.section")
-    public List getScheduleAdherence(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getScheduleAdherence(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.ScheduleAdherence(operation.production.productionDate, SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100) "
@@ -80,7 +80,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " AND operation.actualQuantity > 0"
             + " AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " GROUP BY operation.production.productionDate")
-    public List getScheduleAdherenceBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+    List getScheduleAdherenceBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("section") Section section);
 
     @Query(value = "SELECT "
@@ -91,7 +91,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " AND operation.actualQuantity > 0"
             + " AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
-    public List getLossReasonSummaryBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+    List getLossReasonSummaryBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("section") Section section);
 
     @Query(value = "SELECT "
@@ -100,7 +100,8 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE loss.lossReason.lossType = :lossType AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
-    public List getLossReasonSummaryByLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+
+    List getLossReasonSummaryByLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("lossType") LossType lossType);
 
     @Query(value = "SELECT "
@@ -109,7 +110,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY loss.lossReason" + " ORDER BY SUM(loss.quantity) DESC")
-    public List getLossReasonSummary(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getLossReasonSummary(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
@@ -117,7 +118,8 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
-    public List getLossReasonDailyCountBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+
+    List getLossReasonDailyCountBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("section") Section section);
 
     @Query(value = "SELECT "
@@ -126,7 +128,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE  loss.lossReason.lossType = :lossType AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
-    public List getLossReasonDailyCountByLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+    List getLossReasonDailyCountByLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("lossType") LossType lossType);
 
     @Query(value = "SELECT "
@@ -135,7 +137,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE  loss.lossReason.lossType = :lossType AND loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
-    public List getLossReasonDailyCountBySectionAndLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+    List getLossReasonDailyCountBySectionAndLossType(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("section") Section section,
             @Param("lossType") LossType lossType);
 
@@ -145,7 +147,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
-    public List getLossReasonDailyCount(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getLossReasonDailyCount(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
@@ -153,7 +155,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE loss.lossReason = :lossReason AND loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
-    public List getLossReasonDailyCountBySectionAndLossReason(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+    List getLossReasonDailyCountBySectionAndLossReason(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("section") Section section,
             @Param("lossReason") LossReason lossReason);
 
@@ -163,7 +165,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE loss.lossReason = :lossReason AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
-    public List getLossReasonDailyCountByLossReason(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+    List getLossReasonDailyCountByLossReason(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
             @Param("lossReason") LossReason lossReason);
 
     @Query(value = "SELECT "
@@ -172,7 +174,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE loss.lossReason.lossType = :lossType AND loss.operation.production.controlPoint.workCenter.costCenter.section = :section AND operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY loss.lossReason ORDER BY SUM(loss.quantity) DESC")
-    public List getLossReasonSummaryBySectionAndLossType(@Param("startDate") Date startDate,
+    List getLossReasonSummaryBySectionAndLossType(@Param("startDate") Date startDate,
             @Param("endDate") Date endDate, @Param("section") Section section, @Param("lossType") LossType lossType);
 
     @Query(value = "SELECT "
@@ -180,7 +182,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " FROM OnTimeDelivery onTimeDelivery"
             + " WHERE onTimeDelivery.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(onTimeDelivery.effectiveMonth,'%Y-%m')")
-    public List getMonthlyOnTimeDelivery(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyOnTimeDelivery(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlyDeliverySummary(DATE_FORMAT(onTimeDelivery.effectiveMonth,'%Y-%m'), SUM(onTimeDelivery.plan), SUM(onTimeDelivery.actual), (SUM(onTimeDelivery.actual)/SUM(onTimeDelivery.plan))*100.0) "
@@ -188,7 +190,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE onTimeDelivery.effectiveMonth BETWEEN :startDate AND :endDate"
             + " AND onTimeDelivery.customer = :customer"
             + " GROUP BY DATE_FORMAT(onTimeDelivery.effectiveMonth,'%Y-%m')")
-    public List getMonthlyOnTimeDeliveryByCustomer(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("customer") Customer customer);
+    List getMonthlyOnTimeDeliveryByCustomer(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("customer") Customer customer);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlyScheduleAdherence(DATE_FORMAT(operation.production.productionDate,'%Y-%m'), SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100.0) "
@@ -196,7 +198,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE operation.production.productionDate BETWEEN :startDate AND :endDate"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY DATE_FORMAT(operation.production.productionDate,'%Y-%m')")
-    public List getMonthlyScheduleAdherence(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyScheduleAdherence(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlyScheduleAdherence(DATE_FORMAT(operation.production.productionDate,'%Y-%m'), SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100.0) "
@@ -205,7 +207,7 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " AND operation.production.controlPoint.workCenter.costCenter.section= :section"
             + " AND operation.actualQuantity > 0"
             + " GROUP BY DATE_FORMAT(operation.production.productionDate,'%Y-%m')")
-    public List getMonthlyScheduleAdherenceBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("section") Section section);
+    List getMonthlyScheduleAdherenceBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("section") Section section);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlyEnergyConsumption(DATE_FORMAT(energyConsumption.effectiveMonth,'%Y-%m'), energyConsumption.location.code, SUM(energyConsumption.kwh), SUM(energyConsumption.kva), SUM(energyConsumption.cost)) "
@@ -213,118 +215,118 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " WHERE energyConsumption.effectiveMonth BETWEEN :startDate AND :endDate"
             + " AND energyConsumption.location= :location"
             + " GROUP BY DATE_FORMAT(energyConsumption.effectiveMonth,'%Y-%m')")
-    public List getMonthlyEnergyConsumptionByLocation(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("location") Location location);
+    List getMonthlyEnergyConsumptionByLocation(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("location") Location location);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlyLabourTurnover(DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m'),labourTurnover.labourSource.code, SUM(labourTurnover.turnover), MAX(labourTurnover.target))"
             + " FROM LabourTurnover labourTurnover"
             + " WHERE labourTurnover.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY labourTurnover.labourSource, DATE_FORMAT(labourTurnover.effectiveMonth,'%Y-%m')")
-    public List getMonthlyLabourTurnover(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyLabourTurnover(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlyAbsenteeism(DATE_FORMAT(absenteeism.effectiveMonth,'%Y-%m'),absenteeism.labourSource.code, SUM(absenteeism.absenteeism), MAX(absenteeism.target))"
             + " FROM Absenteeism absenteeism"
             + " WHERE absenteeism.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY absenteeism.labourSource, DATE_FORMAT(absenteeism.effectiveMonth,'%Y-%m')")
-    public List getMonthlyAbsenteeism(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyAbsenteeism(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(salesValue.effectiveMonth,'%Y-%m'),SUM(salesValue.budget), MAX(salesValue.actual))"
             + " FROM SalesValue salesValue"
             + " WHERE salesValue.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(salesValue.effectiveMonth,'%Y-%m')")
-    public List getMonthlySalesValue(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlySalesValue(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(salesWeight.effectiveMonth,'%Y-%m'),SUM(salesWeight.budget), MAX(salesWeight.actual))"
             + " FROM SalesWeight salesWeight"
             + " WHERE salesWeight.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(salesWeight.effectiveMonth,'%Y-%m')")
-    public List getMonthlySalesWeight(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlySalesWeight(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(labourCostPerKg.effectiveMonth,'%Y-%m'),SUM(labourCostPerKg.budget), MAX(labourCostPerKg.actual))"
             + " FROM LabourCostPerKg labourCostPerKg"
             + " WHERE labourCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(labourCostPerKg.effectiveMonth,'%Y-%m')")
-    public List getMonthlyLabourCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyLabourCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(cumulativeSalesPerKg.effectiveMonth,'%Y-%m'),SUM(cumulativeSalesPerKg.budget), MAX(cumulativeSalesPerKg.actual))"
             + " FROM CumulativeSalesPerKg cumulativeSalesPerKg"
             + " WHERE cumulativeSalesPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(cumulativeSalesPerKg.effectiveMonth,'%Y-%m')")
-    public List getMonthlyCumulativeSalesPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyCumulativeSalesPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(productionOverheadCostPerKg.effectiveMonth,'%Y-%m'),SUM(productionOverheadCostPerKg.budget), MAX(productionOverheadCostPerKg.actual))"
             + " FROM ProductionOverheadCostPerKg productionOverheadCostPerKg"
             + " WHERE productionOverheadCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(productionOverheadCostPerKg.effectiveMonth,'%Y-%m')")
-    public List getMonthlyProductionOverheadCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyProductionOverheadCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(salesPerKg.effectiveMonth,'%Y-%m'),SUM(salesPerKg.budget), MAX(salesPerKg.actual))"
             + " FROM SalesPerKg salesPerKg"
             + " WHERE salesPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(salesPerKg.effectiveMonth,'%Y-%m')")
-    public List getMonthlySalesPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlySalesPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(consumableCostPerKg.effectiveMonth,'%Y-%m'),SUM(consumableCostPerKg.budget), MAX(consumableCostPerKg.actual))"
             + " FROM ConsumableCostPerKg consumableCostPerKg"
             + " WHERE consumableCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(consumableCostPerKg.effectiveMonth,'%Y-%m')")
-    public List getMonthlyConsumableCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyConsumableCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(materialCostPerKg.effectiveMonth,'%Y-%m'),SUM(materialCostPerKg.budget), MAX(materialCostPerKg.actual))"
             + " FROM MaterialCostPerKg materialCostPerKg"
             + " WHERE materialCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(materialCostPerKg.effectiveMonth,'%Y-%m')")
-    public List getMonthlyMaterialCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyMaterialCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(electricityCostPerKg.effectiveMonth,'%Y-%m'),SUM(electricityCostPerKg.budget), MAX(electricityCostPerKg.actual))"
             + " FROM ElectricityCostPerKg electricityCostPerKg"
             + " WHERE electricityCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(electricityCostPerKg.effectiveMonth,'%Y-%m')")
-    public List getMonthlyElectricityCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyElectricityCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(scrapCostPerKg.effectiveMonth,'%Y-%m'),SUM(scrapCostPerKg.budget), MAX(scrapCostPerKg.actual))"
             + " FROM ScrapCostPerKg scrapCostPerKg"
             + " WHERE scrapCostPerKg.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(scrapCostPerKg.effectiveMonth,'%Y-%m')")
-    public List getMonthlyScrapCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyScrapCostPerKg(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetRevenue), MAX(financeSummary.actualRevenue))"
             + " FROM FinanceSummary financeSummary"
             + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
-    public List getMonthlyRevenue(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyRevenue(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetEbitda), MAX(financeSummary.actualEbitda))"
             + " FROM FinanceSummary financeSummary"
             + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
-    public List getMonthlyEbitda(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyEbitda(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetGrossProfit), MAX(financeSummary.actualGrossProfit))"
             + " FROM FinanceSummary financeSummary"
             + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
-    public List getMonthlyGrossProfit(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyGrossProfit(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlySummary(DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m'),SUM(financeSummary.budgetNetProfit), MAX(financeSummary.actualNetProfit))"
             + " FROM FinanceSummary financeSummary"
             + " WHERE financeSummary.effectiveMonth BETWEEN :startDate AND :endDate"
             + " GROUP BY DATE_FORMAT(financeSummary.effectiveMonth,'%Y-%m')")
-    public List getMonthlyNetProfit(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List getMonthlyNetProfit(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
 }

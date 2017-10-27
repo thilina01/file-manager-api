@@ -6,16 +6,16 @@ import com.trendsmixed.fma.module.shift.Shift;
 
 import java.util.Date;
 import java.util.List;
+import lombok.AllArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class ProductionService {
 
-    @Autowired
     private ProductionRepository repository;
 
     public Iterable<Production> findAll() {

@@ -3,19 +3,7 @@ package com.trendsmixed.fma.module.controlpointtype;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,8 +18,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "control_point_type")
-@NamedQueries({
-    @NamedQuery(name = "ControlPointType.findAll", query = "SELECT s FROM ControlPointType s")})
 public class ControlPointType implements Serializable {
 
     private static final long serialVersionUID = 1L;

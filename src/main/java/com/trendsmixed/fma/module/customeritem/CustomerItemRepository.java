@@ -9,9 +9,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface CustomerItemRepository extends PagingAndSortingRepository<CustomerItem, Integer> {
 
-    public CustomerItem findByCustomerAndItem(Customer customer, Item item);
-@Query(value = "SELECT"
+    CustomerItem findByCustomerAndItem(Customer customer, Item item);
+
+    @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM CustomerItem o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

@@ -8,19 +8,19 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class ApplicationView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface ShortName {
+    public interface ShortName {
     }
 
-    public static interface All extends Id, Code, Name, ShortName, PageView.All {
+    public interface All extends Id, Code, Name, ShortName, PageView.All {
     }
 
 }

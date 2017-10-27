@@ -1,18 +1,16 @@
 package com.trendsmixed.fma.module.computertype;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.trendsmixed.fma.dao.Combo;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 
+@AllArgsConstructor
 @Service
 public class ComputerTypeService {
 
-    @Autowired
     private ComputerTypeRepository repository;
 
     public Iterable<ComputerType> findAll() {

@@ -7,10 +7,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ComputerRepository extends PagingAndSortingRepository<Computer, Integer> {
 
-    public Computer findByCode(String code);
+    Computer findByCode(String code);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code,o.brand)"
             + " FROM Computer o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

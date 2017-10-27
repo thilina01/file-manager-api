@@ -4,19 +4,19 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class LeaveTypeView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface TypeInSinhala {
+    public interface TypeInSinhala {
     }
 
-    public static interface All extends Id, Name, Code, TypeInSinhala, PageView.All {
+    public interface All extends Id, Name, Code, TypeInSinhala, PageView.All {
     }
 
 }

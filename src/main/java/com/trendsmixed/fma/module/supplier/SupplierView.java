@@ -12,61 +12,61 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class SupplierView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface Fax {
+    public interface Fax {
     }
 
-    public static interface Email {
+    public interface Email {
     }
 
-    public static interface ContactPerson {
+    public interface ContactPerson {
     }
 
-    public static interface ShortName {
+    public interface ShortName {
     }
 
-    public static interface Contact {
+    public interface Contact {
     }
 
-    public static interface Address {
+    public interface Address {
     }
 
-    public static interface Currency {
+    public interface Currency {
     }
 
-    public static interface SupplierType {
+    public interface SupplierType {
     }
 
-    public static interface PaymentTerm {
+    public interface PaymentTerm {
     }
 
-    public static interface DeliveryTerm {
+    public interface DeliveryTerm {
     }
 
-    public static interface All extends Id, Code, Name, Fax, Email, ContactPerson, ShortName, Contact, Address, PageView.All {
+    public interface All extends Id, Code, Name, Fax, Email, ContactPerson, ShortName, Contact, Address, PageView.All {
     }
 
-    public static interface AllAndCurrencyAll extends All, Currency, CurrencyView.All {
+    public interface AllAndCurrencyAll extends All, Currency, CurrencyView.All {
     }
 
-    public static interface AllAndPaymentTermAll extends All, PaymentTerm, PaymentTermView.All {
+    public interface AllAndPaymentTermAll extends All, PaymentTerm, PaymentTermView.All {
     }
 
-    public static interface AllAndDeliveryTermAll extends All, DeliveryTerm, DeliveryTermView.All {
+    public interface AllAndDeliveryTermAll extends All, DeliveryTerm, DeliveryTermView.All {
     }
 
-    public static interface AllAndSupplierTypeAll extends All, SupplierType, SupplierTypeView.All {
+    public interface AllAndSupplierTypeAll extends All, SupplierType, SupplierTypeView.All {
     }
 
-    public static interface AllAndCurrencyAllAndSupplierTypeAllAndDeliveryTermAllAndPaymentTermAll extends All, Currency, CurrencyView.All, PaymentTerm, PaymentTermView.All, SupplierType, SupplierTypeView.All, DeliveryTerm, DeliveryTermView.All {
+    public interface AllAndCurrencyAllAndSupplierTypeAllAndDeliveryTermAllAndPaymentTermAll extends All, Currency, CurrencyView.All, PaymentTerm, PaymentTermView.All, SupplierType, SupplierTypeView.All, DeliveryTerm, DeliveryTermView.All {
     }
 
 }

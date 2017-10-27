@@ -5,28 +5,28 @@ import com.trendsmixed.fma.module.job.JobView;
 
 public class JobDispatchView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Quantity {
+    public interface Quantity {
     }
 
-    public static interface Dispatch {
+    public interface Dispatch {
     }
 
-    public static interface Job {
+    public interface Job {
     }
 
-    public static interface All extends Id, Quantity {
+    public interface All extends Id, Quantity {
     }
 
-    public static interface AllAndDispatchAllAndJobAll extends All, Dispatch, Job, DispatchView.All, JobView.All {
+    public interface AllAndDispatchAllAndJobAll extends All, Dispatch, Job, DispatchView.All, JobView.All {
     }
 
-    public static interface AllAndDispatchAllAndJobAllAndItemAll extends All, Dispatch, Job, DispatchView.All, JobView.AllAndItemAllAndJobTypeAll {
+    public interface AllAndDispatchAllAndJobAllAndItemAll extends All, Dispatch, Job, DispatchView.All, JobView.AllAndItemAllAndJobTypeAll {
     }
 
-    public static interface AllAndDispatchAllAndCustomerAllAndJobAllAndItemAll extends All, Dispatch, Job, DispatchView.AllAndCustomerAll, JobView.AllAndItemAllAndJobTypeAll {
+    public interface AllAndDispatchAllAndCustomerAllAndJobAllAndItemAll extends All, Dispatch, Job, DispatchView.AllAndCustomerAll, JobView.AllAndItemAllAndJobTypeAll {
     }
 
 }

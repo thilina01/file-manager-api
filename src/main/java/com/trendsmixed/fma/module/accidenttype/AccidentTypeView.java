@@ -4,16 +4,16 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class AccidentTypeView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface All extends Id, Name, Code, PageView.All {
+    public interface All extends Id, Name, Code, PageView.All {
     }
 
 }

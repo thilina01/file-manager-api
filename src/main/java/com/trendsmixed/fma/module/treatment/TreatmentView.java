@@ -10,37 +10,37 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class TreatmentView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Description {
+    public interface Description {
     }
 
-    public static interface LossManHours {
+    public interface LossManHours {
     }
 
-    public static interface StartTime {
+    public interface StartTime {
     }
 
-    public static interface EndTime {
+    public interface EndTime {
     }
 
-    public static interface TreatmentType {
+    public interface TreatmentType {
     }
 
-    public static interface Accident {
+    public interface Accident {
     }
 
-    public static interface All extends Id, Code, Description, LossManHours, StartTime, EndTime, PageView.All {
+    public interface All extends Id, Code, Description, LossManHours, StartTime, EndTime, PageView.All {
     }
 
-    public static interface AllAndTreatmentTypeAll extends All, TreatmentType, TreatmentTypeView.All {
+    public interface AllAndTreatmentTypeAll extends All, TreatmentType, TreatmentTypeView.All {
     }
 
-    public static interface AllAndAccidentAll extends All, Accident, AccidentView.All {
+    public interface AllAndAccidentAll extends All, Accident, AccidentView.All {
     }
 
 }

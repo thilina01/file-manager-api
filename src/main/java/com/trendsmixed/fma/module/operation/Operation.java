@@ -9,22 +9,10 @@ import com.trendsmixed.fma.module.producttype.ProductType;
 import com.trendsmixed.fma.module.production.Production;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -35,8 +23,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "operation")
-@NamedQueries({
-    @NamedQuery(name = "Operation.findAll", query = "SELECT p FROM Operation p")})
 public class Operation implements Serializable {
 
     private static final long serialVersionUID = 1L;

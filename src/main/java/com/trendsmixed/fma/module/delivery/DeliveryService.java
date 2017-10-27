@@ -1,14 +1,12 @@
 package com.trendsmixed.fma.module.delivery;
-
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class DeliveryService {
 
-    @Autowired
     private DeliveryRepository deliveryRepository;
 
     public List< Delivery> findAll() {

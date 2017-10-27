@@ -5,19 +5,17 @@ import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.production.Production;
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+@AllArgsConstructor
 @Service
 public class OperationService {
 
-    @Autowired
     private OperationRepository repository;
 
     public Iterable<Operation> findAll() {

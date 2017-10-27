@@ -1,17 +1,6 @@
 package com.trendsmixed.fma.module.energyconsumption;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.location.Location;
 import java.util.Date;
@@ -20,6 +9,7 @@ import javax.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -30,8 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "energy_consumption")
-@NamedQueries({
-    @NamedQuery(name = "EnergyConsumption.findAll", query = "SELECT m FROM EnergyConsumption m")})
+
 public class EnergyConsumption implements Serializable {
 
     private static final long serialVersionUID = 1L;

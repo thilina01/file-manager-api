@@ -14,16 +14,16 @@ public interface ProductionRepository extends PagingAndSortingRepository<Product
 
     Production findByProductionDateAndShiftAndControlPoint(Date productionDate, Shift shift, ControlPoint controlPoint);
 
-    public Page<Production> findByControlPointWorkCenterCostCenterSectionAndProductionDateAndShift(Section section, Date date, Shift shift, Pageable pageable);
+    Page<Production> findByControlPointWorkCenterCostCenterSectionAndProductionDateAndShift(Section section, Date date, Shift shift, Pageable pageable);
 
-    public Page<Production> findByControlPointWorkCenterCostCenterSectionAndProductionDateBetweenAndShift(Section section, Date startDate, Date endDate, Shift shift, Pageable pageable);
+    Page<Production> findByControlPointWorkCenterCostCenterSectionAndProductionDateBetweenAndShift(Section section, Date startDate, Date endDate, Shift shift, Pageable pageable);
 
-    public Page<Production> findByControlPointWorkCenterCostCenterSectionAndProductionDateBetween(Section section, Date startDate, Date endDate, Pageable pageable);
+    Page<Production> findByControlPointWorkCenterCostCenterSectionAndProductionDateBetween(Section section, Date startDate, Date endDate, Pageable pageable);
 
-    public Page<Production> findByProductionDateAndShift(Date date, Shift shift, Pageable pageable);
+    Page<Production> findByProductionDateAndShift(Date date, Shift shift, Pageable pageable);
 
-    public Page<Production> findByProductionDateBetweenAndShift(Date startDate, Date endDate, Shift shift, Pageable pageable);
+    Page<Production> findByProductionDateBetweenAndShift(Date startDate, Date endDate, Shift shift, Pageable pageable);
 
-    public Page<Production> findByProductionDateBetween(Date startDate, Date endDate, Pageable pageable);
+    Page<Production> findByProductionDateBetween(Date startDate, Date endDate, Pageable pageable);
 
 }

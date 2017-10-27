@@ -7,10 +7,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ShiftRepository extends PagingAndSortingRepository<Shift, Integer> {
 
-    public Shift findByCode(String code);
+    Shift findByCode(String code);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM Shift o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

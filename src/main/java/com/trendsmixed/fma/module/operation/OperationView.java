@@ -9,45 +9,45 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class OperationView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface PlannedQuantity {
+    public interface PlannedQuantity {
     }
 
-    public static interface ActualQuantity {
+    public interface ActualQuantity {
     }
 
-    public static interface UnitWeight {
+    public interface UnitWeight {
     }
 
-    public static interface Loss extends LossView.All {
+    public interface Loss extends LossView.All {
     }
 
-    public static interface Production extends ProductionView.AllAndShiftAndShiftTypeAndControlPointAll {
+    public interface Production extends ProductionView.AllAndShiftAndShiftTypeAndControlPointAll {
     }
 
-    public static interface Job extends JobView.All {
+    public interface Job extends JobView.All {
     }
 
-    public static interface OperationType extends OperationTypeView.All {
+    public interface OperationType extends OperationTypeView.All {
     }
 
-    public static interface ProductType extends ProductTypeView.All {
+    public interface ProductType extends ProductTypeView.All {
     }
 
-    public static interface All extends Id, PlannedQuantity, ActualQuantity, UnitWeight, PageView.All {
+    public interface All extends Id, PlannedQuantity, ActualQuantity, UnitWeight, PageView.All {
     }
 
-    public static interface AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
+    public interface AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
             extends All, Job, ProductType, OperationType, Loss, LossView.AllLossReasonAllLossTypeAll {
     }
 
-    public static interface AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
+    public interface AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
             extends AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll, Production {
     }
 
-    public static interface AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
+    public interface AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
             extends AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll, JobView.AllAndItemAllAndJobTypeAll {
     }
 }

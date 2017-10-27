@@ -2,37 +2,25 @@ package com.trendsmixed.fma.module.lossreason;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.trendsmixed.fma.module.losstype.LossType;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.losstype.LossTypeService;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/lossReasons")
 public class LossReasonController {
 
-    @Autowired
-    private AppSessionService appSessionService;
-    @Autowired
-    private LossReasonService service;
-    @Autowired
-    private LossTypeService lossTypeService;
+    private final AppSessionService appSessionService;
+    private final LossReasonService service;
+    private final LossTypeService lossTypeService;
 
     @JsonView(LossReasonView.AllAndLossTypeAll.class)
     @GetMapping
@@ -48,22 +36,22 @@ public class LossReasonController {
 
     @JsonView(LossReasonView.All.class)
     @PostMapping("/pageByLossType")
-    Page<LossReason> pageByLossType(Pageable pageable,@RequestBody LossType lossType) {        
-        if(lossType.getId()==null){
-            lossType  = lossTypeService.findByCode(lossType.getCode());
+    Page<LossReason> pageByLossType(Pageable pageable, @RequestBody LossType lossType) {
+        if (lossType.getId() == null) {
+            lossType = lossTypeService.findByCode(lossType.getCode());
         }
-        return new Page<>(service.findByLossType(lossType,pageable));
+        return new Page<>(service.findByLossType(lossType, pageable));
     }
 
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
-    
+
     @PostMapping("/comboByLossType")
     List<Combo> comboByLossType(@RequestBody LossType lossType) {
-        if(lossType.getId()==null){
-            lossType  = lossTypeService.findByCode(lossType.getCode());
+        if (lossType.getId() == null) {
+            lossType = lossTypeService.findByCode(lossType.getCode());
         }
         return service.getComboByLossType(lossType);
     }

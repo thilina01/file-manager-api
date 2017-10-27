@@ -2,17 +2,16 @@ package com.trendsmixed.fma.module.tool;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Service
 public class ToolService {
 
-    @Autowired
     private ToolRepository repository;
 
     public Iterable<Tool> findAll() {

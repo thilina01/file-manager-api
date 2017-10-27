@@ -2,19 +2,17 @@ package com.trendsmixed.fma.module.job;
 
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Service
 public class JobService {
 
-    @Autowired
     private JobRepository repository;
 
     public Iterable<Job> findAll() {

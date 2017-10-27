@@ -10,6 +10,6 @@ public interface OnTimeDeliveryRepository extends PagingAndSortingRepository<OnT
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, '', '')"
             + " FROM OnTimeDelivery o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 
 }

@@ -9,10 +9,10 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface ShiftRosterRepository extends PagingAndSortingRepository<ShiftRoster, Integer> {
 
-    public ShiftRoster findByName(String name);
+    ShiftRoster findByName(String name);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM ShiftRoster o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

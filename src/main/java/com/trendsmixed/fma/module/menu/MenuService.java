@@ -1,16 +1,14 @@
 package com.trendsmixed.fma.module.menu;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.trendsmixed.fma.module.menutype.MenuType;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Service
 public class MenuService {
 
-    @Autowired
     private MenuRepository menuRepository;
 
     public List<Menu> findAll() {
