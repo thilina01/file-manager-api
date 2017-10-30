@@ -4,6 +4,7 @@ import com.trendsmixed.fma.module.operation.Operation;
 import com.trendsmixed.fma.module.manpower.Manpower;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.productionemployee.ProductionEmployee;
 import com.trendsmixed.fma.module.shift.Shift;
 import com.trendsmixed.fma.module.shifttype.ShiftType;
 import java.io.Serializable;
@@ -21,7 +22,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = { "id" })
 @Table(name = "production")
 public class Production implements Serializable {
 
@@ -55,11 +56,13 @@ public class Production implements Serializable {
     @ManyToOne(optional = true)
     private ShiftType shiftType;
     @JsonView(ProductionView.Manpower.class)
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "production")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "production")
     private List<Manpower> manpowerList;
     @JsonView(ProductionView.Operation.class)
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "production")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "production")
     private List<Operation> operationList;
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "production")
+    private List<ProductionEmployee> productionEmployeeList;
 
     Production(Integer id) {
         this.id = id;
