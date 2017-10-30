@@ -10,7 +10,7 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employee,
     Employee findByCode(String code);
 
     @Query(value = "SELECT"
-            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.firstName + ' ' + o.lastName)"
+            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.callingName)"
             + " FROM Employee o")
     List<Combo> getCombo();
 }
