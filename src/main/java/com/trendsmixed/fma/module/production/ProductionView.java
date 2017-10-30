@@ -5,6 +5,7 @@ import com.trendsmixed.fma.module.costcenter.CostCenterView;
 import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.manpower.ManpowerView;
 import com.trendsmixed.fma.module.operation.OperationView;
+import com.trendsmixed.fma.module.productionemployee.ProductionEmployeeView;
 import com.trendsmixed.fma.module.shift.ShiftView;
 import com.trendsmixed.fma.module.shifttype.ShiftTypeView;
 import com.trendsmixed.fma.module.workcenter.WorkCenterView;
@@ -55,6 +56,9 @@ public class ProductionView {
     public interface ShiftType {
     }
 
+    public interface ProductionEmployee extends ProductionEmployeeView.All {
+    }
+
     public interface All
             extends Id, ProductionDate, PlannedDuration, ActualDuration, PlannedQuantity, ActualQuantity, PageView.All {
     }
@@ -80,6 +84,9 @@ public class ProductionView {
             extends AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection,
             AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll,
             JobView.AllAndItemAllAndJobTypeAll {
+    }
+    public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAllProductionEmployeeAllAndEmployeeAll
+            extends AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll, ProductionEmployee, ProductionEmployeeView.AllAndEmployeeAll{
     }
 
 }

@@ -61,6 +61,7 @@ public class Production implements Serializable {
     @JsonView(ProductionView.Operation.class)
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "production")
     private List<Operation> operationList;
+    @JsonView(ProductionView.ProductionEmployee.class)
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "production")
     private List<ProductionEmployee> productionEmployeeList;
 

@@ -2,6 +2,8 @@ package com.trendsmixed.fma.module.production;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+
+import com.trendsmixed.fma.module.productionemployee.ProductionEmployee;
 import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.manpower.Manpower;
@@ -85,6 +87,7 @@ public class ProductionController {
         try {
             List<Operation> operations = production.getOperationList();
             List<Manpower> manpowers = production.getManpowerList();
+            List<ProductionEmployee> productionEmployeeList = production.getProductionEmployeeList();
 //
 //            if (production.getId() != null && production.getId() > 0) {
 //                List<Operation> oldOperations = operationService.findByProduction(new Production(production.getId()));
@@ -131,6 +134,11 @@ public class ProductionController {
                     manpower.setProduction(production);
                 }
             }
+            if (productionEmployeeList != null) {
+                for (ProductionEmployee productionEmployee : productionEmployeeList) {
+                    productionEmployee.setProduction(production);
+                }
+            }
             production = service.save(production);
 
             return production;
@@ -169,7 +177,7 @@ public class ProductionController {
         }
     }
 
-    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAllProductionEmployeeAllAndEmployeeAll.class)
     @GetMapping("/{id}")
     public Production findOne(@PathVariable("id") int id) {
         return service.findOne(id);
