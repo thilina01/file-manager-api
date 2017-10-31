@@ -28,4 +28,11 @@ public class ProductionEmployeeView {
     public interface AllAndEmployeeAll extends All, Employee, EmployeeView.All {
     }
 
+    public interface AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSection
+            extends AllAndProductionAll, ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection {
+    }
+
+    public interface AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSectionAndEmployeeAll extends AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSection, AllAndEmployeeAll {
+    }
+
 }

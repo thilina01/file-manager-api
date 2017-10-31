@@ -5,9 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.employee.Employee;
+import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.shift.Shift;
+import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
+import java.text.ParseException;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,15 +30,58 @@ public class ProductionEmployeeController {
         return service.findAll();
     }
 
-    @JsonView(ProductionEmployeeView.All.class)
+    @JsonView(ProductionEmployeeView.AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSectionAndEmployeeAll.class)
+    @GetMapping(value = "/sectionAndProductionDurationPage", params = {"section", "startDate", "endDate"})
+    public Page<ProductionEmployee> sectionAndProductionDurationPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetween(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+    }
+
+    @JsonView(ProductionEmployeeView.AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSectionAndEmployeeAll.class)
+    @GetMapping(value = "/productionDateAndShiftPage", params = {"productionDate", "shift"})
+    public Page<ProductionEmployee> productionDateAndShiftPage(@RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionProductionDateAndProductionShift(Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
+    }
+
+    @JsonView(ProductionEmployeeView.AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSectionAndEmployeeAll.class)
+    @GetMapping(value = "/productionDurationAndShiftPage", params = {"startDate", "endDate", "shift"})
+    public Page<ProductionEmployee> productionDurationAndShiftPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionProductionDateBetweenAndProductionShift(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
+    }
+
+    @JsonView(ProductionEmployeeView.AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSectionAndEmployeeAll.class)
+    @GetMapping(value = "/productionDurationPage", params = {"startDate", "endDate"})
+    public Page<ProductionEmployee> productionDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionProductionDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+    }
+
+    @JsonView(ProductionEmployeeView.AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSectionAndEmployeeAll.class)
+    @GetMapping(value = "/productionDurationAndEmployeePage", params = {"startDate", "endDate", "employee"})
+    public Page<ProductionEmployee> productionDurationAndEmployeePage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("employee") String employee, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionProductionDateBetweenAndEmployee(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Employee(Integer.valueOf(employee)), pageable));
+    }
+
+    @JsonView(ProductionEmployeeView.AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSectionAndEmployeeAll.class)
+    @GetMapping(value = "/productionDateAndEmployeePage", params = {"productionDate", "employee"})
+    public Page<ProductionEmployee> productionDateAndEmployeePage(@RequestParam("productionDate") String productionDate, @RequestParam("employee") String employee, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionProductionDateAndEmployee(Format.yyyy_MM_dd.parse(productionDate), new Employee(Integer.valueOf(employee)), pageable));
+    }
+
+    @JsonView(ProductionEmployeeView.AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSectionAndEmployeeAll.class)
+    @GetMapping(value = "/sectionAndEmployeeAndProductionDurationAndShiftPage", params = {"section", "startDate", "endDate", "shift", "employee"})
+    public Page<ProductionEmployee> sectionAndEmployeeAndProductionDurationAndShiftPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("employee") String employee, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndEmployeeAndProductionProductionDateBetweenAndProductionShift(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Employee(Integer.valueOf(employee)), new Shift(Integer.valueOf(shift)), pageable));
+    }
+
+    @JsonView(ProductionEmployeeView.AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSectionAndEmployeeAll.class)
+    @GetMapping(value = "/sectionAndEmployeeAndProductionDateAndShiftPage", params = {"section", "productionDate", "shift", "employee"})
+    public Page<ProductionEmployee> sectionAndEmployeeAndProductionDateAndShiftPage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, @RequestParam("employee") String employee, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndEmployeeAndProductionProductionDateAndProductionShift(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), new Employee(Integer.valueOf(employee)), pageable));
+    }
+
+    @JsonView(ProductionEmployeeView.AllAndProductionAllShiftAllAndControlPointAllWorkCenterCostCenterSectionAndEmployeeAll.class)
     @GetMapping("/page")
     Page<ProductionEmployee> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
-    }
-
-    @GetMapping("/combo")
-    List<Combo> combo() {
-        return service.getCombo();
     }
 
     @JsonView(ProductionEmployeeView.All.class)

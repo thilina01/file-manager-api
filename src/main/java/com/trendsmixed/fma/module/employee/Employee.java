@@ -25,7 +25,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(of = { "id" })
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "employee")
 public class Employee implements Serializable {
 
@@ -62,13 +62,14 @@ public class Employee implements Serializable {
     @Column(name = "nic")
     private String nic;
     @JsonView(EmployeeView.DispatchNote.class)
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "employee")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
     private List<DispatchNote> dispatchNoteList;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "employee")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
     private List<Computer> computerList;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "employee")
+    @JsonView(EmployeeView.ProductionEmployee.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
     private List<ProductionEmployee> productionEmployeeList;
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "employee")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
     private List<Accident> accidentList;
     @JsonView(EmployeeView.Designation.class)
     @JoinColumn(name = "designation_id", referencedColumnName = "id")
@@ -90,4 +91,8 @@ public class Employee implements Serializable {
     @JoinColumn(name = "labourSource_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LabourSource labourSource;
+
+    public Employee(Integer id) {
+        this.id = id;
+    }
 }

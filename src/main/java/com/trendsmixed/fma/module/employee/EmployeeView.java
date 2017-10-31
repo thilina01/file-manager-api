@@ -4,6 +4,7 @@ import com.trendsmixed.fma.module.designation.DesignationView;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
 import com.trendsmixed.fma.module.employeecategory.EmployeeCategoryView;
 import com.trendsmixed.fma.module.labourtursource.LabourSourceView;
+import com.trendsmixed.fma.module.productionemployee.ProductionEmployeeView;
 import com.trendsmixed.fma.module.section.SectionView;
 import com.trendsmixed.fma.module.shift.ShiftView;
 
@@ -40,6 +41,9 @@ public class EmployeeView {
     }
 
     public interface NIC {
+    }
+
+    public interface ProductionEmployee {
     }
 
     public interface All extends Id, Code, CallingName, FullName, LastName, FirstName, DateOfBirth, ContactNumber, NIC, PageView.All {
