@@ -36,4 +36,8 @@ public class Country implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "country")
     private List<Address> addressList;
 
+    @JsonView(CountryView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

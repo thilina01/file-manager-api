@@ -48,4 +48,8 @@ public class CustomerItem implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Item item;
 
+    @JsonView(CustomerItemView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

@@ -36,4 +36,8 @@ public class SupplierType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "supplierType")
     private List<Supplier> supplierList;
 
+    @JsonView(SupplierTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

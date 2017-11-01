@@ -42,4 +42,9 @@ public class ContainerSize implements Serializable {
     @Column(name = "name")
     private String name;
 
+
+    @JsonView(ContainerSizeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

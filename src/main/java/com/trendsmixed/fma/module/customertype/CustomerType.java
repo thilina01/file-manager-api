@@ -36,4 +36,8 @@ public class CustomerType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customerType")
     private List<Customer> customerList;
 
+    @JsonView(CustomerTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

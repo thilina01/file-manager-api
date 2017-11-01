@@ -48,4 +48,8 @@ public class LossReason implements Serializable {
         this.id = id;
     }
 
+    @JsonView(LossReasonView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

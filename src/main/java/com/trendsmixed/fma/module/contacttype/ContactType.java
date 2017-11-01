@@ -37,4 +37,9 @@ public class ContactType implements Serializable {
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "contactType")
     private List<Contact> contactList;
+
+    @JsonView(ContactTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

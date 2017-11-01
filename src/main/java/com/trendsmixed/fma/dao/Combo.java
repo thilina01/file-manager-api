@@ -18,4 +18,7 @@ public class Combo {
         this.name = name;
     }
 
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

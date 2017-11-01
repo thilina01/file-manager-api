@@ -95,4 +95,10 @@ public class Employee implements Serializable {
     public Employee(Integer id) {
         this.id = id;
     }
+
+
+    @JsonView(EmployeeView.All.class)
+    public String getDisplay() {
+        return code + " : " + callingName;
+    }
 }

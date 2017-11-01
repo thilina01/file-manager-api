@@ -41,4 +41,8 @@ public class WorkCenter implements Serializable {
     @ManyToOne(optional = false)
     private CostCenter costCenter;
 
+    @JsonView(WorkCenterView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

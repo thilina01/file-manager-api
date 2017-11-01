@@ -32,4 +32,8 @@ public class Department implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @JsonView(DepartmentView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

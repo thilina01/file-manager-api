@@ -2,15 +2,17 @@ package com.trendsmixed.fma.module.deliveryterm;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.supplier.Supplier;
+
 import java.io.Serializable;
 import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 /**
- *
  * @author Thilina
  */
 @Entity
@@ -36,4 +38,8 @@ public class DeliveryTerm implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "deliveryTerm")
     private List<Supplier> supplierList;
 
+    @JsonView(DeliveryTermView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

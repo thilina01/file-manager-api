@@ -33,4 +33,8 @@ public class Status implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "status")
     private List<User> userList;
 
+    @JsonView(StatusView.All.class)
+    public String getDisplay() {
+        return  name;
+    }
 }

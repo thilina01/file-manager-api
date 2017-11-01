@@ -71,4 +71,8 @@ public class Item implements Serializable {
         this.id = anId;
     }
 
+    @JsonView(ItemView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

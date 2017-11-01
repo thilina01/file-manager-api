@@ -37,4 +37,8 @@ public class TreatmentType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "treatmentType")
     private List<Treatment> treatmentList;
 
+    @JsonView(TreatmentTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

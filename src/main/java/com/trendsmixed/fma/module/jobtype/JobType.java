@@ -37,4 +37,8 @@ public class JobType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "jobType")
     private List<Job> jobList;
 
+    @JsonView(JobTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

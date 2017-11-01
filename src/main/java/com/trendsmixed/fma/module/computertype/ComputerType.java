@@ -36,4 +36,8 @@ public class ComputerType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "computerType")
     private List<Computer> computerList;
 
+    @JsonView(ComputerTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

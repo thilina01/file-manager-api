@@ -40,4 +40,8 @@ public class Location implements Serializable {
         this.id = id;
     }
 
+    @JsonView(LocationView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

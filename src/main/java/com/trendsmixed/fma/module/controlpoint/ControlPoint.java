@@ -49,4 +49,8 @@ public class ControlPoint implements Serializable {
     @ManyToOne(optional = true)
     private ControlPointType controlPointType;
 
+    @JsonView(ControlPointView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

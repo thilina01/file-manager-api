@@ -36,4 +36,8 @@ public class Paint implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "paint")
     private List<Item> itemList;
 
+    @JsonView(PaintView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

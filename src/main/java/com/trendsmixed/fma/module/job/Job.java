@@ -55,5 +55,8 @@ public class Job implements Serializable {
     public Job(Integer id) {
         this.id = id;
     }
-
+    @JsonView(JobView.All.class)
+    public String getDisplay() {
+        return jobNo + " : " + item.getCode();
+    }
 }

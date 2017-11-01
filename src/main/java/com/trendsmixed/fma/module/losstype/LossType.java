@@ -44,4 +44,8 @@ public class LossType implements Serializable {
         this.id = id;
     }
 
+    @JsonView(LossTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

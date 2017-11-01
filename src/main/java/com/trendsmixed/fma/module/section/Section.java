@@ -60,4 +60,8 @@ public class Section implements Serializable {
         this.id = id;
     }
 
+    @JsonView(SectionView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }
