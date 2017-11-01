@@ -36,4 +36,8 @@ public class ManpowerType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "manpowerType")
     private List<Manpower> manpowerList;
 
+    @JsonView(ManpowerTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

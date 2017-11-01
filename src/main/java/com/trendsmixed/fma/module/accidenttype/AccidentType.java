@@ -36,4 +36,8 @@ public class AccidentType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "accidentType")
     private List<Accident> accidentList;
 
+    @JsonView(AccidentTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

@@ -36,4 +36,8 @@ public class SectionType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "sectionType")
     private List<Section> sectionList;
 
+    @JsonView(SectionTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

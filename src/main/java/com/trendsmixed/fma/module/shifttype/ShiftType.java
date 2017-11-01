@@ -36,4 +36,8 @@ public class ShiftType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "shiftType")
     private List<Production> productionList;
 
+    @JsonView(ShiftTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

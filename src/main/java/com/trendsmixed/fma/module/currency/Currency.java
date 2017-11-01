@@ -39,4 +39,8 @@ public class Currency implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "currency")
     private List<Supplier> supplierList;
 
+    @JsonView(CurrencyView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

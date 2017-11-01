@@ -38,4 +38,8 @@ public class AddressType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "addressType")
     private List<Address> addressList;
 
+    @JsonView(AddressTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

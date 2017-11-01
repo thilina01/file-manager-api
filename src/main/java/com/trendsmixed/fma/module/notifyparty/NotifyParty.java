@@ -38,4 +38,8 @@ public class NotifyParty implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "notifyParty")
     private List<Customer> customerList;
 
+    @JsonView(NotifyPartyView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

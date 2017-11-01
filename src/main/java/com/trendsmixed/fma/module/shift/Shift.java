@@ -46,4 +46,8 @@ public class Shift implements Serializable {
         this.id = id;
     }
 
+    @JsonView(ShiftView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

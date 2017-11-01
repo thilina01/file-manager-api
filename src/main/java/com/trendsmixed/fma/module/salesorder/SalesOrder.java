@@ -69,4 +69,8 @@ public class SalesOrder implements Serializable {
         this.id = anId;
     }
 
+    @JsonView(SalesOrderView.All.class)
+    public String getDisplay() {
+        return customerPoNumber + " : " + customer.getCode();
+    }
 }

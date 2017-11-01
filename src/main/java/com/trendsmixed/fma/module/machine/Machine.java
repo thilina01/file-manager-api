@@ -46,4 +46,8 @@ public class Machine implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "machine")
     private List<Accident> accidentList;
 
+    @JsonView(MachineView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

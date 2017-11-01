@@ -46,4 +46,8 @@ public class InvoiceType implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @JsonView(InvoiceTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

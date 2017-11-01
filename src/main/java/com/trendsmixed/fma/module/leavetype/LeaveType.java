@@ -36,4 +36,8 @@ public class LeaveType implements Serializable {
     @Column(name = "type_in_sinhala", length = 250)
     private String typeInSinhala;
 
+    @JsonView(LeaveTypeView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

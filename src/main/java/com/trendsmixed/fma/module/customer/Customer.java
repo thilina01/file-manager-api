@@ -135,4 +135,8 @@ public class Customer implements Serializable {
         this.id = anId;
     }
 
+    @JsonView(CustomerView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

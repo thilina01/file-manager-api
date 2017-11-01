@@ -72,4 +72,8 @@ public class Supplier implements Serializable {
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private DeliveryTerm deliveryTerm;
 
+    @JsonView(SupplierView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }

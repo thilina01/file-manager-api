@@ -3,12 +3,13 @@ package com.trendsmixed.fma.module.computer;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.computertype.ComputerType;
 import com.trendsmixed.fma.module.employee.Employee;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -81,4 +82,8 @@ public class Computer implements Serializable {
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private ComputerType computerType;
 
+    @JsonView(ComputerView.All.class)
+    public String getDisplay() {
+        return code + " : " + model;
+    }
 }

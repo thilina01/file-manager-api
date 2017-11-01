@@ -48,4 +48,8 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    @JsonView(UserView.All.class)
+    public String getDisplay() {
+        return name;
+    }
 }

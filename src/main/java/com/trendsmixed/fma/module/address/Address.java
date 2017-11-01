@@ -30,12 +30,6 @@ public class Address implements Serializable {
     @JsonView(AddressView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(AddressView.Code.class)
-    @Column(name = "code", unique = true)
-    private String code;
-    @JsonView(AddressView.Name.class)
-    @Column(name = "name", unique = true)
-    private String name;
     @JsonView(AddressView.Line1.class)
     @Column(name = "line1", unique = true)
     private String line1;
@@ -67,4 +61,8 @@ public class Address implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "address")
     private List<DispatchNote> dispatchNoteList;
 
+    @JsonView(AddressView.All.class)
+    public String getDisplay() {
+        return line1 + ", " +line2 + ", " +line3 + ", " +line4 + ", " +line5;
+    }
 }

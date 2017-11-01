@@ -40,4 +40,8 @@ public class Team implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "team")
     private List<User> userList;
 
+    @JsonView(TeamView.All.class)
+    public String getDisplay() {
+        return code + " : " + name;
+    }
 }
