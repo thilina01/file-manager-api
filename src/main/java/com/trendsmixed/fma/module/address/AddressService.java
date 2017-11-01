@@ -43,7 +43,4 @@ public class AddressService {
         repository.delete(id);
     }
 
-    public Address findByCode(String code) {
-        return repository.findByCode(code);
-    }
 }

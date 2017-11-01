@@ -73,6 +73,6 @@ public class Item implements Serializable {
 
     @JsonView(ItemView.All.class)
     public String getDisplay() {
-        return code + " : " + name;
+        return code + " : " + description;
     }
 }
