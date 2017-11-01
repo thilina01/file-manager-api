@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Date;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/files")
@@ -20,11 +21,6 @@ public class FileUploadController {
 
     private FileInformationService fileInformationService;
     private FileSystemStorageService fileSystemStorageService;
-
-//    @GetMapping
-//    public List listUploadedFiles() throws IOException {
-//        return fileSystemStorageService.loadAll().map(path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class, "serveFile", path.getFileName().toString()).build().toString()).collect(Collectors.toList());
-//    }
 
     @GetMapping(value = "/{id}")
     public HttpEntity<FileSystemResource> serveFile(@PathVariable("id") int id) throws IOException {
@@ -52,10 +48,5 @@ public class FileUploadController {
         return fileInformationService.save(fileInformation);
 
     }
-
-//    @ExceptionHandler(StorageFileNotFoundException.class)
-//    public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
-//        return ResponseEntity.notFound().build();
-//    }
 
 }

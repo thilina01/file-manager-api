@@ -3,13 +3,8 @@ package com.trendsmixed.fma.entity;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.appsession.AppSessionView;
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  *
@@ -17,8 +12,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "app_session")
-@NamedQueries({
-    @NamedQuery(name = "AppSession.findAll", query = "SELECT a FROM AppSession a")})
 public class AppSession implements Serializable {
 
     private static final long serialVersionUID = 1L;

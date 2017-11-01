@@ -14,24 +14,19 @@ import com.trendsmixed.fma.module.jobtype.JobTypeService;
 import com.trendsmixed.fma.module.status.StatusService;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+@AllArgsConstructor
 @Component
 public class Strater {
 
-    @Autowired
-    private StatusService statusService;
-    @Autowired
-    private CountryService countryService;
-    @Autowired
-    private JobTypeService jobTypeService;
-    @Autowired
-    private CurrencyService currencyService;
-    @Autowired
-    private IncotermService incotermService;
-    @Autowired
-    private CustomerTypeService customerTypeService;
+    private final StatusService statusService;
+    private final CountryService countryService;
+    private final JobTypeService jobTypeService;
+    private final CurrencyService currencyService;
+    private final IncotermService incotermService;
+    private final CustomerTypeService customerTypeService;
 
     @PostConstruct
     public void afterStarted() {

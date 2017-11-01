@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.OperationSummary;
@@ -17,7 +16,6 @@ import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor

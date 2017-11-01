@@ -9,17 +9,16 @@ import com.trendsmixed.fma.dao.Menu;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/menusX")
 public class MenuControllerX {
 
-    @Autowired
-    private AppSessionService appSessionService;
+    private final AppSessionService appSessionService;
 
     @GetMapping
     public ArrayList<Menu> getMenus(@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

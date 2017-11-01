@@ -2,15 +2,15 @@ package com.trendsmixed.fma.module.absenteeism;
 
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
+import lombok.AllArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class AbsenteeismService {
 
-    @Autowired
     private AbsenteeismRepository repository;
 
     public Iterable<Absenteeism> findAll() {

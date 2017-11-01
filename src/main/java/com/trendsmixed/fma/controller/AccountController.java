@@ -1,12 +1,5 @@
 package com.trendsmixed.fma.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.trendsmixed.fma.dao.UserDao;
 import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.module.status.Status;
@@ -18,20 +11,19 @@ import com.trendsmixed.fma.module.team.TeamService;
 import com.trendsmixed.fma.module.user.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
 @CrossOrigin
 @RequestMapping("/accounts")
 public class AccountController {
 
-    @Autowired
-    private TeamService teamService;
-    @Autowired
-    private StatusService statusService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private AppSessionService appSessionService;
+    private final TeamService teamService;
+    private final StatusService statusService;
+    private final UserService userService;
+    private final AppSessionService appSessionService;
 
     @PostMapping("/register")
     public boolean register(@RequestBody UserDao userDao, HttpServletRequest request) {
@@ -70,7 +62,7 @@ public class AccountController {
                 admin.setStatus(status);
                 userService.save(admin);
             }
-            //return true;
+
         }
 
         userDao.setUserService(userService);

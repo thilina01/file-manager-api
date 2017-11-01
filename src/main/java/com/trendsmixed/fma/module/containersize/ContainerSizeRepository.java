@@ -14,5 +14,5 @@ public interface ContainerSizeRepository extends PagingAndSortingRepository<Cont
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM ContainerSize o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

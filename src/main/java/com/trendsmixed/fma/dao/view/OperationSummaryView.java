@@ -5,16 +5,16 @@ import com.trendsmixed.fma.module.producttype.ProductTypeView;
 
 public class OperationSummaryView {
 
-    public static interface ProductType extends ProductTypeView.All {
+    public  interface ProductType extends ProductTypeView.All {
     }
 
-    public static interface OperationType extends OperationTypeView.All {
+    public  interface OperationType extends OperationTypeView.All {
     }
 
-    public static interface Quantity {
+    public  interface Quantity {
     }
 
-    public static interface All extends ProductType, OperationType, Quantity {
+    public  interface All extends ProductType, OperationType, Quantity {
     }
 
 }
