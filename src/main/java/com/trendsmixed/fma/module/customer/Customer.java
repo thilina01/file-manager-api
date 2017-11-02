@@ -8,28 +8,16 @@ import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.customertype.CustomerType;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.incoterm.Incoterm;
+import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.notifyparty.NotifyParty;
 import com.trendsmixed.fma.module.paymentterm.PaymentTerm;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -40,8 +28,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "customer")
-@NamedQueries({
-    @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")})
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -130,6 +116,9 @@ public class Customer implements Serializable {
     @JoinColumn(name = "payment_term_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private PaymentTerm paymentTerm;
+    @JsonView(CustomerView.Invoice.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Invoice> invoiceList;
 
     public Customer(int anId) {
         this.id = anId;

@@ -14,5 +14,5 @@ public interface InvoiceTypeRepository extends PagingAndSortingRepository<Invoic
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM InvoiceType o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

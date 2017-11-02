@@ -7,14 +7,14 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface CustomerRepository extends PagingAndSortingRepository<Customer, Integer> {
 
-    public Customer findByCode(String code);
+    Customer findByCode(String code);
 
-    public Customer findByName(String name);
+    Customer findByName(String name);
 
-    public Customer findByShortName(String shortName);
+    Customer findByShortName(String shortName);
 
     @Query(value = "SELECT"
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
             + " FROM Customer o")
-    public List<Combo> getCombo();
+    List<Combo> getCombo();
 }

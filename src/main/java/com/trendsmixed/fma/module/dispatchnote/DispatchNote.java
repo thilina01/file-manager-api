@@ -2,31 +2,17 @@ package com.trendsmixed.fma.module.dispatchnote;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
 import com.trendsmixed.fma.module.employee.Employee;
+import com.trendsmixed.fma.module.invoice.Invoice;
 import java.util.Date;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  *
@@ -37,8 +23,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "dispatch_note")
-@NamedQueries({
-    @NamedQuery(name = "DispatchNote.findAll", query = "SELECT s FROM DispatchNote s")})
 public class DispatchNote implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,10 +61,18 @@ public class DispatchNote implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
+    @JoinColumn(name = "invoice_id", referencedColumnName = "id")
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = true)
+    private Invoice invoice;
     @JsonView(DispatchNoteView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
     @JsonView(DispatchNoteView.Dispatch.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
     private List<Dispatch> dispatchList;
+
+    public DispatchNote(Integer anId) {
+        this.id = anId;
+    }
+
 }

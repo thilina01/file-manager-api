@@ -1,17 +1,17 @@
 package com.trendsmixed.fma.module.dispatchnote;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.customer.Customer;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class DispatchNoteService {
 
-    @Autowired
     private DispatchNoteRepository repository;
 
     public Iterable<DispatchNote> findAll() {
@@ -41,5 +41,14 @@ public class DispatchNoteService {
     public void delete(int id) {
         repository.delete(id);
     }
+
+    public List<Combo> getComboByCustomer(Customer customer) {
+        return repository.getComboByCustomer(customer);
+    }
+
+    public DispatchNote findById(String id) {
+        return repository.findById(id);
+    }
+
 
 }

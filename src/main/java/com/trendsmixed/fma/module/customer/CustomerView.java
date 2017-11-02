@@ -7,130 +7,137 @@ import com.trendsmixed.fma.module.customeritem.CustomerItemView;
 import com.trendsmixed.fma.module.incoterm.IncotermView;
 import com.trendsmixed.fma.module.customertype.CustomerTypeView;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
+import com.trendsmixed.fma.module.invoice.InvoiceView;
 import com.trendsmixed.fma.module.notifyparty.NotifyPartyView;
 import com.trendsmixed.fma.module.paymentterm.PaymentTermView;
 import com.trendsmixed.fma.utility.PageView;
 
 public class CustomerView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface Code {
+    public interface Code {
     }
 
-    public static interface Name {
+    public interface Name {
     }
 
-    public static interface ShortName {
+    public interface ShortName {
     }
 
-    public static interface Consignee {
+    public interface Consignee {
     }
 
-    public static interface Contact {
+    public interface Contact {
     }
 
-    public static interface Continent {
+    public interface Continent {
     }
 
-    public static interface Fax {
+    public interface Fax {
     }
 
-    public static interface ContactNumber {
+    public interface ContactNumber {
     }
 
-    public static interface FinalDestination {
+    public interface FinalDestination {
     }
 
-    public static interface NotifyParty {
+    public interface NotifyParty {
     }
 
-    public static interface Note {
+    public interface Note {
     }
 
-    public static interface SpecialRequirements {
+    public interface SpecialRequirements {
     }
 
-    public static interface OfficeAddress {
+    public interface OfficeAddress {
     }
 
-    public static interface PaymentTerm {
+    public interface PaymentTerm {
     }
 
-    public static interface PhoneNo {
+    public interface PhoneNo {
     }
 
-    public static interface SVatNo {
+    public interface SVatNo {
     }
 
-    public static interface VatNo {
+    public interface VatNo {
     }
 
-    public static interface Incoterm {
+    public interface Incoterm {
     }
 
-    public static interface CustomerType {
+    public interface CustomerType {
     }
 
-    public static interface Country {
+    public interface Country {
     }
 
-    public static interface Currency {
+    public interface Currency {
     }
 
-    public static interface CustomerItemList {
+    public interface CustomerItemList {
     }
 
-    public static interface Address {
+    public interface Address {
     }
 
-    public static interface DispatchNote {
+    public interface DispatchNote {
     }
 
-    public static interface All extends Id, Code, Name, ShortName, Consignee, Contact, Continent, Fax, FinalDestination, Note, SpecialRequirements, OfficeAddress, PhoneNo, SVatNo, VatNo, PageView.All {
+    public interface Invoice {
     }
 
-    public static interface AllAndIncotermAll extends All, Incoterm, IncotermView.All {
+    public interface All extends Id, Code, Name, ShortName, Consignee, Contact, Continent, Fax, FinalDestination, Note, SpecialRequirements, OfficeAddress, PhoneNo, SVatNo, VatNo, PageView.All {
     }
 
-    public static interface AllAndCustomerTypeAll extends All, CustomerType, CustomerTypeView.All {
+    public interface AllAndIncotermAll extends All, Incoterm, IncotermView.All {
     }
 
-    public static interface AllAndPaymentTermAll extends All, PaymentTerm, PaymentTermView.All {
+    public interface AllAndInvoiceAll extends All, Invoice, InvoiceView.All {
     }
 
-    public static interface AllAndNotifyPartyAll extends All, NotifyParty, NotifyPartyView.All {
+    public interface AllAndCustomerTypeAll extends All, CustomerType, CustomerTypeView.All {
     }
 
-    public static interface AllAndCurrencyAll extends All, Currency, CurrencyView.All {
+    public interface AllAndPaymentTermAll extends All, PaymentTerm, PaymentTermView.All {
     }
 
-    public static interface AllAndCustomerItemList extends All, CustomerItemList, CustomerItemView.All {
+    public interface AllAndNotifyPartyAll extends All, NotifyParty, NotifyPartyView.All {
     }
 
-    public static interface AllAndContactAll extends All, Contact, ContactView.All {
+    public interface AllAndCurrencyAll extends All, Currency, CurrencyView.All {
     }
 
-    public static interface AllAndAddressAll extends All, Address, AddressView.All {
+    public interface AllAndCustomerItemList extends All, CustomerItemList, CustomerItemView.All {
     }
 
-    public static interface AllAndDispatchNoteAll extends All, DispatchNote, DispatchNoteView.All {
+    public interface AllAndContactAll extends All, Contact, ContactView.All {
     }
 
-    public static interface AllAndCustomerItemListAndItemAll extends All, CustomerItemList, CustomerItemView.AllAndItemAll {
+    public interface AllAndAddressAll extends All, Address, AddressView.All {
     }
 
-    public static interface AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndCustomerItemList extends All, Incoterm, IncotermView.All, CustomerType, CustomerTypeView.All, Currency, CurrencyView.All, AllAndCustomerItemList {
+    public interface AllAndDispatchNoteAll extends All, DispatchNote, DispatchNoteView.All {
     }
 
-    public static interface AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndCustomerItemListAndItemAll extends All, Incoterm, IncotermView.All, CustomerType, CustomerTypeView.All, Currency, CurrencyView.All, AllAndCustomerItemListAndItemAll {
+    public interface AllAndCustomerItemListAndItemAll extends All, CustomerItemList, CustomerItemView.AllAndItemAll {
     }
 
-    public static interface AllAndIncotermAllAndCustomerTypeAllAndCurrencyAll extends All, Incoterm, IncotermView.All, CustomerType, CustomerTypeView.All, Currency, CurrencyView.All {
+    public interface AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndCustomerItemList extends All, Incoterm, IncotermView.All, CustomerType, CustomerTypeView.All, Currency, CurrencyView.All, AllAndCustomerItemList {
     }
 
-    public static interface AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndNotifyPartyAllAndContactAllAndContactTypeAllAndPaymentTermAllAndAddressAllAndAddressTypeAllAndCountryAll extends AllAndIncotermAllAndCustomerTypeAllAndCurrencyAll, AllAndNotifyPartyAll, AllAndPaymentTermAll, Address, AddressView.AllAndAddressTypeAllAndCountryAll, Contact, ContactView.AllAndContactTypeAll {
+    public interface AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndCustomerItemListAndItemAll extends All, Incoterm, IncotermView.All, CustomerType, CustomerTypeView.All, Currency, CurrencyView.All, AllAndCustomerItemListAndItemAll {
+    }
+
+    public interface AllAndIncotermAllAndCustomerTypeAllAndCurrencyAll extends All, Incoterm, IncotermView.All, CustomerType, CustomerTypeView.All, Currency, CurrencyView.All {
+    }
+
+    public interface AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndNotifyPartyAllAndContactAllAndContactTypeAllAndPaymentTermAllAndAddressAllAndAddressTypeAllAndCountryAll extends AllAndIncotermAllAndCustomerTypeAllAndCurrencyAll, AllAndNotifyPartyAll, AllAndPaymentTermAll, Address, AddressView.AllAndAddressTypeAllAndCountryAll, Contact, ContactView.AllAndContactTypeAll {
     }
 
 }
