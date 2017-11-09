@@ -27,6 +27,10 @@ public class CustomerItemService {
         return repository.getCombo();
     }
 
+    public List<Combo> getComboByCustomer(Customer customer) {
+        return repository.getComboByCustomer(customer);
+    }
+
     public CustomerItem save(CustomerItem customerItem) {
         return repository.save(customerItem);
     }
@@ -41,6 +45,10 @@ public class CustomerItemService {
 
     public void delete(int id) {
         repository.delete(id);
+    }
+
+    Page<CustomerItem> findByCustomer(Customer customer, Pageable pageable) {
+        return repository.findByCustomer(customer, pageable);
     }
 
     public CustomerItem findByCustomerAndItem(Customer customer, Item item) {

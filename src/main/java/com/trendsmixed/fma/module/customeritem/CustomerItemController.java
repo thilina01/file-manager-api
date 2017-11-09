@@ -37,6 +37,23 @@ public class CustomerItemController {
         return new Page<>(service.findAll(pageable));
     }
 
+    @JsonView(CustomerItemView.All.class)
+    @PostMapping("/pageByCustomer")
+    Page<CustomerItem> pageByCustomer(Pageable pageable, @RequestBody Customer customer) {
+        if (customer.getId() == null) {
+            customer = customerService.findByCode(customer.getCode());
+        }
+        return new Page<>(service.findByCustomer(customer, pageable));
+    }
+
+    @PostMapping("/comboByCustomer")
+    List<Combo> comboByCustomer(@RequestBody Customer customer) {
+        if (customer.getId() == null) {
+            customer = customerService.findByCode(customer.getCode());
+        }
+        return service.getComboByCustomer(customer);
+    }
+
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
