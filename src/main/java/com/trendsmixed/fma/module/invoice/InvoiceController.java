@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteService;
 import com.trendsmixed.fma.utility.Page;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +21,15 @@ public class InvoiceController {
 
     private final AppSessionService appSessionService;
     private final InvoiceService service;
+    private final DispatchNoteService dispatchNoteService;
 
-    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAllAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping
     public Iterable<Invoice> findAll() {
         return service.findAll();
     }
 
-    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAllAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping("/page")
     Page<Invoice> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -38,21 +40,28 @@ public class InvoiceController {
         return service.getCombo();
     }
 
-    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAllAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @PostMapping
     public Invoice save(@RequestBody Invoice invoice, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
 
             List<DispatchNote> dispatchNotes = invoice.getDispatchNoteList();
-            if (dispatchNotes != null) {
-                List<DispatchNote> dispatchNotesToUpdate = new ArrayList<>();
-                for (DispatchNote dispatchNote : dispatchNotes) {
-                    DispatchNote dispatchNoteToUpdate = new DispatchNote(dispatchNote.getId());
-                    dispatchNotesToUpdate.add(dispatchNoteToUpdate);
-                    //dispatchNote.setInvoice(invoice);
+            for (DispatchNote dispatchNote : dispatchNotes) {
+                if (dispatchNote.getId() != null) {
+                    DispatchNote existingDispatchNote = dispatchNoteService.findOne(dispatchNote.getId());
+                    dispatchNote.setDispatchList(existingDispatchNote != null ? existingDispatchNote.getDispatchList() : new ArrayList<>());
+
+                    // List<DispatchNote> dispatchNotes = invoice.getDispatchNoteList();
+                    //if (dispatchNotes != null) {
+                    //List<DispatchNote> dispatchNotesToUpdate = new ArrayList<>();
+                    //for (DispatchNote dispatchNote : dispatchNotes) {
+                    //DispatchNote dispatchNoteToUpdate = new DispatchNote(dispatchNote.getId());
+                    //dispatchNotesToUpdate.add(dispatchNoteToUpdate);
+                    dispatchNote.setInvoice(invoice);
                 }
-                invoice.setDispatchNoteList(dispatchNotesToUpdate);
+                // invoice.setDispatchNoteList(dispatchNotesToUpdate);
+
             }
             invoice = service.save(invoice);
             return invoice;
@@ -65,7 +74,7 @@ public class InvoiceController {
         }
     }
 
-    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAllAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping("/{id}")
     public Invoice findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -78,7 +87,7 @@ public class InvoiceController {
 
     }
 
-    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAllAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @PutMapping("/{id}")
     public Invoice updateCustomer(@PathVariable int id, @RequestBody Invoice invoice, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

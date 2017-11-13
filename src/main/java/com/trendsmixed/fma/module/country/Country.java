@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.country;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.address.Address;
+import com.trendsmixed.fma.module.packinglist.PackingList;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,8 @@ public class Country implements Serializable {
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "country")
     private List<Address> addressList;
+    //@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "country")
+    //private List<PackingList> packingListList;
 
     @JsonView(CountryView.All.class)
     public String getDisplay() {

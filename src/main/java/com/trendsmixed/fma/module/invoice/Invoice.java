@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.invoicetype.InvoiceType;
+import com.trendsmixed.fma.module.packinglist.PackingList;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +38,18 @@ public class Invoice implements Serializable {
     @JsonView(InvoiceView.InvoiceNumber.class)
     @Column(name = "invoice_number")
     private String invoiceNumber;
+    @JsonView(InvoiceView.NetWeight.class)
+    @Column(name = "net_weight")
+    private Double netWeight;
+    @JsonView(InvoiceView.GrossWeight.class)
+    @Column(name = "gross_weight")
+    private Double grossWeight;
+    @JsonView(InvoiceView.Cbm.class)
+    @Column(name = "cbm")
+    private Double cbm;
+    @JsonView(InvoiceView.Pkgs.class)
+    @Column(name = "pkgs")
+    private Double pkgs;
     @JsonView(InvoiceView.InvoiceType.class)
     @JoinColumn(name = "invoice_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -48,6 +61,9 @@ public class Invoice implements Serializable {
     @JsonView(InvoiceView.DispatchNote.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "invoice")
     private List<DispatchNote> dispatchNoteList;
+    @JoinColumn(name = "packing_list_id", referencedColumnName = "id")
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = true)
+    private PackingList packingList;
 
     public Invoice(Integer id) {
         this.id = id;
