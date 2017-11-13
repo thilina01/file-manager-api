@@ -3,7 +3,7 @@ package com.trendsmixed.fma.module.packinglist;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.containersize.ContainerSize;
-import com.trendsmixed.fma.module.customer.CustomerView.Country;
+import com.trendsmixed.fma.module.country.Country;
 import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.port.Port;
 import java.util.List;
@@ -40,10 +40,10 @@ public class PackingList implements Serializable {
     @JoinColumn(name = "port_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Port port;
-    /*@JsonView(PackingListView.Country.class)
+    @JsonView(PackingListView.Country.class)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Country country;*/
+    private Country country;
     @JsonView(PackingListView.ContainerSize.class)
     @JoinColumn(name = "container_size_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
