@@ -49,7 +49,7 @@ public class SalesOrderItem implements Serializable {
     private CustomerItem customerItem;
     @JsonView(SalesOrderItemView.SalesOrder.class)
     @JoinColumn(name = "sales_order_id", referencedColumnName = "id")
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = false)
+    @ManyToOne(optional = false)//cascade = {CascadeType.MERGE, CascadeType.PERSIST},
     private SalesOrder salesOrder;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
     private List<Delivery> deliveryList;

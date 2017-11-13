@@ -47,13 +47,6 @@ public class SalesOrderController {
     @PostMapping
     public SalesOrder save(@RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
-        JobType jobType = jobTypeService.findByCode("SOJ");
-        if (jobType == null) {
-            jobType = new JobType();
-            jobType.setCode("SOJ");
-            jobType.setName("Sales order job");
-            jobType = jobTypeService.save(jobType);
-        }
         try {
             List<SalesOrderItem> salesOrderItems = salesOrder.getSalesOrderItemList();
             for (SalesOrderItem salesOrderItem : salesOrderItems) {
@@ -62,11 +55,9 @@ public class SalesOrderController {
                     salesOrderItem.setDispatchScheduleList(existingSalesOrderItem != null ? existingSalesOrderItem.getDispatchScheduleList() : new ArrayList<>());
                 }
                 salesOrderItem.setSalesOrder(salesOrder);
-
             }
             salesOrder = service.save(salesOrder);
             return salesOrder;
-
         } catch (Throwable e) {
             e.printStackTrace();
             while (e.getCause() != null) {
