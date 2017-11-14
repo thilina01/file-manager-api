@@ -3,9 +3,21 @@ package com.trendsmixed.fma.module.employee;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.designation.Designation;
+import com.trendsmixed.fma.module.designation.DesignationService;
+import com.trendsmixed.fma.module.employeecategory.EmployeeCategory;
+import com.trendsmixed.fma.module.employeecategory.EmployeeCategoryService;
+import com.trendsmixed.fma.module.labourtursource.LabourSource;
+import com.trendsmixed.fma.module.labourtursource.LabourSourceService;
+import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.section.SectionService;
+import com.trendsmixed.fma.module.shift.Shift;
+import com.trendsmixed.fma.module.shift.ShiftService;
 import com.trendsmixed.fma.utility.Page;
+
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +30,11 @@ public class EmployeeController {
 
     private final AppSessionService appSessionService;
     private final EmployeeService service;
+    private final DesignationService designationService;
+    private final EmployeeCategoryService employeeCategoryService;
+    private final LabourSourceService labourSourceService;
+    private final SectionService sectionService;
+    private final ShiftService shiftService;
 
     @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @GetMapping
@@ -55,20 +72,47 @@ public class EmployeeController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Employee> employees, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-
         appSessionService.isValid(email, request);
+
+        Designation designation = designationService.findByCode("NA");
+        EmployeeCategory employeeCategory = employeeCategoryService.findByCode("NA");
+        LabourSource labourSource = labourSourceService.findByCode("NA");
+        Section section = sectionService.findByCode("NA");
+        Shift shift = shiftService.findByCode("NA");
+
         try {
             for (Employee employee : employees) {
                 employee.setCode(employee.getCode().trim());
                 employee.setCallingName(employee.getCallingName().trim());
-                employee.setFullName(employee.getFullName().trim());
-                Employee existingSection = service.findByCode(employee.getCode());
-                if (existingSection != null) {
-                    employee.setId(existingSection.getId());
+                if (employee.getFullName() != null) {
+                    employee.setFullName(employee.getFullName().trim());
+                }
+                if(employee.getDesignation()==null){
+                    employee.setDesignation(designation);
+                }
+                if(employee.getEmployeeCategory()==null){
+                    employee.setEmployeeCategory(employeeCategory);
+                }
+                if(employee.getLabourSource()==null){
+                    employee.setLabourSource(labourSource);
+                }
+                if(employee.getLabourSource()==null){
+                    employee.setLabourSource(labourSource);
+                }
+                if(employee.getShift()==null){
+                    employee.setShift(shift);
+                }
+                if(employee.getSection()==null){
+                    employee.setSection(section);
+                }
+                Employee existingEmployee = service.findByCode(employee.getCode());
+                if (existingEmployee != null) {
+                    employee.setId(existingEmployee.getId());
                 }
             }
             service.save(employees);
         } catch (Throwable e) {
+            e.printStackTrace();
             while (e.getCause() != null) {
                 e = e.getCause();
             }
@@ -91,7 +135,7 @@ public class EmployeeController {
 
     @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @PutMapping("/{id}")
-    public Employee updateCustomer(@PathVariable int id, @RequestBody Employee employee, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         employee.setId(id);
         employee = service.save(employee);

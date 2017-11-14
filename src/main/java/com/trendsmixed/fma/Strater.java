@@ -2,8 +2,18 @@ package com.trendsmixed.fma;
 
 import com.trendsmixed.fma.module.country.Country;
 import com.trendsmixed.fma.module.currency.Currency;
+import com.trendsmixed.fma.module.designation.Designation;
+import com.trendsmixed.fma.module.designation.DesignationService;
+import com.trendsmixed.fma.module.employeecategory.EmployeeCategory;
+import com.trendsmixed.fma.module.employeecategory.EmployeeCategoryService;
 import com.trendsmixed.fma.module.incoterm.Incoterm;
 import com.trendsmixed.fma.module.customertype.CustomerType;
+import com.trendsmixed.fma.module.labourtursource.LabourSource;
+import com.trendsmixed.fma.module.labourtursource.LabourSourceService;
+import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.section.SectionService;
+import com.trendsmixed.fma.module.shift.Shift;
+import com.trendsmixed.fma.module.shift.ShiftService;
 import com.trendsmixed.fma.module.status.Status;
 import com.trendsmixed.fma.module.country.CountryService;
 import com.trendsmixed.fma.module.currency.CurrencyService;
@@ -23,10 +33,15 @@ public class Strater {
 
     private final StatusService statusService;
     private final CountryService countryService;
+    private final DesignationService designationService;
+    private final EmployeeCategoryService employeeCategoryService;
     private final JobTypeService jobTypeService;
     private final CurrencyService currencyService;
     private final IncotermService incotermService;
     private final CustomerTypeService customerTypeService;
+    private final LabourSourceService labourSourceService;
+    private final SectionService sectionService;
+    private final ShiftService shiftService;
 
     @PostConstruct
     public void afterStarted() {
@@ -37,6 +52,11 @@ public class Strater {
         initIncoterm();
         initJobType();
         initCustomerType();
+        initDesignation();
+        initEmployeeCategory();
+        initLabourSource();
+        initSection();
+        initShift();
         System.out.println("Init process finished");
     }
 
@@ -102,6 +122,56 @@ public class Strater {
             customerType.setCode("NA");
             customerType.setName("NOT AVAILABLE");
             customerTypeService.save(customerType);
+        }
+    }
+
+    private void initDesignation() {
+        Designation designation = designationService.findByCode("NA");
+        if (designation == null) {
+            designation = new Designation();
+            designation.setCode("NA");
+            designation.setName("NOT AVAILABLE");
+            designationService.save(designation);
+        }
+    }
+
+    private void initEmployeeCategory() {
+        EmployeeCategory employeeCategory = employeeCategoryService.findByCode("NA");
+        if (employeeCategory == null) {
+            employeeCategory = new EmployeeCategory();
+            employeeCategory.setCode("NA");
+            employeeCategory.setName("NOT AVAILABLE");
+            employeeCategoryService.save(employeeCategory);
+        }
+    }
+
+    private void initLabourSource() {
+        LabourSource labourSource = labourSourceService.findByCode("NA");
+        if (labourSource == null) {
+            labourSource = new LabourSource();
+            labourSource.setCode("NA");
+            labourSource.setName("NOT AVAILABLE");
+            labourSourceService.save(labourSource);
+        }
+    }
+
+    private void initSection() {
+        Section section = sectionService.findByCode("NA");
+        if (section == null) {
+            section = new Section();
+            section.setCode("NA");
+            section.setName("NOT AVAILABLE");
+            sectionService.save(section);
+        }
+    }
+
+    private void initShift() {
+        Shift shift = shiftService.findByCode("NA");
+        if (shift == null) {
+            shift = new Shift();
+            shift.setCode("NA");
+            shift.setName("NOT AVAILABLE");
+            shiftService.save(shift);
         }
     }
 }

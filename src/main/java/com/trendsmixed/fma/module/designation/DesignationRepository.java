@@ -9,6 +9,8 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface DesignationRepository extends PagingAndSortingRepository<Designation, Integer> {
 
+    Designation findByCode(String code);
+
     Designation findByName(String name);
 
     @Query(value = "SELECT"

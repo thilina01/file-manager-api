@@ -41,6 +41,10 @@ public class EmployeeCategoryService {
         repository.delete(id);
     }
 
+    public EmployeeCategory findByCode(String code) {
+        return repository.findByCode(code);
+    }
+
     public EmployeeCategory findByName(String name) {
         return repository.findByName(name);
     }

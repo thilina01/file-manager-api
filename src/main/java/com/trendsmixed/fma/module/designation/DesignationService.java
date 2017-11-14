@@ -44,4 +44,8 @@ public class DesignationService {
     public Designation findByName(String name) {
         return repository.findByName(name);
     }
+
+    public Designation findByCode(String code) {
+        return repository.findByCode(code);
+    }
 }
