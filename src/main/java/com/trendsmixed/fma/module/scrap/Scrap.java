@@ -36,7 +36,7 @@ public class Scrap implements Serializable {
     private Integer quantity;
     @JsonView(ScrapView.UnitValue.class)
     @Column(name = "unit_value")
-    private Integer unitValue;
+    private double unitValue;
     @JsonView(ScrapView.ScrapDate.class)
     @Column(name = "scrap_date")
     @Temporal(TemporalType.DATE)

@@ -200,13 +200,13 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
             + " GROUP BY DATE_FORMAT(operation.production.productionDate,'%Y-%m')")
     List getMonthlyScheduleAdherence(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
-    /* @Query(value = "SELECT "
-            + " new com.trendsmixed.fma.dao.MonthlyScrapValue(DATE_FORMAT(scrap.scrapDate,'%Y-%m'), SUM(scrap.quantity), SUM(scrap.unitValue), (SUM(scrap.quantity)*SUM(scrap.unitValue))) "
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.MonthlyScrapValue(DATE_FORMAT(scrap.scrapDate,'%Y-%m'), SUM(scrap.quantity * scrap.unitValue)) "
             + " FROM Scrap scrap"
             + " WHERE scrap.scrapDate BETWEEN :startDate AND :endDate"
-            + " AND scrap.quantity > 0"
             + " GROUP BY DATE_FORMAT(scrap.scrapDate,'%Y-%m')")
-    List getMonthlyScrapValue(@Param("startDate") Date startDate, @Param("endDate") Date endDate);*/
+    List getMonthlyScrapValue(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
     @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.MonthlyScheduleAdherence(DATE_FORMAT(operation.production.productionDate,'%Y-%m'), SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100.0) "
             + " FROM Operation operation"
