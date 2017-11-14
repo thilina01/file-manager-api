@@ -142,6 +142,11 @@ public class ChartController {
         return chartService.getMonthlyScheduleAdherenceBySection(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new Section(Integer.valueOf(sectionId)));
     }
 
+    /* @GetMapping("/monthlyScrapValue")
+    public List getMonthlyScrapValue(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getMonthlyScrapValue(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }*/
     @GetMapping("/monthlyScheduleAdherence")
     public List getMonthlyScheduleAdherence(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {

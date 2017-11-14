@@ -83,6 +83,9 @@ public class ChartService {
         return chartRepository.getMonthlyScheduleAdherence(startDate, endDate);
     }
 
+    /*  public List getMonthlyScrapValue(Date startDate, Date endDate) {
+        return chartRepository.getMonthlyScrapValue(startDate, endDate);
+    }*/
     public List getMonthlyOnTimeDelivery(Date startDate, Date endDate) {
         return chartRepository.getMonthlyOnTimeDelivery(startDate, endDate);
     }
