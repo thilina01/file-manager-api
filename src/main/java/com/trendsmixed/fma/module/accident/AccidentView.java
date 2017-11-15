@@ -31,9 +31,6 @@ public class AccidentView {
     public interface CorrectiveAction {
     }
 
-    public interface ResponsiblePerson {
-    }
-
     public interface AccidentDate {
     }
 
@@ -55,13 +52,19 @@ public class AccidentView {
     public interface Shift {
     }
 
-    public interface All extends Id, Code, ReferenceNo, RootCause, CorrectiveAction, ResponsiblePerson, AccidentDate, PageView.All {
+    public interface ResponsiblePerson {
+    }
+
+    public interface All extends Id, Code, ReferenceNo, RootCause, CorrectiveAction, AccidentDate, PageView.All {
     }
 
     public interface AllAndAccidentTypeAll extends All, AccidentType, AccidentTypeView.All {
     }
 
     public interface AllAndEmployeeAll extends All, Employee, EmployeeView.All {
+    }
+
+    public interface AllAndResponsiblePersonAll extends All, ResponsiblePerson, EmployeeView.All {
     }
 
     public interface AllAndMachineAll extends All, Machine, MachineView.All {
@@ -79,7 +82,7 @@ public class AccidentView {
     public interface AllAndTreatmentTypeAll extends All, TreatmentType, TreatmentTypeView.All {
     }
 
-    public interface AllAndAccidentTypeAllAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll extends All, AccidentType, AccidentTypeView.All, Employee, EmployeeView.All, Machine, MachineView.All, Section, SectionView.All, Shift, ShiftView.All, Treatment, TreatmentView.All, TreatmentType, TreatmentTypeView.All {
+    public interface AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll extends All, AccidentType, AccidentTypeView.All, Employee, EmployeeView.All, ResponsiblePerson, Machine, MachineView.All, Section, SectionView.All, Shift, ShiftView.All, Treatment, TreatmentView.All, TreatmentType, TreatmentTypeView.All {
     }
 
 }

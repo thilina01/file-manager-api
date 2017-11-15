@@ -45,9 +45,6 @@ public class Accident implements Serializable {
     @JsonView(AccidentView.CorrectiveAction.class)
     @Column(name = "corrective_action")
     private String correctiveAction;
-    @JsonView(AccidentView.ResponsiblePerson.class)
-    @Column(name = "responsible_person")
-    private String responsiblePerson;
     @JsonView(AccidentView.AccidentDate.class)
     @Column(name = "accident_date")
     private Date accidentDate;
@@ -59,6 +56,10 @@ public class Accident implements Serializable {
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Employee employee;
+    @JsonView(AccidentView.ResponsiblePerson.class)
+    @JoinColumn(name = "responsible_person_id", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private Employee responsiblePerson;
     @JsonView(AccidentView.Machine.class)
     @JoinColumn(name = "machine_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)

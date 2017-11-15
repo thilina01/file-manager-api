@@ -20,13 +20,13 @@ public class AccidentController {
     private final AppSessionService appSessionService;
     private final AccidentService service;
 
-    @JsonView(AccidentView.AllAndAccidentTypeAllAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
+    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
     @GetMapping
     public Iterable<Accident> findAll() {
         return service.findAll();
     }
 
-    @JsonView(AccidentView.AllAndAccidentTypeAllAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
+    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
     @GetMapping("/page")
     Page<Accident> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -37,7 +37,7 @@ public class AccidentController {
         return service.getCombo();
     }
 
-    @JsonView(AccidentView.AllAndAccidentTypeAllAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
+    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
     @PostMapping
     public Accident save(@RequestBody Accident accident, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -60,7 +60,7 @@ public class AccidentController {
         }
     }
 
-    @JsonView(AccidentView.AllAndAccidentTypeAllAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
+    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
     @GetMapping("/{id}")
     public Accident findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -73,7 +73,7 @@ public class AccidentController {
 
     }
 
-    @JsonView(AccidentView.AllAndAccidentTypeAllAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
+    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
     @PutMapping("/{id}")
     public Accident updateCustomer(@PathVariable int id, @RequestBody Accident accident, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
