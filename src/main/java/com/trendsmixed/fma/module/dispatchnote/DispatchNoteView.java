@@ -46,6 +46,8 @@ public class DispatchNoteView {
     public static interface Quantity {
     }
 
+    public static interface InvoiceDispatchNote {
+    }
     public static interface All extends Id, DispatchDate, Quantity, ContainerNumber, VehicleNumber, DispatchReleaseTime, Recipient, PageView.All {
     }
 

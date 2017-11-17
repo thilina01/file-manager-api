@@ -2,7 +2,7 @@ package com.trendsmixed.fma.module.invoice;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
+import com.trendsmixed.fma.module.invoicedispatchnote.InvoiceDispatchNote;
 import com.trendsmixed.fma.module.invoicetype.InvoiceType;
 import com.trendsmixed.fma.module.packinglist.PackingList;
 import java.io.Serializable;
@@ -58,12 +58,12 @@ public class Invoice implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Customer customer;
-    @JsonView(InvoiceView.DispatchNote.class)
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "invoice")
-    private List<DispatchNote> dispatchNoteList;
     @JoinColumn(name = "packing_list_id", referencedColumnName = "id")
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = true)
     private PackingList packingList;
+    @JsonView(InvoiceView.InvoiceDispatchNote.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "invoice")
+    private List<InvoiceDispatchNote> invoiceDispatchNoteList;
 
     public Invoice(Integer id) {
         this.id = id;

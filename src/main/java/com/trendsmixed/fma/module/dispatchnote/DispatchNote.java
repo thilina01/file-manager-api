@@ -1,18 +1,19 @@
 package com.trendsmixed.fma.module.dispatchnote;
 
-import java.io.Serializable;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
 import com.trendsmixed.fma.module.employee.Employee;
-import com.trendsmixed.fma.module.invoice.Invoice;
-import java.util.Date;
+import com.trendsmixed.fma.module.invoicedispatchnote.InvoiceDispatchNote;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -61,15 +62,15 @@ public class DispatchNote implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
-    @JoinColumn(name = "invoice_id", referencedColumnName = "id")
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = true)
-    private Invoice invoice;
     @JsonView(DispatchNoteView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
     @JsonView(DispatchNoteView.Dispatch.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
     private List<Dispatch> dispatchList;
+    @JsonView(DispatchNoteView.InvoiceDispatchNote.class)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
+    private InvoiceDispatchNote invoiceDispatchNote;
 
     public DispatchNote(Integer anId) {
         this.id = anId;

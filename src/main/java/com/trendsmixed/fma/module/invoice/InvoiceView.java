@@ -9,6 +9,7 @@ import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView.Job;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView.SalesOrderItem;
+import com.trendsmixed.fma.module.invoicedispatchnote.InvoiceDispatchNoteView;
 import com.trendsmixed.fma.module.invoicetype.InvoiceTypeView;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView.CustomerItem;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView.SalesOrder;
@@ -35,7 +36,7 @@ public class InvoiceView {
     public interface Customer {
     }
 
-    public interface DispatchNote {
+    public interface InvoiceDispatchNote {
     }
 
     public interface Dispatch {
@@ -62,6 +63,9 @@ public class InvoiceView {
     }
 
     public interface All extends Id, InvoiceNumber, InvoiceDate, NetWeight, GrossWeight, Cbm, Pkgs, PageView.All {
+    }
+
+    public interface AllAndInvoiceDispatchNoteAllAndDispatchNoteAllAndDispatchAll extends All, InvoiceDispatchNote, InvoiceDispatchNoteView.AllAndDispatchNoteAllAndDispatchAll{
     }
 
     public interface AllAndInvoiceTypeAll extends All, InvoiceType, InvoiceTypeView.All {
@@ -94,6 +98,6 @@ public class InvoiceView {
     public interface AllAndInvoiceTypeAllAndCustomerAndAllAndDispatchAllAndDispatchScheduleAll extends AllAndInvoiceTypeAllAndCustomerAll, AllAndDispatchAll, AllAndDispatchScheduleAll {
     }
 
-    public interface AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll extends All, InvoiceType, InvoiceTypeView.All, Customer, CustomerView.All, DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll, AllAndDispatchListAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAllAndDispatchAll {
+    public interface AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll extends All, InvoiceType, InvoiceTypeView.All, Customer, CustomerView.All, DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll, AllAndDispatchListAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAllAndDispatchAll, AllAndInvoiceDispatchNoteAllAndDispatchNoteAllAndDispatchAll {
     }
 }
