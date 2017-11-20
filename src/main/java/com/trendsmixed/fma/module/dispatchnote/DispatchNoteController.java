@@ -109,7 +109,7 @@ public class DispatchNoteController {
         }
     }
 
-    @JsonView(DispatchNoteView.AllAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem.class)
+    @JsonView(DispatchNoteView.AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem.class)
     @GetMapping("/{id}")
     public DispatchNote findOne(@PathVariable("id") int id) {
         return service.findOne(id);

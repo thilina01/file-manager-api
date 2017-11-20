@@ -10,67 +10,72 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class DispatchNoteView {
 
-    public static interface Id {
+    public interface Id {
     }
 
-    public static interface DispatchDate {
+    public interface DispatchDate {
     }
 
-    public static interface DeliveryTerm {
+    public interface DeliveryTerm {
     }
 
-    public static interface ContainerNumber {
+    public interface ContainerNumber {
     }
 
-    public static interface VehicleNumber {
+    public interface VehicleNumber {
     }
 
-    public static interface DispatchReleaseTime {
+    public interface DispatchReleaseTime {
     }
 
-    public static interface Recipient {
+    public interface Recipient {
     }
 
-    public static interface Customer {
+    public interface Customer {
     }
 
-    public static interface Employee {
+    public interface Employee {
     }
 
-    public static interface Address {
+    public interface Address {
     }
 
-    public static interface Dispatch {
+    public interface Dispatch {
     }
 
-    public static interface Quantity {
+    public interface Quantity {
     }
 
-    public static interface InvoiceDispatchNote {
-    }
-    public static interface All extends Id, DispatchDate, Quantity, ContainerNumber, VehicleNumber, DispatchReleaseTime, Recipient, PageView.All {
+    public interface InvoiceDispatchNote {
     }
 
-    public static interface AllAndDispatchAll extends All, Dispatch, DispatchView.All {
+    public interface All extends Id, DispatchDate, Quantity, ContainerNumber, VehicleNumber, DispatchReleaseTime, Recipient, PageView.All {
     }
 
-    public static interface AllAndEmployeeAll extends All, Employee, EmployeeView.All {
+    public interface AllAndDispatchAll extends All, Dispatch, DispatchView.All {
     }
 
-    public static interface AllAndAddressAll extends All, Address, AddressView.All {
+    public interface AllAndEmployee extends All, Employee, EmployeeView.All {
     }
 
-    public static interface AllAndCustomerAll extends All, Customer, CustomerView.All {
+    public interface AllAndAddress extends All, Address, AddressView.All {
     }
 
-    public static interface AllAndAddressAllAndEmployeeAllAndCustomerAll extends All, Address, AddressView.All, Employee, EmployeeView.All, Customer, CustomerView.All {
+    public interface AllAndCustomer extends All, Customer, CustomerView.All {
     }
 
-    public static interface AllAndAddressAllAndEmployeeAllAndCustomerAllAndDispatchAllAndDispatchScheduleAll extends AllAndAddressAllAndEmployeeAllAndCustomerAll, AllAndDispatchAll, AllAndDispatchScheduleAll {
+    public interface AllAndAddressAllAndEmployeeAllAndCustomerAll extends All, Address, AddressView.All, Employee, EmployeeView.All, Customer, CustomerView.All {
     }
 
-    public static interface AllAndAddressAllAndEmployeeAllAndCustomerAllAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll extends AllAndAddressAllAndEmployeeAllAndCustomerAllAndDispatchAllAndDispatchScheduleAll, DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll {
+    public interface AllAndAddressAllAndEmployeeAllAndCustomerAllAndDispatchAllAndDispatchScheduleAll extends AllAndAddressAllAndEmployeeAllAndCustomerAll, AllAndDispatchAll, AllAndDispatchScheduleAll {
     }
 
-    public static interface AllAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends All, Dispatch, DispatchView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {}
+    public interface AllAndAddressAllAndEmployeeAllAndCustomerAllAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll extends AllAndAddressAllAndEmployeeAllAndCustomerAllAndDispatchAllAndDispatchScheduleAll, DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll {
+    }
+
+    public interface AllAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends All, Dispatch, DispatchView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
+    }
+
+    public interface AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends
+            AllAndCustomer, AllAndAddress, AllAndEmployee,AllAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem{}
 }
