@@ -38,18 +38,6 @@ public class Invoice implements Serializable {
     @JsonView(InvoiceView.InvoiceNumber.class)
     @Column(name = "invoice_number")
     private String invoiceNumber;
-    @JsonView(InvoiceView.NetWeight.class)
-    @Column(name = "net_weight")
-    private Double netWeight;
-    @JsonView(InvoiceView.GrossWeight.class)
-    @Column(name = "gross_weight")
-    private Double grossWeight;
-    @JsonView(InvoiceView.Cbm.class)
-    @Column(name = "cbm")
-    private Double cbm;
-    @JsonView(InvoiceView.Pkgs.class)
-    @Column(name = "pkgs")
-    private Double pkgs;
     @JsonView(InvoiceView.InvoiceType.class)
     @JoinColumn(name = "invoice_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -62,7 +50,7 @@ public class Invoice implements Serializable {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = true)
     private PackingList packingList;
     @JsonView(InvoiceView.InvoiceDispatchNote.class)
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "invoice")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "invoice")
     private List<InvoiceDispatchNote> invoiceDispatchNoteList;
 
     public Invoice(Integer id) {
