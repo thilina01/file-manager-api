@@ -20,13 +20,13 @@ public class PackingListController {
     private final AppSessionService appSessionService;
     private final PackingListService service;
 
-    @JsonView(PackingListView.AllAndPortAllAndCountryAllAndContainerSizeAllAndInvoiceAll.class)
+    @JsonView(PackingListView.AllAndPortOfLoadingAndPortAllAndCountryAllAndAndEmployeeAllAndContainerSizeAllAndInvoiceAll.class)
     @GetMapping
     public Iterable<PackingList> findAll() {
         return service.findAll();
     }
 
-    @JsonView(PackingListView.AllAndPortAllAndCountryAllAndContainerSizeAllAndInvoiceAll.class)
+    @JsonView(PackingListView.AllAndPortOfLoadingAndPortAllAndCountryAllAndAndEmployeeAllAndContainerSizeAllAndInvoiceAll.class)
     @GetMapping("/page")
     Page<PackingList> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -37,13 +37,13 @@ public class PackingListController {
         return service.getCombo();
     }
 
-    @JsonView(PackingListView.AllAndPortAllAndCountryAllAndContainerSizeAllAndInvoiceAll.class)
+    @JsonView(PackingListView.AllAndPortOfLoadingAndPortAllAndCountryAllAndAndEmployeeAllAndContainerSizeAllAndInvoiceAll.class)
     @GetMapping("/id/{id}")
     public PackingList findById(@PathVariable("id") String id) {
         return service.findById(id);
     }
 
-    @JsonView(PackingListView.AllAndPortAllAndCountryAllAndContainerSizeAllAndInvoiceAll.class)
+    @JsonView(PackingListView.AllAndPortOfLoadingAndPortAllAndCountryAllAndAndEmployeeAllAndContainerSizeAllAndInvoiceAll.class)
     @PostMapping
     public PackingList save(@RequestBody PackingList packingList, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -78,7 +78,7 @@ public class PackingListController {
         }
     }
 
-    @JsonView(PackingListView.AllAndPortAllAndCountryAllAndContainerSizeAllAndInvoiceAll.class)
+    @JsonView(PackingListView.AllAndPortOfLoadingAndPortAllAndCountryAllAndAndEmployeeAllAndContainerSizeAllAndInvoiceAll.class)
     @GetMapping("/{id}")
     public PackingList findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -91,7 +91,7 @@ public class PackingListController {
 
     }
 
-    @JsonView(PackingListView.AllAndPortAllAndCountryAllAndContainerSizeAllAndInvoiceAll.class)
+    @JsonView(PackingListView.AllAndPortOfLoadingAndPortAllAndCountryAllAndAndEmployeeAllAndContainerSizeAllAndInvoiceAll.class)
     @PutMapping("/{id}")
     public PackingList updateCustomer(@PathVariable int id, @RequestBody PackingList packingList, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
