@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.packinglist;
 
 import com.trendsmixed.fma.module.containersize.ContainerSizeView;
 import com.trendsmixed.fma.module.country.CountryView;
+import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.module.invoice.InvoiceView;
 import com.trendsmixed.fma.module.port.PortView;
 import com.trendsmixed.fma.utility.PageView;
@@ -14,9 +15,6 @@ public class PackingListView {
     public static interface NoOfContainers {
     }
 
-    public static interface ContactPerson {
-    }
-
     public static interface Port {
     }
 
@@ -26,13 +24,25 @@ public class PackingListView {
     public static interface ContainerSize {
     }
 
+    public static interface PortOfLoading {
+    }
+
     public static interface Invoice {
     }
 
-    public static interface All extends Id, ContactPerson, NoOfContainers, PageView.All {
+    public interface Employee {
+    }
+
+    public static interface All extends Id, NoOfContainers, PageView.All {
     }
 
     public static interface AllAndPortAll extends All, Port, PortView.All {
+    }
+
+    public static interface AllAndPortOfLoadingAll extends All, PortOfLoading, PortView.All {
+    }
+
+    public interface AllAndEmployeeAll extends All, Employee, EmployeeView.All {
     }
 
     public static interface AllAndCountryAll extends All, Country, CountryView.All {
@@ -44,6 +54,6 @@ public class PackingListView {
     public static interface AllAndInvoiceAll extends All, Invoice, InvoiceView.All {
     }
 
-    public static interface AllAndPortAllAndCountryAllAndContainerSizeAllAndInvoiceAll extends All, Port, PortView.All, Country, CountryView.All, ContainerSize, ContainerSizeView.All, Invoice, InvoiceView.All {
+    public static interface AllAndPortOfLoadingAndPortAllAndCountryAllAndAndEmployeeAllAndContainerSizeAllAndInvoiceAll extends All, Port, PortOfLoading, PortView.All, Country, CountryView.All, AllAndEmployeeAll, ContainerSize, ContainerSizeView.All, Invoice, InvoiceView.All {
     }
 }

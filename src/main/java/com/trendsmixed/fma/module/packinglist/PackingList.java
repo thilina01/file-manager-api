@@ -4,6 +4,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.containersize.ContainerSize;
 import com.trendsmixed.fma.module.country.Country;
+import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.port.Port;
 import java.util.List;
@@ -33,13 +34,14 @@ public class PackingList implements Serializable {
     @JsonView(PackingListView.NoOfContainers.class)
     @Column(name = "no_of_containers")
     private Integer noOfContainers;
-    @JsonView(PackingListView.ContactPerson.class)
-    @Column(name = "contact_person")
-    private String contactPerson;
     @JsonView(PackingListView.Port.class)
     @JoinColumn(name = "port_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Port port;
+    @JsonView(PackingListView.PortOfLoading.class)
+    @JoinColumn(name = "port_of_loading_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Port portOfLoading;
     @JsonView(PackingListView.Country.class)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -48,6 +50,10 @@ public class PackingList implements Serializable {
     @JoinColumn(name = "container_size_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ContainerSize containerSize;
+    @JsonView(PackingListView.Employee.class)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private Employee employee;
     @JsonView(PackingListView.Invoice.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "packingList", fetch = FetchType.LAZY)
     private List<Invoice> invoiceList;
