@@ -40,4 +40,9 @@ public class DispatchView {
     public interface AllAndCustomerAllAndJobDispatchAll extends All, Customer, CustomerView.All, JobDispatch, JobDispatchView.All {
     }
 
+    public interface AllAndDispatchScheduleAndJobAndItem extends All, DispatchSchedule, DispatchScheduleView.AllAndJobAndItem{
+    }
+
+    public interface AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends All, DispatchSchedule, DispatchScheduleView.AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem{
+    }
 }

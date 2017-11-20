@@ -26,31 +26,31 @@ public class SalesOrderItemView {
     public interface Amount {
     }
 
-    public interface CustomerItem extends CustomerItemView.All {
+    public interface CustomerItem {
     }
 
     public interface DispatchSchedule extends DispatchScheduleView.All {
     }
 
-    public interface SalesOrder extends SalesOrderView.All {
+    public interface SalesOrder {
     }
 
     public interface All extends Id, Quantity, Scheduled, UnitPrice, Amount, PageView.All {
     }
 
-    public interface AllAndCustomerItemAll extends All, CustomerItem {
+    public interface AllAndSalesOrder extends All, SalesOrder, SalesOrderView.All {}
+
+    public interface AllAndCustomerItem extends All, CustomerItem, CustomerItemView.All {}
+
+    public interface AllAndSalesOrderAndCustomerItem extends AllAndSalesOrder, AllAndCustomerItem {}
+
+
+    public interface AllAndCustomerItemAllAndSalesOrderAllAndDispatchScheduleAll extends AllAndSalesOrderAndCustomerItem, DispatchSchedule {
     }
 
-    public interface AllAndCustomerItemAllAndSalesOrderAll extends AllAndCustomerItemAll, SalesOrder {
+    public interface AllAndCustomerItemAllAndItemAllAndSalesOrderAllAndDispatchScheduleAll extends AllAndSalesOrderAndCustomerItem, DispatchSchedule, CustomerItemView.AllAndItemAll {
     }
 
-    public interface AllAndCustomerItemAllAndSalesOrderAllAndDispatchScheduleAll extends AllAndCustomerItemAllAndSalesOrderAll, DispatchSchedule {
+    public interface AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll extends AllAndCustomerItem, DispatchSchedule, CustomerItemView.AllAndItemAll {
     }
-
-    public interface AllAndCustomerItemAllAndItemAllAndSalesOrderAllAndDispatchScheduleAll extends AllAndCustomerItemAllAndSalesOrderAll, DispatchSchedule, CustomerItemView.AllAndItemAll {
-    }
-
-    public interface AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll extends AllAndCustomerItemAll, DispatchSchedule, CustomerItemView.AllAndItemAll {
-    }
-
 }

@@ -43,10 +43,13 @@ public class SalesOrderView {
     public interface OrderDate {
     }
 
-    public interface SalesOrderItem extends SalesOrderItemView.All {
+    public interface SalesOrderItem {
     }
 
     public interface SalesOrderNumber {
+    }
+
+    public interface Display {
     }
 
     public interface All extends Id, CustomerPONumber, Quantity, Amount, CustomerRequestedDate, TrwConfirmedDate, ActualDispatchedDate, Comments, OrderReceivedDate, SalesOrderNumber, OrderDate, PageView.All {
@@ -55,13 +58,16 @@ public class SalesOrderView {
     public interface AllAndCustomerAll extends All, Customer {
     }
 
+    public interface AllAndSalesOrderItem extends All, SalesOrderItem, SalesOrderItemView.All {
+    }
+
     public interface AllAndCustomerAllAndSalesOrderTypeAll extends AllAndCustomerAll, SalesOrderType {
     }
 
-    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAll extends AllAndCustomerAllAndSalesOrderTypeAll, SalesOrderItem {
+    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAll extends AllAndCustomerAllAndSalesOrderTypeAll, AllAndSalesOrderItem  {
     }
 
-    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAll, SalesOrderItemView.AllAndCustomerItemAll {
+    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAll, SalesOrderItemView.AllAndCustomerItem {
     }
 
     public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAll extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll, SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll {

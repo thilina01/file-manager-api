@@ -17,7 +17,7 @@ public class InvoiceDispatchNoteView {
     public interface Invoice {
     }
 
-    public interface AllAndDispatchNoteAllAndDispatchAll extends Id, DispatchNote, DispatchNoteView.AllAndDispatchAll{
+    public interface AllAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends Id, DispatchNote, DispatchNoteView.AllAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem{
     }
 
 

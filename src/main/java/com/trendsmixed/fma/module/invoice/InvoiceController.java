@@ -21,13 +21,13 @@ public class InvoiceController {
     private final AppSessionService appSessionService;
     private final InvoiceService service;
 
-    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(InvoiceView.All.class)
     @GetMapping
     public Iterable<Invoice> findAll() {
         return service.findAll();
     }
 
-    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(InvoiceView.AllAndCustomerAllAndInvoiceTypeAll.class)
     @GetMapping("/page")
     Page<Invoice> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -38,7 +38,7 @@ public class InvoiceController {
         return service.getCombo();
     }
 
-    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(InvoiceView.All.class)
     @PostMapping
     public Invoice save(@RequestBody Invoice invoice, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -57,7 +57,7 @@ public class InvoiceController {
         }
     }
 
-    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(InvoiceView.AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem.class)
     @GetMapping("/{id}")
     public Invoice findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -70,7 +70,7 @@ public class InvoiceController {
 
     }
 
-    @JsonView(InvoiceView.AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(InvoiceView.All.class)
     @PutMapping("/{id}")
     public Invoice updateCustomer(@PathVariable int id, @RequestBody Invoice invoice, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

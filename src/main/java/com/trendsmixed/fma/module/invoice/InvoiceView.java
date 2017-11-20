@@ -39,33 +39,7 @@ public class InvoiceView {
     public interface InvoiceDispatchNote {
     }
 
-    public interface Dispatch {
-
-    }
-
-    public interface dispatchSchedule {
-
-    }
-
-    public interface DispatchList {
-    }
-
-    public interface NetWeight {
-    }
-
-    public interface GrossWeight {
-    }
-
-    public interface Cbm {
-    }
-
-    public interface Pkgs {
-    }
-
-    public interface All extends Id, InvoiceNumber, InvoiceDate, NetWeight, GrossWeight, Cbm, Pkgs, PageView.All {
-    }
-
-    public interface AllAndInvoiceDispatchNoteAllAndDispatchNoteAllAndDispatchAll extends All, InvoiceDispatchNote, InvoiceDispatchNoteView.AllAndDispatchNoteAllAndDispatchAll{
+    public interface All extends Id, InvoiceNumber, InvoiceDate, PageView.All {
     }
 
     public interface AllAndInvoiceTypeAll extends All, InvoiceType, InvoiceTypeView.All {
@@ -74,30 +48,13 @@ public class InvoiceView {
     public interface AllAndCustomerAll extends All, Customer, CustomerView.All {
     }
 
-    public interface AllAndItemAll extends All, Item, DispatchScheduleView.All {
+    public interface AllAndCustomerAllAndInvoiceTypeAll extends AllAndCustomerAll,AllAndInvoiceTypeAll {
     }
 
-    public interface AllAndDispatchList extends All, DispatchList, DispatchNoteView.All {
+    public interface AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends All, InvoiceDispatchNote, InvoiceDispatchNoteView.AllAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
     }
 
-    public interface AllAndDispatchSchedule extends All, DispatchSchedule, DispatchScheduleView.All {
+    public interface AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends AllAndCustomerAllAndInvoiceTypeAll,AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
     }
 
-    public interface AllAndDispatchAll extends All, Dispatch, DispatchView.All {
-    }
-
-    public interface AllAndDispatchListAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAllAndDispatchAll extends All, DispatchList, DispatchSchedule, SalesOrderItem, SalesOrder, CustomerItem, Job, DispatchNoteView.AllAndDispatchAll {
-    }
-
-    public interface AllAndInvoiceTypeAllAndCustomerAllAndDispatchList extends All, InvoiceType, InvoiceTypeView.All, Customer, CustomerView.All, AllAndDispatchList {
-    }
-
-    public interface AllAndInvoiceTypeAllAndCustomerAll extends All, InvoiceType, InvoiceTypeView.All, Customer, CustomerView.All {
-    }
-
-    public interface AllAndInvoiceTypeAllAndCustomerAndAllAndDispatchAllAndDispatchScheduleAll extends AllAndInvoiceTypeAllAndCustomerAll, AllAndDispatchAll, AllAndDispatchScheduleAll {
-    }
-
-    public interface AllAndInvoiceTypeAllAndCustomerAllAndDispatchNoteAndDispatchListAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll extends All, InvoiceType, InvoiceTypeView.All, Customer, CustomerView.All, DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll, AllAndDispatchListAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAllAndDispatchAll, AllAndInvoiceDispatchNoteAllAndDispatchNoteAllAndDispatchAll {
-    }
 }
