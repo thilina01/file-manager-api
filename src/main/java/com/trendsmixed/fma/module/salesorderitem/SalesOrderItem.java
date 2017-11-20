@@ -1,19 +1,22 @@
 package com.trendsmixed.fma.module.salesorderitem;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import com.trendsmixed.fma.module.delivery.Delivery;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
+
 import java.io.Serializable;
 import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 /**
- *
  * @author Thilina
  */
 @Entity
@@ -21,7 +24,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "sales_order_item", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"customer_item_id", "sales_order_id"})})
+        @UniqueConstraint(columnNames = {"customer_item_id", "sales_order_id"})})
 public class SalesOrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,7 +39,9 @@ public class SalesOrderItem implements Serializable {
     @Column(name = "quantity")
     private Double quantity;
     @JsonView(SalesOrderItemView.Scheduled.class)
-    private transient int scheduled;
+    @JsonInclude()
+    @Transient
+    private int scheduled;
     @JsonView(SalesOrderItemView.UnitPrice.class)
     @Column(name = "unit_price")
     private Double unitPrice;
@@ -66,8 +71,10 @@ public class SalesOrderItem implements Serializable {
 
     public int getScheduled() {
         scheduled = 0;
-        for (DispatchSchedule dispatchSchedule : dispatchScheduleList) {
-            scheduled += dispatchSchedule.getQuantity();
+        if (dispatchScheduleList != null) {
+            for (DispatchSchedule dispatchSchedule : dispatchScheduleList) {
+                scheduled += dispatchSchedule.getQuantity() != null ? dispatchSchedule.getQuantity() : 0;
+            }
         }
         return scheduled;
     }
