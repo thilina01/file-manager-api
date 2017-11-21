@@ -7,6 +7,7 @@ import com.trendsmixed.fma.module.designation.Designation;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.employeecategory.EmployeeCategory;
 import com.trendsmixed.fma.module.labourtursource.LabourSource;
+import com.trendsmixed.fma.module.packinglist.PackingList;
 import com.trendsmixed.fma.module.productionemployee.ProductionEmployee;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
@@ -71,6 +72,8 @@ public class Employee implements Serializable {
     private List<ProductionEmployee> productionEmployeeList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
     private List<Accident> accidentList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
+    private List<PackingList> packingListList;
     @JsonView(EmployeeView.Designation.class)
     @JoinColumn(name = "designation_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -95,7 +98,6 @@ public class Employee implements Serializable {
     public Employee(Integer id) {
         this.id = id;
     }
-
 
     @JsonView(EmployeeView.All.class)
     public String getDisplay() {
