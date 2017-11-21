@@ -46,12 +46,11 @@ public class Invoice implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Customer customer;
-    @JoinColumn(name = "packing_list_id", referencedColumnName = "id")
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = true)
-    private PackingList packingList;
     @JsonView(InvoiceView.InvoiceDispatchNote.class)
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "invoice")
     private List<InvoiceDispatchNote> invoiceDispatchNoteList;
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "invoice")
+    private List<PackingList> packingListList;
 
     public Invoice(Integer id) {
         this.id = id;
