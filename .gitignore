@@ -13,6 +13,9 @@ local.properties
 .loadpath
 .recommenders
 
+#Project Specific
+storage
+
 # Eclipse Core
 .project
 
@@ -52,3 +55,7 @@ local.properties
 # Code Recommenders
 .recommenders/
 /target/
+
+#IntelliJ IDEA
+.idea
+file-manager-api.iml
