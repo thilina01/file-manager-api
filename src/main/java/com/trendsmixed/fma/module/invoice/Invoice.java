@@ -49,9 +49,9 @@ public class Invoice implements Serializable {
     @JsonView(InvoiceView.InvoiceDispatchNote.class)
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "invoice")
     private List<InvoiceDispatchNote> invoiceDispatchNoteList;
-    @JoinColumn(name = "packing_list_id", referencedColumnName = "id")
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, optional = true)
-    private PackingList packingList;
+    @JsonView(InvoiceView.PackingList.class)
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "invoice")
+    private List<PackingList> packingListList;
 
     public Invoice(Integer id) {
         this.id = id;
