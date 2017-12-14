@@ -59,7 +59,7 @@ public class PackingList implements Serializable {
     private Country country;
     @JsonView(PackingListView.ContainerSize.class)
     @JoinColumn(name = "container_size_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ContainerSize containerSize;
     @JsonView(PackingListView.Employee.class)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
