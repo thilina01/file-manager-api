@@ -7,7 +7,6 @@ import com.trendsmixed.fma.module.country.Country;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.port.Port;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -42,6 +41,18 @@ public class PackingList implements Serializable {
     @JoinColumn(name = "port_of_loading_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Port portOfLoading;
+    @JsonView(PackingListView.NetWeight.class)
+    @Column(name = "net_weight")
+    private Double netWeight;
+    @JsonView(PackingListView.GrossWeight.class)
+    @Column(name = "gross_weight")
+    private Double grossWeight;
+    @JsonView(PackingListView.Cbm.class)
+    @Column(name = "cbm")
+    private Double cbm;
+    @JsonView(PackingListView.NumberOfPackage.class)
+    @Column(name = "number_of_package")
+    private Double numberOfPackage;
     @JsonView(PackingListView.Country.class)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -52,11 +63,12 @@ public class PackingList implements Serializable {
     private ContainerSize containerSize;
     @JsonView(PackingListView.Employee.class)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Employee employee;
     @JsonView(PackingListView.Invoice.class)
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "packingList", fetch = FetchType.LAZY)
-    private List<Invoice> invoiceList;
+    @JoinColumn(name = "invoice_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Invoice invoice;
 
     public PackingList(Integer anId) {
         this.id = anId;

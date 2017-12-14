@@ -29,6 +29,9 @@ public class InvoiceView {
     public interface InvoiceDispatchNote {
     }
 
+    public interface PackingList {
+    }
+
     public interface All extends Id, InvoiceNumber, InvoiceDate, PageView.All {
     }
 

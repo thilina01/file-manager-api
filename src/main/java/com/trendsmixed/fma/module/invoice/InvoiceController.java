@@ -70,6 +70,19 @@ public class InvoiceController {
 
     }
 
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<Invoice> invoices, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+        appSessionService.isValid(email, request);
+        try {
+
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+
     @JsonView(InvoiceView.All.class)
     @PutMapping("/{id}")
     public Invoice updateCustomer(@PathVariable int id, @RequestBody Invoice invoice, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

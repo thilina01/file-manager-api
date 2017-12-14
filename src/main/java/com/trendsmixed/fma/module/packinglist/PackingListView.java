@@ -15,6 +15,18 @@ public class PackingListView {
     public static interface NoOfContainers {
     }
 
+    public static interface NetWeight {
+    }
+
+    public static interface GrossWeight {
+    }
+
+    public static interface Cbm {
+    }
+
+    public static interface NumberOfPackage {
+    }
+
     public static interface Port {
     }
 
@@ -33,7 +45,7 @@ public class PackingListView {
     public interface Employee {
     }
 
-    public static interface All extends Id, NoOfContainers, PageView.All {
+    public static interface All extends Id, NoOfContainers, NetWeight, GrossWeight, Cbm, NumberOfPackage, PageView.All {
     }
 
     public static interface AllAndPortAll extends All, Port, PortView.All {
@@ -56,4 +68,8 @@ public class PackingListView {
 
     public static interface AllAndPortOfLoadingAndPortAllAndCountryAllAndAndEmployeeAllAndContainerSizeAllAndInvoiceAll extends All, Port, PortOfLoading, PortView.All, Country, CountryView.All, AllAndEmployeeAll, ContainerSize, ContainerSizeView.All, Invoice, InvoiceView.All {
     }
+
+    public interface AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends InvoiceView.AllAndCustomerAllAndInvoiceTypeAll, InvoiceView.AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
+    }
+
 }
