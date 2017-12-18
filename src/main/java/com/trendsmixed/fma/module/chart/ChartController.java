@@ -1,5 +1,7 @@
 package com.trendsmixed.fma.module.chart;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.dao.view.ScrapReasonSummaryView;
 import com.trendsmixed.fma.dao.BreakdownChart;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
@@ -37,6 +39,51 @@ public class ChartController {
     public List getScheduleAdherence(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getScheduleAdherence(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+    
+    @GetMapping("/scrap")
+    public List getScrap(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getScrap(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+    
+    @JsonView(ScrapReasonSummaryView.All.class)
+    @GetMapping("/scrapReasonSummary")
+    public List getScrapReasonSummary(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText) {
+        return chartService.getScrapReasonSummary(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+
+    @JsonView(ScrapReasonSummaryView.All.class)
+    @GetMapping("/scrapReasonSummaryBySection")
+    public List getScrapReasonSummaryBySection(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText,
+            @RequestParam(value = "section") String sectionId) {
+        return chartService.getScrapReasonSummaryBySection(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new Section(Integer.valueOf(sectionId)));
+    }
+
+    @JsonView(ScrapReasonSummaryView.All.class)
+    @GetMapping("/scrapReasonSummaryBySectionAndLossReason")
+    public List getScrapReasonSummaryBySectionAndLossReason(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText,
+            @RequestParam(value = "section") String sectionId,
+            @RequestParam(value = "lossReason") String lossReasonId) {
+        return chartService.getScrapReasonSummaryBySectionAndLossReason(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new Section(Integer.valueOf(sectionId)), new LossReason(Integer.valueOf(lossReasonId)));
+    }
+
+    @JsonView(ScrapReasonSummaryView.All.class)
+    @GetMapping("/scrapReasonSummaryByLossReason")
+    public List getScrapReasonSummaryByLossReason(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText,
+            @RequestParam(value = "lossReason") String lossReasonId) {
+        return chartService.getScrapReasonSummaryByLossReason(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new LossReason(Integer.valueOf(lossReasonId)));
+    }
+
+    @GetMapping("/scrapBySection")
+    public List getScrapBySection(@RequestParam(value = "startDate") String startDateText,
+            @RequestParam(value = "endDate") String endDateText,
+            @RequestParam(value = "section") String sectionId) {
+        return chartService.getScrapBySection(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new Section(Integer.valueOf(sectionId)));
     }
 
     @GetMapping("/scheduleAdherenceBySection")

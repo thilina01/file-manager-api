@@ -16,6 +16,28 @@ public class ChartService {
 
     private ChartRepository chartRepository;
 
+    public List getScrap(Date startDate, Date endDate) {
+        return chartRepository.getScrap(startDate, endDate);
+    }
+    
+    public List getScrapReasonSummary(Date startDate, Date endDate) {
+        return chartRepository.getScrapReasonSummary(startDate, endDate);
+    }
+
+    public List getScrapReasonSummaryBySection(Date startDate, Date endDate, Section section) {
+        return chartRepository.getScrapReasonSummaryBySection(startDate, endDate, section);
+    }
+
+    public List getScrapReasonSummaryBySectionAndLossReason(Date startDate, Date endDate, Section section, LossReason lossReason) {
+        return chartRepository.getScrapReasonSummaryBySectionAndLossReason(startDate, endDate, section, lossReason);
+    }
+    public List getScrapReasonSummaryByLossReason(Date startDate, Date endDate, LossReason lossReason) {
+        return chartRepository.getScrapReasonSummaryByLossReason(startDate, endDate, lossReason);
+    }
+    public List getScrapBySection(Date startDate, Date endDate, Section section) {
+        return chartRepository.getScrapBySection(startDate, endDate, section);
+    }
+    
     public List getScheduleAdherence(Date startDate, Date endDate) {
         return chartRepository.getScheduleAdherence(startDate, endDate);
     }

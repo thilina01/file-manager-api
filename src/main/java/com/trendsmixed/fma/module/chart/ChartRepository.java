@@ -73,6 +73,54 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
     List getScheduleAdherence(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.Scrap(scrap.section.code, SUM(scrap.quantity), (SUM(scrap.quantity * scrap.unitValue))) "
+            + " FROM Scrap scrap"
+            + " WHERE scrap.scrapDate BETWEEN :startDate AND :endDate"
+            + " GROUP BY scrap.section")
+    List getScrap(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.ScrapReasonSummary(scrap.lossReason, SUM(scrap.quantity), (SUM(scrap.quantity * scrap.unitValue))) "
+            + " FROM Scrap scrap"
+            + " WHERE scrap.scrapDate BETWEEN :startDate AND :endDate"
+            + " GROUP BY scrap.lossReason")
+    List getScrapReasonSummary(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.ScrapReasonSummary(scrap.lossReason, SUM(scrap.quantity), (SUM(scrap.quantity * scrap.unitValue))) "
+            + " FROM Scrap scrap"
+            + " WHERE scrap.scrapDate BETWEEN :startDate AND :endDate"
+            + " AND scrap.section = :section"
+            + " GROUP BY scrap.lossReason")
+    List getScrapReasonSummaryBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("section") Section section);
+
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.ScrapReasonSummary(scrap.scrapDate, SUM(scrap.quantity), (SUM(scrap.quantity * scrap.unitValue))) "
+            + " FROM Scrap scrap"
+            + " WHERE scrap.scrapDate BETWEEN :startDate AND :endDate"
+            + " AND scrap.lossReason = :lossReason"
+            + " GROUP BY scrap.scrapDate")
+    List getScrapReasonSummaryByLossReason(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("lossReason") LossReason lossReason);
+
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.ScrapReasonSummary(scrap.scrapDate, SUM(scrap.quantity), (SUM(scrap.quantity * scrap.unitValue))) "
+            + " FROM Scrap scrap"
+            + " WHERE scrap.scrapDate BETWEEN :startDate AND :endDate"
+            + " AND scrap.section = :section"
+            + " AND scrap.lossReason = :lossReason"
+            + " GROUP BY scrap.scrapDate")
+    List getScrapReasonSummaryBySectionAndLossReason(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("section") Section section, @Param("lossReason") LossReason lossReason);
+
+    @Query(value = "SELECT "
+            + " new com.trendsmixed.fma.dao.Scrap(scrap.scrapDate, SUM(scrap.quantity), (SUM(scrap.quantity * scrap.unitValue))) "
+            + " FROM Scrap scrap"
+            + " WHERE scrap.scrapDate BETWEEN :startDate AND :endDate"
+            + " AND scrap.section = :section"
+            + " GROUP BY scrap.scrapDate")
+    List getScrapBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("section") Section section);
+
+    
+    @Query(value = "SELECT "
             + " new com.trendsmixed.fma.dao.ScheduleAdherence(operation.production.productionDate, SUM(operation.actualQuantity), SUM(operation.plannedQuantity), (SUM(operation.actualQuantity)/SUM(operation.plannedQuantity))*100) "
             + " FROM Operation operation"
             + " WHERE operation.production.controlPoint.workCenter.costCenter.section = :section"
