@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.machine;
 
 import com.trendsmixed.fma.module.controlpointmachine.ControlPointMachine;
+import com.trendsmixed.fma.module.resourceutilization.ResourceUtilization;
 import com.trendsmixed.fma.module.breakdown.Breakdown;
 import java.io.Serializable;
 import java.util.List;
@@ -45,6 +46,8 @@ public class Machine implements Serializable {
     private List<ControlPointMachine> controlPointMachineList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "machine")
     private List<Accident> accidentList;
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "machine")
+    private List<ResourceUtilization> resourceUtilizationList;
 
     @JsonView(MachineView.All.class)
     public String getDisplay() {

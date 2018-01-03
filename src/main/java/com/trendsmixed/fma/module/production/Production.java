@@ -5,6 +5,7 @@ import com.trendsmixed.fma.module.manpower.Manpower;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.productionemployee.ProductionEmployee;
+import com.trendsmixed.fma.module.resourceutilization.ResourceUtilization;
 import com.trendsmixed.fma.module.shift.Shift;
 import com.trendsmixed.fma.module.shifttype.ShiftType;
 import java.io.Serializable;
@@ -64,6 +65,10 @@ public class Production implements Serializable {
     @JsonView(ProductionView.ProductionEmployee.class)
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "production")
     private List<ProductionEmployee> productionEmployeeList;
+    @JsonView(ProductionView.ResourceUtilization.class)
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "production")
+    private List<ResourceUtilization> resourceUtilizationList;
+    
 
     Production(Integer id) {
         this.id = id;

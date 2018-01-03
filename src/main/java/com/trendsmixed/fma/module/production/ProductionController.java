@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.trendsmixed.fma.module.productionemployee.ProductionEmployee;
+import com.trendsmixed.fma.module.resourceutilization.ResourceUtilization;
 import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.manpower.Manpower;
@@ -139,6 +140,15 @@ public class ProductionController {
                     productionEmployee.setProduction(production);
                 }
             }
+
+            List<ResourceUtilization> resourceUtilizations = production.getResourceUtilizationList();
+            
+            if (resourceUtilizations != null) {
+                for (ResourceUtilization resourceUtilization : resourceUtilizations) {
+                    resourceUtilization.setProduction(production);
+                }
+            }
+
             production = service.save(production);
 
             return production;
@@ -177,7 +187,7 @@ public class ProductionController {
         }
     }
 
-    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAllProductionEmployeeAllAndEmployeeAll.class)
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAllProductionEmployeeAllAndEmployeeAllResourceUtilizationAllAndMachineAllAndEmployeeAll.class)
     @GetMapping("/{id}")
     public Production findOne(@PathVariable("id") int id) {
         return service.findOne(id);
