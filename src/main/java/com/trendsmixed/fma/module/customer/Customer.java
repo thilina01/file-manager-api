@@ -98,11 +98,11 @@ public class Customer implements Serializable {
     private List<DispatchNote> dispatchNoteList;
     @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Incoterm incoterm;
     @JsonView(CustomerView.Currency.class)
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Currency currency;
     @JsonView(CustomerView.CustomerType.class)
     @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
