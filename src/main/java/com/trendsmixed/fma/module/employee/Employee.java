@@ -63,9 +63,9 @@ public class Employee implements Serializable {
     @JsonView(EmployeeView.NIC.class)
     @Column(name = "nic")
     private String nic;
-    @JsonView(EmployeeView.DispatchNote.class)
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
-    private List<DispatchNote> dispatchNoteList;
+//    @JsonView(EmployeeView.DispatchNote.class)
+//    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
+//    private List<DispatchNote> dispatchNoteList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
     private List<Computer> computerList;
     @JsonView(EmployeeView.ProductionEmployee.class)
