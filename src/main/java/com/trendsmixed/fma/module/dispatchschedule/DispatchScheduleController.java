@@ -58,7 +58,11 @@ public class DispatchScheduleController {
 
             Job job = dispatchSchedule.getJob();
             if (job != null) {
-                if (job.getId() == null) {
+                if (job.getId() == null|| job.getId() == 0) {
+                    Job existingJob = jobService.findByJobNo(job.getJobNo());
+                    if (existingJob != null) {
+                        throw new Error("Job Number Already Used!");
+                    }
                     job.setJobDate(new Date());
                     job.setJobType(jobTypeService.findByCode("Order"));
                     job.setDispatchScheduleList(new ArrayList<>());
