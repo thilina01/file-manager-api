@@ -1,10 +1,10 @@
 package com.trendsmixed.fma.module.dispatchnote;
 
+import com.trendsmixed.fma.module.packinglist.PackingList;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
-import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.invoicedispatchnote.InvoiceDispatchNote;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -62,6 +62,9 @@ public class DispatchNote implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
+    @JoinColumn(name = "packing_list_id", referencedColumnName = "id")
+    @ManyToOne(optional = true)
+    private PackingList packingList;
     @JsonView(DispatchNoteView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;

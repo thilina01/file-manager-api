@@ -29,9 +29,6 @@ public class InvoiceView {
     public interface InvoiceDispatchNote {
     }
 
-    public interface PackingList {
-    }
-
     public interface All extends Id, InvoiceNumber, InvoiceDate, PageView.All {
     }
 
@@ -44,10 +41,14 @@ public class InvoiceView {
     public interface AllAndCustomerAllAndInvoiceTypeAll extends AllAndCustomerAll, AllAndInvoiceTypeAll {
     }
 
-    public interface AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends All, InvoiceDispatchNote, InvoiceDispatchNoteView.AllAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
+    public interface AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
+            extends All, InvoiceDispatchNote,
+            InvoiceDispatchNoteView.AllAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
     }
 
-    public interface AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends AllAndCustomerAllAndInvoiceTypeAll, AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
+    public interface AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
+            extends AllAndCustomerAllAndInvoiceTypeAll,
+            AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
     }
 
 }
