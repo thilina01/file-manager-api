@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.containersize.ContainerSize;
 import com.trendsmixed.fma.module.country.Country;
 import com.trendsmixed.fma.module.employee.Employee;
-import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.port.Port;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
+
+import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -47,9 +49,9 @@ public class PackingList implements Serializable {
     @JsonView(PackingListView.GrossWeight.class)
     @Column(name = "gross_weight")
     private Double grossWeight;
-    @JsonView(PackingListView.Cbm.class)
-    @Column(name = "cbm")
-    private Double cbm;
+    @JsonView(PackingListView.CubicMeter.class)
+    @Column(name = "cubic_meter ")
+    private Double cubicMeter ;
     @JsonView(PackingListView.NumberOfPackage.class)
     @Column(name = "number_of_package")
     private Double numberOfPackage;
@@ -64,11 +66,10 @@ public class PackingList implements Serializable {
     @JsonView(PackingListView.Employee.class)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Employee employee;
-    @JsonView(PackingListView.Invoice.class)
-    @JoinColumn(name = "invoice_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Invoice invoice;
+    private Employee employee;    
+    @JsonView(PackingListView.DispatchNote.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "packingList")
+    private List<DispatchNote> dispatchNoteList;
 
     public PackingList(Integer anId) {
         this.id = anId;

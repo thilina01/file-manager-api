@@ -25,7 +25,7 @@ public class PackingListController {
         return service.findAll();
     }
 
-    @JsonView(PackingListView.AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem.class)
+    @JsonView(PackingListView.AllAndPortOfLoadingAndPortAllAndCountryAllAndAndEmployeeAllAndContainerSizeAllAndDispatchNoteAll.class)
     @GetMapping("/page")
     Page<PackingList> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
