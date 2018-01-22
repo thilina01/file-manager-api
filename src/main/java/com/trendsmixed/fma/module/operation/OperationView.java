@@ -4,6 +4,7 @@ import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.loss.LossView;
 import com.trendsmixed.fma.module.operationtype.OperationTypeView;
 import com.trendsmixed.fma.module.production.ProductionView;
+import com.trendsmixed.fma.module.operationprogress.OperationProgressView;
 import com.trendsmixed.fma.module.producttype.ProductTypeView;
 import com.trendsmixed.fma.utility.PageView;
 
@@ -22,6 +23,9 @@ public class OperationView {
     }
 
     public interface Loss extends LossView.All {
+    }
+
+    public interface OperationProgress extends OperationProgressView.All {
     }
 
     public interface Production extends ProductionView.AllAndShiftAndShiftTypeAndControlPointAll {
@@ -49,5 +53,9 @@ public class OperationView {
 
     public interface AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll
             extends AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll, JobView.AllAndItemAllAndJobTypeAll {
+    }
+
+    public interface AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAllOperationProgressAll
+            extends AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll,OperationProgress {
     }
 }

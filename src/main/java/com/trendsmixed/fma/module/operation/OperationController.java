@@ -119,7 +119,7 @@ public class OperationController {
         }
     }
 
-    @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
+    @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAllOperationProgressAll.class)
     @GetMapping("/{id}")
     public Operation findOne(@PathVariable("id") int id) {
         return service.findOne(id);

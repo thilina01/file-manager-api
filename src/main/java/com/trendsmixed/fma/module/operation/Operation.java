@@ -4,6 +4,7 @@ import com.trendsmixed.fma.module.loss.Loss;
 import com.trendsmixed.fma.module.job.Job;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.operationbreadown.OperationBreadown;
+import com.trendsmixed.fma.module.operationprogress.OperationProgress;
 import com.trendsmixed.fma.module.operationtype.OperationType;
 import com.trendsmixed.fma.module.producttype.ProductType;
 import com.trendsmixed.fma.module.production.Production;
@@ -63,5 +64,8 @@ public class Operation implements Serializable {
     private ProductType productType;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "operation")
     private List<OperationBreadown> operationBreadownList;
+    @JsonView(OperationView.OperationProgress.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "operation")
+    private List<OperationProgress> operationProgressList;
 
 }
