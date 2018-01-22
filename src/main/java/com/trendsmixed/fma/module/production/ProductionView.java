@@ -57,7 +57,7 @@ public class ProductionView {
         public interface Shift {
         }
 
-        public interface ShiftType {
+        public interface ShiftType extends ShiftTypeView.All{
         }
 
         public interface ProductionEmployee extends ProductionEmployeeView.All {
@@ -71,7 +71,7 @@ public class ProductionView {
         }
 
         public static interface AllAndShiftAndShiftType
-                        extends All, Shift, ShiftView.All, ShiftType, ShiftTypeView.All {
+                        extends All, Shift, ShiftView.All, ShiftType  {
         }
 
         public static interface AllAndShiftAndShiftTypeAndControlPointAll
@@ -94,11 +94,11 @@ public class ProductionView {
                         JobView.AllAndItemAllAndJobTypeAll {
         }
 
-        public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAllProductionEmployeeAllAndEmployeeAllResourceUtilizationAllAndMachineAllAndEmployeeAll
+        public static interface AllShiftAllShiftTypeAllControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAllProductionEmployeeAllEmployeeAllResourceUtilizationAllMachineAllEmployeeAll
                         extends
                         AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll,
                         ProductionEmployee, ProductionEmployeeView.AllAndEmployeeAll, ResourceUtilization,
-                        ResourceUtilizationView.AllAndMachineAll, ResourceUtilizationView.AllAndEmployeeAll {
+                        ResourceUtilizationView.AllAndMachineAll, ResourceUtilizationView.AllAndEmployeeAll, ShiftType {
         }
 
 }
