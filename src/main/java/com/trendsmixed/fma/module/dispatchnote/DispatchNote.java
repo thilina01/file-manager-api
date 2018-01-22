@@ -45,7 +45,6 @@ public class DispatchNote implements Serializable {
     private String vehicleNumber;
     @JsonView(DispatchNoteView.DispatchReleaseTime.class)
     @Column(name = "dispatch_release_time")
-    @Temporal(TemporalType.DATE)
     private Date dispatchReleaseTime;
     @JsonView(DispatchNoteView.Recipient.class)
     @Column(name = "recipient")
