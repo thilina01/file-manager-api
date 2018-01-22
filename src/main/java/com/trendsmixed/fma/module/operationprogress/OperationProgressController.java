@@ -25,7 +25,7 @@ public class OperationProgressController {
         return service.findAll();
     }
 
-    @JsonView(OperationProgressView.All.class)
+    @JsonView(OperationProgressView.AllAndOperation.class)
     @GetMapping("/page")
     Page<OperationProgress> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
