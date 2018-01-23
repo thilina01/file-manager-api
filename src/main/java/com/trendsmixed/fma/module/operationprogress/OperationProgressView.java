@@ -1,6 +1,11 @@
 package com.trendsmixed.fma.module.operationprogress;
 
+import com.trendsmixed.fma.module.production.ProductionView;
+import com.trendsmixed.fma.module.production.ProductionView.ControlPoint;
 import com.trendsmixed.fma.module.operation.OperationView;
+import com.trendsmixed.fma.module.operation.OperationView.Job;
+import com.trendsmixed.fma.module.operation.OperationView.ProductType;
+import com.trendsmixed.fma.module.operation.OperationView.Production;
 import com.trendsmixed.fma.utility.PageView;
 
 public class OperationProgressView {
@@ -14,7 +19,10 @@ public class OperationProgressView {
     public interface Quantity {
     }
 
-    public interface Operation extends OperationView.All{
+    public interface Operation extends OperationView.All {
+    }
+
+    public interface AllAndProductionAll extends All, Production, ProductionView.All {
     }
 
     public interface All extends Id, TimeSlot, Quantity, PageView.All {
@@ -23,4 +31,13 @@ public class OperationProgressView {
     public interface AllAndOperation extends All, Operation {
     }
 
+    public interface AllAndProductionAndControlPoint extends All, ControlPoint, ProductionView.All {
+    }
+
+    public interface AllAndJobAndProductTypeAndProduction extends Job, ProductType, OperationView.All {
+    }
+
+    public interface AllAndJobAndProductTypeAllAndProductionAndControlPointAllAndOperation extends AllAndOperation, Job,
+            ProductType, OperationView.All, AllAndProductionAll, ControlPoint, ProductionView.All {
+    }
 }
