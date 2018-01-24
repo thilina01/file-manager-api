@@ -13,6 +13,9 @@ public class LocationView {
     public interface Name {
     }
 
+    public interface DispatchNote {
+    }
+
     public interface All extends Id, Code, Name, PageView.All {
 
     }

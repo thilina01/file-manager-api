@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.location;
 
 import com.trendsmixed.fma.module.energyconsumption.EnergyConsumption;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
@@ -35,7 +36,9 @@ public class Location implements Serializable {
     private String name;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "location")
     private List<EnergyConsumption> energyConsumptionList;
-
+    @JsonView(LocationView.DispatchNote.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<DispatchNote> dispatchNoteList;
     public Location(Integer id) {
         this.id = id;
     }

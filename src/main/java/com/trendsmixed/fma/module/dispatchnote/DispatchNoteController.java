@@ -23,13 +23,13 @@ public class DispatchNoteController {
     private final AppSessionService appSessionService;
     private final DispatchNoteService service;
 
-    @JsonView(DispatchNoteView.AllAndAddressAllAndEmployeeAllAndCustomerAll.class)
+    @JsonView(DispatchNoteView.AllAndAddressAndEmployeeAndCustomerAndLocation.class)
     @GetMapping
     public Iterable<DispatchNote> findAll() {
         return service.findAll();
     }
 
-    @JsonView(DispatchNoteView.AllAndAddressAllAndEmployeeAllAndCustomerAll.class)
+    @JsonView(DispatchNoteView.AllAndAddressAndEmployeeAndCustomerAndLocation.class)
     @GetMapping("/page")
     Page<DispatchNote> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -46,13 +46,13 @@ public class DispatchNoteController {
         return service.getComboByCustomer(new Customer(id));
     }
 
-    @JsonView(DispatchNoteView.AllAndAddressAllAndEmployeeAllAndCustomerAllAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(DispatchNoteView.AllAndAddressAndEmployeeAndCustomerAndLocationAndDispatchAllAndDispatchScheduleAllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping("/id/{id}")
     public DispatchNote findById(@PathVariable("id") String id) {
         return service.findById(id);
     }
 
-    @JsonView(DispatchNoteView.AllAndAddressAllAndEmployeeAllAndCustomerAll.class)
+    @JsonView(DispatchNoteView.AllAndAddressAndEmployeeAndCustomerAndLocation.class)
     @PostMapping
     public DispatchNote save(@RequestBody DispatchNote dispatchNote, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -75,7 +75,7 @@ public class DispatchNoteController {
         }
     }
 
-    @JsonView(DispatchNoteView.AllAndAddressAllAndEmployeeAllAndCustomerAll.class)
+    @JsonView(DispatchNoteView.AllAndAddressAndEmployeeAndCustomerAndLocation.class)
     @PostMapping("/release")
     public DispatchNote saveReleaseInformation(@RequestBody DispatchNote dispatchNote, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -85,6 +85,7 @@ public class DispatchNoteController {
             existingDispatchNote.setContainerNumber(dispatchNote.getContainerNumber());
             existingDispatchNote.setVehicleNumber(dispatchNote.getVehicleNumber());
             existingDispatchNote.setDispatchReleaseTime(dispatchNote.getDispatchReleaseTime());
+            existingDispatchNote.setLocation(dispatchNote.getLocation());
             return service.save(existingDispatchNote);
 
         } catch (Throwable e) {
@@ -109,7 +110,7 @@ public class DispatchNoteController {
         }
     }
 
-    @JsonView(DispatchNoteView.AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem.class)
+    @JsonView(DispatchNoteView.AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndLocation.class)
     @GetMapping("/{id}")
     public DispatchNote findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -122,7 +123,7 @@ public class DispatchNoteController {
 
     }
 
-    @JsonView(DispatchNoteView.AllAndAddressAllAndEmployeeAllAndCustomerAll.class)
+    @JsonView(DispatchNoteView.AllAndAddressAndEmployeeAndCustomerAndLocation.class)
     @PutMapping("/{id}")
     public DispatchNote updateCustomer(@PathVariable int id, @RequestBody DispatchNote dispatchNote, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
