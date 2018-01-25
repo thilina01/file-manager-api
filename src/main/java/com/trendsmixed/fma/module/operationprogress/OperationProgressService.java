@@ -5,6 +5,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.trendsmixed.fma.dao.Combo;
 import lombok.AllArgsConstructor;
+import java.util.Date;
+import com.trendsmixed.fma.module.controlpoint.ControlPoint;
+import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.job.Job;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 
 @AllArgsConstructor
@@ -36,5 +41,48 @@ public class OperationProgressService {
     public void delete(int id) {
         repository.delete(id);
     }
+    public Page<OperationProgress> findByOperationProductionProductionDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByOperationProductionProductionDateBetween(startDate, endDate, pageable);
+    }
+    public Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationProductionProductionDateBetween(Section section, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationProductionProductionDateBetween(section, startDate, endDate, pageable);
+    }
+    public Page<OperationProgress> findByOperationProductionProductionDateAndOperationProductionControlPoint(Date date, ControlPoint controlPoint, Pageable pageable) {
+        return repository.findByOperationProductionProductionDateAndOperationProductionControlPoint(date, controlPoint, pageable);
+    }
+    public Page<OperationProgress> findByOperationProductionProductionDateBetweenAndOperationProductionControlPoint(Date startDate, Date endDate, ControlPoint controlPoint, Pageable pageable) {
+        return repository.findByOperationProductionProductionDateBetweenAndOperationProductionControlPoint(startDate, endDate, controlPoint, pageable);
+    }
+    public Page<OperationProgress> findByOperationProductionProductionDateBetweenAndOperationJob(Date startDate, Date endDate, Job job, Pageable pageable) {
+        return repository.findByOperationProductionProductionDateBetweenAndOperationJob(startDate, endDate, job, pageable);
+    }
+    public Page<OperationProgress> findByOperationProductionProductionDateAndOperationJob(Date date, Job job, Pageable pageable) {
+        return repository.findByOperationProductionProductionDateAndOperationJob(date, job, pageable);
+    }
+    public Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateBetweenAndOperationProductionControlPoint(Section section, Date startDate, Date endDate, Job job, ControlPoint controlPoint, Pageable pageable) {
+        return repository.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateBetweenAndOperationProductionControlPoint(section, startDate, endDate, controlPoint, pageable, job);
+    }
+    public Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateAndOperationProductionControlPoint(Section section, Date date, ControlPoint controlPoint, Job job, Pageable pageable) {
+        return repository.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateAndOperationProductionControlPoint(section, date, controlPoint, job, pageable);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
