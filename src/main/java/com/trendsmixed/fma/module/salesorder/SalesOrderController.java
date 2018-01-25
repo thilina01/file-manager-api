@@ -1,11 +1,14 @@
 package com.trendsmixed.fma.module.salesorder;
-
+import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.jobtype.JobType;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
+import com.trendsmixed.fma.utility.Format;
+import java.text.ParseException;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemService;
 import com.trendsmixed.fma.utility.Page;
 import java.util.ArrayList;
@@ -37,7 +40,37 @@ public class SalesOrderController {
     Page<SalesOrder> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
-
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @GetMapping(value = "/salesOrderDurationPage", params = {"startDate", "endDate"})
+    public Page<SalesOrder> salesOrderDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
+        return new Page(service.findByOrderDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+    }
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @GetMapping(value = "/orderDateAndSalesOrderTypePage", params = {"orderDate", "salesOrderType"})
+    public Page<SalesOrder> orderDateAndSalesOrderTypePage(@RequestParam("orderDate") String orderDate, @RequestParam("salesOrderType") String salesOrderType, Pageable pageable) throws ParseException {
+        return new Page(service.findByOrderDateAndSalesOrderType(Format.yyyy_MM_dd.parse(orderDate), new SalesOrderType(Integer.valueOf(salesOrderType)), pageable));
+    }
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @GetMapping(value = "/salesOrderDurationAndSalesOrderTypePage", params = {"startDate", "endDate", "salesOrderType"})
+    public Page<SalesOrder> salesOrderDurationAndSalesOrderTypePage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("salesOrderType") String salesOrderType, Pageable pageable) throws ParseException {
+        return new Page(service.findByOrderDateBetweenAndSalesOrderType(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new SalesOrderType(Integer.valueOf(salesOrderType)), pageable));
+    }
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @GetMapping(value = "/customerAndSalesOrderDurationPage", params = {"customer", "startDate", "endDate"})
+    public Page<SalesOrder> customerAndSalesOrderDurationPage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
+        return new Page(service.findByCustomerAndOrderDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+    }
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @GetMapping(value = "/customerAndOrderDateAndSalesOrderTypePage", params = {"customer", "orderDate", "salesOrderType"})
+    public Page<SalesOrder> customerAndOrderDateAndSalesOrderTypePage(@RequestParam("customer") String customer, @RequestParam("orderDate") String orderDate, @RequestParam("salesOrderType") String salesOrderType, Pageable pageable) throws ParseException {
+        return new Page(service.findByCustomerAndOrderDateAndSalesOrderType(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(orderDate), new SalesOrderType(Integer.valueOf(salesOrderType)), pageable));
+    }
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @GetMapping(value = "/customerAndSalesOrderDurationAndSalesOrderTypePage", params = {"customer", "startDate", "endDate", "salesOrderType"})
+    public Page<SalesOrder> customerAndSalesOrderDurationAndSalesOrderTypePage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("salesOrderType") String salesOrderType, Pageable pageable) throws ParseException {
+        return new Page(service.findByCustomerAndOrderDateBetweenAndSalesOrderType(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new SalesOrderType(Integer.valueOf(salesOrderType)), pageable));
+    }
+    
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();

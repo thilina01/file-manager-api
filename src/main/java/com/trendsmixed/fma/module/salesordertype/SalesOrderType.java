@@ -36,6 +36,10 @@ public class SalesOrderType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderType")
     private List<SalesOrder> salesOrderList;
 
+    public SalesOrderType(Integer id) {
+        this.id = id;
+    }
+
     @JsonView(SalesOrderTypeView.All.class)
     public String getDisplay() {
         return code + " : " + name;
