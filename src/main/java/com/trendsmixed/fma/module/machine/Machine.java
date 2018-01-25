@@ -49,6 +49,10 @@ public class Machine implements Serializable {
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "machine")
     private List<ResourceUtilization> resourceUtilizationList;
 
+    public Machine(Integer id) {
+        this.id = id;
+    }
+
     @JsonView(MachineView.All.class)
     public String getDisplay() {
         return code + " : " + name;
