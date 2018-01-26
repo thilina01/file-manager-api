@@ -1,8 +1,9 @@
 package com.trendsmixed.fma.module.dispatchnote;
-
+import com.trendsmixed.fma.module.location.Location;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import java.util.List;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,5 +51,28 @@ public class DispatchNoteService {
         return repository.findById(id);
     }
 
+    public Page<DispatchNote> findByDispatchDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByDispatchDateBetween(startDate, endDate, pageable);
 
+    }
+    public Page<DispatchNote> findByDispatchDateAndLocation(Date date, Location location, Pageable pageable) {
+        return repository.findByDispatchDateAndLocation(date, location, pageable);
+    }
+    public Page<DispatchNote> findByDispatchDateBetweenAndLocation(Date startDate, Date endDate, Location location, Pageable pageable) {
+        return repository.findByDispatchDateBetweenAndLocation(startDate, endDate, location, pageable);
+    }
+    public Page<DispatchNote> findByCustomerAndDispatchDateBetween(Customer customer, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByCustomerAndDispatchDateBetween(customer, startDate, endDate, pageable);
+    }
+    public Page<DispatchNote> findByCustomerAndDispatchDateAndLocation(Customer customer, Date date, Location location, Pageable pageable) {
+        return repository.findByCustomerAndDispatchDateAndLocation(customer, date, location, pageable);
+
+    }
+    public Page<DispatchNote> findByCustomerAndDispatchDateBetweenAndLocation(Customer customer, Date startDate, Date endDate, Location location, Pageable pageable) {
+        return repository.findByCustomerAndDispatchDateBetweenAndLocation(customer, startDate, endDate, location, pageable);
+    }
+    public Page<DispatchNote> findByDispatchDateAndCustomer(Date date, Customer customer, Pageable pageable) {
+        return repository.findByDispatchDateAndCustomer(date, customer, pageable);
+    }
+ 
 }

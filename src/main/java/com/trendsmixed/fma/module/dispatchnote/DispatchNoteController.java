@@ -3,7 +3,9 @@ package com.trendsmixed.fma.module.dispatchnote;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
+import com.trendsmixed.fma.utility.Format;
+import java.text.ParseException;
+import com.trendsmixed.fma.module.location.Location;
 import com.trendsmixed.fma.utility.Page;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
@@ -34,6 +36,42 @@ public class DispatchNoteController {
     Page<DispatchNote> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
 
+    }
+    @JsonView(DispatchNoteView.AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndLocation.class)
+    @GetMapping(value = "/dispatchNoteDurationPage", params = {"startDate", "endDate"})
+    public Page<DispatchNote> dispatchNoteDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
+        return new Page(service.findByDispatchDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+    }
+    @JsonView(DispatchNoteView.AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndLocation.class)
+    @GetMapping(value = "/dispatchDateAndLocationPage", params = {"dispatchDate", "location"})
+    public Page<DispatchNote> dispatchDateAndLocationPage(@RequestParam("dispatchDate") String dispatchDate, @RequestParam("location") String location, Pageable pageable) throws ParseException {
+        return new Page(service.findByDispatchDateAndLocation(Format.yyyy_MM_dd.parse(dispatchDate), new Location(Integer.valueOf(location)), pageable));
+    }
+    @JsonView(DispatchNoteView.AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndLocation.class)
+    @GetMapping(value = "/dispatchNoteDurationAndLocationPage", params = {"startDate", "endDate", "location"})
+    public Page<DispatchNote> dispatchNoteDurationAndLocationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("location") String location, Pageable pageable) throws ParseException {
+        return new Page(service.findByDispatchDateBetweenAndLocation(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Location(Integer.valueOf(location)), pageable));
+    }
+    @JsonView(DispatchNoteView.AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndLocation.class)
+    @GetMapping(value = "/customerAndDispatchNoteDurationPage", params = {"customer", "startDate", "endDate"})
+    public Page<DispatchNote> customerAndDispatchNoteDurationPage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
+        return new Page(service.findByCustomerAndDispatchDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+    }
+    @JsonView(DispatchNoteView.AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndLocation.class)
+    @GetMapping(value = "/customerAndDispatchDateAndLocationPage", params = {"customer", "dispatchDate", "location"})
+    public Page<DispatchNote> customerAndDispatchDateAndLocationPage(@RequestParam("customer") String customer, @RequestParam("dispatchDate") String dispatchDate, @RequestParam("location") String location, Pageable pageable) throws ParseException {
+        return new Page(service.findByCustomerAndDispatchDateAndLocation(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(dispatchDate), new Location(Integer.valueOf(location)), pageable));
+    }
+    @JsonView(DispatchNoteView.AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndLocation.class)
+    @GetMapping(value = "/customerAndDispatchNoteDurationAndLocationPage", params = {"customer", "startDate", "endDate", "location"})
+    public Page<DispatchNote> customerAndDispatchNoteDurationAndLocationPage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("location") String location, Pageable pageable) throws ParseException {
+        return new Page(service.findByCustomerAndDispatchDateBetweenAndLocation(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Location(Integer.valueOf(location)), pageable));
+    }
+    
+    @JsonView(DispatchNoteView.AllAndCustomerAndAddressAndEmployeeAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndLocation.class)
+    @GetMapping(value = "/dispatchDateAndCustomerPage", params = {"dispatchDate", "customer"})
+    public Page<DispatchNote> dispatchDateAndCustomerPage(@RequestParam("dispatchDate") String dispatchDate, @RequestParam("customer") String customer, Pageable pageable) throws ParseException {
+        return new Page(service.findByDispatchDateAndCustomer(Format.yyyy_MM_dd.parse(dispatchDate), new Customer(Integer.valueOf(customer)), pageable));
     }
 
     @GetMapping("/combo")

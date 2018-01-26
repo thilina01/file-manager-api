@@ -6,7 +6,7 @@ import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
-import com.trendsmixed.fma.module.invoicedispatchnote.InvoiceDispatchNote;
+// import com.trendsmixed.fma.module.invoicedispatchnote.InvoiceDispatchNote;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -75,9 +75,9 @@ public class DispatchNote implements Serializable {
     @JsonView(DispatchNoteView.Dispatch.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
     private List<Dispatch> dispatchList;
-    @JsonView(DispatchNoteView.InvoiceDispatchNote.class)
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
-    private InvoiceDispatchNote invoiceDispatchNote;
+    // @JsonView(DispatchNoteView.InvoiceDispatchNote.class)
+    // @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
+    // private InvoiceDispatchNote invoiceDispatchNote;
 
     public DispatchNote(Integer anId) {
         this.id = anId;
