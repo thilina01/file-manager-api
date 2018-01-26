@@ -43,10 +43,10 @@ public class InvoiceController {
     public Invoice save(@RequestBody Invoice invoice, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-            List<InvoiceDispatchNote> invoiceDispatchNoteList = invoice.getInvoiceDispatchNoteList();
-            for (InvoiceDispatchNote invoiceDispatchNote : invoiceDispatchNoteList) {
-                invoiceDispatchNote.setInvoice(invoice);
-            }
+            // List<InvoiceDispatchNote> invoiceDispatchNoteList = invoice.getInvoiceDispatchNoteList();
+            // for (InvoiceDispatchNote invoiceDispatchNote : invoiceDispatchNoteList) {
+            //     invoiceDispatchNote.setInvoice(invoice);
+            // }
             return service.save(invoice);
         } catch (Throwable e) {
             e.printStackTrace();

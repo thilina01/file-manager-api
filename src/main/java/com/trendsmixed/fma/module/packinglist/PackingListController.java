@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.packinglist;
 
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import com.trendsmixed.fma.utility.Page;
@@ -47,6 +48,15 @@ public class PackingListController {
     public PackingList save(@RequestBody PackingList packingList, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
+            List<DispatchNote> dispatchNotes = packingList.getDispatchNoteList();
+            
+            if (dispatchNotes != null) {
+                for (DispatchNote dispatchNote : dispatchNotes) {
+                    dispatchNote.setPackingList(packingList);
+                }
+            }
+
+            packingList = service.save(packingList);
             return service.save(packingList);
 
         } catch (Throwable e) {
@@ -62,7 +72,7 @@ public class PackingListController {
     public void saveMany(@RequestBody List<PackingList> packingLists, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
-
+           
             service.save(packingLists);
 
         } catch (Throwable e) {

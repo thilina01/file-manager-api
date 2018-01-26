@@ -6,7 +6,9 @@ import com.trendsmixed.fma.module.containersize.ContainerSize;
 import com.trendsmixed.fma.module.country.Country;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.port.Port;
+import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
+
 
 import java.util.List;
 import lombok.Data;
@@ -70,6 +72,8 @@ public class PackingList implements Serializable {
     @JsonView(PackingListView.DispatchNote.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "packingList")
     private List<DispatchNote> dispatchNoteList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "packingList")
+    private List<Invoice> invoiceList;
 
     public PackingList(Integer anId) {
         this.id = anId;

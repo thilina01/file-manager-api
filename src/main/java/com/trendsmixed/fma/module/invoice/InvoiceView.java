@@ -11,44 +11,47 @@ import com.trendsmixed.fma.utility.PageView;
  */
 public class InvoiceView {
 
-    public interface Id {
-    }
+        public interface Id {
+        }
 
-    public interface InvoiceType {
-    }
+        public interface InvoiceType {
+        }
 
-    public interface InvoiceDate {
-    }
+        public interface InvoiceDate {
+        }
 
-    public interface InvoiceNumber {
-    }
+        public interface InvoiceNumber {
+        }
 
-    public interface Customer {
-    }
+        public interface Customer {
+        }
 
-    public interface InvoiceDispatchNote {
-    }
+        public interface PackingList {
+        }
 
-    public interface All extends Id, InvoiceNumber, InvoiceDate, PageView.All {
-    }
+        public interface InvoiceDispatchNote {
+        }
 
-    public interface AllAndInvoiceTypeAll extends All, InvoiceType, InvoiceTypeView.All {
-    }
+        public interface All extends Id, InvoiceNumber, InvoiceDate, PageView.All {
+        }
 
-    public interface AllAndCustomerAll extends All, Customer, CustomerView.All {
-    }
+        public interface AllAndInvoiceTypeAll extends All, InvoiceType, InvoiceTypeView.All {
+        }
 
-    public interface AllAndCustomerAllAndInvoiceTypeAll extends AllAndCustomerAll, AllAndInvoiceTypeAll {
-    }
+        public interface AllAndCustomerAll extends All, Customer, CustomerView.All {
+        }
 
-    public interface AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
-            extends All, InvoiceDispatchNote,
-            InvoiceDispatchNoteView.AllAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
-    }
+        public interface AllAndCustomerAllAndInvoiceTypeAll extends AllAndCustomerAll, AllAndInvoiceTypeAll {
+        }
 
-    public interface AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
-            extends AllAndCustomerAllAndInvoiceTypeAll,
-            AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
-    }
+        public interface AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
+                        extends All, InvoiceDispatchNote,
+                        InvoiceDispatchNoteView.AllAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
+        }
+
+        public interface AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
+                        extends AllAndCustomerAllAndInvoiceTypeAll,
+                        AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
+        }
 
 }

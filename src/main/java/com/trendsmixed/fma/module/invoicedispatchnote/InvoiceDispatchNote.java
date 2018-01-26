@@ -1,8 +1,7 @@
 package com.trendsmixed.fma.module.invoicedispatchnote;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
-import com.trendsmixed.fma.module.invoice.Invoice;
+// import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -28,13 +27,13 @@ public class InvoiceDispatchNote implements Serializable {
     @JsonView(InvoiceDispatchNoteView.Id.class)
     @Column(name = "id")
     private Integer id;
-    @JsonView(InvoiceDispatchNoteView.DispatchNote.class)
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "dispatch_note_id", referencedColumnName = "id")
-    private DispatchNote dispatchNote;
-    @JsonView(InvoiceDispatchNoteView.Invoice.class)
-    @JoinColumn(name = "invoice_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Invoice invoice;
+    // @JsonView(InvoiceDispatchNoteView.DispatchNote.class)
+    // @OneToOne(optional = false, fetch = FetchType.LAZY)
+    // @JoinColumn(name = "dispatch_note_id", referencedColumnName = "id")
+    // private DispatchNote dispatchNote;
+    // @JsonView(InvoiceDispatchNoteView.Invoice.class)
+    // @JoinColumn(name = "invoice_id", referencedColumnName = "id")
+    // @ManyToOne(optional = false)
+    // private Invoice invoice;
 
 }
