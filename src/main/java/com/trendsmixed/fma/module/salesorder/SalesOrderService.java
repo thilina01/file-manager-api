@@ -72,5 +72,9 @@ public class SalesOrderService {
         return repository.findByCustomerAndOrderDateBetweenAndSalesOrderType(customer, startDate, endDate, salesOrderType, pageable);
     }
 
+    Page<SalesOrder> findByCustomer(Customer customer, Pageable pageable) {
+        return repository.findByCustomer(customer, pageable);
+    }
+
 
 }

@@ -34,4 +34,6 @@ public interface SalesOrderRepository extends PagingAndSortingRepository<SalesOr
         Page<SalesOrder> findByCustomerAndOrderDateBetweenAndSalesOrderType(Customer customer, Date startDate,
                         Date endDate, SalesOrderType salesOrderType, Pageable pageable);
 
+        Page<SalesOrder> findByCustomer(Customer customer, Pageable pageable);
+
 }

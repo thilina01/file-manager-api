@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.salesorder;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
@@ -28,6 +29,7 @@ public class SalesOrderController {
     private final SalesOrderService service;
     private final SalesOrderItemService salesOrderItemService;
     private final JobTypeService jobTypeService;
+    private final CustomerService customerService;
 
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @GetMapping
@@ -69,6 +71,14 @@ public class SalesOrderController {
     @GetMapping(value = "/customerAndSalesOrderDurationAndSalesOrderTypePage", params = {"customer", "startDate", "endDate", "salesOrderType"})
     public Page<SalesOrder> customerAndSalesOrderDurationAndSalesOrderTypePage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("salesOrderType") String salesOrderType, Pageable pageable) throws ParseException {
         return new Page(service.findByCustomerAndOrderDateBetweenAndSalesOrderType(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new SalesOrderType(Integer.valueOf(salesOrderType)), pageable));
+    }
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @PostMapping("/pageByCustomer")
+    Page<SalesOrder> pageByCustomer(Pageable pageable, @RequestBody Customer customer) {
+        if (customer.getId() == null) {
+            customer = customerService.findByCode(customer.getCode());
+        }
+        return new Page<>(service.findByCustomer(customer, pageable));
     }
     
     @GetMapping("/combo")
