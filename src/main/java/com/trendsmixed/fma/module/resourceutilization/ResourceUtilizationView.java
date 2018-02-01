@@ -4,6 +4,9 @@ import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.module.machine.MachineView;
 import com.trendsmixed.fma.module.production.ProductionView;
 import com.trendsmixed.fma.module.shift.ShiftView;
+import com.trendsmixed.fma.module.costcenter.CostCenterView;
+import com.trendsmixed.fma.module.workcenter.WorkCenterView;
+import com.trendsmixed.fma.module.controlpoint.ControlPointView;
 import com.trendsmixed.fma.module.production.ProductionView.ControlPoint;
 import com.trendsmixed.fma.module.production.ProductionView.Shift;
 import com.trendsmixed.fma.utility.PageView;
@@ -44,12 +47,17 @@ public class ResourceUtilizationView {
                         extends All, Shift, ControlPoint, ProductionView.AllAndShiftAndShiftTypeAndControlPointAll {
         }
 
+        public static interface AllAndControlPointAllWorkCenterCostCenterSection extends ControlPoint,
+        ControlPointView.AllAndWorkCenterAll, WorkCenterView.AllAndCostCenterAll, CostCenterView.AllAndSectionAll {
+}
+
         public interface AllAndProductionAll extends All, Production, ProductionView.All {
         }
 
-        public static interface AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAll
+        public static interface AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection
                         extends All, Production, ProductionView.All, AllAndMachineAll, AllAndEmployeeAll,
-                        ProductionView.AllAndShiftAndShiftTypeAndControlPointAll {
+                        ProductionView.AllAndShiftAndShiftTypeAndControlPointAll,ControlPoint,
+                        ControlPointView.AllAndWorkCenterAll, WorkCenterView.AllAndCostCenterAll, CostCenterView.AllAndSectionAll {
         }
 
 }
