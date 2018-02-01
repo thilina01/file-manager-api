@@ -7,42 +7,54 @@ import com.trendsmixed.fma.module.jobdispatch.JobDispatchView;
 
 public class DispatchView {
 
-    public interface Id {
-    }
+        public interface Id {
+        }
 
-    public interface Customer {
-    }
+        public interface Customer {
+        }
 
-    public interface JobDispatch {
-    }
+        public interface JobDispatch {
+        }
 
-    public interface DispatchSchedule {
-    }
+        public interface DispatchSchedule {
+        }
 
-    public interface DispatchNote {
-    }
+        public interface DispatchNote {
+        }
 
-    public interface Quantity {
-    }
+        public interface Quantity {
+        }
 
-    public interface All extends Id, Quantity {
-    }
+        public interface All extends Id, Quantity {
+        }
 
-    public interface AllAndCustomerAll extends All, Customer, CustomerView.All {
-    }
+       
 
-    public interface AllAndDispatchScheduleAll extends All, DispatchSchedule, DispatchScheduleView.All {
-    }
+        public interface AllAndDispatchScheduleAll extends All, DispatchSchedule, DispatchScheduleView.All {
+        }
 
-    public interface AllAndDispatchNoteAll extends All, DispatchNote, DispatchNoteView.All {
-    }
+        public interface AllAndDispatchNoteAll extends All, DispatchNote, DispatchNoteView.All {
+        }
 
-    public interface AllAndCustomerAllAndJobDispatchAll extends All, Customer, CustomerView.All, JobDispatch, JobDispatchView.All {
-    }
+        public interface AllAndCustomerAll extends All, DispatchNote, DispatchNoteView.All {
+        }
 
-    public interface AllAndDispatchScheduleAndJobAndItem extends All, DispatchSchedule, DispatchScheduleView.AllAndJobAndItem{
-    }
+        public interface AllAndCustomerAllAndJobDispatchAll
+                        extends All, Customer, CustomerView.All, JobDispatch, JobDispatchView.All {
+        }
 
-    public interface AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem extends All, DispatchSchedule, DispatchScheduleView.AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem{
-    }
+        public interface AllAndDispatchScheduleAndJobAndItem
+                        extends All, DispatchSchedule, DispatchScheduleView.AllAndJobAndItem {
+        }
+
+        public interface AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
+                        extends All, DispatchSchedule,
+                        DispatchScheduleView.AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
+        }
+
+        public interface AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAllDispatchNoteAllCustomerAll
+                        extends All, DispatchSchedule,
+                        DispatchScheduleView.AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
+                          DispatchNote, DispatchNoteView.AllAndCustomer {
+        }
 }
