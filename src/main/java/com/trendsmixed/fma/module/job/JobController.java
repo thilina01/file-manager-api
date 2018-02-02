@@ -36,12 +36,21 @@ public class JobController {
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/page")
     Page<Job> page(Pageable pageable) {
-        return service.findAll(pageable);
+        return new Page<>(service.findAll(pageable));
     }
 
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
+    }
+    
+    @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
+    @PostMapping("/pageByItem")
+    Page<Job> pageByItem(Pageable pageable, @RequestBody Item item) {
+        if (item.getId() == null) {
+            item = itemService.findByCode(item.getCode());
+        }
+        return new Page<>(service.findByItem(item, pageable));
     }
 
     @GetMapping("/combo/item/{id}")

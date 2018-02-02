@@ -1,12 +1,11 @@
 package com.trendsmixed.fma.module.job;
-
 import java.util.Date;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.item.Item;
-import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -20,7 +19,7 @@ public class JobService {
     }
 
     public Page<Job> findAll(Pageable pageable) {
-        return new Page<Job>(repository.findAll(pageable));
+        return repository.findAll(pageable);
     }
 
     public List<Combo> getCombo() {
@@ -58,5 +57,11 @@ public class JobService {
     List<Combo> comboByItem(Item item) {
         return repository.comboByItem(item);
     }
+    
+    Page<Job> findByItem(Item item, Pageable pageable) {
+        return repository.findByItem(item, pageable);
+    }
 
 }
+
+
