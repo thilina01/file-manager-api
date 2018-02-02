@@ -3,10 +3,12 @@ package com.trendsmixed.fma.module.dispatchschedule;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
+import com.trendsmixed.fma.module.job.Job;
 import java.util.List;
+import java.util.Date;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.trendsmixed.fma.utility.Page;
+import org.springframework.data.domain.Page;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -20,7 +22,7 @@ public class DispatchScheduleService {
     }
 
     public Page<DispatchSchedule> findAll(Pageable pageable) {
-        return new Page<DispatchSchedule>(repository.findAll(pageable));
+        return repository.findAll(pageable);
     }
 
     public List<Combo> getCombo() {
@@ -50,4 +52,37 @@ public class DispatchScheduleService {
     public Iterable<DispatchSchedule> findBySalesOrderItemSalesOrder(SalesOrder salesOrder) {
         return repository.findBySalesOrderItemSalesOrder(salesOrder);
     }
+
+    public Page<DispatchSchedule>findBySalesOrderItemSalesOrderOrderDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findBySalesOrderItemSalesOrderOrderDateBetween(startDate, endDate, pageable);
+
+    }
+    public Page<DispatchSchedule> findBySalesOrderItemSalesOrderOrderDateAndJob(Date date, Job job, Pageable pageable) {
+        return repository.findBySalesOrderItemSalesOrderOrderDateAndJob(date, job, pageable);
+    }
+
+    public Page<DispatchSchedule> findBySalesOrderItemSalesOrderOrderDateBetweenAndJob(Date startDate, Date endDate, Job job, Pageable pageable) {
+        return repository.findBySalesOrderItemSalesOrderOrderDateBetweenAndJob(startDate, endDate, job, pageable);
+    }
+   
+    public Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrderOrderDateBetween(Customer customer, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findBySalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrderOrderDateBetween(customer, startDate, endDate, pageable);
+    }
+    public Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrderOrderDateAndJob(Customer customer, Date date, Job job, Pageable pageable) {
+        return repository.findBySalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrderOrderDateAndJob(customer, date, job, pageable);
+
+    }
+    public Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrderOrderDateBetweenAndJob(Customer customer, Date startDate, Date endDate, Job job, Pageable pageable) {
+        return repository.findBySalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrderOrderDateBetweenAndJob(customer, startDate, endDate, job, pageable);
+    }
+
+    Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomer(Customer customer, Pageable pageable) {
+        return repository.findBySalesOrderItemSalesOrderCustomer(customer, pageable);
+    }
+
+    Page<DispatchSchedule> findByJob(Job job, Pageable pageable) {
+        return repository.findByJob(job, pageable);
+}
+
+
 }
