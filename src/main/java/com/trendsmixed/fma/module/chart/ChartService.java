@@ -90,6 +90,14 @@ public class ChartService {
         return chartRepository.getBreakdown(startDate, endDate);
     }
 
+    public List getManpowerSummary(Date startDate, Date endDate) {
+        return chartRepository.getManpowerSummary(startDate, endDate);
+    }
+
+    public List getManpowerSummaryBySection(Date startDate, Date endDate, Section section) {
+        return chartRepository.getManpowerSummaryBySection(startDate, endDate, section);
+    }
+
     /**
      * ***********
      */

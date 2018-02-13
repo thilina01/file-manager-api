@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.chart;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.dao.view.ManpowerSummaryView;
 import com.trendsmixed.fma.dao.view.ScrapReasonSummaryView;
 import com.trendsmixed.fma.dao.BreakdownChart;
 import com.trendsmixed.fma.module.customer.Customer;
@@ -12,6 +13,7 @@ import com.trendsmixed.fma.module.losstype.LossType;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.utility.Format;
 import java.util.ArrayList;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -302,6 +304,21 @@ public class ChartController {
     public List getMonthlyNetProfit(@RequestParam(value = "startDate") String startDateText,
             @RequestParam(value = "endDate") String endDateText) {
         return chartService.getMonthlyNetProfit(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+    }
+
+    @JsonView(ManpowerSummaryView.All.class)
+    @GetMapping("/manpowerSummary")
+    public List getManpowerSummary(@RequestParam(value = "startDate") long startDate,
+            @RequestParam(value = "endDate") long endDate) {
+        return chartService.getManpowerSummary(new Date(startDate), new Date(endDate));
+    }
+
+    @JsonView(ManpowerSummaryView.All.class)
+    @GetMapping("/manpowerSummaryBySection")
+    public List getManpowerSummaryBySection(@RequestParam(value = "startDate") long startDate,
+            @RequestParam(value = "endDate") long endDate,
+            @RequestParam(value = "section") String sectionId) {
+        return chartService.getManpowerSummaryBySection(new Date(startDate), new Date(endDate), new Section(Integer.valueOf(sectionId)));
     }
 
 }
