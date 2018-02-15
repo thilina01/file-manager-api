@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.chart;
 
+import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
 import java.util.Date;
@@ -98,6 +99,14 @@ public class ChartService {
         return chartRepository.getManpowerSummaryBySection(startDate, endDate, section);
     }
 
+    public List getResourceUtilizationDistinctEmployeeBySectionAndStartTimeBetween(Section section, Date startDate, Date endDate) {
+        return chartRepository.getResourceUtilizationDistinctEmployeeBySectionAndStartTimeBetween(section, startDate, endDate);
+    }
+    
+    public List getResourceUtilizationDistinctEmployeeByControlPointAndStartTimeBetween(ControlPoint controlPoint, Date startDate, Date endDate) {
+        return chartRepository.getResourceUtilizationDistinctEmployeeByControlPointAndStartTimeBetween(controlPoint, startDate, endDate);
+    }
+    
     /**
      * ***********
      */

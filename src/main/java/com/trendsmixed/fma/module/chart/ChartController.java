@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.view.ManpowerSummaryView;
 import com.trendsmixed.fma.dao.view.ScrapReasonSummaryView;
 import com.trendsmixed.fma.dao.BreakdownChart;
+import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.module.location.Location;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
@@ -321,4 +323,20 @@ public class ChartController {
         return chartService.getManpowerSummaryBySection(new Date(startDate), new Date(endDate), new Section(Integer.valueOf(sectionId)));
     }
 
+    @JsonView(EmployeeView.All.class)
+    @GetMapping("/resourceUtilizationDistinctEmployeeBySectionAndStartTimeBetween")
+    public List getResourceUtilizationDistinctEmployeeBySectionAndStartTimeBetween(@RequestParam(value = "startDate") long startDate,
+            @RequestParam(value = "endDate") long endDate,
+            @RequestParam(value = "section") String sectionId) {
+        return chartService.getResourceUtilizationDistinctEmployeeBySectionAndStartTimeBetween(new Section(Integer.valueOf(sectionId)), new Date(startDate), new Date(endDate));
+    }
+    
+    @JsonView(EmployeeView.All.class)
+    @GetMapping("/resourceUtilizationDistinctEmployeeByControlPointAndStartTimeBetween")
+    public List getResourceUtilizationDistinctEmployeeByControlPointAndStartTimeBetween(
+        @RequestParam(value = "controlPoint") String controlPointId, 
+        @RequestParam(value = "startDate") long startDate,
+        @RequestParam(value = "endDate") long endDate) {
+        return chartService.getResourceUtilizationDistinctEmployeeByControlPointAndStartTimeBetween(new ControlPoint(Integer.valueOf(controlPointId)), new Date(startDate), new Date(endDate));
+    }
 }

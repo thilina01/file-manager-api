@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.chart;
 
+import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
 import java.util.Date;
@@ -391,5 +392,17 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
                         + " ORDER BY COUNT(DISTINCT resourceUtilization.employee)DESC")
         List getManpowerSummaryBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
                         @Param("section") Section section);
+
+        @Query(value = "SELECT DISTINCT resourceUtilization.employee " + " FROM ResourceUtilization resourceUtilization"
+                        + " WHERE resourceUtilization.production.controlPoint.workCenter.costCenter.section = :section"
+                        + " AND resourceUtilization.startTime BETWEEN :startDate AND :endDate")
+        List getResourceUtilizationDistinctEmployeeBySectionAndStartTimeBetween(@Param("section") Section section,
+                        @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+        @Query(value = "SELECT DISTINCT resourceUtilization.employee " + " FROM ResourceUtilization resourceUtilization"
+                        + " WHERE resourceUtilization.production.controlPoint = :controlPoint"
+                        + " AND resourceUtilization.startTime BETWEEN :startDate AND :endDate")
+        List getResourceUtilizationDistinctEmployeeByControlPointAndStartTimeBetween(@Param("controlPoint") ControlPoint controlPoint,
+                        @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
 }
