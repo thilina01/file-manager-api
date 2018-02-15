@@ -2,7 +2,10 @@ package com.trendsmixed.fma.module.accident;
 
 import com.trendsmixed.fma.dao.Combo;
 import java.util.List;
+import java.util.Date;
 import lombok.AllArgsConstructor;
+import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.employee.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -40,4 +43,29 @@ public class AccidentService {
     public Accident findByCode(String code) {
         return repository.findByCode(code);
     }
+
+    public Page<Accident> findByAccidentDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByAccidentDateBetween(startDate, endDate, pageable);
+    }
+
+    public Page<Accident> findByAccidentDateAndSection(Date date, Section section, Pageable pageable) {
+        return repository.findByAccidentDateAndSection(date, section, pageable);
+    }
+
+    public Page<Accident> findBySectionAndAccidentDateBetween(Section section, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findBySectionAndAccidentDateBetween(section, startDate, endDate, pageable);
+    }
+
+    public Page<Accident> findByAccidentDateAndEmployee(Date date, Employee employee, Pageable pageable) {
+        return repository.findByAccidentDateAndEmployee(date, employee, pageable);
+    }
+
+    public Page<Accident> findByEmployeeAndAccidentDateBetween(Employee employee, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByEmployeeAndAccidentDateBetween(employee, startDate, endDate, pageable);
+    }
+
+    Page<Accident> findByEmployee(Employee employee, Pageable pageable) {
+        return repository.findByEmployee(employee, pageable);
+    }
+    
 }
