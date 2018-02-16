@@ -1,7 +1,8 @@
 package com.trendsmixed.fma.module.breakdown;
-
-import com.trendsmixed.fma.utility.Page;
+import org.springframework.data.domain.Page;
 import lombok.AllArgsConstructor;
+import java.util.Date;
+import com.trendsmixed.fma.module.machine.Machine;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class BreakdownService {
     }
 
     public Page<Breakdown> findAll(Pageable pageable) {
-        return new Page<>(repository.findAll(pageable));
+    return repository.findAll(pageable);
     }
 
     public Breakdown save(Breakdown breakdown) {
@@ -29,5 +30,18 @@ public class BreakdownService {
 
     public void delete(int id) {
         repository.delete(id);
+    }
+    
+    public Page<Breakdown> findByBreakdownTimeBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByBreakdownTimeBetween(startDate, endDate, pageable);
+    }
+    public Page<Breakdown> findByBreakdownTimeBetweenAndMachine(Date startDate, Date endDate, Machine machine, Pageable pageable) {
+        return repository.findByBreakdownTimeBetweenAndMachine(startDate, endDate, machine, pageable);
+    }
+    public Page<Breakdown> findByBreakdownTimeAndMachine(Date date, Machine machine, Pageable pageable) {
+        return repository.findByBreakdownTimeAndMachine(date, machine, pageable);
+    }
+    Page<Breakdown> findByMachine(Machine machine, Pageable pageable) {
+        return repository.findByMachine(machine, pageable);
     }
 }
