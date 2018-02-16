@@ -3,13 +3,11 @@ package com.trendsmixed.fma.module.operationprogress;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.trendsmixed.fma.dao.Combo;
 import lombok.AllArgsConstructor;
 import java.util.Date;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.job.Job;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 
 @AllArgsConstructor
@@ -64,25 +62,17 @@ public class OperationProgressService {
     }
     public Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateAndOperationProductionControlPoint(Section section, Date date, ControlPoint controlPoint, Job job, Pageable pageable) {
         return repository.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateAndOperationProductionControlPoint(section, date, controlPoint, job, pageable);
-
     }
 
+    Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSection(Section section, Pageable pageable) {
+        return repository.findByOperationProductionControlPointWorkCenterCostCenterSection(section, pageable);
+    }
 
+    Page<OperationProgress> findByOperationJob(Job job, Pageable pageable) {
+        return repository.findByOperationJob(job, pageable);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    Page<OperationProgress> findByOperationProductionControlPoint(ControlPoint controlPoint, Pageable pageable) {
+        return repository.findByOperationProductionControlPoint(controlPoint, pageable);
+   }
 }

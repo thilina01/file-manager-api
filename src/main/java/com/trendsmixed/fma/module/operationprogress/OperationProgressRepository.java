@@ -1,16 +1,13 @@
 package com.trendsmixed.fma.module.operationprogress;
 
-import java.util.List;
 import java.util.Date;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.job.Job;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.trendsmixed.fma.dao.Combo;
 
 public interface OperationProgressRepository extends PagingAndSortingRepository<OperationProgress, Integer> {
 
@@ -39,4 +36,9 @@ public interface OperationProgressRepository extends PagingAndSortingRepository<
                         Section section, Date startDate, Date endDate, ControlPoint controlPoint, Pageable pageable,
                         Job job);
 
+        Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSection(Section section, Pageable pageable);
+
+        Page<OperationProgress> findByOperationJob(Job job, Pageable pageable);
+
+        Page<OperationProgress> findByOperationProductionControlPoint(ControlPoint controlPoint, Pageable pageable);
 }

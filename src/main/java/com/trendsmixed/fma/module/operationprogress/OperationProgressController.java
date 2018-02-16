@@ -4,14 +4,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import java.text.ParseException;
 import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.section.SectionService;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
+import com.trendsmixed.fma.module.controlpoint.ControlPointService;
 import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.job.JobService;
 import com.trendsmixed.fma.utility.Format;
 import org.springframework.data.domain.Pageable;
 
@@ -23,6 +25,9 @@ public class OperationProgressController {
 
     private final AppSessionService appSessionService;
     private final OperationProgressService service;
+    private final SectionService sectionService;
+    private final JobService jobService;
+    private final ControlPointService controlPointService;
 
     @JsonView(OperationProgressView.All.class)
     @GetMapping
@@ -73,6 +78,33 @@ public class OperationProgressController {
     @GetMapping(value = "/sectionAndJobAndProductionDateAndControlPointPage", params = {"section", "productionDate", "controlPoint", "job"})
     public Page<OperationProgress> sectionAndJobAndProductionDateAndControlPointPage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("controlPoint") String controlPoint, @RequestParam("job") String job, Pageable pageable) throws ParseException {
         return new Page(service.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateAndOperationProductionControlPoint(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(productionDate), new ControlPoint(Integer.valueOf(controlPoint)), new Job(Integer.valueOf(job)), pageable));
+    }
+
+    @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
+    @PostMapping("/pageBySection")
+    Page<OperationProgress> pageBySection(Pageable pageable, @RequestBody Section section) {
+        if (section.getId() == null) {
+            section = sectionService.findByCode(section.getCode());
+        }
+        return new Page<>(service.findByOperationProductionControlPointWorkCenterCostCenterSection(section, pageable));
+    }
+
+    @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
+    @PostMapping("/pageByJob")
+    Page<OperationProgress> pageByJob(Pageable pageable, @RequestBody Job job) {
+        if (job.getId() == null) {
+            job = jobService.findByJobNo(job.getJobNo());
+        }
+        return new Page<>(service.findByOperationJob(job, pageable));
+    }
+
+    @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
+    @PostMapping("/pageByControlPoint")
+    Page<OperationProgress> pageByControlPoint(Pageable pageable, @RequestBody ControlPoint controlPoint) {
+        if (controlPoint.getId() == null) {
+            controlPoint = controlPointService.findByCode(controlPoint.getCode());
+        }
+        return new Page<>(service.findByOperationProductionControlPoint(controlPoint, pageable));
     }
 
     @JsonView(OperationProgressView.All.class)
