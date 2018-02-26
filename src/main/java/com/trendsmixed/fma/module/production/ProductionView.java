@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.production;
 
 import com.trendsmixed.fma.module.controlpoint.ControlPointView;
+import com.trendsmixed.fma.module.controlpoint.ControlPointView.ControlPointType;
 import com.trendsmixed.fma.module.costcenter.CostCenterView;
 import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.manpower.ManpowerView;
@@ -57,7 +58,7 @@ public class ProductionView {
         public interface Shift {
         }
 
-        public interface ShiftType extends ShiftTypeView.All{
+        public interface ShiftType extends ShiftTypeView.All {
         }
 
         public interface ProductionEmployee extends ProductionEmployeeView.All {
@@ -70,8 +71,7 @@ public class ProductionView {
         public interface AllAndResourceUtilizationAll extends All, ResourceUtilization, ResourceUtilizationView.All {
         }
 
-        public static interface AllAndShiftAndShiftType
-                        extends All, Shift, ShiftView.All, ShiftType  {
+        public static interface AllAndShiftAndShiftType extends All, Shift, ShiftView.All, ShiftType {
         }
 
         public static interface AllAndShiftAndShiftTypeAndControlPointAll
@@ -88,7 +88,18 @@ public class ProductionView {
                         OperationView.AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll {
         }
 
+        public static interface AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSection extends
+                        AllAndShiftAndShiftType, ControlPoint, ControlPointType, ControlPointView.AllAndWorkCenterAll,
+                        WorkCenterView.AllAndCostCenterAll, CostCenterView.AllAndSectionAll {
+        }
+
         public static interface AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll
+                        extends AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection,
+                        AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll,
+                        JobView.AllAndItemAllAndJobTypeAll {
+        }
+
+        public static interface AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll
                         extends AllAndShiftAllAndControlPointAllWorkCenterCostCenterSection,
                         AllAndShiftAllAndControlPointAllManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAll,
                         JobView.AllAndItemAllAndJobTypeAll {

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.manpower.Manpower;
 import com.trendsmixed.fma.module.operation.Operation;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.controlpointtype.ControlPointType;
 import com.trendsmixed.fma.module.manpower.ManpowerService;
 import com.trendsmixed.fma.module.operation.OperationService;
 import com.trendsmixed.fma.module.section.Section;
@@ -44,40 +45,87 @@ public class ProductionController {
         return new Page(service.findAll(pageable));
     }
 
-    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
     @GetMapping(value = "/sectionAndProductionDateAndShiftPage", params = {"section", "productionDate", "shift"})
-    public Page<Operation> sectionAndProductionDateAndShiftPage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+    public Page<Production> sectionAndProductionDateAndShiftPage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
         return new Page(service.findByControlPointWorkCenterCostCenterSectionAndProductionDateAndShift(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
     }
 
-    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
     @GetMapping(value = "/sectionAndProductionDurationAndShiftPage", params = {"section", "startDate", "endDate", "shift"})
-    public Page<Operation> sectionAndProductionDurationAndShiftPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+    public Page<Production> sectionAndProductionDurationAndShiftPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
         return new Page(service.findByControlPointWorkCenterCostCenterSectionAndProductionDateBetweenAndShift(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
     }
 
-    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
     @GetMapping(value = "/sectionAndProductionDurationPage", params = {"section", "startDate", "endDate"})
-    public Page<Operation> sectionAndProductionDurationPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
+    public Page<Production> sectionAndProductionDurationPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
         return new Page(service.findByControlPointWorkCenterCostCenterSectionAndProductionDateBetween(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
     }
 
-    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
     @GetMapping(value = "/productionDateAndShiftPage", params = {"productionDate", "shift"})
-    public Page<Operation> productionDateAndShiftPage(@RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+    public Page<Production> productionDateAndShiftPage(@RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
         return new Page(service.findByProductionDateAndShift(Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
     }
 
-    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
     @GetMapping(value = "/productionDurationAndShiftPage", params = {"startDate", "endDate", "shift"})
-    public Page<Operation> productionDurationAndShiftPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+    public Page<Production> productionDurationAndShiftPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
         return new Page(service.findByProductionDateBetweenAndShift(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
     }
-
-    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
     @GetMapping(value = "/productionDurationPage", params = {"startDate", "endDate"})
-    public Page<Operation> productionDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
+    public Page<Production> productionDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
         return new Page(service.findByProductionDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+    }
+
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @GetMapping(value = "/sectionAndShiftAndProductionDurationAndControlPointTypePage", params = {"section","shift", "startDate", "endDate", "controlPointType"})
+    public Page<Production> sectionAndShiftAndProductionDurationAndControlPointTypePage(@RequestParam("section") String section,@RequestParam("shift") String shift, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,  @RequestParam("controlPointType") String controlPointType, Pageable pageable) throws ParseException {
+        return new Page(service.findByControlPointWorkCenterCostCenterSectionAndShiftAndProductionDateBetweenAndControlPointControlPointType(new Section(Integer.valueOf(section)),new Shift(Integer.valueOf(shift)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),  new ControlPointType(Integer.valueOf(controlPointType)), pageable));
+    }
+
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @GetMapping(value = "/sectionAndShiftAndProductionDateAndControlPointTypePage", params = {"section", "productionDate", "controlPointType", "shift"})
+    public Page<Production> sectionAndShiftAndProductionDateAndControlPointTypePage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("controlPointType") String controlPointType, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+        return new Page(service.findByControlPointWorkCenterCostCenterSectionAndShiftAndProductionDateAndControlPointControlPointType(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(productionDate), new ControlPointType(Integer.valueOf(controlPointType)), new Shift(Integer.valueOf(shift)), pageable));
+    }
+
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @GetMapping(value = "/productionDateAndControlPointTypePage", params = {"productionDate", "controlPointType"})
+    public Page<Production> productionDateAndControlPointTypePage(@RequestParam("productionDate") String productionDate, @RequestParam("controlPointType") String controlPointType, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionDateAndControlPointControlPointType(Format.yyyy_MM_dd.parse(productionDate), new ControlPointType(Integer.valueOf(controlPointType)), pageable));
+    }
+
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @GetMapping(value = "/productionDurationAndControlPointTypePage", params = {"startDate", "endDate", "controlPointType"})
+    public Page<Production> productionDurationAndControlPointTypePage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("controlPointType") String controlPointType, Pageable pageable) throws ParseException {
+        return new Page(service.findByProductionDateBetweenAndControlPointControlPointType(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new ControlPointType(Integer.valueOf(controlPointType)), pageable));
+    }
+
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @GetMapping(value = "/controlPointTypeAndProductionDateAndShiftPage", params = {"controlPointType", "productionDate", "shift"})
+    public Page<Production> controlPointTypeAndProductionDateAndShiftPage(@RequestParam("controlPointType") String controlPointType, @RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+        return new Page(service.findByControlPointControlPointTypeAndProductionDateAndShift(new ControlPointType(Integer.valueOf(controlPointType)), Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
+    }
+
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @GetMapping(value = "/controlPointTypeAndProductionDurationAndShiftPage", params = {"controlPointType", "startDate", "endDate", "shift"})
+    public Page<Production> controlPointTypeAndProductionDurationAndShiftPage(@RequestParam("controlPointType") String controlPointType, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
+        return new Page(service.findByControlPointControlPointTypeAndProductionDateBetweenAndShift(new ControlPointType(Integer.valueOf(controlPointType)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
+    }
+
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @GetMapping(value = "/controlPointTypeAndProductionDateAndSectionPage", params = {"controlPointType", "productionDate", "section"})
+    public Page<Production> controlPointTypeAndProductionDateAndSectionPage(@RequestParam("controlPointType") String controlPointType, @RequestParam("productionDate") String productionDate, @RequestParam("section") String section, Pageable pageable) throws ParseException {
+        return new Page(service.findByControlPointControlPointTypeAndProductionDateAndControlPointWorkCenterCostCenterSection(new ControlPointType(Integer.valueOf(controlPointType)), Format.yyyy_MM_dd.parse(productionDate), new Section(Integer.valueOf(section)), pageable));
+    }
+
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @GetMapping(value = "/controlPointTypeAndProductionDurationAndSectionPage", params = {"controlPointType", "startDate", "endDate", "section"})
+    public Page<Production> controlPointTypeAndProductionDurationAndSectionPage(@RequestParam("controlPointType") String controlPointType, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("section") String section, Pageable pageable) throws ParseException {
+        return new Page(service.findByControlPointControlPointTypeAndProductionDateBetweenAndControlPointWorkCenterCostCenterSection(new ControlPointType(Integer.valueOf(controlPointType)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Section(Integer.valueOf(section)), pageable));
     }
 
     @JsonView(ProductionView.All.class)
@@ -162,7 +210,7 @@ public class ProductionController {
         }
     }
 
-    @JsonView(ProductionView.AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
+    @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
     @PostMapping("/ByProductionDateAndShiftAndControlPoint")
     public Production ByProductionDateAndShiftAndControlPoint(@RequestBody Production production,
             @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

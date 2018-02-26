@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.production;
 
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
+import com.trendsmixed.fma.module.controlpointtype.ControlPointType;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
 
@@ -71,5 +72,39 @@ public class ProductionService {
         return repository.findByProductionDateBetween(startDate, endDate, pageable);
 
     }
+    
+    public Page<Production> findByControlPointWorkCenterCostCenterSectionAndShiftAndProductionDateBetweenAndControlPointControlPointType(Section section,Shift shift, Date startDate, Date endDate,  ControlPointType controlPointType, Pageable pageable) {
+        return repository.findByControlPointWorkCenterCostCenterSectionAndShiftAndProductionDateBetweenAndControlPointControlPointType(section, shift, startDate, endDate, controlPointType, pageable);
+    }
+
+    public Page<Production> findByControlPointWorkCenterCostCenterSectionAndShiftAndProductionDateAndControlPointControlPointType(Section section, Date date, ControlPointType controlPointType, Shift shift, Pageable pageable) {
+        return repository.findByControlPointWorkCenterCostCenterSectionAndShiftAndProductionDateAndControlPointControlPointType(section, date, controlPointType, shift, pageable);
+    }
+
+    public Page<Production> findByProductionDateAndControlPointControlPointType(Date date, ControlPointType controlPointType, Pageable pageable) {
+        return repository.findByProductionDateAndControlPointControlPointType(date, controlPointType, pageable);
+    }
+
+    public Page<Production> findByProductionDateBetweenAndControlPointControlPointType(Date startDate, Date endDate, ControlPointType controlPointType, Pageable pageable) {
+        return repository.findByProductionDateBetweenAndControlPointControlPointType(startDate, endDate, controlPointType, pageable);
+    }
+
+    public Page<Production> findByControlPointControlPointTypeAndProductionDateAndShift(ControlPointType controlPointType, Date date, Shift shift, Pageable pageable) {
+        return repository.findByControlPointControlPointTypeAndProductionDateAndShift(controlPointType, date, shift, pageable);
+
+    }
+
+    public Page<Production> findByControlPointControlPointTypeAndProductionDateBetweenAndShift(ControlPointType controlPointType, Date startDate, Date endDate, Shift shift, Pageable pageable) {
+        return repository.findByControlPointControlPointTypeAndProductionDateBetweenAndShift(controlPointType, startDate, endDate, shift, pageable);
+    } 
+
+    public Page<Production> findByControlPointControlPointTypeAndProductionDateAndControlPointWorkCenterCostCenterSection(ControlPointType controlPointType, Date date, Section section, Pageable pageable) {
+        return repository.findByControlPointControlPointTypeAndProductionDateAndControlPointWorkCenterCostCenterSection(controlPointType, date, section, pageable);
+
+    }
+
+    public Page<Production> findByControlPointControlPointTypeAndProductionDateBetweenAndControlPointWorkCenterCostCenterSection(ControlPointType controlPointType, Date startDate, Date endDate, Section section, Pageable pageable) {
+        return repository.findByControlPointControlPointTypeAndProductionDateBetweenAndControlPointWorkCenterCostCenterSection(controlPointType, startDate, endDate, section, pageable);
+    } 
 
 }
