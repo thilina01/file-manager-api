@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-
 public interface OperationProgressRepository extends PagingAndSortingRepository<OperationProgress, Integer> {
 
         Page<OperationProgress> findByOperationProductionProductionDateBetween(Date startDate, Date endDate,
@@ -33,12 +32,32 @@ public interface OperationProgressRepository extends PagingAndSortingRepository<
                         Section section, Date date, ControlPoint controlPoint, Job job, Pageable pageable);
 
         Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateBetweenAndOperationProductionControlPoint(
-                        Section section, Date startDate, Date endDate, ControlPoint controlPoint, Pageable pageable,
-                        Job job);
+                        Section section, Job job, Date startDate, Date endDate, ControlPoint controlPoint,
+                        Pageable pageable);
 
-        Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSection(Section section, Pageable pageable);
+        Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSection(Section section,
+                        Pageable pageable);
 
         Page<OperationProgress> findByOperationJob(Job job, Pageable pageable);
 
         Page<OperationProgress> findByOperationProductionControlPoint(ControlPoint controlPoint, Pageable pageable);
+
+        Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationProductionProductionDateAndOperationJob(
+                        Section section, Date date, Job job, Pageable pageable);
+
+        Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationProductionProductionDateBetweenAndOperationJob(
+                        Section section, Date startDate, Date endDate, Job job, Pageable pageable);
+
+        Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationProductionProductionDateAndOperationProductionControlPoint(
+                        Section section, Date date, ControlPoint controlPoint, Pageable pageable);
+
+        Page<OperationProgress> findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationProductionProductionDateBetweenAndOperationProductionControlPoint(
+                        Section section, Date startDate, Date endDate, ControlPoint controlPoint, Pageable pageable);
+
+        Page<OperationProgress> findByOperationProductionControlPointAndOperationProductionProductionDateAndOperationJob(
+                        ControlPoint controlPoint, Date date, Job job, Pageable pageable);
+
+        Page<OperationProgress> findByOperationProductionControlPointAndOperationProductionProductionDateBetweenAndOperationJob(
+                        ControlPoint controlPoint, Date startDate, Date endDate, Job job, Pageable pageable);
+
 }

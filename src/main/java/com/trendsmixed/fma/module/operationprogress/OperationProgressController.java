@@ -70,14 +70,44 @@ public class OperationProgressController {
         return new Page(service.findByOperationProductionProductionDateAndOperationJob(Format.yyyy_MM_dd.parse(productionDate), new Job(Integer.valueOf(job)), pageable));
     }
     @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/sectionAndJobAndProductionDurationAndControlPointPage", params = {"section", "startDate", "endDate", "controlPoint", "job"})
-    public Page<OperationProgress> sectionAndJobAndProductionDurationAndControlPointPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("job") String job, @RequestParam("controlPoint") String controlPoint, Pageable pageable) throws ParseException {
-        return new Page(service.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateBetweenAndOperationProductionControlPoint(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Job(Integer.valueOf(job)), new ControlPoint(Integer.valueOf(controlPoint)), pageable));
+    @GetMapping(value = "/sectionAndJobAndProductionDurationAndControlPointPage", params = {"section","job", "startDate", "endDate", "controlPoint"})
+    public Page<OperationProgress> sectionAndJobAndProductionDurationAndControlPointPage(@RequestParam("section") String section,@RequestParam("job") String job, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,  @RequestParam("controlPoint") String controlPoint, Pageable pageable) throws ParseException {
+        return new Page(service.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateBetweenAndOperationProductionControlPoint(new Section(Integer.valueOf(section)),new Job(Integer.valueOf(job)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),  new ControlPoint(Integer.valueOf(controlPoint)), pageable));
     }
     @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
     @GetMapping(value = "/sectionAndJobAndProductionDateAndControlPointPage", params = {"section", "productionDate", "controlPoint", "job"})
     public Page<OperationProgress> sectionAndJobAndProductionDateAndControlPointPage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("controlPoint") String controlPoint, @RequestParam("job") String job, Pageable pageable) throws ParseException {
         return new Page(service.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationJobAndOperationProductionProductionDateAndOperationProductionControlPoint(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(productionDate), new ControlPoint(Integer.valueOf(controlPoint)), new Job(Integer.valueOf(job)), pageable));
+    }
+    @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
+    @GetMapping(value = "/controlPointAndProductionDateAndJobPage", params = {"controlPoint", "productionDate", "job"})
+    public Page<OperationProgress> controlPointAndProductionDateAndJobPage(@RequestParam("controlPoint") String controlPoint, @RequestParam("productionDate") String productionDate, @RequestParam("job") String job, Pageable pageable) throws ParseException {
+        return new Page(service.findByOperationProductionControlPointAndOperationProductionProductionDateAndOperationJob(new ControlPoint(Integer.valueOf(controlPoint)), Format.yyyy_MM_dd.parse(productionDate), new Job(Integer.valueOf(job)), pageable));
+    }
+    @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
+    @GetMapping(value = "/controlPointAndProductionDurationAndJobPage", params = {"controlPoint", "startDate", "endDate", "job"})
+    public Page<OperationProgress> controlPointAndProductionDurationAndJobPage(@RequestParam("controlPoint") String controlPoint, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("job") String job, Pageable pageable) throws ParseException {
+        return new Page(service.findByOperationProductionControlPointAndOperationProductionProductionDateBetweenAndOperationJob(new ControlPoint(Integer.valueOf(controlPoint)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Job(Integer.valueOf(job)), pageable));
+    }
+    @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
+    @GetMapping(value = "/sectionAndProductionDateAndControlPointPage", params = {"section", "productionDate", "controlPoint"})
+    public Page<OperationProgress> sectionAndProductionDateAndControlPointPage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("controlPoint") String controlPoint, Pageable pageable) throws ParseException {
+        return new Page(service.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationProductionProductionDateAndOperationProductionControlPoint(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(productionDate), new ControlPoint(Integer.valueOf(controlPoint)), pageable));
+    }
+    @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
+    @GetMapping(value = "/sectionAndProductionDurationAndControlPointPage", params = {"section", "startDate", "endDate", "controlPoint"})
+    public Page<OperationProgress> sectionAndProductionDurationAndControlPointPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("controlPoint") String controlPoint, Pageable pageable) throws ParseException {
+        return new Page(service.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationProductionProductionDateBetweenAndOperationProductionControlPoint(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new ControlPoint(Integer.valueOf(controlPoint)), pageable));
+    }
+    @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
+    @GetMapping(value = "/sectionAndProductionDateAndJobPage", params = {"section", "productionDate", "job"})
+    public Page<OperationProgress> sectionAndProductionDateAndJobPage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("job") String job, Pageable pageable) throws ParseException {
+        return new Page(service.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationProductionProductionDateAndOperationJob(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(productionDate), new Job(Integer.valueOf(job)), pageable));
+    }
+    @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
+    @GetMapping(value = "/sectionAndProductionDurationAndJobPage", params = {"section", "startDate", "endDate", "job"})
+    public Page<OperationProgress> sectionAndProductionDurationAndJobPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("job") String job, Pageable pageable) throws ParseException {
+        return new Page(service.findByOperationProductionControlPointWorkCenterCostCenterSectionAndOperationProductionProductionDateBetweenAndOperationJob(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Job(Integer.valueOf(job)), pageable));
     }
 
     @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
