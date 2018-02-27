@@ -376,10 +376,10 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
         List getMonthlyNetProfit(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
         @Query(value = "SELECT "
-                        + " new com.trendsmixed.fma.dao.ManpowerSummary(resourceUtilization.production.controlPoint, COUNT(DISTINCT resourceUtilization.employee)) "
+                        + " new com.trendsmixed.fma.dao.ManpowerSummary(resourceUtilization.production.controlPoint.workCenter.costCenter.section, COUNT(DISTINCT resourceUtilization.employee)) "
                         + " FROM ResourceUtilization resourceUtilization"
                         + " WHERE resourceUtilization.startTime  BETWEEN :startDate AND :endDate"
-                        + " GROUP BY resourceUtilization.production.controlPoint"
+                        + " GROUP BY resourceUtilization.production.controlPoint.workCenter.costCenter.section"
                         + " ORDER BY COUNT(DISTINCT resourceUtilization.employee)DESC")
         List getManpowerSummary(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
