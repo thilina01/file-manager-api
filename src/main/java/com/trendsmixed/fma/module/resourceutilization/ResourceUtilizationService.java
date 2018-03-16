@@ -48,25 +48,57 @@ public class ResourceUtilizationService {
     public Page<ResourceUtilization> findByProductionProductionDateBetweenAndProductionShift(Date startDate, Date endDate, Shift shift, Pageable pageable) {
         return repository.findByProductionProductionDateBetweenAndProductionShift(startDate, endDate, shift, pageable);
     }
+
     public Page<ResourceUtilization> findByProductionProductionDateBetween(Date startDate, Date endDate, Pageable pageable) {
         return repository.findByProductionProductionDateBetween(startDate, endDate, pageable);
     }
+
     public Page<ResourceUtilization> findByProductionProductionDateAndProductionShift(Date date, Shift shift, Pageable pageable) {
         return repository.findByProductionProductionDateAndProductionShift(date, shift, pageable);
     }
+
     public Page<ResourceUtilization> findByProductionProductionDateAndEmployee(Date date, Employee employee, Pageable pageable) {
         return repository.findByProductionProductionDateAndEmployee(date, employee, pageable);
     }
+
     public Page<ResourceUtilization> findByProductionProductionDateBetweenAndEmployee(Date startDate, Date endDate, Employee employee, Pageable pageable) {
         return repository.findByProductionProductionDateBetweenAndEmployee(startDate, endDate, employee, pageable);
     }
+
     public Page<ResourceUtilization> findByMachineAndProductionProductionDateBetween(Machine machine, Date startDate, Date endDate, Pageable pageable) {
         return repository.findByMachineAndProductionProductionDateBetween(machine, startDate, endDate, pageable);
     }
+
     public Page<ResourceUtilization> findByMachineAndEmployeeAndProductionProductionDateAndProductionShift(Machine machine, Date date,Employee employee,Shift shift, Pageable pageable) {
         return repository.findByMachineAndEmployeeAndProductionProductionDateAndProductionShift(machine, date, employee,shift, pageable);
     }
-    public Page<ResourceUtilization> findByMachineAndEmployeeAndProductionProductionDateBetweenAndProductionShift(Machine machine, Date startDate, Date endDate, Employee employee, Shift shift, Pageable pageable) {
-        return repository.findByMachineAndEmployeeAndProductionProductionDateBetweenAndProductionShift(machine, startDate, endDate,employee,shift,pageable);
+
+    public Page<ResourceUtilization> findByMachineAndEmployeeAndProductionProductionDateBetweenAndProductionShift(Machine machine,Employee employee, Date startDate, Date endDate,  Shift shift, Pageable pageable) {
+        return repository.findByMachineAndEmployeeAndProductionProductionDateBetweenAndProductionShift(machine,employee, startDate, endDate,shift,pageable);
     }
+
+    public Page<ResourceUtilization> findByMachineAndProductionProductionDateAndProductionShift(Machine machine, Date date, Shift shift, Pageable pageable) {
+        return repository.findByMachineAndProductionProductionDateAndProductionShift(machine, date, shift, pageable);
+    }
+    
+    public Page<ResourceUtilization> findByMachineAndProductionProductionDateBetweenAndProductionShift(Machine machine, Date startDate, Date endDate, Shift shift, Pageable pageable) {
+        return repository.findByMachineAndProductionProductionDateBetweenAndProductionShift(machine, startDate, endDate, shift, pageable);
+    }
+
+    public Page<ResourceUtilization> findByMachineAndProductionProductionDateAndEmployee(Machine machine, Date date, Employee employee, Pageable pageable) {
+       return repository.findByMachineAndProductionProductionDateAndEmployee(machine, date, employee, pageable);
+    }
+
+    public Page<ResourceUtilization> findByMachineAndProductionProductionDateBetweenAndEmployee(Machine machine, Date startDate, Date endDate, Employee employee, Pageable pageable) {
+       return repository.findByMachineAndProductionProductionDateBetweenAndEmployee(machine, startDate, endDate, employee, pageable);
+    }
+
+    public Page<ResourceUtilization> findByEmployeeAndProductionProductionDateAndProductionShift(Employee employee, Date date, Shift shift, Pageable pageable) {
+       return repository.findByEmployeeAndProductionProductionDateAndProductionShift(employee, date, shift, pageable);
+    }
+
+    public Page<ResourceUtilization> findByEmployeeAndProductionProductionDateBetweenAndProductionShift(Employee employee, Date startDate, Date endDate, Shift shift, Pageable pageable) {
+       return repository.findByEmployeeAndProductionProductionDateBetweenAndProductionShift(employee, startDate, endDate, shift, pageable);
+    }
+
 }

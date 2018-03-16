@@ -69,8 +69,8 @@ public class DispatchController {
         return new Page(service.findByDispatchNoteDispatchDateAndDispatchScheduleJobItem(Format.yyyy_MM_dd.parse(dispatchDate), new Item(Integer.valueOf(item)), pageable));
     }
     @JsonView(DispatchView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAllDispatchNoteAllCustomerAll.class)
-    @GetMapping(value = "/dispatchScheduleDurationAndItemPage", params = {"startDate", "endDate", "item"})
-    public Page<Dispatch> dispatchScheduleDurationAndItemPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("item") String item, Pageable pageable) throws ParseException {
+    @GetMapping(value = "/dispatchDurationAndItemPage", params = {"startDate", "endDate", "item"})
+    public Page<Dispatch> dispatchDurationAndItemPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("item") String item, Pageable pageable) throws ParseException {
         return new Page(service.findByDispatchNoteDispatchDateBetweenAndDispatchScheduleJobItem(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Item(Integer.valueOf(item)), pageable));
     }
     @JsonView(DispatchView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAllDispatchNoteAllCustomerAll.class)
