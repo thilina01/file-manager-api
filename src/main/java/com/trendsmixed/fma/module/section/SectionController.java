@@ -2,9 +2,11 @@ package com.trendsmixed.fma.module.section;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.production.ProductionView;
 import com.trendsmixed.fma.utility.Page;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -83,7 +85,6 @@ public class SectionController {
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         service.delete(id);
-
     }
 
     @PutMapping("/{id}")
@@ -93,4 +94,12 @@ public class SectionController {
         section = service.save(section);
         return section;
     }
+
+    @JsonView(SectionView.AllAndCostCenterAndWorkCenterAndControlPointProduction.class)
+    @GetMapping("/test/{id}")
+    public Section test(@PathVariable("id") int id,
+                     @RequestParam(value = "productionDate") long productionDate) {
+        return service.findByIdAndCostCenterListWorkCenterListControlPointListProductionListProductionDate(id, new Date(productionDate));
+    }
+
 }

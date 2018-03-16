@@ -49,6 +49,7 @@ public class Section implements Serializable {
     @JoinColumn(name = "section_type_id", referencedColumnName = "id")
     @ManyToOne(optional = true)
     private SectionType sectionType;
+    @JsonView(SectionView.CostCenter.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "section")
     private List<CostCenter> costCenterList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "section")

@@ -196,13 +196,34 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
                         @Param("lossReason") LossReason lossReason);
 
         @Query(value = "SELECT "
-                        + " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
-                        + " FROM Loss loss"
-                        + " WHERE loss.lossReason = :lossReason AND operation.production.productionDate BETWEEN :startDate AND :endDate"
-                        + " AND operation.actualQuantity > 0"
-                        + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
+                + " new com.trendsmixed.fma.dao.LossReasonDailyCount(operation.production.productionDate, SUM(loss.quantity)) "
+                + " FROM Loss loss"
+                + " WHERE loss.lossReason = :lossReason AND operation.production.productionDate BETWEEN :startDate AND :endDate"
+                + " AND operation.actualQuantity > 0"
+                + " GROUP BY operation.production.productionDate ORDER BY SUM(loss.quantity) DESC")
         List getLossReasonDailyCountByLossReason(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
-                        @Param("lossReason") LossReason lossReason);
+                                                 @Param("lossReason") LossReason lossReason);
+
+        @Query(value = "SELECT "
+                + " new com.trendsmixed.fma.dao.LossReasonSectionCount(loss.operation.production.controlPoint.workCenter.costCenter.section, SUM(loss.quantity)) "
+                + " FROM Loss loss"
+                + " WHERE loss.lossReason = :lossReason AND loss.operation.production.productionDate BETWEEN :startDate AND :endDate"
+                + " AND loss.operation.actualQuantity > 0"
+                + " GROUP BY loss.operation.production.controlPoint.workCenter.costCenter.section ORDER BY SUM(loss.quantity) DESC")
+        List getLossReasonSectionCountByLossReason(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+                                                   @Param("lossReason") LossReason lossReason);
+
+        @Query(value = "SELECT "
+                + " new com.trendsmixed.fma.dao.LossReasonControlPointCount(loss.operation.production.controlPoint, SUM(loss.quantity)) "
+                + " FROM Loss loss"
+                + " WHERE loss.lossReason = :lossReason "
+                + " AND loss.operation.production.controlPoint.workCenter.costCenter.section = :section"
+                + " AND loss.operation.production.productionDate BETWEEN :startDate AND :endDate"
+                + " AND loss.operation.actualQuantity > 0"
+                + " GROUP BY loss.operation.production.controlPoint ORDER BY SUM(loss.quantity) DESC")
+        List getLossReasonControlPointCountByLossReasonAndSection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+                                                                  @Param("lossReason") LossReason lossReason,
+                                                                  @Param("section") Section section);
 
         @Query(value = "SELECT "
                         + " new com.trendsmixed.fma.dao.LossReasonSummary(loss.lossReason.id,loss.lossReason.code,loss.lossReason.name, SUM(loss.quantity)) "
@@ -404,5 +425,40 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
                         + " AND resourceUtilization.startTime BETWEEN :startDate AND :endDate")
         List getResourceUtilizationDistinctEmployeeByControlPointAndStartTimeBetween(@Param("controlPoint") ControlPoint controlPoint,
                         @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+//        @Query(value = "SELECT"
+//                + " section"
+//                + " FROM Production production, Section section"
+//                + " WHERE production.controlPoint.workCenter.costCenter.section = section AND section = :section AND production.productionDate = :productionDate "
+//                + " GROUP BY section")
+////        @Query(value = "SELECT"
+////                + " section"
+////                + " FROM Section section"
+////                + " WHERE section = :section AND section.costCenter.workCenter.controlPoint.production.productionDate = :productionDate ")
+//        List<String> test(@Param("section") Section section,@Param("productionDate") Date productionDate);
+
+//        @Query(value = "SELECT production " +
+//                "FROM Production production " +
+//                "JOIN FETCH production.controlPoint controlPoint " +
+//                "JOIN FETCH controlPoint.workCenter workCenter " +
+//                "JOIN FETCH workCenter.costCenter costCenter " +
+//                "JOIN FETCH costCenter.section section " +
+//                "WHERE section = :section AND production.productionDate = :productionDate"
+//                + " GROUP BY section")
+//        List test(@Param("section") Section section,@Param("productionDate") Date productionDate);
+
+
+        @Query(value = "SELECT new com.trendsmixed.fma.dao.OperationProgressSummary(production.controlPoint.workCenter.costCenter.section,production.controlPoint, production) "
+                + "FROM Production production "
+                + " WHERE production.controlPoint.workCenter.costCenter.section = :section AND production.productionDate = :productionDate "
+                + " GROUP BY production.controlPoint.workCenter.costCenter.section, production.controlPoint, production")
+        List getOperationProgressSummaryBySection(@Param("section") Section section, @Param("productionDate") Date productionDate);
+
+        @Query(value = "SELECT new com.trendsmixed.fma.dao.OperationProgressSummary(production.controlPoint.workCenter.costCenter.section,production.controlPoint, production)"
+                + " FROM Production production"
+                + " WHERE production.productionDate = :productionDate "
+                + " GROUP BY production.controlPoint.workCenter.costCenter.section, production.controlPoint, production"
+                + " ORDER BY production.controlPoint.workCenter.costCenter.section.id ASC, production.controlPoint.id ASC ")
+        List getOperationProgressSummary( @Param("productionDate") Date productionDate);
 
 }
