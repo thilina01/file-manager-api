@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.controlpoint;
 
 import com.trendsmixed.fma.module.controlpointtype.ControlPointTypeView;
 import com.trendsmixed.fma.module.costcenter.CostCenterView;
+import com.trendsmixed.fma.module.production.ProductionView;
 import com.trendsmixed.fma.module.workcenter.WorkCenterView;
 import com.trendsmixed.fma.utility.PageView;
 
@@ -22,10 +23,17 @@ public class ControlPointView {
     public interface ControlPointType extends ControlPointTypeView.All {
     }
 
+    public interface Production extends ProductionView.All {
+    }
+
+
     public interface All extends Id, Code, Name, PageView.All {
     }
 
     public interface AllAndWorkCenterAll extends All, WorkCenter {
+    }
+
+    public interface AllAndProduction extends All, Production {
     }
 
     public interface AllAndControlPointTypeAllAndWorkCenterAllAndCostCenterAllAndSectionAll extends All,

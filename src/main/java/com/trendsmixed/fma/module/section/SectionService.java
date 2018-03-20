@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.section;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -46,4 +47,9 @@ public class SectionService {
     public Section findByCode(String code) {
         return repository.findByCode(code);
     }
+
+    public Section findByIdAndCostCenterListWorkCenterListControlPointListProductionListProductionDate(int id, Date productionDate) {
+        return repository.findByIdAndCostCenterListWorkCenterListControlPointListProductionListProductionDate(id, productionDate);
+    }
+
 }

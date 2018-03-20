@@ -83,6 +83,13 @@ public class ChartService {
         return chartRepository.getLossReasonDailyCountByLossReason(startDate, endDate, lossReason);
     }
 
+    public List getLossReasonSectionCountByLossReason(Date startDate, Date endDate, LossReason lossReason) {
+        return chartRepository.getLossReasonSectionCountByLossReason(startDate, endDate, lossReason);
+    }
+
+    public List getLossReasonControlPointCountByLossReasonAndSection(Date startDate, Date endDate, LossReason lossReason, Section section) {
+        return chartRepository.getLossReasonControlPointCountByLossReasonAndSection(startDate, endDate, lossReason, section);
+    }
     public List getLossReasonSummaryBySectionAndLossType(Date startDate, Date endDate, Section section, LossType lossType) {
         return chartRepository.getLossReasonSummaryBySectionAndLossType(startDate, endDate, section, lossType);
     }
@@ -200,5 +207,12 @@ public class ChartService {
 
     public List getMonthlyNetProfit(Date startDate, Date endDate) {
         return chartRepository.getMonthlyNetProfit(startDate, endDate);
+    }
+
+    public List getOperationProgressSummaryBySection(Section section, Date productionDate) {
+        return chartRepository.getOperationProgressSummaryBySection(section, productionDate);
+    }
+    public List getOperationProgressSummary(Date productionDate) {
+        return chartRepository.getOperationProgressSummary(productionDate);
     }
 }

@@ -6,6 +6,7 @@ import com.trendsmixed.fma.module.costcenter.CostCenterView;
 import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.manpower.ManpowerView;
 import com.trendsmixed.fma.module.operation.OperationView;
+import com.trendsmixed.fma.module.operationprogress.OperationProgressView;
 import com.trendsmixed.fma.module.productionemployee.ProductionEmployeeView;
 import com.trendsmixed.fma.module.resourceutilization.ResourceUtilizationView;
 import com.trendsmixed.fma.module.shift.ShiftView;
@@ -43,9 +44,6 @@ public class ProductionView {
         public interface ResourceUtilization {
         }
 
-        public interface Job {
-        }
-
         public interface Operation extends OperationView.All {
         }
 
@@ -66,6 +64,9 @@ public class ProductionView {
 
         public interface All extends Id, ProductionDate, PlannedDuration, ActualDuration, PlannedQuantity,
                         ActualQuantity, PageView.All {
+        }
+
+        public interface AllAndOperationAndOperationProgressAndJobAndItem extends All, Operation, OperationView.All, OperationView.OperationProgress, OperationProgressView.All {
         }
 
         public interface AllAndResourceUtilizationAll extends All, ResourceUtilization, ResourceUtilizationView.All {

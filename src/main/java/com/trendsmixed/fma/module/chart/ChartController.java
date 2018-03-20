@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.chart;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.dao.view.ManpowerSummaryView;
-import com.trendsmixed.fma.dao.view.ScrapReasonSummaryView;
+import com.trendsmixed.fma.dao.view.*;
 import com.trendsmixed.fma.dao.BreakdownChart;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.module.location.Location;
 import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.trendsmixed.fma.module.losstype.LossType;
@@ -155,9 +155,26 @@ public class ChartController {
 
     @GetMapping("/lossReasonDailyCountByLossReason")
     public List getLossReasonDailyCountBySectionAndLossReason(@RequestParam(value = "startDate") String startDateText,
-            @RequestParam(value = "endDate") String endDateText,
-            @RequestParam(value = "lossReason") String lossReasonId) {
+                                                              @RequestParam(value = "endDate") String endDateText,
+                                                              @RequestParam(value = "lossReason") String lossReasonId) {
         return chartService.getLossReasonDailyCountByLossReason(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new LossReason(Integer.valueOf(lossReasonId)));
+    }
+
+    @JsonView(LossReasonSectionCountView.All.class)
+    @GetMapping("/lossReasonSectionCountByLossReason")
+    public List getLossReasonSectionCountByLossReason(@RequestParam(value = "startDate") String startDateText,
+                                                                @RequestParam(value = "endDate") String endDateText,
+                                                                @RequestParam(value = "lossReason") String lossReasonId) {
+        return chartService.getLossReasonSectionCountByLossReason(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new LossReason(Integer.valueOf(lossReasonId)));
+    }
+
+    @JsonView(LossReasonControlPointCountView.All.class)
+    @GetMapping("/lossReasonControlPointCountByLossReasonAndSection")
+    public List getLossReasonControlPointCountByLossReasonAndSection(@RequestParam(value = "startDate") String startDateText,
+                                                                @RequestParam(value = "endDate") String endDateText,
+                                                                     @RequestParam(value = "lossReason") String lossReasonId,
+                                                                     @RequestParam(value = "section") String sectionId) {
+        return chartService.getLossReasonControlPointCountByLossReasonAndSection(Format.toStartDate(startDateText), Format.toEndDate(endDateText), new LossReason(Integer.valueOf(lossReasonId)), new Section(Integer.valueOf(sectionId)));
     }
 
     @GetMapping("/lossReasonSummaryBySectionAndLossType")
@@ -180,11 +197,11 @@ public class ChartController {
         return breakdownChartList;
     }
 
-    @GetMapping("/test")
-    public List test(@RequestParam(value = "startDate") String startDateText,
-            @RequestParam(value = "endDate") String endDateText) {
-        return chartService.test(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
-    }
+//    @GetMapping("/test")
+//    public List test(@RequestParam(value = "startDate") String startDateText,
+//            @RequestParam(value = "endDate") String endDateText) {
+//        return chartService.test(Format.toStartDate(startDateText), Format.toEndDate(endDateText));
+//    }
 
     @GetMapping("/monthlyScheduleAdherenceBySection")
     public List getMonthlyScheduleAdherenceBySection(@RequestParam(value = "startDate") String startDateText,
@@ -338,5 +355,18 @@ public class ChartController {
         @RequestParam(value = "startDate") long startDate,
         @RequestParam(value = "endDate") long endDate) {
         return chartService.getResourceUtilizationDistinctEmployeeByControlPointAndStartTimeBetween(new ControlPoint(Integer.valueOf(controlPointId)), new Date(startDate), new Date(endDate));
+    }
+
+    @JsonView(OperationProgressSummaryView.All.class)
+    @GetMapping("/operationProgressSummaryBySection/{id}")
+    public List getOperationProgressSummaryBySection(@PathVariable("id") int id,
+                     @RequestParam(value = "productionDate") long productionDate) {
+        return chartService.getOperationProgressSummaryBySection(new Section(id), new Date(productionDate));
+    }
+
+    @JsonView(OperationProgressSummaryView.All.class)
+    @GetMapping("/operationProgressSummary")
+    public List getOperationProgressSummary(@RequestParam(value = "productionDate") long productionDate) {
+        return chartService.getOperationProgressSummary(new Date(productionDate));
     }
 }
