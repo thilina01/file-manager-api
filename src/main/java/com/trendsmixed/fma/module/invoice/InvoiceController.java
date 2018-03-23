@@ -3,7 +3,6 @@ package com.trendsmixed.fma.module.invoice;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.invoicedispatchnote.InvoiceDispatchNote;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -57,7 +56,7 @@ public class InvoiceController {
         }
     }
 
-    @JsonView(InvoiceView.AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem.class)
+    @JsonView(InvoiceView.All.class)
     @GetMapping("/{id}")
     public Invoice findOne(@PathVariable("id") int id) {
         return service.findOne(id);

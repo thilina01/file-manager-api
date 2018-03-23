@@ -50,7 +50,7 @@ public class DispatchNoteView {
     public interface Quantity {
     }
 
-    public interface InvoiceDispatchNote {
+    public interface PackingListDispatchNote {
     }
 
     public interface All extends Id, DispatchDate, Quantity, ContainerNumber, VehicleNumber, DispatchReleaseTime, Recipient, PageView.All {

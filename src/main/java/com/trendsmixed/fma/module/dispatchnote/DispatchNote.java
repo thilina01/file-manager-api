@@ -1,12 +1,10 @@
 package com.trendsmixed.fma.module.dispatchnote;
 
-import com.trendsmixed.fma.module.packinglist.PackingList;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
-// import com.trendsmixed.fma.module.invoicedispatchnote.InvoiceDispatchNote;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -66,18 +64,13 @@ public class DispatchNote implements Serializable {
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     @ManyToOne(optional = true)
     private Location location;
-    @JoinColumn(name = "packing_list_id", referencedColumnName = "id")
-    @ManyToOne(optional = true)
-    private PackingList packingList;
     @JsonView(DispatchNoteView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
     @JsonView(DispatchNoteView.Dispatch.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
     private List<Dispatch> dispatchList;
-    // @JsonView(DispatchNoteView.InvoiceDispatchNote.class)
-    // @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
-    // private InvoiceDispatchNote invoiceDispatchNote;
+    
 
     public DispatchNote(Integer anId) {
         this.id = anId;

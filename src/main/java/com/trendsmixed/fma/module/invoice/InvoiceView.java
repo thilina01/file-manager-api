@@ -1,8 +1,8 @@
 package com.trendsmixed.fma.module.invoice;
 
 import com.trendsmixed.fma.module.customer.CustomerView;
-import com.trendsmixed.fma.module.invoicedispatchnote.InvoiceDispatchNoteView;
 import com.trendsmixed.fma.module.invoicetype.InvoiceTypeView;
+
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -44,14 +44,14 @@ public class InvoiceView {
         public interface AllAndCustomerAllAndInvoiceTypeAll extends AllAndCustomerAll, AllAndInvoiceTypeAll {
         }
 
-        public interface AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
-                        extends All, InvoiceDispatchNote,
-                        InvoiceDispatchNoteView.AllAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
-        }
+        // public interface AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
+        //                 extends All, InvoiceDispatchNote,
+        //                 InvoiceDispatchNoteView.AllAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
+        // }
 
-        public interface AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
-                        extends AllAndCustomerAllAndInvoiceTypeAll,
-                        AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
-        }
+        // public interface AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
+        //                 extends AllAndCustomerAllAndInvoiceTypeAll,
+        //                 AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
+        // }
 
 }
