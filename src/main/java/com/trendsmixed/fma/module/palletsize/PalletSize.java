@@ -3,7 +3,6 @@ package com.trendsmixed.fma.module.palletsize;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.packagingspecification.PackagingSpecification;
-import com.trendsmixed.fma.module.palletlable.PalletLable;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
@@ -43,15 +42,15 @@ public class PalletSize implements Serializable {
     @JsonView(PalletSizeView.Width.class)
     @Column(name = "width")
     private Double width;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "palletSize", fetch = FetchType.LAZY)
-    private List<PalletLable> palletLableList;
+    @JsonView(PalletSizeView.Weight.class)
+    @Column(name = "weight")
+    private Double weight;
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "palletSize")
     private List<PackagingSpecification> packagingSpecification;
 
-
     @JsonView(PalletSizeView.All.class)
     public String getDisplay() {
-        return length + " : " + width;
+        return length + " : " + width ;
     }
     
 }

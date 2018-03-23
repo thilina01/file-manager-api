@@ -19,6 +19,9 @@ public class PalletSizeView {
     public interface Width {
     }
 
-    public interface All extends Id, Name, Length, Width, Code, PageView.All {
+    public interface Weight {
+    }
+
+    public interface All extends Id, Name, Length, Width, Code, Weight, PageView.All {
     }
 }
