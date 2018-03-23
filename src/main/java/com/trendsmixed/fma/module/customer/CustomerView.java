@@ -5,6 +5,7 @@ import com.trendsmixed.fma.module.contact.ContactView;
 import com.trendsmixed.fma.module.currency.CurrencyView;
 import com.trendsmixed.fma.module.customeritem.CustomerItemView;
 import com.trendsmixed.fma.module.incoterm.IncotermView;
+import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.module.customertype.CustomerTypeView;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
 import com.trendsmixed.fma.module.invoice.InvoiceView;
@@ -74,6 +75,9 @@ public class CustomerView {
         public interface CustomerType {
         }
 
+        public interface Employee {
+        }
+
         public interface Country {
         }
 
@@ -97,6 +101,9 @@ public class CustomerView {
         }
 
         public interface AllAndIncotermAll extends All, Incoterm, IncotermView.All {
+        }
+
+        public interface AllAndEmployeeAll extends All, Employee, EmployeeView.All {
         }
 
         public interface AllAndInvoiceAll extends All, Invoice, InvoiceView.All {
@@ -150,10 +157,10 @@ public class CustomerView {
                         ContactView.AllAndContactTypeAll {
         }
 
-        public interface AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndNotifyPartyAllAndContactAllAndContactTypeAndEmployeeAllAndPaymentTermAllAndAddressAllAndAddressTypeAllAndCountryAllAndPortAll
+        public interface AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndNotifyPartyAllAndContactAllAndContactTypeAllAndPaymentTermAllAndAddressAllAndAddressTypeAllAndCountryAllAndPortAllAndEmployeeAll
                         extends AllAndIncotermAllAndCustomerTypeAllAndCurrencyAll, AllAndNotifyPartyAll,
                         AllAndPaymentTermAll, Address, AddressView.AllAndAddressTypeAllAndCountryAllAndPortAll, Contact,
-                        ContactView.AllAndContactTypeAndEmployeeAll {
+                        ContactView.AllAndContactTypeAll, AllAndEmployeeAll {
         }
 
 }

@@ -40,8 +40,5 @@ public class Contact implements Serializable {
     @JoinColumn(name = "contact_type_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private ContactType contactType;
-    @JsonView(ContactView.Employee.class)
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Employee employee;
+   
 }

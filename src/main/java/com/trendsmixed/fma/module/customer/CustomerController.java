@@ -149,7 +149,7 @@ public class CustomerController {
         }
     }
 
-    @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndNotifyPartyAllAndContactAllAndContactTypeAndEmployeeAllAndPaymentTermAllAndAddressAllAndAddressTypeAllAndCountryAllAndPortAll.class)
+    @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndNotifyPartyAllAndContactAllAndContactTypeAllAndPaymentTermAllAndAddressAllAndAddressTypeAllAndCountryAllAndPortAllAndEmployeeAll.class)
     @GetMapping("/{id}")
     public Customer findOne(@PathVariable("id") int id
     ) {

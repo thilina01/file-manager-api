@@ -7,6 +7,7 @@ import com.trendsmixed.fma.module.contact.Contact;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.customertype.CustomerType;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
+import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.incoterm.Incoterm;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
 import com.trendsmixed.fma.module.notifyparty.NotifyParty;
@@ -115,6 +116,13 @@ public class Customer implements Serializable {
     @JoinColumn(name = "payment_term_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private PaymentTerm paymentTerm;
+    @JsonView(CustomerView.Employee.class)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Employee employee;
+
+
+
    
     public Customer(int anId) {
         this.id = anId;

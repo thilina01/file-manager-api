@@ -31,11 +31,4 @@ public class ContactView {
     public interface AllAndContactTypeAll extends All, ContactType, ContactTypeView.All {
     }
 
-    public interface AllAndEmployeeAll extends All, Employee, EmployeeView.All {
-    }
-
-    public interface AllAndContactTypeAndEmployeeAll
-            extends All, ContactType, ContactTypeView.All, Employee, EmployeeView.All {
-    }
-
 }

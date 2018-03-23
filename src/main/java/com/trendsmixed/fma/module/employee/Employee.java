@@ -3,7 +3,7 @@ package com.trendsmixed.fma.module.employee;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.accident.Accident;
 import com.trendsmixed.fma.module.computer.Computer;
-import com.trendsmixed.fma.module.contact.Contact;
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.designation.Designation;
 import com.trendsmixed.fma.module.employeecategory.EmployeeCategory;
 import com.trendsmixed.fma.module.labourtursource.LabourSource;
@@ -94,9 +94,8 @@ public class Employee implements Serializable {
     @JoinColumn(name = "labourSource_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LabourSource labourSource;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<Contact> contactList;
-
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
+    private List<Customer> customerList;
     public Employee(Integer id) {
         this.id = id;
     }
