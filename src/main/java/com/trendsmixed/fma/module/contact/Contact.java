@@ -3,6 +3,8 @@ package com.trendsmixed.fma.module.contact;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.contacttype.ContactType;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.employee.Employee;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import lombok.Data;
@@ -38,4 +40,8 @@ public class Contact implements Serializable {
     @JoinColumn(name = "contact_type_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private ContactType contactType;
+    @JsonView(ContactView.Employee.class)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Employee employee;
 }

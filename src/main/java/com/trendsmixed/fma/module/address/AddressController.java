@@ -36,7 +36,7 @@ public class AddressController {
         return service.findAll();
     }
 
-    @JsonView(AddressView.All.class)
+    @JsonView(AddressView.AllAndAddressTypeAllAndCountryAllAndPortAll.class)
     @GetMapping("/page")
     Page<Address> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -52,7 +52,7 @@ public class AddressController {
         return service.getComboByCustomer(new Customer(id));
     }
 
-    @JsonView(AddressView.All.class)
+    @JsonView(AddressView.AllAndAddressTypeAllAndCountryAllAndPortAll.class)
     @PostMapping
     public Address save(@RequestBody Address address, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -68,7 +68,7 @@ public class AddressController {
         }
     }
 
-    @JsonView(AddressView.All.class)
+    @JsonView(AddressView.AllAndAddressTypeAllAndCountryAllAndPortAll.class)
     @GetMapping("/{id}")
     public Address findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -81,7 +81,7 @@ public class AddressController {
 
     }
 
-    @JsonView(AddressView.All.class)
+    @JsonView(AddressView.AllAndAddressTypeAllAndCountryAllAndPortAll.class)
     @PutMapping("/{id}")
     public Address updateAddressType(@PathVariable int id, @RequestBody Address address, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);

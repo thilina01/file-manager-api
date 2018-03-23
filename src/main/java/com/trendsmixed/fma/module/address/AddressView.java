@@ -3,6 +3,8 @@ package com.trendsmixed.fma.module.address;
 import com.trendsmixed.fma.module.addresstype.AddressTypeView;
 import com.trendsmixed.fma.module.country.CountryView;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
+import com.trendsmixed.fma.module.port.PortView;
+import com.trendsmixed.fma.module.customer.CustomerView;
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -41,6 +43,9 @@ public class AddressView {
     public interface Country {
     }
 
+    public interface Port {
+    }
+
     public interface Customer {
     }
 
@@ -50,10 +55,20 @@ public class AddressView {
     public interface AllAndAddressTypeAll extends All, AddressType, AddressTypeView.All {
     }
 
+    public interface AllAndPortAll extends All, Port, PortView.All {
+    }
+
+
+    public interface AllAndCustomerAll extends All, Customer, CustomerView.All {
+    }
+
     public interface AllAndAddressTypeAllAndCountryAll extends AllAndAddressTypeAll, Country, CountryView.All {
     }
 
     public interface DispatchNote extends DispatchNoteView.All {
     }
 
+    public interface AllAndAddressTypeAllAndCountryAllAndPortAll
+            extends AllAndAddressTypeAll, Country, CountryView.All, Port, PortView.All {
+    }
 }

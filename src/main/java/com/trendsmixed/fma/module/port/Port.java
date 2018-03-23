@@ -1,7 +1,8 @@
 package com.trendsmixed.fma.module.port;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.packinglist.PackingList;
+import com.trendsmixed.fma.module.address.Address;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
@@ -33,8 +34,11 @@ public class Port implements Serializable {
     @JsonView(PortView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(PortView.Address.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "port")
-    private List<PackingList> packingListList;
+    private List<Address> addressList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "port")
+    private List<LoadingPlan> loadingPlanList;
 
     @JsonView(PortView.All.class)
     public String getDisplay() {

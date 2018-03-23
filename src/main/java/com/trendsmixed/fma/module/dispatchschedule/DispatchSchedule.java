@@ -3,6 +3,7 @@ package com.trendsmixed.fma.module.dispatchschedule;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
 import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItem;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import java.io.Serializable;
 import java.util.Date;
@@ -48,6 +49,8 @@ public class DispatchSchedule implements Serializable {
     @JsonView(DispatchScheduleView.Dispatch.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchSchedule")
     private List<Dispatch> dispatchList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchSchedule", fetch = FetchType.LAZY)
+    private List<LoadingPlanItem> loadingPlanItemList;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @JsonView(DispatchScheduleView.Quantity.class)
     @Column(name = "quantity")

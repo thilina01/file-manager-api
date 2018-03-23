@@ -8,9 +8,9 @@ import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.customertype.CustomerType;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.incoterm.Incoterm;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
 import com.trendsmixed.fma.module.notifyparty.NotifyParty;
 import com.trendsmixed.fma.module.paymentterm.PaymentTerm;
-import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
@@ -84,8 +84,6 @@ public class Customer implements Serializable {
     @JsonView(CustomerView.CustomerItemList.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<CustomerItem> customerItemList;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
-    private List<SalesOrder> salesOrderList;
     @JsonView(CustomerView.Contact.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Contact> contactList;
@@ -95,6 +93,8 @@ public class Customer implements Serializable {
     @JsonView(CustomerView.DispatchNote.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<DispatchNote> dispatchNoteList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<LoadingPlan> loadingPlanList;
     @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)

@@ -10,72 +10,74 @@ import com.trendsmixed.fma.utility.PageView;
 
 public class DispatchScheduleView {
 
-    public interface Id {
-    }
+        public interface Id {
+        }
 
-    public interface DispatchDate {
-    }
+        public interface DispatchDate {
+        }
 
-    public interface ConfirmDate {
-    }
+        public interface ConfirmDate {
+        }
 
-    public interface RequestDate {
-    }
+        public interface RequestDate {
+        }
 
-    public interface Quantity {
-    }
+        public interface Quantity {
+        }
 
-    public interface Comment {
-    }
+        public interface Comment {
+        }
 
-    public interface All extends Id, DispatchDate, ConfirmDate, RequestDate, Quantity, Comment, PageView.All {
-    }
+        public interface All extends Id, DispatchDate, ConfirmDate, RequestDate, Quantity, Comment, PageView.All {
+        }
 
-    public interface Job extends JobView.All {
-    }
+        public interface Job extends JobView.All {
+        }
 
-    public interface SalesOrderItem {
-    }
+        public interface SalesOrderItem {
+        }
 
-    public interface Dispatch extends DispatchView.All {
-    }
+        public interface Dispatch extends DispatchView.All {
+        }
 
-    public interface AllAndSalesOrderItemAndCustomerItem
-            extends All, SalesOrderItem, SalesOrderItemView.AllAndCustomerItem {
-    }
+        public interface AllAndSalesOrderItemAndCustomerItem
+                        extends All, SalesOrderItem, SalesOrderItemView.AllAndCustomerItem {
+        }
 
-    public interface AllAndJobAndItem extends All, Job, JobView.AllAndItemAll {
-    }
+        public interface AllAndJobAndItem extends All, Job, JobView.AllAndItemAll {
+        }
 
-    public interface AllAndSalesOrderItem extends All, SalesOrderItem, SalesOrderItemView.All {
-    }
+        public interface AllAndSalesOrderItem extends All, SalesOrderItem, SalesOrderItemView.All {
+        }
 
-    public interface AllAndCustomer extends All, Customer, SalesOrderView.All {
-    }
+        public interface AllAndCustomer extends All, Customer, SalesOrderView.All {
+        }
 
-    public interface AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll
-            extends AllAndSalesOrderItemAndCustomerItem, AllAndJobAndItem {
-    }
+        public interface AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll
+                        extends AllAndSalesOrderItemAndCustomerItem, AllAndJobAndItem {
+        }
 
-    public interface AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll
-            extends AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll,
-            SalesOrderItemView.AllAndSalesOrderAndCustomerItem {
-    }
+        public interface AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll
+                        extends AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll,
+                        SalesOrderItemView.AllAndSalesOrderAndCustomerItem {
+        }
 
-    public interface AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAllAndPaintAll
-            extends AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll, ItemView.AllAndPaintAll {
-    }
+        public interface AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAllAndPaintAll
+                        extends AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll,
+                        ItemView.AllAndPaintAll {
+        }
 
-    public interface AllAndSalesOrderItemAndSalesOrderAndCustomerItem
-            extends All, SalesOrderItem, SalesOrderItemView.AllAndSalesOrderAndCustomerItem {
-    }
+        public interface AllAndSalesOrderItemAndSalesOrderAndCustomerItem
+                        extends All, SalesOrderItem, SalesOrderItemView.AllAndSalesOrderAndCustomerItem {
+        }
 
-    public interface AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
-            extends AllAndJobAndItem, AllAndSalesOrderItemAndSalesOrderAndCustomerItem {
-    }
+        public interface AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
+                        extends AllAndJobAndItem, AllAndSalesOrderItemAndSalesOrderAndCustomerItem {
+        }
 
-    public interface AllAndSalesOrderItemAllAndSalesOrderAllCustomerAllCustomerItemAllAndJobAllAndItemAll
-            extends AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll,
-            SalesOrderItemView.AllAndSalesOrderAndCustomerItem, AllAndCustomer, SalesOrderView.All {
-    }
+        public interface AllAndSalesOrderItemAllAndSalesOrderAllCustomerAllCustomerItemAllAndJobAllAndItemAll
+                        extends AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll,
+                        SalesOrderItemView.AllAndSalesOrderAndCustomerItem, AllAndCustomer, SalesOrderView.All {
+        }
+        
 }

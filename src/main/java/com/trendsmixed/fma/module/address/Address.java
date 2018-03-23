@@ -5,6 +5,8 @@ import com.trendsmixed.fma.module.addresstype.AddressType;
 import com.trendsmixed.fma.module.country.Country;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
+import com.trendsmixed.fma.module.port.Port;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -57,12 +59,20 @@ public class Address implements Serializable {
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Country country;
+    @JsonView(AddressView.Port.class)
+    @JoinColumn(name = "port_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Port port;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "address", fetch = FetchType.LAZY)
+    private List<LoadingPlan> loadingPlanList;
     @JsonView(AddressView.DispatchNote.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "address")
     private List<DispatchNote> dispatchNoteList;
-
+    
     @JsonView(AddressView.All.class)
     public String getDisplay() {
         return line1 + ", " +line2 + ", " +line3 + ", " +line4 + ", " +line5;
+
+
     }
 }

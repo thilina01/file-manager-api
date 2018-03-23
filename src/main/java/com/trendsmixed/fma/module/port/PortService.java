@@ -1,11 +1,14 @@
 package com.trendsmixed.fma.module.port;
 
 import java.util.List;
+
+import com.trendsmixed.fma.dao.Combo;
+
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.trendsmixed.fma.dao.Combo;
+
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 
 @AllArgsConstructor
 @Service
@@ -47,5 +50,9 @@ public class PortService {
 
     public Port findByName(String name) {
         return repository.findByName(name);
+    }
+
+    public List <Port> findByAddressListCustomerId(int customerId) {
+        return repository.findByAddressListCustomerId(customerId);
     }
 }

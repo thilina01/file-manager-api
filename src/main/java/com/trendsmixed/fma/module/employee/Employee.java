@@ -3,11 +3,10 @@ package com.trendsmixed.fma.module.employee;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.accident.Accident;
 import com.trendsmixed.fma.module.computer.Computer;
+import com.trendsmixed.fma.module.contact.Contact;
 import com.trendsmixed.fma.module.designation.Designation;
-import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.employeecategory.EmployeeCategory;
 import com.trendsmixed.fma.module.labourtursource.LabourSource;
-import com.trendsmixed.fma.module.packinglist.PackingList;
 import com.trendsmixed.fma.module.productionemployee.ProductionEmployee;
 import com.trendsmixed.fma.module.resourceutilization.ResourceUtilization;
 import com.trendsmixed.fma.module.section.Section;
@@ -73,8 +72,6 @@ public class Employee implements Serializable {
     private List<ProductionEmployee> productionEmployeeList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
     private List<Accident> accidentList;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee")
-    private List<PackingList> packingListList;
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "employee")
     private List<ResourceUtilization> resourceUtilizationList;
     @JsonView(EmployeeView.Designation.class)
@@ -97,6 +94,8 @@ public class Employee implements Serializable {
     @JoinColumn(name = "labourSource_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LabourSource labourSource;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<Contact> contactList;
 
     public Employee(Integer id) {
         this.id = id;

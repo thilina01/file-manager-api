@@ -1,7 +1,7 @@
 package com.trendsmixed.fma.module.containersize;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.packinglist.PackingList;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
@@ -33,8 +33,8 @@ public class ContainerSize implements Serializable {
     @JsonView(ContainerSizeView.Name.class)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "containerSize")
-    private List<PackingList> packingListList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "containerSize", fetch = FetchType.LAZY)
+    private List<LoadingPlan> loadingPlanList;
 
     @JsonView(ContainerSizeView.All.class)
     public String getDisplay() {

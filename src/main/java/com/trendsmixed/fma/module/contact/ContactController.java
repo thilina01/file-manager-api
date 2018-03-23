@@ -20,13 +20,13 @@ public class ContactController {
 
     private final ContactService service;
 
-    @JsonView(ContactView.All.class)
+    @JsonView(ContactView.AllAndContactTypeAndEmployeeAll.class)
     @GetMapping
     public Iterable<Contact> findAll() {
         return service.findAll();
     }
 
-    @JsonView(ContactView.All.class)
+    @JsonView(ContactView.AllAndContactTypeAndEmployeeAll.class)
     @GetMapping("/page")
     Page<Contact> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -37,7 +37,7 @@ public class ContactController {
         return service.getCombo();
     }
 
-    @JsonView(ContactView.All.class)
+    @JsonView(ContactView.AllAndContactTypeAndEmployeeAll.class)
     @PostMapping
     public Contact save(@RequestBody Contact contact, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
@@ -53,7 +53,7 @@ public class ContactController {
         }
     }
 
-    @JsonView(ContactView.All.class)
+    @JsonView(ContactView.AllAndContactTypeAndEmployeeAll.class)
     @GetMapping("/{id}")
     public Contact findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -66,7 +66,7 @@ public class ContactController {
 
     }
 
-    @JsonView(ContactView.All.class)
+    @JsonView(ContactView.AllAndContactTypeAndEmployeeAll.class)
     @PutMapping("/{id}")
     public Contact updateCustomer(@PathVariable int id, @RequestBody Contact contact, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
