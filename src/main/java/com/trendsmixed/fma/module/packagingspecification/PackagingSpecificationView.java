@@ -26,12 +26,13 @@ public class PackagingSpecificationView {
     public interface All extends Id, PerPalletQuantity, PageView.All {
     }
 
-    public interface AllAndItemAll extends All, Item, ItemView.All {
+    public interface AllAndItem extends All, Item, ItemView.All {
     }
 
-    public interface AllAndPalletSizeAll extends All, PalletSize, PalletSizeView.All {
+    public interface AllAndPalletSize extends All, PalletSize, PalletSizeView.All {
     }
 
-    public interface AllAndPalletSizeAndItemAll extends All, PalletSize, PalletSizeView.All, Item, ItemView.All {
+    public interface AllAndPalletSizeAndItem extends All, AllAndItem, AllAndPalletSize {
     }
+
 }

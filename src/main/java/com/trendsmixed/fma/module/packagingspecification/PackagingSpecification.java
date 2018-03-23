@@ -1,9 +1,12 @@
 package com.trendsmixed.fma.module.packagingspecification;
 
 import com.trendsmixed.fma.module.item.Item;
+import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItem;
 import com.trendsmixed.fma.module.palletsize.PalletSize;
 
 import java.io.Serializable;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,6 +42,14 @@ public class PackagingSpecification implements Serializable {
     @JoinColumn(name = " pallet_size_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private PalletSize palletSize;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "packagingSpecification", fetch = FetchType.LAZY)
+    private List<LoadingPlanItem> loadingPlanItemList;
+
+    @JsonView(PackagingSpecificationView.All.class)
+    public String getDisplay() {
+        return  palletSize.getName() + " : " + perPalletQuantity ;
+
+    }
     
    
 }

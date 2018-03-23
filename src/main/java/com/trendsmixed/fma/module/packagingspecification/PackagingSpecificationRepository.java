@@ -7,6 +7,8 @@ import com.trendsmixed.fma.dao.Combo;
 
 public interface PackagingSpecificationRepository extends PagingAndSortingRepository<PackagingSpecification, Integer> {
 
-    @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, '', '')" + " FROM PackagingSpecification o")
+    @Query(value = "SELECT"
+            + " new com.trendsmixed.fma.dao.Combo(o.id, (o.palletSize.name), CONCAT(o.perPalletQuantity,'') )"
+            + " FROM PackagingSpecification o")
     List<Combo> getCombo();
 }

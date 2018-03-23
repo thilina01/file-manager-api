@@ -19,13 +19,13 @@ public class PackagingSpecificationController {
     private final AppSessionService appSessionService;
     private final PackagingSpecificationService service;
 
-    @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItemAll.class)
+    @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItem.class)
     @GetMapping
     public Iterable<PackagingSpecification> findAll() {
         return service.findAll();
-    }
+    } 
 
-    @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItemAll.class)
+    @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItem.class)
     @GetMapping("/page")
     Page<PackagingSpecification> page(Pageable pageable) {
         return service.findAll(pageable);
@@ -51,7 +51,7 @@ public class PackagingSpecificationController {
         }
     }
 
-    @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItemAll.class)
+    @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItem.class)
     @GetMapping("/{id}")
     public PackagingSpecification findOne(@PathVariable("id") int id) {
         return service.findOne(id);
@@ -63,7 +63,7 @@ public class PackagingSpecificationController {
         service.delete(id);
 
     }
-
+    @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItem.class)
     @PutMapping("/{id}")
     public PackagingSpecification updateCustomer(@PathVariable int id, @RequestBody PackagingSpecification packagingSpecification, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
