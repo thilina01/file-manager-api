@@ -118,7 +118,7 @@ public class Customer implements Serializable {
     private PaymentTerm paymentTerm;
     @JsonView(CustomerView.Employee.class)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Employee employee;
 
 

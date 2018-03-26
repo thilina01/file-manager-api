@@ -61,7 +61,7 @@ public class Address implements Serializable {
     private Country country;
     @JsonView(AddressView.Port.class)
     @JoinColumn(name = "port_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Port port;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "address", fetch = FetchType.LAZY)
     private List<LoadingPlan> loadingPlanList;
