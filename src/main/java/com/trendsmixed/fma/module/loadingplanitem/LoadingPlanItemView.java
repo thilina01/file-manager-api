@@ -20,6 +20,12 @@ public class LoadingPlanItemView {
         public interface Quantity {
         }
 
+        public interface noOfpackages {
+        }
+
+        public interface netWeight {
+        }
+
         public interface PackagingSpecification {
         }
 
@@ -39,6 +45,10 @@ public class LoadingPlanItemView {
         public interface AllAndLoadingPlan extends All, LoadingPlan, LoadingPlanView.All {
         }
 
+        public interface AllAndPackagingSpecificationAndPalletSize
+                        extends All, PackagingSpecification, PackagingSpecificationView.AllAndPalletSize {
+        }
+
         public interface AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
                         extends All, DispatchSchedule,
                         DispatchScheduleView.AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
@@ -48,6 +58,12 @@ public class LoadingPlanItemView {
                         extends All, DispatchSchedule,
                         DispatchScheduleView.AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
                         AllAndPackagingSpecification {
+        }
+
+        public interface AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSize
+                        extends All, DispatchSchedule,
+                        DispatchScheduleView.AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
+                        PackagingSpecification, PackagingSpecificationView.AllAndPalletSize {
         }
 
 }

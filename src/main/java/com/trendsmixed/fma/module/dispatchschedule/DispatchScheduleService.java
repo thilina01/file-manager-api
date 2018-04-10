@@ -53,6 +53,9 @@ public class DispatchScheduleService {
         return repository.findBySalesOrderItemSalesOrder(salesOrder);
     }
 
+    public Iterable<DispatchSchedule> findBySalesOrderItemSalesOrderCustomer(Customer customer) {
+        return repository.findBySalesOrderItemSalesOrderCustomer(customer);
+    }
     public Page<DispatchSchedule>findBySalesOrderItemSalesOrderOrderDateBetween(Date startDate, Date endDate, Pageable pageable) {
         return repository.findBySalesOrderItemSalesOrderOrderDateBetween(startDate, endDate, pageable);
 

@@ -1,6 +1,9 @@
 package com.trendsmixed.fma.module.exchangerate;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.currency.Currency;
+
+import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,5 +44,8 @@ public class ExchangeRateService {
         repository.delete(id);
     }
 
+    public ExchangeRate findOneByCurrencyAndExchangeRateDate(Currency currency, Date exchangeRateDate) {
+        return repository.findOneByCurrencyAndExchangeRateDate(currency, exchangeRateDate);
+    }
   
 }

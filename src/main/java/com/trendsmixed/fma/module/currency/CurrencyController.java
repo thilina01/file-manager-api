@@ -3,6 +3,7 @@ package com.trendsmixed.fma.module.currency;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.utility.Page;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,12 @@ public class CurrencyController {
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
+    }
+
+    @JsonView(CurrencyView.All.class)
+    @GetMapping("/customer/{id}")
+    public Currency findOneByCustomer(@PathVariable("id") int id) {
+        return service.findOneByCustomerListId(id);
     }
 
     @JsonView(CurrencyView.All.class)

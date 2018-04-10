@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItem;
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,12 @@ public class LoadingPlanController {
         return service.getCombo();
     }
 
+    @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomer.class)
+    @GetMapping("/comboByCustomer/{id}")
+    public Iterable<LoadingPlan> findByCustomer(@PathVariable("id") int id) {
+        return service.findByCustomer(new Customer(id));
+    }
+
     @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPortOfLoadingAndContainerSizeAndAddressAndCustomer.class)
     @PostMapping
     public LoadingPlan save(@RequestBody LoadingPlan loadingPlan, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -61,7 +68,7 @@ public class LoadingPlanController {
         }
     }
 
-    @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomer.class)
+    @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomer.class)
     @GetMapping("/{id}")
     public LoadingPlan findOne(@PathVariable("id") int id) {
         return service.findOne(id);

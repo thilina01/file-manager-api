@@ -1,6 +1,9 @@
 package com.trendsmixed.fma.module.invoice;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.customer.Customer;
+
+import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -36,5 +39,22 @@ public class InvoiceService {
     public void delete(int id) {
         repository.delete(id);
     }
+
+    public Page<Invoice> findByInvoiceDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByInvoiceDateBetween(startDate, endDate, pageable);
+
+    }
+
+    public Page<Invoice> findByCustomerAndInvoiceDateBetween(Customer customer, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByCustomerAndInvoiceDateBetween(customer, startDate, endDate, pageable);
+    }
+
+    public Page<Invoice> findByCustomer(Customer customer,  Pageable pageable) {
+        return repository.findByCustomer(customer,  pageable);
+    }
+
+    //  public Page<Invoice> findByDispatchDateAndCustomer(Date date, Customer customer, Pageable pageable) {
+    //     return repository.findByDispatchDateAndCustomer(date, customer, pageable);
+    // }
 
 }

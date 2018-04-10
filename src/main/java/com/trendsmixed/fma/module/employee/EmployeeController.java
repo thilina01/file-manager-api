@@ -3,6 +3,7 @@ package com.trendsmixed.fma.module.employee;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.designation.Designation;
 import com.trendsmixed.fma.module.designation.DesignationService;
 import com.trendsmixed.fma.module.employeecategory.EmployeeCategory;
@@ -51,6 +52,11 @@ public class EmployeeController {
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
+    }
+
+    @GetMapping("/customer/{id}")
+    public Employee findOneByCustomer(@PathVariable("id") int id) {
+        return service.findOneByCustomerListId(id);
     }
 
     @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)

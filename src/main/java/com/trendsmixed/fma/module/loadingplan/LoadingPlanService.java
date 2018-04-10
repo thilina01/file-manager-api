@@ -1,6 +1,8 @@
 package com.trendsmixed.fma.module.loadingplan;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.customer.Customer;
+
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -37,4 +39,7 @@ public class LoadingPlanService {
         repository.delete(id);
     }
 
+    public Iterable<LoadingPlan> findByCustomer(Customer customer) {
+        return repository.findByCustomer(customer);
+    }
 }

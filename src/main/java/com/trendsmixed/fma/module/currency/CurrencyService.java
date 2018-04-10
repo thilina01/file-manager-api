@@ -1,6 +1,8 @@
 package com.trendsmixed.fma.module.currency;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.customer.Customer;
+
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -39,5 +41,9 @@ public class CurrencyService {
 
     public Currency findByCode(String code) {
         return repository.findByCode(code);
+    }
+
+    public Currency findOneByCustomerListId(int id) {
+        return repository.findOneByCustomerListId(id);
     }
 }

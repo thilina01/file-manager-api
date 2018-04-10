@@ -13,4 +13,7 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employee,
             + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.callingName)"
             + " FROM Employee o")
     List<Combo> getCombo();
+
+    Employee findOneByCustomerListId(int id);
+
 }

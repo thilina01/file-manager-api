@@ -3,7 +3,10 @@ package com.trendsmixed.fma.module.exchangerate;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.utility.Page;
+
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -35,6 +38,14 @@ public class ExchangeRateController {
     List<Combo> combo() {
         return service.getCombo();
     }
+    
+    @JsonView(ExchangeRateView.AllAndCurrencyAll.class)
+    @GetMapping("/currencyAndExchangeRateDate")
+    public ExchangeRate getByCurrencyAndExchangeRateDate(
+    @RequestParam(value = "currencyId") String currencyId,
+            @RequestParam(value = "exchangeRateDate") long exchangeRateDate) {
+        return service.findOneByCurrencyAndExchangeRateDate(new Currency(Integer.valueOf(currencyId)), new Date(exchangeRateDate));
+    }
 
     @PostMapping
     @JsonView(ExchangeRateView.AllAndCurrencyAll.class)
@@ -57,19 +68,6 @@ public class ExchangeRateController {
 
         appSessionService.isValid(email, request);
         try {
-            // for (ExchangeRate exchangeRate :exchangeRates) {
-            //    exchangeRate.setCode( exchangeRate.getCode().trim());
-            //    exchangeRate.setName( exchangeRate.getName().trim());
-            //     ExchangeRate existingExchangeRate = service.findByCode( exchangeRate.getCode());
-            //     if (existingExchangeRate != null) {
-            //        exchangeRate.setId(existingExchangeRate.getId());
-            //     }
-            //     Section section =exchangeRate.getCurrency();
-            //     if (section != null) {
-            //         section = sectionService.findByCode(section.getCode());
-            //        exchangeRate.setSection(section);
-            //     }
-            // }
             service.save( exchangeRates);
         } catch (Throwable e) {
             while (e.getCause() != null) {

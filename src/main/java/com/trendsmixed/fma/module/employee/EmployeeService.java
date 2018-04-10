@@ -44,5 +44,8 @@ public class EmployeeService {
     public Employee findByCode(String code) {
         return repository.findByCode(code);
     }
+    public Employee findOneByCustomerListId(int id) {
+        return repository.findOneByCustomerListId(id);
+    }
 
 }

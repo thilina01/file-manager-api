@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,11 @@ public class PackagingSpecificationController {
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
+    }
+
+    @GetMapping("/comboByItem/{id}")
+    List<Combo> comboByItem(@PathVariable("id") int id) {
+        return service.getComboByItemId(id);
     }
 
     @PostMapping

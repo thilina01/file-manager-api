@@ -20,6 +20,8 @@ public interface DispatchScheduleRepository extends PagingAndSortingRepository<D
 
         Iterable<DispatchSchedule> findBySalesOrderItemSalesOrder(SalesOrder salesOrder);
 
+        Iterable<DispatchSchedule> findBySalesOrderItemSalesOrderCustomer(Customer customer);
+
         @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id,o.job.jobNo,o.job.item.code)"
                         + " FROM DispatchSchedule o" + " WHERE o.salesOrderItem.salesOrder.customer = :customer")
         List<Combo> getComboByCustomer(@Param("customer") Customer customer);
