@@ -5,6 +5,8 @@ import com.trendsmixed.fma.module.dispatch.Dispatch;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItem;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
+import com.trendsmixed.fma.utility.Format;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -68,4 +70,8 @@ public class DispatchSchedule implements Serializable {
         this.id = id;
     }
 
+    @JsonView(DispatchScheduleView.All.class)
+    public String getDisplay() {
+        return job.getDisplay() + " : " + Format.yyyy_MM_dd.format(confirmDate);
+    }
 }

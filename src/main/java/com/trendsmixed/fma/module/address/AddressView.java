@@ -58,6 +58,8 @@ public class AddressView {
     public interface AllAndPortAll extends All, Port, PortView.All {
     }
 
+    public interface AllAndCountryAll extends All, Country, CountryView.All {
+    }
 
     public interface AllAndCustomerAll extends All, Customer, CustomerView.All {
     }
@@ -71,4 +73,8 @@ public class AddressView {
     public interface AllAndAddressTypeAllAndCountryAllAndPortAll
             extends AllAndAddressTypeAll, Country, CountryView.All, Port, PortView.All {
     }
+
+    public interface AllAndAddressTypeAndCountryAndPort extends All, AllAndCountryAll, AllAndPortAll,AllAndAddressTypeAll {
+    }
+
 }

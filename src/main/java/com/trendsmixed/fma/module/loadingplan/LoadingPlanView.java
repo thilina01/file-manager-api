@@ -4,9 +4,19 @@ import com.trendsmixed.fma.utility.PageView;
 import com.trendsmixed.fma.module.customer.CustomerView;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndPackagingSpecification;
+import com.trendsmixed.fma.module.packagingspecification.PackagingSpecificationView.AllAndPalletSize;
 import com.trendsmixed.fma.module.containersize.ContainerSizeView;
 import com.trendsmixed.fma.module.port.PortView;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndContactAll;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndCurrencyAll;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndEmployeeAll;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndIncotermAll;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndNotifyPartyAll;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndPaymentTermAll;
 import com.trendsmixed.fma.module.address.AddressView;
+import com.trendsmixed.fma.module.address.AddressView.AllAndAddressTypeAll;
+import com.trendsmixed.fma.module.address.AddressView.AllAndCountryAll;
+import com.trendsmixed.fma.module.address.AddressView.AllAndPortAll;
 
 /**
  *
@@ -29,7 +39,13 @@ public class LoadingPlanView {
         public interface Customer {
         }
 
+        public interface Employee {
+        }
+
         public static interface Address {
+        }
+
+        public static interface Invoice {
         }
 
         public static interface ContainerSize {
@@ -86,5 +102,27 @@ public class LoadingPlanView {
                         AllAndPackagingSpecification, AllAndPortOfLoading, AllAndContainerSize, AllAndCustomer,
                         AllAndAddress {
         }
+
+        public interface AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomer
+                        extends All, LoadingPlanItem,
+                        LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
+                        AllAndPackagingSpecification,AllAndPalletSize, AllAndPortOfLoading, AllAndContainerSize, AllAndCustomer,
+                        AllAndAddress, AddressView.AllAndAddressTypeAndCountryAndPort, AllAndCountryAll, AllAndPortAll,
+                        AllAndAddressTypeAll, AllAndIncotermAll, AllAndNotifyPartyAll, AllAndCurrencyAll,
+                        AllAndPaymentTermAll, AllAndEmployeeAll, AllAndContactAll {
+
+        }
+
+        public interface AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomer
+                        extends All, LoadingPlanItem,
+                        LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
+                        AllAndPackagingSpecification,AllAndPalletSize, AllAndPortOfLoading, AllAndContainerSize, AllAndCustomer,
+                        AllAndAddress, AddressView.AllAndAddressTypeAndCountryAndPort, AllAndCountryAll, AllAndPortAll,
+                        AllAndAddressTypeAll, AllAndIncotermAll, AllAndNotifyPartyAll, AllAndCurrencyAll,
+                        AllAndPaymentTermAll, AllAndEmployeeAll, AllAndContactAll {
+
+        }
+
+       
 
 }

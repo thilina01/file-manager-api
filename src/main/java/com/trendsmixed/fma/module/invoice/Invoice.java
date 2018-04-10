@@ -1,9 +1,17 @@
 package com.trendsmixed.fma.module.invoice;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.currency.Currency;
+import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.employee.Employee;
+import com.trendsmixed.fma.module.exchangerate.ExchangeRate;
 import com.trendsmixed.fma.module.invoicetype.InvoiceType;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -31,6 +39,9 @@ public class Invoice implements Serializable {
     @Column(name = "invoice_date")
     @Temporal(TemporalType.DATE)
     private Date invoiceDate;
+    @JsonView(InvoiceView.TotalAmount.class)
+    @Column(name = "totalAmount")
+    private Double totalAmount;
     @JsonView(InvoiceView.InvoiceNumber.class)
     @Column(name = "invoice_number")
     private String invoiceNumber;
@@ -38,6 +49,25 @@ public class Invoice implements Serializable {
     @JoinColumn(name = "invoice_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private InvoiceType invoiceType;
+    @JsonView(InvoiceView.Customer.class)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Customer customer;
+    @JsonView(InvoiceView.Employee.class)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private Employee employee;
+    @JsonView(InvoiceView.ExchangeRate.class)
+    @JoinColumn(name = "exchange_rate_id", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private ExchangeRate exchangeRate;
+    @JsonView(InvoiceView.Currency.class)
+    @JoinColumn(name = "currency_id", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private Currency currency;
+    @JsonView(InvoiceView.LoadingPlan.class)
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "invoice", fetch = FetchType.LAZY)
+    private List<LoadingPlan> loadingPlanList;
    
     public Invoice(Integer id) {
         this.id = id;

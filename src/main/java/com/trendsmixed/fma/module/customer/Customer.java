@@ -9,6 +9,7 @@ import com.trendsmixed.fma.module.customertype.CustomerType;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.incoterm.Incoterm;
+import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
 import com.trendsmixed.fma.module.notifyparty.NotifyParty;
 import com.trendsmixed.fma.module.paymentterm.PaymentTerm;
@@ -96,6 +97,8 @@ public class Customer implements Serializable {
     private List<DispatchNote> dispatchNoteList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<LoadingPlan> loadingPlanList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Invoice> invoiceList;
     @JsonView(CustomerView.Incoterm.class)
     @JoinColumn(name = "incoterm_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
@@ -120,9 +123,6 @@ public class Customer implements Serializable {
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Employee employee;
-
-
-
    
     public Customer(int anId) {
         this.id = anId;

@@ -163,4 +163,7 @@ public class CustomerView {
                         ContactView.AllAndContactTypeAll, AllAndEmployeeAll {
         }
 
+        public interface AllAndIncotermAndCurrencyAndNotifyPartyAndPaymentTermAndEmployee
+                        extends All,AllAndIncotermAll,AllAndEmployeeAll,AllAndPaymentTermAll,AllAndNotifyPartyAll,AllAndCurrencyAll{
+        }
 }

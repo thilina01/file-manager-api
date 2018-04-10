@@ -2,8 +2,12 @@ package com.trendsmixed.fma.module.exchangerate;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.currency.Currency;
+import com.trendsmixed.fma.module.invoice.Invoice;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -38,6 +42,8 @@ public class ExchangeRate implements Serializable {
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Currency currency;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "exchangeRate", fetch = FetchType.LAZY)
+    private List<Invoice> invoiceList;
 
    
 }

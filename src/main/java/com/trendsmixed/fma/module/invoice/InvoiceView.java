@@ -1,8 +1,23 @@
 package com.trendsmixed.fma.module.invoice;
 
-import com.trendsmixed.fma.module.customer.CustomerView;
 import com.trendsmixed.fma.module.invoicetype.InvoiceTypeView;
-
+import com.trendsmixed.fma.module.exchangerate.ExchangeRateView;
+import com.trendsmixed.fma.module.customer.CustomerView;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndContactAll;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndCurrencyAll;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndEmployeeAll;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndIncotermAll;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndNotifyPartyAll;
+import com.trendsmixed.fma.module.customer.CustomerView.AllAndPaymentTermAll;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlanView;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndAddress;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndContainerSize;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndPortOfLoading;
+import com.trendsmixed.fma.module.address.AddressView;
+import com.trendsmixed.fma.module.address.AddressView.AllAndAddressTypeAll;
+import com.trendsmixed.fma.module.address.AddressView.AllAndCountryAll;
+import com.trendsmixed.fma.module.address.AddressView.AllAndPortAll;
+import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndPackagingSpecification;
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -17,6 +32,9 @@ public class InvoiceView {
         public interface InvoiceType {
         }
 
+        public interface TotalAmount {
+        }
+
         public interface InvoiceDate {
         }
 
@@ -26,32 +44,70 @@ public class InvoiceView {
         public interface Customer {
         }
 
-        public interface PackingList {
+        public interface ExchangeRate {
         }
 
-        public interface InvoiceDispatchNote {
+        public interface Currency {
         }
 
-        public interface All extends Id, InvoiceNumber, InvoiceDate, PageView.All {
+        public interface Employee {
         }
 
-        public interface AllAndInvoiceTypeAll extends All, InvoiceType, InvoiceTypeView.All {
+        public interface LoadingPlan {
         }
 
-        public interface AllAndCustomerAll extends All, Customer, CustomerView.All {
+        public interface All extends Id, InvoiceNumber, InvoiceDate, TotalAmount, PageView.All {
         }
 
-        public interface AllAndCustomerAllAndInvoiceTypeAll extends AllAndCustomerAll, AllAndInvoiceTypeAll {
+        public interface AllAndInvoiceType extends All, InvoiceType, InvoiceTypeView.All {
         }
 
-        // public interface AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
-        //                 extends All, InvoiceDispatchNote,
-        //                 InvoiceDispatchNoteView.AllAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
-        // }
+        public interface AllAndExchangeRate extends All, ExchangeRate, ExchangeRateView.All {
+        }
 
-        // public interface AllAndCustomerAndInvoiceTypeAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
-        //                 extends AllAndCustomerAllAndInvoiceTypeAll,
-        //                 AllAndInvoiceDispatchNoteAndDispatchNoteAndDispatchAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
-        // }
+        public interface AllAndCustomer extends All, Customer, CustomerView.All {
+        }
+
+        public interface AllAndLoadingPlan extends All, LoadingPlan, LoadingPlanView.All {
+        }
+
+        public interface AllAndCustomerAndInvoiceType extends All, AllAndInvoiceType, AllAndCustomer {
+        }
+
+        public interface AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomerAndInvoiceType
+                        extends All, LoadingPlan,
+                        LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
+                        AllAndPackagingSpecification, AllAndPortOfLoading, AllAndContainerSize, AllAndCustomer,
+                        AllAndInvoiceType, AllAndAddress {
+        }
+
+        public interface AllAndCustomerAndIncotermAndCurrencyAndNotifyPartyAndPaymentTermAndEmployee extends All,
+                        Customer, CustomerView.AllAndIncotermAndCurrencyAndNotifyPartyAndPaymentTermAndEmployee,
+                        AllAndIncotermAll, AllAndEmployeeAll, AllAndPaymentTermAll, AllAndNotifyPartyAll,
+                        AllAndCurrencyAll {
+        }
+
+        public interface AllAndAddressAndAddressTypeAndCountryAndPort
+                        extends All, AddressView.AllAndAddressTypeAndCountryAndPort, AllAndCountryAll, AllAndPortAll,
+                        AllAndAddressTypeAll {
+        }
+
+        public interface AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomerAndIncotermAndInvoiceType
+                        extends All, LoadingPlan,
+                        LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
+                        AllAndPackagingSpecification, AllAndPortOfLoading, AllAndContainerSize, AllAndCustomer,
+                        AllAndInvoiceType, AllAndAddress, AddressView.AllAndAddressTypeAndCountryAndPort,
+                        AllAndCountryAll, AllAndPortAll, AllAndAddressTypeAll, AllAndIncotermAll, AllAndNotifyPartyAll,
+                        AllAndCurrencyAll, AllAndPaymentTermAll, AllAndEmployeeAll, AllAndContactAll {
+        }
+
+        public interface AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomerAndIncotermAndInvoiceTypeAndExchangeRate
+                        extends All, LoadingPlan,
+                        LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
+                        AllAndPackagingSpecification, AllAndPortOfLoading, AllAndContainerSize, AllAndCustomer,
+                        AllAndCountryAll, AllAndCurrencyAll, AllAndPortAll, AllAndIncotermAll, AllAndNotifyPartyAll,
+                        AllAndPaymentTermAll, AllAndEmployeeAll, AllAndContactAll, AllAndInvoiceType,
+                        AllAndExchangeRate, AllAndAddress, AddressView.AllAndAddressTypeAndCountryAndPort {
+        }
 
 }

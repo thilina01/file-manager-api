@@ -6,7 +6,9 @@ import com.trendsmixed.fma.module.computer.Computer;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.designation.Designation;
 import com.trendsmixed.fma.module.employeecategory.EmployeeCategory;
+import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.labourtursource.LabourSource;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
 import com.trendsmixed.fma.module.productionemployee.ProductionEmployee;
 import com.trendsmixed.fma.module.resourceutilization.ResourceUtilization;
 import com.trendsmixed.fma.module.section.Section;
@@ -74,6 +76,10 @@ public class Employee implements Serializable {
     private List<Accident> accidentList;
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "employee")
     private List<ResourceUtilization> resourceUtilizationList;
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "employee")
+    private List<LoadingPlan> loadingPlanList;
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "employee")
+    private List<Invoice> invoiceList;
     @JsonView(EmployeeView.Designation.class)
     @JoinColumn(name = "designation_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
