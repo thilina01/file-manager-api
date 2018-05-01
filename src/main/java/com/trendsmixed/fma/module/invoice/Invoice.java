@@ -3,6 +3,7 @@ package com.trendsmixed.fma.module.invoice;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.exchangerate.ExchangeRate;
 import com.trendsmixed.fma.module.invoicetype.InvoiceType;
@@ -65,10 +66,9 @@ public class Invoice implements Serializable {
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Currency currency;
-    @JsonView(InvoiceView.LoadingPlan.class)
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "invoice", fetch = FetchType.LAZY)
-    private List<LoadingPlan> loadingPlanList;
-   
+    @JsonView(InvoiceView.DispatchNote.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "invoice", fetch = FetchType.LAZY)
+    private List<DispatchNote> dispatchNoteList;
     public Invoice(Integer id) {
         this.id = id;
     }

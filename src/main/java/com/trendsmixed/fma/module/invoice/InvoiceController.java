@@ -6,6 +6,8 @@ import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanService;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import java.text.ParseException;
@@ -25,8 +27,7 @@ public class InvoiceController {
 
     private final AppSessionService appSessionService;
     private final InvoiceService service;
-    private final LoadingPlanService loadingPlanService;
-
+    private final DispatchNoteService dispatchNoteService;
     @JsonView(InvoiceView.All.class)
     @GetMapping
     public Iterable<Invoice> findAll() {
@@ -62,8 +63,6 @@ public class InvoiceController {
         return new Page(service.findByCustomer(new Customer(Integer.valueOf(customer)), pageable));
     }
 
-   
-
     @JsonView(InvoiceView.All.class)
     @PostMapping
     public Invoice save(@RequestBody Invoice invoice, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
@@ -74,16 +73,16 @@ public class InvoiceController {
             //     invoiceDispatchNote.setInvoice(invoice);
             // }
 
-            List<LoadingPlan> loadingPlansToUpdate = new ArrayList(); 
-            List<LoadingPlan> loadingPlans = invoice.getLoadingPlanList();
+            List<DispatchNote> dispatchNotesToUpdate = new ArrayList(); 
+            List<DispatchNote> dispatchNotes = invoice.getDispatchNoteList();
                       
-                      if (loadingPlans != null) {
-                          for (LoadingPlan loadingPlan : loadingPlans) {
-                            LoadingPlan loadingPlanToUpdate = loadingPlanService.findOne(loadingPlan.getId());
-                            loadingPlanToUpdate.setInvoice(invoice);
-                            loadingPlansToUpdate.add(loadingPlanToUpdate);
+                      if (dispatchNotes != null) {
+                          for (DispatchNote dispatchNote : dispatchNotes) {
+                            DispatchNote dispatchNoteToUpdate = dispatchNoteService.findOne(dispatchNote.getId());
+                            dispatchNoteToUpdate.setInvoice(invoice);
+                            dispatchNotesToUpdate.add(dispatchNoteToUpdate);
                           }
-                          invoice.setLoadingPlanList(loadingPlansToUpdate);
+                          invoice.setDispatchNoteList(dispatchNotesToUpdate);
                      }
                      return service.save(invoice);
 
@@ -96,7 +95,7 @@ public class InvoiceController {
         }
     }
 
-     @JsonView(InvoiceView.AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomerAndIncotermAndInvoiceTypeAndExchangeRate.class)
+     @JsonView(InvoiceView.AllAndDispatchNoteAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomerAndIncotermAndInvoiceType.class)
     @GetMapping("/{id}")
     public Invoice findOne(@PathVariable("id") int id) {
         return service.findOne(id);

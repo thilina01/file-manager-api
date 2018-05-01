@@ -14,6 +14,8 @@ import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndAddress;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndContainerSize;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndPortOfLoading;
 import com.trendsmixed.fma.module.address.AddressView;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddress;
 import com.trendsmixed.fma.module.address.AddressView.AllAndAddressTypeAll;
 import com.trendsmixed.fma.module.address.AddressView.AllAndCountryAll;
 import com.trendsmixed.fma.module.address.AddressView.AllAndPortAll;
@@ -44,6 +46,9 @@ public class InvoiceView {
         public interface Customer {
         }
 
+        public interface DispatchNote {
+        }
+
         public interface ExchangeRate {
         }
 
@@ -66,6 +71,9 @@ public class InvoiceView {
         }
 
         public interface AllAndCustomer extends All, Customer, CustomerView.All {
+        }
+
+        public interface AllAndDispatchNote extends All, DispatchNote, DispatchNoteView.All {
         }
 
         public interface AllAndLoadingPlan extends All, LoadingPlan, LoadingPlanView.All {
@@ -108,6 +116,15 @@ public class InvoiceView {
                         AllAndCountryAll, AllAndCurrencyAll, AllAndPortAll, AllAndIncotermAll, AllAndNotifyPartyAll,
                         AllAndPaymentTermAll, AllAndEmployeeAll, AllAndContactAll, AllAndInvoiceType,
                         AllAndExchangeRate, AllAndAddress, AddressView.AllAndAddressTypeAndCountryAndPort {
+        }
+
+        public interface AllAndDispatchNoteAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomerAndIncotermAndInvoiceType
+                        extends All, DispatchNote,
+                        AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddress,
+                        AllAndPackagingSpecification, AllAndPortOfLoading, AllAndInvoiceType, AllAndExchangeRate,
+                        AllAndContainerSize, AllAndCountryAll, AllAndCurrencyAll, AllAndPortAll, AllAndIncotermAll,
+                        AllAndNotifyPartyAll, AllAndPaymentTermAll, AllAndEmployeeAll, AllAndContactAll, AllAndAddress,
+                        AddressView.AllAndAddressTypeAndCountryAndPort, AllAndCustomer {
         }
 
 }

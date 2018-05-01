@@ -1,5 +1,5 @@
 package com.trendsmixed.fma.module.exchangerate;
-
+import org.springframework.data.repository.query.Param;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.currency.Currency;
 
@@ -14,4 +14,11 @@ public interface ExchangeRateRepository extends PagingAndSortingRepository<Excha
     List<Combo> getCombo();
     
     ExchangeRate findOneByCurrencyAndExchangeRateDate(Currency currency, Date exchangeRateDate);
+
+    @Query(value = "SELECT exchangeRate"
+                        + " FROM ExchangeRate exchangeRate"
+                        + " WHERE exchangeRate.currency= :currency AND exchangeRate.exchangeRateDate BETWEEN :startDate AND :endDate"
+                        + " ORDER BY exchangeRate.exchangeRateDate DESC")
+        List findOneByCurrencyAndExchangeRateBetween( @Param("currency") Currency currency,@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
 }

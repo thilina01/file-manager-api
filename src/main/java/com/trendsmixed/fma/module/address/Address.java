@@ -65,9 +65,6 @@ public class Address implements Serializable {
     private Port port;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "address", fetch = FetchType.LAZY)
     private List<LoadingPlan> loadingPlanList;
-    @JsonView(AddressView.DispatchNote.class)
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "address")
-    private List<DispatchNote> dispatchNoteList;
     
     @JsonView(AddressView.All.class)
     public String getDisplay() {

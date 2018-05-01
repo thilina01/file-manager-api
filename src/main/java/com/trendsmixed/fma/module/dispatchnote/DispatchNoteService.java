@@ -43,10 +43,17 @@ public class DispatchNoteService {
         repository.delete(id);
     }
 
-    public List<Combo> getComboByCustomer(Customer customer) {
-        return repository.getComboByCustomer(customer);
+    // public List<Combo> getComboByCustomer(Customer customer) {
+    //     return repository.getComboByCustomer(customer);
+    // }
+
+    public Iterable<DispatchNote> findByCustomer(Customer customer) {
+        return repository.findByCustomer(customer);
     }
 
+    public Iterable<DispatchNote> findByCustomerAndInvoiceIsNull(Customer customer) {
+        return repository.findByCustomerAndInvoiceIsNull(customer);
+    }
     public DispatchNote findById(String id) {
         return repository.findById(id);
     }

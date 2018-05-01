@@ -45,6 +45,10 @@ public class LoadingPlanItemView {
         public interface AllAndLoadingPlan extends All, LoadingPlan, LoadingPlanView.All {
         }
 
+        public interface AllAndLoadingPlanAndCustomerAndDispatchNote
+                        extends All, LoadingPlan, LoadingPlanView.AllAndCustomerAndDispatchNote {
+        }
+
         public interface AllAndPackagingSpecificationAndPalletSize
                         extends All, PackagingSpecification, PackagingSpecificationView.AllAndPalletSize {
         }
@@ -64,6 +68,13 @@ public class LoadingPlanItemView {
                         extends All, DispatchSchedule,
                         DispatchScheduleView.AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
                         PackagingSpecification, PackagingSpecificationView.AllAndPalletSize {
+        }
+
+        public interface AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote
+                        extends All, DispatchSchedule,
+                        DispatchScheduleView.AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
+                        PackagingSpecification, PackagingSpecificationView.AllAndPalletSize, LoadingPlan,
+                        LoadingPlanView.AllAndCustomerAndDispatchNote {
         }
 
 }

@@ -5,6 +5,9 @@ import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
+import com.trendsmixed.fma.module.invoice.Invoice;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -48,14 +51,6 @@ public class DispatchNote implements Serializable {
     @JsonView(DispatchNoteView.Recipient.class)
     @Column(name = "recipient")
     private String recipient;
-//    @JsonView(DispatchNoteView.Employee.class)
-//    @JoinColumn(name = "employee_id", referencedColumnName = "id")
-//    @ManyToOne(optional = true, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private Employee employee;
-    @JsonView(DispatchNoteView.Address.class)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Address address;
     @JsonView(DispatchNoteView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -64,16 +59,25 @@ public class DispatchNote implements Serializable {
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     @ManyToOne(optional = true)
     private Location location;
-    @JsonView(DispatchNoteView.Quantity.class)
-    @Column(name = "quantity")
-    private Double quantity;
+    @JsonView(DispatchNoteView.Invoice.class)
+    @JoinColumn(name = "invoice_id", referencedColumnName = "id")
+    @ManyToOne(optional = true)
+    private Invoice invoice;
+    @JsonView(DispatchNoteView.LoadingPlan.class)
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dispatchNote", fetch = FetchType.LAZY)
+    private List<LoadingPlan> loadingPlanList;
     @JsonView(DispatchNoteView.Dispatch.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
     private List<Dispatch> dispatchList;
-    
 
     public DispatchNote(Integer anId) {
         this.id = anId;
+    }
+
+    @JsonView(DispatchNoteView.All.class)
+    public String getDisplay() {
+        return id + " : "; 
+        
     }
 
 }

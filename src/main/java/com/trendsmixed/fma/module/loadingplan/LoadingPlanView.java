@@ -14,6 +14,7 @@ import com.trendsmixed.fma.module.customer.CustomerView.AllAndIncotermAll;
 import com.trendsmixed.fma.module.customer.CustomerView.AllAndNotifyPartyAll;
 import com.trendsmixed.fma.module.customer.CustomerView.AllAndPaymentTermAll;
 import com.trendsmixed.fma.module.address.AddressView;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
 import com.trendsmixed.fma.module.address.AddressView.AllAndAddressTypeAll;
 import com.trendsmixed.fma.module.address.AddressView.AllAndCountryAll;
 import com.trendsmixed.fma.module.address.AddressView.AllAndPortAll;
@@ -42,6 +43,9 @@ public class LoadingPlanView {
         public interface Employee {
         }
 
+        public interface DispatchNote {
+        }
+
         public static interface Address {
         }
 
@@ -63,6 +67,9 @@ public class LoadingPlanView {
         public interface AllAndAddress extends All, Address, AddressView.All {
         }
 
+        public interface AllAndDispatchNote extends All, DispatchNote, DispatchNoteView.All {
+        }
+
         public interface AllAndCustomer extends All, Customer, CustomerView.All {
         }
 
@@ -73,6 +80,9 @@ public class LoadingPlanView {
         }
 
         public interface AllAndAddressAndCustomer extends AllAndCustomer, AllAndAddress {
+        }
+
+        public interface AllAndCustomerAndDispatchNote extends AllAndCustomer, AllAndDispatchNote {
         }
 
         public static interface AllAndPortOfLoadingAndContainerSize extends AllAndPortOfLoading, AllAndContainerSize {
@@ -106,9 +116,9 @@ public class LoadingPlanView {
         public interface AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomer
                         extends All, LoadingPlanItem,
                         LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
-                        AllAndPackagingSpecification,AllAndPalletSize, AllAndPortOfLoading, AllAndContainerSize, AllAndCustomer,
-                        AllAndAddress, AddressView.AllAndAddressTypeAndCountryAndPort, AllAndCountryAll, AllAndPortAll,
-                        AllAndAddressTypeAll, AllAndIncotermAll, AllAndNotifyPartyAll, AllAndCurrencyAll,
+                        AllAndPackagingSpecification, AllAndPalletSize, AllAndPortOfLoading, AllAndContainerSize,
+                        AllAndCustomer, AllAndAddress, AddressView.AllAndAddressTypeAndCountryAndPort, AllAndCountryAll,
+                        AllAndPortAll, AllAndAddressTypeAll, AllAndIncotermAll, AllAndNotifyPartyAll, AllAndCurrencyAll,
                         AllAndPaymentTermAll, AllAndEmployeeAll, AllAndContactAll {
 
         }
@@ -116,13 +126,11 @@ public class LoadingPlanView {
         public interface AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomer
                         extends All, LoadingPlanItem,
                         LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
-                        AllAndPackagingSpecification,AllAndPalletSize, AllAndPortOfLoading, AllAndContainerSize, AllAndCustomer,
-                        AllAndAddress, AddressView.AllAndAddressTypeAndCountryAndPort, AllAndCountryAll, AllAndPortAll,
-                        AllAndAddressTypeAll, AllAndIncotermAll, AllAndNotifyPartyAll, AllAndCurrencyAll,
+                        AllAndPackagingSpecification, AllAndPalletSize, AllAndPortOfLoading, AllAndContainerSize,
+                        AllAndCustomer, AllAndAddress, AddressView.AllAndAddressTypeAndCountryAndPort, AllAndCountryAll,
+                        AllAndPortAll, AllAndAddressTypeAll, AllAndIncotermAll, AllAndNotifyPartyAll, AllAndCurrencyAll,
                         AllAndPaymentTermAll, AllAndEmployeeAll, AllAndContactAll {
 
         }
-
-       
 
 }

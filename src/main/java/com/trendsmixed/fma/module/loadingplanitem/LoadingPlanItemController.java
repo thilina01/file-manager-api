@@ -25,11 +25,12 @@ public class LoadingPlanItemController {
         return service.findAll();
     }
 
-    @JsonView(LoadingPlanItemView.All.class)
+    @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
     @GetMapping("/page")
     Page<LoadingPlanItem> page(Pageable pageable) {
         return service.findAll(pageable);
     }
+    
 
     @GetMapping("/combo")
     List<Combo> combo() {

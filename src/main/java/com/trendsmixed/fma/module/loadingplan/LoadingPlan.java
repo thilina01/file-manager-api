@@ -3,6 +3,7 @@ package com.trendsmixed.fma.module.loadingplan;
 import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.containersize.ContainerSize;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItem;
@@ -63,10 +64,14 @@ public class LoadingPlan implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customer;
-    @JsonView(LoadingPlanView.Invoice.class)
-    @JoinColumn(name = "invoice_id", referencedColumnName = "id")
+    // @JsonView(LoadingPlanView.Invoice.class)
+    // @JoinColumn(name = "invoice_id", referencedColumnName = "id")
+    // @ManyToOne(optional = true)
+    // private Invoice invoice;
+    @JsonView(LoadingPlanView.DispatchNote.class)
+    @JoinColumn(name = "dispatchNote_id", referencedColumnName = "id")
     @ManyToOne(optional = true)
-    private Invoice invoice;
+    private DispatchNote dispatchNote;
     @JsonView(LoadingPlanView.LoadingPlanItem.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "loadingPlan", fetch = FetchType.LAZY)
     private List<LoadingPlanItem> loadingPlanItemList;

@@ -47,5 +47,9 @@ public class ExchangeRateService {
     public ExchangeRate findOneByCurrencyAndExchangeRateDate(Currency currency, Date exchangeRateDate) {
         return repository.findOneByCurrencyAndExchangeRateDate(currency, exchangeRateDate);
     }
+
+    public List findOneByCurrencyAndExchangeRateBetween(Currency currency, Date startDate,Date endDate) {
+        return repository.findOneByCurrencyAndExchangeRateBetween(currency, startDate,endDate);
+    }
   
 }
