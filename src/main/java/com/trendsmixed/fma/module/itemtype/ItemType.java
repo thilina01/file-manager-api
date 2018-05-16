@@ -36,6 +36,10 @@ public class ItemType implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "itemType")
     private List<Item> itemList;
 
+    public ItemType(int anId) {
+        this.id = anId;
+    }
+
     @JsonView(ItemTypeView.All.class)
     public String getDisplay() {
         return code + " : " + name;

@@ -5,7 +5,9 @@ import org.springframework.data.domain.Pageable;
 import java.util.Date;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
+import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
 import com.trendsmixed.fma.module.job.Job;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
@@ -46,4 +48,30 @@ public interface DispatchScheduleRepository extends PagingAndSortingRepository<D
         Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomer(Customer customer, Pageable pageable);
 
         Page<DispatchSchedule> findByJob(Job job, Pageable pageable);
+
+
+        Page<DispatchSchedule> findByJobItemAndSalesOrderItemSalesOrderOrderDateBetween(Item item, Date startDate,
+                        Date endDate, Pageable pageable);
+
+        Page<DispatchSchedule> findBySalesOrderItemSalesOrderSalesOrderTypeAndSalesOrderItemSalesOrderOrderDateBetween(
+                        SalesOrderType salesOrderType, Date startDate, Date endDate, Pageable pageable);
+
+        Page<DispatchSchedule> findByJobItemAndSalesOrderItemSalesOrderOrderDateBetweenAndJob(
+                                Item item, Date startDate, Date endDate, Job job, Pageable pageable);
+        
+        Page<DispatchSchedule> findByJobItemAndSalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderSalesOrderType(
+                                        Item item, Date startDate, Date endDate, SalesOrderType salesOrderType, Pageable pageable);
+                                        
+        Page<DispatchSchedule> findByJobItemAndSalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderCustomer(
+                                                Item item, Date startDate, Date endDate, Customer customer, Pageable pageable);
+
+        Page<DispatchSchedule> findBySalesOrderItemSalesOrderSalesOrderTypeAndSalesOrderItemSalesOrderOrderDateBetweenAndJob(
+                                                        SalesOrderType salesOrderType, Date startDate, Date endDate, Job job, Pageable pageable);
+
+        Page<DispatchSchedule> findBySalesOrderItemSalesOrderSalesOrderTypeAndSalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderCustomer(
+                                                                SalesOrderType salesOrderType, Date startDate, Date endDate, Customer Customer, Pageable pageable);
+                                                                              
+                                                                                              
+                                                              
+
 }

@@ -51,6 +51,7 @@ public class DispatchSchedule implements Serializable {
     @JsonView(DispatchScheduleView.Dispatch.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchSchedule")
     private List<Dispatch> dispatchList;
+    @JsonView(DispatchScheduleView.LoadingPlanItem.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchSchedule", fetch = FetchType.LAZY)
     private List<LoadingPlanItem> loadingPlanItemList;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation

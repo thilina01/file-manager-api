@@ -44,4 +44,9 @@ public class ItemTypeService {
     public ItemType findByName(String name) {
         return repository.findByName(name);
     }
+
+    public ItemType findByCode(String code) {
+        return repository.findByCode(code);
+    }
+
 }

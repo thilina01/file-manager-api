@@ -2,7 +2,9 @@ package com.trendsmixed.fma.module.invoice;
 
 import com.trendsmixed.fma.module.invoicetype.InvoiceTypeView;
 import com.trendsmixed.fma.module.exchangerate.ExchangeRateView;
+import com.trendsmixed.fma.module.exchangerate.ExchangeRateView.AllAndCurrencyId;
 import com.trendsmixed.fma.module.customer.CustomerView;
+import com.trendsmixed.fma.module.currency.CurrencyView;
 import com.trendsmixed.fma.module.customer.CustomerView.AllAndContactAll;
 import com.trendsmixed.fma.module.customer.CustomerView.AllAndCurrencyAll;
 import com.trendsmixed.fma.module.customer.CustomerView.AllAndEmployeeAll;
@@ -73,6 +75,12 @@ public class InvoiceView {
         public interface AllAndCustomer extends All, Customer, CustomerView.All {
         }
 
+        public interface AllAndCurrency extends All, Currency, CurrencyView.All {
+        }
+
+        public interface AllAndExchangeRateAndCurrency extends All, AllAndCurrency, ExchangeRateView.All {
+        }
+
         public interface AllAndDispatchNote extends All, DispatchNote, DispatchNoteView.All {
         }
 
@@ -125,6 +133,9 @@ public class InvoiceView {
                         AllAndContainerSize, AllAndCountryAll, AllAndCurrencyAll, AllAndPortAll, AllAndIncotermAll,
                         AllAndNotifyPartyAll, AllAndPaymentTermAll, AllAndEmployeeAll, AllAndContactAll, AllAndAddress,
                         AddressView.AllAndAddressTypeAndCountryAndPort, AllAndCustomer {
+        }
+
+        public interface AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency  extends All, AllAndInvoiceType, AllAndCustomer,AllAndExchangeRate,AllAndCurrencyId {
         }
 
 }

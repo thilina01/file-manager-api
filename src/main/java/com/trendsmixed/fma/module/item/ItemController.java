@@ -34,12 +34,21 @@ public class ItemController {
     @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @GetMapping("/page")
     Page<Item> page(Pageable pageable) {
-        return service.findAll(pageable);
+        return new Page<>(service.findAll(pageable));
     }
 
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
+    }
+
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
+    @PostMapping("/pageByItemType")
+    Page<Item> pageByItemType(Pageable pageable, @RequestBody ItemType itemType) {
+        if (itemType.getId() == null) {
+            itemType = itemTypeService.findByCode(itemType.getCode());
+        }
+        return new Page<>(service.findByItemType(itemType, pageable));
     }
 
     @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)

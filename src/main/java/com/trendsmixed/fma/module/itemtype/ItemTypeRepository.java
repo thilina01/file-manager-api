@@ -11,8 +11,8 @@ public interface ItemTypeRepository extends PagingAndSortingRepository<ItemType,
 
     ItemType findByName(String name);
 
-    @Query(value = "SELECT"
-            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
-            + " FROM ItemType o")
+    ItemType findByCode(String code);
+
+    @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)" + " FROM ItemType o")
     List<Combo> getCombo();
 }

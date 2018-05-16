@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
-import com.trendsmixed.fma.module.loadingplan.LoadingPlanService;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNoteService;
 import com.trendsmixed.fma.utility.Page;
@@ -34,7 +32,7 @@ public class InvoiceController {
         return service.findAll();
     }
 
-    @JsonView(InvoiceView.AllAndCustomerAndInvoiceType.class)
+    @JsonView(InvoiceView.AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency.class)
     @GetMapping("/page")
     Page<Invoice> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -45,19 +43,19 @@ public class InvoiceController {
         return service.getCombo();
     }
 
-    @JsonView(InvoiceView.AllAndCustomerAndInvoiceType.class)
+    @JsonView(InvoiceView.AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency.class)
     @GetMapping(value = "/invoiceDurationPage", params = {"startDate", "endDate"})
     public Page<Invoice> invoiceDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
         return new Page(service.findByInvoiceDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
     }
 
-    @JsonView(InvoiceView.AllAndCustomerAndInvoiceType.class)
+    @JsonView(InvoiceView.AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency.class)
     @GetMapping(value = "/customerAndInvoiceDurationPage", params = {"customer", "startDate", "endDate"})
     public Page<Invoice> customerAndInvoiceDurationPage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
         return new Page(service.findByCustomerAndInvoiceDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
     }
 
-    @JsonView(InvoiceView.AllAndCustomerAndInvoiceType.class)
+    @JsonView(InvoiceView.AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency.class)
     @GetMapping(value = "/customerPage", params = {"customer"})
     public Page<Invoice> customerPage( @RequestParam("customer") String customer, Pageable pageable) throws ParseException {
         return new Page(service.findByCustomer(new Customer(Integer.valueOf(customer)), pageable));

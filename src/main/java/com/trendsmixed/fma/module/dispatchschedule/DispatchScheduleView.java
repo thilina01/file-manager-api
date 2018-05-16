@@ -2,9 +2,13 @@ package com.trendsmixed.fma.module.dispatchschedule;
 
 import com.trendsmixed.fma.module.dispatch.DispatchView;
 import com.trendsmixed.fma.module.item.ItemView;
+import com.trendsmixed.fma.module.item.ItemView.AllAndPaintAll;
 import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView;
+import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView;
+import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndLoadingPlan;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView;
+import com.trendsmixed.fma.module.salesorder.SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView.Customer;
 import com.trendsmixed.fma.utility.PageView;
 
@@ -37,6 +41,9 @@ public class DispatchScheduleView {
         public interface SalesOrderItem {
         }
 
+        public interface LoadingPlanItem {
+        }
+
         public interface Dispatch extends DispatchView.All {
         }
 
@@ -48,6 +55,9 @@ public class DispatchScheduleView {
         }
 
         public interface AllAndSalesOrderItem extends All, SalesOrderItem, SalesOrderItemView.All {
+        }
+
+        public interface AllAndLoadingPlanItem extends All, LoadingPlanItem, LoadingPlanItemView.All {
         }
 
         public interface AllAndCustomer extends All, Customer, SalesOrderView.All {
@@ -79,5 +89,11 @@ public class DispatchScheduleView {
                         extends AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll,
                         SalesOrderItemView.AllAndSalesOrderAndCustomerItem, AllAndCustomer, SalesOrderView.All {
         }
-        
+
+        public interface AllAndSalesOrderItemAllAndSalesOrderAllAndSalesOrderTypeAllAndCustomerAllCustomerItemAllAndJobAllAndPaintAllAndItemAllAndLoadingPlanItemAllAndLoadingPlanAll
+                        extends AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll, AllAndPaintAll,
+                        AllAndCustomerAllAndSalesOrderTypeAll, SalesOrderItemView.AllAndSalesOrderAndCustomerItem,
+                        AllAndCustomer, SalesOrderView.All, AllAndLoadingPlanItem ,AllAndLoadingPlan{
+        }
+
 }
