@@ -54,4 +54,13 @@ public class CustomerItemService {
     public CustomerItem findByCustomerAndItem(Customer customer, Item item) {
         return repository.findByCustomerAndItem(customer, item);
     }
+
+    Page<CustomerItem> findByItem(Item item, Pageable pageable) {
+        return repository.findByItem(item, pageable);
+    }
+
+    Page<CustomerItem> findByItemAndCustomer(Item item,Customer customer, Pageable pageable) {
+        return repository.findByItemAndCustomer(item,customer, pageable);
+    }
+
 }

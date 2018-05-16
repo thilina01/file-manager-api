@@ -12,18 +12,21 @@ import org.springframework.data.repository.query.Param;
 
 public interface CustomerItemRepository extends PagingAndSortingRepository<CustomerItem, Integer> {
 
-    CustomerItem findByCustomerAndItem(Customer customer, Item item);
+        CustomerItem findByCustomerAndItem(Customer customer, Item item);
 
-    @Query(value = "SELECT"
-            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
-            + " FROM CustomerItem o")
-    List<Combo> getCombo();
+        @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)" + " FROM CustomerItem o")
+        List<Combo> getCombo();
 
-    @Query(value = "SELECT"
-            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)"
-            + " FROM CustomerItem o"
-            + " WHERE o.customer = :customer")
-    List<Combo> getComboByCustomer(@Param("customer") Customer customer);
+        @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)" + " FROM CustomerItem o"
+                        + " WHERE o.customer = :customer")
+        List<Combo> getComboByCustomer(@Param("customer") Customer customer);
 
-    Page<CustomerItem> findByCustomer(Customer customer, Pageable pageable);
+        Page<CustomerItem> findByCustomer(Customer customer, Pageable pageable);
+
+        Page<CustomerItem> findByItem(Item item, Pageable pageable);
+
+        Page<CustomerItem> findByItemAndCustomer(Item item, Customer customer, Pageable pageable);
+
+       
+
 }
