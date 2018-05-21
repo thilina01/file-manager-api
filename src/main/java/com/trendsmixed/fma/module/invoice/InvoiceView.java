@@ -54,6 +54,12 @@ public class InvoiceView {
         public interface Customer {
         }
 
+        public interface TaxValue {
+        }
+
+        public interface TotalSalesAmount {
+        }
+
         public interface DispatchNote {
         }
 
@@ -69,7 +75,8 @@ public class InvoiceView {
         public interface LoadingPlan {
         }
 
-        public interface All extends Id, InvoiceNumber, InvoiceDate, TaxRate, TotalAmount, TotalWeight, PageView.All {
+        public interface All extends Id, InvoiceNumber, InvoiceDate, TaxRate, TotalAmount, TotalWeight,
+                        TotalSalesAmount, TaxValue, PageView.All {
         }
 
         public interface AllAndInvoiceType extends All, InvoiceType, InvoiceTypeView.All {
