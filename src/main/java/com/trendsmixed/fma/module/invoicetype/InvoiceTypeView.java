@@ -13,7 +13,10 @@ public class InvoiceTypeView {
     public interface Code {
     }
 
-    public interface All extends Id, Name, Code, PageView.All {
+    public interface TaxRate {
+    }
+
+    public interface All extends Id, Name, Code, TaxRate, PageView.All {
     }
 
 }

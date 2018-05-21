@@ -35,6 +35,9 @@ public class InvoiceType implements Serializable {
     @JsonView(InvoiceTypeView.Name.class)
     @Column(name = "name")
     private String name;
+    @JsonView(InvoiceTypeView.TaxRate.class)
+    @Column(name = "taxRate")
+    private Double taxRate;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "invoiceType")
     private List<Invoice> invoiceList;
 
