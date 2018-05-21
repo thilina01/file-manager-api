@@ -43,6 +43,9 @@ public class Invoice implements Serializable {
     @JsonView(InvoiceView.TotalAmount.class)
     @Column(name = "totalAmount")
     private Double totalAmount;
+    @JsonView(InvoiceView.TotalWeight.class)
+    @Column(name = "totalWeight")
+    private Double totalWeight;
     @JsonView(InvoiceView.InvoiceNumber.class)
     @Column(name = "invoice_number")
     private String invoiceNumber;

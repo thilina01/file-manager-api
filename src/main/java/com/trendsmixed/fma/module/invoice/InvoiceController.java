@@ -32,7 +32,7 @@ public class InvoiceController {
         return service.findAll();
     }
 
-    @JsonView(InvoiceView.AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency.class)
+    @JsonView(InvoiceView.AllAndDispatchNoteAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomerAndIncotermAndInvoiceType.class)
     @GetMapping("/page")
     Page<Invoice> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));

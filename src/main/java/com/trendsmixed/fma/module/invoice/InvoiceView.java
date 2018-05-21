@@ -39,6 +39,9 @@ public class InvoiceView {
         public interface TotalAmount {
         }
 
+        public interface TotalWeight {
+        }
+
         public interface InvoiceDate {
         }
 
@@ -63,7 +66,7 @@ public class InvoiceView {
         public interface LoadingPlan {
         }
 
-        public interface All extends Id, InvoiceNumber, InvoiceDate, TotalAmount, PageView.All {
+        public interface All extends Id, InvoiceNumber, InvoiceDate, TotalAmount,TotalWeight, PageView.All {
         }
 
         public interface AllAndInvoiceType extends All, InvoiceType, InvoiceTypeView.All {
