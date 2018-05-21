@@ -53,6 +53,9 @@ public class Invoice implements Serializable {
     @JoinColumn(name = "invoice_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private InvoiceType invoiceType;
+    @JsonView(InvoiceView.TaxRate.class)
+    @Column(name = "taxRate")
+    private Double taxRate;
     @JsonView(InvoiceView.Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)

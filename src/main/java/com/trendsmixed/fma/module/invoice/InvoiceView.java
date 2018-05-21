@@ -48,6 +48,9 @@ public class InvoiceView {
         public interface InvoiceNumber {
         }
 
+        public interface TaxRate {
+        }
+
         public interface Customer {
         }
 
@@ -66,7 +69,7 @@ public class InvoiceView {
         public interface LoadingPlan {
         }
 
-        public interface All extends Id, InvoiceNumber, InvoiceDate, TotalAmount,TotalWeight, PageView.All {
+        public interface All extends Id, InvoiceNumber, InvoiceDate, TaxRate, TotalAmount, TotalWeight, PageView.All {
         }
 
         public interface AllAndInvoiceType extends All, InvoiceType, InvoiceTypeView.All {
@@ -138,7 +141,8 @@ public class InvoiceView {
                         AddressView.AllAndAddressTypeAndCountryAndPort, AllAndCustomer {
         }
 
-        public interface AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency  extends All, AllAndInvoiceType, AllAndCustomer,AllAndExchangeRate,AllAndCurrencyId {
+        public interface AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency
+                        extends All, AllAndInvoiceType, AllAndCustomer, AllAndExchangeRate, AllAndCurrencyId {
         }
 
 }
