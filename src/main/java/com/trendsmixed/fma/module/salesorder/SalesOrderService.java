@@ -76,5 +76,8 @@ public class SalesOrderService {
         return repository.findByCustomer(customer, pageable);
     }
 
+    public List<Combo> getComboByCustomer(Customer customer) {
+        return repository.getComboByCustomer(customer);
+    }
 
 }

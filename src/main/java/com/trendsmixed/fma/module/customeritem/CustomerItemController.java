@@ -96,6 +96,12 @@ public class CustomerItemController {
     List<Combo> combo() {
         return service.getCombo();
     }
+    
+    @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
+    @GetMapping("/customer/{id}")
+    public Iterable<CustomerItem> findByCustomer(@PathVariable("id") int id) {
+        return service.findByCustomer(new Customer(id));
+    }
 
     @PostMapping
     public CustomerItem save(@RequestBody CustomerItem customerItems, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

@@ -17,6 +17,8 @@ public interface CustomerItemRepository extends PagingAndSortingRepository<Custo
         @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, o.code,CONCAT(o.item.code,'') )" + " FROM CustomerItem o")
         List<Combo> getCombo();
 
+        Iterable<CustomerItem> findByCustomer(Customer customer);
+
         @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.name)" + " FROM CustomerItem o"
                         + " WHERE o.customer = :customer")
         List<Combo> getComboByCustomer(@Param("customer") Customer customer);

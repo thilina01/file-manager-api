@@ -86,6 +86,11 @@ public class SalesOrderController {
         return service.getCombo();
     }
 
+    @GetMapping("/comboByCustomer/{id}")
+    List<Combo> combo(@PathVariable("id") int id) {
+        return service.getComboByCustomer(new Customer(id));
+    }
+    
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PostMapping
     public SalesOrder save(@RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {

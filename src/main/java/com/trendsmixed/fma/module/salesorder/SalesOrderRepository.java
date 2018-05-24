@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 public interface SalesOrderRepository extends PagingAndSortingRepository<SalesOrder, Integer> {
 
@@ -17,6 +18,12 @@ public interface SalesOrderRepository extends PagingAndSortingRepository<SalesOr
         @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, o.salesOrderNumber, o.customerPoNumber)"
                         + " FROM SalesOrder o")
         List<Combo> getCombo();
+
+        @Query(value = "SELECT"
+        + " new com.trendsmixed.fma.dao.Combo(o.id, o.salesOrderNumber, o.customerPoNumber)"
+        + " FROM SalesOrder o"
+        + " WHERE o.customer = :customer")
+       List<Combo> getComboByCustomer(@Param("customer") Customer customer);
 
         Page<SalesOrder> findByOrderDateBetween(Date startDate, Date endDate, Pageable pageable);
 

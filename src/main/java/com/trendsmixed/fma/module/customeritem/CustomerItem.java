@@ -52,8 +52,8 @@ public class CustomerItem implements Serializable {
         this.id = anId;
     }
     
-    @JsonView(CustomerItemView.All.class)
+    @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     public String getDisplay() {
-        return code + " : " + name;
+        return code + " : " + item.getCode() ;
     }
 }

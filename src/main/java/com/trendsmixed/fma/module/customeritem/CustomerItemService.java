@@ -63,4 +63,8 @@ public class CustomerItemService {
         return repository.findByItemAndCustomer(item,customer, pageable);
     }
 
+    public Iterable<CustomerItem> findByCustomer(Customer customer) {
+        return repository.findByCustomer(customer);
+    }
+
 }
