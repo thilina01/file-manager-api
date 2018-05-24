@@ -1,8 +1,16 @@
 package com.trendsmixed.fma.module.loadingplanitem;
 
 import com.trendsmixed.fma.module.packagingspecification.PackagingSpecificationView;
+import com.trendsmixed.fma.module.salesorder.SalesOrderView.AllAndCustomerAll;
+import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView.AllAndCustomerItem;
+import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView.AllAndSalesOrder;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndDispatchNote;
+import com.trendsmixed.fma.module.customeritem.CustomerItemView.AllAndItemAll;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView.AllAndInvoice;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView;
+import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView.SalesOrderItem;
+import com.trendsmixed.fma.module.item.ItemView.AllAndPaintAll;
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -45,6 +53,9 @@ public class LoadingPlanItemView {
         public interface AllAndLoadingPlan extends All, LoadingPlan, LoadingPlanView.All {
         }
 
+        public interface AllAndDispatchSchedule extends All, DispatchSchedule, DispatchScheduleView.All {
+        }
+
         public interface AllAndLoadingPlanAndCustomerAndDispatchNote
                         extends All, LoadingPlan, LoadingPlanView.AllAndCustomerAndDispatchNote {
         }
@@ -76,5 +87,18 @@ public class LoadingPlanItemView {
                         PackagingSpecification, PackagingSpecificationView.AllAndPalletSize, LoadingPlan,
                         LoadingPlanView.AllAndCustomerAndDispatchNote {
         }
+
+        public interface AllAndLoadingPlanAndDispatchNoteAndinvoice
+                        extends All, AllAndLoadingPlan, AllAndDispatchNote, AllAndInvoice {
+        }
+
+        public interface AllAndSalesOrderItemAndCustomerItemAndSalesOrderAndCustomerAndItemAndPaint
+                        extends All, SalesOrderItem,AllAndCustomerItem,AllAndSalesOrder,AllAndCustomerAll,AllAndItemAll,AllAndPaintAll {
+        }
+
+        public interface AllAndDispatchScheduleAndLoadingPlanAndDispatchNoteAndinvoiceAndSalesOrderItemAndCustomerItemAndSalesOrderAndCustomerAndItemAndPaint
+        extends All, AllAndLoadingPlan, AllAndDispatchNote, AllAndInvoice,SalesOrderItem,AllAndCustomerItem,AllAndSalesOrder,AllAndCustomerAll,AllAndItemAll,AllAndPaintAll,DispatchSchedule,
+        DispatchScheduleView.All{
+}
 
 }

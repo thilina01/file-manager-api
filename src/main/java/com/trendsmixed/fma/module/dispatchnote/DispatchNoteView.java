@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.dispatchnote;
 
 import com.trendsmixed.fma.module.address.AddressView;
+import com.trendsmixed.fma.module.invoice.InvoiceView;
 import com.trendsmixed.fma.module.address.AddressView.AllAndAddressTypeAll;
 import com.trendsmixed.fma.module.address.AddressView.AllAndCountryAll;
 import com.trendsmixed.fma.module.address.AddressView.AllAndPortAll;
@@ -73,6 +74,9 @@ public class DispatchNoteView {
         }
 
         public interface AllAndEmployee extends All, Employee, EmployeeView.All {
+        }
+
+        public interface AllAndInvoice extends All, Invoice, InvoiceView.All {
         }
 
         public interface AllAndLocation extends All, Location, LocationView.All {

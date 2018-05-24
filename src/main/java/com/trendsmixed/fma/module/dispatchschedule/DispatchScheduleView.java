@@ -1,12 +1,15 @@
 package com.trendsmixed.fma.module.dispatchschedule;
 
 import com.trendsmixed.fma.module.dispatch.DispatchView;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView.AllAndInvoice;
 import com.trendsmixed.fma.module.item.ItemView;
 import com.trendsmixed.fma.module.item.ItemView.AllAndPaintAll;
 import com.trendsmixed.fma.module.job.JobView;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndDispatchNote;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndLoadingPlan;
+import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndLoadingPlanAndDispatchNoteAndinvoice;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView.Customer;
@@ -94,6 +97,10 @@ public class DispatchScheduleView {
                         extends AllAndSalesOrderItemAllAndCustomerItemAllAndJobAllAndItemAll, AllAndPaintAll,
                         AllAndCustomerAllAndSalesOrderTypeAll, SalesOrderItemView.AllAndSalesOrderAndCustomerItem,
                         AllAndCustomer, SalesOrderView.All, AllAndLoadingPlanItem ,AllAndLoadingPlan{
+        }
+
+
+        public interface AllAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoice extends  LoadingPlanItem, AllAndLoadingPlanAndDispatchNoteAndinvoice,AllAndLoadingPlan, AllAndDispatchNote, AllAndInvoice{
         }
 
 }

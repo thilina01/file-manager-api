@@ -1,8 +1,12 @@
 package com.trendsmixed.fma.module.salesorderitem;
 
 import com.trendsmixed.fma.module.customeritem.CustomerItemView;
+import com.trendsmixed.fma.module.customeritem.CustomerItemView.AllAndItemAll;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView;
+import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView.AllAndLoadingPlanItem;
+import com.trendsmixed.fma.module.item.ItemView.AllAndPaintAll;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView;
+import com.trendsmixed.fma.module.salesorder.SalesOrderView.AllAndCustomerAll;
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -38,19 +42,42 @@ public class SalesOrderItemView {
     public interface All extends Id, Quantity, Scheduled, UnitPrice, Amount, PageView.All {
     }
 
-    public interface AllAndSalesOrder extends All, SalesOrder, SalesOrderView.All {}
-
-    public interface AllAndCustomerItem extends All, CustomerItem, CustomerItemView.All {}
-
-    public interface AllAndSalesOrderAndCustomerItem extends AllAndSalesOrder, AllAndCustomerItem {}
-
-
-    public interface AllAndCustomerItemAllAndSalesOrderAllAndDispatchScheduleAll extends AllAndSalesOrderAndCustomerItem, DispatchSchedule {
+    public interface AllAndSalesOrder extends All, SalesOrder, SalesOrderView.All {
     }
 
-    public interface AllAndCustomerItemAllAndItemAllAndSalesOrderAllAndDispatchScheduleAll extends AllAndSalesOrderAndCustomerItem, DispatchSchedule, CustomerItemView.AllAndItemAll {
+    public interface AllAndCustomerItem extends All, CustomerItem, CustomerItemView.All {
     }
 
-    public interface AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll extends AllAndCustomerItem, DispatchSchedule, CustomerItemView.AllAndItemAll {
+    public interface AllAndSalesOrderAndCustomerItem extends AllAndSalesOrder, AllAndCustomerItem {
     }
-}
+
+    public interface AllAndCustomerItemAllAndSalesOrderAllAndDispatchScheduleAll
+            extends AllAndSalesOrderAndCustomerItem, DispatchSchedule {
+    }
+
+    public interface AllAndCustomerItemAllAndItemAllAndSalesOrderAllAndDispatchScheduleAll
+            extends AllAndSalesOrderAndCustomerItem, DispatchSchedule, CustomerItemView.AllAndItemAll {
+    }
+
+    public interface AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll
+            extends AllAndCustomerItem, DispatchSchedule, CustomerItemView.AllAndItemAll {
+    }
+
+    public interface AllAndSalesOrderItemAndCustomerItemAndSalesOrderAndCustomerAndItemAndPaint
+            extends All, AllAndCustomerItem, AllAndSalesOrder, AllAndCustomerAll, AllAndItemAll, AllAndPaintAll {
+    }
+
+    // public interface AllAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoiceAndDispatchSchedule
+    //         extends All, AllAndLoadingPlan, AllAndDispatchNote, AllAndInvoice, AllAndLoadingPlanItem,AllAndDispatchSchedule {
+    // }
+
+    public interface AllAndDispatchSchedule extends All, DispatchSchedule, DispatchScheduleView.All {
+    }
+
+    public interface AllAndDispatchScheduleAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoiceAndSalesOrderItemAndCustomerItemAndSalesOrderAndCustomerAndItemAndPaint extends All, DispatchSchedule,AllAndLoadingPlanItem, DispatchScheduleView.AllAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoice, AllAndCustomerItem, AllAndSalesOrder, AllAndCustomerAll, AllAndItemAll, AllAndPaintAll {
+    }
+
+
+   
+
+    }
