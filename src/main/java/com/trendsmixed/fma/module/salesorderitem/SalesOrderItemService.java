@@ -3,10 +3,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Date;
-import java.util.List;
 
 import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.module.item.Item;
+import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
 
 import lombok.AllArgsConstructor;
@@ -41,33 +40,33 @@ public class SalesOrderItemService {
         return repository.findBySalesOrderOrderDateBetween(startDate, endDate, pageable);
 
     }
-
+    
     public Page<SalesOrderItem> findBySalesOrderCustomerAndSalesOrderOrderDateBetween(Customer customer, Date startDate, Date endDate, Pageable pageable) {
         return repository.findBySalesOrderCustomerAndSalesOrderOrderDateBetween(customer, startDate, endDate, pageable);
     }
 
-    public Page<SalesOrderItem> findByCustomerItemItemAndSalesOrderOrderDateBetween(Item item, Date startDate, Date endDate, Pageable pageable) {
-        return repository.findByCustomerItemItemAndSalesOrderOrderDateBetween(item, startDate, endDate, pageable);
+    public Page<SalesOrderItem> findByCustomerItemAndSalesOrderOrderDateBetween(CustomerItem customerItem, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByCustomerItemAndSalesOrderOrderDateBetween(customerItem, startDate, endDate, pageable);
     }
 
-    public Page<SalesOrderItem> findByCustomerItemItemAndSalesOrderOrderDateBetweenAndSalesOrderCustomer(Item item, Date startDate, Date endDate, Customer customer, Pageable pageable) {
-        return repository.findByCustomerItemItemAndSalesOrderOrderDateBetweenAndSalesOrderCustomer(item, startDate, endDate, customer, pageable);
+    public Page<SalesOrderItem> findByCustomerItemAndSalesOrderOrderDateBetweenAndSalesOrderCustomer(CustomerItem customerItem, Date startDate, Date endDate, Customer customer, Pageable pageable) {
+        return repository.findByCustomerItemAndSalesOrderOrderDateBetweenAndSalesOrderCustomer(customerItem, startDate, endDate, customer, pageable);
     }
 
     public Page<SalesOrderItem> findBySalesOrderAndSalesOrderOrderDateBetween(SalesOrder salesOrder, Date startDate, Date endDate, Pageable pageable) {
         return repository.findBySalesOrderAndSalesOrderOrderDateBetween(salesOrder, startDate, endDate, pageable);
     }
 
-    public Page<SalesOrderItem> findByCustomerItemItemAndSalesOrderOrderDateBetweenAndSalesOrder(Item item, Date startDate, Date endDate, SalesOrder salesOrder, Pageable pageable) {
-        return repository.findByCustomerItemItemAndSalesOrderOrderDateBetweenAndSalesOrder(item, startDate, endDate, salesOrder, pageable);
+    public Page<SalesOrderItem> findByCustomerItemAndSalesOrderOrderDateBetweenAndSalesOrder(CustomerItem customerItem, Date startDate, Date endDate, SalesOrder salesOrder, Pageable pageable) {
+        return repository.findByCustomerItemAndSalesOrderOrderDateBetweenAndSalesOrder(customerItem, startDate, endDate, salesOrder, pageable);
     }
 
     public Page<SalesOrderItem> findBySalesOrderAndSalesOrderOrderDateBetweenAndSalesOrderCustomer(SalesOrder salesOrder, Date startDate, Date endDate, Customer customer, Pageable pageable) {
         return repository.findBySalesOrderAndSalesOrderOrderDateBetweenAndSalesOrderCustomer(salesOrder, startDate, endDate, customer, pageable);
     }
 
-    public Page<SalesOrderItem> findBySalesOrderCustomerAndCustomerItemItemAndSalesOrderAndAndSalesOrderOrderDateBetween(Customer customer,Item item,SalesOrder salesOrder, Date startDate, Date endDate,  Pageable pageable) {
-        return repository.findBySalesOrderCustomerAndCustomerItemItemAndSalesOrderAndAndSalesOrderOrderDateBetween(customer,item,salesOrder, startDate, endDate,  pageable);
+    public Page<SalesOrderItem> findBySalesOrderCustomerAndCustomerItemAndSalesOrderAndAndSalesOrderOrderDateBetween(Customer customer,CustomerItem customerItem,SalesOrder salesOrder, Date startDate, Date endDate,  Pageable pageable) {
+        return repository.findBySalesOrderCustomerAndCustomerItemAndSalesOrderAndAndSalesOrderOrderDateBetween(customer,customerItem,salesOrder, startDate, endDate,  pageable);
     }
    
 
