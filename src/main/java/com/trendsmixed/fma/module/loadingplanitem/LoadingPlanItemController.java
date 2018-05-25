@@ -35,7 +35,7 @@ public class LoadingPlanItemController {
         return service.findAll();
     }
 
-    @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndLoadingPlanAndDispatchNoteAndinvoiceAndSalesOrderItemAndCustomerItemAndSalesOrderAndCustomerAndItemAndPaint.class)
+    @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
     @GetMapping("/page")
     Page<LoadingPlanItem> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
