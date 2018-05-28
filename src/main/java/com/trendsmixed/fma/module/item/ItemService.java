@@ -51,5 +51,13 @@ public class ItemService {
         return repository.findByItemType(itemType, pageable);
     }
 
+    Page<Item> findByCode(String code, Pageable pageable) {
+        return repository.findByCode(code, pageable);
+    }
+
+    Page<Item> findBySize(String itemSize, Pageable pageable) {
+        return repository.findBySize( itemSize, pageable);
+    }
+
 
 }

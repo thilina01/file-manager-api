@@ -55,19 +55,22 @@ public class CustomerItemController {
         return service.getComboByCustomer(customer);
     }
 
-    @GetMapping(value = "/itemAndCustomerPage", params = {"item", "customer"})
-    public Page<CustomerItem> itemAndCustomerPage(@RequestParam("item") String item, @RequestParam("customer") String customer, Pageable pageable) throws ParseException {
-        return new Page(service.findByItemAndCustomer(new Item(Integer.valueOf(item)), new Customer(Integer.valueOf(customer)), pageable));
+    @GetMapping(value = "/itemAndCustomerPage", params = { "item", "customer" })
+    public Page<CustomerItem> itemAndCustomerPage(@RequestParam("item") String item,
+            @RequestParam("customer") String customer, Pageable pageable) throws ParseException {
+        return new Page(service.findByItemAndCustomer(new Item(Integer.valueOf(item)),
+                new Customer(Integer.valueOf(customer)), pageable));
     }
 
-    @GetMapping(value = "/itemPage", params = {"item"})
+    @GetMapping(value = "/itemPage", params = { "item" })
     public Page<CustomerItem> itemPage(@RequestParam("item") String item, Pageable pageable) throws ParseException {
-        return new Page(service.findByItem(new Item(Integer.valueOf(item)),  pageable));
+        return new Page(service.findByItem(new Item(Integer.valueOf(item)), pageable));
     }
 
-    @GetMapping(value = "/customerPage", params = {"customer"})
-    public Page<CustomerItem> customerPage(@RequestParam("customer") String customer, Pageable pageable) throws ParseException {
-        return new Page(service.findByCustomer(new Customer(Integer.valueOf(customer)),  pageable));
+    @GetMapping(value = "/customerPage", params = { "customer" })
+    public Page<CustomerItem> customerPage(@RequestParam("customer") String customer, Pageable pageable)
+            throws ParseException {
+        return new Page(service.findByCustomer(new Customer(Integer.valueOf(customer)), pageable));
     }
 
     @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
@@ -75,10 +78,13 @@ public class CustomerItemController {
     public Page<CustomerItem> getCustomerItem(
         @RequestParam(value = "customer", required = false, defaultValue = "0") String customer, 
         @RequestParam(value = "item", required = false, defaultValue = "0") String item,
+        @RequestParam(value = "code", required = false, defaultValue = "0") String code,
         Pageable pageable) throws ParseException {
         Page<CustomerItem> page ;
-
-        if(item.equals("0")){
+        if(!code.equals("0")){
+            page = new Page(service.findByCode(code, pageable));
+        }
+       else if(item.equals("0")){
             page = new Page(service.findByCustomer(new Customer(Integer.valueOf(customer)),  pageable));
         }
         else if(customer.equals("0")){
@@ -96,7 +102,7 @@ public class CustomerItemController {
     List<Combo> combo() {
         return service.getCombo();
     }
-    
+
     @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @GetMapping("/customer/{id}")
     public Iterable<CustomerItem> findByCustomer(@PathVariable("id") int id) {
@@ -104,7 +110,8 @@ public class CustomerItemController {
     }
 
     @PostMapping
-    public CustomerItem save(@RequestBody CustomerItem customerItems, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public CustomerItem save(@RequestBody CustomerItem customerItems,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
             customerItems = service.save(customerItems);
@@ -119,7 +126,8 @@ public class CustomerItemController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<CustomerItem> customerItems, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<CustomerItem> customerItems,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         try {
             for (CustomerItem customerItem : customerItems) {
@@ -160,21 +168,24 @@ public class CustomerItemController {
 
     @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @GetMapping("/byCustomerIdAndItemId/{customerId}/{itemId}")
-    public CustomerItem byCustomerIdAndItemId(@PathVariable("customerId") int customerId, @PathVariable("itemId") int itemId) {
+    public CustomerItem byCustomerIdAndItemId(@PathVariable("customerId") int customerId,
+            @PathVariable("itemId") int itemId) {
         Customer customer = customerService.findOne(customerId);
         Item item = itemService.findOne(itemId);
         return service.findByCustomerAndItem(customer, item);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
+            HttpServletRequest request) {
         appSessionService.isValid(email, request);
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public CustomerItem updateCustomer(@PathVariable int id, @RequestBody CustomerItem customerItems, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public CustomerItem updateCustomer(@PathVariable int id, @RequestBody CustomerItem customerItems,
+            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
         appSessionService.isValid(email, request);
         customerItems.setId(id);
         customerItems = service.save(customerItems);

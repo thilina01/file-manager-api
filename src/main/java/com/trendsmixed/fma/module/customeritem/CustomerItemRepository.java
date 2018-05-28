@@ -29,6 +29,7 @@ public interface CustomerItemRepository extends PagingAndSortingRepository<Custo
 
         Page<CustomerItem> findByItemAndCustomer(Item item, Customer customer, Pageable pageable);
 
-       
+        Page<CustomerItem> findByCode(String code, Pageable pageable);
+
 
 }

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.itemtype.ItemType;
 import com.trendsmixed.fma.module.paint.Paint;
+import java.text.ParseException;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.itemtype.ItemTypeService;
 import com.trendsmixed.fma.module.paint.PaintService;
@@ -49,6 +50,22 @@ public class ItemController {
             itemType = itemTypeService.findByCode(itemType.getCode());
         }
         return new Page<>(service.findByItemType(itemType, pageable));
+    }
+
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
+    @GetMapping(value = "/itemPage")
+    public Page<Item> getItem(
+        @RequestParam(value = "code", required = false, defaultValue = "0") String code,
+        @RequestParam(value = "itemSize", required = false, defaultValue = "0") String itemSize,   
+        Pageable pageable) throws ParseException {
+        Page<Item> page ;
+        if(!code.equals("0")){
+            page = new Page(service.findByCode(code, pageable));
+        }else {
+            page = new Page(service.findBySize(itemSize, pageable));
+
+        }
+        return page;
     }
 
     @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)

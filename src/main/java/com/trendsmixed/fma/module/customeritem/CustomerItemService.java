@@ -67,4 +67,8 @@ public class CustomerItemService {
         return repository.findByCustomer(customer);
     }
 
+    Page<CustomerItem> findByCode(String code, Pageable pageable) {
+        return repository.findByCode(code, pageable);
+    }
+
 }

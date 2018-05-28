@@ -14,11 +14,13 @@ public interface ItemRepository extends PagingAndSortingRepository<Item, Integer
 
     Item findByCode(String code);
 
-    @Query(value = "SELECT"
-            + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.description)"
-            + " FROM Item o")
+    @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, o.code, o.description)" + " FROM Item o")
     List<Combo> getCombo();
 
     Page<Item> findByItemType(ItemType itemType, Pageable pageable);
+
+    Page<Item> findByCode(String code, Pageable pageable);
+
+    Page<Item> findBySize(String itemSize, Pageable pageable);
 
 }
