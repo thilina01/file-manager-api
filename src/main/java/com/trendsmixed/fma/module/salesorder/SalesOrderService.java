@@ -80,4 +80,11 @@ public class SalesOrderService {
         return repository.getComboByCustomer(customer);
     }
 
+    Page<SalesOrder> findByCustomerPoNumber(String customerPoNumber, Pageable pageable) {
+        return repository.findByCustomerPoNumber(customerPoNumber, pageable);
+    }
+
+    // public Iterable<SalesOrder> findByCustomerPoNumber(SalesOrder customerPoNumber) {
+    //     return repository.findByCustomerPoNumber(customerPoNumber);
+    // }
 }

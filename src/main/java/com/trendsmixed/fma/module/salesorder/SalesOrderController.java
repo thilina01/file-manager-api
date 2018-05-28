@@ -4,7 +4,6 @@ import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.jobtype.JobType;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
@@ -72,6 +71,43 @@ public class SalesOrderController {
     public Page<SalesOrder> customerAndSalesOrderDurationAndSalesOrderTypePage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("salesOrderType") String salesOrderType, Pageable pageable) throws ParseException {
         return new Page(service.findByCustomerAndOrderDateBetweenAndSalesOrderType(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new SalesOrderType(Integer.valueOf(salesOrderType)), pageable));
     }
+
+/*     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @GetMapping(value = "/customerPONumberPage", params = {"customerPoNumber","startDate", "endDate"})
+    public Page<SalesOrder> customerPoNumberPage(@RequestParam("customerPoNumber") String customerPoNumber,@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
+        return new Page(service.findByCustomerPoNumber(new SalesOrder(Integer.valueOf(customerPoNumber)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+    }
+ */
+    // @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    // @GetMapping("/customerPoNumber/{id}")
+    // public Iterable<SalesOrder> findByCustomerPoNumber(@PathVariable("customerPoNumber") int customerPoNumber) {
+    //     return service.findByCustomerPoNumber(new SalesOrder(customerPoNumber));
+    // }
+
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
+    @GetMapping(value = "/salesOrder")
+    public Page<SalesOrderItem> getSalesOrder(
+        @RequestParam(value = "customer", required = false, defaultValue = "0") String customer,
+        @RequestParam(value = "salesOrderType", required = false, defaultValue = "0") String salesOrderType,   
+        @RequestParam(value = "customerPoNumber", required = false, defaultValue = "0") String customerPoNumber,   
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<SalesOrderItem> page ;
+        if(!customerPoNumber.equals("0")){
+            page = new Page(service.findByCustomerPoNumber(customerPoNumber, pageable));
+        }else if(!customer.equals("0")&& !salesOrderType.equals("0")){
+            page = new Page(service.findByCustomerAndOrderDateBetweenAndSalesOrderType(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new SalesOrderType(Integer.valueOf(salesOrderType)), pageable));
+        }else if(!customer.equals("0")){
+            page = new Page(service.findByCustomerAndOrderDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }else if(!salesOrderType.equals("0")){
+            page = new Page(service.findByOrderDateBetweenAndSalesOrderType(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new SalesOrderType(Integer.valueOf(salesOrderType)), pageable));
+        }else {
+            page = new Page(service.findByOrderDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        return page;
+    }
+
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PostMapping("/pageByCustomer")
     Page<SalesOrder> pageByCustomer(Pageable pageable, @RequestBody Customer customer) {
@@ -115,7 +151,7 @@ public class SalesOrderController {
         }
     }
 
-    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAll.class)
+    @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoice.class)
     @GetMapping("/{id}")
     public SalesOrder findOne(@PathVariable("id") int id) {
         return service.findOne(id);

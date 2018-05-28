@@ -19,11 +19,11 @@ public interface SalesOrderRepository extends PagingAndSortingRepository<SalesOr
                         + " FROM SalesOrder o")
         List<Combo> getCombo();
 
-        @Query(value = "SELECT"
-        + " new com.trendsmixed.fma.dao.Combo(o.id, o.salesOrderNumber, o.customerPoNumber)"
-        + " FROM SalesOrder o"
-        + " WHERE o.customer = :customer")
-       List<Combo> getComboByCustomer(@Param("customer") Customer customer);
+        @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, o.salesOrderNumber, o.customerPoNumber)"
+                        + " FROM SalesOrder o" + " WHERE o.customer = :customer")
+        List<Combo> getComboByCustomer(@Param("customer") Customer customer);
+
+        // Iterable<SalesOrder> findByCustomerPoNumber(SalesOrder customerPoNumber);
 
         Page<SalesOrder> findByOrderDateBetween(Date startDate, Date endDate, Pageable pageable);
 
@@ -42,5 +42,7 @@ public interface SalesOrderRepository extends PagingAndSortingRepository<SalesOr
                         Date endDate, SalesOrderType salesOrderType, Pageable pageable);
 
         Page<SalesOrder> findByCustomer(Customer customer, Pageable pageable);
+
+        Page<SalesOrder> findByCustomerPoNumber(String customerPoNumber, Pageable pageable);
 
 }

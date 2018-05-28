@@ -1,6 +1,12 @@
 package com.trendsmixed.fma.module.salesorder;
 
 import com.trendsmixed.fma.module.customer.CustomerView;
+import com.trendsmixed.fma.module.customeritem.CustomerItemView.AllAndItemAll;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView.AllAndInvoice;
+import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView.AllAndLoadingPlanItem;
+import com.trendsmixed.fma.module.item.ItemView.AllAndPaintAll;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndDispatchNote;
+import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndLoadingPlan;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView;
 import com.trendsmixed.fma.module.salesordertype.SalesOrderTypeView;
 import com.trendsmixed.fma.utility.PageView;
@@ -72,5 +78,12 @@ public class SalesOrderView {
 
     public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAll extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll, SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll {
     }
+
+    public interface AllAndDispatchScheduleAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoice extends All, AllAndLoadingPlanItem, AllAndItemAll, AllAndPaintAll,AllAndInvoice,AllAndLoadingPlan,AllAndDispatchNote {
+    }
+
+    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoice extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll, SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll,AllAndLoadingPlanItem,AllAndInvoice,AllAndDispatchNote,AllAndLoadingPlan {
+    }
+
 
 }
