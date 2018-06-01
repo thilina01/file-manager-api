@@ -43,7 +43,7 @@ public class DispatchScheduleController {
         return service.findAll();
     }
 
-    @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
+    @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping("/page")
     Page<DispatchSchedule> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
