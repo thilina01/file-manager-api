@@ -143,4 +143,9 @@ public class DispatchNoteView {
 
         }
 
+        public interface AllAndLoadingPlanAndLoadingPlanItemAndInvoiceAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomerAndLocation
+                        extends AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomerAndLocation,AllAndInvoice  {
+
+        }
+
 }
