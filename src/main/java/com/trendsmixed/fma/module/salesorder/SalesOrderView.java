@@ -55,10 +55,15 @@ public class SalesOrderView {
     public interface SalesOrderNumber {
     }
 
+    public interface Remarks {
+    }
+
     public interface Display {
     }
 
-    public interface All extends Id, CustomerPONumber, Quantity, Amount, CustomerRequestedDate, TrwConfirmedDate, ActualDispatchedDate, Comments, OrderReceivedDate, SalesOrderNumber, OrderDate, PageView.All {
+    public interface All
+            extends Id, CustomerPONumber, Quantity, Amount, Remarks, CustomerRequestedDate, TrwConfirmedDate,
+            ActualDispatchedDate, Comments, OrderReceivedDate, SalesOrderNumber, OrderDate, PageView.All {
     }
 
     public interface AllAndCustomerAll extends All, Customer {
@@ -70,20 +75,27 @@ public class SalesOrderView {
     public interface AllAndCustomerAllAndSalesOrderTypeAll extends AllAndCustomerAll, SalesOrderType {
     }
 
-    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAll extends AllAndCustomerAllAndSalesOrderTypeAll, AllAndSalesOrderItem  {
+    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAll
+            extends AllAndCustomerAllAndSalesOrderTypeAll, AllAndSalesOrderItem {
     }
 
-    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAll, SalesOrderItemView.AllAndCustomerItem {
+    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll
+            extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAll, SalesOrderItemView.AllAndCustomerItem {
     }
 
-    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAll extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll, SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll {
+    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAll
+            extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll,
+            SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll {
     }
 
-    public interface AllAndDispatchScheduleAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoice extends All, AllAndLoadingPlanItem, AllAndItemAll, AllAndPaintAll,AllAndInvoice,AllAndLoadingPlan,AllAndDispatchNote {
+    public interface AllAndDispatchScheduleAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoice extends All,
+            AllAndLoadingPlanItem, AllAndItemAll, AllAndPaintAll, AllAndInvoice, AllAndLoadingPlan, AllAndDispatchNote {
     }
 
-    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoice extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll, SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll,AllAndLoadingPlanItem,AllAndInvoice,AllAndDispatchNote,AllAndLoadingPlan {
+    public interface AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoice
+            extends AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAll,
+            SalesOrderItemView.AllAndCustomerItemAllAndItemAllAndDispatchScheduleAll, AllAndLoadingPlanItem,
+            AllAndInvoice, AllAndDispatchNote, AllAndLoadingPlan {
     }
-
 
 }

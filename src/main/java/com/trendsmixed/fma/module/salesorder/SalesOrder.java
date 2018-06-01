@@ -46,6 +46,9 @@ public class SalesOrder implements Serializable {
     @JsonView(SalesOrderView.CustomerPONumber.class)
     @Column(name = "customer_po_number")
     private String customerPoNumber;
+    @JsonView(SalesOrderView.Remarks.class)
+    @Column(name = "remarks")
+    private String remarks;
     @JsonView(SalesOrderView.SalesOrderItem.class)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "salesOrder")
     private List<SalesOrderItem> salesOrderItemList;
