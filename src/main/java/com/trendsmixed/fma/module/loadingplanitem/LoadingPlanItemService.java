@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Date;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.item.Item;
+import com.trendsmixed.fma.module.job.Job;
+
 import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -72,4 +74,25 @@ public class LoadingPlanItemService {
     public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteDispatchDateBetweenAndDispatchScheduleJobItem(Customer customer, Date startDate, Date endDate, Item item, Pageable pageable) {
         return repository.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteDispatchDateBetweenAndDispatchScheduleJobItem(customer, startDate, endDate, item, pageable);
     }
+
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteInvoiceNotNull( Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteInvoiceNotNull( pageable);
+    }
+
+    public Page<LoadingPlanItem>findByLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(startDate, endDate, pageable);
+    }
+
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteInvoiceInvoiceNumber(String invoiceNumber, Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteInvoiceInvoiceNumber(invoiceNumber, pageable);
+    }
+
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteInvoiceCustomerAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(Customer customer, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteInvoiceCustomerAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(customer, startDate, endDate, pageable);
+    }
+
+    public Page<LoadingPlanItem> findByDispatchScheduleJobAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(Job job, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByDispatchScheduleJobAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(job, startDate, endDate, pageable);
+    }
+
 }

@@ -8,8 +8,10 @@ import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.customer.CustomerService;
+import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.item.ItemService;
+import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.job.JobService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
@@ -87,6 +89,37 @@ public class LoadingPlanItemController {
     @GetMapping(value = "/customerAndDispatchDurationAndItemPage", params = {"customer", "startDate", "endDate", "item"})
     public Page<LoadingPlanItem> customerAndDispatchDurationAndItemPage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("item") String item, Pageable pageable) throws ParseException {
         return new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteDispatchDateBetweenAndDispatchScheduleJobItem(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Item(Integer.valueOf(item)), pageable));
+    }
+
+    @JsonView(LoadingPlanItemView.AllAndLoadingPlanAndDispatchNoteAndInvoiceAndCustomerAndInvoiceTypeAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem.class)
+    @GetMapping(value = "/invoiceInformation")
+    public Page<Invoice> getInvoiceInformationPage(
+        @RequestParam(value = "invoice", required = false, defaultValue = "0") String invoice,
+        @RequestParam(value = "invoiceNumber", required = false, defaultValue = "0") String invoiceNumber,
+        @RequestParam(value = "customer", required = false, defaultValue = "0") String customer,
+        @RequestParam(value = "job", required = false, defaultValue = "0") String job,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<Invoice> page ;
+
+    if(!invoice.equals("0")) {
+            page = new Page(service.findByLoadingPlanDispatchNoteInvoiceNotNull( pageable));
+        }  
+    else if(!invoiceNumber.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteInvoiceInvoiceNumber(invoiceNumber, pageable));
+        }   
+    else if(!job.equals("0")){
+            page = new Page(service.findByDispatchScheduleJobAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(new Job(Integer.valueOf(job)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));    
+        }
+    else if(!customer.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteInvoiceCustomerAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));    
+        }
+    else{
+        page = new Page(service.findByLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));    
+        }
+    
+        return page;
     }
 
     @GetMapping("/combo")
