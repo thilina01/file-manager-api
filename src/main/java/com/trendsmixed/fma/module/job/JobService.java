@@ -62,6 +62,11 @@ public class JobService {
         return repository.findByItem(item, pageable);
     }
 
+    public Page<Job> findByJobNo(String jobNo, Pageable pageable) {
+        return repository.findByJobNo(jobNo, pageable);
+    }
+
+
 }
 
 

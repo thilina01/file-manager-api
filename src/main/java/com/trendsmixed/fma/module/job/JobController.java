@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import java.text.ParseException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,18 +45,24 @@ public class JobController {
         return service.getCombo();
     }
     
-    @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
-    @PostMapping("/pageByItem")
-    Page<Job> pageByItem(Pageable pageable, @RequestBody Item item) {
-        if (item.getId() == null) {
-            item = itemService.findByCode(item.getCode());
-        }
-        return new Page<>(service.findByItem(item, pageable));
-    }
-
     @GetMapping("/combo/item/{id}")
     List<Combo> comboByItem(@PathVariable("id") int itemId) {
         return service.comboByItem(new Item(itemId));
+    }
+
+    @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
+    @GetMapping(value = "/pageByItem")
+    public Page<Job> getItem(
+        @RequestParam(value = "jobNo", required = false, defaultValue = "0") String jobNo,
+        @RequestParam(value = "item", required = false, defaultValue = "0") String item,   
+        Pageable pageable) throws ParseException {
+        Page<Job> page ;
+        if(!jobNo.equals("0")){
+            page = new Page(service.findByJobNo(jobNo, pageable));
+        }else {
+            page = new Page(service.findByItem(new Item(Integer.valueOf(item)),  pageable));
+       }
+        return page;
     }
 
     @JsonView(JobView.All.class)
