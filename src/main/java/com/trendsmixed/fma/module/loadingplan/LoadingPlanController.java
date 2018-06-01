@@ -68,7 +68,7 @@ public class LoadingPlanController {
         }
     }
 
-    @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomer.class)
+    @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchNoteAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomer.class)
     @GetMapping("/{id}")
     public LoadingPlan findOne(@PathVariable("id") int id) {
         return service.findOne(id);

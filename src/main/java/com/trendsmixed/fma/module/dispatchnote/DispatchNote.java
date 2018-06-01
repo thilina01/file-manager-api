@@ -64,7 +64,7 @@ public class DispatchNote implements Serializable {
     @ManyToOne(optional = true)
     private Invoice invoice;
     @JsonView(DispatchNoteView.LoadingPlan.class)
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dispatchNote", fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
     private List<LoadingPlan> loadingPlanList;
     @JsonView(DispatchNoteView.Dispatch.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "dispatchNote")
