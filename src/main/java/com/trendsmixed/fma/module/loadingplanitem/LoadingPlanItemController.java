@@ -61,34 +61,28 @@ public class LoadingPlanItemController {
     }
 
     @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
-    @GetMapping(value = "/dispatchDurationPage", params = {"startDate", "endDate"})
-    public Page<LoadingPlanItem> dispatchDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
-        return new Page(service.findByLoadingPlanDispatchNoteDispatchDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));    
-    }
-    @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
-    @GetMapping(value = "/dispatchDateAndItemPage", params = {"dispatchDate", "item"})
-    public Page<LoadingPlanItem> dispatchDateAndItemPage(@RequestParam("dispatchDate") String dispatchDate, @RequestParam("item") String item, Pageable pageable) throws ParseException {
-        return new Page(service.findByLoadingPlanDispatchNoteDispatchDateAndDispatchScheduleJobItem(Format.yyyy_MM_dd.parse(dispatchDate), new Item(Integer.valueOf(item)), pageable));
-    }
-    @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
-    @GetMapping(value = "/dispatchDurationAndItemPage", params = {"startDate", "endDate", "item"})
-    public Page<LoadingPlanItem> dispatchDurationAndItemPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("item") String item, Pageable pageable) throws ParseException {
-        return new Page(service.findByLoadingPlanDispatchNoteDispatchDateBetweenAndDispatchScheduleJobItem(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Item(Integer.valueOf(item)), pageable));
-    }
-    @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
-    @GetMapping(value = "/customerAndDispatchDurationPage", params = {"customer", "startDate", "endDate"})
-    public Page<LoadingPlanItem> customerAndDispatchDurationPage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
-        return new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
-    }
-    @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
-    @GetMapping(value = "/customerAndDispatchDateAndItemPage", params = {"customer", "dispatchDate", "item"})
-    public Page<LoadingPlanItem> customerAndDispatchDateAndItemPage(@RequestParam("customer") String customer, @RequestParam("dispatchDate") String dispatchDate, @RequestParam("item") String item, Pageable pageable) throws ParseException {
-        return new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteDispatchDateAndDispatchScheduleJobItem(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(dispatchDate), new Item(Integer.valueOf(item)), pageable));
-    }
-    @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
-    @GetMapping(value = "/customerAndDispatchDurationAndItemPage", params = {"customer", "startDate", "endDate", "item"})
-    public Page<LoadingPlanItem> customerAndDispatchDurationAndItemPage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("item") String item, Pageable pageable) throws ParseException {
-        return new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteDispatchDateBetweenAndDispatchScheduleJobItem(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Item(Integer.valueOf(item)), pageable));
+    @GetMapping(value = "/dispatchInformation")
+    public Page<LoadingPlanItem> getDispatchInformationPage(
+        @RequestParam(value = "customer", required = false, defaultValue = "0") String customer,
+        @RequestParam(value = "item", required = false, defaultValue = "0") String item,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<LoadingPlanItem> page ;
+
+        if(customer.equals("0") && item.equals("0") ){
+            page = new Page(service.findByLoadingPlanDispatchNoteDispatchDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));    
+        } 
+        else if(item.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(customer.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteDispatchDateBetweenAndDispatchScheduleJobItem(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Item(Integer.valueOf(item)), pageable));
+        }
+        else{
+            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteDispatchDateBetweenAndDispatchScheduleJobItem(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Item(Integer.valueOf(item)), pageable));
+        }
+        return page;
     }
 
     @JsonView(LoadingPlanItemView.AllAndLoadingPlanAndDispatchNoteAndInvoiceAndCustomerAndInvoiceTypeAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem.class)
