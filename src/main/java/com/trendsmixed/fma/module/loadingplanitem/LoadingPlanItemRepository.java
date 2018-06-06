@@ -57,15 +57,29 @@ public interface LoadingPlanItemRepository extends PagingAndSortingRepository<Lo
         Page<LoadingPlanItem> findByDispatchScheduleJobAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(Job job,
                         Date startDate, Date endDate, Pageable pageable);
 
-        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(
+        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(
                         DispatchNote dispatchNote, Date startDate, Date endDate, Pageable pageable);
 
-        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(
+        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(
                         Customer customer, DispatchNote dispatchNote, Date startDate, Date endDate, Pageable pageable);
 
-        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteDispatchDateBetween(
+        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(
                         DispatchNote dispatchNote, Item item, Date startDate, Date endDate, Pageable pageable);
 
-        Page<LoadingPlanItem> findByRejectedQuantityNotNull(Pageable pageable);
+        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(
+                        Customer customer, Date startDate, Date endDate, Pageable pageable);
+
+        Page<LoadingPlanItem> findByDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(
+                        Item item, Date startDate, Date endDate, Pageable pageable);
+
+        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(
+                        Customer customer, Item item, Date startDate, Date endDate, Pageable pageable);
+
+        Page<LoadingPlanItem> findByRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(Date startDate,
+                        Date endDate, Pageable pageable);
+
+        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(
+                        Customer customer, Item item, DispatchNote dispatchNote, Date startDate, Date endDate,
+                        Pageable pageable);
 
 }

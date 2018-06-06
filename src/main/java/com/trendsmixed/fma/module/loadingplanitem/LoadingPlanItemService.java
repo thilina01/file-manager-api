@@ -104,21 +104,38 @@ public class LoadingPlanItemService {
         return repository.findByDispatchScheduleJobAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(job, startDate, endDate, pageable);
     }
 
-    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(DispatchNote dispatchNote,Date startDate, Date endDate,  Pageable pageable) {
-        return repository.findByLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(dispatchNote,startDate, endDate,  pageable);
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(DispatchNote dispatchNote,Date startDate, Date endDate,  Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(dispatchNote,startDate, endDate,  pageable);
     }
 
-    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(Customer customer,DispatchNote dispatchNote, Date startDate, Date endDate,Pageable pageable) {
-        return repository.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(customer,dispatchNote, startDate, endDate, pageable);
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(Customer customer,DispatchNote dispatchNote, Date startDate, Date endDate,Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(customer,dispatchNote, startDate, endDate, pageable);
     }
 
-    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteDispatchDateBetween(DispatchNote dispatchNote,Item item, Date startDate, Date endDate,  Pageable pageable) {
-        return repository.findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteDispatchDateBetween(dispatchNote,item, startDate, endDate,  pageable);
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(DispatchNote dispatchNote,Item item, Date startDate, Date endDate,  Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(dispatchNote,item, startDate, endDate,  pageable);
     }
 
-    public Page<LoadingPlanItem> findByRejectedQuantityNotNull( Pageable pageable) {
-        return repository.findByRejectedQuantityNotNull( pageable);
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(Customer customer, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteCustomerAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(customer, startDate, endDate, pageable);
     }
-    
+
+    public Page<LoadingPlanItem> findByDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(Item item,Date startDate, Date endDate,  Pageable pageable) {
+        return repository.findByDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(item,startDate, endDate,  pageable);
+    }
+
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(Customer customer,Item item, Date startDate, Date endDate,  Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(customer,item, startDate, endDate,  pageable);
+    }
+
+    public Page<LoadingPlanItem>findByRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(startDate, endDate, pageable);
+    }
+
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(Customer customer,Item item,DispatchNote dispatchNote, Date startDate, Date endDate,  Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(customer,item,dispatchNote, startDate, endDate,  pageable);
+    }
+
+
 
 }
