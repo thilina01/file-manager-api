@@ -57,5 +57,10 @@ public class LoadingPlanItem implements Serializable {
         return id + " : "; 
         
     }
-  
+
+    @JsonView(LoadingPlanItemView.All.class)
+    public Double getInvoiceQuantity() {
+        return rejectedQuantity==null?quantity:quantity-rejectedQuantity; 
+        
+    }
 }
