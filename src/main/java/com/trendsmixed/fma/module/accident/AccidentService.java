@@ -63,9 +63,5 @@ public class AccidentService {
     public Page<Accident> findByEmployeeAndAccidentDateBetween(Employee employee, Date startDate, Date endDate, Pageable pageable) {
         return repository.findByEmployeeAndAccidentDateBetween(employee, startDate, endDate, pageable);
     }
-
-    Page<Accident> findByEmployee(Employee employee, Pageable pageable) {
-        return repository.findByEmployee(employee, pageable);
-    }
-    
+   
 }

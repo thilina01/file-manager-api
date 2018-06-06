@@ -39,42 +39,37 @@ public class AccidentController {
     }
 
     @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
-    @GetMapping(value = "/accidentDurationPage", params = {"startDate", "endDate"})
-    public Page<Accident> accidentDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
-        return new Page(service.findByAccidentDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
-    }
-
-    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
-    @GetMapping(value = "/accidentDateAndSectionPage", params = {"accidentDate", "section"})
-    public Page<Accident> accidentDateAndSectionPage(@RequestParam("accidentDate") String accidentDate, @RequestParam("section") String section, Pageable pageable) throws ParseException {
-        return new Page(service.findByAccidentDateAndSection(Format.yyyy_MM_dd.parse(accidentDate), new Section(Integer.valueOf(section)), pageable));
-    }
-
-    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
-    @GetMapping(value = "/sectionAndAccidentDurationPage", params = {"section", "startDate", "endDate"})
-    public Page<Accident> sectionAndAccidentDurationPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
-        return new Page(service.findBySectionAndAccidentDateBetween(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
-    }
-
-    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
-    @GetMapping(value = "/accidentDateAndEmployeePage", params = {"accidentDate", "employee"})
-    public Page<Accident> accidentDateAndEmployeePage(@RequestParam("accidentDate") String accidentDate, @RequestParam("employee") String employee, Pageable pageable) throws ParseException {
-        return new Page(service.findByAccidentDateAndEmployee(Format.yyyy_MM_dd.parse(accidentDate), new Employee(Integer.valueOf(employee)), pageable));
-    }
-
-    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
-    @GetMapping(value = "/employeeAndAccidentDurationPage", params = {"employee", "startDate", "endDate"})
-    public Page<Accident> employeeAndAccidentDurationPage(@RequestParam("employee") String employee, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
-        return new Page(service.findByEmployeeAndAccidentDateBetween(new Employee(Integer.valueOf(employee)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
-    }
-    
-    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
-    @PostMapping("/pageByEmployee")
-    Page<Accident> pageByEmployee(Pageable pageable, @RequestBody Employee employee) {
-        if (employee.getId() == null) {
-            employee = employeeService.findByCode(employee.getCode());
+    @GetMapping(value = "/treatment")
+    public Page<Accident> getTreatment(
+        @RequestParam(value = "employee", required = false, defaultValue = "0") String employee,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<Accident> page ;
+        if(employee.equals("0") ){
+            page = new Page(service.findByAccidentDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        } 
+        else {
+            page = new Page(service.findByEmployeeAndAccidentDateBetween(new Employee(Integer.valueOf(employee)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
         }
-        return new Page<>(service.findByEmployee(employee, pageable));
+        return page;
+    }
+
+    @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
+    @GetMapping(value = "/accident")
+    public Page<Accident> getAccident(
+        @RequestParam(value = "section", required = false, defaultValue = "0") String section,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<Accident> page ;
+        if(section.equals("0") ){
+            page = new Page(service.findByAccidentDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        } 
+        else {
+            page = new Page(service.findBySectionAndAccidentDateBetween(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        return page;
     }
 
     @GetMapping("/combo")
