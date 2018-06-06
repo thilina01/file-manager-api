@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface DispatchNoteRepository extends PagingAndSortingRepository<DispatchNote, Integer> {
 
-        @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id,'','')" + " FROM DispatchNote o")
+        @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, CONCAT(o.id,''),'')" + " FROM DispatchNote o")
         List<Combo> getCombo();
         
         Iterable<DispatchNote> findByCustomer(Customer customer);

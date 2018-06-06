@@ -36,6 +36,9 @@ public class LoadingPlanItem implements Serializable {
     @JsonView(LoadingPlanItemView.Quantity.class)
     @Column(name = "quantity")
     private Double quantity;
+    @JsonView(LoadingPlanItemView.RejectedQuantity.class)
+    @Column(name = "rejected_quantity")
+    private Double rejectedQuantity;
     @JsonView(LoadingPlanItemView.DispatchSchedule.class)
     @JoinColumn(name = "dispatch_schedule_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -48,5 +51,11 @@ public class LoadingPlanItem implements Serializable {
     @JoinColumn(name = "loading_plan_id", referencedColumnName = "id")
     @ManyToOne(optional = true)
     private LoadingPlan loadingPlan;
+
+    @JsonView(LoadingPlanItemView.All.class)
+    public String getDisplay() {
+        return id + " : "; 
+        
+    }
   
 }

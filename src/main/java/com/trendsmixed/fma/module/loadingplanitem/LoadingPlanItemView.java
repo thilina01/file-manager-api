@@ -30,10 +30,7 @@ public class LoadingPlanItemView {
         public interface Quantity {
         }
 
-        public interface noOfpackages {
-        }
-
-        public interface netWeight {
+        public interface RejectedQuantity {
         }
 
         public interface PackagingSpecification {
@@ -45,7 +42,7 @@ public class LoadingPlanItemView {
         public interface LoadingPlan {
         }
 
-        public interface All extends Id, CubicMeter, Quantity, PageView.All {
+        public interface All extends Id, CubicMeter, Quantity, RejectedQuantity, PageView.All {
         }
 
         public interface AllAndPackagingSpecification
@@ -113,6 +110,9 @@ public class LoadingPlanItemView {
                         extends All, AllAndLoadingPlan, AllAndDispatchNote, AllAndInvoice, AllAndInvoiceType,
                         AllAndCustomer, DispatchSchedule,
                         DispatchScheduleView.AllAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
+        }
+
+        public interface AllAndLoadingPlanAndDispatchNote extends All, AllAndLoadingPlan, AllAndDispatchNote {
         }
 
 }

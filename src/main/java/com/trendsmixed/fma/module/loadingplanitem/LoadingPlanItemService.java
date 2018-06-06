@@ -4,6 +4,7 @@ import com.trendsmixed.fma.dao.Combo;
 import java.util.List;
 import java.util.Date;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.job.Job;
 
@@ -35,12 +36,20 @@ public class LoadingPlanItemService {
         return repository.save(loadingPlanItem);
     }
 
+    public void save(List<LoadingPlanItem> loadingPlanItemList) {
+        repository.save(loadingPlanItemList);
+    }
+
     public LoadingPlanItem findOne(int id) {
         return repository.findOne(id);
     }
 
     public void delete(int id) {
         repository.delete(id);
+    }
+    
+    public Iterable<LoadingPlanItem> findByLoadingPlanDispatchNote(DispatchNote dispatchNote) {
+        return repository.findByLoadingPlanDispatchNote(dispatchNote);
     }
 
     Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomer(Customer customer, Pageable pageable) {
@@ -94,5 +103,22 @@ public class LoadingPlanItemService {
     public Page<LoadingPlanItem> findByDispatchScheduleJobAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(Job job, Date startDate, Date endDate, Pageable pageable) {
         return repository.findByDispatchScheduleJobAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(job, startDate, endDate, pageable);
     }
+
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(DispatchNote dispatchNote,Date startDate, Date endDate,  Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(dispatchNote,startDate, endDate,  pageable);
+    }
+
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(Customer customer,DispatchNote dispatchNote, Date startDate, Date endDate,Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(customer,dispatchNote, startDate, endDate, pageable);
+    }
+
+    public Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteDispatchDateBetween(DispatchNote dispatchNote,Item item, Date startDate, Date endDate,  Pageable pageable) {
+        return repository.findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteDispatchDateBetween(dispatchNote,item, startDate, endDate,  pageable);
+    }
+
+    public Page<LoadingPlanItem> findByRejectedQuantityNotNull( Pageable pageable) {
+        return repository.findByRejectedQuantityNotNull( pageable);
+    }
+    
 
 }

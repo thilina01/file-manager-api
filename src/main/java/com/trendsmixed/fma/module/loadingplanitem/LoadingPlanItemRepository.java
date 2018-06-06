@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.job.Job;
 
@@ -14,8 +15,11 @@ import org.springframework.data.domain.Pageable;
 
 public interface LoadingPlanItemRepository extends PagingAndSortingRepository<LoadingPlanItem, Integer> {
 
-        @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id,'','')" + " FROM LoadingPlanItem o")
+        @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id,CONCAT(o.id,''),'')"
+                        + " FROM LoadingPlanItem o")
         List<Combo> getCombo();
+
+        Iterable<LoadingPlanItem> findByLoadingPlanDispatchNote(DispatchNote dispatchNote);
 
         Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomer(Customer customer, Pageable pageable);
 
@@ -52,5 +56,16 @@ public interface LoadingPlanItemRepository extends PagingAndSortingRepository<Lo
 
         Page<LoadingPlanItem> findByDispatchScheduleJobAndLoadingPlanDispatchNoteInvoiceInvoiceDateBetween(Job job,
                         Date startDate, Date endDate, Pageable pageable);
+
+        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(
+                        DispatchNote dispatchNote, Date startDate, Date endDate, Pageable pageable);
+
+        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(
+                        Customer customer, DispatchNote dispatchNote, Date startDate, Date endDate, Pageable pageable);
+
+        Page<LoadingPlanItem> findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteDispatchDateBetween(
+                        DispatchNote dispatchNote, Item item, Date startDate, Date endDate, Pageable pageable);
+
+        Page<LoadingPlanItem> findByRejectedQuantityNotNull(Pageable pageable);
 
 }

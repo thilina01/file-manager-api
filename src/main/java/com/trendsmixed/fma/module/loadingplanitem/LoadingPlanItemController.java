@@ -8,6 +8,7 @@ import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.customer.CustomerService;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.item.ItemService;
@@ -42,6 +43,27 @@ public class LoadingPlanItemController {
     Page<LoadingPlanItem> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
+    
+    @PostMapping("/many")
+    public void saveMany(@RequestBody List<LoadingPlanItem> loadingPlanItemList, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+
+        appSessionService.isValid(email, request);
+        try {
+
+            service.save(loadingPlanItemList);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new Error(e.getMessage());
+        }
+    }
+
+    @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
+    @GetMapping("/dispatchNote/{id}")
+    public Iterable<LoadingPlanItem> findByLoadingPlanDispatchNote(@PathVariable("id") int id) {
+        return service.findByLoadingPlanDispatchNote(new DispatchNote(id));
+    }
 
     @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
     @PostMapping("/pageByCustomer")
@@ -51,6 +73,7 @@ public class LoadingPlanItemController {
         }
         return new Page<>(service.findByLoadingPlanDispatchNoteCustomer(customer, pageable));
     }
+    
     @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
     @PostMapping("/pageByItem")
     Page<LoadingPlanItem> pageByItem(Pageable pageable, @RequestBody Item item) {
@@ -58,6 +81,46 @@ public class LoadingPlanItemController {
             item = itemService.findByCode(item.getCode());
         }
         return new Page<>(service.findByDispatchScheduleJobItem(item, pageable));
+    }
+
+    @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
+    @GetMapping(value = "/dispatchReject")
+    public Page<LoadingPlanItem> getDispatchRejectPage(
+        @RequestParam(value = "customer", required = false, defaultValue = "0") String customer,
+        @RequestParam(value = "item", required = false, defaultValue = "0") String item,
+        @RequestParam(value = "dispatchNote", required = false, defaultValue = "0") String dispatchNote,
+        // @RequestParam(value = "rejectedQuantity", required = false, defaultValue = "0") Double rejectedQuantity,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<LoadingPlanItem> page;
+
+        if(!customer.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(!item.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteDispatchDateBetweenAndDispatchScheduleJobItem(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Item(Integer.valueOf(item)), pageable));
+        }
+        else if(!dispatchNote.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(new DispatchNote(Integer.valueOf(dispatchNote)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(!customer.equals("0")&&!dispatchNote.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)),new DispatchNote(Integer.valueOf(dispatchNote)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(!dispatchNote.equals("0")&&!item.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteDispatchDateBetween(new DispatchNote(Integer.valueOf(dispatchNote)),new Item(Integer.valueOf(item)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(!customer.equals("0")&&!item.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteDispatchDateBetweenAndDispatchScheduleJobItem(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Item(Integer.valueOf(item)), pageable));
+        }
+        // else if(!startDate.equals("0")&&!endDate.equals("0")){
+        //     page = new Page(service.findByLoadingPlanDispatchNoteDispatchDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));    
+        // }
+        else{
+        page = new Page(service.findByRejectedQuantityNotNull( pageable));
+    } 
+
+        return page;
     }
 
     @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
