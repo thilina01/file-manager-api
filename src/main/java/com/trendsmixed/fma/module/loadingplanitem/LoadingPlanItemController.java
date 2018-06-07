@@ -94,31 +94,31 @@ public class LoadingPlanItemController {
         Pageable pageable) throws ParseException {
         Page<LoadingPlanItem> page;
 
-        if(!customer.equals("0")){
-            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
-        }
-        else if(!item.equals("0")){
-            page = new Page(service.findByDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new Item(Integer.valueOf(item)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
-        }
-        else if(!dispatchNote.equals("0")){
-            page = new Page(service.findByLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new DispatchNote(Integer.valueOf(dispatchNote)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
-        }
-        else if(!customer.equals("0")&&!dispatchNote.equals("0")){
-            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)),new DispatchNote(Integer.valueOf(dispatchNote)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
-        }
-        else if(!dispatchNote.equals("0")&&!item.equals("0")){
-            page = new Page(service.findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new DispatchNote(Integer.valueOf(dispatchNote)),new Item(Integer.valueOf(item)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
-        }
-        else if(!customer.equals("0")&&!item.equals("0")){
-            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)), new Item(Integer.valueOf(item)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
-        }
-        else if(!customer.equals("0")&&!item.equals("0")&&!dispatchNote.equals("0")){
-            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)), new Item(Integer.valueOf(item)),new DispatchNote(Integer.valueOf(dispatchNote)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
-        }
-        else {
+        if(customer.equals("0")&&item.equals("0")&&dispatchNote.equals("0")){
             page = new Page(service.findByRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));    
         }
-   
+        else if(item.equals("0")&&dispatchNote.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
+        }
+        else if(customer.equals("0")&& dispatchNote.equals("0")){
+            page = new Page(service.findByDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new Item(Integer.valueOf(item)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
+        }
+        else if(customer.equals("0")&& item.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new DispatchNote(Integer.valueOf(dispatchNote)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
+        }
+        else if(item.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)),new DispatchNote(Integer.valueOf(dispatchNote)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
+        }
+        else if(customer.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteAndDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new DispatchNote(Integer.valueOf(dispatchNote)),new Item(Integer.valueOf(item)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
+        }
+        else if(dispatchNote.equals("0")){
+            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)), new Item(Integer.valueOf(item)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
+        }
+        else {
+            page = new Page(service.findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(new Customer(Integer.valueOf(customer)), new Item(Integer.valueOf(item)),new DispatchNote(Integer.valueOf(dispatchNote)),Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),pageable));
+        }
+        
         return page;
     }
 
