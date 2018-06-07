@@ -77,6 +77,23 @@ public class DispatchNoteController {
     public Page<DispatchNote> dispatchDateAndCustomerPage(@RequestParam("dispatchDate") String dispatchDate, @RequestParam("customer") String customer, Pageable pageable) throws ParseException {
         return new Page(service.findByDispatchDateAndCustomer(Format.yyyy_MM_dd.parse(dispatchDate), new Customer(Integer.valueOf(customer)), pageable));
     }
+    
+    @JsonView(DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomerAndLocation.class)
+    @GetMapping(value = "/dispatchNote")
+    public Page<DispatchNote> getDispatchNote(
+        @RequestParam(value = "customer", required = false, defaultValue = "0") String customer,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<DispatchNote> page ;
+        if(customer.equals("0") ){
+            page = new Page(service.findByDispatchDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        } 
+        else {
+            page = new Page(service.findByCustomerAndDispatchDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        return page;
+    }
 
     @GetMapping("/combo")
     List<Combo> combo() {
