@@ -29,8 +29,8 @@ public class OnTimeDeliveryService {
         return repository.getCombo();
     }
 
-    public void save(List<OnTimeDelivery> countries) {
-        repository.save(countries);
+    public void save(List<OnTimeDelivery> onTimeDeliveries) {
+        repository.save(onTimeDeliveries);
     }
 
     public OnTimeDelivery findOne(int id) {

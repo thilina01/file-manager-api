@@ -29,8 +29,8 @@ public class LocationService {
         return repository.save(location);
     }
 
-    public void save(List<Location> machines) {
-        repository.save(machines);
+    public void save(List<Location> locations) {
+        repository.save(locations);
     }
 
     public Location findOne(int id) {

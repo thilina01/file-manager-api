@@ -29,8 +29,8 @@ public class ItemTypeService {
         return repository.save(itemType);
     }
 
-    public void save(List<ItemType> items) {
-        repository.save(items);
+    public void save(List<ItemType> itemTypes) {
+        repository.save(itemTypes);
     }
 
     public ItemType findOne(int id) {

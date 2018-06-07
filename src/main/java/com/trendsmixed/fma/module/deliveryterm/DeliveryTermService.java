@@ -30,8 +30,8 @@ public class DeliveryTermService {
         return repository.save(deliveryTerm);
     }
 
-    public void save(List<DeliveryTerm> items) {
-        repository.save(items);
+    public void save(List<DeliveryTerm> deliveryTerms) {
+        repository.save(deliveryTerms);
     }
 
     public DeliveryTerm findOne(int id) {

@@ -24,8 +24,8 @@ public class FinanceSummaryService {
         return repository.save(financeSummary);
     }
 
-    public void save(List<FinanceSummary> financeSummarys) {
-        repository.save(financeSummarys);
+    public void save(List<FinanceSummary> financeSummaries) {
+        repository.save(financeSummaries);
     }
 
     public FinanceSummary findOne(int id) {

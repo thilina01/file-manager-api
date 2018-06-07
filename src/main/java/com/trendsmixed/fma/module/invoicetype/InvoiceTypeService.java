@@ -31,8 +31,8 @@ public class InvoiceTypeService {
         return repository.save(invoiceType);
     }
 
-    public void save(List<InvoiceType> items) {
-        repository.save(items);
+    public void save(List<InvoiceType> invoiceTypes) {
+        repository.save(invoiceTypes);
     }
 
     public InvoiceType findOne(int id) {

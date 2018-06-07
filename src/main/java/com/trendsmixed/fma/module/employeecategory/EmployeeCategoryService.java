@@ -29,8 +29,8 @@ public class EmployeeCategoryService {
         return repository.save(employeeCategory);
     }
 
-    public void save(List<EmployeeCategory> shifts) {
-        repository.save(shifts);
+    public void save(List<EmployeeCategory> employeeCategories) {
+        repository.save(employeeCategories);
     }
 
     public EmployeeCategory findOne(int id) {

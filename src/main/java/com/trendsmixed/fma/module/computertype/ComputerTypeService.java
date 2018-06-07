@@ -29,8 +29,8 @@ public class ComputerTypeService {
         return repository.save(computerType);
     }
 
-    public void save(List<ComputerType> items) {
-        repository.save(items);
+    public void save(List<ComputerType> computerTypes) {
+        repository.save(computerTypes);
     }
 
     public ComputerType findOne(int id) {

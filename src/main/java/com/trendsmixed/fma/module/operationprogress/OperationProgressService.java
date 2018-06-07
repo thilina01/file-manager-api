@@ -28,8 +28,8 @@ public class OperationProgressService {
         return repository.save(operationProgress);
     }
 
-    public void save(List<OperationProgress> items) {
-        repository.save(items);
+    public void save(List<OperationProgress> operationProgresses) {
+        repository.save(operationProgresses);
     }
 
     public OperationProgress findOne(int id) {

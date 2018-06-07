@@ -24,8 +24,8 @@ public class ProductionOverheadCostPerKgService {
         return repository.save(productionOverheadCostPerKg);
     }
 
-    public void save(List<ProductionOverheadCostPerKg> countries) {
-        repository.save(countries);
+    public void save(List<ProductionOverheadCostPerKg> productionOverheadCostPerKgs) {
+        repository.save(productionOverheadCostPerKgs);
     }
 
     public ProductionOverheadCostPerKg findOne(int id) {

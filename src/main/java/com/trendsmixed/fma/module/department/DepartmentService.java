@@ -29,8 +29,8 @@ public class DepartmentService {
         return repository.save(department);
     }
 
-    public void save(List<Department> countries) {
-        repository.save(countries);
+    public void save(List<Department> departments) {
+        repository.save(departments);
     }
 
     public Department findOne(int id) {

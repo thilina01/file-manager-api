@@ -30,8 +30,8 @@ public class ToolService {
         return repository.save(tool);
     }
 
-    public void save(List<Tool> machines) {
-        repository.save(machines);
+    public void save(List<Tool> tools) {
+        repository.save(tools);
     }
 
     public Tool findOne(int id) {

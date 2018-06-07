@@ -30,8 +30,8 @@ public class ProductTypeService {
         return repository.save(productType);
     }
 
-    public void save(List<ProductType> countries) {
-        repository.save(countries);
+    public void save(List<ProductType> productTypes) {
+        repository.save(productTypes);
     }
 
     public ProductType findOne(int id) {

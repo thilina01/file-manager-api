@@ -29,8 +29,8 @@ public class ContactTypeService {
         return repository.save(addressType);
     }
 
-    public void save(List<ContactType> countries) {
-        repository.save(countries);
+    public void save(List<ContactType> contactTypes) {
+        repository.save(contactTypes);
     }
 
     public ContactType findOne(int id) {

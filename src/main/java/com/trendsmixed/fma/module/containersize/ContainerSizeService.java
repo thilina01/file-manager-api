@@ -30,8 +30,8 @@ public class ContainerSizeService {
         return repository.save(containerSize);
     }
 
-    public void save(List<ContainerSize> items) {
-        repository.save(items);
+    public void save(List<ContainerSize> containerSizes) {
+        repository.save(containerSizes);
     }
 
     public ContainerSize findOne(int id) {

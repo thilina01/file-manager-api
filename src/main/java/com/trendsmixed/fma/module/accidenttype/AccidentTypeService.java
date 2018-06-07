@@ -31,8 +31,8 @@ public class AccidentTypeService {
         return repository.save(accidentType);
     }
 
-    public void save(List<AccidentType> items) {
-        repository.save(items);
+    public void save(List<AccidentType> accidentTypes) {
+        repository.save(accidentTypes);
     }
 
     public AccidentType findOne(int id) {

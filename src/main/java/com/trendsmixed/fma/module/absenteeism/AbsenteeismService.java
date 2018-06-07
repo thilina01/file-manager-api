@@ -25,8 +25,8 @@ public class AbsenteeismService {
         return repository.save(absenteeism);
     }
 
-    public void save(List<Absenteeism> countries) {
-        repository.save(countries);
+    public void save(List<Absenteeism> absenteeisms) {
+        repository.save(absenteeisms);
     }
 
     public Absenteeism findOne(int id) {

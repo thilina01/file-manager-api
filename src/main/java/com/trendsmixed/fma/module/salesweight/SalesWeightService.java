@@ -24,8 +24,8 @@ public class SalesWeightService {
         return repository.save(salesWeight);
     }
 
-    public void save(List<SalesWeight> countries) {
-        repository.save(countries);
+    public void save(List<SalesWeight> salesWeights) {
+        repository.save(salesWeights);
     }
 
     public SalesWeight findOne(int id) {

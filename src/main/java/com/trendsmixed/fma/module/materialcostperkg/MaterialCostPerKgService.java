@@ -24,8 +24,8 @@ public class MaterialCostPerKgService {
         return repository.save(materialCostPerKg);
     }
 
-    public void save(List<MaterialCostPerKg> countries) {
-        repository.save(countries);
+    public void save(List<MaterialCostPerKg> materialCostPerKgs) {
+        repository.save(materialCostPerKgs);
     }
 
     public MaterialCostPerKg findOne(int id) {

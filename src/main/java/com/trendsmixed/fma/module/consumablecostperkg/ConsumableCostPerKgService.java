@@ -24,8 +24,8 @@ public class ConsumableCostPerKgService {
         return repository.save(consumableCostPerKg);
     }
 
-    public void save(List<ConsumableCostPerKg> countries) {
-        repository.save(countries);
+    public void save(List<ConsumableCostPerKg> consumableCostPerKgs) {
+        repository.save(consumableCostPerKgs);
     }
 
     public ConsumableCostPerKg findOne(int id) {

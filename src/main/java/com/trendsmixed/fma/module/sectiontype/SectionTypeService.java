@@ -29,8 +29,8 @@ public class SectionTypeService {
         return repository.save(sectionType);
     }
 
-    public void save(List<SectionType> countries) {
-        repository.save(countries);
+    public void save(List<SectionType> sectionTypes) {
+        repository.save(sectionTypes);
     }
 
     public SectionType findOne(int id) {

@@ -24,8 +24,8 @@ public class ElectricityCostPerKgService {
         return repository.save(electricityCostPerKg);
     }
 
-    public void save(List<ElectricityCostPerKg> countries) {
-        repository.save(countries);
+    public void save(List<ElectricityCostPerKg> electricityCostPerKgs) {
+        repository.save(electricityCostPerKgs);
     }
 
     public ElectricityCostPerKg findOne(int id) {

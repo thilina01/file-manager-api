@@ -29,8 +29,8 @@ public class MailConfigurationService {
         return repository.save(mailConfiguration);
     }
 
-    public void save(List<MailConfiguration> items) {
-        repository.save(items);
+    public void save(List<MailConfiguration> mailConfigurations) {
+        repository.save(mailConfigurations);
     }
 
     public MailConfiguration findOne(int id) {

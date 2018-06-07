@@ -29,12 +29,12 @@ public class ResourceUtilizationService {
         return repository.getCombo();
     }
 
-    public ResourceUtilization save(ResourceUtilization costCenter) {
-        return repository.save(costCenter);
+    public ResourceUtilization save(ResourceUtilization resourceUtilization) {
+        return repository.save(resourceUtilization);
     }
 
-    public void save(List<ResourceUtilization> costCenters) {
-        repository.save(costCenters);
+    public void save(List<ResourceUtilization> resourceUtilizations) {
+        repository.save(resourceUtilizations);
     }
 
     public ResourceUtilization findOne(int id) {

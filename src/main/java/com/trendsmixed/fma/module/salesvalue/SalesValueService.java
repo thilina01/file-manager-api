@@ -24,8 +24,8 @@ public class SalesValueService {
         return repository.save(salesValue);
     }
 
-    public void save(List<SalesValue> countries) {
-        repository.save(countries);
+    public void save(List<SalesValue> salesValues) {
+        repository.save(salesValues);
     }
 
     public SalesValue findOne(int id) {

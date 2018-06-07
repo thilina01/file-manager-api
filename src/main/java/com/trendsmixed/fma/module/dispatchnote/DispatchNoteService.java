@@ -31,8 +31,8 @@ public class DispatchNoteService {
         return repository.save(dispatchNote);
     }
 
-    public void save(List<DispatchNote> countries) {
-        repository.save(countries);
+    public void save(List<DispatchNote> dispatchNotes) {
+        repository.save(dispatchNotes);
     }
 
     public DispatchNote findOne(int id) {

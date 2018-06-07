@@ -24,8 +24,8 @@ public class LabourCostPerKgService {
         return repository.save(labourCostPerKg);
     }
 
-    public void save(List<LabourCostPerKg> countries) {
-        repository.save(countries);
+    public void save(List<LabourCostPerKg> labourCostPerKgs) {
+        repository.save(labourCostPerKgs);
     }
 
     public LabourCostPerKg findOne(int id) {

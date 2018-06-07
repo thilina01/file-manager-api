@@ -24,8 +24,8 @@ public class ScrapCostPerKgService {
         return repository.save(scrapCostPerKg);
     }
 
-    public void save(List<ScrapCostPerKg> countries) {
-        repository.save(countries);
+    public void save(List<ScrapCostPerKg> scrapCostPerKgs) {
+        repository.save(scrapCostPerKgs);
     }
 
     public ScrapCostPerKg findOne(int id) {

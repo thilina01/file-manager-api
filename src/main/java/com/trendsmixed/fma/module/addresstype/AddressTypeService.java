@@ -29,8 +29,8 @@ public class AddressTypeService {
         return repository.save(addressType);
     }
 
-    public void save(List<AddressType> countries) {
-        repository.save(countries);
+    public void save(List<AddressType> addressTypes) {
+        repository.save(addressTypes);
     }
 
     public AddressType findOne(int id) {

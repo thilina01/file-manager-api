@@ -29,8 +29,8 @@ public class EmployeeService {
         return repository.save(employee);
     }
 
-    public void save(List<Employee> countries) {
-        repository.save(countries);
+    public void save(List<Employee> employees) {
+        repository.save(employees);
     }
 
     public Employee findOne(int id) {

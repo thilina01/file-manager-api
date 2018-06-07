@@ -31,8 +31,8 @@ public class TreatmentTypeService {
         return repository.save(treatmentType);
     }
 
-    public void save(List<TreatmentType> items) {
-        repository.save(items);
+    public void save(List<TreatmentType> treatmentTypes) {
+        repository.save(treatmentTypes);
     }
 
     public TreatmentType findOne(int id) {

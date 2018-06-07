@@ -24,8 +24,8 @@ public class LabourTurnoverService {
         return repository.save(labourTurnover);
     }
 
-    public void save(List<LabourTurnover> countries) {
-        repository.save(countries);
+    public void save(List<LabourTurnover> labourTurnovers) {
+        repository.save(labourTurnovers);
     }
 
     public LabourTurnover findOne(int id) {

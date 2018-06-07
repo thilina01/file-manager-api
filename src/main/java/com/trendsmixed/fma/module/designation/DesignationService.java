@@ -29,8 +29,8 @@ public class DesignationService {
         return repository.save(designation);
     }
 
-    public void save(List<Designation> shifts) {
-        repository.save(shifts);
+    public void save(List<Designation> designations) {
+        repository.save(designations);
     }
 
     public Designation findOne(int id) {

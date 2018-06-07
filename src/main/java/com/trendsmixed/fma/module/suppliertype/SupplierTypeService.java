@@ -31,8 +31,8 @@ public class SupplierTypeService {
         return repository.save(supplierType);
     }
 
-    public void save(List<SupplierType> items) {
-        repository.save(items);
+    public void save(List<SupplierType> supplierTypes) {
+        repository.save(supplierTypes);
     }
 
     public SupplierType findOne(int id) {

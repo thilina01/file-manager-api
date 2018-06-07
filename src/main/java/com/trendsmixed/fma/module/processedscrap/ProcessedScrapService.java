@@ -24,8 +24,8 @@ public class ProcessedScrapService {
         return repository.save(processedScrap);
     }
 
-    public void save(List<ProcessedScrap> menus) {
-        repository.save(menus);
+    public void save(List<ProcessedScrap> processedScraps) {
+        repository.save(processedScraps);
     }
 
     public ProcessedScrap findOne(int id) {
