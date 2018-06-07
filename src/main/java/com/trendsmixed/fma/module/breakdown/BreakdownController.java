@@ -50,29 +50,23 @@ public class BreakdownController {
     }
 
     @JsonView(BreakdownView.All.class)
-    @GetMapping(value = "/breakdownDurationPage", params = {"startDate", "endDate"})
-    public Page<Breakdown> breakdownDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
-        return new Page(service.findByBreakdownTimeBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
-    }
-    @JsonView(BreakdownView.All.class)
-    @GetMapping(value = "/breakdownDurationAndMachinePage", params = {"startDate", "endDate", "machine"})
-    public Page<Breakdown> breakdownDurationAndMachinePage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("machine") String machine, Pageable pageable) throws ParseException {
-        return new Page(service.findByBreakdownTimeBetweenAndMachine(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Machine(Integer.valueOf(machine)), pageable));
-    } 
-    @JsonView(BreakdownView.All.class)
-    @GetMapping(value = "/breakdownTimeAndMachinePage", params = {"breakdownTime", "machine"})
-    public Page<Breakdown> breakdownTimeAndMachinePage(@RequestParam("breakdownTime") String breakdownTime, @RequestParam("machine") String machine, Pageable pageable) throws ParseException {
-        return new Page(service.findByBreakdownTimeAndMachine(Format.yyyy_MM_dd.parse(breakdownTime), new Machine(Integer.valueOf(machine)), pageable));
-    }
-    @JsonView(BreakdownView.All.class)
-    @PostMapping("/pageByMachine")
-    Page<Breakdown> pageByMachine(Pageable pageable, @RequestBody Machine machine) {
-        if (machine.getId() == null) {
-            machine = machineService.findByCode(machine.getCode());
+    @GetMapping(value = "/breakdown")
+    public Page<Breakdown> getBreakdownPage(
+        @RequestParam(value = "machine", required = false, defaultValue = "0") String machine,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<Breakdown> page ;
+
+        if(machine.equals("0") ){
+            page = new Page(service.findByBreakdownTimeBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        } 
+        else{
+            page = new Page(service.findByBreakdownTimeBetweenAndMachine(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Machine(Integer.valueOf(machine)), pageable));
         }
-        return new Page<>(service.findByMachine(machine, pageable));
+        return page;
     }
-    
+  
     @GetMapping("/{id}")
     @JsonView(BreakdownView.All.class)
     public Breakdown findOne(@PathVariable("id") int id) {

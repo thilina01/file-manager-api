@@ -13,7 +13,5 @@ public interface BreakdownRepository extends PagingAndSortingRepository<Breakdow
     Page<Breakdown> findByBreakdownTimeBetweenAndMachine(Date startDate, Date endDate, Machine machine,
             Pageable pageable);
 
-    Page<Breakdown> findByBreakdownTimeAndMachine(Date date, Machine machine, Pageable pageable);
-
     Page<Breakdown> findByMachine(Machine machine, Pageable pageable);
 }

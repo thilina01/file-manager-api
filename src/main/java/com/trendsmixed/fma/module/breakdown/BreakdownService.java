@@ -35,12 +35,11 @@ public class BreakdownService {
     public Page<Breakdown> findByBreakdownTimeBetween(Date startDate, Date endDate, Pageable pageable) {
         return repository.findByBreakdownTimeBetween(startDate, endDate, pageable);
     }
+
     public Page<Breakdown> findByBreakdownTimeBetweenAndMachine(Date startDate, Date endDate, Machine machine, Pageable pageable) {
         return repository.findByBreakdownTimeBetweenAndMachine(startDate, endDate, machine, pageable);
     }
-    public Page<Breakdown> findByBreakdownTimeAndMachine(Date date, Machine machine, Pageable pageable) {
-        return repository.findByBreakdownTimeAndMachine(date, machine, pageable);
-    }
+    
     Page<Breakdown> findByMachine(Machine machine, Pageable pageable) {
         return repository.findByMachine(machine, pageable);
     }
