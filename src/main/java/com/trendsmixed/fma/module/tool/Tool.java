@@ -38,6 +38,11 @@ public class Tool implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "tool")
     private List<ToolBreakdown> toolBreakdownList;
 
+    public Tool(int anId) {
+        this.id = anId;
+    }
+
+
     @JsonView(ToolView.All.class)
     public String getDisplay() {
         return code + " : " + name;
