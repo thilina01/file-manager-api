@@ -3,19 +3,18 @@ package com.trendsmixed.fma.module.job;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.item.Item;
-import com.trendsmixed.fma.module.jobtype.JobType;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.item.ItemService;
+import com.trendsmixed.fma.module.jobtype.JobType;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
 import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
-import java.text.ParseException;
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/jobs")
 public class JobController {
 
-    private final AppSessionService appSessionService;
+    
     private final JobService service;
     private final ItemService itemService;
     private final JobTypeService jobTypeService;
@@ -67,8 +66,8 @@ public class JobController {
 
     @JsonView(JobView.All.class)
     @PostMapping
-    public Job save(@RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Job save(@RequestBody Job job) {
+        
         try {
             Job existingJob = service.findByJobNo(job.getJobNo());
             if ((job.getId() == null || job.getId() == 0) && existingJob != null) {
@@ -90,9 +89,9 @@ public class JobController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Job> jobs, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<Job> jobs) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             List<Job> jobsToSave = new ArrayList<>();
             for (Job job : jobs) {
@@ -150,14 +149,14 @@ public class JobController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
     }
 
     @PutMapping("/{id}")
-    public Job update(@PathVariable int id, @RequestBody Job job, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Job update(@PathVariable int id, @RequestBody Job job) {
+        
         job.setId(id);
         job = service.save(job);
         return job;

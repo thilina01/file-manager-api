@@ -1,14 +1,15 @@
 package com.trendsmixed.fma.module.menutype;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -38,8 +39,8 @@ public class MenuTypeController {
 
     @PostMapping
     public MenuType save(@RequestBody MenuType menuType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             menuType = service.save(menuType);
             return menuType;
@@ -54,8 +55,8 @@ public class MenuTypeController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<MenuType> menuTypes,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(menuTypes);
@@ -76,15 +77,15 @@ public class MenuTypeController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     public MenuType updateCustomer(@PathVariable int id, @RequestBody MenuType menuType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         menuType.setId(id);
         menuType = service.save(menuType);
         return menuType;

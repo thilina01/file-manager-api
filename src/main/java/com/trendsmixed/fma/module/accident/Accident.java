@@ -7,13 +7,14 @@ import com.trendsmixed.fma.module.machine.Machine;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
 import com.trendsmixed.fma.module.treatment.Treatment;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  *

@@ -1,14 +1,15 @@
 package com.trendsmixed.fma.module.lossreason;
 
-import com.trendsmixed.fma.module.loss.Loss;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.loss.Loss;
 import com.trendsmixed.fma.module.losstype.LossType;
-import java.io.Serializable;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

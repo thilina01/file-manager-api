@@ -1,15 +1,14 @@
 package com.trendsmixed.fma.module.shiftroster;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/shiftRosters")
 public class ShiftRosterController {
 
-    private final AppSessionService appSessionService;
+    
     private final ShiftRosterService service;
 
     @JsonView(ShiftRosterView.All.class)
@@ -39,8 +38,8 @@ public class ShiftRosterController {
 
     @PostMapping
     public ShiftRoster save(@RequestBody ShiftRoster shiftRoster,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             shiftRoster = service.save(shiftRoster);
             return shiftRoster;
@@ -55,8 +54,8 @@ public class ShiftRosterController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<ShiftRoster> shiftRosters,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(shiftRosters);
@@ -77,15 +76,15 @@ public class ShiftRosterController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     public ShiftRoster updateCustomer(@PathVariable int id, @RequestBody ShiftRoster shiftRoster,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         shiftRoster.setId(id);
         shiftRoster = service.save(shiftRoster);
         return shiftRoster;

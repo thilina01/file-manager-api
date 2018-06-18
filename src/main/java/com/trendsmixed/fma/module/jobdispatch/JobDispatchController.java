@@ -1,11 +1,10 @@
 package com.trendsmixed.fma.module.jobdispatch;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/jobDispatches")
 public class JobDispatchController {
 
-    private final AppSessionService appSessionService;
+    
     private final JobDispatchService jobDispatchService;
 
     @JsonView(JobDispatchView.AllAndDispatchAllAndCustomerAllAndJobAllAndItemAll.class)
@@ -28,15 +27,15 @@ public class JobDispatchController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         jobDispatchService.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public JobDispatch updateCustomer(@PathVariable int id, @RequestBody JobDispatch jobDispatch, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public JobDispatch updateCustomer(@PathVariable int id, @RequestBody JobDispatch jobDispatch) {
+        
         jobDispatch.setId(id);
         jobDispatch = jobDispatchService.save(jobDispatch);
         return jobDispatch;

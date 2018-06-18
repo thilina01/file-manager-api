@@ -1,23 +1,21 @@
 package com.trendsmixed.fma.module.dispatchnote;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import com.trendsmixed.fma.utility.Format;
-import java.text.ParseException;
-import com.trendsmixed.fma.module.location.Location;
-import com.trendsmixed.fma.utility.Page;
-import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
-import com.trendsmixed.fma.module.loadingplan.LoadingPlanService;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
+import com.trendsmixed.fma.module.loadingplan.LoadingPlanService;
+import com.trendsmixed.fma.module.location.Location;
+import com.trendsmixed.fma.utility.Format;
+import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
-import java.util.ArrayList;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -25,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/dispatchNotes")
 public class DispatchNoteController {
 
-    private final AppSessionService appSessionService;
+    
     private final DispatchNoteService service;
     private final LoadingPlanService loadingPlanService;
 
@@ -121,8 +119,8 @@ public class DispatchNoteController {
 
     @JsonView(DispatchNoteView.AllAndCustomerAndLocation.class)
     @PostMapping
-    public DispatchNote save(@RequestBody DispatchNote dispatchNote, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public DispatchNote save(@RequestBody DispatchNote dispatchNote) {
+        
         try {
 
             List<Dispatch> dispatches = dispatchNote.getDispatchList();
@@ -157,8 +155,8 @@ public class DispatchNoteController {
 
     @JsonView(DispatchNoteView.AllAndCustomerAndLocation.class)
     @PostMapping("/release")
-    public DispatchNote saveReleaseInformation(@RequestBody DispatchNote dispatchNote, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public DispatchNote saveReleaseInformation(@RequestBody DispatchNote dispatchNote) {
+        
         try {
             DispatchNote existingDispatchNote = service.findOne(dispatchNote.getId());
             existingDispatchNote.setRecipient(dispatchNote.getRecipient());
@@ -177,9 +175,9 @@ public class DispatchNoteController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<DispatchNote> dispatchNotes, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<DispatchNote> dispatchNotes) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(dispatchNotes);
         } catch (Throwable e) {
@@ -197,16 +195,16 @@ public class DispatchNoteController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(DispatchNoteView.AllAndCustomerAndLocation.class)
     @PutMapping("/{id}")
-    public DispatchNote updateCustomer(@PathVariable int id, @RequestBody DispatchNote dispatchNote, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public DispatchNote updateCustomer(@PathVariable int id, @RequestBody DispatchNote dispatchNote) {
+        
         dispatchNote.setId(id);
         dispatchNote = service.save(dispatchNote);
         return dispatchNote;

@@ -1,18 +1,18 @@
 package com.trendsmixed.fma.module.workcenter;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.costcenter.CostCenter;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.costcenter.CostCenter;
 import com.trendsmixed.fma.module.costcenter.CostCenterService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.HandlerMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -39,8 +39,7 @@ public class WorkCenterController {
     @JsonView(WorkCenterView.AllAndCostCenterAll.class)
     @PostMapping
     public WorkCenter save(@RequestBody WorkCenter workCenter,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
         try {
             workCenter = service.save(workCenter);
             return workCenter;
@@ -55,9 +54,9 @@ public class WorkCenterController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<WorkCenter> workCenters,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+            @RequestHeader(value = "email", defaultValue = "") String email) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             for (WorkCenter workCenter : workCenters) {
                 workCenter.setCode(workCenter.getCode().trim());
@@ -97,7 +96,7 @@ public class WorkCenterController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
@@ -105,8 +104,8 @@ public class WorkCenterController {
     @PutMapping("/{id}")
     @JsonView(WorkCenterView.AllAndCostCenterAll.class)
     public WorkCenter updateCustomer(@PathVariable int id, @RequestBody WorkCenter workCenter,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         workCenter.setId(id);
         workCenter = service.save(workCenter);
         return workCenter;

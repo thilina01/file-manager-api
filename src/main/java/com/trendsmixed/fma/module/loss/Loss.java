@@ -3,11 +3,12 @@ package com.trendsmixed.fma.module.loss;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.trendsmixed.fma.module.operation.Operation;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *

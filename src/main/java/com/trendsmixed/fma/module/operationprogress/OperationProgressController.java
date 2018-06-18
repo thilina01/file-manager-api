@@ -1,21 +1,21 @@
 package com.trendsmixed.fma.module.operationprogress;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.utility.Page;
-import lombok.AllArgsConstructor;
-import java.text.ParseException;
-import com.trendsmixed.fma.module.section.Section;
-import com.trendsmixed.fma.module.section.SectionService;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.controlpoint.ControlPointService;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.job.JobService;
+import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.section.SectionService;
 import com.trendsmixed.fma.utility.Format;
+import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -23,7 +23,7 @@ import org.springframework.data.domain.Pageable;
 @RequestMapping("/operationProgresses")
 public class OperationProgressController {
 
-    private final AppSessionService appSessionService;
+    
     private final OperationProgressService service;
     private final SectionService sectionService;
     private final JobService jobService;
@@ -140,8 +140,8 @@ public class OperationProgressController {
     @JsonView(OperationProgressView.All.class)
     @PostMapping
     public OperationProgress save(@RequestBody OperationProgress operationProgress,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             operationProgress = service.save(operationProgress);
             return operationProgress;
@@ -156,8 +156,8 @@ public class OperationProgressController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<OperationProgress> operationProgresses,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(operationProgresses);
@@ -178,15 +178,15 @@ public class OperationProgressController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
     }
 
     @JsonView(OperationProgressView.All.class)
     @PutMapping("/{id}")
     public OperationProgress updateCustomer(@PathVariable int id, @RequestBody OperationProgress operationProgress,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         operationProgress.setId(id);
         operationProgress = service.save(operationProgress);
         return operationProgress;

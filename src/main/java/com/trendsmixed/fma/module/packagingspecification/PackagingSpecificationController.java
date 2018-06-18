@@ -1,15 +1,13 @@
 package com.trendsmixed.fma.module.packagingspecification;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/packagingSpecifications")
 public class PackagingSpecificationController {
 
-    private final AppSessionService appSessionService;
+    
     private final PackagingSpecificationService service;
 
     @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItem.class)
@@ -43,8 +41,8 @@ public class PackagingSpecificationController {
     }
 
     @PostMapping
-    public PackagingSpecification save(@RequestBody PackagingSpecification packagingSpecification, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public PackagingSpecification save(@RequestBody PackagingSpecification packagingSpecification) {
+        
         try {
             packagingSpecification = service.save(packagingSpecification);
             return packagingSpecification;
@@ -64,15 +62,15 @@ public class PackagingSpecificationController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
     @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItem.class)
     @PutMapping("/{id}")
-    public PackagingSpecification updateCustomer(@PathVariable int id, @RequestBody PackagingSpecification packagingSpecification, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public PackagingSpecification updateCustomer(@PathVariable int id, @RequestBody PackagingSpecification packagingSpecification) {
+        
         packagingSpecification.setId(id);
         packagingSpecification = service.save(packagingSpecification);
         return packagingSpecification;

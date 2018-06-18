@@ -1,14 +1,13 @@
 package com.trendsmixed.fma.module.palletsize;
-import com.trendsmixed.fma.dao.Combo;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.utility.Page;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -17,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class PalletSizeController {
 
     private final PalletSizeService service;
-    private final AppSessionService appSessionService;
+    
 
     @PostMapping
     @JsonView(PalletSizeView.All.class)
-    public PalletSize save(@RequestBody PalletSize palletSize, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public PalletSize save(@RequestBody PalletSize palletSize) {
+        
         try {
             palletSize = service.save(palletSize);
             return palletSize;
@@ -57,16 +56,16 @@ public class PalletSizeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     @JsonView(PalletSizeView.All.class)
-    public PalletSize update(@PathVariable int id, @RequestBody PalletSize palletSize, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public PalletSize update(@PathVariable int id, @RequestBody PalletSize palletSize) {
+        
         palletSize.setId(id);
         palletSize = service.save(palletSize);
         return palletSize;

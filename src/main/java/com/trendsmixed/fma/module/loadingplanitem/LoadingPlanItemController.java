@@ -1,11 +1,7 @@
 package com.trendsmixed.fma.module.loadingplanitem;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
@@ -14,11 +10,14 @@ import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.item.ItemService;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.job.JobService;
+import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
-import java.text.ParseException;
-import com.trendsmixed.fma.utility.Format;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -26,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/loadingPlanItems")
 public class LoadingPlanItemController {
 
-    private final AppSessionService appSessionService;
+    
     private final LoadingPlanItemService service;
     private final JobService jobService;
     private final ItemService itemService;
@@ -45,9 +44,9 @@ public class LoadingPlanItemController {
     }
     
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<LoadingPlanItem> loadingPlanItemList, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<LoadingPlanItem> loadingPlanItemList) {
 
-        appSessionService.isValid(email, request);
+        
         try {
 
             service.save(loadingPlanItemList);
@@ -184,8 +183,8 @@ public class LoadingPlanItemController {
     }
 
     @PostMapping
-    public LoadingPlanItem save(@RequestBody LoadingPlanItem loadingPlanItem, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public LoadingPlanItem save(@RequestBody LoadingPlanItem loadingPlanItem) {
+        
         try {
             loadingPlanItem = service.save(loadingPlanItem);
             return loadingPlanItem;
@@ -205,15 +204,15 @@ public class LoadingPlanItemController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public LoadingPlanItem updateCustomer(@PathVariable int id, @RequestBody LoadingPlanItem loadingPlanItem, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public LoadingPlanItem updateCustomer(@PathVariable int id, @RequestBody LoadingPlanItem loadingPlanItem) {
+        
         loadingPlanItem.setId(id);
         loadingPlanItem = service.save(loadingPlanItem);
         return loadingPlanItem;

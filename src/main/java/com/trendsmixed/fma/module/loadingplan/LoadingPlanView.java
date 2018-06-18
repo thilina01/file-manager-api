@@ -1,23 +1,18 @@
 package com.trendsmixed.fma.module.loadingplan;
 
-import com.trendsmixed.fma.utility.PageView;
-import com.trendsmixed.fma.module.customer.CustomerView;
-import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView;
-import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndPackagingSpecification;
-import com.trendsmixed.fma.module.packagingspecification.PackagingSpecificationView.AllAndPalletSize;
-import com.trendsmixed.fma.module.containersize.ContainerSizeView;
-import com.trendsmixed.fma.module.port.PortView;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndContactAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndCurrencyAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndEmployeeAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndIncotermAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndNotifyPartyAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndPaymentTermAll;
 import com.trendsmixed.fma.module.address.AddressView;
-import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
 import com.trendsmixed.fma.module.address.AddressView.AllAndAddressTypeAll;
 import com.trendsmixed.fma.module.address.AddressView.AllAndCountryAll;
 import com.trendsmixed.fma.module.address.AddressView.AllAndPortAll;
+import com.trendsmixed.fma.module.containersize.ContainerSizeView;
+import com.trendsmixed.fma.module.customer.CustomerView;
+import com.trendsmixed.fma.module.customer.CustomerView.*;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
+import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView;
+import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndPackagingSpecification;
+import com.trendsmixed.fma.module.packagingspecification.PackagingSpecificationView.AllAndPalletSize;
+import com.trendsmixed.fma.module.port.PortView;
+import com.trendsmixed.fma.utility.PageView;
 
 /**
  *

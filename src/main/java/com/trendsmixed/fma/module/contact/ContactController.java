@@ -2,13 +2,12 @@ package com.trendsmixed.fma.module.contact;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/Contacts")
 public class ContactController {
 
-    private final AppSessionService appSessionService;
+    
 
     private final ContactService service;
 
@@ -39,8 +38,8 @@ public class ContactController {
 
     @JsonView(ContactView.AllAndContactTypeAll.class)
     @PostMapping
-    public Contact save(@RequestBody Contact contact, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Contact save(@RequestBody Contact contact) {
+        
         try {
             contact = service.save(contact);
             return contact;
@@ -60,16 +59,16 @@ public class ContactController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(ContactView.AllAndContactTypeAll.class)
     @PutMapping("/{id}")
-    public Contact updateCustomer(@PathVariable int id, @RequestBody Contact contact, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Contact updateCustomer(@PathVariable int id, @RequestBody Contact contact) {
+        
         contact.setId(id);
         contact = service.save(contact);
         return contact;

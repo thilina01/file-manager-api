@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.employeecategory;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/employeeCategories")
 public class EmployeeCategoryController {
 
-    private final AppSessionService appSessionService;
+    
     private final EmployeeCategoryService service;
 
     @JsonView(EmployeeCategoryView.All.class)
@@ -38,8 +38,8 @@ public class EmployeeCategoryController {
 
     @PostMapping
     public EmployeeCategory save(@RequestBody EmployeeCategory employeeCategory,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             employeeCategory = service.save(employeeCategory);
             return employeeCategory;
@@ -54,8 +54,8 @@ public class EmployeeCategoryController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<EmployeeCategory> employeeCategories,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(employeeCategories);
@@ -76,15 +76,15 @@ public class EmployeeCategoryController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     public EmployeeCategory updateCustomer(@PathVariable int id, @RequestBody EmployeeCategory employeeCategory,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         employeeCategory.setId(id);
         employeeCategory = service.save(employeeCategory);
         return employeeCategory;

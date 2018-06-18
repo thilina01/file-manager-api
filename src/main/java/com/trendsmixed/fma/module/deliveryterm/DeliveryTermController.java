@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.deliveryterm;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/deliveryTerms")
 public class DeliveryTermController {
 
-    private final AppSessionService appSessionService;
+    
     private final DeliveryTermService service;
 
     @JsonView(DeliveryTermView.All.class)
@@ -39,8 +39,8 @@ public class DeliveryTermController {
     @JsonView(DeliveryTermView.All.class)
     @PostMapping
     public DeliveryTerm save(@RequestBody DeliveryTerm deliveryTerm,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             deliveryTerm = service.save(deliveryTerm);
             return deliveryTerm;
@@ -55,8 +55,8 @@ public class DeliveryTermController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<DeliveryTerm> deliveryTerms,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(deliveryTerms);
@@ -77,15 +77,15 @@ public class DeliveryTermController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
     }
 
     @JsonView(DeliveryTermView.All.class)
     @PutMapping("/{id}")
     public DeliveryTerm updateCustomer(@PathVariable int id, @RequestBody DeliveryTerm deliveryTerm,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         deliveryTerm.setId(id);
         deliveryTerm = service.save(deliveryTerm);
         return deliveryTerm;

@@ -1,13 +1,14 @@
 package com.trendsmixed.fma.module.labourturnover;
 
-import com.trendsmixed.fma.module.labourtursource.LabourSource;
 import com.fasterxml.jackson.annotation.JsonView;
-import java.io.Serializable;
-import java.util.Date;
+import com.trendsmixed.fma.module.labourtursource.LabourSource;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *

@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.computertype;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +16,7 @@ import org.springframework.data.domain.Pageable;
 @RequestMapping("/computerTypes")
 public class ComputerTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final ComputerTypeService service;
 
     @JsonView(ComputerTypeView.All.class)
@@ -39,8 +39,8 @@ public class ComputerTypeController {
     @JsonView(ComputerTypeView.All.class)
     @PostMapping
     public ComputerType save(@RequestBody ComputerType computerType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             computerType = service.save(computerType);
             return computerType;
@@ -55,8 +55,8 @@ public class ComputerTypeController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<ComputerType> computerTypes,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(computerTypes);
@@ -77,15 +77,15 @@ public class ComputerTypeController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
     }
 
     @JsonView(ComputerTypeView.All.class)
     @PutMapping("/{id}")
     public ComputerType updateCustomer(@PathVariable int id, @RequestBody ComputerType computerType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         computerType.setId(id);
         computerType = service.save(computerType);
         return computerType;

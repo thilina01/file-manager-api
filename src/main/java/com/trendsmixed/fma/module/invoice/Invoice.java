@@ -7,16 +7,14 @@ import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.exchangerate.ExchangeRate;
 import com.trendsmixed.fma.module.invoicetype.InvoiceType;
-import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
-
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  *

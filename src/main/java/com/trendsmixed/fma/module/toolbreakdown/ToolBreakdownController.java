@@ -1,17 +1,14 @@
 package com.trendsmixed.fma.module.toolbreakdown;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.tool.Tool;
+import com.trendsmixed.fma.utility.Format;
+import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-
-import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
-import com.trendsmixed.fma.utility.Page;
-import org.springframework.data.domain.Pageable;
-import com.trendsmixed.fma.utility.Format;
-import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -20,12 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class ToolBreakdownController {
 
     private final ToolBreakdownService service;
-    private final AppSessionService appSessionService;
+    
 
     @PostMapping
     @JsonView(ToolBreakdownView.All.class)
-    public ToolBreakdown save(@RequestBody ToolBreakdown toolBreakdown, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ToolBreakdown save(@RequestBody ToolBreakdown toolBreakdown) {
+        
         try {
             toolBreakdown = service.save(toolBreakdown);
             return toolBreakdown;
@@ -74,16 +71,16 @@ public class ToolBreakdownController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     @JsonView(ToolBreakdownView.All.class)
-    public ToolBreakdown update(@PathVariable int id, @RequestBody ToolBreakdown toolBreakdown, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ToolBreakdown update(@PathVariable int id, @RequestBody ToolBreakdown toolBreakdown) {
+        
         toolBreakdown.setId(id);
         toolBreakdown = service.save(toolBreakdown);
         return toolBreakdown;

@@ -1,13 +1,12 @@
 package com.trendsmixed.fma.module.cumulativesalesperkg;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/cumulativeSalesPerKgs")
 public class CumulativeSalesPerKgController {
 
-    private final AppSessionService appSessionService;
+    
     private final CumulativeSalesPerKgService service;
 
     @JsonView(CumulativeSalesPerKgView.All.class)
@@ -31,9 +30,9 @@ public class CumulativeSalesPerKgController {
     }
 
     @PostMapping
-    public CumulativeSalesPerKg save(@RequestBody CumulativeSalesPerKg cumulativeSalesPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public CumulativeSalesPerKg save(@RequestBody CumulativeSalesPerKg cumulativeSalesPerKg) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             cumulativeSalesPerKg = service.save(cumulativeSalesPerKg);
             return cumulativeSalesPerKg;
@@ -47,9 +46,9 @@ public class CumulativeSalesPerKgController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<CumulativeSalesPerKg> cumulativeSalesPerKgs, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<CumulativeSalesPerKg> cumulativeSalesPerKgs) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(cumulativeSalesPerKgs);
         } catch (Throwable e) {
@@ -67,15 +66,15 @@ public class CumulativeSalesPerKgController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public CumulativeSalesPerKg updateCustomer(@PathVariable int id, @RequestBody CumulativeSalesPerKg cumulativeSalesPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public CumulativeSalesPerKg updateCustomer(@PathVariable int id, @RequestBody CumulativeSalesPerKg cumulativeSalesPerKg) {
+        
         cumulativeSalesPerKg.setId(id);
         cumulativeSalesPerKg = service.save(cumulativeSalesPerKg);
         return cumulativeSalesPerKg;

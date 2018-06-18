@@ -1,13 +1,12 @@
 package com.trendsmixed.fma.module.controlpointmachine;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -15,7 +14,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/controlPointMachines")
 public class ControlPointMachineController {
 
-    private final AppSessionService appSessionService;
+    
     private final ControlPointMachineService service;
 
     @JsonView(ControlPointMachineView.IdAndControlPointAndMachine.class)
@@ -32,8 +31,8 @@ public class ControlPointMachineController {
 
     @JsonView(ControlPointMachineView.IdAndControlPointAndMachine.class)
     @PostMapping
-    public ControlPointMachine save(@RequestBody ControlPointMachine controlPointMachine, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ControlPointMachine save(@RequestBody ControlPointMachine controlPointMachine) {
+        
         try {
             ControlPointMachine existingMachine = service.findByControlPointAndMachine(controlPointMachine.getControlPoint(), controlPointMachine.getMachine());
             if (existingMachine != null) {
@@ -51,9 +50,9 @@ public class ControlPointMachineController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<ControlPointMachine> controlPointMachines, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<ControlPointMachine> controlPointMachines) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             for (ControlPointMachine controlPointMachine : controlPointMachines) {
                 ControlPointMachine existingMachine = service.findByControlPointAndMachine(controlPointMachine.getControlPoint(), controlPointMachine.getMachine());
@@ -77,16 +76,16 @@ public class ControlPointMachineController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(ControlPointMachineView.IdAndControlPointAndMachine.class)
     @PutMapping("/{id}")
-    public ControlPointMachine updateCustomer(@PathVariable int id, @RequestBody ControlPointMachine controlPointMachine, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ControlPointMachine updateCustomer(@PathVariable int id, @RequestBody ControlPointMachine controlPointMachine) {
+        
         controlPointMachine.setId(id);
         controlPointMachine = service.save(controlPointMachine);
         return controlPointMachine;

@@ -1,27 +1,14 @@
 package com.trendsmixed.fma.module.port;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -29,7 +16,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/ports")
 public class PortController {
 
-    private final AppSessionService appSessionService;
+    
     private final PortService service;
     
     @JsonView(PortView.All.class)
@@ -59,7 +46,7 @@ public class PortController {
     @PostMapping
     public Port save(@RequestBody Port port, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         try {
             port = service.save(port);
             return port;
@@ -73,9 +60,9 @@ public class PortController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Port> ports,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+            @RequestHeader(value = "email", defaultValue = "") String email) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(ports);
         } catch (Throwable e) {
@@ -95,7 +82,7 @@ public class PortController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
@@ -103,8 +90,8 @@ public class PortController {
     @JsonView(PortView.All.class)
     @PutMapping("/{id}")
     public Port updateCustomer(@PathVariable int id, @RequestBody Port port,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         port.setId(id);
         port = service.save(port);
         return port;

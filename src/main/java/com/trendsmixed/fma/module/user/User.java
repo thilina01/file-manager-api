@@ -1,13 +1,14 @@
 package com.trendsmixed.fma.module.user;
 
-import com.trendsmixed.fma.module.team.Team;
-import com.trendsmixed.fma.module.status.Status;
 import com.fasterxml.jackson.annotation.JsonView;
-import java.io.Serializable;
+import com.trendsmixed.fma.module.status.Status;
+import com.trendsmixed.fma.module.team.Team;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *

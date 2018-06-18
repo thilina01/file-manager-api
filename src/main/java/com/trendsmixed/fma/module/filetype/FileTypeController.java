@@ -1,10 +1,9 @@
 package com.trendsmixed.fma.module.filetype;
 
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/fileTypes")
 public class FileTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final FileTypeService fileTypeService;
 
     @GetMapping
@@ -21,8 +20,8 @@ public class FileTypeController {
     }
 
     @PostMapping
-    public FileType save(@RequestBody FileType fileType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public FileType save(@RequestBody FileType fileType) {
+        
         try {
             fileType = fileTypeService.save(fileType);
             return fileType;

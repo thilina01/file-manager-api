@@ -1,11 +1,10 @@
 package com.trendsmixed.fma.module.delivery;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/deliveries")
 public class DeliveryController {
 
-    private final AppSessionService appSessionService;
+    
     private final DeliveryService deliveryService;
 
     @JsonView(DeliveryView.All.class)
@@ -24,8 +23,8 @@ public class DeliveryController {
 
     @JsonView(DeliveryView.All.class)
     @PostMapping
-    public Delivery save(@RequestBody Delivery delivery, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Delivery save(@RequestBody Delivery delivery) {
+        
         try {
             delivery = deliveryService.save(delivery);
             return delivery;
@@ -44,15 +43,15 @@ public class DeliveryController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         deliveryService.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Delivery updateCustomer(@PathVariable int id, @RequestBody Delivery delivery, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Delivery updateCustomer(@PathVariable int id, @RequestBody Delivery delivery) {
+        
         delivery.setId(id);
         delivery = deliveryService.save(delivery);
         return delivery;

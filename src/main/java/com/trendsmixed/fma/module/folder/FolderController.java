@@ -1,12 +1,10 @@
 package com.trendsmixed.fma.module.folder;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import java.util.List;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -15,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class FolderController {
 
     private final FolderService folderService;
-    private final AppSessionService appSessionService;
+    
 
     @PostMapping
-    public Folder save(@RequestBody Folder folder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Folder save(@RequestBody Folder folder) {
+        
         try {
             folder = folderService.save(folder);
             return folder;
@@ -40,7 +38,7 @@ public class FolderController {
 
     @GetMapping("/top")
     public @JsonView(FolderView.All.class)
-    List<Folder> top(@RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    List<Folder> top(@RequestHeader(value = "email", defaultValue = "") String email) {
         return folderService.findByFolderIsNull();
     }
 

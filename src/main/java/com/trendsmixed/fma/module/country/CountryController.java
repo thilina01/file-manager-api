@@ -2,13 +2,11 @@ package com.trendsmixed.fma.module.country;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,7 +15,7 @@ import java.util.List;
 @RequestMapping("/countries")
 public class CountryController {
 
-    private final AppSessionService appSessionService;
+    
     private final CountryService service;
 
     @JsonView(CountryView.All.class)
@@ -39,9 +37,9 @@ public class CountryController {
 
     @JsonView(CountryView.All.class)
     @PostMapping
-    public Country save(@RequestBody Country country, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Country save(@RequestBody Country country) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             country = service.save(country);
             return country;
@@ -55,9 +53,9 @@ public class CountryController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Country> countries, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<Country> countries) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             for (Country country : countries) {
                 country.setCode(country.getCode().trim());
@@ -79,19 +77,21 @@ public class CountryController {
     @JsonView(CountryView.All.class)
     @GetMapping("/{id}")
     public Country findOne(@PathVariable("id") int id) {
+        
+
         return service.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
     }
 
     @JsonView(CountryView.All.class)
     @PutMapping("/{id}")
-    public Country updateCustomer(@PathVariable int id, @RequestBody Country country, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Country updateCustomer(@PathVariable int id, @RequestBody Country country) {
+        
         country.setId(id);
         country = service.save(country);
         return country;

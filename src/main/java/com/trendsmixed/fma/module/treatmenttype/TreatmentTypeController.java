@@ -1,18 +1,16 @@
 package com.trendsmixed.fma.module.treatmenttype;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -45,8 +43,8 @@ public class TreatmentTypeController {
     @JsonView(TreatmentTypeView.All.class)
     @PostMapping
     public TreatmentType save(@RequestBody TreatmentType treatmentType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             treatmentType = service.save(treatmentType);
             return treatmentType;
@@ -61,8 +59,8 @@ public class TreatmentTypeController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<TreatmentType> treatmentTypes,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(treatmentTypes);
@@ -83,15 +81,15 @@ public class TreatmentTypeController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
     }
 
     @JsonView(TreatmentTypeView.All.class)
     @PutMapping("/{id}")
     public TreatmentType updateCustomer(@PathVariable int id, @RequestBody TreatmentType treatmentType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         treatmentType.setId(id);
         treatmentType = service.save(treatmentType);
         return treatmentType;

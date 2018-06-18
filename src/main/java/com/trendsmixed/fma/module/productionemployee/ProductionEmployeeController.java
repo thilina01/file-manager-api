@@ -1,19 +1,18 @@
 package com.trendsmixed.fma.module.productionemployee;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
 import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
-import java.text.ParseException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/productionEmployees")
 public class ProductionEmployeeController {
 
-    private final AppSessionService appSessionService;
+    
     private final ProductionEmployeeService service;
 
     @JsonView(ProductionEmployeeView.All.class)
@@ -87,8 +86,8 @@ public class ProductionEmployeeController {
     @JsonView(ProductionEmployeeView.All.class)
     @PostMapping
     public ProductionEmployee save(@RequestBody ProductionEmployee productionEmployee,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             productionEmployee = service.save(productionEmployee);
             return productionEmployee;
@@ -103,8 +102,8 @@ public class ProductionEmployeeController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<ProductionEmployee> productionEmployees,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(productionEmployees);
@@ -125,15 +124,15 @@ public class ProductionEmployeeController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
     }
 
     @JsonView(ProductionEmployeeView.All.class)
     @PutMapping("/{id}")
     public ProductionEmployee updateCustomer(@PathVariable int id, @RequestBody ProductionEmployee productionEmployee,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         productionEmployee.setId(id);
         productionEmployee = service.save(productionEmployee);
         return productionEmployee;

@@ -2,13 +2,12 @@ package com.trendsmixed.fma.module.leavetype;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/leaveTypes")
 public class LeaveTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final LeaveTypeService service;
 
     @JsonView(LeaveTypeView.All.class)
@@ -37,8 +36,8 @@ public class LeaveTypeController {
     }
 
     @PostMapping
-    public LeaveType save(@RequestBody LeaveType leaveType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public LeaveType save(@RequestBody LeaveType leaveType) {
+        
         try {
             leaveType = service.save(leaveType);
             return leaveType;
@@ -58,16 +57,16 @@ public class LeaveTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(LeaveTypeView.All.class)
     @PutMapping("/{id}")
-    public LeaveType updateCustomer(@PathVariable int id, @RequestBody LeaveType leaveType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public LeaveType updateCustomer(@PathVariable int id, @RequestBody LeaveType leaveType) {
+        
         leaveType.setId(id);
         leaveType = service.save(leaveType);
         return leaveType;

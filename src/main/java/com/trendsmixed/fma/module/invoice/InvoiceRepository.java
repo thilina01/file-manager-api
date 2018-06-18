@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.invoice;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Date;
 import java.util.List;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface InvoiceRepository extends PagingAndSortingRepository<Invoice, Integer> {
 

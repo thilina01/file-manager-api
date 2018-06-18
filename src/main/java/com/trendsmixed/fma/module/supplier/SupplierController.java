@@ -1,14 +1,13 @@
 package com.trendsmixed.fma.module.supplier;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/suppliers")
 public class SupplierController {
 
-    private final AppSessionService appSessionService;
+    
     private final SupplierService service;
 
     @JsonView(SupplierView.All.class)
@@ -35,7 +34,7 @@ public class SupplierController {
     @PostMapping
     public Supplier save(@RequestBody Supplier supplier, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         try {
             supplier = service.save(supplier);
             return supplier;
@@ -49,9 +48,9 @@ public class SupplierController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Supplier> suppliers,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+            @RequestHeader(value = "email", defaultValue = "") String email) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(suppliers);
         } catch (Throwable e) {
@@ -71,7 +70,7 @@ public class SupplierController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
@@ -79,8 +78,8 @@ public class SupplierController {
     @JsonView(SupplierView.All.class)
     @PutMapping("/{id}")
     public Supplier updateCustomer(@PathVariable int id, @RequestBody Supplier supplier,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         supplier.setId(id);
         supplier = service.save(supplier);
         return supplier;

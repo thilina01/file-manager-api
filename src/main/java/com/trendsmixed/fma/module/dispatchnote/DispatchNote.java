@@ -1,13 +1,11 @@
 package com.trendsmixed.fma.module.dispatchnote;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.module.location.Location;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
 import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
-
+import com.trendsmixed.fma.module.location.Location;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

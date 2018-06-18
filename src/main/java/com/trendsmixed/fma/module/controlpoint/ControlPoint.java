@@ -1,7 +1,5 @@
 package com.trendsmixed.fma.module.controlpoint;
 
-import java.io.Serializable;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.controlpointmachine.ControlPointMachine;
 import com.trendsmixed.fma.module.controlpointtype.ControlPointType;
@@ -10,7 +8,10 @@ import com.trendsmixed.fma.module.workcenter.WorkCenter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

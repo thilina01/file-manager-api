@@ -2,7 +2,6 @@ package com.trendsmixed.fma.module.dispatchschedule;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.item.Item;
@@ -11,19 +10,16 @@ import com.trendsmixed.fma.module.job.JobService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
-
-import java.text.ParseException;
 import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
-
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -31,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/dispatchSchedules")
 public class DispatchScheduleController {
 
-    private final AppSessionService appSessionService;
+    
     private final DispatchScheduleService service;
     private final JobTypeService jobTypeService;
     private final JobService jobService;
@@ -151,8 +147,8 @@ public class DispatchScheduleController {
 
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @PostMapping
-    public DispatchSchedule save(@RequestBody DispatchSchedule dispatchSchedule, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public DispatchSchedule save(@RequestBody DispatchSchedule dispatchSchedule) {
+        
         try {
 
             Job job = dispatchSchedule.getJob();
@@ -188,14 +184,14 @@ public class DispatchScheduleController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
     }
 
     @PutMapping("/{id}")
-    public DispatchSchedule update(@PathVariable int id, @RequestBody DispatchSchedule dispatchSchedule, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public DispatchSchedule update(@PathVariable int id, @RequestBody DispatchSchedule dispatchSchedule) {
+        
         dispatchSchedule.setId(id);
         dispatchSchedule = service.save(dispatchSchedule);
         return dispatchSchedule;

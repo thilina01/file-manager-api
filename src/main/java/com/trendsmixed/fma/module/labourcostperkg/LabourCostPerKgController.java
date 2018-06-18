@@ -1,13 +1,12 @@
 package com.trendsmixed.fma.module.labourcostperkg;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/labourCostPerKgs")
 public class LabourCostPerKgController {
 
-    private final AppSessionService appSessionService;
+    
     private final LabourCostPerKgService service;
 
     @JsonView(LabourCostPerKgView.All.class)
@@ -31,9 +30,9 @@ public class LabourCostPerKgController {
     }
 
     @PostMapping
-    public LabourCostPerKg save(@RequestBody LabourCostPerKg labourCostPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public LabourCostPerKg save(@RequestBody LabourCostPerKg labourCostPerKg) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             labourCostPerKg = service.save(labourCostPerKg);
             return labourCostPerKg;
@@ -47,9 +46,9 @@ public class LabourCostPerKgController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<LabourCostPerKg> labourCostPerKgs, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<LabourCostPerKg> labourCostPerKgs) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(labourCostPerKgs);
         } catch (Throwable e) {
@@ -67,15 +66,15 @@ public class LabourCostPerKgController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public LabourCostPerKg updateCustomer(@PathVariable int id, @RequestBody LabourCostPerKg labourCostPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public LabourCostPerKg updateCustomer(@PathVariable int id, @RequestBody LabourCostPerKg labourCostPerKg) {
+        
         labourCostPerKg.setId(id);
         labourCostPerKg = service.save(labourCostPerKg);
         return labourCostPerKg;

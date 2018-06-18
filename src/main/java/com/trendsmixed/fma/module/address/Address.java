@@ -4,15 +4,15 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.addresstype.AddressType;
 import com.trendsmixed.fma.module.country.Country;
 import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
 import com.trendsmixed.fma.module.port.Port;
-import java.io.Serializable;
-import java.util.List;
-import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

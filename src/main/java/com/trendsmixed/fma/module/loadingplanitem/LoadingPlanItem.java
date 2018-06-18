@@ -1,16 +1,15 @@
 package com.trendsmixed.fma.module.loadingplanitem;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
 import com.trendsmixed.fma.module.packagingspecification.PackagingSpecification;
-
-import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *

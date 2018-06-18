@@ -1,11 +1,10 @@
 package com.trendsmixed.fma.module.status;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/statuses")
 public class StatusController {
 
-    private final AppSessionService appSessionService;
+    
     private final StatusService statusService;
 
     @JsonView(StatusView.All.class)
@@ -23,9 +22,9 @@ public class StatusController {
     }
 
     @PostMapping
-    public Status save(@RequestBody Status status, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Status save(@RequestBody Status status) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             status = statusService.save(status);
             return status;
@@ -39,9 +38,9 @@ public class StatusController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Status> statuss, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<Status> statuss) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             for (Status status : statuss) {
                 status.setName(status.getName().trim());
@@ -65,15 +64,15 @@ public class StatusController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         statusService.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Status updateCustomer(@PathVariable int id, @RequestBody Status status, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Status updateCustomer(@PathVariable int id, @RequestBody Status status) {
+        
         status.setId(id);
         status = statusService.save(status);
         return status;

@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -38,8 +38,8 @@ public class PaymentTermController {
 
     @JsonView(PaymentTermView.All.class)
     @PostMapping
-    public PaymentTerm save(@RequestBody PaymentTerm paymentTerm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public PaymentTerm save(@RequestBody PaymentTerm paymentTerm) {
+        
         try {
             paymentTerm = service.save(paymentTerm);
             return paymentTerm;
@@ -59,16 +59,16 @@ public class PaymentTermController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(PaymentTermView.All.class)
     @PutMapping("/{id}")
-    public PaymentTerm updateCustomer(@PathVariable int id, @RequestBody PaymentTerm paymentTerm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public PaymentTerm updateCustomer(@PathVariable int id, @RequestBody PaymentTerm paymentTerm) {
+        
         paymentTerm.setId(id);
         paymentTerm = service.save(paymentTerm);
         return paymentTerm;

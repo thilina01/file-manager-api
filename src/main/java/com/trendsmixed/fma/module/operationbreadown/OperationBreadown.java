@@ -1,13 +1,14 @@
 package com.trendsmixed.fma.module.operationbreadown;
 
-import com.trendsmixed.fma.module.operation.Operation;
-import com.trendsmixed.fma.module.breakdown.Breakdown;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.breakdown.Breakdown;
+import com.trendsmixed.fma.module.operation.Operation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *

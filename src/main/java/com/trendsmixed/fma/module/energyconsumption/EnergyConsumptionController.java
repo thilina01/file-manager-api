@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.energyconsumption;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -35,8 +35,8 @@ public class EnergyConsumptionController {
 
     @JsonView(EnergyConsumptionView.All.class)
     @PostMapping
-    public EnergyConsumption save(@RequestBody EnergyConsumption energyConsumption, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public EnergyConsumption save(@RequestBody EnergyConsumption energyConsumption) {
+        
         try {
             energyConsumption = service.save(energyConsumption);
             return energyConsumption;
@@ -50,9 +50,9 @@ public class EnergyConsumptionController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List< EnergyConsumption> energyConsumptions, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List< EnergyConsumption> energyConsumptions) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(energyConsumptions);
         } catch (Throwable e) {
@@ -70,15 +70,15 @@ public class EnergyConsumptionController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public EnergyConsumption updateCustomer(@PathVariable int id, @RequestBody EnergyConsumption energyConsumption, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public EnergyConsumption updateCustomer(@PathVariable int id, @RequestBody EnergyConsumption energyConsumption) {
+        
         energyConsumption.setId(id);
         energyConsumption = service.save(energyConsumption);
         return energyConsumption;

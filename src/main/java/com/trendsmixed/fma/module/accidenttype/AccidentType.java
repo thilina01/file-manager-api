@@ -2,12 +2,13 @@ package com.trendsmixed.fma.module.accidenttype;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.accident.Accident;
-import java.io.Serializable;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import javax.persistence.*;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

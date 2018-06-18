@@ -1,26 +1,24 @@
 package com.trendsmixed.fma.module.production;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-
+import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.controlpointtype.ControlPointType;
+import com.trendsmixed.fma.module.manpower.Manpower;
+import com.trendsmixed.fma.module.manpower.ManpowerService;
+import com.trendsmixed.fma.module.operation.Operation;
+import com.trendsmixed.fma.module.operation.OperationService;
 import com.trendsmixed.fma.module.productionemployee.ProductionEmployee;
 import com.trendsmixed.fma.module.resourceutilization.ResourceUtilization;
-import org.springframework.data.domain.Pageable;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.manpower.Manpower;
-import com.trendsmixed.fma.module.operation.Operation;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.controlpointtype.ControlPointType;
-import com.trendsmixed.fma.module.manpower.ManpowerService;
-import com.trendsmixed.fma.module.operation.OperationService;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
 import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
-import java.text.ParseException;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -28,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/productions")
 public class ProductionController {
 
-    private final AppSessionService appSessionService;
+    
     private final ProductionService service;
     private final OperationService operationService;
     private final ManpowerService manpowerService;
@@ -131,8 +129,8 @@ public class ProductionController {
     @JsonView(ProductionView.All.class)
     @PostMapping
     public Production save(@RequestBody Production production,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        // appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        // 
         try {
             List<Operation> operations = production.getOperationList();
             List<Manpower> manpowers = production.getManpowerList();
@@ -213,8 +211,8 @@ public class ProductionController {
     @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
     @PostMapping("/ByProductionDateAndShiftAndControlPoint")
     public Production ByProductionDateAndShiftAndControlPoint(@RequestBody Production production,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
 
         return service.findByProductionDateAndShiftAndControlPoint(production.getProductionDate(),
                 production.getShift(), production.getControlPoint());
@@ -222,9 +220,9 @@ public class ProductionController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Production> productions,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+            @RequestHeader(value = "email", defaultValue = "") String email) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(productions);
         } catch (Throwable e) {
@@ -244,14 +242,14 @@ public class ProductionController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
     }
 
     @PutMapping("/{id}")
     public Production updateCustomer(@PathVariable int id, @RequestBody Production production,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         production.setId(id);
         production = service.save(production);
         return production;

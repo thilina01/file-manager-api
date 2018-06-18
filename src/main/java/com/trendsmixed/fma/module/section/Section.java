@@ -1,16 +1,17 @@
 package com.trendsmixed.fma.module.section;
 
-import com.trendsmixed.fma.module.costcenter.CostCenter;
-import java.io.Serializable;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.accident.Accident;
+import com.trendsmixed.fma.module.costcenter.CostCenter;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.sectiontype.SectionType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

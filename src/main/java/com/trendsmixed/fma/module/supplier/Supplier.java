@@ -5,11 +5,12 @@ import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.module.deliveryterm.DeliveryTerm;
 import com.trendsmixed.fma.module.paymentterm.PaymentTerm;
 import com.trendsmixed.fma.module.suppliertype.SupplierType;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *

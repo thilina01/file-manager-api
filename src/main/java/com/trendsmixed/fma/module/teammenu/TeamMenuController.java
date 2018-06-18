@@ -1,11 +1,10 @@
 package com.trendsmixed.fma.module.teammenu;
 
 import com.trendsmixed.fma.module.team.Team;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -13,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/teamMenus")
 public class TeamMenuController {
 
-    private final AppSessionService appSessionService;
+    
     private final TeamMenuService teamMenuService;
 
     @PutMapping
-    public List<TeamMenu> saveMany(@RequestBody List<TeamMenu> teamMenus, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public List<TeamMenu> saveMany(@RequestBody List<TeamMenu> teamMenus) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             if (!teamMenus.isEmpty()) {
                 Team team = teamMenus.get(0).getTeam();

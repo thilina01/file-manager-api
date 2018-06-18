@@ -3,21 +3,20 @@ package com.trendsmixed.fma.module.customer;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.address.Address;
-import com.trendsmixed.fma.module.currency.Currency;
-import com.trendsmixed.fma.module.customeritem.CustomerItem;
-import com.trendsmixed.fma.module.incoterm.Incoterm;
-import com.trendsmixed.fma.module.customertype.CustomerType;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.contact.Contact;
+import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.module.currency.CurrencyService;
-import com.trendsmixed.fma.module.incoterm.IncotermService;
+import com.trendsmixed.fma.module.customeritem.CustomerItem;
+import com.trendsmixed.fma.module.customertype.CustomerType;
 import com.trendsmixed.fma.module.customertype.CustomerTypeService;
+import com.trendsmixed.fma.module.incoterm.Incoterm;
+import com.trendsmixed.fma.module.incoterm.IncotermService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/customers")
 public class CustomerController {
 
-    private final AppSessionService appSessionService;
     private final CustomerService service;
     private final IncotermService incotermService;
     private final CurrencyService currencyService;
@@ -49,8 +47,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public Customer save(@RequestBody Customer customer, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Customer save(@RequestBody Customer customer) {
+
         List<CustomerItem> customerItems = customer.getCustomerItemList();
         if (customerItems != null) {
             for (CustomerItem customerItem : customerItems) {
@@ -84,8 +82,8 @@ public class CustomerController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Customer> customers, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void saveMany(@RequestBody List<Customer> customers) {
+
         try {
             for (Customer customer : customers) {
 
@@ -151,26 +149,21 @@ public class CustomerController {
 
     @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndNotifyPartyAllAndContactAllAndContactTypeAllAndPaymentTermAllAndAddressAllAndAddressTypeAllAndCountryAllAndPortAllAndEmployeeAll.class)
     @GetMapping("/{id}")
-    public Customer findOne(@PathVariable("id") int id
-    ) {
+    public Customer findOne(@PathVariable("id") int id) {
         return service.findOne(id);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request
-    ) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email) {
+
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable int id,
-            @RequestBody Customer customer,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request
-    ) {
-        appSessionService.isValid(email, request);
+    public Customer updateCustomer(@PathVariable int id, @RequestBody Customer customer,
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+
         customer.setId(id);
         customer = service.save(customer);
         return customer;

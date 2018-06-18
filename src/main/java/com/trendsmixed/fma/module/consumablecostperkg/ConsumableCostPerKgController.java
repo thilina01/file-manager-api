@@ -1,16 +1,12 @@
 package com.trendsmixed.fma.module.consumablecostperkg;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -18,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/consumableCostPerKgs")
 public class ConsumableCostPerKgController {
 
-    private final AppSessionService appSessionService;
+    
     private final ConsumableCostPerKgService service;
 
     @JsonView(ConsumableCostPerKgView.All.class)
@@ -34,9 +30,9 @@ public class ConsumableCostPerKgController {
     }
 
     @PostMapping
-    public ConsumableCostPerKg save(@RequestBody ConsumableCostPerKg consumableCostPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public ConsumableCostPerKg save(@RequestBody ConsumableCostPerKg consumableCostPerKg) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             consumableCostPerKg = service.save(consumableCostPerKg);
             return consumableCostPerKg;
@@ -50,9 +46,9 @@ public class ConsumableCostPerKgController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<ConsumableCostPerKg> consumableCostPerKgs, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<ConsumableCostPerKg> consumableCostPerKgs) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(consumableCostPerKgs);
         } catch (Throwable e) {
@@ -70,15 +66,15 @@ public class ConsumableCostPerKgController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public ConsumableCostPerKg updateCustomer(@PathVariable int id, @RequestBody ConsumableCostPerKg consumableCostPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ConsumableCostPerKg updateCustomer(@PathVariable int id, @RequestBody ConsumableCostPerKg consumableCostPerKg) {
+        
         consumableCostPerKg.setId(id);
         consumableCostPerKg = service.save(consumableCostPerKg);
         return consumableCostPerKg;

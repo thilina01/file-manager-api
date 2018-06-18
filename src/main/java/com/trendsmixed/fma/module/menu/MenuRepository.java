@@ -1,8 +1,9 @@
 package com.trendsmixed.fma.module.menu;
 
 import com.trendsmixed.fma.module.menutype.MenuType;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
 

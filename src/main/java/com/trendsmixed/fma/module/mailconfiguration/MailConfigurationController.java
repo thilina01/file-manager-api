@@ -1,15 +1,15 @@
 package com.trendsmixed.fma.module.mailconfiguration;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.MailService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/mailConfigurations")
 public class MailConfigurationController {
 
-    private final AppSessionService appSessionService;
+    
     private final MailConfigurationService service;
     private final MailService mailService;
 
@@ -41,8 +41,8 @@ public class MailConfigurationController {
     @JsonView(MailConfigurationView.All.class)
     @PostMapping
     public MailConfiguration save(@RequestBody MailConfiguration mailConfiguration,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             mailConfiguration = service.save(mailConfiguration);
             return mailConfiguration;
@@ -57,8 +57,8 @@ public class MailConfigurationController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<MailConfiguration> mailConfigurations,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(mailConfigurations);
@@ -79,15 +79,15 @@ public class MailConfigurationController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
     }
 
     @JsonView(MailConfigurationView.All.class)
     @PutMapping("/{id}")
     public MailConfiguration updateCustomer(@PathVariable int id, @RequestBody MailConfiguration mailConfiguration,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         mailConfiguration.setId(id);
         mailConfiguration = service.save(mailConfiguration);
         return mailConfiguration;

@@ -2,22 +2,21 @@ package com.trendsmixed.fma.module.dispatch;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.job.Job;
-import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.module.item.ItemService;
+import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.item.Item;
-import com.trendsmixed.fma.utility.Format;
-import com.trendsmixed.fma.module.jobdispatch.JobDispatch;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.item.ItemService;
+import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.job.JobService;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+import com.trendsmixed.fma.module.jobdispatch.JobDispatch;
+import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
-import java.text.ParseException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -25,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/dispatches")
 public class DispatchController {
 
-    private final AppSessionService appSessionService;
+    
     private final DispatchService service;
     private final JobService jobService;
     private final ItemService itemService;
@@ -94,8 +93,8 @@ public class DispatchController {
     }
     @JsonView(DispatchView.All.class)
     @PostMapping
-    public Dispatch save(@RequestBody Dispatch dispatch, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Dispatch save(@RequestBody Dispatch dispatch) {
+        
         try {
             List<JobDispatch> jobDispatchs = dispatch.getJobDispatchList();
             for (JobDispatch jobDispatch : jobDispatchs) {
@@ -124,15 +123,15 @@ public class DispatchController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Dispatch updateCustomer(@PathVariable int id, @RequestBody Dispatch dispatch, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Dispatch updateCustomer(@PathVariable int id, @RequestBody Dispatch dispatch) {
+        
         dispatch.setId(id);
         dispatch = service.save(dispatch);
         return dispatch;

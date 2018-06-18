@@ -2,13 +2,13 @@ package com.trendsmixed.fma.module.exchangerate;
 
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.currency.Currency;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 @AllArgsConstructor
 @Service

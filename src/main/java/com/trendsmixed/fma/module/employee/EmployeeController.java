@@ -2,8 +2,6 @@ package com.trendsmixed.fma.module.employee;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.designation.Designation;
 import com.trendsmixed.fma.module.designation.DesignationService;
 import com.trendsmixed.fma.module.employeecategory.EmployeeCategory;
@@ -15,13 +13,11 @@ import com.trendsmixed.fma.module.section.SectionService;
 import com.trendsmixed.fma.module.shift.Shift;
 import com.trendsmixed.fma.module.shift.ShiftService;
 import com.trendsmixed.fma.utility.Page;
-
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -29,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    private final AppSessionService appSessionService;
+    
     private final EmployeeService service;
     private final DesignationService designationService;
     private final EmployeeCategoryService employeeCategoryService;
@@ -61,9 +57,9 @@ public class EmployeeController {
 
     @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @PostMapping
-    public Employee save(@RequestBody Employee employee, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Employee save(@RequestBody Employee employee) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             employee = service.save(employee);
             return employee;
@@ -77,8 +73,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Employee> employees, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void saveMany(@RequestBody List<Employee> employees) {
+        
 
         Designation designation = designationService.findByCode("NA");
         EmployeeCategory employeeCategory = employeeCategoryService.findByCode("NA");
@@ -133,16 +129,16 @@ public class EmployeeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
+        
         employee.setId(id);
         employee = service.save(employee);
         return employee;

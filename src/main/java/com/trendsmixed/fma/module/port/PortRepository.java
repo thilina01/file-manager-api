@@ -1,11 +1,10 @@
 package com.trendsmixed.fma.module.port;
 
-import java.util.List;
-
 import com.trendsmixed.fma.dao.Combo;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.List;
 
 public interface PortRepository extends PagingAndSortingRepository<Port, Integer> {
 

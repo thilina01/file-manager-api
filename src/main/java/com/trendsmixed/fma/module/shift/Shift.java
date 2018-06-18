@@ -1,15 +1,16 @@
 package com.trendsmixed.fma.module.shift;
 
-import com.trendsmixed.fma.module.production.Production;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.accident.Accident;
 import com.trendsmixed.fma.module.employee.Employee;
-import java.io.Serializable;
-import java.util.List;
+import com.trendsmixed.fma.module.production.Production;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

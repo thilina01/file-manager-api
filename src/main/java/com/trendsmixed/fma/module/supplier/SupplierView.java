@@ -2,8 +2,8 @@ package com.trendsmixed.fma.module.supplier;
 
 import com.trendsmixed.fma.module.currency.CurrencyView;
 import com.trendsmixed.fma.module.deliveryterm.DeliveryTermView;
-import com.trendsmixed.fma.module.suppliertype.SupplierTypeView;
 import com.trendsmixed.fma.module.paymentterm.PaymentTermView;
+import com.trendsmixed.fma.module.suppliertype.SupplierTypeView;
 import com.trendsmixed.fma.utility.PageView;
 
 /**

@@ -1,8 +1,9 @@
 package com.trendsmixed.fma.module.folder;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Service

@@ -2,13 +2,12 @@ package com.trendsmixed.fma.module.department;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/departments")
 public class DepartmentController {
 
-    private final AppSessionService appSessionService;
+    
     private final DepartmentService service;
 
     @JsonView(DepartmentView.All.class)
@@ -38,9 +37,9 @@ public class DepartmentController {
 
     @JsonView(DepartmentView.All.class)
     @PostMapping
-    public Department save(@RequestBody Department department, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Department save(@RequestBody Department department) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             department = service.save(department);
             return department;
@@ -54,9 +53,9 @@ public class DepartmentController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Department> countries, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<Department> countries) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             for (Department department : countries) {
                 department.setCode(department.getCode().trim());
@@ -82,16 +81,16 @@ public class DepartmentController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(DepartmentView.All.class)
     @PutMapping("/{id}")
-    public Department updateCustomer(@PathVariable int id, @RequestBody Department department, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Department updateCustomer(@PathVariable int id, @RequestBody Department department) {
+        
         department.setId(id);
         department = service.save(department);
         return department;

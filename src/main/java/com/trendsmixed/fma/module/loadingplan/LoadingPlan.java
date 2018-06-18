@@ -1,23 +1,21 @@
 package com.trendsmixed.fma.module.loadingplan;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.containersize.ContainerSize;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.employee.Employee;
-import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItem;
 import com.trendsmixed.fma.module.port.Port;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  *

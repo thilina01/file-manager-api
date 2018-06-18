@@ -1,15 +1,14 @@
 package com.trendsmixed.fma.module.salesorderitem;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-import java.util.Date;
 
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
-
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @AllArgsConstructor
 @Service

@@ -1,13 +1,13 @@
 package com.trendsmixed.fma.module.scrap;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/scraps")
 public class ScrapController {
 
-    private final AppSessionService appSessionService;
+    
     private final ScrapService service;
 
     @JsonView(ScrapView.All.class)
@@ -34,7 +34,7 @@ public class ScrapController {
     @PostMapping
     public Scrap save(@RequestBody Scrap scrap, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         try {
             scrap = service.save(scrap);
             return scrap;
@@ -48,9 +48,9 @@ public class ScrapController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Scrap> scraps,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+            @RequestHeader(value = "email", defaultValue = "") String email) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(scraps);
         } catch (Throwable e) {
@@ -70,7 +70,7 @@ public class ScrapController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
@@ -78,8 +78,8 @@ public class ScrapController {
     @JsonView(ScrapView.All.class)
     @PutMapping("/{id}")
     public Scrap updateCustomer(@PathVariable int id, @RequestBody Scrap scrap,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         scrap.setId(id);
         scrap = service.save(scrap);
         return scrap;

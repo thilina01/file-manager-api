@@ -2,17 +2,14 @@ package com.trendsmixed.fma.module.exchangerate;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
-
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -20,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/exchangeRates")
 public class ExchangeRateController {
 
-    private final AppSessionService appSessionService;
+    
     private final ExchangeRateService service;
 
     @GetMapping
@@ -60,8 +57,8 @@ public class ExchangeRateController {
    
     @PostMapping
     @JsonView(ExchangeRateView.AllAndCurrencyAll.class)
-    public ExchangeRate save(@RequestBody ExchangeRate exchangeRate, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email,request);
+    public ExchangeRate save(@RequestBody ExchangeRate exchangeRate) {
+        
         try {
            exchangeRate = service.save(exchangeRate);
             return exchangeRate;
@@ -75,9 +72,9 @@ public class ExchangeRateController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<ExchangeRate>exchangeRates, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<ExchangeRate>exchangeRates) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save( exchangeRates);
         } catch (Throwable e) {

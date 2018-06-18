@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.manpower;
 
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.manpowertype.ManpowerType;
 import com.trendsmixed.fma.module.production.Production;
-import javax.persistence.CascadeType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *

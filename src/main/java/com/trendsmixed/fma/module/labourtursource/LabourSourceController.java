@@ -2,13 +2,12 @@ package com.trendsmixed.fma.module.labourtursource;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/labourSources")
 public class LabourSourceController {
 
-    private final AppSessionService appSessionService;
+    
     private final LabourSourceService service;
 
     @JsonView(LabourSourceView.All.class)
@@ -38,9 +37,9 @@ public class LabourSourceController {
 
     @PostMapping
     @JsonView(LabourSourceView.All.class)
-    public LabourSource save(@RequestBody LabourSource labourSource, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public LabourSource save(@RequestBody LabourSource labourSource) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             labourSource = service.save(labourSource);
             return labourSource;
@@ -54,9 +53,9 @@ public class LabourSourceController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<LabourSource> labourSources, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<LabourSource> labourSources) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(labourSources);
         } catch (Throwable e) {
@@ -74,16 +73,16 @@ public class LabourSourceController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     @JsonView(LabourSourceView.All.class)
-    public LabourSource updateCustomer(@PathVariable int id, @RequestBody LabourSource labourSource, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public LabourSource updateCustomer(@PathVariable int id, @RequestBody LabourSource labourSource) {
+        
         labourSource.setId(id);
         labourSource = service.save(labourSource);
         return labourSource;

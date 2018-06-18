@@ -2,9 +2,9 @@ package com.trendsmixed.fma.module.operation;
 
 import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.loss.LossView;
+import com.trendsmixed.fma.module.operationprogress.OperationProgressView;
 import com.trendsmixed.fma.module.operationtype.OperationTypeView;
 import com.trendsmixed.fma.module.production.ProductionView;
-import com.trendsmixed.fma.module.operationprogress.OperationProgressView;
 import com.trendsmixed.fma.module.producttype.ProductTypeView;
 import com.trendsmixed.fma.utility.PageView;
 

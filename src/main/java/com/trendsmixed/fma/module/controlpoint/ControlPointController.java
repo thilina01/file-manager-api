@@ -1,16 +1,15 @@
 package com.trendsmixed.fma.module.controlpoint;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.workcenter.WorkCenter;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.workcenter.WorkCenterService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -18,7 +17,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/controlPoints")
 public class ControlPointController {
 
-    private final AppSessionService appSessionService;
+    
     private final ControlPointService service;
     private WorkCenterService workCenterService;
 
@@ -41,8 +40,8 @@ public class ControlPointController {
 
     @JsonView(ControlPointView.AllAndWorkCenterAll.class)
     @PostMapping
-    public ControlPoint save(@RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ControlPoint save(@RequestBody ControlPoint controlPoint) {
+        
         try {
             controlPoint = service.save(controlPoint);
             return controlPoint;
@@ -56,9 +55,9 @@ public class ControlPointController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<ControlPoint> controlPoints, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<ControlPoint> controlPoints) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             for (ControlPoint controlPoint : controlPoints) {
                 controlPoint.setCode(controlPoint.getCode().trim());
@@ -89,15 +88,15 @@ public class ControlPointController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public ControlPoint updateCustomer(@PathVariable int id, @RequestBody ControlPoint controlPoint, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ControlPoint updateCustomer(@PathVariable int id, @RequestBody ControlPoint controlPoint) {
+        
         controlPoint.setId(id);
         controlPoint = service.save(controlPoint);
         return controlPoint;

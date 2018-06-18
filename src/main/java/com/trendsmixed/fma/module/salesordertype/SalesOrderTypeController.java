@@ -2,13 +2,12 @@ package com.trendsmixed.fma.module.salesordertype;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/salesOrderTypes")
 public class SalesOrderTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final SalesOrderTypeService service;
 
     @JsonView(SalesOrderTypeView.All.class)
@@ -38,8 +37,8 @@ public class SalesOrderTypeController {
 
     @JsonView(SalesOrderTypeView.All.class)
     @PostMapping
-    public SalesOrderType save(@RequestBody SalesOrderType salesOrderType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public SalesOrderType save(@RequestBody SalesOrderType salesOrderType) {
+        
         try {
             salesOrderType = service.save(salesOrderType);
             return salesOrderType;
@@ -58,15 +57,15 @@ public class SalesOrderTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public SalesOrderType updateCustomer(@PathVariable int id, @RequestBody SalesOrderType salesOrderType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public SalesOrderType updateCustomer(@PathVariable int id, @RequestBody SalesOrderType salesOrderType) {
+        
         salesOrderType.setId(id);
         salesOrderType = service.save(salesOrderType);
         return salesOrderType;

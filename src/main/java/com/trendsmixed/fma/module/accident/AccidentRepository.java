@@ -1,14 +1,15 @@
 package com.trendsmixed.fma.module.accident;
 
+import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.employee.Employee;
+import com.trendsmixed.fma.module.section.Section;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.section.Section;
-import com.trendsmixed.fma.module.employee.Employee;
-import java.util.List;
-import java.util.Date;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.Date;
+import java.util.List;
 
 public interface AccidentRepository extends PagingAndSortingRepository<Accident, Integer> {
 

@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.designation;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/designations")
 public class DesignationController {
 
-    private final AppSessionService appSessionService;
+    
     private final DesignationService service;
 
     @JsonView(DesignationView.All.class)
@@ -38,8 +38,8 @@ public class DesignationController {
 
     @PostMapping
     public Designation save(@RequestBody Designation designation,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             designation = service.save(designation);
             return designation;
@@ -54,8 +54,8 @@ public class DesignationController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Designation> designations,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(designations);
@@ -76,15 +76,15 @@ public class DesignationController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     public Designation updateCustomer(@PathVariable int id, @RequestBody Designation designation,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         designation.setId(id);
         designation = service.save(designation);
         return designation;

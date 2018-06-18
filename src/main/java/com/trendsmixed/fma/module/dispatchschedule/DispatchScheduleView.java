@@ -6,13 +6,13 @@ import com.trendsmixed.fma.module.item.ItemView;
 import com.trendsmixed.fma.module.item.ItemView.AllAndPaintAll;
 import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndDispatchNote;
-import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndLoadingPlan;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndLoadingPlanAndDispatchNoteAndInvoice;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll;
 import com.trendsmixed.fma.module.salesorder.SalesOrderView.Customer;
+import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemView;
 import com.trendsmixed.fma.utility.PageView;
 
 public class DispatchScheduleView {

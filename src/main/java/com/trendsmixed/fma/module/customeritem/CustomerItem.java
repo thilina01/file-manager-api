@@ -1,13 +1,14 @@
 package com.trendsmixed.fma.module.customeritem;
 
-import com.trendsmixed.fma.module.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.item.Item;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *

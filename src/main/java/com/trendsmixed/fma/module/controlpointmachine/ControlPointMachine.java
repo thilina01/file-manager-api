@@ -1,13 +1,14 @@
 package com.trendsmixed.fma.module.controlpointmachine;
 
-import com.trendsmixed.fma.module.controlpoint.ControlPoint;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.machine.Machine;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *

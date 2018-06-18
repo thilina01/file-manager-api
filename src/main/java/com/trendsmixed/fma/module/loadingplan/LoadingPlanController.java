@@ -1,16 +1,15 @@
 package com.trendsmixed.fma.module.loadingplan;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItem;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItem;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/loadingPlans")
 public class LoadingPlanController {
 
-    private final AppSessionService appSessionService;
+    
     private final LoadingPlanService service;
 
     @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomer.class)
@@ -46,8 +45,8 @@ public class LoadingPlanController {
 
     @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPortOfLoadingAndContainerSizeAndAddressAndCustomer.class)
     @PostMapping
-    public LoadingPlan save(@RequestBody LoadingPlan loadingPlan, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public LoadingPlan save(@RequestBody LoadingPlan loadingPlan) {
+        
         try {
 
             List<LoadingPlanItem> loadingPlanItems = loadingPlan.getLoadingPlanItemList();
@@ -75,15 +74,15 @@ public class LoadingPlanController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public LoadingPlan updateCustomer(@PathVariable int id, @RequestBody LoadingPlan loadingPlan, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public LoadingPlan updateCustomer(@PathVariable int id, @RequestBody LoadingPlan loadingPlan) {
+        
         loadingPlan.setId(id);
         loadingPlan = service.save(loadingPlan);
         return loadingPlan;

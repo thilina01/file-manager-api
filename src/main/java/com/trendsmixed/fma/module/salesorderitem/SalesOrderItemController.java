@@ -1,20 +1,16 @@
 package com.trendsmixed.fma.module.salesorderitem;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
-import com.trendsmixed.fma.module.customeritem.CustomerItemService;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
-
-import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
-import com.trendsmixed.fma.utility.Page;
 import com.trendsmixed.fma.utility.Format;
-import java.text.ParseException;
+import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 
 @AllArgsConstructor
 @RestController
@@ -22,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/salesOrderItems")
 public class SalesOrderItemController {
 
-    private final AppSessionService appSessionService;
+    
     private final SalesOrderItemService service;
 
     @GetMapping
@@ -124,8 +120,8 @@ public class SalesOrderItemController {
     }
 
     @PostMapping
-    public SalesOrderItem save(@RequestBody SalesOrderItem salesOrderItem, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public SalesOrderItem save(@RequestBody SalesOrderItem salesOrderItem) {
+        
         try {
             salesOrderItem = service.save(salesOrderItem);
             return salesOrderItem;
@@ -145,15 +141,15 @@ public class SalesOrderItemController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public SalesOrderItem updateCustomer(@PathVariable int id, @RequestBody SalesOrderItem salesOrderItem, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public SalesOrderItem updateCustomer(@PathVariable int id, @RequestBody SalesOrderItem salesOrderItem) {
+        
         salesOrderItem.setId(id);
         salesOrderItem = service.save(salesOrderItem);
         return salesOrderItem;

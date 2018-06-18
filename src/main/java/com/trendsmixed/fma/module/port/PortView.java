@@ -1,9 +1,8 @@
 package com.trendsmixed.fma.module.port;
 
-import com.trendsmixed.fma.utility.PageView;
-
 import com.trendsmixed.fma.module.address.AddressView;
 import com.trendsmixed.fma.module.address.AddressView.Customer;
+import com.trendsmixed.fma.utility.PageView;
 
 
 public class PortView {

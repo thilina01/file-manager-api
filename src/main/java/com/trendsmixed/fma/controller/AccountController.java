@@ -39,37 +39,10 @@ public class AccountController {
     @PostMapping("/login")
     public boolean login(@RequestBody UserDao userDao, HttpServletRequest request, HttpServletResponse response) {
 
-        if (userDao.getEmail().equalsIgnoreCase("admin@trwlanka.com")
-                && userDao.getPassword().equalsIgnoreCase("trwadmin")) {
-            User admin = userService.findByEmail(userDao.getEmail());
-            if (admin == null) {
-                admin = new User();
-                Team team = teamService.findByName("admin");
-                if (team == null) {
-                    team = new Team();
-                    team.setName("admin");
-                    team = teamService.save(team);
-                }
-                admin.setTeam(team);
-                admin.setEmail(userDao.getEmail());
-                admin.setPassword(userDao.getPassword());
-                Status status = statusService.findByName("active");
-                if (status == null) {
-                    status = new Status();
-                    status.setName("active");
-                    status = statusService.save(status);
-                }
-                admin.setStatus(status);
-                userService.save(admin);
-            }
-
-        }
-
         userDao.setUserService(userService);
         boolean authenticated = userDao.isAuthenticated();
         if (authenticated) {
             saveAppSession(userDao.getEmail(), request.getRemoteAddr());
-
             return authenticated;
         } else {
         }

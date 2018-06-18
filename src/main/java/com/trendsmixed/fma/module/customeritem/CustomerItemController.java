@@ -3,17 +3,17 @@ package com.trendsmixed.fma.module.customeritem;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.module.item.Item;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.customer.CustomerService;
+import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.item.ItemService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
-import java.text.ParseException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/customerItems")
 public class CustomerItemController {
 
-    private final AppSessionService appSessionService;
+    
     private final CustomerItemService service;
     private final CustomerService customerService;
     private final ItemService itemService;
@@ -111,8 +111,8 @@ public class CustomerItemController {
 
     @PostMapping
     public CustomerItem save(@RequestBody CustomerItem customerItems,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             customerItems = service.save(customerItems);
             return customerItems;
@@ -127,8 +127,8 @@ public class CustomerItemController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<CustomerItem> customerItems,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             for (CustomerItem customerItem : customerItems) {
                 Customer customer = customerItem.getCustomer();
@@ -178,15 +178,15 @@ public class CustomerItemController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     public CustomerItem updateCustomer(@PathVariable int id, @RequestBody CustomerItem customerItems,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         customerItems.setId(id);
         customerItems = service.save(customerItems);
         return customerItems;

@@ -3,15 +3,11 @@ package com.trendsmixed.fma.module.producttype;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.utility.Page;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -19,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/productTypes")
 public class ProductTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final ProductTypeService service;
 
     @JsonView(ProductTypeView.All.class)
@@ -41,8 +37,8 @@ public class ProductTypeController {
 
     @JsonView(ProductTypeView.All.class)
     @PostMapping
-    public ProductType save(@RequestBody ProductType productType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ProductType save(@RequestBody ProductType productType) {
+        
         try {
             productType = service.save(productType);
             return productType;
@@ -56,9 +52,9 @@ public class ProductTypeController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<ProductType> productTypes, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<ProductType> productTypes) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(productTypes);
         } catch (Throwable e) {
@@ -75,15 +71,15 @@ public class ProductTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public ProductType updateCustomer(@PathVariable int id, @RequestBody ProductType productType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ProductType updateCustomer(@PathVariable int id, @RequestBody ProductType productType) {
+        
         productType.setId(id);
         productType = service.save(productType);
         return productType;

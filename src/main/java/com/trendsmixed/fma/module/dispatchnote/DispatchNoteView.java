@@ -1,29 +1,25 @@
 package com.trendsmixed.fma.module.dispatchnote;
 
 import com.trendsmixed.fma.module.address.AddressView;
-import com.trendsmixed.fma.module.invoice.InvoiceView;
 import com.trendsmixed.fma.module.address.AddressView.AllAndAddressTypeAll;
 import com.trendsmixed.fma.module.address.AddressView.AllAndCountryAll;
 import com.trendsmixed.fma.module.address.AddressView.AllAndPortAll;
 import com.trendsmixed.fma.module.customer.CustomerView;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndContactAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndCurrencyAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndEmployeeAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndIncotermAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndNotifyPartyAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndPaymentTermAll;
-// import com.trendsmixed.fma.module.dispatch.DispatchView;
-// import com.trendsmixed.fma.module.dispatch.DispatchView.AllAndDispatchScheduleAll;
-// import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView;
+import com.trendsmixed.fma.module.customer.CustomerView.*;
+import com.trendsmixed.fma.module.employee.EmployeeView;
+import com.trendsmixed.fma.module.invoice.InvoiceView;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndAddress;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndContainerSize;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndPortOfLoading;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndPackagingSpecification;
-import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.module.location.LocationView;
 import com.trendsmixed.fma.module.packagingspecification.PackagingSpecificationView.AllAndPalletSize;
 import com.trendsmixed.fma.utility.PageView;
+
+// import com.trendsmixed.fma.module.dispatch.DispatchView;
+// import com.trendsmixed.fma.module.dispatch.DispatchView.AllAndDispatchScheduleAll;
+// import com.trendsmixed.fma.module.dispatchschedule.DispatchScheduleView;
 
 public class DispatchNoteView {
 

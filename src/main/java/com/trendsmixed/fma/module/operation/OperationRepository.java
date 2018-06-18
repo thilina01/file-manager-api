@@ -5,15 +5,14 @@ import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.production.Production;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
-
-import java.util.Date;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+
+import java.util.Date;
+import java.util.List;
 
 public interface OperationRepository extends PagingAndSortingRepository<Operation, Integer> {
 

@@ -1,22 +1,22 @@
 package com.trendsmixed.fma.module.salesorder;
-import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.module.customer.CustomerService;
-import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
-import com.trendsmixed.fma.utility.Format;
-import java.text.ParseException;
+import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.salesorderitem.SalesOrderItemService;
+import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
+import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/salesOrders")
 public class SalesOrderController {
 
-    private final AppSessionService appSessionService;
+    
     private final SalesOrderService service;
     private final SalesOrderItemService salesOrderItemService;
     private final JobTypeService jobTypeService;
@@ -129,8 +129,8 @@ public class SalesOrderController {
     
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PostMapping
-    public SalesOrder save(@RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public SalesOrder save(@RequestBody SalesOrder salesOrder) {
+        
         try {
             List<SalesOrderItem> salesOrderItems = salesOrder.getSalesOrderItemList();
             for (SalesOrderItem salesOrderItem : salesOrderItems) {
@@ -158,16 +158,16 @@ public class SalesOrderController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PutMapping("/{id}")
-    public SalesOrder updateCustomer(@PathVariable int id, @RequestBody SalesOrder salesOrder, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public SalesOrder updateCustomer(@PathVariable int id, @RequestBody SalesOrder salesOrder) {
+        
         salesOrder.setId(id);
         salesOrder = service.save(salesOrder);
         return salesOrder;

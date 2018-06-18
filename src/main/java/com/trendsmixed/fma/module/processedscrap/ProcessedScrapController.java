@@ -1,13 +1,13 @@
 package com.trendsmixed.fma.module.processedscrap;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/processedScraps")
 public class ProcessedScrapController {
 
-    private final AppSessionService appSessionService;
+    
     private final ProcessedScrapService service;
 
     @JsonView(ProcessedScrapView.All.class)
@@ -32,8 +32,8 @@ public class ProcessedScrapController {
 
     @PostMapping
     public ProcessedScrap save(@RequestBody ProcessedScrap processedScrap,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             processedScrap = service.save(processedScrap);
             return processedScrap;
@@ -48,8 +48,8 @@ public class ProcessedScrapController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<ProcessedScrap> processedScraps,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(processedScraps);
@@ -70,15 +70,15 @@ public class ProcessedScrapController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     public ProcessedScrap updateCustomer(@PathVariable int id, @RequestBody ProcessedScrap processedScrap,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         processedScrap.setId(id);
         processedScrap = service.save(processedScrap);
         return processedScrap;

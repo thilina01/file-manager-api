@@ -1,15 +1,14 @@
 package com.trendsmixed.fma.module.suppliertype;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/supplierTypes")
 public class SupplierTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final SupplierTypeService service;
 
     @JsonView(SupplierTypeView.All.class)
@@ -40,8 +39,8 @@ public class SupplierTypeController {
     @JsonView(SupplierTypeView.All.class)
     @PostMapping
     public SupplierType save(@RequestBody SupplierType supplierType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             supplierType = service.save(supplierType);
             return supplierType;
@@ -56,8 +55,8 @@ public class SupplierTypeController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<SupplierType> supplierTypes,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(supplierTypes);
@@ -78,15 +77,15 @@ public class SupplierTypeController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
     }
 
     @JsonView(SupplierTypeView.All.class)
     @PutMapping("/{id}")
     public SupplierType updateCustomer(@PathVariable int id, @RequestBody SupplierType supplierType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         supplierType.setId(id);
         supplierType = service.save(supplierType);
         return supplierType;

@@ -1,13 +1,14 @@
 package com.trendsmixed.fma.module.jobdispatch;
 
-import com.trendsmixed.fma.module.job.Job;
-import com.trendsmixed.fma.module.dispatch.Dispatch;
 import com.fasterxml.jackson.annotation.JsonView;
-import java.io.Serializable;
+import com.trendsmixed.fma.module.dispatch.Dispatch;
+import com.trendsmixed.fma.module.job.Job;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *

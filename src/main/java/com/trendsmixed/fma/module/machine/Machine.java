@@ -1,16 +1,17 @@
 package com.trendsmixed.fma.module.machine;
 
-import com.trendsmixed.fma.module.controlpointmachine.ControlPointMachine;
-import com.trendsmixed.fma.module.resourceutilization.ResourceUtilization;
-import com.trendsmixed.fma.module.breakdown.Breakdown;
-import java.io.Serializable;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.accident.Accident;
+import com.trendsmixed.fma.module.breakdown.Breakdown;
+import com.trendsmixed.fma.module.controlpointmachine.ControlPointMachine;
+import com.trendsmixed.fma.module.resourceutilization.ResourceUtilization;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

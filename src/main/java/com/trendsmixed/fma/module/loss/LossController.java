@@ -1,11 +1,10 @@
 package com.trendsmixed.fma.module.loss;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/losses")
 public class LossController {
 
-    private final AppSessionService appSessionService;
+    
     private final LossService lossService;
 
     @JsonView(LossView.All.class)
@@ -24,8 +23,8 @@ public class LossController {
 
     @JsonView(LossView.All.class)
     @PostMapping
-    public Loss save(@RequestBody Loss loss, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Loss save(@RequestBody Loss loss) {
+        
         try {
             loss = lossService.save(loss);
             return loss;
@@ -39,9 +38,9 @@ public class LossController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Loss> losses, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<Loss> losses) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             lossService.save(losses);
         } catch (Throwable e) {
@@ -58,15 +57,15 @@ public class LossController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         lossService.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Loss updateCustomer(@PathVariable int id, @RequestBody Loss loss, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Loss updateCustomer(@PathVariable int id, @RequestBody Loss loss) {
+        
         loss.setId(id);
         loss = lossService.save(loss);
         return loss;

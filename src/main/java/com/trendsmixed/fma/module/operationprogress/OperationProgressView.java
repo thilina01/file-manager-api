@@ -1,15 +1,15 @@
 package com.trendsmixed.fma.module.operationprogress;
 
-import com.trendsmixed.fma.module.production.ProductionView;
-import com.trendsmixed.fma.module.production.ProductionView.ControlPoint;
-import com.trendsmixed.fma.module.operation.OperationView;
 import com.trendsmixed.fma.module.controlpoint.ControlPointView;
 import com.trendsmixed.fma.module.costcenter.CostCenterView;
-import com.trendsmixed.fma.module.workcenter.WorkCenterView;
+import com.trendsmixed.fma.module.operation.OperationView;
 import com.trendsmixed.fma.module.operation.OperationView.Job;
 import com.trendsmixed.fma.module.operation.OperationView.OperationType;
 import com.trendsmixed.fma.module.operation.OperationView.ProductType;
 import com.trendsmixed.fma.module.operation.OperationView.Production;
+import com.trendsmixed.fma.module.production.ProductionView;
+import com.trendsmixed.fma.module.production.ProductionView.ControlPoint;
+import com.trendsmixed.fma.module.workcenter.WorkCenterView;
 import com.trendsmixed.fma.utility.PageView;
 
 public class OperationProgressView {

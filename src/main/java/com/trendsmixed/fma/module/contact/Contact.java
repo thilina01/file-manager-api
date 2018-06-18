@@ -3,13 +3,12 @@ package com.trendsmixed.fma.module.contact;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.contacttype.ContactType;
 import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.module.employee.Employee;
-
-import java.io.Serializable;
-import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *

@@ -1,15 +1,13 @@
 package com.trendsmixed.fma.module.tool;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -17,7 +15,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/tools")
 public class ToolController {
 
-    private final AppSessionService appSessionService;
+    
     private final ToolService service;
 
     @JsonView(ToolView.All.class)
@@ -39,8 +37,8 @@ public class ToolController {
 
     @JsonView(ToolView.All.class)
     @PostMapping
-    public Tool save(@RequestBody Tool tool, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Tool save(@RequestBody Tool tool) {
+        
         try {
             tool = service.save(tool);
             return tool;
@@ -54,9 +52,9 @@ public class ToolController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List< Tool> tools, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List< Tool> tools) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             for (Tool tool : tools) {
                 tool.setCode(tool.getCode().trim());
@@ -82,15 +80,15 @@ public class ToolController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Tool updateCustomer(@PathVariable int id, @RequestBody Tool tool, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Tool updateCustomer(@PathVariable int id, @RequestBody Tool tool) {
+        
         tool.setId(id);
         tool = service.save(tool);
         return tool;

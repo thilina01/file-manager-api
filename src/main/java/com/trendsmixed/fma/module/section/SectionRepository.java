@@ -1,13 +1,11 @@
 package com.trendsmixed.fma.module.section;
 
-import java.util.Date;
-import java.util.List;
-
+import com.trendsmixed.fma.dao.Combo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.trendsmixed.fma.dao.Combo;
-import org.springframework.data.repository.query.Param;
+import java.util.Date;
+import java.util.List;
 
 public interface SectionRepository extends PagingAndSortingRepository<Section, Integer> {
 

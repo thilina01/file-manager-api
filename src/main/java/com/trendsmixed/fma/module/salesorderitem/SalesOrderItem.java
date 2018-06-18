@@ -1,20 +1,18 @@
 package com.trendsmixed.fma.module.salesorderitem;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trendsmixed.fma.module.salesorder.SalesOrder;
-import com.trendsmixed.fma.module.delivery.Delivery;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
+import com.trendsmixed.fma.module.delivery.Delivery;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
-
-import java.io.Serializable;
-import java.util.List;
-
+import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Thilina

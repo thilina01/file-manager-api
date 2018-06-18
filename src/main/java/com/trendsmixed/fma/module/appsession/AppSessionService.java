@@ -1,10 +1,11 @@
 package com.trendsmixed.fma.module.appsession;
 
 import com.trendsmixed.fma.entity.AppSession;
-import java.util.List;
-import org.springframework.stereotype.Service;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -28,14 +29,38 @@ public class AppSessionService {
         appSessionRepository.delete(email);
     }
 
-    public boolean isValid(String email, HttpServletRequest request) {
-        AppSession appSession = findOne(email);
-        if (appSession == null) {
-            throw new Error("Please Login");
+    public boolean isValid(HttpServletRequest request) {
+        String email = request.getHeader("email");
+        String uriString = request.getRequestURI();
+        String methodString = request.getMethod();
+        String remoteAddress = request.getRemoteAddr();
+        System.out.println("Validating: " + email);
+        System.out.println("RequestURI: " + uriString);
+        System.out.println("Method: " + methodString);
+        System.out.println("RemoteAddress: " + remoteAddress);
+
+        if (uriString.equalsIgnoreCase("/accounts/login") || methodString.equalsIgnoreCase("OPTIONS")) {
+            return true;
         }
-        if (!appSession.getIp().equals(request.getRemoteAddr())) {
+
+        if (email == null || email.equals("")) {
+            System.out.println("Email is blank ");
+            return false;
+        }
+
+        AppSession appSession = findOne(email);
+
+        if (appSession == null) {
+            System.out.println("AppSession is null ");
+            return false;
+            //throw new Error("Please Login");
+        }
+
+        if (!appSession.getIp().equals(remoteAddress)) {
             delete(email);
-            throw new Error("Please Login");
+            System.out.println("IP does not match");
+            return false;
+            //throw new Error("Please Login");
         }
 
         appSession.setLastTime(System.currentTimeMillis());

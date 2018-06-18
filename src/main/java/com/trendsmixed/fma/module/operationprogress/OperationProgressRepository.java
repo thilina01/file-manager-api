@@ -1,12 +1,13 @@
 package com.trendsmixed.fma.module.operationprogress;
 
-import java.util.Date;
-import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.section.Section;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.Date;
 
 public interface OperationProgressRepository extends PagingAndSortingRepository<OperationProgress, Integer> {
 

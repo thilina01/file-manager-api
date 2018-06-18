@@ -2,13 +2,12 @@ package com.trendsmixed.fma.module.notifyparty;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/notifyParties")
 public class NotifyPartyController {
 
-    private final AppSessionService appSessionService;
+    
     private final NotifyPartyService service;
 
     @JsonView(NotifyPartyView.All.class)
@@ -38,8 +37,8 @@ public class NotifyPartyController {
 
     @JsonView(NotifyPartyView.All.class)
     @PostMapping
-    public NotifyParty save(@RequestBody NotifyParty notifyParty, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public NotifyParty save(@RequestBody NotifyParty notifyParty) {
+        
         try {
             notifyParty = service.save(notifyParty);
             return notifyParty;
@@ -58,15 +57,15 @@ public class NotifyPartyController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
     }
 
     @JsonView(NotifyPartyView.All.class)
     @PutMapping("/{id}")
-    public NotifyParty updateCustomer(@PathVariable int id, @RequestBody NotifyParty notifyParty, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public NotifyParty updateCustomer(@PathVariable int id, @RequestBody NotifyParty notifyParty) {
+        
         notifyParty.setId(id);
         notifyParty = service.save(notifyParty);
         return notifyParty;

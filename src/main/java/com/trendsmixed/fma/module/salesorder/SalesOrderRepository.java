@@ -1,15 +1,16 @@
 package com.trendsmixed.fma.module.salesorder;
 
 import com.trendsmixed.fma.dao.Combo;
-import java.util.List;
-import java.util.Date;
-import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
 import com.trendsmixed.fma.module.customer.Customer;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import com.trendsmixed.fma.module.salesordertype.SalesOrderType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+
+import java.util.Date;
+import java.util.List;
 
 public interface SalesOrderRepository extends PagingAndSortingRepository<SalesOrder, Integer> {
 

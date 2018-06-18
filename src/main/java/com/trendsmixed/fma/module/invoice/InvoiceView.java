@@ -1,26 +1,21 @@
 package com.trendsmixed.fma.module.invoice;
 
-import com.trendsmixed.fma.module.invoicetype.InvoiceTypeView;
+import com.trendsmixed.fma.module.address.AddressView;
+import com.trendsmixed.fma.module.address.AddressView.AllAndAddressTypeAll;
+import com.trendsmixed.fma.module.address.AddressView.AllAndCountryAll;
+import com.trendsmixed.fma.module.address.AddressView.AllAndPortAll;
+import com.trendsmixed.fma.module.currency.CurrencyView;
+import com.trendsmixed.fma.module.customer.CustomerView;
+import com.trendsmixed.fma.module.customer.CustomerView.*;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
+import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddress;
 import com.trendsmixed.fma.module.exchangerate.ExchangeRateView;
 import com.trendsmixed.fma.module.exchangerate.ExchangeRateView.AllAndCurrencyId;
-import com.trendsmixed.fma.module.customer.CustomerView;
-import com.trendsmixed.fma.module.currency.CurrencyView;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndContactAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndCurrencyAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndEmployeeAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndIncotermAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndNotifyPartyAll;
-import com.trendsmixed.fma.module.customer.CustomerView.AllAndPaymentTermAll;
+import com.trendsmixed.fma.module.invoicetype.InvoiceTypeView;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndAddress;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndContainerSize;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlanView.AllAndPortOfLoading;
-import com.trendsmixed.fma.module.address.AddressView;
-import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
-import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddress;
-import com.trendsmixed.fma.module.address.AddressView.AllAndAddressTypeAll;
-import com.trendsmixed.fma.module.address.AddressView.AllAndCountryAll;
-import com.trendsmixed.fma.module.address.AddressView.AllAndPortAll;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndPackagingSpecification;
 import com.trendsmixed.fma.utility.PageView;
 

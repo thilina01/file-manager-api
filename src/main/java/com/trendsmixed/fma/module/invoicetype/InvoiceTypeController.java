@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.invoicetype;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/invoiceTypes")
 public class InvoiceTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final InvoiceTypeService service;
 
     @JsonView(InvoiceTypeView.All.class)
@@ -39,8 +39,8 @@ public class InvoiceTypeController {
     @JsonView(InvoiceTypeView.All.class)
     @PostMapping
     public InvoiceType save(@RequestBody InvoiceType invoiceType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             invoiceType = service.save(invoiceType);
             return invoiceType;
@@ -55,8 +55,8 @@ public class InvoiceTypeController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<InvoiceType> invoiceTypes,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(invoiceTypes);
@@ -77,15 +77,15 @@ public class InvoiceTypeController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
     }
 
     @JsonView(InvoiceTypeView.All.class)
     @PutMapping("/{id}")
     public InvoiceType updateCustomer(@PathVariable int id, @RequestBody InvoiceType invoiceType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         invoiceType.setId(id);
         invoiceType = service.save(invoiceType);
         return invoiceType;

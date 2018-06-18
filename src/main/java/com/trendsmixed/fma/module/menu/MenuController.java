@@ -2,20 +2,20 @@ package com.trendsmixed.fma.module.menu;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
-import com.trendsmixed.fma.module.menutype.MenuType;
-import com.trendsmixed.fma.module.team.Team;
-import com.trendsmixed.fma.module.teammenu.TeamMenu;
-import com.trendsmixed.fma.module.user.User;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.menutype.MenuType;
 import com.trendsmixed.fma.module.menutype.MenuTypeService;
-import com.trendsmixed.fma.module.teammenu.TeamMenuService;
+import com.trendsmixed.fma.module.team.Team;
 import com.trendsmixed.fma.module.team.TeamService;
+import com.trendsmixed.fma.module.teammenu.TeamMenu;
+import com.trendsmixed.fma.module.teammenu.TeamMenuService;
+import com.trendsmixed.fma.module.user.User;
 import com.trendsmixed.fma.module.user.UserService;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -98,9 +98,9 @@ public class MenuController {
     }
 
     @PostMapping
-    public Menu save(@RequestBody Menu menu, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Menu save(@RequestBody Menu menu) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             menu = menuService.save(menu);
             return menu;
@@ -114,7 +114,7 @@ public class MenuController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Menu> menus, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<Menu> menus) {
 
         try {
             int i = 0;
@@ -179,15 +179,15 @@ public class MenuController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         menuService.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Menu updateCustomer(@PathVariable int id, @RequestBody Menu menu, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Menu updateCustomer(@PathVariable int id, @RequestBody Menu menu) {
+        
         menu.setId(id);
         menu = menuService.save(menu);
         return menu;

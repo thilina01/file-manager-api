@@ -2,14 +2,12 @@ package com.trendsmixed.fma.module.currency;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/currencies")
 public class CurrencyController {
 
-    private final AppSessionService appSessionService;
+    
     private final CurrencyService service;
 
     @JsonView(CurrencyView.All.class)
@@ -45,8 +43,8 @@ public class CurrencyController {
 
     @JsonView(CurrencyView.All.class)
     @PostMapping
-    public Currency save(@RequestBody Currency currency, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Currency save(@RequestBody Currency currency) {
+        
         try {
             currency = service.save(currency);
             return currency;
@@ -66,16 +64,16 @@ public class CurrencyController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(CurrencyView.All.class)
     @PutMapping("/{id}")
-    public Currency updateCustomer(@PathVariable int id, @RequestBody Currency currency, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Currency updateCustomer(@PathVariable int id, @RequestBody Currency currency) {
+        
         currency.setId(id);
         currency = service.save(currency);
         return currency;

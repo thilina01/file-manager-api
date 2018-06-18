@@ -2,13 +2,12 @@ package com.trendsmixed.fma.module.manpowertype;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manpowerTypes")
 public class ManpowerTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final ManpowerTypeService service;
 
     @JsonView(ManpowerTypeView.All.class)
@@ -38,8 +37,8 @@ public class ManpowerTypeController {
 
     @JsonView(ManpowerTypeView.All.class)
     @PostMapping
-    public ManpowerType save(@RequestBody ManpowerType manpowerType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ManpowerType save(@RequestBody ManpowerType manpowerType) {
+        
         try {
             manpowerType = service.save(manpowerType);
             return manpowerType;
@@ -58,15 +57,15 @@ public class ManpowerTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
     }
 
     @JsonView(ManpowerTypeView.All.class)
     @PutMapping("/{id}")
-    public ManpowerType updateCustomer(@PathVariable int id, @RequestBody ManpowerType manpowerType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ManpowerType updateCustomer(@PathVariable int id, @RequestBody ManpowerType manpowerType) {
+        
         manpowerType.setId(id);
         manpowerType = service.save(manpowerType);
         return manpowerType;

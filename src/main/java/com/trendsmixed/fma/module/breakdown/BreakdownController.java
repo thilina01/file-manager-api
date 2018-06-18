@@ -1,16 +1,15 @@
 package com.trendsmixed.fma.module.breakdown;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.machine.Machine;
 import com.trendsmixed.fma.module.machine.MachineService;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.utility.Page;
-import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
 import com.trendsmixed.fma.utility.Format;
-import java.text.ParseException;
+import com.trendsmixed.fma.utility.Page;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 
 @AllArgsConstructor
 @RestController
@@ -19,13 +18,13 @@ import org.springframework.web.bind.annotation.*;
 public class BreakdownController {
 
     private final BreakdownService service;
-    private final AppSessionService appSessionService;
+    
     private final MachineService machineService;
 
     @PostMapping
     @JsonView(BreakdownView.All.class)
-    public Breakdown save(@RequestBody Breakdown breakdown, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Breakdown save(@RequestBody Breakdown breakdown) {
+        
         try {
             breakdown = service.save(breakdown);
             return breakdown;
@@ -74,16 +73,16 @@ public class BreakdownController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     @JsonView(BreakdownView.All.class)
-    public Breakdown updateCustomer(@PathVariable int id, @RequestBody Breakdown breakdown, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Breakdown updateCustomer(@PathVariable int id, @RequestBody Breakdown breakdown) {
+        
         breakdown.setId(id);
         breakdown = service.save(breakdown);
         return breakdown;

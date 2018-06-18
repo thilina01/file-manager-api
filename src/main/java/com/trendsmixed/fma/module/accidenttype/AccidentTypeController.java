@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.accidenttype;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/accidentTypes")
 public class AccidentTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final AccidentTypeService service;
 
     @JsonView(AccidentTypeView.All.class)
@@ -39,8 +39,8 @@ public class AccidentTypeController {
     @JsonView(AccidentTypeView.All.class)
     @PostMapping
     public AccidentType save(@RequestBody AccidentType accidentType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             accidentType = service.save(accidentType);
             return accidentType;
@@ -55,8 +55,8 @@ public class AccidentTypeController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<AccidentType> accidentTypes,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
 
             service.save(accidentTypes);
@@ -77,15 +77,15 @@ public class AccidentTypeController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
     }
 
     @JsonView(AccidentTypeView.All.class)
     @PutMapping("/{id}")
     public AccidentType updateCustomer(@PathVariable int id, @RequestBody AccidentType accidentType,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         accidentType.setId(id);
         accidentType = service.save(accidentType);
         return accidentType;

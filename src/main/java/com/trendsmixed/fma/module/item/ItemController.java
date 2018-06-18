@@ -1,19 +1,19 @@
 package com.trendsmixed.fma.module.item;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.itemtype.ItemType;
-import com.trendsmixed.fma.module.paint.Paint;
-import java.text.ParseException;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.module.itemtype.ItemType;
 import com.trendsmixed.fma.module.itemtype.ItemTypeService;
+import com.trendsmixed.fma.module.paint.Paint;
 import com.trendsmixed.fma.module.paint.PaintService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -70,8 +70,8 @@ public class ItemController {
 
     @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
     @PostMapping
-    public Item save(@RequestBody Item item, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Item save(@RequestBody Item item) {
+        
         try {
             if (item.getId() == null && service.findByCode(item.getCode()) != null) {
                 throw new Error("Already Exists [ " + item.getCode() + " ]");
@@ -88,8 +88,8 @@ public class ItemController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Item> items, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void saveMany(@RequestBody List<Item> items) {
+        
         try {
             for (Item item : items) {
                 String code = item.getCode();
@@ -160,15 +160,15 @@ public class ItemController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Item update(@PathVariable int id, @RequestBody Item item, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Item update(@PathVariable int id, @RequestBody Item item) {
+        
         item.setId(id);
         item = service.save(item);
         return item;

@@ -3,12 +3,12 @@ package com.trendsmixed.fma.module.financesummary;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -35,9 +35,9 @@ public class FinanceSummaryController {
 
     @JsonView(FinanceSummaryView.All.class)
     @PostMapping
-    public FinanceSummary save(@RequestBody FinanceSummary financeSummary, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public FinanceSummary save(@RequestBody FinanceSummary financeSummary) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             financeSummary = service.save(financeSummary);
             return financeSummary;
@@ -51,9 +51,9 @@ public class FinanceSummaryController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<FinanceSummary> financeSummaries, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<FinanceSummary> financeSummaries) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(financeSummaries);
         } catch (Throwable e) {
@@ -71,15 +71,15 @@ public class FinanceSummaryController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public FinanceSummary updateCustomer(@PathVariable int id, @RequestBody FinanceSummary financeSummary, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public FinanceSummary updateCustomer(@PathVariable int id, @RequestBody FinanceSummary financeSummary) {
+        
         financeSummary.setId(id);
         financeSummary = service.save(financeSummary);
         return financeSummary;

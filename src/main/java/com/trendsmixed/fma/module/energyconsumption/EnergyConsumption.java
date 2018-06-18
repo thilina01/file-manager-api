@@ -1,15 +1,14 @@
 package com.trendsmixed.fma.module.energyconsumption;
 
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.location.Location;
-import java.util.Date;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *

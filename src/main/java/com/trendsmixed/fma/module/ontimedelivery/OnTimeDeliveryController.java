@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -41,9 +41,9 @@ public class OnTimeDeliveryController {
 
     @JsonView(OnTimeDeliveryView.AllAndCustomerAll.class)
     @PostMapping
-    public OnTimeDelivery save(@RequestBody OnTimeDelivery onTimeDelivery, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public OnTimeDelivery save(@RequestBody OnTimeDelivery onTimeDelivery) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             onTimeDelivery = service.save(onTimeDelivery);
             return onTimeDelivery;
@@ -57,9 +57,9 @@ public class OnTimeDeliveryController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<OnTimeDelivery> onTimeDeliveries, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<OnTimeDelivery> onTimeDeliveries) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(onTimeDeliveries);
         } catch (Throwable e) {
@@ -77,15 +77,15 @@ public class OnTimeDeliveryController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public OnTimeDelivery updateCustomer(@PathVariable int id, @RequestBody OnTimeDelivery onTimeDelivery, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public OnTimeDelivery updateCustomer(@PathVariable int id, @RequestBody OnTimeDelivery onTimeDelivery) {
+        
         onTimeDelivery.setId(id);
         onTimeDelivery = service.save(onTimeDelivery);
         return onTimeDelivery;

@@ -1,14 +1,13 @@
 package com.trendsmixed.fma.module.item;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
-
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.itemtype.ItemType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.List;
 
 public interface ItemRepository extends PagingAndSortingRepository<Item, Integer> {
 

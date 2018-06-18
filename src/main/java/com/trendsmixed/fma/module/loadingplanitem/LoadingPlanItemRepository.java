@@ -1,17 +1,17 @@
 package com.trendsmixed.fma.module.loadingplanitem;
 
-import java.util.List;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.job.Job;
-
-import java.util.Date;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.Date;
+import java.util.List;
 
 public interface LoadingPlanItemRepository extends PagingAndSortingRepository<LoadingPlanItem, Integer> {
 

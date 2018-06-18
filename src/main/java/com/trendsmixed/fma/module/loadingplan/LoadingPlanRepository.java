@@ -1,10 +1,11 @@
 package com.trendsmixed.fma.module.loadingplan;
 
+import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
-import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import com.trendsmixed.fma.dao.Combo;
+
+import java.util.List;
 
 public interface LoadingPlanRepository extends PagingAndSortingRepository<LoadingPlan, Integer> {
 

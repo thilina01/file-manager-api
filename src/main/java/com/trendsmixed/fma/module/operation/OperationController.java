@@ -1,22 +1,22 @@
 package com.trendsmixed.fma.module.operation;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.OperationSummary;
 import com.trendsmixed.fma.dao.view.OperationSummaryView;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/operations")
 public class OperationController {
 
-    private final AppSessionService appSessionService;
+    
     private final OperationService service;
 
     @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
@@ -90,8 +90,8 @@ public class OperationController {
     @JsonView(OperationView.All.class)
     @PostMapping
     public Operation save(@RequestBody Operation operation,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         try {
             operation = service.save(operation);
             return operation;
@@ -106,9 +106,9 @@ public class OperationController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Operation> operations,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+            @RequestHeader(value = "email", defaultValue = "") String email) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(operations);
         } catch (Throwable e) {
@@ -128,15 +128,15 @@ public class OperationController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     public Operation updateCustomer(@PathVariable int id, @RequestBody Operation operation,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         operation.setId(id);
         operation = service.save(operation);
         return operation;

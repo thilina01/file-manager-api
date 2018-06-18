@@ -1,19 +1,20 @@
 package com.trendsmixed.fma.module.operation;
 
-import com.trendsmixed.fma.module.loss.Loss;
-import com.trendsmixed.fma.module.job.Job;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.loss.Loss;
 import com.trendsmixed.fma.module.operationbreadown.OperationBreadown;
 import com.trendsmixed.fma.module.operationprogress.OperationProgress;
 import com.trendsmixed.fma.module.operationtype.OperationType;
-import com.trendsmixed.fma.module.producttype.ProductType;
 import com.trendsmixed.fma.module.production.Production;
-import java.io.Serializable;
-import java.util.List;
+import com.trendsmixed.fma.module.producttype.ProductType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

@@ -1,11 +1,10 @@
 package com.trendsmixed.fma.module.currency;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.customer.Customer;
-
-import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.List;
 
 public interface CurrencyRepository extends PagingAndSortingRepository<Currency, Integer> {
 

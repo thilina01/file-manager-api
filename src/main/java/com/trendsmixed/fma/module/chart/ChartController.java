@@ -1,22 +1,22 @@
 package com.trendsmixed.fma.module.chart;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.dao.view.*;
 import com.trendsmixed.fma.dao.BreakdownChart;
+import com.trendsmixed.fma.dao.view.*;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.module.location.Location;
-import java.util.List;
-
-import org.springframework.web.bind.annotation.*;
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.trendsmixed.fma.module.losstype.LossType;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.utility.Format;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.Date;
-import lombok.AllArgsConstructor;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController

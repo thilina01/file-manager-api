@@ -1,14 +1,14 @@
 package com.trendsmixed.fma.module.paint;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/paints")
 public class PaintController {
 
-    private final AppSessionService appSessionService;
+    
     private final PaintService service;
 
     @JsonView(PaintView.All.class)
@@ -40,7 +40,7 @@ public class PaintController {
     @PostMapping
     public Paint save(@RequestBody Paint paint, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         try {
             paint = service.save(paint);
             return paint;
@@ -54,9 +54,9 @@ public class PaintController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Paint> paints,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+            @RequestHeader(value = "email", defaultValue = "") String email) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(paints);
         } catch (Throwable e) {
@@ -76,7 +76,7 @@ public class PaintController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
@@ -84,8 +84,8 @@ public class PaintController {
     @JsonView(PaintView.All.class)
     @PutMapping("/{id}")
     public Paint updateCustomer(@PathVariable int id, @RequestBody Paint paint,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         paint.setId(id);
         paint = service.save(paint);
         return paint;

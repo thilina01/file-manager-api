@@ -1,13 +1,14 @@
 package com.trendsmixed.fma.module.salesordertype;
 
-import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import com.fasterxml.jackson.annotation.JsonView;
-import java.io.Serializable;
-import java.util.List;
+import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

@@ -2,13 +2,12 @@ package com.trendsmixed.fma.module.shift;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -17,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class ShiftController {
 
     private final ShiftService service;
-    private final AppSessionService appSessionService;
+    
 
     @JsonView(ShiftView.All.class)
     @PostMapping
-    public Shift save(@RequestBody Shift shift, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Shift save(@RequestBody Shift shift) {
+        
         try {
             shift = service.save(shift);
             return shift;
@@ -58,14 +57,14 @@ public class ShiftController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
     }
 
     @PutMapping("/{id}")
-    public Shift update(@PathVariable int id, @RequestBody Shift shift, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Shift update(@PathVariable int id, @RequestBody Shift shift) {
+        
         shift.setId(id);
         shift = service.save(shift);
         return shift;

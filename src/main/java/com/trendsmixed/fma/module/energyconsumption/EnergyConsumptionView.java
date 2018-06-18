@@ -1,6 +1,6 @@
 package com.trendsmixed.fma.module.energyconsumption;
 
-import com.trendsmixed.fma.module.location.*;
+import com.trendsmixed.fma.module.location.LocationView;
 import com.trendsmixed.fma.utility.PageView;
 
 public class EnergyConsumptionView {

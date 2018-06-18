@@ -1,14 +1,13 @@
 package com.trendsmixed.fma.module.operationtype;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/operationTypes")
 public class OperationTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final OperationTypeService service;
 
     @JsonView(OperationTypeView.All.class)
@@ -37,8 +36,8 @@ public class OperationTypeController {
     }
 
     @PostMapping
-    public OperationType save(@RequestBody OperationType operationType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public OperationType save(@RequestBody OperationType operationType) {
+        
         try {
             operationType = service.save(operationType);
             return operationType;
@@ -58,15 +57,15 @@ public class OperationTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public OperationType updateCustomer(@PathVariable int id, @RequestBody OperationType operationType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public OperationType updateCustomer(@PathVariable int id, @RequestBody OperationType operationType) {
+        
         operationType.setId(id);
         operationType = service.save(operationType);
         return operationType;

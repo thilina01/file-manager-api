@@ -1,15 +1,16 @@
 package com.trendsmixed.fma.module.resourceutilization;
 
 import com.trendsmixed.fma.dao.Combo;
-import java.util.List;
-import lombok.AllArgsConstructor;
-import java.util.Date;
 import com.trendsmixed.fma.module.employee.Employee;
-import com.trendsmixed.fma.module.shift.Shift;
 import com.trendsmixed.fma.module.machine.Machine;
-import org.springframework.stereotype.Service;
+import com.trendsmixed.fma.module.shift.Shift;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @Service

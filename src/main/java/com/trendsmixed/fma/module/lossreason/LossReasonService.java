@@ -2,11 +2,12 @@ package com.trendsmixed.fma.module.lossreason;
 
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.losstype.LossType;
-import java.util.List;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Service

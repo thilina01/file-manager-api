@@ -1,16 +1,17 @@
 package com.trendsmixed.fma.module.item;
 
-import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.itemtype.ItemType;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.packagingspecification.PackagingSpecification;
 import com.trendsmixed.fma.module.paint.Paint;
-import java.io.Serializable;
-import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

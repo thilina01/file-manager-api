@@ -2,10 +2,11 @@ package com.trendsmixed.fma.module.address;
 
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
-import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface AddressRepository extends PagingAndSortingRepository<Address, Integer> {
 

@@ -1,15 +1,14 @@
 package com.trendsmixed.fma.module.production;
 
-import java.util.Date;
-
-import org.springframework.data.repository.PagingAndSortingRepository;
-
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.controlpointtype.ControlPointType;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.Date;
 
 public interface ProductionRepository extends PagingAndSortingRepository<Production, Integer> {
 

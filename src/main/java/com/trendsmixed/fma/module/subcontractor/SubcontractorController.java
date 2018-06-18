@@ -2,13 +2,11 @@ package com.trendsmixed.fma.module.subcontractor;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,7 +15,7 @@ import java.util.List;
 @RequestMapping("/subcontractors")
 public class SubcontractorController {
 
-    private final AppSessionService appSessionService;
+    
     private final SubcontractorService service;
     @JsonView(SubcontractorView.All.class)
     @GetMapping
@@ -38,8 +36,8 @@ public class SubcontractorController {
 
     @JsonView(SubcontractorView.All.class)
     @PostMapping
-    public Subcontractor save(@RequestBody Subcontractor subcontractor, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Subcontractor save(@RequestBody Subcontractor subcontractor) {
+        
         try {
         
          return service.save(subcontractor);
@@ -61,15 +59,15 @@ public class SubcontractorController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Subcontractor> subcontractors, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void saveMany(@RequestBody List<Subcontractor> subcontractors) {
+        
         try {
 
         } catch (Throwable e) {
@@ -82,8 +80,8 @@ public class SubcontractorController {
 
     @JsonView(SubcontractorView.All.class)
     @PutMapping("/{id}")
-    public Subcontractor updateCustomer(@PathVariable int id, @RequestBody Subcontractor subcontractor, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Subcontractor updateCustomer(@PathVariable int id, @RequestBody Subcontractor subcontractor) {
+        
         subcontractor.setId(id);
         subcontractor = service.save(subcontractor);
         return subcontractor;

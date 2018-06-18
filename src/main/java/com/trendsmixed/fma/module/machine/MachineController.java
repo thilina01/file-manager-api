@@ -1,14 +1,13 @@
 package com.trendsmixed.fma.module.machine;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/machines")
 public class MachineController {
 
-    private final AppSessionService appSessionService;
+    
     private final MachineService service;
 
     @JsonView(MachineView.AllAndWorkCenterAll.class)
@@ -38,8 +37,8 @@ public class MachineController {
 
     @JsonView(MachineView.All.class)
     @PostMapping
-    public Machine save(@RequestBody Machine machine, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Machine save(@RequestBody Machine machine) {
+        
         try {
             machine = service.save(machine);
             return machine;
@@ -53,9 +52,9 @@ public class MachineController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Machine> machines, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<Machine> machines) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             for (Machine machine : machines) {
                 machine.setCode(machine.getCode().trim());
@@ -81,15 +80,15 @@ public class MachineController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public Machine updateCustomer(@PathVariable int id, @RequestBody Machine machine, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Machine updateCustomer(@PathVariable int id, @RequestBody Machine machine) {
+        
         machine.setId(id);
         machine = service.save(machine);
         return machine;

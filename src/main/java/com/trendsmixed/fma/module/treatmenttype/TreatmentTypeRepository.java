@@ -1,11 +1,10 @@
 package com.trendsmixed.fma.module.treatmenttype;
 
-import java.util.List;
-
+import com.trendsmixed.fma.dao.Combo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.trendsmixed.fma.dao.Combo;
+import java.util.List;
 
 public interface TreatmentTypeRepository extends PagingAndSortingRepository<TreatmentType, Integer> {
 

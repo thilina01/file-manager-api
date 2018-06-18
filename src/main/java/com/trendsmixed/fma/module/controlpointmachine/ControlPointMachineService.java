@@ -1,12 +1,13 @@
 package com.trendsmixed.fma.module.controlpointmachine;
 
-import java.util.List;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.machine.Machine;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Service

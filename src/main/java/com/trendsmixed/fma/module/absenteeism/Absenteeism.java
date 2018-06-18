@@ -2,12 +2,13 @@ package com.trendsmixed.fma.module.absenteeism;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.labourtursource.LabourSource;
-import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *

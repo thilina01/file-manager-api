@@ -1,7 +1,6 @@
 package com.trendsmixed.fma.module.contact;
 
 import com.trendsmixed.fma.module.contacttype.ContactTypeView;
-import com.trendsmixed.fma.module.employee.EmployeeView;
 import com.trendsmixed.fma.utility.PageView;
 
 /**

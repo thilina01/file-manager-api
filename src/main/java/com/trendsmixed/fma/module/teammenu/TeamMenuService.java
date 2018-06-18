@@ -2,9 +2,10 @@ package com.trendsmixed.fma.module.teammenu;
 
 import com.trendsmixed.fma.module.menu.Menu;
 import com.trendsmixed.fma.module.team.Team;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Service

@@ -1,5 +1,10 @@
 package com.trendsmixed.fma.module.fileinformation;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,13 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.web.multipart.MultipartFile;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trendsmixed.fma.entity.AppSession;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -23,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class FileInformationController {
 
     private final FileInformationService fileInformationService;
-    private final AppSessionService appSessionService;
+    
 
     @GetMapping
     public List<FileInformation> all() {
@@ -31,13 +29,8 @@ public class FileInformationController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable("id") int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
+    public void delete(@PathVariable("id") int id) {
             deleteFile(id);
-        }
     }
 
 //    @GetMapping(value = "/{id}/download")
@@ -65,69 +58,64 @@ public class FileInformationController {
 //        return download;
 //    }
     @PostMapping(value = "/upload")
-    public FileInformation handleFileUpload(@RequestParam(value = "data") String data, @RequestParam(value = "file") MultipartFile multipartFile, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public FileInformation handleFileUpload(@RequestParam(value = "data") String data, @RequestParam(value = "file") MultipartFile multipartFile) {
 
-        AppSession appSession = appSessionService.findOne(email);
-        if (appSession == null) {
-            throw new Error("Unauthorized access");
-        } else {
-            int fileId = 0;
-            try {
-                ObjectMapper mapper = new ObjectMapper();
-                FileInformation file = mapper.readValue(data, FileInformation.class);
-                String originalFileName = multipartFile.getOriginalFilename();
-                file.setOriginalFileName(originalFileName);
-                String extension = originalFileName.substring(originalFileName.lastIndexOf('.'));
+        int fileId = 0;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            FileInformation file = mapper.readValue(data, FileInformation.class);
+            String originalFileName = multipartFile.getOriginalFilename();
+            file.setOriginalFileName(originalFileName);
+            String extension = originalFileName.substring(originalFileName.lastIndexOf('.'));
 //                Folder folder = folderService.findOne(file.getFolderList().get(0).getId());
 
-                file.setUploadDate(new Date());
-                file.setExtension(extension);
-                file = fileInformationService.save(file);
+            file.setUploadDate(new Date());
+            file.setExtension(extension);
+            file = fileInformationService.save(file);
 //                folder.getFileList().add(file);
 //                folderService.save(folder);
-                fileId = file.getId();
-                String name = file.getId() + extension;
+            fileId = file.getId();
+            String name = file.getId() + extension;
 
-                if (!multipartFile.isEmpty()) {
-                    try {
-                        byte[] bytes = multipartFile.getBytes();
-                        java.io.File folderToSaveTxt = new java.io.File("txt");
-                        if (!folderToSaveTxt.exists()) {
-                            folderToSaveTxt.mkdir();
-                        }
-
-                        String jsonString = mapper.writeValueAsString(file);
-                        System.out.println(jsonString);
-                        PrintWriter out = new PrintWriter("txt/" + file.getId() + ".txt");
-                        out.println(jsonString);
-                        out.close();
-
-                        java.io.File MainolderToSaveIn = new java.io.File("files");
-                        if (!MainolderToSaveIn.exists()) {
-                            MainolderToSaveIn.mkdir();
-                        }
-
-                        int x = fileId / 100;
-                        java.io.File subFolderToSaveIn = new java.io.File("files/" + x);
-                        if (!subFolderToSaveIn.exists()) {
-                            subFolderToSaveIn.mkdir();
-                        }
-
-                        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new java.io.File("files/" + x + "/" + name)));
-                        stream.write(bytes);
-                        stream.close();
-                        System.out.println("You successfully uploaded " + name + " into " + name + "-uploaded !");
-                        return file;
-                    } catch (Exception e) {
-                        System.out.println("You failed to upload " + name + " => " + e.getMessage());
-                        deleteFile(fileId);
+            if (!multipartFile.isEmpty()) {
+                try {
+                    byte[] bytes = multipartFile.getBytes();
+                    java.io.File folderToSaveTxt = new java.io.File("txt");
+                    if (!folderToSaveTxt.exists()) {
+                        folderToSaveTxt.mkdir();
                     }
-                } else {
-                    System.out.println("You failed to upload " + name + " because the file was empty.");
+
+                    String jsonString = mapper.writeValueAsString(file);
+                    System.out.println(jsonString);
+                    PrintWriter out = new PrintWriter("txt/" + file.getId() + ".txt");
+                    out.println(jsonString);
+                    out.close();
+
+                    java.io.File MainolderToSaveIn = new java.io.File("files");
+                    if (!MainolderToSaveIn.exists()) {
+                        MainolderToSaveIn.mkdir();
+                    }
+
+                    int x = fileId / 100;
+                    java.io.File subFolderToSaveIn = new java.io.File("files/" + x);
+                    if (!subFolderToSaveIn.exists()) {
+                        subFolderToSaveIn.mkdir();
+                    }
+
+                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new java.io.File("files/" + x + "/" + name)));
+                    stream.write(bytes);
+                    stream.close();
+                    System.out.println("You successfully uploaded " + name + " into " + name + "-uploaded !");
+                    return file;
+                } catch (Exception e) {
+                    System.out.println("You failed to upload " + name + " => " + e.getMessage());
+                    deleteFile(fileId);
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(FileInformationController.class.getName()).log(Level.SEVERE, null, ex);
+            } else {
+                System.out.println("You failed to upload " + name + " because the file was empty.");
             }
+        } catch (IOException ex) {
+            Logger.getLogger(FileInformationController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

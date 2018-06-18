@@ -1,16 +1,16 @@
 package com.trendsmixed.fma.module.resourceutilization;
 
 import com.trendsmixed.fma.dao.Combo;
-import java.util.List;
-import com.trendsmixed.fma.module.shift.Shift;
 import com.trendsmixed.fma.module.employee.Employee;
-import java.util.Date;
+import com.trendsmixed.fma.module.machine.Machine;
+import com.trendsmixed.fma.module.shift.Shift;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import com.trendsmixed.fma.module.machine.Machine;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.Date;
+import java.util.List;
 
 public interface ResourceUtilizationRepository extends PagingAndSortingRepository<ResourceUtilization, Integer> {
 

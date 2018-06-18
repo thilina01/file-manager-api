@@ -1,13 +1,14 @@
 package com.trendsmixed.fma.module.sectiontype;
 
-import com.trendsmixed.fma.module.section.Section;
-import java.io.Serializable;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.section.Section;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

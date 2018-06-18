@@ -2,12 +2,13 @@ package com.trendsmixed.fma.module.ontimedelivery;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.customer.Customer;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *

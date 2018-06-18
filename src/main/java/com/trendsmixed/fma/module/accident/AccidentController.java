@@ -2,19 +2,18 @@ package com.trendsmixed.fma.module.accident;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import org.springframework.web.bind.annotation.*;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.treatment.Treatment;
-import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.employee.EmployeeService;
+import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.treatment.Treatment;
 import com.trendsmixed.fma.utility.Format;
-import java.text.ParseException;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -22,7 +21,7 @@ import org.springframework.data.domain.Pageable;
 @RequestMapping("/accidents")
 public class AccidentController {
 
-    private final AppSessionService appSessionService;
+    
     private final AccidentService service;
     private final EmployeeService employeeService;
 
@@ -79,8 +78,8 @@ public class AccidentController {
 
     @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
     @PostMapping
-    public Accident save(@RequestBody Accident accident, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Accident save(@RequestBody Accident accident) {
+        
         try {
 
             List<Treatment> treatmentes = accident.getTreatmentList();
@@ -107,16 +106,16 @@ public class AccidentController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(AccidentView.AllAndAccidentTypeAllAndResponsiblePersonAndEmployeeAllAndMachineAllAndSectionAllAndShiftAllAndTreatmentAllAndTreatmentTypeAll.class)
     @PutMapping("/{id}")
-    public Accident updateCustomer(@PathVariable int id, @RequestBody Accident accident, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Accident updateCustomer(@PathVariable int id, @RequestBody Accident accident) {
+        
         accident.setId(id);
         accident = service.save(accident);
         return accident;

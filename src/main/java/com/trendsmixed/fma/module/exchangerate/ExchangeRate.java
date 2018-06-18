@@ -3,15 +3,14 @@ package com.trendsmixed.fma.module.exchangerate;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.module.invoice.Invoice;
-
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  *

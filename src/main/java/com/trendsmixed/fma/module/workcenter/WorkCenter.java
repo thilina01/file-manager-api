@@ -1,14 +1,15 @@
 package com.trendsmixed.fma.module.workcenter;
 
-import com.trendsmixed.fma.module.costcenter.CostCenter;
-import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.fasterxml.jackson.annotation.JsonView;
-import java.io.Serializable;
-import java.util.List;
+import com.trendsmixed.fma.module.controlpoint.ControlPoint;
+import com.trendsmixed.fma.module.costcenter.CostCenter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

@@ -2,17 +2,12 @@ package com.trendsmixed.fma.module.team;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -20,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/teams")
 public class TeamController {
 
-    private final AppSessionService appSessionService;
+    
     private final TeamService service;
 
     @JsonView(TeamView.AllAndMenuAll.class)
@@ -42,9 +37,9 @@ public class TeamController {
 
     @JsonView(TeamView.All.class)
     @PostMapping
-    public Team save(@RequestBody Team team, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public Team save(@RequestBody Team team) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             team = service.save(team);
             return team;
@@ -58,9 +53,9 @@ public class TeamController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<Team> teams, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<Team> teams) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             for (Team team : teams) {
                 team.setName(team.getName().trim());
@@ -85,16 +80,16 @@ public class TeamController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(TeamView.All.class)
     @PutMapping("/{id}")
-    public Team updateCustomer(@PathVariable int id, @RequestBody Team team, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Team updateCustomer(@PathVariable int id, @RequestBody Team team) {
+        
         team.setId(id);
         team = service.save(team);
         return team;

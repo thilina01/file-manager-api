@@ -3,16 +3,15 @@ package com.trendsmixed.fma.module.user;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.status.Status;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.status.StatusService;
 import com.trendsmixed.fma.utility.MailService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
-    private final AppSessionService appSessionService;
+    
     private final UserService service;
     private final MailService mailService;
     private final StatusService statusService;
@@ -44,7 +43,7 @@ public class UserController {
 
     @JsonView(UserView.All.class)
     @PostMapping
-    public User save(@RequestBody User user, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public User save(@RequestBody User user) {
         try {
             boolean isActivation = false;
             boolean isNew = false;
@@ -93,14 +92,14 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
     }
 
     @PutMapping("/{id}")
-    public User updateCustomer(@PathVariable int id, @RequestBody User user, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public User updateCustomer(@PathVariable int id, @RequestBody User user) {
+        
         user.setId(id);
         user = service.save(user);
         return user;

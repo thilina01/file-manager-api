@@ -2,7 +2,6 @@ package com.trendsmixed.fma.module.packagingspecification;
 
 import com.trendsmixed.fma.module.item.ItemView;
 import com.trendsmixed.fma.module.palletsize.PalletSizeView;
-
 import com.trendsmixed.fma.utility.PageView;
 
 /**

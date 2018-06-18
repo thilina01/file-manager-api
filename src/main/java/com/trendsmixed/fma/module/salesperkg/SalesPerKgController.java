@@ -1,14 +1,12 @@
 package com.trendsmixed.fma.module.salesperkg;
 
 import com.fasterxml.jackson.annotation.JsonView;
-
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/salesPerKgs")
 public class SalesPerKgController {
 
-    private final AppSessionService appSessionService;
+    
     private final SalesPerKgService service;
 
     @JsonView(SalesPerKgView.All.class)
@@ -32,9 +30,9 @@ public class SalesPerKgController {
     }
 
     @PostMapping
-    public SalesPerKg save(@RequestBody SalesPerKg salesPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public SalesPerKg save(@RequestBody SalesPerKg salesPerKg) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             salesPerKg = service.save(salesPerKg);
             return salesPerKg;
@@ -48,9 +46,9 @@ public class SalesPerKgController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<SalesPerKg> salesPerKgs, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<SalesPerKg> salesPerKgs) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(salesPerKgs);
         } catch (Throwable e) {
@@ -68,15 +66,15 @@ public class SalesPerKgController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public SalesPerKg updateCustomer(@PathVariable int id, @RequestBody SalesPerKg salesPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public SalesPerKg updateCustomer(@PathVariable int id, @RequestBody SalesPerKg salesPerKg) {
+        
         salesPerKg.setId(id);
         salesPerKg = service.save(salesPerKg);
         return salesPerKg;

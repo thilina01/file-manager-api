@@ -1,15 +1,14 @@
 package com.trendsmixed.fma.module.contacttype;
 
-import java.io.Serializable;
-import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.contact.Contact;
-import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

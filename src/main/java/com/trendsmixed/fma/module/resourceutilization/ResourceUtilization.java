@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.machine.Machine;
 import com.trendsmixed.fma.module.production.Production;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *

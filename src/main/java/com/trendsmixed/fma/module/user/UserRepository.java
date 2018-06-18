@@ -1,10 +1,10 @@
 package com.trendsmixed.fma.module.user;
 
 import com.trendsmixed.fma.dao.Combo;
-
-import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.List;
 
 public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
 

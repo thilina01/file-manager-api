@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/productionOverheadCostPerKgs")
 public class ProductionOverheadCostPerKgController {
 
-    private final AppSessionService appSessionService;
+    
     private final ProductionOverheadCostPerKgService service;
 
     @JsonView(ProductionOverheadCostPerKgView.All.class)
@@ -31,9 +31,9 @@ public class ProductionOverheadCostPerKgController {
     }
 
     @PostMapping
-    public ProductionOverheadCostPerKg save(@RequestBody ProductionOverheadCostPerKg productionOverheadCostPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public ProductionOverheadCostPerKg save(@RequestBody ProductionOverheadCostPerKg productionOverheadCostPerKg) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             productionOverheadCostPerKg = service.save(productionOverheadCostPerKg);
             return productionOverheadCostPerKg;
@@ -47,9 +47,9 @@ public class ProductionOverheadCostPerKgController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<ProductionOverheadCostPerKg> productionOverheadCostPerKgs, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<ProductionOverheadCostPerKg> productionOverheadCostPerKgs) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(productionOverheadCostPerKgs);
         } catch (Throwable e) {
@@ -67,15 +67,15 @@ public class ProductionOverheadCostPerKgController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public ProductionOverheadCostPerKg updateCustomer(@PathVariable int id, @RequestBody ProductionOverheadCostPerKg productionOverheadCostPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ProductionOverheadCostPerKg updateCustomer(@PathVariable int id, @RequestBody ProductionOverheadCostPerKg productionOverheadCostPerKg) {
+        
         productionOverheadCostPerKg.setId(id);
         productionOverheadCostPerKg = service.save(productionOverheadCostPerKg);
         return productionOverheadCostPerKg;

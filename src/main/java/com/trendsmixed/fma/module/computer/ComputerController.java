@@ -1,13 +1,13 @@
 package com.trendsmixed.fma.module.computer;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/computers")
 public class ComputerController {
 
-    private final AppSessionService appSessionService;
+    
     private final ComputerService service;
 
     @JsonView(ComputerView.All.class)
@@ -34,7 +34,7 @@ public class ComputerController {
     @PostMapping
     public Computer save(@RequestBody Computer computer, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         try {
             computer = service.save(computer);
             return computer;
@@ -48,9 +48,9 @@ public class ComputerController {
 
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Computer> computers,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+            @RequestHeader(value = "email", defaultValue = "") String email) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(computers);
         } catch (Throwable e) {
@@ -70,7 +70,7 @@ public class ComputerController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+        
         service.delete(id);
 
     }
@@ -78,8 +78,8 @@ public class ComputerController {
     @JsonView(ComputerView.All.class)
     @PutMapping("/{id}")
     public Computer updateCustomer(@PathVariable int id, @RequestBody Computer computer,
-            @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+            @RequestHeader(value = "email", defaultValue = "") String email) {
+        
         computer.setId(id);
         computer = service.save(computer);
         return computer;

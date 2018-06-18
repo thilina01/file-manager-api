@@ -1,13 +1,12 @@
 package com.trendsmixed.fma.module.labourturnover;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/labourTurnovers")
 public class LabourTurnoverController {
 
-    private final AppSessionService appSessionService;
+    
     private final LabourTurnoverService service;
 
     @JsonView(LabourTurnoverView.AllAndLabourSource.class)
@@ -32,9 +31,9 @@ public class LabourTurnoverController {
 
     @PostMapping
     @JsonView(LabourTurnoverView.AllAndLabourSource.class)
-    public LabourTurnover save(@RequestBody LabourTurnover labourTurnover, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public LabourTurnover save(@RequestBody LabourTurnover labourTurnover) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             labourTurnover = service.save(labourTurnover);
             return labourTurnover;
@@ -48,9 +47,9 @@ public class LabourTurnoverController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<LabourTurnover> labourTurnovers, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<LabourTurnover> labourTurnovers) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(labourTurnovers);
         } catch (Throwable e) {
@@ -68,16 +67,16 @@ public class LabourTurnoverController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
     @JsonView(LabourTurnoverView.AllAndLabourSource.class)
-    public LabourTurnover updateCustomer(@PathVariable int id, @RequestBody LabourTurnover labourTurnover, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public LabourTurnover updateCustomer(@PathVariable int id, @RequestBody LabourTurnover labourTurnover) {
+        
         labourTurnover.setId(id);
         labourTurnover = service.save(labourTurnover);
         return labourTurnover;

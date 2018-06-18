@@ -3,12 +3,13 @@ package com.trendsmixed.fma.module.palletsize;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.packagingspecification.PackagingSpecification;
-import java.io.Serializable;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

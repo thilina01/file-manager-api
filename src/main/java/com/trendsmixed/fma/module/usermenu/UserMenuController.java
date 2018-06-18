@@ -3,12 +3,12 @@ package com.trendsmixed.fma.module.usermenu;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.menu.Menu;
 import com.trendsmixed.fma.module.user.User;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.user.UserService;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/userMenus")
 public class UserMenuController {
 
-    private final AppSessionService appSessionService;
+    
     private final UserMenuService userMenuService;
     private final UserService userService;
 
     @PutMapping
-    public List<UserMenu> saveMany(@RequestBody List<UserMenu> userMenus, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public List<UserMenu> saveMany(@RequestBody List<UserMenu> userMenus) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             if (!userMenus.isEmpty()) {
                 User user = userMenus.get(0).getUser();
@@ -46,7 +46,7 @@ public class UserMenuController {
             @PathVariable("userId") int userId,
             @PathVariable("menuId") int menuId) {
         //System.out.println("RRRRR " + email);
-        //appSessionService.isValid(email, request);
+        //
         try {
             UserMenu userMenu = userMenuService.findByUserAndMenu(new User(userId), new Menu(menuId));
             if (userMenu != null) {

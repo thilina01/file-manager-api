@@ -1,14 +1,12 @@
 package com.trendsmixed.fma.module.scrapcostperkg;
 
 import com.fasterxml.jackson.annotation.JsonView;
-
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/scrapCostPerKgs")
 public class ScrapCostPerKgController {
 
-    private final AppSessionService appSessionService;
+    
     private final ScrapCostPerKgService service;
 
     @JsonView(ScrapCostPerKgView.All.class)
@@ -32,9 +30,9 @@ public class ScrapCostPerKgController {
     }
 
     @PostMapping
-    public ScrapCostPerKg save(@RequestBody ScrapCostPerKg scrapCostPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public ScrapCostPerKg save(@RequestBody ScrapCostPerKg scrapCostPerKg) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             scrapCostPerKg = service.save(scrapCostPerKg);
             return scrapCostPerKg;
@@ -48,9 +46,9 @@ public class ScrapCostPerKgController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<ScrapCostPerKg> scrapCostPerKgs, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<ScrapCostPerKg> scrapCostPerKgs) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(scrapCostPerKgs);
         } catch (Throwable e) {
@@ -68,15 +66,15 @@ public class ScrapCostPerKgController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public ScrapCostPerKg updateCustomer(@PathVariable int id, @RequestBody ScrapCostPerKg scrapCostPerKg, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public ScrapCostPerKg updateCustomer(@PathVariable int id, @RequestBody ScrapCostPerKg scrapCostPerKg) {
+        
         scrapCostPerKg.setId(id);
         scrapCostPerKg = service.save(scrapCostPerKg);
         return scrapCostPerKg;

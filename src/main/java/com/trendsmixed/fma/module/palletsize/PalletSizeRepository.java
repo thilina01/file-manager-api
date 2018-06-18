@@ -1,9 +1,10 @@
 package com.trendsmixed.fma.module.palletsize;
 
+import com.trendsmixed.fma.dao.Combo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
 import java.util.List;
-import com.trendsmixed.fma.dao.Combo;
 
 public interface PalletSizeRepository extends PagingAndSortingRepository<PalletSize, Integer> {
 

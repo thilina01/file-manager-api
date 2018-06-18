@@ -2,9 +2,9 @@ package com.trendsmixed.fma.module.address;
 
 import com.trendsmixed.fma.module.addresstype.AddressTypeView;
 import com.trendsmixed.fma.module.country.CountryView;
+import com.trendsmixed.fma.module.customer.CustomerView;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNoteView;
 import com.trendsmixed.fma.module.port.PortView;
-import com.trendsmixed.fma.module.customer.CustomerView;
 import com.trendsmixed.fma.utility.PageView;
 
 /**

@@ -1,14 +1,13 @@
 package com.trendsmixed.fma.module.sectiontype;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import com.trendsmixed.fma.utility.Page;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
+import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sectionTypes")
 public class SectionTypeController {
 
-    private final AppSessionService appSessionService;
+    
     private final SectionTypeService service;
 
     @JsonView(SectionTypeView.All.class)
@@ -39,8 +38,8 @@ public class SectionTypeController {
 
     @JsonView(SectionTypeView.All.class)
     @PostMapping
-    public SectionType save(@RequestBody SectionType sectionType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public SectionType save(@RequestBody SectionType sectionType) {
+        
         try {
             sectionType = service.save(sectionType);
             return sectionType;
@@ -54,9 +53,9 @@ public class SectionTypeController {
     }
 
     @PostMapping("/many")
-    public void saveMany(@RequestBody List<SectionType> sectionTypes, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
+    public void saveMany(@RequestBody List<SectionType> sectionTypes) {
 
-        appSessionService.isValid(email, request);
+        
         try {
             service.save(sectionTypes);
         } catch (Throwable e) {
@@ -73,15 +72,15 @@ public class SectionTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @PutMapping("/{id}")
-    public SectionType updateCustomer(@PathVariable int id, @RequestBody SectionType sectionType, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public SectionType updateCustomer(@PathVariable int id, @RequestBody SectionType sectionType) {
+        
         sectionType.setId(id);
         sectionType = service.save(sectionType);
         return sectionType;

@@ -2,13 +2,12 @@ package com.trendsmixed.fma.module.incoterm;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/incoterms")
 public class IncotermController {
 
-    private final AppSessionService appSessionService;
+    
     private final IncotermService service;
 
     @JsonView(IncotermView.All.class)
@@ -38,8 +37,8 @@ public class IncotermController {
 
     @JsonView(IncotermView.All.class)
     @PostMapping
-    public Incoterm save(@RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Incoterm save(@RequestBody Incoterm incoterm) {
+        
         try {
             incoterm = service.save(incoterm);
             return incoterm;
@@ -59,16 +58,16 @@ public class IncotermController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public void delete(@PathVariable int id) {
+        
         service.delete(id);
 
     }
 
     @JsonView(IncotermView.All.class)
     @PutMapping("/{id}")
-    public Incoterm updateCustomer(@PathVariable int id, @RequestBody Incoterm incoterm, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-        appSessionService.isValid(email, request);
+    public Incoterm updateCustomer(@PathVariable int id, @RequestBody Incoterm incoterm) {
+        
         incoterm.setId(id);
         incoterm = service.save(incoterm);
         return incoterm;
