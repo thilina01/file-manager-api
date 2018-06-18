@@ -22,8 +22,13 @@ import com.trendsmixed.fma.module.incoterm.IncotermService;
 import com.trendsmixed.fma.module.jobtype.JobType;
 import com.trendsmixed.fma.module.jobtype.JobTypeService;
 import com.trendsmixed.fma.module.status.StatusService;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+
+import com.trendsmixed.fma.module.team.Team;
+import com.trendsmixed.fma.module.team.TeamService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +37,7 @@ import org.springframework.stereotype.Component;
 public class Strater {
 
     private final StatusService statusService;
+    private final TeamService teamService;
     private final CountryService countryService;
     private final DesignationService designationService;
     private final EmployeeCategoryService employeeCategoryService;
@@ -47,6 +53,7 @@ public class Strater {
     public void afterStarted() {
         System.out.println("Init process started");
         initStatus();
+        initTeam();
         initCountry();
         initCurrency();
         initIncoterm();
@@ -72,6 +79,19 @@ public class Strater {
             statuses.add(inactive);
 
             statusService.save(statuses);
+        }
+    }
+
+    private void initTeam() {
+        if (teamService.count()==0) {
+            List<Team> teams = new ArrayList<>();
+            Team admin = new Team();
+            admin.setName("admin");
+            teams.add(admin);
+            Team user = new Team();
+            user.setName("admin");
+            teams.add(user);
+            teamService.save(teams);
         }
     }
 
