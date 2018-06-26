@@ -2,8 +2,11 @@ package com.trendsmixed.fma.module.packagingspecification;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.item.Item;
+import com.trendsmixed.fma.module.palletsize.PalletSize;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import java.text.ParseException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +30,9 @@ public class PackagingSpecificationController {
     @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItem.class)
     @GetMapping("/page")
     Page<PackagingSpecification> page(Pageable pageable) {
-        return service.findAll(pageable);
+        return new Page<>(service.findAll(pageable));
     }
-
+    
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
@@ -38,6 +41,26 @@ public class PackagingSpecificationController {
     @GetMapping("/comboByItem/{id}")
     List<Combo> comboByItem(@PathVariable("id") int id) {
         return service.getComboByItemId(id);
+    }
+    
+    @JsonView(PackagingSpecificationView.AllAndPalletSizeAndItem.class)
+    @GetMapping(value = "/palletSizeAndItemSearch")
+    public Page<PackagingSpecification> getPalletSizeAndItemPage(
+        @RequestParam(value = "palletSize", required = false, defaultValue = "0") String palletSize,
+        @RequestParam(value = "item", required = false, defaultValue = "0") String item,
+        Pageable pageable) throws ParseException {
+        Page<PackagingSpecification> page ;
+
+        if(item.equals("0")){
+            page = new Page(service.findByPalletSize(new PalletSize(Integer.valueOf(palletSize)),pageable));
+        }
+        else if(palletSize.equals("0")){
+            page = new Page(service.findByItem(new Item(Integer.valueOf(item)), pageable));
+        }
+        else{
+            page = new Page(service.findByItemAndPalletSize( new Item(Integer.valueOf(item)),new PalletSize(Integer.valueOf(palletSize)), pageable));
+        }
+        return page;
     }
 
     @PostMapping

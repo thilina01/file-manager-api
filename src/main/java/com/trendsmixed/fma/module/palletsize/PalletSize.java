@@ -49,6 +49,10 @@ public class PalletSize implements Serializable {
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "palletSize")
     private List<PackagingSpecification> packagingSpecification;
 
+    public PalletSize(int anId) {
+        this.id = anId;
+    }
+
     @JsonView(PalletSizeView.All.class)
     public String getDisplay() {
         return length + " : " + width ;

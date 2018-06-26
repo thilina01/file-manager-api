@@ -1,8 +1,11 @@
 package com.trendsmixed.fma.module.packagingspecification;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.utility.Page;
+import com.trendsmixed.fma.module.item.Item;
+import com.trendsmixed.fma.module.palletsize.PalletSize;
+
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,7 @@ public class PackagingSpecificationService {
     }
 
     public Page<PackagingSpecification> findAll(Pageable pageable) {
-        return new Page<PackagingSpecification>(repository.findAll(pageable));
+        return repository.findAll(pageable);
     }
 
     public List<Combo> getCombo() {
@@ -40,6 +43,18 @@ public class PackagingSpecificationService {
 
     public void delete(int id) {
         repository.delete(id);
+    }
+
+    public Page<PackagingSpecification> findByItem(Item item,Pageable pageable) {
+        return repository.findByItem(item,pageable);
+    }
+
+    public Page<PackagingSpecification> findByPalletSize(PalletSize palletSize,Pageable pageable) {
+        return repository.findByPalletSize(palletSize,pageable);
+    }
+
+    public Page<PackagingSpecification> findByItemAndPalletSize(Item item,PalletSize palletSize,Pageable pageable) {
+        return repository.findByItemAndPalletSize(item,palletSize,pageable);
     }
 
 }
