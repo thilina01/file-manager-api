@@ -44,7 +44,7 @@ public class AppSessionService {
         System.out.println("RemoteAddress: " + remoteAddress);
         System.out.println("loginTimeMills: " + loginTimeMillsString);
 
-        if (uriString.equalsIgnoreCase("/accounts/login") || methodString.equalsIgnoreCase("OPTIONS")) {
+        if (uriString.toLowerCase().contains("/login") || methodString.equalsIgnoreCase("OPTIONS")) {
             return true;
         }
 
