@@ -7,7 +7,6 @@ import com.trendsmixed.fma.module.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @AllArgsConstructor
@@ -41,8 +40,6 @@ public class UserMenuController {
 
     @PostMapping("toggle/{userId}/{menuId}")
     public void toggle(
-            @RequestHeader(value = "email", defaultValue = "") String email,
-            HttpServletRequest request,
             @PathVariable("userId") int userId,
             @PathVariable("menuId") int menuId) {
         //System.out.println("RRRRR " + email);
