@@ -68,6 +68,10 @@ public class JobService {
         return repository.findByJobNo(jobNo, pageable);
     }
 
+    public Iterable<Job>  findByJobNoLike(String query) {
+        return repository.findByJobNoLike(query);
+    }
+
 
 }
 

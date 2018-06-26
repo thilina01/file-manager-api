@@ -33,4 +33,6 @@ public interface JobRepository extends PagingAndSortingRepository<Job, Integer> 
 
         Page<Job> findByJobNo(String jobNo, Pageable pageable);
 
+        Iterable<Job> findByJobNoLike(String query);
+
 }

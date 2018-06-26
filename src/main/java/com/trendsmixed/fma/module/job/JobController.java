@@ -138,6 +138,12 @@ public class JobController {
     }
 
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
+    @GetMapping("/jobNoLike/{query}")
+    public Iterable<Job> findByJobNoLike(@PathVariable("query") String query) {
+        return service.findByJobNoLike("%"+query+"%");
+    }
+
+    @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/jobNo/{jobNo}")
     public Job findByJobNo(@PathVariable("jobNo") String jobNo) {
         return service.findByJobNo(jobNo);
