@@ -2,11 +2,12 @@ package com.trendsmixed.fma.module.loadingplan;
 
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
-import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class LoadingPlanService {
     }
 
     public Page<LoadingPlan> findAll(Pageable pageable) {
-        return new Page<LoadingPlan>(repository.findAll(pageable));
+        return repository.findAll(pageable);
     }
 
     public List<Combo> getCombo() {
@@ -41,5 +42,13 @@ public class LoadingPlanService {
 
     public Iterable<LoadingPlan> findByCustomer(Customer customer) {
         return repository.findByCustomer(customer);
+    }
+
+    public Page<LoadingPlan>findByLoadingPlanDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByLoadingPlanDateBetween(startDate, endDate, pageable);
+    }
+
+    public Page<LoadingPlan> findByCustomerAndLoadingPlanDateBetween(Customer customer, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByCustomerAndLoadingPlanDateBetween(customer, startDate, endDate, pageable);
     }
 }
