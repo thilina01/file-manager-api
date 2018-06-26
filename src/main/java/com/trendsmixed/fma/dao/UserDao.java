@@ -25,6 +25,11 @@ public class UserDao {
         return isAvailable();
     }
 
+    public User save(UserService userService) {
+        setUserService(userService);
+        return save();
+    }
+
     public User save() {
         if (isValidToSave()) {
             User user = new User();
@@ -33,6 +38,11 @@ public class UserDao {
             return userService.save(user);
         }
         return null;
+    }
+
+    public boolean isAuthenticated(UserService userService) {
+        setUserService(userService);
+        return isAuthenticated();
     }
 
     public boolean isAuthenticated() {
@@ -47,7 +57,7 @@ public class UserDao {
                 status = new Status();
                 status.setName("inactive");
                 user.setStatus(status);
-                //user = userService.save(user);
+                // user = userService.save(user);
             }
             if (user.getStatus().getName().equalsIgnoreCase("active")) {
                 return true;

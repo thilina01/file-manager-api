@@ -1,16 +1,24 @@
 package com.trendsmixed.fma.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.appsession.AppSessionView;
-import java.io.Serializable;
-import javax.persistence.Table;
-import javax.persistence.*;
+
+import lombok.Data;
 
 /**
  *
  * @author Thilina
  */
 @Entity
+@Data
 @Table(name = "app_session")
 public class AppSession implements Serializable {
 
@@ -23,6 +31,10 @@ public class AppSession implements Serializable {
     @JsonView(AppSessionView.Ip.class)
     @Column(name = "ip")
     private String ip;
+    @Basic(optional = false)
+    @JsonView(AppSessionView.LoginTimeMills.class)
+    @Column(name = "login_time_mills")
+    private long loginTimeMills;
     @Basic(optional = false)
     @JsonView(AppSessionView.LastTime.class)
     @Column(name = "last_time")
@@ -37,30 +49,6 @@ public class AppSession implements Serializable {
 
     public AppSession(String email, long lastTime) {
         this.email = email;
-        this.lastTime = lastTime;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public long getLastTime() {
-        return lastTime;
-    }
-
-    public void setLastTime(long lastTime) {
         this.lastTime = lastTime;
     }
 

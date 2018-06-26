@@ -3,7 +3,9 @@ package com.trendsmixed.fma.module.appsession;
 import com.trendsmixed.fma.entity.AppSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -31,13 +33,16 @@ public class AppSessionService {
 
     public boolean isValid(HttpServletRequest request) {
         String email = request.getHeader("email");
+        String loginTimeMillsString = request.getHeader("loginTimeMills");
         String uriString = request.getRequestURI();
         String methodString = request.getMethod();
         String remoteAddress = request.getRemoteAddr();
+
         System.out.println("Validating: " + email);
         System.out.println("RequestURI: " + uriString);
         System.out.println("Method: " + methodString);
         System.out.println("RemoteAddress: " + remoteAddress);
+        System.out.println("loginTimeMills: " + loginTimeMillsString);
 
         if (uriString.equalsIgnoreCase("/accounts/login") || methodString.equalsIgnoreCase("OPTIONS")) {
             return true;
@@ -53,14 +58,14 @@ public class AppSessionService {
         if (appSession == null) {
             System.out.println("AppSession is null ");
             return false;
-            //throw new Error("Please Login");
+            // throw new Error("Please Login");
         }
 
         if (!appSession.getIp().equals(remoteAddress)) {
             delete(email);
             System.out.println("IP does not match");
             return false;
-            //throw new Error("Please Login");
+            // throw new Error("Please Login");
         }
 
         appSession.setLastTime(System.currentTimeMillis());

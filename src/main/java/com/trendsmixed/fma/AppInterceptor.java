@@ -1,18 +1,19 @@
 package com.trendsmixed.fma;
 
+import java.nio.charset.StandardCharsets;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trendsmixed.fma.dao.AppError;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
-import com.trendsmixed.fma.module.menu.Menu;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.nio.charset.StandardCharsets;
 
 @Component
 public class AppInterceptor extends HandlerInterceptorAdapter {

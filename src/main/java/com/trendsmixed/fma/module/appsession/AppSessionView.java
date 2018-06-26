@@ -15,4 +15,7 @@ public class AppSessionView {
     public interface LastTime {
     }
 
+    public interface LoginTimeMills {
+    }
+
 }
