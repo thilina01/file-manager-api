@@ -5,7 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+
+import com.trendsmixed.fma.module.section.Section;
 
 @AllArgsConstructor
 @Service
@@ -35,5 +38,13 @@ public class ScrapService {
 
     public void delete(int id) {
         repository.delete(id);
+    }
+
+    public Page<Scrap>findByScrapDateBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByScrapDateBetween(startDate, endDate, pageable);
+    }
+
+    public Page<Scrap> findBySectionAndScrapDateBetween(Section section, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findBySectionAndScrapDateBetween(section, startDate, endDate, pageable);
     }
 }
