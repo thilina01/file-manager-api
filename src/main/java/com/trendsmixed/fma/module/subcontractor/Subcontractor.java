@@ -1,9 +1,13 @@
 package com.trendsmixed.fma.module.subcontractor;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.subcontractoroperation.SubcontractorOperation;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import java.util.List;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -38,9 +42,21 @@ public class Subcontractor implements Serializable {
     @JsonView(SubcontractorView.Contact.class)
     @Column(name = "contact")
     private String contact;
+    @JsonView(SubcontractorView.Validity.class)
+    @Column(name = "validity")
+    private Integer validity;
+    @JsonView(SubcontractorView.SubcontractorOperation.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "subcontractor", fetch = FetchType.LAZY)
+    private List<SubcontractorOperation> subcontractorOperationList;
 
     public Subcontractor(Integer id) {
         this.id = id;
+    }
+
+    @JsonView(SubcontractorView.All.class)
+    public String getDisplay() {
+        return code + " : "+name; 
+        
     }
 
 }
