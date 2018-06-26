@@ -3,6 +3,8 @@ package com.trendsmixed.fma.module.lossreason;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.loss.Loss;
 import com.trendsmixed.fma.module.losstype.LossType;
+import com.trendsmixed.fma.module.subcontractarrivalreject.SubcontractArrivalReject;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -44,6 +46,8 @@ public class LossReason implements Serializable {
     private LossType lossType;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "lossReason")
     private List<Loss> lossList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "lossReason")
+    private List<SubcontractArrivalReject> subcontractArrivalRejectList;
 
     public LossReason(Integer id) {
         this.id = id;

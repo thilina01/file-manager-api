@@ -2,6 +2,8 @@ package com.trendsmixed.fma.module.operationtype;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.operation.Operation;
+import com.trendsmixed.fma.module.subcontractoperationdefinition.SubcontractOperationDefinition;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -36,6 +38,12 @@ public class OperationType implements Serializable {
     private String description;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "operationType")
     private List<Operation> operationList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "operationType")
+    private List<SubcontractOperationDefinition> subcontractOperationDefinition;
+
+    public OperationType(int anId) {
+        this.id = anId;
+    }
 
     @JsonView(OperationTypeView.All.class)
     public String getDisplay() {

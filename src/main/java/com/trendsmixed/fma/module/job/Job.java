@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.jobtype.JobType;
+import com.trendsmixed.fma.module.subcontractoperation.SubcontractOperation;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -52,6 +54,8 @@ public class Job implements Serializable {
     private JobType jobType;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job")
     private List<DispatchSchedule> dispatchScheduleList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job", fetch = FetchType.LAZY)
+    private List<SubcontractOperation> subcontractOperationList;
 
     public Job(Integer id) {
         this.id = id;
