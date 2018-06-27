@@ -27,18 +27,22 @@ public class AppSessionService {
         return appSessionRepository.findOne(email);
     }
 
-    public void delete(String email) {
-        appSessionRepository.delete(email);
+    public AppSession findFirstByLoginTimeMills(long loginTimeMills) {
+        return appSessionRepository.findFirstByLoginTimeMills(loginTimeMills);
+    }
+
+    public long deleteByLoginTimeMills(long loginTimeMills) {
+        return appSessionRepository.deleteByLoginTimeMills(loginTimeMills);
     }
 
     public boolean isValid(HttpServletRequest request) {
-        String email = request.getHeader("email");
+        // String email = request.getHeader("email");
         String loginTimeMillsString = request.getHeader("loginTimeMills");
         String uriString = request.getRequestURI();
         String methodString = request.getMethod();
         String remoteAddress = request.getRemoteAddr();
 
-        System.out.println("Validating: " + email);
+        // System.out.println("Validating: " + email);
         System.out.println("RequestURI: " + uriString);
         System.out.println("Method: " + methodString);
         System.out.println("RemoteAddress: " + remoteAddress);
@@ -48,12 +52,12 @@ public class AppSessionService {
             return true;
         }
 
-        if (email == null || email.equals("")) {
-            System.out.println("Email is blank ");
+        if (loginTimeMillsString == null || loginTimeMillsString.equals("")) {
+            System.out.println("loginTimeMillsString is blank ");
             return false;
         }
 
-        AppSession appSession = findOne(email);
+        AppSession appSession = findFirstByLoginTimeMills(Long.valueOf(loginTimeMillsString));
 
         if (appSession == null) {
             System.out.println("AppSession is null ");
@@ -62,7 +66,7 @@ public class AppSessionService {
         }
 
         if (!appSession.getIp().equals(remoteAddress)) {
-            delete(email);
+            deleteByLoginTimeMills(Long.valueOf(loginTimeMillsString));
             System.out.println("IP does not match");
             return false;
             // throw new Error("Please Login");

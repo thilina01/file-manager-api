@@ -10,8 +10,10 @@ import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.user.UserService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,11 +53,10 @@ public class AccountController {
         return null;
     }
 
-    @PostMapping("/logout")
-    public void logout(@RequestBody UserDao userDao) {
-        appSessionService.delete(userDao.getEmail());
+    @GetMapping("/logout")
+    public long logout( @RequestHeader(value = "loginTimeMills", defaultValue = "") long loginTimeMills) {
+        return appSessionService.deleteByLoginTimeMills(loginTimeMills);
 
-        System.out.println(userDao.getEmail());
     }
 
     private AppSession saveAppSession(String email, String ip) {

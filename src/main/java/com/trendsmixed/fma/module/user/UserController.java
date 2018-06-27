@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.status.Status;
 import com.trendsmixed.fma.module.status.StatusService;
 import com.trendsmixed.fma.utility.MailService;
@@ -23,6 +24,7 @@ public class UserController {
     private final UserService service;
     private final MailService mailService;
     private final StatusService statusService;
+    private final AppSessionService appSessionService;
 
     @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
     @GetMapping
@@ -87,7 +89,8 @@ public class UserController {
 
     @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
     @GetMapping("/own")
-    public User own(@RequestHeader(value = "email", defaultValue = "") String email) {
+    public User own(@RequestHeader(value = "loginTimeMills", defaultValue = "") long loginTimeMills) {
+        String email = appSessionService.findFirstByLoginTimeMills(loginTimeMills).getEmail();
         return service.findByEmail(email);
     }
 

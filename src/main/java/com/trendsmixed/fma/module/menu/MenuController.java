@@ -44,15 +44,15 @@ public class MenuController {
 
     @JsonView(MenuView.AllAndSubMenu.class)
     @GetMapping("/top")
-    public List<Menu> findTop(@RequestHeader(value = "email", defaultValue = "") String email) {
+    public List<Menu> findTop(@RequestHeader(value = "loginTimeMills", defaultValue = "") long loginTimeMills) {
 
-        AppSession appSession = appSessionService.findOne(email);
+        AppSession appSession = appSessionService.findFirstByLoginTimeMills(loginTimeMills);
         List<Menu> menus = new ArrayList<>();
 
         if (appSession != null) {
-            User user = userService.findByEmail(email);
+            User user = userService.findByEmail(appSession.getEmail());
             if (user == null) {
-                appSessionService.delete(email);
+                appSessionService.deleteByLoginTimeMills(loginTimeMills);
                 return null;
             }
 
