@@ -12,8 +12,10 @@ import com.trendsmixed.fma.module.appsession.AppSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 @Component
 public class AppInterceptor extends HandlerInterceptorAdapter {
@@ -38,8 +40,24 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        System.out.println("================PRE=============");
-        System.out.println(handler);
+        if(handler instanceof ResourceHttpRequestHandler){
+            ResourceHttpRequestHandler resourceHttpRequestHandler = (ResourceHttpRequestHandler) handler;
+            System.out.println("================PRE 2=================");
+            System.out.println("resourceHttpRequestHandler : "+resourceHttpRequestHandler);
+            System.out.println("Class : ResourceHttpRequestHandler");
+            System.out.println("================PRE 2 End=============");
+            return false;
+        } 
+
+        if(handler instanceof HandlerMethod){
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            System.out.println("================PRE 1=================");
+            // System.out.println("handlerMethod : "+handlerMethod);
+            // System.out.println("getBean : " + handlerMethod.getBean());
+            System.out.println("getBeanType : " + handlerMethod.getBeanType().getName());
+            System.out.println("================PRE 1 End=============");
+        }
+
         boolean isValid = appSessionService.isValid(request);
         if(!isValid){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

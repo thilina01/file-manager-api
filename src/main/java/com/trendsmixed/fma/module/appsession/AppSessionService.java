@@ -38,17 +38,23 @@ public class AppSessionService {
     public boolean isValid(HttpServletRequest request) {
         // String email = request.getHeader("email");
         String loginTimeMillsString = request.getHeader("loginTimeMills");
-        String uriString = request.getRequestURI();
+        String requestURI = request.getRequestURI();
+        String contextPath = request.getContextPath();
         String methodString = request.getMethod();
         String remoteAddress = request.getRemoteAddr();
-
+        String servletPath = request.getServletPath();
+        String pathInfo = request.getPathInfo();
         // System.out.println("Validating: " + email);
-        System.out.println("RequestURI: " + uriString);
+        // System.out.println("RequestURI: " + requestURI);
+        System.out.println("servletPath: " + servletPath);
+        System.out.println("servletPath split: " + servletPath.split("/")[1]);
+        // System.out.println("contextPath: " + contextPath);
+        // System.out.println("pathInfo: " + pathInfo);
         System.out.println("Method: " + methodString);
         System.out.println("RemoteAddress: " + remoteAddress);
         System.out.println("loginTimeMills: " + loginTimeMillsString);
 
-        if (uriString.toLowerCase().contains("/login") || methodString.equalsIgnoreCase("OPTIONS")) {
+        if (servletPath.toLowerCase().contains("/login") || servletPath.toLowerCase().contains("/error") || methodString.equalsIgnoreCase("OPTIONS")) {
             return true;
         }
 
