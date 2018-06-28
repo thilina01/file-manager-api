@@ -52,7 +52,7 @@ public class SubcontractOperation implements Serializable {
 
     @JsonView(SubcontractOperationView.All.class)
     public String getDisplay() {
-        return job.getJobNo() + " : "+quantity; 
+        return id + " : "; 
         
     }
 
