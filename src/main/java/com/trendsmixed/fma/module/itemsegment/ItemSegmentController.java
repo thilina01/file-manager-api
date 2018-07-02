@@ -37,11 +37,11 @@ public class ItemSegmentController {
 
     @JsonView(ItemSegmentView.All.class)
     @PostMapping
-    public ItemSegment save(@RequestBody ItemSegment customerType) {
+    public ItemSegment save(@RequestBody ItemSegment itemSegment) {
         
         try {
-            customerType = service.save(customerType);
-            return customerType;
+            itemSegment = service.save(itemSegment);
+            return itemSegment;
 
         } catch (Throwable e) {
             while (e.getCause() != null) {
@@ -65,11 +65,11 @@ public class ItemSegmentController {
     }
 
     @PutMapping("/{id}")
-    public ItemSegment updateCustomer(@PathVariable int id, @RequestBody ItemSegment customerType) {
+    public ItemSegment updateCustomer(@PathVariable int id, @RequestBody ItemSegment itemSegment) {
         
-        customerType.setId(id);
-        customerType = service.save(customerType);
-        return customerType;
+        itemSegment.setId(id);
+        itemSegment = service.save(itemSegment);
+        return itemSegment;
     }
 
 }

@@ -26,8 +26,8 @@ public class ItemSegmentService {
         return repository.getCombo();
     }
 
-    public ItemSegment save(ItemSegment customerType) {
-        return repository.save(customerType);
+    public ItemSegment save(ItemSegment itemSegment) {
+        return repository.save(itemSegment);
     }
 
     public ItemSegment findOne(int id) {
