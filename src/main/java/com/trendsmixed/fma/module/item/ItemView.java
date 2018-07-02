@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.item;
 
 import com.trendsmixed.fma.module.itemtype.ItemTypeView;
+import com.trendsmixed.fma.module.itemsegment.ItemSegmentView;
 import com.trendsmixed.fma.module.paint.PaintView;
 import com.trendsmixed.fma.utility.PageView;
 
@@ -48,7 +49,11 @@ public class ItemView {
     public interface CustomerItem {
     }
 
-    public interface All extends Id, Code, Size, Weight, Volume, Description, DrawingVersion, ProductionToolAvailability, DrawingApproval, PageView.All {
+    public interface ItemSegment {
+    }
+
+    public interface All extends Id, Code, Size, Weight, Volume, Description, DrawingVersion,
+            ProductionToolAvailability, DrawingApproval, PageView.All {
     }
 
     public interface AllAndItemTypeAll extends All, ItemType, ItemTypeView.All {
@@ -57,7 +62,14 @@ public class ItemView {
     public static interface AllAndPaintAll extends All, Paint, PaintView.All {
     }
 
+    public static interface AllAndItemSegmentAll extends All, ItemSegment, ItemSegmentView.All {
+    }
+
     public static interface AllAndItemTypeAllAndPaintAll extends All, ItemType, ItemTypeView.All, Paint, PaintView.All {
+    }
+
+    public static interface AllAndItemTypeAllAndPaintAllAndItemSegmentAll
+            extends All, ItemType, ItemTypeView.All, Paint, PaintView.All, ItemSegment, ItemSegmentView.All {
     }
 
 }

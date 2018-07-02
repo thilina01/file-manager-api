@@ -26,13 +26,13 @@ public class ItemController {
     private ItemTypeService itemTypeService;
     private PaintService paintService;
 
-    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAllAndItemSegmentAll.class)
     @GetMapping
     public Iterable<Item> findAll() {
         return service.findAll();
     }
 
-    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAllAndItemSegmentAll.class)
     @GetMapping("/page")
     Page<Item> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -43,7 +43,7 @@ public class ItemController {
         return service.getCombo();
     }
 
-    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAllAndItemSegmentAll.class)
     @PostMapping("/pageByItemType")
     Page<Item> pageByItemType(Pageable pageable, @RequestBody ItemType itemType) {
         if (itemType.getId() == null) {
@@ -52,7 +52,7 @@ public class ItemController {
         return new Page<>(service.findByItemType(itemType, pageable));
     }
 
-    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAllAndItemSegmentAll.class)
     @GetMapping(value = "/itemPage")
     public Page<Item> getItem(
         @RequestParam(value = "code", required = false, defaultValue = "0") String code,
@@ -68,7 +68,7 @@ public class ItemController {
         return page;
     }
 
-    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAllAndItemSegmentAll.class)
     @PostMapping
     public Item save(@RequestBody Item item) {
         
@@ -153,7 +153,7 @@ public class ItemController {
         }
     }
 
-    @JsonView(ItemView.AllAndItemTypeAllAndPaintAll.class)
+    @JsonView(ItemView.AllAndItemTypeAllAndPaintAllAndItemSegmentAll.class)
     @GetMapping("/{id}")
     public Item findOne(@PathVariable("id") int id) {
         return service.findOne(id);
