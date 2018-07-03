@@ -54,7 +54,7 @@ public class AppSessionService {
         System.out.println("RemoteAddress: " + remoteAddress);
         System.out.println("loginTimeMills: " + loginTimeMillsString);
 
-        if (servletPath.toLowerCase().contains("/login") || servletPath.toLowerCase().contains("/error") || methodString.equalsIgnoreCase("OPTIONS")) {
+        if (servletPath.toLowerCase().contains("/login") || servletPath.toLowerCase().contains("/error") || methodString.equalsIgnoreCase("OPTIONS") || (servletPath.toLowerCase().contains("/users") && methodString.equalsIgnoreCase("POST"))) {
             return true;
         }
 
