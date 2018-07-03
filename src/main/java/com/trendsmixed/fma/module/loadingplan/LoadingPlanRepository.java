@@ -22,6 +22,8 @@ public interface LoadingPlanRepository extends PagingAndSortingRepository<Loadin
 
     Iterable<LoadingPlan> findByCustomer(Customer customer);
 
+    Iterable<LoadingPlan> findByDispatchNoteId(int id);
+
     Page<LoadingPlan> findByLoadingPlanDateBetween(Date startDate, Date endDate, Pageable pageable);
 
     Page<LoadingPlan> findByCustomerAndLoadingPlanDateBetween(Customer customer, Date startDate, Date endDate,

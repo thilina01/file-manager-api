@@ -196,7 +196,11 @@ public class DispatchNoteController {
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
-        
+        Iterable<LoadingPlan> loadingPlanList = loadingPlanService.findByDispatchNoteId(id);
+        for (LoadingPlan loadingPlan : loadingPlanList) {
+            loadingPlan.setDispatchNote(null);
+            loadingPlanService.save(loadingPlan);
+        }
         service.delete(id);
 
     }

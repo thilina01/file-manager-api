@@ -43,7 +43,11 @@ public class LoadingPlanService {
     public Iterable<LoadingPlan> findByCustomer(Customer customer) {
         return repository.findByCustomer(customer);
     }
-
+    
+    public Iterable<LoadingPlan> findByDispatchNoteId(int id) {
+        return repository.findByDispatchNoteId(id);
+    }
+    
     public Page<LoadingPlan>findByLoadingPlanDateBetween(Date startDate, Date endDate, Pageable pageable) {
         return repository.findByLoadingPlanDateBetween(startDate, endDate, pageable);
     }
