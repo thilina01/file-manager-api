@@ -24,7 +24,6 @@ import java.util.List;
 @RequestMapping("/operations")
 public class OperationController {
 
-    
     private final OperationService service;
 
     @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
@@ -40,39 +39,28 @@ public class OperationController {
     }
 
     @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
-    @GetMapping(value = "/sectionAndProductionDateAndShiftPage", params = {"section", "productionDate", "shift"})
-    public Page<Operation> sectionAndProductionDateAndShiftPage(@RequestParam("section") String section, @RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
-    }
+    @GetMapping(value = "/sectionAndShiftAndProductionDateBetween")
+    public Page<Operation> getSectionAndShiftAndProductionDateBetweenPage(
+        @RequestParam(value = "section", required = false, defaultValue = "0") String section,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        @RequestParam(value = "shift", required = false, defaultValue = "0") String shift,
+        Pageable pageable) throws ParseException {
+        Page<Operation> page ;
 
-    @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
-    @GetMapping(value = "/sectionAndProductionDurationAndShiftPage", params = {"section", "startDate", "endDate", "shift"})
-    public Page<Operation> sectionAndProductionDurationAndShiftPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetweenAndProductionShift(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
-    }
-
-    @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
-    @GetMapping(value = "/sectionAndProductionDurationPage", params = {"section", "startDate", "endDate"})
-    public Page<Operation> sectionAndProductionDurationPage(@RequestParam("section") String section, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetween(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
-    }
-
-    @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
-    @GetMapping(value = "/productionDateAndShiftPage", params = {"productionDate", "shift"})
-    public Page<Operation> productionDateAndShiftPage(@RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionProductionDateAndProductionShift(Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
-    }
-
-    @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
-    @GetMapping(value = "/productionDurationAndShiftPage", params = {"startDate", "endDate", "shift"})
-    public Page<Operation> productionDurationAndShiftPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionProductionDateBetweenAndProductionShift(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
-    }
-
-    @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
-    @GetMapping(value = "/productionDurationPage", params = {"startDate", "endDate"})
-    public Page<Operation> productionDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionProductionDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        if(section.equals("0") && shift.equals("0") ){
+            page = new Page(service.findByProductionProductionDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(section.equals("0")){
+            page = new Page(service.findByProductionProductionDateBetweenAndProductionShift(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
+        }
+        else if(shift.equals("0")){
+            page = new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetween(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else{
+            page = new Page(service.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetweenAndProductionShift(new Section(Integer.valueOf(section)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
+        }
+        return page;
     }
 
     @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)

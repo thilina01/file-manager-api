@@ -47,21 +47,12 @@ public class OperationService {
         return repository.test(startDate, endDate);
     }
 
-    public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(Section section, Date date, Shift shift, Pageable pageable) {
-        return repository.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateAndProductionShift(section, date, shift, pageable);
-
-    }
-
     public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetweenAndProductionShift(Section section, Date startDate, Date endDate, Shift shift, Pageable pageable) {
         return repository.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetweenAndProductionShift(section, startDate, endDate, shift, pageable);
     }
 
     public Page<Operation> findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetween(Section section, Date startDate, Date endDate, Pageable pageable) {
         return repository.findByProductionControlPointWorkCenterCostCenterSectionAndProductionProductionDateBetween(section, startDate, endDate, pageable);
-    }
-
-    public Page<Operation> findByProductionProductionDateAndProductionShift(Date date, Shift shift, Pageable pageable) {
-        return repository.findByProductionProductionDateAndProductionShift(date, shift, pageable);
     }
 
     public Page<Operation> findByProductionProductionDateBetweenAndProductionShift(Date startDate, Date endDate, Shift shift, Pageable pageable) {
