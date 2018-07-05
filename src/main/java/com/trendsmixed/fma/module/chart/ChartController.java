@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.chart;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.BreakdownChart;
+import com.trendsmixed.fma.dao.BreakdownSixMonthsChart;
 import com.trendsmixed.fma.dao.view.*;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.customer.Customer;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -196,6 +199,55 @@ public class ChartController {
         }
         return breakdownChartList;
     }
+
+    @GetMapping("/breakdownSixMonths")
+    public List<BreakdownSixMonthsChart> getBreakdownSixMonths() {
+        List<BreakdownSixMonthsChart> BreakdownSixMonthsChartData = new ArrayList<>();
+        for (Object object : chartService.getBreakdownSixMonths()) {
+            Object[] rowData = (Object[]) object;
+            BreakdownSixMonthsChartData.add(
+                new BreakdownSixMonthsChart(
+                    rowData[0].toString(),
+                    (Number)rowData[1], 
+                    (Number)rowData[2], 
+                    (Number)rowData[3], 
+                    (Number)rowData[4], 
+                    (Number)rowData[5], 
+                    (Number)rowData[6]
+                )
+            );
+        }
+        return BreakdownSixMonthsChartData;
+    }
+
+    // @GetMapping("/breakdown6Months")
+    // public Map<String,Double> getBreakdown6Months() {
+
+    //     List<BreakdownChart> breakdownChartList =getBreakdown("2018-05-01", "2018-05-31");
+    //     double totalRunDuration = 0;
+    //     double totalBreakdownDuration = 0;
+    //     double totalBreakdownCount = 0;
+    //     // double totalMTBF = 0;
+    //     // double totalMTTR = 0;
+    //     // double totalMDT = 0;
+
+    //     for (BreakdownChart breakdownChart : breakdownChartList) {
+    //         totalRunDuration += breakdownChart.getRunDuration();
+    //         totalBreakdownDuration += breakdownChart.getBreakdownDuration();
+    //         totalBreakdownCount += breakdownChart.getBreakdownCount();
+    //         // totalMTBF += breakdownChart.getMtbf();
+    //         // totalMTTR += breakdownChart.getMttr();
+    //         // totalMDT += breakdownChart.getMdt();            
+    //     }
+    //     Map<String,Double> result = new HashMap<>();
+    //     result.put("totalRunDuration", totalRunDuration);
+    //     result.put("totalBreakdownDuration", totalBreakdownDuration);
+    //     result.put("totalBreakdownCount", totalBreakdownCount);
+    //     result.put("MTBF", totalRunDuration/totalBreakdownCount);
+    //     result.put("totalMTTR", totalBreakdownDuration/totalBreakdownCount);
+    //     result.put("totalMDT", (totalBreakdownDuration/totalRunDuration)*100);
+    //     return result;
+    // }
 
 //    @GetMapping("/test")
 //    public List test(@RequestParam(value = "startDate") String startDateText,

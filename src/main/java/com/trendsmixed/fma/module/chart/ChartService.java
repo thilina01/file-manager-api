@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.chart;
 
+import com.trendsmixed.fma.dao.BreakdownSixMonthsChart;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.location.Location;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @Service
@@ -97,6 +99,10 @@ public class ChartService {
 
     public List getBreakdown(Date startDate, Date endDate) {
         return chartRepository.getBreakdown(startDate, endDate);
+    }
+
+    public List getBreakdownSixMonths() {
+        return chartRepository.getBreakdownSixMonths();
     }
 
     public List getManpowerSummary(Date startDate, Date endDate) {
