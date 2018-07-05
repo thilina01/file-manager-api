@@ -45,10 +45,6 @@ public class DispatchNoteService {
         repository.delete(id);
     }
 
-    // public List<Combo> getComboByCustomer(Customer customer) {
-    //     return repository.getComboByCustomer(customer);
-    // }
-
     public Iterable<DispatchNote> findByCustomer(Customer customer) {
         return repository.findByCustomer(customer);
     }
@@ -59,29 +55,20 @@ public class DispatchNoteService {
     public DispatchNote findById(String id) {
         return repository.findById(id);
     }
-
+    
     public Page<DispatchNote> findByDispatchDateBetween(Date startDate, Date endDate, Pageable pageable) {
         return repository.findByDispatchDateBetween(startDate, endDate, pageable);
+    }
 
-    }
-    public Page<DispatchNote> findByDispatchDateAndLocation(Date date, Location location, Pageable pageable) {
-        return repository.findByDispatchDateAndLocation(date, location, pageable);
-    }
     public Page<DispatchNote> findByDispatchDateBetweenAndLocation(Date startDate, Date endDate, Location location, Pageable pageable) {
         return repository.findByDispatchDateBetweenAndLocation(startDate, endDate, location, pageable);
     }
     public Page<DispatchNote> findByCustomerAndDispatchDateBetween(Customer customer, Date startDate, Date endDate, Pageable pageable) {
         return repository.findByCustomerAndDispatchDateBetween(customer, startDate, endDate, pageable);
     }
-    public Page<DispatchNote> findByCustomerAndDispatchDateAndLocation(Customer customer, Date date, Location location, Pageable pageable) {
-        return repository.findByCustomerAndDispatchDateAndLocation(customer, date, location, pageable);
-
-    }
+   
     public Page<DispatchNote> findByCustomerAndDispatchDateBetweenAndLocation(Customer customer, Date startDate, Date endDate, Location location, Pageable pageable) {
         return repository.findByCustomerAndDispatchDateBetweenAndLocation(customer, startDate, endDate, location, pageable);
     }
-    public Page<DispatchNote> findByDispatchDateAndCustomer(Date date, Customer customer, Pageable pageable) {
-        return repository.findByDispatchDateAndCustomer(date, customer, pageable);
-    }
- 
+    
 }

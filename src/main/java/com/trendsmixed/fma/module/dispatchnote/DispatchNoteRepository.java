@@ -14,9 +14,10 @@ import java.util.List;
 
 public interface DispatchNoteRepository extends PagingAndSortingRepository<DispatchNote, Integer> {
 
-        @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, CONCAT(o.id,''),'')" + " FROM DispatchNote o")
+        @Query(value = "SELECT" + " new com.trendsmixed.fma.dao.Combo(o.id, CONCAT(o.id,''),'')"
+                        + " FROM DispatchNote o")
         List<Combo> getCombo();
-        
+
         Iterable<DispatchNote> findByCustomer(Customer customer);
 
         Iterable<DispatchNote> findByCustomerAndInvoiceIsNull(Customer customer);
@@ -29,20 +30,13 @@ public interface DispatchNoteRepository extends PagingAndSortingRepository<Dispa
 
         Page<DispatchNote> findByDispatchDateBetween(Date startDate, Date endDate, Pageable pageable);
 
-        Page<DispatchNote> findByDispatchDateAndLocation(Date date, Location location, Pageable pageable);
-
         Page<DispatchNote> findByDispatchDateBetweenAndLocation(Date startDate, Date endDate, Location location,
                         Pageable pageable);
 
         Page<DispatchNote> findByCustomerAndDispatchDateBetween(Customer customer, Date startDate, Date endDate,
                         Pageable pageable);
 
-        Page<DispatchNote> findByCustomerAndDispatchDateAndLocation(Customer customer, Date date, Location location,
-                        Pageable pageable);
-
         Page<DispatchNote> findByCustomerAndDispatchDateBetweenAndLocation(Customer customer, Date startDate,
                         Date endDate, Location location, Pageable pageable);
-
-        Page<DispatchNote> findByDispatchDateAndCustomer(Date date, Customer customer, Pageable pageable);
 
 }
