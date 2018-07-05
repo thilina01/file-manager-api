@@ -30,87 +30,41 @@ public class ResourceUtilizationController {
     }
 
     @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/productionDateAndShiftPage", params = {"productionDate", "shift"})
-    public Page<ResourceUtilization> productionDateAndShiftPage(@RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionProductionDateAndProductionShift(Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
-    }
+    @GetMapping(value = "/machineAndEmployeeAndShiftAndProductionDateBetween")
+    public Page<ResourceUtilization> getMachineAndEmployeeAndShiftAndProductionDateBetweenPage(
+        @RequestParam(value = "machine", required = false, defaultValue = "0") String machine,
+        @RequestParam(value = "employee", required = false, defaultValue = "0") String employee,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        @RequestParam(value = "shift", required = false, defaultValue = "0") String shift,
+        Pageable pageable) throws ParseException {
+        Page<ResourceUtilization> page ;
 
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/productionDurationAndShiftPage", params = {"startDate", "endDate", "shift"})
-    public Page<ResourceUtilization> productionDurationAndShiftPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionProductionDateBetweenAndProductionShift(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/productionDurationPage", params = {"startDate", "endDate"})
-    public Page<ResourceUtilization> productionDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionProductionDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/productionDurationAndEmployeePage", params = {"startDate", "endDate", "employee"})
-    public Page<ResourceUtilization> productionDurationAndEmployeePage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("employee") String employee, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionProductionDateBetweenAndEmployee(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Employee(Integer.valueOf(employee)), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/productionDateAndEmployeePage", params = {"productionDate", "employee"})
-    public Page<ResourceUtilization> productionDateAndEmployeePage(@RequestParam("productionDate") String productionDate, @RequestParam("employee") String employee, Pageable pageable) throws ParseException {
-        return new Page(service.findByProductionProductionDateAndEmployee(Format.yyyy_MM_dd.parse(productionDate), new Employee(Integer.valueOf(employee)), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/machineAndProductionDurationPage", params = {"machine", "startDate", "endDate"})
-    public Page<ResourceUtilization> machineAndProductionDurationPage(@RequestParam("machine") String machine, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
-        return new Page(service.findByMachineAndProductionProductionDateBetween(new Machine(Integer.valueOf(machine)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/machineAndEmployeeAndProductionDateAndShiftPage", params = {"machine", "productionDate", "shift", "employee"})
-    public Page<ResourceUtilization> machineAndEmployeeAndProductionDateAndShiftPage(@RequestParam("machine") String machine, @RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, @RequestParam("employee") String employee, Pageable pageable) throws ParseException {
-        return new Page(service.findByMachineAndEmployeeAndProductionProductionDateAndProductionShift(new Machine(Integer.valueOf(machine)), Format.yyyy_MM_dd.parse(productionDate),  new Employee(Integer.valueOf(employee)),new Shift(Integer.valueOf(shift)), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/machineAndEmployeeAndProductionDurationAndShiftPage", params = {"machine","employee", "startDate", "endDate", "shift"})
-    public Page<ResourceUtilization> machineAndEmployeeAndProductionDurationAndShiftPage(@RequestParam("machine") String machine,@RequestParam("employee") String employee, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,  @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-        return new Page(service.findByMachineAndEmployeeAndProductionProductionDateBetweenAndProductionShift(new Machine(Integer.valueOf(machine)),new Employee(Integer.valueOf(employee)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/machineAndProductionDateAndShiftPage", params = {"machine", "productionDate", "shift"})
-    public Page<ResourceUtilization> machineAndProductionDateAndShiftPage(@RequestParam("machine") String machine, @RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-        return new Page(service.findByMachineAndProductionProductionDateAndProductionShift(new Machine(Integer.valueOf(machine)), Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/machineAndProductionDurationAndShiftPage", params = {"machine", "startDate", "endDate", "shift"})
-    public Page<ResourceUtilization> machineAndProductionDurationAndShiftPage(@RequestParam("machine") String machine, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-        return new Page(service.findByMachineAndProductionProductionDateBetweenAndProductionShift(new Machine(Integer.valueOf(machine)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)   
-    @GetMapping(value = "/machineAndProductionDateAndEmployeePage", params = {"machine", "productionDate", "employee"})
-    public Page<ResourceUtilization> machineAndProductionDateAndEmployeePage(@RequestParam("machine") String machine, @RequestParam("productionDate") String productionDate, @RequestParam("employee") String employee, Pageable pageable) throws ParseException {
-       return new Page(service.findByMachineAndProductionProductionDateAndEmployee(new Machine(Integer.valueOf(machine)), Format.yyyy_MM_dd.parse(productionDate), new Employee(Integer.valueOf(employee)), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/machineAndProductionDurationAndEmployeePage", params = {"machine", "startDate", "endDate", "employee"})
-    public Page<ResourceUtilization> machineAndProductionDurationAndEmployeePage(@RequestParam("machine") String machine, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("employee") String employee, Pageable pageable) throws ParseException {
-       return new Page(service.findByMachineAndProductionProductionDateBetweenAndEmployee(new Machine(Integer.valueOf(machine)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Employee(Integer.valueOf(employee)), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/employeeAndProductionDateAndShiftPage", params = {"employee", "productionDate", "shift"})
-    public Page<ResourceUtilization> employeeAndProductionDateAndShiftPage(@RequestParam("employee") String employee, @RequestParam("productionDate") String productionDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-       return new Page(service.findByEmployeeAndProductionProductionDateAndProductionShift(new Employee(Integer.valueOf(employee)), Format.yyyy_MM_dd.parse(productionDate), new Shift(Integer.valueOf(shift)), pageable));
-    }
-
-    @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
-    @GetMapping(value = "/employeeAndProductionDurationAndShiftPage", params = {"employee", "startDate", "endDate", "shift"})
-    public Page<ResourceUtilization> employeeAndProductionDurationAndShiftPage(@RequestParam("employee") String employee, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("shift") String shift, Pageable pageable) throws ParseException {
-       return new Page(service.findByEmployeeAndProductionProductionDateBetweenAndProductionShift(new Employee(Integer.valueOf(employee)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
+        if(machine.equals("0") && employee.equals("0") && shift.equals("0") ){
+            page = new Page(service.findByProductionProductionDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(machine.equals("0") && employee.equals("0")){
+            page = new Page(service.findByProductionProductionDateBetweenAndProductionShift(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
+        }
+        else if(employee.equals("0") && shift.equals("0")){
+            page = new Page(service.findByMachineAndProductionProductionDateBetween(new Machine(Integer.valueOf(machine)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(shift.equals("0") && machine.equals("0")){
+            page = new Page(service.findByProductionProductionDateBetweenAndEmployee(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Employee(Integer.valueOf(employee)), pageable));
+        }
+        else if(machine.equals("0")){
+            page = new Page(service.findByEmployeeAndProductionProductionDateBetweenAndProductionShift(new Employee(Integer.valueOf(employee)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
+        }
+        else if(employee.equals("0")){
+            page = new Page(service.findByMachineAndProductionProductionDateBetweenAndProductionShift(new Machine(Integer.valueOf(machine)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
+        }
+        else if(shift.equals("0")){
+            page = new Page(service.findByMachineAndProductionProductionDateBetweenAndEmployee(new Machine(Integer.valueOf(machine)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Employee(Integer.valueOf(employee)), pageable));
+        }
+        else{
+            page = new Page(service.findByMachineAndEmployeeAndProductionProductionDateBetweenAndProductionShift(new Machine(Integer.valueOf(machine)),new Employee(Integer.valueOf(employee)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Shift(Integer.valueOf(shift)), pageable));
+        }
+        return page;
     }
 
     @JsonView(ResourceUtilizationView.AllAndProductionAndShiftAndControlPointAllAndEmployeeAllAndMachineAllAndAllAndControlPointAllWorkCenterCostCenterSection.class)
