@@ -13,10 +13,13 @@ public class LocationView {
     public interface Name {
     }
 
+    public interface Address {
+    }
+
     public interface DispatchNote {
     }
 
-    public interface All extends Id, Code, Name, PageView.All {
+    public interface All extends Id, Code, Name,Address, PageView.All {
 
     }
 

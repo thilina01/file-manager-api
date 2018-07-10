@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.producttype;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.internaltransferitem.InternalTransferItem;
 import com.trendsmixed.fma.module.operation.Operation;
 import com.trendsmixed.fma.module.subcontractoperationdefinition.SubcontractOperationDefinition;
 
@@ -40,7 +41,8 @@ public class ProductType implements Serializable {
     private List<Operation> operationList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "productType")
     private List<SubcontractOperationDefinition> subcontractOperationDefinition;
-
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "productType")
+    private List<InternalTransferItem> internalTransferItemList;
     public ProductType(int anId) {
         this.id = anId;
     }
