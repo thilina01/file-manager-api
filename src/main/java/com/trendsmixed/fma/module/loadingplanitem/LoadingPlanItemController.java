@@ -148,7 +148,7 @@ public class LoadingPlanItemController {
 
     @JsonView(LoadingPlanItemView.AllAndLoadingPlanAndDispatchNoteAndInvoiceAndCustomerAndInvoiceTypeAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem.class)
     @GetMapping(value = "/invoiceInformation")
-    public Page<Invoice> getInvoiceInformationPage(
+    public Page<LoadingPlanItem> getInvoiceInformationPage(
         @RequestParam(value = "invoice", required = false, defaultValue = "0") String invoice,
         @RequestParam(value = "invoiceNumber", required = false, defaultValue = "0") String invoiceNumber,
         @RequestParam(value = "customer", required = false, defaultValue = "0") String customer,
@@ -156,7 +156,7 @@ public class LoadingPlanItemController {
         @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
         @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
         Pageable pageable) throws ParseException {
-        Page<Invoice> page ;
+        Page<LoadingPlanItem> page ;
 
     if(!invoice.equals("0")) {
             page = new Page(service.findByLoadingPlanDispatchNoteInvoiceNotNull( pageable));
