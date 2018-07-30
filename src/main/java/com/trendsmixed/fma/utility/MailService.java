@@ -53,7 +53,7 @@ public class MailService {
                 // Step1
                 System.out.println("\n 1st ===> setup Mail Server Properties..");
                 mailServerProperties = System.getProperties();
-                mailServerProperties.put("mail.smtp.port", mailConfiguration.getPort());//"587"
+                mailServerProperties.put("mail.smtp.port", mailConfiguration.getPort());// "587"
                 mailServerProperties.put("mail.smtp.auth", "true");
                 mailServerProperties.put("mail.smtp.starttls.enable", "true");
                 System.out.println("Mail Server Properties have been setup successfully..");
@@ -63,8 +63,12 @@ public class MailService {
                 getMailSession = Session.getDefaultInstance(mailServerProperties, null);
                 generateMailMessage = new MimeMessage(getMailSession);
                 generateMailMessage.setFrom(new InternetAddress("admin.lanka@otrwheel.com", "System Administrator"));
+                if (emailList.size() == 1) {
+                    generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailList.get(0)));
+                } else {
                 for (String email : emailList) {
-                    generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+                        generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress(email));
+                    }
                 }
                 generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("r.thilina@gmail.com"));
                 generateMailMessage.setSubject(subject);
