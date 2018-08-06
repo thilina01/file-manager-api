@@ -46,6 +46,9 @@ public class SalesOrderItem implements Serializable {
     @JsonView(SalesOrderItemView.Amount.class)
     @Column(name = "amount")
     private Double amount;
+    @JsonView(SalesOrderItemView.Remarks.class)
+    @Column(name = "remarks")
+    private String remarks;
     @JsonView(SalesOrderItemView.CustomerItem.class)
     @JoinColumn(name = "customer_item_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
