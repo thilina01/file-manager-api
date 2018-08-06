@@ -62,7 +62,7 @@ public class SubcontractOperationController {
         }
     }
 
-    @JsonView(SubcontractOperationView.AllAndSubcontractNote.class)
+    @JsonView(SubcontractOperationView.AllJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndItemAndOperationTypeAndProductTypeAndSubcontractArrival.class)
     @GetMapping("/subcontractNote/{id}")
     public Iterable<SubcontractOperation> findBySubcontractNote(@PathVariable("id") int id) {
         return service.findBySubcontractNote(new SubcontractNote(id));

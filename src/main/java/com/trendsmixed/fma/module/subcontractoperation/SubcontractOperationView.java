@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.subcontractoperation;
 
 import com.trendsmixed.fma.utility.PageView;
+import com.trendsmixed.fma.module.subcontractarrival.SubcontractArrivalView;
 import com.trendsmixed.fma.module.subcontractnote.SubcontractNoteView;
 import com.trendsmixed.fma.module.subcontractoperationdefinition.SubcontractOperationDefinitionView.AllAndItemAll;
 import com.trendsmixed.fma.module.subcontractoperationdefinition.SubcontractOperationDefinitionView.AllAndOperationType;
@@ -27,6 +28,9 @@ public class SubcontractOperationView {
         public interface SubcontractNote {
         }
 
+        public interface SubcontractArrival {
+        }
+
         public interface Job {
         }
 
@@ -34,6 +38,9 @@ public class SubcontractOperationView {
         }
 
         public interface AllAndSubcontractNote extends All, SubcontractNote, SubcontractNoteView.All {
+        }
+
+        public interface AllAndSubcontractArrival extends All, SubcontractArrival, SubcontractArrivalView.All {
         }
 
         public interface AllAndSubcontractOperationRate
@@ -64,6 +71,15 @@ public class SubcontractOperationView {
                         extends All, AllAndSubcontractOperationRate, AllAndJob, AllAndSubcontractOperationDefinition {
         }
 
-       
+        public interface AllJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndItemAndOperationTypeAndProductType
+                        extends All, SubcontractOperationRate,
+                        SubcontractOperationRateView.AllAndSubcontractorOperationAndSubcontractOperationDefinitionAndItemAndOperationTypeAndProductTypeAndSubcontractor,
+                        AllAndOperationType, AllAndProductType, AllAndItemAll, AllAndJob {
+        }
+        public interface AllJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndItemAndOperationTypeAndProductTypeAndSubcontractArrival
+                        extends All, SubcontractOperationRate,
+                        SubcontractOperationRateView.AllAndSubcontractorOperationAndSubcontractOperationDefinitionAndItemAndOperationTypeAndProductTypeAndSubcontractor,
+                        AllAndOperationType, AllAndProductType, AllAndItemAll, AllAndJob,AllAndSubcontractArrival {
+        }
 
 }

@@ -47,8 +47,13 @@ public class SubcontractOperation implements Serializable {
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Job job;
+    @JsonView(SubcontractOperationView.SubcontractArrival.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "subcontractOperation")
     private List<SubcontractArrival> subcontractArrivalList;
+
+    public SubcontractOperation(Integer id) {
+        this.id = id;
+    }
 
     @JsonView(SubcontractOperationView.All.class)
     public String getDisplay() {

@@ -42,26 +42,6 @@ public class SubcontractArrivalController {
         }
     }
 
-    // @PostMapping("/release")
-    // public SubcontractArrival saveReleaseInformation(@RequestBody SubcontractArrival subcontractArrival, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-    //     appSessionService.isValid(email, request);
-    //     try {
-    //         SubcontractArrival existingSubcontractArrival = service.findOne(subcontractArrival.getId());
-    //         existingSubcontractArrival.setRecipient(subcontractArrival.getRecipient());
-    //         existingSubcontractArrival.setContainerNumber(subcontractArrival.getContainerNumber());
-    //         existingSubcontractArrival.setVehicleNumber(subcontractArrival.getVehicleNumber());
-    //         existingSubcontractArrival.setSubcontractReleaseTime(subcontractArrival.getSubcontractReleaseTime());
-    //         existingSubcontractArrival.setLocation(subcontractArrival.getLocation());
-    //         return service.save(existingSubcontractArrival);
-
-    //     } catch (Throwable e) {
-    //         while (e.getCause() != null) {
-    //             e = e.getCause();
-    //         }
-    //         throw new Error(e.getMessage());
-    //     }
-    // }
-
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();

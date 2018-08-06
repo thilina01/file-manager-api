@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.subcontractarrival;
 
 import com.trendsmixed.fma.dao.Combo;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -42,5 +43,5 @@ public class SubcontractArrivalService {
     public void delete(int id) {
         repository.delete(id);
     }
-   
+
 }
