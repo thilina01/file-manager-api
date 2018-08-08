@@ -33,6 +33,9 @@ public class LoadingPlanItemView {
         public interface RejectedQuantity {
         }
 
+        public interface UnitPrice {
+        }
+
         public interface PackagingSpecification {
         }
 
@@ -42,7 +45,7 @@ public class LoadingPlanItemView {
         public interface LoadingPlan {
         }
 
-        public interface All extends Id, CubicMeter, Quantity, RejectedQuantity, PageView.All {
+        public interface All extends Id, CubicMeter, UnitPrice, Quantity, RejectedQuantity, PageView.All {
         }
 
         public interface AllAndPackagingSpecification

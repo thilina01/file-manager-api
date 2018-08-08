@@ -38,6 +38,9 @@ public class LoadingPlanItem implements Serializable {
     @JsonView(LoadingPlanItemView.RejectedQuantity.class)
     @Column(name = "rejected_quantity")
     private Double rejectedQuantity;
+    @JsonView(LoadingPlanItemView.UnitPrice.class)
+    @Column(name = "unit_price")
+    private Double unitPrice;
     @JsonView(LoadingPlanItemView.DispatchSchedule.class)
     @JoinColumn(name = "dispatch_schedule_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
