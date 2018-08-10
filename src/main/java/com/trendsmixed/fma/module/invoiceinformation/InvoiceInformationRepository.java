@@ -23,11 +23,11 @@ public interface InvoiceInformationRepository extends JpaRepository<com.trendsmi
                         + " loadingPlanItem.dispatchSchedule.job.item.description,"
                         + " loadingPlanItem.dispatchSchedule.job.jobNo,"
                         + " loadingPlanItem.dispatchSchedule.job.item.weight,"
-                        + " loadingPlanItem.dispatchSchedule.salesOrderItem.unitPrice,"
+                        + " ( CASE WHEN loadingPlanItem.unitPrice != null THEN loadingPlanItem.unitPrice ELSE loadingPlanItem.dispatchSchedule.salesOrderItem.unitPrice END ),"
                         + " SUM(loadingPlanItem.rejectedQuantity)," + " SUM(loadingPlanItem.quantity))"
                         + " FROM LoadingPlanItem loadingPlanItem"
                         + " WHERE loadingPlanItem.loadingPlan.dispatchNote.invoice.invoiceDate BETWEEN :startDate AND :endDate"
-                        + " GROUP BY loadingPlanItem.loadingPlan.dispatchNote.invoice, loadingPlanItem.dispatchSchedule.job, loadingPlanItem.dispatchSchedule.salesOrderItem")
+                        + " GROUP BY loadingPlanItem.loadingPlan.dispatchNote.invoice, loadingPlanItem.dispatchSchedule.job, loadingPlanItem.dispatchSchedule.salesOrderItem, loadingPlanItem.unitPrice")
         Page<InvoiceInformation> getInvoiceInformationByDateBetween(@Param("startDate") Date startDate,
                         @Param("endDate") Date endDate, Pageable pageable);
 
@@ -43,11 +43,11 @@ public interface InvoiceInformationRepository extends JpaRepository<com.trendsmi
                         + " loadingPlanItem.dispatchSchedule.job.item.description,"
                         + " loadingPlanItem.dispatchSchedule.job.jobNo,"
                         + " loadingPlanItem.dispatchSchedule.job.item.weight,"
-                        + " loadingPlanItem.dispatchSchedule.salesOrderItem.unitPrice,"
+                        + " ( CASE WHEN loadingPlanItem.unitPrice != null THEN loadingPlanItem.unitPrice ELSE loadingPlanItem.dispatchSchedule.salesOrderItem.unitPrice END ),"
                         + " SUM(loadingPlanItem.rejectedQuantity)," + " SUM(loadingPlanItem.quantity))"
                         + " FROM LoadingPlanItem loadingPlanItem"
                         + " WHERE loadingPlanItem.loadingPlan.dispatchNote.invoice.invoiceDate BETWEEN :startDate AND :endDate AND loadingPlanItem.loadingPlan.dispatchNote.invoice.customer.id = :customerId"
-                        + " GROUP BY loadingPlanItem.loadingPlan.dispatchNote.invoice, loadingPlanItem.dispatchSchedule.job, loadingPlanItem.dispatchSchedule.salesOrderItem")
+                        + " GROUP BY loadingPlanItem.loadingPlan.dispatchNote.invoice, loadingPlanItem.dispatchSchedule.job, loadingPlanItem.dispatchSchedule.salesOrderItem, loadingPlanItem.unitPrice")
 
         Page<InvoiceInformation> getInvoiceInformationByCustomerId(@Param("startDate") Date startDate,
                         @Param("endDate") Date endDate, @Param("customerId") Integer customerId, Pageable pageable);
@@ -64,11 +64,11 @@ public interface InvoiceInformationRepository extends JpaRepository<com.trendsmi
                         + " loadingPlanItem.dispatchSchedule.job.item.description,"
                         + " loadingPlanItem.dispatchSchedule.job.jobNo,"
                         + " loadingPlanItem.dispatchSchedule.job.item.weight,"
-                        + " loadingPlanItem.dispatchSchedule.salesOrderItem.unitPrice,"
+                        + " ( CASE WHEN loadingPlanItem.unitPrice != null THEN loadingPlanItem.unitPrice ELSE loadingPlanItem.dispatchSchedule.salesOrderItem.unitPrice END ),"
                         + " SUM(loadingPlanItem.rejectedQuantity)," + " SUM(loadingPlanItem.quantity))"
                         + " FROM LoadingPlanItem loadingPlanItem"
                         + " WHERE loadingPlanItem.loadingPlan.dispatchNote.invoice.invoiceDate BETWEEN :startDate AND :endDate AND loadingPlanItem.dispatchSchedule.job.id = :jobId "
-                        + " GROUP BY loadingPlanItem.loadingPlan.dispatchNote.invoice, loadingPlanItem.dispatchSchedule.job, loadingPlanItem.dispatchSchedule.salesOrderItem")
+                        + " GROUP BY loadingPlanItem.loadingPlan.dispatchNote.invoice, loadingPlanItem.dispatchSchedule.job, loadingPlanItem.dispatchSchedule.salesOrderItem, loadingPlanItem.unitPrice")
 
         Page<InvoiceInformation> getInvoiceInformationByJobId(@Param("startDate") Date startDate,
                         @Param("endDate") Date endDate, @Param("jobId") Integer jobId, Pageable pageable);
@@ -84,11 +84,11 @@ public interface InvoiceInformationRepository extends JpaRepository<com.trendsmi
                         + " loadingPlanItem.dispatchSchedule.job.item.description,"
                         + " loadingPlanItem.dispatchSchedule.job.jobNo,"
                         + " loadingPlanItem.dispatchSchedule.job.item.weight,"
-                        + " loadingPlanItem.dispatchSchedule.salesOrderItem.unitPrice,"
+                        + " ( CASE WHEN loadingPlanItem.unitPrice != null THEN loadingPlanItem.unitPrice ELSE loadingPlanItem.dispatchSchedule.salesOrderItem.unitPrice END ),"
                         + " SUM(loadingPlanItem.rejectedQuantity)," + " SUM(loadingPlanItem.quantity))"
                         + " FROM LoadingPlanItem loadingPlanItem"
                         + " WHERE loadingPlanItem.loadingPlan.dispatchNote.invoice.invoiceNumber = :invoiceNumber "
-                        + " GROUP BY loadingPlanItem.loadingPlan.dispatchNote.invoice, loadingPlanItem.dispatchSchedule.job, loadingPlanItem.dispatchSchedule.salesOrderItem")
+                        + " GROUP BY loadingPlanItem.loadingPlan.dispatchNote.invoice, loadingPlanItem.dispatchSchedule.job, loadingPlanItem.dispatchSchedule.salesOrderItem, loadingPlanItem.unitPrice")
 
         Page<InvoiceInformation> getInvoiceInformationByInvoiceNumber(@Param("invoiceNumber") String invoiceNumber,
                         Pageable pageable);
