@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.subcontractor;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.subcontractoroperation.SubcontractorOperation;
+import com.trendsmixed.fma.module.subcontractreworknote.SubcontractReworkNote;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -48,6 +49,8 @@ public class Subcontractor implements Serializable {
     @JsonView(SubcontractorView.SubcontractorOperation.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "subcontractor", fetch = FetchType.LAZY)
     private List<SubcontractorOperation> subcontractorOperationList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "subcontractor", fetch = FetchType.LAZY)
+    private List<SubcontractReworkNote> subcontractReworkNoteList;
 
     public Subcontractor(Integer id) {
         this.id = id;

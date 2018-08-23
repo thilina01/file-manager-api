@@ -1,7 +1,11 @@
 package com.trendsmixed.fma.module.subcontractarrival;
 
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.subcontractnote.SubcontractNote;
+import com.trendsmixed.fma.module.subcontractor.Subcontractor;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -43,5 +47,25 @@ public class SubcontractArrivalService {
     public void delete(int id) {
         repository.delete(id);
     }
+    
+    public Iterable<SubcontractArrival> findBySubcontractOperationSubcontractNote(SubcontractNote subcontractNote) {
+        return repository.findBySubcontractOperationSubcontractNote(subcontractNote);
+    }
+   
+    public Page<SubcontractArrival>findByArrivalTimeBetween(Date startDate, Date endDate, Pageable pageable) {
+        return repository.findByArrivalTimeBetween(startDate, endDate, pageable);
 
+    }
+    
+    public Page<SubcontractArrival> findBySubcontractOperationSubcontractOperationRateSubcontractorOperationSubcontractorAndArrivalTimeBetween(Subcontractor subcontractor, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findBySubcontractOperationSubcontractOperationRateSubcontractorOperationSubcontractorAndArrivalTimeBetween(subcontractor, startDate, endDate, pageable);
+    }
+
+    public Page<SubcontractArrival> findBySubcontractOperationJobAndArrivalTimeBetween(Job job, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findBySubcontractOperationJobAndArrivalTimeBetween(job, startDate, endDate, pageable);
+    }
+
+    public Page<SubcontractArrival> findBySubcontractOperationSubcontractOperationRateSubcontractorOperationSubcontractorAndSubcontractOperationJobAndArrivalTimeBetween(Subcontractor subcontractor,Job job, Date startDate, Date endDate, Pageable pageable) {
+        return repository.findBySubcontractOperationSubcontractOperationRateSubcontractorOperationSubcontractorAndSubcontractOperationJobAndArrivalTimeBetween(subcontractor,job, startDate, endDate, pageable);
+    }
 }

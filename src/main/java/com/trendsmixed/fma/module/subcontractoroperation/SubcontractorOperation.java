@@ -25,6 +25,7 @@ import javax.persistence.*;
 public class SubcontractorOperation implements Serializable {
 
     private static final long serialVersionUID = 1L;
+	public static final String job = null;
     @JsonView(SubcontractorOperationView.Id.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

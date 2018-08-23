@@ -70,11 +70,11 @@ public class SubcontractNoteView {
                         AllAndLocation {
         }
 
-        public interface AllAndSubcontractOperationAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndSubcontractorAndItemAndOperationTypeAndProductType
+        public interface AllAndSubcontractOperationAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndSubcontractorAndItemAndOperationTypeAndProductTypeAndLocation
                         extends All, SubcontractOperation,
                         AllAndJobAndSubcontractOperationRateAndSubcontractOperationDefinition,
                         AllAndSubcontractorOperation, AllAndSubcontractOperationDefinition, AllAndSubcontractor,
-                        AllAndOperationType, AllAndProductType, AllAndItemAll {
+                        AllAndOperationType, AllAndProductType, AllAndItemAll,AllAndLocation {
         }
 
 }

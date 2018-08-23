@@ -4,9 +4,14 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.subcontractnote.SubcontractNote;
+import com.trendsmixed.fma.module.subcontractor.Subcontractor;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import java.text.ParseException;
+import com.trendsmixed.fma.utility.Format;
 
 @AllArgsConstructor
 @RestController
@@ -22,7 +27,7 @@ public class SubcontractArrivalController {
         return service.findAll();
     }
 
-    @JsonView(SubcontractArrivalView.AllAndSubcontractOperationAndSubcontractNote.class)
+    @JsonView(SubcontractArrivalView.AllAndSubcontractOperationAndSubcontractNoteAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndSubcontractorAndItemAndProductTypeAndOperationType.class)
     @GetMapping("/page")
     Page<SubcontractArrival> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -60,6 +65,36 @@ public class SubcontractArrivalController {
             }
             throw new Error(e.getMessage());
         }
+    }
+
+    @JsonView(SubcontractArrivalView.AllAndSubcontractOperationAndSubcontractNoteAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndSubcontractorAndItemAndProductTypeAndOperationType.class)
+    @GetMapping("/subcontractNote/{id}")
+    public Iterable<SubcontractArrival> findBySubcontractNote(@PathVariable("id") int id) {
+        return service.findBySubcontractOperationSubcontractNote(new SubcontractNote(id));
+    }
+
+    @JsonView(SubcontractArrivalView.AllAndSubcontractOperationAndSubcontractNoteAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndSubcontractorAndItemAndProductTypeAndOperationType.class)
+    @GetMapping(value = "/subcontractArrival")
+    public Page<SubcontractArrival> getSubcontractArrival(
+        @RequestParam(value = "subcontractor", required = false, defaultValue = "0") String subcontractor,
+        @RequestParam(value = "job", required = false, defaultValue = "0") String job,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<SubcontractArrival> page ;
+        if(subcontractor.equals("0")&&job.equals("0") ){
+            page = new Page(service.findByArrivalTimeBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        } 
+        else if(job.equals("0")) {
+            page = new Page(service.findBySubcontractOperationSubcontractOperationRateSubcontractorOperationSubcontractorAndArrivalTimeBetween(new Subcontractor(Integer.valueOf(subcontractor)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(subcontractor.equals("0")) {
+            page = new Page(service.findBySubcontractOperationJobAndArrivalTimeBetween(new Job(Integer.valueOf(job)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else {
+            page = new Page(service.findBySubcontractOperationSubcontractOperationRateSubcontractorOperationSubcontractorAndSubcontractOperationJobAndArrivalTimeBetween(new Subcontractor(Integer.valueOf(subcontractor)),new Job(Integer.valueOf(job)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        return page;
     }
 
     @JsonView(SubcontractArrivalView.AllAndSubcontractOperationAndSubcontractNote.class)

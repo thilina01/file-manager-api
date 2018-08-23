@@ -4,8 +4,12 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.job.Job;
+import com.trendsmixed.fma.module.subcontractor.Subcontractor;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import java.text.ParseException;
+import com.trendsmixed.fma.utility.Format;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
@@ -22,7 +26,7 @@ public class SubcontractArrivalRejectController {
         return service.findAll();
     }
 
-    @JsonView(SubcontractArrivalRejectView.AllAndLossReasonAndSubcontractArrival.class)
+    @JsonView(SubcontractArrivalRejectView.AllAndLossReasonAndSubcontractArrivalAndSubcontractOperationAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractorAndSubcontractOperationDefinitionAndItemAndProductTypeAndOperationType.class)
     @GetMapping("/page")
     Page<SubcontractArrivalReject> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
@@ -42,25 +46,35 @@ public class SubcontractArrivalRejectController {
         }
     }
 
-    // @PostMapping("/release")
-    // public SubcontractArrivalReject saveReleaseInformation(@RequestBody SubcontractArrivalReject subcontractArrivalReject, @RequestHeader(value = "email", defaultValue = "") String email, HttpServletRequest request) {
-    //     appSessionService.isValid(email, request);
-    //     try {
-    //         SubcontractArrivalReject existingSubcontractArrivalReject = service.findOne(subcontractArrivalReject.getId());
-    //         existingSubcontractArrivalReject.setRecipient(subcontractArrivalReject.getRecipient());
-    //         existingSubcontractArrivalReject.setContainerNumber(subcontractArrivalReject.getContainerNumber());
-    //         existingSubcontractArrivalReject.setVehicleNumber(subcontractArrivalReject.getVehicleNumber());
-    //         existingSubcontractArrivalReject.setSubcontractReleaseTime(subcontractArrivalReject.getSubcontractReleaseTime());
-    //         existingSubcontractArrivalReject.setLocation(subcontractArrivalReject.getLocation());
-    //         return service.save(existingSubcontractArrivalReject);
+    @JsonView(SubcontractArrivalRejectView.AllAndLossReasonAndSubcontractArrivalAndSubcontractOperationAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractorAndSubcontractOperationDefinitionAndItemAndProductTypeAndOperationType.class)
+    @GetMapping("/subcontractor/{id}")
+    public Iterable<SubcontractArrivalReject> findBySubcontractor(@PathVariable("id") int id) {
+        return service.findBySubcontractArrivalSubcontractOperationSubcontractOperationRateSubcontractorOperationSubcontractor(new Subcontractor(id));
+    }
 
-    //     } catch (Throwable e) {
-    //         while (e.getCause() != null) {
-    //             e = e.getCause();
-    //         }
-    //         throw new Error(e.getMessage());
-    //     }
-    // }
+    @JsonView(SubcontractArrivalRejectView.AllAndLossReasonAndSubcontractArrivalAndSubcontractOperationAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractorAndSubcontractOperationDefinitionAndItemAndProductTypeAndOperationType.class)
+    @GetMapping(value = "/subcontractArrivalReject")
+    public Page<SubcontractArrivalReject> getSubcontractArrivalReject(
+        @RequestParam(value = "subcontractor", required = false, defaultValue = "0") String subcontractor,
+        @RequestParam(value = "job", required = false, defaultValue = "0") String job,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<SubcontractArrivalReject> page ;
+        if(subcontractor.equals("0")&&job.equals("0") ){
+            page = new Page(service.findByArrivalRejectDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        } 
+         else if(job.equals("0")) {
+            page = new Page(service.findBySubcontractArrivalSubcontractOperationSubcontractOperationRateSubcontractorOperationSubcontractorAndArrivalRejectDateBetween(new Subcontractor(Integer.valueOf(subcontractor)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(subcontractor.equals("0")) {
+            page = new Page(service.findBySubcontractArrivalSubcontractOperationJobAndArrivalRejectDateBetween(new Job(Integer.valueOf(job)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else {
+            page = new Page(service.findBySubcontractArrivalSubcontractOperationSubcontractOperationRateSubcontractorOperationSubcontractorAndSubcontractArrivalSubcontractOperationJobAndArrivalRejectDateBetween(new Subcontractor(Integer.valueOf(subcontractor)),new Job(Integer.valueOf(job)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        return page;
+    }
 
     @GetMapping("/combo")
     List<Combo> combo() {
@@ -82,7 +96,7 @@ public class SubcontractArrivalRejectController {
         }
     }
 
-    @JsonView(SubcontractArrivalRejectView.AllAndLossReasonAndSubcontractArrival.class)
+    @JsonView(SubcontractArrivalRejectView.AllAndLossReasonAndSubcontractArrivalAndSubcontractOperationAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractorAndSubcontractOperationDefinitionAndItemAndProductTypeAndOperationType.class)
     @GetMapping("/{id}")
     public SubcontractArrivalReject findOne(@PathVariable("id") int id) {
         return service.findOne(id);

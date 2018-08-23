@@ -41,12 +41,13 @@ public class SubcontractArrival implements Serializable {
     @JoinColumn(name = "subcontract_operation_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SubcontractOperation subcontractOperation;
+    @JsonView(SubcontractArrivalView.SubcontractArrivalReject.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "subcontractArrival")
-    private List<SubcontractArrivalReject> subcontractArrivalRejectList;  
+    private List<SubcontractArrivalReject> subcontractArrivalRejectList; 
     @JsonView(SubcontractArrivalView.All.class)
     public String getDisplay() {
-        return id + " : "; 
-        
+    return subcontractOperation.getSubcontractOperationRate().subcontractorOperation.getSubcontractOperationDefinition().getDisplay() + " | "+arrivalTime;     
     }
+    
 
 }

@@ -134,7 +134,7 @@ public class SubcontractNoteController {
         }
     }
 
-    @JsonView(SubcontractNoteView.AllAndSubcontractOperationAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndSubcontractorAndItemAndOperationTypeAndProductType.class)
+    @JsonView(SubcontractNoteView.AllAndSubcontractOperationAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndSubcontractorAndItemAndOperationTypeAndProductTypeAndLocation.class)
     @GetMapping("/{id}")
     public SubcontractNote findOne(@PathVariable("id") int id) {
         return service.findOne(id);
