@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.item;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
+import com.trendsmixed.fma.module.drawingversion.DrawingVersion;
 import com.trendsmixed.fma.module.itemsegment.ItemSegment;
 import com.trendsmixed.fma.module.itemtype.ItemType;
 import com.trendsmixed.fma.module.job.Job;
@@ -76,9 +77,11 @@ public class Item implements Serializable {
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
     private List<Job> jobList;
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "item")
-    private List<PackagingSpecification> packagingSpecification;
+    private List<PackagingSpecification> packagingSpecificationList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
-    private List<SubcontractOperationDefinition> subcontractOperationDefinition;
+    private List<SubcontractOperationDefinition> subcontractOperationDefinitionList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "item")
+    private List<DrawingVersion> DrawingVersionList;
 
     public Item(int anId) {
         this.id = anId;

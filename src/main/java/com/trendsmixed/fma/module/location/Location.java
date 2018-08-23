@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.energyconsumption.EnergyConsumption;
 import com.trendsmixed.fma.module.subcontractnote.SubcontractNote;
+import com.trendsmixed.fma.module.subcontractreworknote.SubcontractReworkNote;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -47,6 +48,8 @@ public class Location implements Serializable {
     private List<DispatchNote> dispatchNoteList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "location", fetch = FetchType.LAZY)
     private List<SubcontractNote> SubcontractNoteList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "location", fetch = FetchType.LAZY)
+    private List<SubcontractReworkNote> subcontractReworkNoteList;
 
     public Location(Integer id) {
         this.id = id;
