@@ -136,6 +136,7 @@ public class LoadingPlanItemService {
         return repository.findByLoadingPlanDispatchNoteCustomerAndDispatchScheduleJobItemAndLoadingPlanDispatchNoteAndRejectedQuantityNotNullAndLoadingPlanDispatchNoteDispatchDateBetween(customer,item,dispatchNote, startDate, endDate,  pageable);
     }
 
-
-
+    public Iterable<LoadingPlanItem> findByLoadingPlanDispatchNoteInvoiceId(int invoiceId) {
+        return repository.findByLoadingPlanDispatchNoteInvoiceId(invoiceId);
+    }
 }

@@ -118,4 +118,10 @@ public class LoadingPlanItemView {
         public interface AllAndLoadingPlanAndDispatchNote extends All, AllAndLoadingPlan, AllAndDispatchNote {
         }
 
+        public interface AllAndLoadingPlanAndDispatchNoteAndInvoiceAndCustomerAndInvoiceTypeAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecification
+                        extends
+                        AllAndLoadingPlanAndDispatchNoteAndInvoiceAndCustomerAndInvoiceTypeAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
+                        AllAndPackagingSpecification {
+        }
+
 }
