@@ -82,4 +82,6 @@ public interface LoadingPlanItemRepository extends PagingAndSortingRepository<Lo
                         Customer customer, Item item, DispatchNote dispatchNote, Date startDate, Date endDate,
                         Pageable pageable);
 
+        Iterable<LoadingPlanItem> findByLoadingPlanDispatchNoteInvoiceId(int invoiceId);
+
 }

@@ -5,7 +5,6 @@ import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
-import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.item.ItemService;
 import com.trendsmixed.fma.module.job.Job;
@@ -175,6 +174,13 @@ public class LoadingPlanItemController {
         }
     
         return page;
+    }
+
+    @JsonView(LoadingPlanItemView.AllAndLoadingPlanAndDispatchNoteAndInvoiceAndCustomerAndInvoiceTypeAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecification.class)
+    @GetMapping(value = "/byInvoiceId")
+    public  Iterable<LoadingPlanItem> getByInvoiceId(
+        @RequestParam(value = "invoiceId", required = true) int invoiceId){
+        return service.findByLoadingPlanDispatchNoteInvoiceId(invoiceId);
     }
 
     @GetMapping("/combo")
