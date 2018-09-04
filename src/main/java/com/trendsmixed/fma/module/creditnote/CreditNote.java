@@ -2,6 +2,8 @@ package com.trendsmixed.fma.module.creditnote;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.invoice.Invoice;
+import com.trendsmixed.fma.module.invoicetype.InvoiceType;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -38,6 +40,10 @@ public class CreditNote implements Serializable {
     @JoinColumn(name = "invoice_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Invoice invoice;
+    @JsonView(CreditNoteView.InvoiceType.class)
+    @JoinColumn(name = "invoice_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private InvoiceType invoiceType;
     
     public CreditNote(int anId) {
         this.id = anId;
