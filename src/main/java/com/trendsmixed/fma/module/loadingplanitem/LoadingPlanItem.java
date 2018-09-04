@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.loadingplanitem;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.creditnoteitem.CreditNoteItem;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
 import com.trendsmixed.fma.module.packagingspecification.PackagingSpecification;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -53,6 +55,8 @@ public class LoadingPlanItem implements Serializable {
     @JoinColumn(name = "loading_plan_id", referencedColumnName = "id")
     @ManyToOne(optional = true)
     private LoadingPlan loadingPlan;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "loadingPlanItem")
+    private List<CreditNoteItem> creditNoteItemList;
 
     @JsonView(LoadingPlanItemView.All.class)
     public String getDisplay() {
