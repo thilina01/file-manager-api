@@ -36,6 +36,9 @@ public class CreditNote implements Serializable {
     @Column(name = "date_of_credit_note")
     @Temporal(TemporalType.DATE)
     private Date dateOfCreditNote;
+    @JsonView(CreditNoteView.CreditNoteNumber.class)
+    @Column(name = "credit_note_number")
+    private String creditNoteNumber;
     @JsonView(CreditNoteView.Invoice.class)
     @JoinColumn(name = "invoice_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)

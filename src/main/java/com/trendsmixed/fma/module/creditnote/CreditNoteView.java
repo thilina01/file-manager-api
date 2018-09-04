@@ -18,7 +18,10 @@ public class CreditNoteView {
     public interface DateOfCreditNote {
     }
 
-    public interface All extends Id, DateOfCreditNote, PageView.All {
+    public interface CreditNoteNumber {
+    }
+
+    public interface All extends Id, DateOfCreditNote, CreditNoteNumber, PageView.All {
     }
 
     public interface AllAndInvoice extends All, Invoice, InvoiceView.All {
