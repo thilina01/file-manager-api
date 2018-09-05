@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.debitnote;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.debitnoteitem.DebitNoteItem;
 import com.trendsmixed.fma.module.invoice.Invoice;
 import com.trendsmixed.fma.module.invoicetype.InvoiceType;
 
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -47,6 +49,9 @@ public class DebitNote implements Serializable {
     @JoinColumn(name = "invoice_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private InvoiceType invoiceType;
+    @JsonView(DebitNoteView.DebitNoteItem.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "debitNote")
+    private List<DebitNoteItem> debitNoteItemList;
     
     public DebitNote(int anId) {
         this.id = anId;

@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.debitnote;
 
 import com.trendsmixed.fma.module.invoice.InvoiceView;
 import com.trendsmixed.fma.module.invoicetype.InvoiceTypeView;
+import com.trendsmixed.fma.module.debitnoteitem.DebitNoteItemView;
 import com.trendsmixed.fma.utility.PageView;
 
 public class DebitNoteView {
@@ -21,6 +22,9 @@ public class DebitNoteView {
     public interface DebitNoteNumber {
     }
 
+    public interface DebitNoteItem {
+    }
+
     public interface All extends Id, DateOfDebitNote, DebitNoteNumber, PageView.All {
     }
 
@@ -28,6 +32,9 @@ public class DebitNoteView {
     }
 
     public interface AllAndInvoiceType extends All, InvoiceType, InvoiceTypeView.All {
+    }
+
+    public interface AllAndDebitNoteItem extends All, DebitNoteItem, DebitNoteItemView.All {
     }
 
 }
