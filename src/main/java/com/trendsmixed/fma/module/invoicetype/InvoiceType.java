@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.invoicetype;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.creditnote.CreditNote;
+import com.trendsmixed.fma.module.debitnote.DebitNote;
 import com.trendsmixed.fma.module.invoice.Invoice;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -44,6 +45,8 @@ public class InvoiceType implements Serializable {
     private List<Invoice> invoiceList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "invoiceType")
     private List<CreditNote> creditNoteList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "invoiceType")
+    private List<DebitNote> debitNoteList;
 
     @JsonView(InvoiceTypeView.All.class)
     public String getDisplay() {
