@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.creditnote.CreditNote;
 import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.module.customer.Customer;
+import com.trendsmixed.fma.module.debitnote.DebitNote;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.employee.Employee;
 import com.trendsmixed.fma.module.exchangerate.ExchangeRate;
@@ -70,6 +71,8 @@ public class Invoice implements Serializable {
     private List<DispatchNote> dispatchNoteList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "invoice", fetch = FetchType.LAZY)
     private List<CreditNote> creditNoteList;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "invoice", fetch = FetchType.LAZY)
+    private List<DebitNote> debitNoteList;
     public Invoice(Integer id) {
         this.id = id;
     }
