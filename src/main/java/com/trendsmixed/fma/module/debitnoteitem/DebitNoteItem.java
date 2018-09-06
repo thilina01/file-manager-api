@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.debitnoteitem;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.debitnote.DebitNote;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItem;
 
 import lombok.Data;
@@ -44,6 +45,10 @@ public class DebitNoteItem implements Serializable {
     @JoinColumn(name = "loading_plan_item_id", referencedColumnName = "id")
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private LoadingPlanItem loadingPlanItem;
+    @JsonView(DebitNoteItemView.DebitNote.class)
+    @JoinColumn(name = "debit_note_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private DebitNote debitNote;
 
     @JsonView(DebitNoteItemView.All.class)
     public String getDisplay() {
