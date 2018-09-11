@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.debitnote;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.module.debitnoteitem.DebitNoteItem;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +38,14 @@ public class DebitNoteController {
     @PostMapping
     @JsonView(DebitNoteView.AllAndInvoice.class)
     public DebitNote save(@RequestBody DebitNote debitNote) {
-        
+
+        List<DebitNoteItem> debitNoteItems = debitNote.getDebitNoteItemList();
+        if (debitNoteItems != null) {
+            for (DebitNoteItem debitNoteItem : debitNoteItems) {
+                debitNoteItem.setDebitNote(debitNote);
+            }
+        }
+
         try {
             debitNote = service.save(debitNote);
             return debitNote;
