@@ -60,7 +60,7 @@ public class LoadingPlanItem implements Serializable {
 
     @JsonView(LoadingPlanItemView.All.class)
     public String getDisplay() {
-        return id + " : "; 
+        return "ID :"+ id + " | "+ "JobNo :"+ dispatchSchedule.getJob().getJobNo() + " | Quantity :"+quantity;
         
     }
 
