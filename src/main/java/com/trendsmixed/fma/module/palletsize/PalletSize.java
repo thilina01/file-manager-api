@@ -1,7 +1,7 @@
 package com.trendsmixed.fma.module.palletsize;
-// import com.trendsmixed.fma.module.palletlable.PalletLable;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.pack.Pack;
 import com.trendsmixed.fma.module.packagingspecification.PackagingSpecification;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -48,7 +48,9 @@ public class PalletSize implements Serializable {
     private Double weight;
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "palletSize")
     private List<PackagingSpecification> packagingSpecification;
-
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "palletSize", fetch = FetchType.LAZY)
+    private List<Pack> packList;
+    
     public PalletSize(int anId) {
         this.id = anId;
     }
