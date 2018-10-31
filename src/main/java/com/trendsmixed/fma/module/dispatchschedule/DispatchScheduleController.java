@@ -59,19 +59,30 @@ public class DispatchScheduleController {
     @GetMapping(value = "/dispatchSchedule")
     public Page<DispatchSchedule> getDispatchSchedule(
         @RequestParam(value = "customer", required = false, defaultValue = "0") String customer,
-        @RequestParam(value = "job", required = false, defaultValue = "0") String job,   
+        @RequestParam(value = "job", required = false, defaultValue = "0") String job, 
+        @RequestParam(value = "salesOrder", required = false, defaultValue = "0") String salesOrder,  
         @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
         @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
         Pageable pageable) throws ParseException {
         Page<DispatchSchedule> page ;
-        if(customer.equals("0")&& job.equals("0") ){
+
+        if(customer.equals("0") && job.equals("0") && salesOrder.equals("0") ){
             page = new Page(service.findBySalesOrderItemSalesOrderOrderDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
         } 
-        else if(customer.equals("0") ){
+        else if(customer.equals("0") && salesOrder.equals("0") ){
             page = new Page(service.findBySalesOrderItemSalesOrderOrderDateBetweenAndJob(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Job(Integer.valueOf(job)), pageable));
         }
-        else if(job.equals("0") ){
+        else if(job.equals("0") && salesOrder.equals("0") ){
             page = new Page(service.findBySalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrderOrderDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        else if(job.equals("0") && customer.equals("0") ){
+            page = new Page(service.findBySalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrder(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),new SalesOrder(Integer.valueOf(salesOrder)), pageable));
+        }
+        else if(customer.equals("0")){
+            page = new Page(service.findBySalesOrderItemSalesOrderOrderDateBetweenAndJobAndSalesOrderItemSalesOrder( Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),new Job(Integer.valueOf(job)),new SalesOrder(Integer.valueOf(salesOrder)), pageable));
+        }
+        else if(job.equals("0")){
+            page = new Page(service.findBySalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrder(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate),new Customer(Integer.valueOf(customer)),new SalesOrder(Integer.valueOf(salesOrder)), pageable));
         }
         else {
             page = new Page(service.findBySalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrderOrderDateBetweenAndJob(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new Job(Integer.valueOf(job)), pageable));
