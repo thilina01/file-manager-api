@@ -63,12 +63,16 @@ public class InvoiceController {
     @GetMapping(value = "/customerAndInvoiceDateBetween")
     public Page<Invoice> getCustomerAndInvoiceDateBetweenPage(
         @RequestParam(value = "customer", required = false, defaultValue = "0") String customer,
+        @RequestParam(value = "invoiceNumber",required = false, defaultValue = "0") String invoiceNumber,
         @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
         @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
         Pageable pageable) throws ParseException {
         Page<Invoice> page ;
 
-        if(customer.equals("0")){
+        if(!invoiceNumber.equals("0")){
+            page = new Page(service.findByInvoiceNumber(invoiceNumber, pageable));
+        }
+        else if(customer.equals("0")){
             page = new Page(service.findByInvoiceDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));    
         } 
         else{

@@ -22,4 +22,6 @@ public interface InvoiceRepository extends PagingAndSortingRepository<Invoice, I
 
     Page<Invoice> findByCustomer(Customer customer, Pageable pageable);
 
+    Page<Invoice> findByInvoiceNumber(String invoiceNumber, Pageable pageable);
+
 }
