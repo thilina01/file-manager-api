@@ -53,6 +53,10 @@ public class InvoiceService {
         return repository.findByCustomer(customer,  pageable);
     }
 
+    Page<Invoice> findByInvoiceNumber(String invoiceNumber, Pageable pageable) {
+        return repository.findByInvoiceNumber(invoiceNumber, pageable);
+    }
+
     //  public Page<Invoice> findByDispatchDateAndCustomer(Date date, Customer customer, Pageable pageable) {
     //     return repository.findByDispatchDateAndCustomer(date, customer, pageable);
     // }
