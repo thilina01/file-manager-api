@@ -40,6 +40,12 @@ public class InvoiceView {
         public interface TaxRate {
         }
 
+        public interface Other {
+        }
+
+        public interface OtherAmount {
+        }
+
         public interface Customer {
         }
 
@@ -58,7 +64,7 @@ public class InvoiceView {
         public interface LoadingPlan {
         }
 
-        public interface All extends Id, InvoiceNumber, InvoiceDate, TaxRate, PageView.All {
+        public interface All extends Id, InvoiceNumber, InvoiceDate, TaxRate, Other, OtherAmount, PageView.All {
         }
 
         public interface AllAndInvoiceType extends All, InvoiceType, InvoiceTypeView.All {
