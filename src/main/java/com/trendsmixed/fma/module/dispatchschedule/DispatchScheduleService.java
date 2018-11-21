@@ -119,6 +119,16 @@ public Page<DispatchSchedule> findBySalesOrderItemSalesOrderSalesOrderTypeAndSal
     return repository.findBySalesOrderItemSalesOrderSalesOrderTypeAndSalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderCustomer(salesOrderType, startDate, endDate, customer, pageable);
 }
 
+Page<DispatchSchedule> findBySalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrder(Date startDate, Date endDate,SalesOrder salesOrder, Pageable pageable) {
+    return repository.findBySalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrder(startDate, endDate,salesOrder, pageable);
+}
 
+Page<DispatchSchedule> findBySalesOrderItemSalesOrderOrderDateBetweenAndJobAndSalesOrderItemSalesOrder(Date startDate, Date endDate,Job job,SalesOrder salesOrder, Pageable pageable) {
+    return repository.findBySalesOrderItemSalesOrderOrderDateBetweenAndJobAndSalesOrderItemSalesOrder(startDate, endDate,job,salesOrder, pageable);
+}
+
+Page<DispatchSchedule> findBySalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrder(Date startDate, Date endDate,Customer customer,SalesOrder salesOrder, Pageable pageable) {
+    return repository.findBySalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderCustomerAndSalesOrderItemSalesOrder(startDate, endDate,customer,salesOrder,pageable);
+}
 
 }
