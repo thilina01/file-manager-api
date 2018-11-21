@@ -37,6 +37,10 @@ public class DispatchSchedule implements Serializable {
     @Column(name = "dispatch_date")
     @Temporal(TemporalType.DATE)
     private Date dispatchDate;
+    @JsonView(DispatchScheduleView.DispatchScheduleDate.class)
+    @Column(name = "dispatch_schedule_date")
+    @Temporal(TemporalType.DATE)
+    private Date dispatchScheduleDate;
     @JsonView(DispatchScheduleView.Comment.class)
     @Column(name = "comment")
     private String comment;

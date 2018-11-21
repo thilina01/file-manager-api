@@ -23,6 +23,9 @@ public class DispatchScheduleView {
         public interface DispatchDate {
         }
 
+        public interface DispatchScheduleDate {
+        }
+
         public interface ConfirmDate {
         }
 
@@ -35,7 +38,7 @@ public class DispatchScheduleView {
         public interface Comment {
         }
 
-        public interface All extends Id, DispatchDate, ConfirmDate, RequestDate, Quantity, Comment, PageView.All {
+        public interface All extends Id,DispatchScheduleDate, DispatchDate, ConfirmDate, RequestDate, Quantity, Comment, PageView.All {
         }
 
         public interface Job extends JobView.All {
