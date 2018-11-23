@@ -119,6 +119,29 @@ public Page<DispatchSchedule> findBySalesOrderItemSalesOrderSalesOrderTypeAndSal
     return repository.findBySalesOrderItemSalesOrderSalesOrderTypeAndSalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderCustomer(salesOrderType, startDate, endDate, customer, pageable);
 }
 
+public Page<DispatchSchedule>findByDispatchScheduleDateBetween(Date startDate, Date endDate, Pageable pageable) {
+    return repository.findByDispatchScheduleDateBetween(startDate, endDate, pageable);
 
+}
+
+public Page<DispatchSchedule> findByDispatchScheduleDateBetweenAndJob(Date startDate, Date endDate, Job job, Pageable pageable) {
+    return repository.findByDispatchScheduleDateBetweenAndJob(startDate, endDate, job, pageable);
+}
+
+public Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomerAndDispatchScheduleDateBetween(Customer customer, Date startDate, Date endDate, Pageable pageable) {
+    return repository.findBySalesOrderItemSalesOrderCustomerAndDispatchScheduleDateBetween(customer, startDate, endDate, pageable);
+}
+
+public Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomerAndDispatchScheduleDateBetweenAndJob(Customer customer, Date startDate, Date endDate, Job job, Pageable pageable) {
+    return repository.findBySalesOrderItemSalesOrderCustomerAndDispatchScheduleDateBetweenAndJob(customer, startDate, endDate, job, pageable);
+}
+
+public Page<DispatchSchedule> findByConfirmDateNotNull( Pageable pageable) {
+    return repository.findByConfirmDateNotNull( pageable);
+}
+
+Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomerPoNumber(String customerPoNumber, Pageable pageable) {
+    return repository.findBySalesOrderItemSalesOrderCustomerPoNumber(customerPoNumber, pageable);
+}
 
 }
