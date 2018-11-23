@@ -50,29 +50,41 @@ public interface DispatchScheduleRepository extends PagingAndSortingRepository<D
 
         Page<DispatchSchedule> findByJob(Job job, Pageable pageable);
 
-
         Page<DispatchSchedule> findByJobItemAndSalesOrderItemSalesOrderOrderDateBetween(Item item, Date startDate,
                         Date endDate, Pageable pageable);
 
         Page<DispatchSchedule> findBySalesOrderItemSalesOrderSalesOrderTypeAndSalesOrderItemSalesOrderOrderDateBetween(
                         SalesOrderType salesOrderType, Date startDate, Date endDate, Pageable pageable);
 
-        Page<DispatchSchedule> findByJobItemAndSalesOrderItemSalesOrderOrderDateBetweenAndJob(
-                                Item item, Date startDate, Date endDate, Job job, Pageable pageable);
-        
+        Page<DispatchSchedule> findByJobItemAndSalesOrderItemSalesOrderOrderDateBetweenAndJob(Item item, Date startDate,
+                        Date endDate, Job job, Pageable pageable);
+
         Page<DispatchSchedule> findByJobItemAndSalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderSalesOrderType(
-                                        Item item, Date startDate, Date endDate, SalesOrderType salesOrderType, Pageable pageable);
-                                        
+                        Item item, Date startDate, Date endDate, SalesOrderType salesOrderType, Pageable pageable);
+
         Page<DispatchSchedule> findByJobItemAndSalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderCustomer(
-                                                Item item, Date startDate, Date endDate, Customer customer, Pageable pageable);
+                        Item item, Date startDate, Date endDate, Customer customer, Pageable pageable);
 
         Page<DispatchSchedule> findBySalesOrderItemSalesOrderSalesOrderTypeAndSalesOrderItemSalesOrderOrderDateBetweenAndJob(
-                                                        SalesOrderType salesOrderType, Date startDate, Date endDate, Job job, Pageable pageable);
+                        SalesOrderType salesOrderType, Date startDate, Date endDate, Job job, Pageable pageable);
 
         Page<DispatchSchedule> findBySalesOrderItemSalesOrderSalesOrderTypeAndSalesOrderItemSalesOrderOrderDateBetweenAndSalesOrderItemSalesOrderCustomer(
-                                                                SalesOrderType salesOrderType, Date startDate, Date endDate, Customer Customer, Pageable pageable);
-                                                                              
-                                                                                              
-                                                              
+                        SalesOrderType salesOrderType, Date startDate, Date endDate, Customer Customer,
+                        Pageable pageable);
+
+        Page<DispatchSchedule> findByDispatchScheduleDateBetween(Date startDate, Date endDate, Pageable pageable);
+
+        Page<DispatchSchedule> findByDispatchScheduleDateBetweenAndJob(Date startDate, Date endDate, Job job,
+                        Pageable pageable);
+
+        Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomerAndDispatchScheduleDateBetween(Customer customer,
+                        Date startDate, Date endDate, Pageable pageable);
+
+        Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomerAndDispatchScheduleDateBetweenAndJob(
+                        Customer customer, Date startDate, Date endDate, Job job, Pageable pageable);
+
+        Page<DispatchSchedule> findByConfirmDateNotNull(Pageable pageable);
+
+        Page<DispatchSchedule> findBySalesOrderItemSalesOrderCustomerPoNumber(String customerPoNumber, Pageable pageable);
 
 }
