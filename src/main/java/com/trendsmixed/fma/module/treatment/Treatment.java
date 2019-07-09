@@ -32,6 +32,9 @@ public class Treatment implements Serializable {
     @JsonView(TreatmentView.Code.class)
     @Column(name = "code", unique = true)
     private String code;
+    @JsonView(TreatmentView.TreatmentCost.class)
+    @Column(name = "treatment_cost")
+    private Double treatmentCost;
     @JsonView(TreatmentView.Description.class)
     @Column(name = "description", unique = true)
     private String description;

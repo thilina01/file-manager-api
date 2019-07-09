@@ -22,6 +22,9 @@ public class TreatmentView {
     public interface LossManHours {
     }
 
+    public interface TreatmentCost {
+    }
+
     public interface StartTime {
     }
 
@@ -34,7 +37,7 @@ public class TreatmentView {
     public interface Accident {
     }
 
-    public interface All extends Id, Code, Description, LossManHours, StartTime, EndTime, PageView.All {
+    public interface All extends Id, Code, Description, LossManHours, StartTime, EndTime, TreatmentCost, PageView.All {
     }
 
     public interface AllAndTreatmentTypeAll extends All, TreatmentType, TreatmentTypeView.All {
