@@ -2,8 +2,11 @@ package com.trendsmixed.fma.module.internaltransferitem;
 
 import com.trendsmixed.fma.utility.PageView;
 import com.trendsmixed.fma.module.job.JobView;
+import com.trendsmixed.fma.module.job.JobView.AllAndItemAll;
 import com.trendsmixed.fma.module.producttype.ProductTypeView;
 import com.trendsmixed.fma.module.internaltransfernote.InternalTransferNoteView;
+import com.trendsmixed.fma.module.internaltransfernote.InternalTransferNoteView.AllAndFromLocation;
+import com.trendsmixed.fma.module.internaltransfernote.InternalTransferNoteView.AllAndToLocation;
 
 /**
  *
@@ -40,4 +43,16 @@ public class InternalTransferItemView {
 
         public interface AllAndProductTypeAndJob extends AllAndProductType, AllAndJob {
         }
+
+        public interface AllAndProductTypeAndJobAndItem extends AllAndProductType, AllAndJob, AllAndItemAll {
+        }
+
+        public interface AllAndFromLocationAndToLocation extends All, InternalTransferNote,
+                        InternalTransferNoteView.AllAndFromLocation, AllAndToLocation {
+        }
+
+        public interface AllAndProductTypeAndJobAndItemAndInternalTransferNoteAndFromLocationAndToLocation extends All,
+                        AllAndProductType, AllAndJob, AllAndItemAll, InternalTransferNote, AllAndFromLocation,AllAndToLocation {
+        }
+
 }
