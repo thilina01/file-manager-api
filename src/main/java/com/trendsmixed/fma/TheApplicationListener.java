@@ -20,7 +20,7 @@ public class TheApplicationListener implements ApplicationListener<ContextRefres
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         ApplicationContext applicationContext = ((ContextRefreshedEvent) event).getApplicationContext();
-        Map<RequestMappingInfo, HandlerMethod> handlerMethods = applicationContext.getBean(RequestMappingHandlerMapping.class).getHandlerMethods();
+//        Map<RequestMappingInfo, HandlerMethod> handlerMethods = applicationContext.getBean(RequestMappingHandlerMapping.class).getHandlerMethods();
         // handlerMethods.forEach((requestMappingInfo, handlerMethod) -> {
         //     Class handlerClass =handlerMethod.getMethod().getDeclaringClass();
         //     if(handlerClass.getName().contains("omp")){
@@ -31,7 +31,7 @@ public class TheApplicationListener implements ApplicationListener<ContextRefres
         //     }
         // });
 
-        System.out.println(handlerMethods.size());
+//        System.out.println(handlerMethods.size());
         System.out.println("To Be implemented : Request Mapping URL registory ");
 
     }
