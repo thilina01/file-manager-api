@@ -1,11 +1,12 @@
 package com.trendsmixed.fma.module.creditnote;
 
 import com.trendsmixed.fma.dao.Combo;
-import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -14,12 +15,13 @@ public class CreditNoteService {
 
     private CreditNoteRepository repository;
 
+
     public Iterable<CreditNote> findAll() {
         return repository.findAll();
     }
-
+    
     public Page<CreditNote> findAll(Pageable pageable) {
-        return new Page<>(repository.findAll(pageable));
+        return repository.findAll(pageable);
     }
 
     public CreditNote save(CreditNote creditNote) {
@@ -33,7 +35,13 @@ public class CreditNoteService {
     public void delete(int id) {
         repository.delete(id);
     }
+    
     public List<Combo> getCombo() {
         return repository.getCombo();
     }
+
+    public  Page<CreditNote> getCreditNoteByDateBetween(Date startDate, Date endDate,Pageable pageable) {
+        return repository.getCreditNoteByDateBetween(startDate, endDate,pageable);
+    }
 }
+

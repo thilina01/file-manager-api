@@ -2,8 +2,6 @@ package com.trendsmixed.fma.module.creditnoteitem;
 
 import com.trendsmixed.fma.module.creditnote.CreditNoteView;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView;
-import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndLoadingPlan;
-import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItemView.AllAndPackagingSpecificationAndPalletSize;
 import com.trendsmixed.fma.utility.PageView;
 
 /**
@@ -42,13 +40,12 @@ public class CreditNoteItemView {
         public interface AllAndLoadingPlanItem extends All, LoadingPlanItem, LoadingPlanItemView.All {
         }
 
-        public interface AllAndLoadingPlanItemAndLoadingPlan extends All, AllAndLoadingPlan {
+        public interface AllAndLoadingPlanItemAndLoadingPlan extends All, LoadingPlanItemView.AllAndLoadingPlan {
         }
 
-        public interface AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSize
+        public interface AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem
                         extends All, LoadingPlanItem,
-                        LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem,
-                        AllAndPackagingSpecificationAndPalletSize {
+                        LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItem {
         }
 
 }
