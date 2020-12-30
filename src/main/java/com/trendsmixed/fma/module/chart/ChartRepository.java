@@ -7,6 +7,7 @@ import com.trendsmixed.fma.module.location.Location;
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.trendsmixed.fma.module.losstype.LossType;
 import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.shift.Shift;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -463,6 +464,14 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
                         + " WHERE production.controlPoint.workCenter.costCenter.section = :section AND production.productionDate = :productionDate "
                         + " GROUP BY production.controlPoint.workCenter.costCenter.section, production.controlPoint, production")
         List getOperationProgressSummaryBySection(@Param("section") Section section,
+                        @Param("productionDate") Date productionDate);
+
+        @Query(value = "SELECT new com.trendsmixed.fma.dao.OperationProgressSummary(production.controlPoint.workCenter.costCenter.section,production.controlPoint, production) "
+                        + "FROM Production production "
+                        + " WHERE production.controlPoint.workCenter.costCenter.section = :section AND production.productionDate = :productionDate AND production.shift = :shift "
+                        + " GROUP BY production.controlPoint.workCenter.costCenter.section, production.controlPoint, production")
+        List getOperationProgressSummaryBySectionAndShift(@Param("section") Section section,
+                                                          @Param("shift") Shift shift,
                         @Param("productionDate") Date productionDate);
 
         @Query(value = "SELECT new com.trendsmixed.fma.dao.OperationProgressSummary(production.controlPoint.workCenter.costCenter.section,production.controlPoint, production)"

@@ -11,6 +11,7 @@ import com.trendsmixed.fma.module.location.Location;
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.trendsmixed.fma.module.losstype.LossType;
 import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.shift.Shift;
 import com.trendsmixed.fma.utility.Format;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -414,6 +415,14 @@ public class ChartController {
     public List getOperationProgressSummaryBySection(@PathVariable("id") int id,
                      @RequestParam(value = "productionDate") long productionDate) {
         return chartService.getOperationProgressSummaryBySection(new Section(id), new Date(productionDate));
+    }
+
+    @JsonView(OperationProgressSummaryView.All.class)
+    @GetMapping("/operationProgressSummaryBySectionAndShift/{sectionId}/{shiftId}")
+    public List getOperationProgressSummaryBySection(@PathVariable("sectionId") int sectionId,
+                                                     @PathVariable("shiftId") int shiftId,
+                                                     @RequestParam(value = "productionDate") long productionDate) {
+        return chartService.getOperationProgressSummaryBySectionAndShift(new Section(sectionId), new Shift(shiftId), new Date(productionDate));
     }
 
     @JsonView(OperationProgressSummaryView.All.class)

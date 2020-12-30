@@ -7,6 +7,7 @@ import com.trendsmixed.fma.module.location.Location;
 import com.trendsmixed.fma.module.lossreason.LossReason;
 import com.trendsmixed.fma.module.losstype.LossType;
 import com.trendsmixed.fma.module.section.Section;
+import com.trendsmixed.fma.module.shift.Shift;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -219,6 +220,11 @@ public class ChartService {
     public List getOperationProgressSummaryBySection(Section section, Date productionDate) {
         return chartRepository.getOperationProgressSummaryBySection(section, productionDate);
     }
+
+    public List getOperationProgressSummaryBySectionAndShift(Section section, Shift shift, Date productionDate) {
+        return chartRepository.getOperationProgressSummaryBySectionAndShift(section, shift, productionDate);
+    }
+
     public List getOperationProgressSummary(Date productionDate) {
         return chartRepository.getOperationProgressSummary(productionDate);
     }
