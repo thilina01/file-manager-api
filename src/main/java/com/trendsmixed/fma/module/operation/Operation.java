@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,6 +45,12 @@ public class Operation implements Serializable {
     @JsonView(OperationView.UnitWeight.class)
     @Column(name = "unit_weight")
     private Double unitWeight;
+    @JsonView(OperationView.StartTime.class)
+    @Column(name = "start_time")
+    private Date startTime;
+    @JsonView(OperationView.EndTime.class)
+    @Column(name = "end_time")
+    private Date endTime;
     @JsonView(OperationView.Loss.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "operation")
     private List<Loss> lossList;
