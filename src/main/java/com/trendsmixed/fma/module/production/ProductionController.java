@@ -176,9 +176,38 @@ public class ProductionController {
     public void saveMany(@RequestBody List<Production> productions,
             @RequestHeader(value = "email", defaultValue = "") String email) {
 
-        
         try {
+            productions.forEach(production -> {
+
+                List<Operation> operations = production.getOperationList();
+                List<Manpower> manpowers = production.getManpowerList();
+                List<ProductionEmployee> productionEmployeeList = production.getProductionEmployeeList();
+                if (operations != null) {
+                    for (Operation operation : operations) {
+                        operation.setProduction(production);
+                    }
+                }
+                if (manpowers != null) {
+                    for (Manpower manpower : manpowers) {
+                        manpower.setProduction(production);
+                    }
+                }
+                if (productionEmployeeList != null) {
+                    for (ProductionEmployee productionEmployee : productionEmployeeList) {
+                        productionEmployee.setProduction(production);
+                    }
+                }
+
+                List<ResourceUtilization> resourceUtilizations = production.getResourceUtilizationList();
+
+                if (resourceUtilizations != null) {
+                    for (ResourceUtilization resourceUtilization : resourceUtilizations) {
+                        resourceUtilization.setProduction(production);
+                    }
+                }
+            });
             service.save(productions);
+
         } catch (Throwable e) {
             while (e.getCause() != null) {
                 e = e.getCause();
