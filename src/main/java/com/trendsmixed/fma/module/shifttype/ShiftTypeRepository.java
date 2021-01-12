@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface ShiftTypeRepository extends PagingAndSortingRepository<ShiftType, Integer> {
 
+    ShiftType findByCode(String code);
+
     ShiftType findByName(String name);
 
     @Query(value = "SELECT"

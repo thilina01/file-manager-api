@@ -45,4 +45,8 @@ public class ShiftTypeService {
     public ShiftType findByName(String name) {
         return repository.findByName(name);
     }
+
+    public ShiftType findByCode(String code) {
+        return repository.findByCode(code);
+    }
 }
