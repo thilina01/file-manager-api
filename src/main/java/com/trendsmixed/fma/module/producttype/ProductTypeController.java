@@ -65,6 +65,7 @@ public class ProductTypeController {
         }
     }
 
+    @JsonView(ProductTypeView.All.class)
     @GetMapping("/{id}")
     public ProductType findOne(@PathVariable("id") int id) {
         return service.findOne(id);
