@@ -28,6 +28,9 @@ public class OperationView {
     public interface EndTime {
     }
 
+    public interface ScheduleId {
+    }
+
     public interface Loss extends LossView.All {
     }
 
@@ -46,7 +49,7 @@ public class OperationView {
     public interface ProductType extends ProductTypeView.All {
     }
 
-    public interface All extends Id, PlannedQuantity, ActualQuantity, UnitWeight, StartTime, EndTime, PageView.All {
+    public interface All extends Id, PlannedQuantity, ActualQuantity, UnitWeight, StartTime, EndTime, ScheduleId, PageView.All {
     }
 
     public interface AllJobAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll

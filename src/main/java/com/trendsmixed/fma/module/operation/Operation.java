@@ -51,6 +51,9 @@ public class Operation implements Serializable {
     @JsonView(OperationView.EndTime.class)
     @Column(name = "end_time")
     private Date endTime;
+    @JsonView(OperationView.ScheduleId.class)
+    @Column(name = "schedule_id")
+    private String scheduleId;
     @JsonView(OperationView.Loss.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "operation")
     private List<Loss> lossList;
