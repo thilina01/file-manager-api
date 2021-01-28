@@ -420,6 +420,27 @@ public interface ChartRepository extends JpaRepository<com.trendsmixed.fma.entit
         List getManpowerSummaryBySection(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
                         @Param("section") Section section);
 
+        @Query(value = "SELECT "
+                        + " new com.trendsmixed.fma.dao.ManpowerSummary(resourceUtilization.production.controlPoint, COUNT(DISTINCT resourceUtilization.employee)) "
+                        + " FROM ResourceUtilization resourceUtilization"
+                        + " WHERE resourceUtilization.production.shift = :shift"
+                        + " AND resourceUtilization.startTime BETWEEN :startDate AND :endDate"
+                        + " GROUP BY resourceUtilization.production.controlPoint"
+                        + " ORDER BY COUNT(DISTINCT resourceUtilization.employee)DESC")
+        List getManpowerSummaryByShift(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+                        @Param("shift") Shift shift);
+
+        @Query(value = "SELECT "
+                + " new com.trendsmixed.fma.dao.ManpowerSummary(resourceUtilization.production.controlPoint, COUNT(DISTINCT resourceUtilization.employee)) "
+                + " FROM ResourceUtilization resourceUtilization"
+                + " WHERE resourceUtilization.production.controlPoint.workCenter.costCenter.section = :section"
+                + " AND resourceUtilization.production.shift = :shift"
+                + " AND resourceUtilization.startTime BETWEEN :startDate AND :endDate"
+                + " GROUP BY resourceUtilization.production.controlPoint"
+                + " ORDER BY COUNT(DISTINCT resourceUtilization.employee)DESC")
+        List getManpowerSummaryBySectionAndShift(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+                                         @Param("section") Section section, @Param("shift") Shift shift);
+
         @Query(value = "SELECT DISTINCT resourceUtilization.employee " + " FROM ResourceUtilization resourceUtilization"
                         + " WHERE resourceUtilization.production.controlPoint.workCenter.costCenter.section = :section"
                         + " AND resourceUtilization.startTime BETWEEN :startDate AND :endDate")

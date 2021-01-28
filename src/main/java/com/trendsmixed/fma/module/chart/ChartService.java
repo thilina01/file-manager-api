@@ -114,6 +114,14 @@ public class ChartService {
         return chartRepository.getManpowerSummaryBySection(startDate, endDate, section);
     }
 
+    public List getManpowerSummaryByShift(Date startDate, Date endDate, Shift shift) {
+        return chartRepository.getManpowerSummaryByShift(startDate, endDate, shift);
+    }
+
+    public List getManpowerSummaryBySectionAndShift(Date startDate, Date endDate, Section section, Shift shift) {
+        return chartRepository.getManpowerSummaryBySectionAndShift(startDate, endDate, section, shift);
+    }
+
     public List getResourceUtilizationDistinctEmployeeBySectionAndStartTimeBetween(Section section, Date startDate, Date endDate) {
         return chartRepository.getResourceUtilizationDistinctEmployeeBySectionAndStartTimeBetween(section, startDate, endDate);
     }

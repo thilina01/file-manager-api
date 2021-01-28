@@ -393,6 +393,23 @@ public class ChartController {
         return chartService.getManpowerSummaryBySection(new Date(startDate), new Date(endDate), new Section(Integer.valueOf(sectionId)));
     }
 
+    @JsonView(ManpowerSummaryView.All.class)
+    @GetMapping("/manpowerSummaryByShift")
+    public List getManpowerSummaryByShift(@RequestParam(value = "startDate") long startDate,
+            @RequestParam(value = "endDate") long endDate,
+            @RequestParam(value = "shift") String shiftId) {
+        return chartService.getManpowerSummaryByShift(new Date(startDate), new Date(endDate), new Shift(Integer.valueOf(shiftId)));
+    }
+
+    @JsonView(ManpowerSummaryView.All.class)
+    @GetMapping("/manpowerSummaryBySectionAndShift")
+    public List getManpowerSummaryBySectionAndShift(@RequestParam(value = "startDate") long startDate,
+            @RequestParam(value = "endDate") long endDate,
+            @RequestParam(value = "section") String sectionId,
+            @RequestParam(value = "shift") String shiftId) {
+        return chartService.getManpowerSummaryBySectionAndShift(new Date(startDate), new Date(endDate), new Section(Integer.valueOf(sectionId)), new Shift(Integer.valueOf(shiftId)));
+    }
+
     @JsonView(EmployeeView.All.class)
     @GetMapping("/resourceUtilizationDistinctEmployeeBySectionAndStartTimeBetween")
     public List getResourceUtilizationDistinctEmployeeBySectionAndStartTimeBetween(@RequestParam(value = "startDate") long startDate,
