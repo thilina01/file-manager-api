@@ -43,6 +43,9 @@ public class Invoice implements Serializable {
     @JsonView(InvoiceView.InvoiceNumber.class)
     @Column(name = "invoice_number")
     private String invoiceNumber;
+    @JsonView(InvoiceView.SysproInvoiceNumber.class)
+    @Column(name = "syspro_invoice_number")
+    private String sysproInvoiceNumber;
     @JsonView(InvoiceView.Other.class)
     @Column(name = "other")
     private String other;
