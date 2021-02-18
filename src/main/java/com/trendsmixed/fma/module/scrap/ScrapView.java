@@ -1,8 +1,10 @@
 package com.trendsmixed.fma.module.scrap;
 
+import com.trendsmixed.fma.module.defect.DefectView;
 import com.trendsmixed.fma.module.itemtype.ItemTypeView;
 import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.lossreason.LossReasonView;
+import com.trendsmixed.fma.module.operation.OperationView;
 import com.trendsmixed.fma.module.operationtype.OperationTypeView;
 import com.trendsmixed.fma.module.section.SectionView;
 import com.trendsmixed.fma.utility.PageView;
@@ -33,6 +35,9 @@ public class ScrapView {
     public static interface Section extends SectionView.All {
     }
 
+    public static interface Operation extends OperationView.All {
+    }
+
     public static interface OperationType extends OperationTypeView.All {
     }
 
@@ -46,6 +51,9 @@ public class ScrapView {
     }
 
     public static interface AllAndSectionAll extends All, Section {
+    }
+
+    public static interface AllAndOperationAll extends All, Operation {
     }
 
     public static interface AllAndOperationTypeAll extends All, OperationType {

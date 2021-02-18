@@ -1,9 +1,11 @@
 package com.trendsmixed.fma.module.scrap;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.defect.DefectView;
 import com.trendsmixed.fma.module.itemtype.ItemType;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.lossreason.LossReason;
+import com.trendsmixed.fma.module.operation.Operation;
 import com.trendsmixed.fma.module.operationtype.OperationType;
 import com.trendsmixed.fma.module.section.Section;
 import lombok.Data;
@@ -32,6 +34,10 @@ public class Scrap implements Serializable {
     @JsonView(ScrapView.Id.class)
     @Column(name = "id")
     private Integer id;
+    @JsonView(ScrapView.Operation.class)
+    @JoinColumn(name = "operation_id", referencedColumnName = "id")
+    @ManyToOne(optional = true)
+    private Operation operation;
     @JsonView(ScrapView.Quantity.class)
     @Column(name = "quantity")
     private Integer quantity;

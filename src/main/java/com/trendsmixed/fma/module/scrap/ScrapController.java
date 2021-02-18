@@ -1,6 +1,8 @@
 package com.trendsmixed.fma.module.scrap;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.operation.Operation;
+import com.trendsmixed.fma.module.operation.OperationService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +23,7 @@ public class ScrapController {
 
     
     private final ScrapService service;
+    private final OperationService operationService;
 
     @JsonView(ScrapView.All.class)
     @GetMapping
@@ -38,7 +41,15 @@ public class ScrapController {
     @PostMapping
     public Scrap save(@RequestBody Scrap scrap, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        
+
+        Operation operation = operationService.findOne(scrap.getOperation().getId());
+        scrap.setOperation(operation);
+        scrap.setJob(operation.getJob());
+        scrap.setItemType(operation.getJob().getItem().getItemType());
+        scrap.setOperationType(operation.getOperationType());
+        scrap.setSection(operation.getProduction().getControlPoint().getWorkCenter().getCostCenter().getSection());
+        scrap.setScrapDate(operation.getProduction().getProductionDate());
+
         try {
             scrap = service.save(scrap);
             return scrap;
