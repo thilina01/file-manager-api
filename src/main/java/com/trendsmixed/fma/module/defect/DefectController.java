@@ -1,6 +1,8 @@
 package com.trendsmixed.fma.module.defect;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.module.operation.Operation;
+import com.trendsmixed.fma.module.operation.OperationService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +23,7 @@ public class DefectController {
 
     
     private final DefectService service;
+    private final OperationService operationService;
 
     @JsonView(DefectView.All.class)
     @GetMapping
@@ -38,7 +41,14 @@ public class DefectController {
     @PostMapping
     public Defect save(@RequestBody Defect defect, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
-        
+
+        Operation operation = operationService.findOne(defect.getOperation().getId());
+        defect.setOperation(operation);
+        defect.setJob(operation.getJob());
+        defect.setItemType(operation.getJob().getItem().getItemType());
+        defect.setOperationType(operation.getOperationType());
+        defect.setSection(operation.getProduction().getControlPoint().getWorkCenter().getCostCenter().getSection());
+        defect.setDefectDate(operation.getProduction().getProductionDate());
         try {
             defect = service.save(defect);
             return defect;

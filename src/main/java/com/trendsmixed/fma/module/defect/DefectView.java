@@ -3,6 +3,7 @@ package com.trendsmixed.fma.module.defect;
 import com.trendsmixed.fma.module.itemtype.ItemTypeView;
 import com.trendsmixed.fma.module.job.JobView;
 import com.trendsmixed.fma.module.lossreason.LossReasonView;
+import com.trendsmixed.fma.module.operation.OperationView;
 import com.trendsmixed.fma.module.operationtype.OperationTypeView;
 import com.trendsmixed.fma.module.section.SectionView;
 import com.trendsmixed.fma.utility.PageView;
@@ -33,6 +34,9 @@ public class DefectView {
     public static interface Section extends SectionView.All {
     }
 
+    public static interface Operation extends OperationView.All {
+    }
+
     public static interface OperationType extends OperationTypeView.All {
     }
 
@@ -46,6 +50,9 @@ public class DefectView {
     }
 
     public static interface AllAndSectionAll extends All, Section {
+    }
+
+    public static interface AllAndOperationAll extends All, Operation {
     }
 
     public static interface AllAndOperationTypeAll extends All, OperationType {
