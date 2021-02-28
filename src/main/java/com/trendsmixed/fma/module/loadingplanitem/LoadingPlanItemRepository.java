@@ -3,6 +3,7 @@ package com.trendsmixed.fma.module.loadingplanitem;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
+import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.job.Job;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,8 @@ public interface LoadingPlanItemRepository extends PagingAndSortingRepository<Lo
         List<Combo> getCombo();
 
         Iterable<LoadingPlanItem> findByLoadingPlanDispatchNote(DispatchNote dispatchNote);
+
+        Iterable<LoadingPlanItem> findByDispatchSchedule(DispatchSchedule dispatchSchedule);
 
         Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomer(Customer customer, Pageable pageable);
 

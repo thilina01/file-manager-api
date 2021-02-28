@@ -3,6 +3,7 @@ package com.trendsmixed.fma.module.loadingplanitem;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
+import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.job.Job;
 import lombok.AllArgsConstructor;
@@ -50,6 +51,10 @@ public class LoadingPlanItemService {
     
     public Iterable<LoadingPlanItem> findByLoadingPlanDispatchNote(DispatchNote dispatchNote) {
         return repository.findByLoadingPlanDispatchNote(dispatchNote);
+    }
+
+    public Iterable<LoadingPlanItem> findByDispatchSchedule(DispatchSchedule dispatchSchedule) {
+        return repository.findByDispatchSchedule(dispatchSchedule);
     }
 
     Page<LoadingPlanItem> findByLoadingPlanDispatchNoteCustomer(Customer customer, Pageable pageable) {

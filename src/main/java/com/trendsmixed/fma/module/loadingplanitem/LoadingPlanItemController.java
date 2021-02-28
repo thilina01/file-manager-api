@@ -5,6 +5,7 @@ import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
+import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.item.ItemService;
 import com.trendsmixed.fma.module.job.Job;
@@ -61,6 +62,12 @@ public class LoadingPlanItemController {
     @GetMapping("/dispatchNote/{id}")
     public Iterable<LoadingPlanItem> findByLoadingPlanDispatchNote(@PathVariable("id") int id) {
         return service.findByLoadingPlanDispatchNote(new DispatchNote(id));
+    }
+
+    @JsonView(LoadingPlanItemView.All.class)
+    @GetMapping("/dispatchSchedule/{id}")
+    public Iterable<LoadingPlanItem> findByDispatchSchedule(@PathVariable("id") int id) {
+        return service.findByDispatchSchedule(new DispatchSchedule(id));
     }
 
     @JsonView(LoadingPlanItemView.AllAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPalletSizeAndLoadingPlanAndCustomerAndDispatchNote.class)
