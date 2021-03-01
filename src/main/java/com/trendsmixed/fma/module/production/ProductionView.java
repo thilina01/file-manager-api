@@ -110,7 +110,8 @@ public class ProductionView {
                         extends
                         AllAndShiftAllAndControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll,
                         ProductionEmployee, ProductionEmployeeView.AllAndEmployeeAll, ResourceUtilization,
-                        ResourceUtilizationView.AllAndMachineAll, ResourceUtilizationView.AllAndEmployeeAll, ShiftType {
+                        ResourceUtilizationView.AllAndMachineAll, ResourceUtilizationView.AllAndEmployeeAll, ShiftType,
+                        OperationView.OperationProgress{
         }
 
 }
