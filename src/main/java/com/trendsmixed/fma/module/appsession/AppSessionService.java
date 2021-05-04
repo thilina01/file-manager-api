@@ -43,12 +43,12 @@ public class AppSessionService {
         String methodString = request.getMethod();
         String remoteAddress = request.getRemoteAddr();
         String servletPath = request.getServletPath();
-        String servletPathSplit = servletPath.contains("/")?servletPath.split("/")[1]:"";
+        String[] servletPathSplit = servletPath.split("/");
         String pathInfo = request.getPathInfo();
         // System.out.println("Validating: " + email);
         // System.out.println("RequestURI: " + requestURI);
         System.out.println("servletPath: " + servletPath);
-        System.out.println("servletPath split: " + servletPathSplit);
+        System.out.println("servletPath split: " + (servletPathSplit.length > 1 ? servletPathSplit[1] : ""));
         // System.out.println("contextPath: " + contextPath);
         // System.out.println("pathInfo: " + pathInfo);
         System.out.println("Method: " + methodString);
