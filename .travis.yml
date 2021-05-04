@@ -5,8 +5,7 @@ services:
 
 before_install:
   - docker build -t thilina01/oms-api:latest -t thilina01/oms-api:0.0.1 .
-  - docker run --rm -d thilina01/oms-api:0.0.1
-  - docker ps -a
+  - docker image ls
 
 install:
   - echo "install nothing!"
