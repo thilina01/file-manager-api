@@ -6,7 +6,7 @@
     <groupId>com.trendsmixed</groupId>
     <artifactId>file-manager-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>file-manager-api</name>
     <description>API for file management system</description>
 
