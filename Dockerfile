@@ -19,6 +19,15 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 # Production Stage for Spring boot application image
 FROM openjdk:8-jre-alpine as production
 ARG DEPENDENCY=/app/target/dependency
+ARG TZ='Asia/Colombo'
+ENV DEFAULT_TZ ${TZ}
+
+RUN apk upgrade --update \
+  && apk add -U tzdata \
+  && cp /usr/share/zoneinfo/${DEFAULT_TZ} /etc/localtime \
+  #&& apk del tzdata \
+  && rm -rf \
+  /var/cache/apk/*
 
 # Copy the dependency application file from build stage artifact
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
