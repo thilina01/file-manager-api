@@ -1,8 +1,26 @@
 language: java
-sudo: true
-jdk:
-  - openjdk8
-os:
-  - linux
+
+services:
+  - docker
+
 before_install:
-  - chmod +x mvnw
+  - docker build -t thilina01/oms-api:latest -t thilina01/oms-api:0.0.1 .
+  - docker run --rm -d thilina01/oms-api:0.0.1
+  - docker ps -a
+
+install:
+  - echo "install nothing!"
+
+script:
+  - echo "no tests!"
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
+
+notifications:
+  email: # only receive email when the build status changes (someone broke the build!)
+    on_failure: change
+    on_success: change
