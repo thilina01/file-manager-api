@@ -2,9 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    paths: "pom.xml"
 
 jobs:
   docker:
@@ -15,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
       - 
         name: Extract Maven project version
-        run: echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        run: echo ::set-output name=version::$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
         id: project
       - 
         name: Show extracted Maven project version
