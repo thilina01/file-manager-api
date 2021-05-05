@@ -33,5 +33,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: thilina01/oms:latest, thilina01/oms:${{ steps.project.outputs.version }}
+          tags: thilina01/oms-api:latest, thilina01/oms-api:${{ steps.project.outputs.version }}
         
