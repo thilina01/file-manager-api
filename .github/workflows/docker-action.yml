@@ -23,7 +23,8 @@ jobs:
       - 
         name: Extract Maven project version
         run: |
-          V=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
+          V=$( mvn help:evaluate -Dexpression=project.version -q  )
+          mvn help:evaluate -Dexpression=project.version -q 
           echo "::set-output name=version::$V"
           echo $V
           echo ${{ steps.project.outputs.version }}
