@@ -25,6 +25,8 @@ jobs:
         run: |
           VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
           echo "::set-output name=version::$VERSION"
+          echo $VERSION
+          echo ${{ steps.project.outputs.version }}
         id: project
 
       - 
