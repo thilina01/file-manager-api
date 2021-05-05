@@ -3,6 +3,7 @@ name: Docker Image CI
 on:
   push:
     paths: "pom.xml"
+  workflow_dispatch:
 
 jobs:
   docker:
