@@ -13,13 +13,11 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
-        
       - 
-        name: Set Release version env variable
-        run: |
-          echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
-          
+        name: Extract Maven project version
+        run: echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        id: project
       - 
         name: Show extracted Maven project version
-        run: echo ${{ env.RELEASE_VERSION }}
+        run: echo ${{ steps.project.outputs.version }}
         
