@@ -23,9 +23,9 @@ jobs:
       - 
         name: Extract Maven project version
         run: |
-          VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
-          echo "::set-output name=version::$VERSION"
-          echo $VERSION
+          V=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
+          echo "::set-output name=version::$V"
+          echo $V
           echo ${{ steps.project.outputs.version }}
         id: project
 
@@ -33,13 +33,4 @@ jobs:
         name: Show extracted Maven project version
         run: echo ${{ steps.project.outputs.version }}
         
-      -
-        name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: thilina01/oms:latest, thilina01/oms:${{ steps.project.outputs.version }}
-      -
-        name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+
