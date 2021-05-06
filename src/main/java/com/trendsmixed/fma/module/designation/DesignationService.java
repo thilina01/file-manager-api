@@ -31,15 +31,15 @@ public class DesignationService {
     }
 
     public void save(List<Designation> designations) {
-        repository.save(designations);
+        repository.saveAll(designations);
     }
 
-    public Designation findOne(int id) {
-        return repository.findOne(id);
+    public Designation findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Designation findByName(String name) {

@@ -33,15 +33,15 @@ public class SubcontractReworkOperationService {
     }
 
     public void save(List<SubcontractReworkOperation> subcontractReworkOperationList) {
-        repository.save(subcontractReworkOperationList);
+        repository.saveAll(subcontractReworkOperationList);
     }
 
-    public SubcontractReworkOperation findOne(int id) {
-        return repository.findOne(id);
+    public SubcontractReworkOperation findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

@@ -26,15 +26,15 @@ public class LabourCostPerKgService {
     }
 
     public void save(List<LabourCostPerKg> labourCostPerKgs) {
-        repository.save(labourCostPerKgs);
+        repository.saveAll(labourCostPerKgs);
     }
 
-    public LabourCostPerKg findOne(int id) {
-        return repository.findOne(id);
+    public LabourCostPerKg findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

@@ -19,11 +19,11 @@ public class FileInformationService {
         return fileRepository.save(file);
     }
 
-    public FileInformation findOne(int id) {
-        return fileRepository.findOne(id);
+    public FileInformation findById(int id) {
+        return fileRepository.findById(id).get();
     }
 
-    public void delete(int id) {
-        fileRepository.delete(id);
+    public void deleteById(int id) {
+        fileRepository.deleteById(id);
     }
 }

@@ -36,15 +36,15 @@ public class LossReasonService {
     }
 
     public void save(List<LossReason> lossReasons) {
-        repository.save(lossReasons);
+        repository.saveAll(lossReasons);
     }
 
-    public LossReason findOne(int id) {
-        return repository.findOne(id);
+    public LossReason findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public LossReason findByCode(String code) {

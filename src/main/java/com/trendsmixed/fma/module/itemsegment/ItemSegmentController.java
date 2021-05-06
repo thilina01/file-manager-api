@@ -54,13 +54,13 @@ public class ItemSegmentController {
     @JsonView(ItemSegmentView.All.class)
     @GetMapping("/{id}")
     public ItemSegment findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

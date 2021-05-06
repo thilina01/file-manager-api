@@ -26,15 +26,15 @@ public class MaterialCostPerKgService {
     }
 
     public void save(List<MaterialCostPerKg> materialCostPerKgs) {
-        repository.save(materialCostPerKgs);
+        repository.saveAll(materialCostPerKgs);
     }
 
-    public MaterialCostPerKg findOne(int id) {
-        return repository.findOne(id);
+    public MaterialCostPerKg findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

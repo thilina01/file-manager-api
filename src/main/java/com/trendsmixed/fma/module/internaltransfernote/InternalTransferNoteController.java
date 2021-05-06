@@ -95,7 +95,7 @@ public class InternalTransferNoteController {
     @PostMapping("/release")
     public InternalTransferNote saveReleaseInformation(@RequestBody InternalTransferNote internalTransferNote) {
         try {
-            InternalTransferNote existingInternalTransferNote = service.findOne(internalTransferNote.getId());
+            InternalTransferNote existingInternalTransferNote = service.findById(internalTransferNote.getId());
             existingInternalTransferNote.setRecipient(internalTransferNote.getRecipient());
             existingInternalTransferNote.setVehicleNumber(internalTransferNote.getVehicleNumber());
             existingInternalTransferNote.setReleaseTime(internalTransferNote.getReleaseTime());
@@ -112,7 +112,7 @@ public class InternalTransferNoteController {
     @PostMapping("/arrival")
     public InternalTransferNote saveInternalTransferArrival(@RequestBody InternalTransferNote internalTransferNote) {
         try {
-            InternalTransferNote existingInternalTransferNote = service.findOne(internalTransferNote.getId());
+            InternalTransferNote existingInternalTransferNote = service.findById(internalTransferNote.getId());
             existingInternalTransferNote.setArrivalTime(internalTransferNote.getArrivalTime());
             return service.save(existingInternalTransferNote);
 
@@ -154,12 +154,12 @@ public class InternalTransferNoteController {
     @JsonView(InternalTransferNoteView.AllAndFromLocationAndToLocationAndInternalTransferItemAndProductTypeAndJobAndItem.class)
     @GetMapping("/{id}")
     public InternalTransferNote findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

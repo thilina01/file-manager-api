@@ -26,12 +26,12 @@ public class BreakdownService {
         return repository.save(breakdown);
     }
 
-    public Breakdown findOne(int id) {
-        return repository.findOne(id);
+    public Breakdown findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
     
     public Page<Breakdown> findByBreakdownTimeBetween(Date startDate, Date endDate, Pageable pageable) {

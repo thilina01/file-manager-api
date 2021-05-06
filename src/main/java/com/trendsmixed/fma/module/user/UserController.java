@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.entity.AppSession;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.status.Status;
 import com.trendsmixed.fma.module.status.StatusService;
@@ -9,8 +10,11 @@ import com.trendsmixed.fma.utility.MailService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +57,7 @@ public class UserController {
             int userId = user.getId();
 
             if (userId > 0) {
-                User existingUser = service.findOne(userId);
+                User existingUser = service.findById(userId);
                 if (user.getPassword() == null) {
                     user.setPassword(existingUser.getPassword());
                 }
@@ -84,20 +88,24 @@ public class UserController {
     @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
     @GetMapping("/{id}")
     public User findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
     @GetMapping("/own")
     public User own(@RequestHeader(value = "loginTimeMills", defaultValue = "") long loginTimeMills) {
-        String email = appSessionService.findFirstByLoginTimeMills(loginTimeMills).getEmail();
-        return service.findByEmail(email);
+        AppSession appSession = appSessionService.findFirstByLoginTimeMills(loginTimeMills);
+        if (appSession != null) {
+            String email = appSession.getEmail();
+            return service.findByEmail(email);
+        }
+        throw new Error("No associated session");
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
     }
 
     @PutMapping("/{id}")

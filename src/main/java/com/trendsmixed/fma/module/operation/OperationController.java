@@ -110,14 +110,14 @@ public class OperationController {
     @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAllOperationProgressAll.class)
     @GetMapping("/{id}")
     public Operation findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

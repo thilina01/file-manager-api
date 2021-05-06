@@ -32,15 +32,15 @@ public class DebitNoteItemService {
     }
 
     public void save(List<DebitNoteItem> debitNoteItemList) {
-        repository.save(debitNoteItemList);
+        repository.saveAll(debitNoteItemList);
     }
 
-    public DebitNoteItem findOne(int id) {
-        return repository.findOne(id);
+    public DebitNoteItem findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

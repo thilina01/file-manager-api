@@ -31,15 +31,15 @@ public class ToolService {
     }
 
     public void save(List<Tool> tools) {
-        repository.save(tools);
+        repository.saveAll(tools);
     }
 
-    public Tool findOne(int id) {
-        return repository.findOne(id);
+    public Tool findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Tool findByCode(String code) {

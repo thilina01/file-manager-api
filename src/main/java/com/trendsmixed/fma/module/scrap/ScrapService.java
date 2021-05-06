@@ -29,15 +29,15 @@ public class ScrapService {
     }
 
     public void save(List<Scrap> scraps) {
-        repository.save(scraps);
+        repository.saveAll(scraps);
     }
 
-    public Scrap findOne(int id) {
-        return repository.findOne(id);
+    public Scrap findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Page<Scrap>findByScrapDateBetween(Date startDate, Date endDate, Pageable pageable) {

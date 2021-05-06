@@ -26,15 +26,15 @@ public class EnergyConsumptionService {
     }
 
     public void save(List<EnergyConsumption> energyConsumptions) {
-        repository.save(energyConsumptions);
+        repository.saveAll(energyConsumptions);
     }
 
-    public EnergyConsumption findOne(int id) {
-        return repository.findOne(id);
+    public EnergyConsumption findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

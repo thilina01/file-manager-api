@@ -75,13 +75,13 @@ public class ControlPointTypeController {
     @GetMapping("/{id}")
     @JsonView(ControlPointTypeView.All.class)
     public ControlPointType findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

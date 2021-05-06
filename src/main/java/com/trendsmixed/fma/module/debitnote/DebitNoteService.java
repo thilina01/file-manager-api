@@ -26,12 +26,12 @@ public class DebitNoteService {
         return repository.save(debitNote);
     }
 
-    public DebitNote findOne(int id) {
-        return repository.findOne(id);
+    public DebitNote findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
     public List<Combo> getCombo() {
         return repository.getCombo();

@@ -170,7 +170,7 @@ public class DispatchScheduleController {
                     job.setJobType(jobTypeService.findByCode("Order"));
                     job.setDispatchScheduleList(new ArrayList<>());
                 } else {
-                    job = jobService.findOne(job.getId());
+                    job = jobService.findById(job.getId());
                 }
             }
 
@@ -188,13 +188,13 @@ public class DispatchScheduleController {
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping("/{id}")
     public DispatchSchedule findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
     }
 
     @PutMapping("/{id}")

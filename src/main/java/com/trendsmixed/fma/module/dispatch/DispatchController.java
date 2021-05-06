@@ -99,7 +99,7 @@ public class DispatchController {
             List<JobDispatch> jobDispatchs = dispatch.getJobDispatchList();
             for (JobDispatch jobDispatch : jobDispatchs) {
                 jobDispatch.setDispatch(dispatch);
-                Job job = jobService.findOne(jobDispatch.getJob().getId());
+                Job job = jobService.findById(jobDispatch.getJob().getId());
 
                 double dispatchQuantity = jobDispatch.getQuantity();
                 jobService.save(job);
@@ -119,13 +119,13 @@ public class DispatchController {
     @JsonView(DispatchView.AllAndCustomerAllAndJobDispatchAll.class)
     @GetMapping("/{id}")
     public Dispatch findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

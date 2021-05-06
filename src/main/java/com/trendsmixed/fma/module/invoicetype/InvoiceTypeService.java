@@ -31,15 +31,15 @@ public class InvoiceTypeService {
     }
 
     public void save(List<InvoiceType> invoiceTypes) {
-        repository.save(invoiceTypes);
+        repository.saveAll(invoiceTypes);
     }
 
-    public InvoiceType findOne(int id) {
-        return repository.findOne(id);
+    public InvoiceType findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public InvoiceType findByName(String name) {

@@ -30,12 +30,12 @@ public class CurrencyService {
         return repository.save(currency);
     }
 
-    public Currency findOne(int id) {
-        return repository.findOne(id);
+    public Currency findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Currency findByCode(String code) {

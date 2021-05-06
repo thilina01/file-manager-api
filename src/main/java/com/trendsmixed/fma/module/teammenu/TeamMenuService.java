@@ -22,23 +22,23 @@ public class TeamMenuService {
     }
 
     public List<TeamMenu> save(List<TeamMenu> teamMenus) {
-        return teamMenuRepository.save(teamMenus);
+        return teamMenuRepository.saveAll(teamMenus);
     }
 
-    public TeamMenu findOne(int id) {
-        return teamMenuRepository.findOne(id);
+    public TeamMenu findById(int id) {
+        return teamMenuRepository.findById(id).get();
     }
 
     public List<Menu> findTopMenuByTeam(Team team) {
         return teamMenuRepository.findTopMenuByTeam(team);
     }
 
-    public void delete(int id) {
-        teamMenuRepository.delete(id);
+    public void deleteById(int id) {
+        teamMenuRepository.deleteById(id);
     }
 
     public void delete(List<TeamMenu> teamMenus) {
-        teamMenuRepository.delete(teamMenus);
+        teamMenuRepository.deleteAll(teamMenus);
     }
 
     public TeamMenu findByTeamAndMenu(Team team, Menu menu) {

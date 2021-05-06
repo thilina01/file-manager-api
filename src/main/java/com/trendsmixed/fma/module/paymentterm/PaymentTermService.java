@@ -30,12 +30,12 @@ public class PaymentTermService {
         return repository.save(paymentTerm);
     }
 
-    public PaymentTerm findOne(int id) {
-        return repository.findOne(id);
+    public PaymentTerm findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public PaymentTerm findByCode(String code) {

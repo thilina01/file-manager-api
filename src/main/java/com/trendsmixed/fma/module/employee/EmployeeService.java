@@ -31,15 +31,15 @@ public class EmployeeService {
     }
 
     public void save(List<Employee> employees) {
-        repository.save(employees);
+        repository.saveAll(employees);
     }
 
-    public Employee findOne(int id) {
-        return repository.findOne(id);
+    public Employee findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Employee findByCode(String code) {

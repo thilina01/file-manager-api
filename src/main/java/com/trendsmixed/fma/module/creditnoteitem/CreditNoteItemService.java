@@ -32,15 +32,15 @@ public class CreditNoteItemService {
     }
 
     public void save(List<CreditNoteItem> creditNoteItemList) {
-        repository.save(creditNoteItemList);
+        repository.saveAll(creditNoteItemList);
     }
 
-    public CreditNoteItem findOne(int id) {
-        return repository.findOne(id);
+    public CreditNoteItem findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

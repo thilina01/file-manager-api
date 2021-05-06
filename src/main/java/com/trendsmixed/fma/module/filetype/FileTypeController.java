@@ -37,12 +37,12 @@ public class FileTypeController {
 
     @GetMapping("/{id}")
     public FileType findOne(@PathVariable("id") int id) {
-        return fileTypeService.findOne(id);
+        return fileTypeService.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
-        fileTypeService.delete(id);
+        fileTypeService.deleteById(id);
 
     }
 

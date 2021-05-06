@@ -36,15 +36,15 @@ public class SubcontractOperationRateService {
     }
 
     public void save(List<SubcontractOperationRate> subcontractOperationRateList) {
-        repository.save(subcontractOperationRateList);
+        repository.saveAll(subcontractOperationRateList);
     }
 
-    public SubcontractOperationRate findOne(int id) {
-        return repository.findOne(id);
+    public SubcontractOperationRate findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
     public Page<SubcontractOperationRate> findBySubcontractorOperationSubcontractor( Subcontractor subcontractor, Pageable pageable) {
         return repository.findBySubcontractorOperationSubcontractor( subcontractor, pageable);

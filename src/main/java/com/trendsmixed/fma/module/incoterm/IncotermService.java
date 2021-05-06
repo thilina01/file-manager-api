@@ -30,12 +30,12 @@ public class IncotermService {
         return repository.save(incoterm);
     }
 
-    public Incoterm findOne(int id) {
-        return repository.findOne(id);
+    public Incoterm findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Incoterm findByCode(String code) {

@@ -53,13 +53,13 @@ public class LossController {
 
     @GetMapping("/{id}")
     public Loss findOne(@PathVariable("id") int id) {
-        return lossService.findOne(id);
+        return lossService.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        lossService.delete(id);
+        lossService.deleteById(id);
 
     }
 

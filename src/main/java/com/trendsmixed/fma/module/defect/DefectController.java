@@ -42,7 +42,7 @@ public class DefectController {
     public Defect save(@RequestBody Defect defect, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
 
-        Operation operation = operationService.findOne(defect.getOperation().getId());
+        Operation operation = operationService.findById(defect.getOperation().getId());
         defect.setOperation(operation);
         defect.setJob(operation.getJob());
         defect.setItemType(operation.getJob().getItem().getItemType());
@@ -97,14 +97,14 @@ public class DefectController {
     @JsonView(DefectView.AllAndItemTypeAllAndLossReasonAllAndOperationTypeAllAndSectionAllAndJobAll.class)
     @GetMapping("/{id}")
     public Defect findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

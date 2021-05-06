@@ -24,7 +24,7 @@ public class AppSessionService {
     }
 
     public AppSession findOne(String email) {
-        return appSessionRepository.findOne(email);
+        return appSessionRepository.findById(email).get();
     }
 
     public AppSession findFirstByLoginTimeMills(long loginTimeMills) {

@@ -31,15 +31,15 @@ public class MachineService {
     }
 
     public void save(List<Machine> machines) {
-        repository.save(machines);
+        repository.saveAll(machines);
     }
 
-    public Machine findOne(int id) {
-        return repository.findOne(id);
+    public Machine findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Machine findByCode(String code) {

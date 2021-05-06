@@ -36,15 +36,15 @@ public class SubcontractArrivalRejectService {
     }
 
     public void save(List<SubcontractArrivalReject> subcontractArrivalRejectList) {
-        repository.save(subcontractArrivalRejectList);
+        repository.saveAll(subcontractArrivalRejectList);
     }
 
-    public SubcontractArrivalReject findOne(int id) {
-        return repository.findOne(id);
+    public SubcontractArrivalReject findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Iterable<SubcontractArrivalReject> findBySubcontractArrivalSubcontractOperationSubcontractOperationRateSubcontractorOperationSubcontractor(Subcontractor subcontractor) {

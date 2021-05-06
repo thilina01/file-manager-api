@@ -26,15 +26,15 @@ public class SalesPerKgService {
     }
 
     public void save(List<SalesPerKg> salesPerKgs) {
-        repository.save(salesPerKgs);
+        repository.saveAll(salesPerKgs);
     }
 
-    public SalesPerKg findOne(int id) {
-        return repository.findOne(id);
+    public SalesPerKg findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

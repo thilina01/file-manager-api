@@ -31,15 +31,15 @@ public class PortService {
     }
 
     public void save(List<Port> ports) {
-        repository.save(ports);
+        repository.saveAll(ports);
     }
 
-    public Port findOne(int id) {
-        return repository.findOne(id);
+    public Port findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Port findByCode(String code) {

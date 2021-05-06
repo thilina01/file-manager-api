@@ -31,15 +31,15 @@ public class CostCenterService {
     }
 
     public void save(List<CostCenter> costCenters) {
-        repository.save(costCenters);
+        repository.saveAll(costCenters);
     }
 
-    public CostCenter findOne(int id) {
-        return repository.findOne(id);
+    public CostCenter findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public CostCenter findByCode(String code) {

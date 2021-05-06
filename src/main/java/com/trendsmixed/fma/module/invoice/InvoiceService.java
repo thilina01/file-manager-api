@@ -32,12 +32,12 @@ public class InvoiceService {
         return repository.save(invoice);
     }
 
-    public Invoice findOne(int id) {
-        return repository.findOne(id);
+    public Invoice findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Page<Invoice> findByInvoiceDateBetween(Date startDate, Date endDate, Pageable pageable) {

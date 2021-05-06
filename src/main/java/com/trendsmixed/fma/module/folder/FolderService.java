@@ -19,12 +19,12 @@ public class FolderService {
         return folderRepository.save(folder);
     }
 
-    public Folder findOne(int id) {
-        return folderRepository.findOne(id);
+    public Folder findById(int id) {
+        return folderRepository.findById(id).get();
     }
 
-    public void delete(int id) {
-        folderRepository.delete(id);
+    public void deleteById(int id) {
+        folderRepository.deleteById(id);
     }
 
     public List<Folder> findByFolderIsNull() {

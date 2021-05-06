@@ -31,15 +31,15 @@ public class CustomerService {
     }
 
     public void save(List<Customer> customers) {
-        repository.save(customers);
+        repository.saveAll(customers);
     }
 
-    public Customer findOne(int id) {
-        return repository.findOne(id);
+    public Customer findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Customer findByCode(String code) {

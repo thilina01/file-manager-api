@@ -115,7 +115,7 @@ public class DispatchNoteController {
                       
                       if (loadingPlans != null) {
                           for (LoadingPlan loadingPlan : loadingPlans) {
-                            LoadingPlan loadingPlanToUpdate = loadingPlanService.findOne(loadingPlan.getId());
+                            LoadingPlan loadingPlanToUpdate = loadingPlanService.findById(loadingPlan.getId());
                             loadingPlanToUpdate.setDispatchNote(dispatchNote);
                             loadingPlansToUpdate.add(loadingPlanToUpdate);
                           }
@@ -138,7 +138,7 @@ public class DispatchNoteController {
     public DispatchNote saveReleaseInformation(@RequestBody DispatchNote dispatchNote) {
         
         try {
-            DispatchNote existingDispatchNote = service.findOne(dispatchNote.getId());
+            DispatchNote existingDispatchNote = service.findById(dispatchNote.getId());
             existingDispatchNote.setRecipient(dispatchNote.getRecipient());
             existingDispatchNote.setContainerNumber(dispatchNote.getContainerNumber());
             existingDispatchNote.setVehicleNumber(dispatchNote.getVehicleNumber());
@@ -171,7 +171,7 @@ public class DispatchNoteController {
     @JsonView(DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndInvoiceAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomerAndLocation.class)
     @GetMapping("/{id}")
     public DispatchNote findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -181,7 +181,7 @@ public class DispatchNoteController {
             loadingPlan.setDispatchNote(null);
             loadingPlanService.save(loadingPlan);
         }
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

@@ -91,7 +91,7 @@ public class SubcontractNoteController {
     @PostMapping("/release")
     public SubcontractNote saveReleaseInformation(@RequestBody SubcontractNote subcontractNote) {
         try {
-            SubcontractNote existingSubcontractNote = service.findOne(subcontractNote.getId());
+            SubcontractNote existingSubcontractNote = service.findById(subcontractNote.getId());
             existingSubcontractNote.setRecipient(subcontractNote.getRecipient());
             existingSubcontractNote.setContainerNumber(subcontractNote.getContainerNumber());
             existingSubcontractNote.setVehicleNumber(subcontractNote.getVehicleNumber());
@@ -137,12 +137,12 @@ public class SubcontractNoteController {
     @JsonView(SubcontractNoteView.AllAndSubcontractOperationAndJobAndSubcontractOperationRateAndSubcontractorOperationAndSubcontractOperationDefinitionAndSubcontractorAndItemAndOperationTypeAndProductTypeAndLocation.class)
     @GetMapping("/{id}")
     public SubcontractNote findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

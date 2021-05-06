@@ -31,15 +31,15 @@ public class ComputerTypeService {
     }
 
     public void save(List<ComputerType> computerTypes) {
-        repository.save(computerTypes);
+        repository.saveAll(computerTypes);
     }
 
-    public ComputerType findOne(int id) {
-        return repository.findOne(id);
+    public ComputerType findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public ComputerType findByName(String name) {

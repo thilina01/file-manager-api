@@ -26,15 +26,15 @@ public class SalesWeightService {
     }
 
     public void save(List<SalesWeight> salesWeights) {
-        repository.save(salesWeights);
+        repository.saveAll(salesWeights);
     }
 
-    public SalesWeight findOne(int id) {
-        return repository.findOne(id);
+    public SalesWeight findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

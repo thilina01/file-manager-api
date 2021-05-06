@@ -37,15 +37,15 @@ public class CustomerItemService {
     }
 
     public void save(List<CustomerItem> customerItems) {
-        repository.save(customerItems);
+        repository.saveAll(customerItems);
     }
 
-    public CustomerItem findOne(int id) {
-        return repository.findOne(id);
+    public CustomerItem findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     Page<CustomerItem> findByCustomer(Customer customer, Pageable pageable) {

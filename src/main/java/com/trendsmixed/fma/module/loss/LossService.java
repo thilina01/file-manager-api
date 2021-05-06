@@ -20,15 +20,15 @@ public class LossService {
     }
 
     public void save(List<Loss> losses) {
-        lossRepository.save(losses);
+        lossRepository.saveAll(losses);
     }
 
-    public Loss findOne(int id) {
-        return lossRepository.findOne(id);
+    public Loss findById(int id) {
+        return lossRepository.findById(id).get();
     }
 
-    public void delete(int id) {
-        lossRepository.delete(id);
+    public void deleteById(int id) {
+        lossRepository.deleteById(id);
     }
 
 }

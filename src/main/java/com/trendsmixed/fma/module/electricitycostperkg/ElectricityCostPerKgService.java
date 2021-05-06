@@ -26,15 +26,15 @@ public class ElectricityCostPerKgService {
     }
 
     public void save(List<ElectricityCostPerKg> electricityCostPerKgs) {
-        repository.save(electricityCostPerKgs);
+        repository.saveAll(electricityCostPerKgs);
     }
 
-    public ElectricityCostPerKg findOne(int id) {
-        return repository.findOne(id);
+    public ElectricityCostPerKg findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

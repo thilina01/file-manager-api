@@ -134,7 +134,7 @@ public class JobController {
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/{id}")
     public Job findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
@@ -157,7 +157,7 @@ public class JobController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
     }
 
     @PutMapping("/{id}")

@@ -36,15 +36,15 @@ public class SubcontractNoteService {
     }
 
     public void save(List<SubcontractNote> subcontractNoteList) {
-        repository.save(subcontractNoteList);
+        repository.saveAll(subcontractNoteList);
     }
 
-    public SubcontractNote findOne(int id) {
-        return repository.findOne(id);
+    public SubcontractNote findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Page<SubcontractNote>findByNoteTimeBetween(Date startDate, Date endDate, Pageable pageable) {

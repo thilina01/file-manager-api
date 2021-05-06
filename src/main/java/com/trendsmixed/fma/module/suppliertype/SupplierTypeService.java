@@ -31,15 +31,15 @@ public class SupplierTypeService {
     }
 
     public void save(List<SupplierType> supplierTypes) {
-        repository.save(supplierTypes);
+        repository.saveAll(supplierTypes);
     }
 
-    public SupplierType findOne(int id) {
-        return repository.findOne(id);
+    public SupplierType findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public SupplierType findByName(String name) {

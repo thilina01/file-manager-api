@@ -31,15 +31,15 @@ public class AccidentTypeService {
     }
 
     public void save(List<AccidentType> accidentTypes) {
-        repository.save(accidentTypes);
+        repository.saveAll(accidentTypes);
     }
 
-    public AccidentType findOne(int id) {
-        return repository.findOne(id);
+    public AccidentType findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public AccidentType findByName(String name) {

@@ -19,11 +19,11 @@ public class DeliveryService {
         return deliveryRepository.save(delivery);
     }
 
-    public Delivery findOne(int id) {
-        return deliveryRepository.findOne(id);
+    public Delivery findById(int id) {
+        return deliveryRepository.findById(id).get();
     }
 
-    public void delete(int id) {
-        deliveryRepository.delete(id);
+    public void deleteById(int id) {
+        deliveryRepository.deleteById(id);
     }
 }

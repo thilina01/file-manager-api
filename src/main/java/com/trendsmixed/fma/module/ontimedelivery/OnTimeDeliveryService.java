@@ -31,15 +31,15 @@ public class OnTimeDeliveryService {
     }
 
     public void save(List<OnTimeDelivery> onTimeDeliveries) {
-        repository.save(onTimeDeliveries);
+        repository.saveAll(onTimeDeliveries);
     }
 
-    public OnTimeDelivery findOne(int id) {
-        return repository.findOne(id);
+    public OnTimeDelivery findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

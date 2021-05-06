@@ -26,15 +26,15 @@ public class ScrapCostPerKgService {
     }
 
     public void save(List<ScrapCostPerKg> scrapCostPerKgs) {
-        repository.save(scrapCostPerKgs);
+        repository.saveAll(scrapCostPerKgs);
     }
 
-    public ScrapCostPerKg findOne(int id) {
-        return repository.findOne(id);
+    public ScrapCostPerKg findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

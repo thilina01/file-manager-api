@@ -30,12 +30,12 @@ public class LeaveTypeService {
         return repository.save(leaveType);
     }
 
-    public LeaveType findOne(int id) {
-        return repository.findOne(id);
+    public LeaveType findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public LeaveType findByCode(String code) {

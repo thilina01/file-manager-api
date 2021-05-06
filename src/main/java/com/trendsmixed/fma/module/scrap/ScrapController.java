@@ -42,7 +42,7 @@ public class ScrapController {
     public Scrap save(@RequestBody Scrap scrap, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
 
-        Operation operation = operationService.findOne(scrap.getOperation().getId());
+        Operation operation = operationService.findById(scrap.getOperation().getId());
         scrap.setOperation(operation);
         scrap.setJob(operation.getJob());
         scrap.setItemType(operation.getJob().getItem().getItemType());
@@ -98,14 +98,14 @@ public class ScrapController {
     @JsonView(ScrapView.AllAndItemTypeAllAndLossReasonAllAndOperationTypeAllAndSectionAllAndJobAll.class)
     @GetMapping("/{id}")
     public Scrap findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

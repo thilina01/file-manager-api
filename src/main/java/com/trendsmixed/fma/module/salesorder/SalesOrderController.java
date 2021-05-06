@@ -135,7 +135,7 @@ public class SalesOrderController {
             List<SalesOrderItem> salesOrderItems = salesOrder.getSalesOrderItemList();
             for (SalesOrderItem salesOrderItem : salesOrderItems) {
                 if (salesOrderItem.getId() != null) {
-                    SalesOrderItem existingSalesOrderItem = salesOrderItemService.findOne(salesOrderItem.getId());
+                    SalesOrderItem existingSalesOrderItem = salesOrderItemService.findById(salesOrderItem.getId());
                     salesOrderItem.setDispatchScheduleList(existingSalesOrderItem != null ? existingSalesOrderItem.getDispatchScheduleList() : new ArrayList<>());
                 }
                 salesOrderItem.setSalesOrder(salesOrder);
@@ -154,13 +154,13 @@ public class SalesOrderController {
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAllAndSalesOrderItemAllAndCustomerItemAllAndItemAllAndDispatchScheduleAndLoadingPlanItemAndLoadingPlanAndDispatchNoteAndinvoice.class)
     @GetMapping("/{id}")
     public SalesOrder findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

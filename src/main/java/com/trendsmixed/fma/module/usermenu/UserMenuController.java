@@ -45,7 +45,7 @@ public class UserMenuController {
         try {
             UserMenu userMenu = userMenuService.findByUserAndMenu(new User(userId), new Menu(menuId));
             if (userMenu != null) {
-                userMenuService.delete(userMenu.getId());
+                userMenuService.deleteById(userMenu.getId());
             } else {
                 userMenu = new UserMenu();
                 userMenu.setUser(new User(userId));

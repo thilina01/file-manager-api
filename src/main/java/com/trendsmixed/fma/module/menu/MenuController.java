@@ -169,7 +169,7 @@ public class MenuController {
 
     @GetMapping("/{id}")
     public Menu findOne(@PathVariable("id") int id) {
-        return menuService.findOne(id);
+        return menuService.findById(id);
     }
 
     @JsonView(MenuView.AllAndSubMenu.class)
@@ -181,7 +181,7 @@ public class MenuController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        menuService.delete(id);
+        menuService.deleteById(id);
 
     }
 

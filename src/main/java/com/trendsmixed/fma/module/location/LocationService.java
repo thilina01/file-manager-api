@@ -31,15 +31,15 @@ public class LocationService {
     }
 
     public void save(List<Location> locations) {
-        repository.save(locations);
+        repository.saveAll(locations);
     }
 
-    public Location findOne(int id) {
-        return repository.findOne(id);
+    public Location findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Location findByCode(String code) {

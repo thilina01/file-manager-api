@@ -42,7 +42,7 @@ public class ShiftController {
     @JsonView(ShiftView.All.class)
     @GetMapping("/{id}")
     public Shift findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @JsonView(ShiftView.All.class)
@@ -59,7 +59,7 @@ public class ShiftController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
     }
 
     @PutMapping("/{id}")

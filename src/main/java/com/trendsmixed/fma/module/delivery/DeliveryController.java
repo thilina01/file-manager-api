@@ -39,13 +39,13 @@ public class DeliveryController {
 
     @GetMapping("/{id}")
     public Delivery findOne(@PathVariable("id") int id) {
-        return deliveryService.findOne(id);
+        return deliveryService.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        deliveryService.delete(id);
+        deliveryService.deleteById(id);
 
     }
 

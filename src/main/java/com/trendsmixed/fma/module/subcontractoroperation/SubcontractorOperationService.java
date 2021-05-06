@@ -34,15 +34,15 @@ public class SubcontractorOperationService {
     }
 
     public void save(List<SubcontractorOperation> subcontractorOperationList) {
-        repository.save(subcontractorOperationList);
+        repository.saveAll(subcontractorOperationList);
     }
 
-    public SubcontractorOperation findOne(int id) {
-        return repository.findOne(id);
+    public SubcontractorOperation findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
     
     public Page<SubcontractorOperation> findBySubcontractor(Subcontractor subcontractor,  Pageable pageable) {

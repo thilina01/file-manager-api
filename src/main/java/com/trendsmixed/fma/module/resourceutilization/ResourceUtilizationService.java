@@ -35,15 +35,15 @@ public class ResourceUtilizationService {
     }
 
     public void save(List<ResourceUtilization> resourceUtilizations) {
-        repository.save(resourceUtilizations);
+        repository.saveAll(resourceUtilizations);
     }
 
-    public ResourceUtilization findOne(int id) {
-        return repository.findOne(id);
+    public ResourceUtilization findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Page<ResourceUtilization> findByProductionProductionDateBetweenAndProductionShift(Date startDate, Date endDate, Shift shift, Pageable pageable) {

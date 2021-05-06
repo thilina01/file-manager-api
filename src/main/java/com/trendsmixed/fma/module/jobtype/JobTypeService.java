@@ -30,16 +30,16 @@ public class JobTypeService {
         return repository.save(jobType);
     }
 
-    public JobType findOne(int id) {
-        return repository.findOne(id);
+    public JobType findById(int id) {
+        return repository.findById(id).get();
     }
 
     public JobType findByCode(String code) {
         return repository.findByCode(code);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

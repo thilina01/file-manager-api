@@ -31,15 +31,15 @@ public class DepartmentService {
     }
 
     public void save(List<Department> departments) {
-        repository.save(departments);
+        repository.saveAll(departments);
     }
 
-    public Department findOne(int id) {
-        return repository.findOne(id);
+    public Department findById(int id) {
+        return repository.findById(id).get();
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Department findByCode(String code) {
