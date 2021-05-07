@@ -1,40 +1,36 @@
 # Build Stage for Spring boot application image
-FROM openjdk:8-jdk-alpine as build
+FROM openjdk:16-jdk-alpine as build
 
-WORKDIR /app
+WORKDIR application
 
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
-
-RUN chmod +x ./mvnw
+COPY src src
 # download the dependency if needed or if the pom file is changed
 RUN ./mvnw dependency:go-offline -B
 
-COPY src src
-
 RUN ./mvnw package -DskipTests
-RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+
+RUN cp /application/target/*.jar app.jar
+RUN java -Djarmode=layertools -jar app.jar extract
 
 # Production Stage for Spring boot application image
-FROM openjdk:8-jre-alpine as production
-ARG DEPENDENCY=/app/target/dependency
+FROM openjdk:16-alpine as production
 ARG TZ='Asia/Colombo'
 ENV DEFAULT_TZ ${TZ}
-
 RUN apk upgrade --update \
   && apk add -U tzdata \
   && cp /usr/share/zoneinfo/${DEFAULT_TZ} /etc/localtime \
-  #&& apk del tzdata \
-  && rm -rf \
-  /var/cache/apk/*
+  # && apk del tzdata \
+  && rm -rf /var/cache/apk/*
 
-# Copy the dependency application file from build stage artifact
-COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
+WORKDIR application
+COPY --from=build application/dependencies/ ./
+COPY --from=build application/spring-boot-loader/ ./
+COPY --from=build application/snapshot-dependencies/ ./
+COPY --from=build application/application/ ./
 
-# Run the Spring boot application
-ENTRYPOINT ["java", "-cp", "app:app/lib/*","com.trendsmixed.fma.FileManagerApiApplication"]
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
 
-#docker build -t file-manager-api:0.0.1 .
+#docker build -t thilina01/oms-api:test .
