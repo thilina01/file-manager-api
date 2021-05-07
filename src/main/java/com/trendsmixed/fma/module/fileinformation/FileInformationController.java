@@ -37,7 +37,7 @@ public class FileInformationController {
 //    public Download download(@PathVariable("id") int id, HttpServletResponse response) {
 //        Download download = new Download();
 //        try {
-//            FileInformation fileInformation = fileInformationService.findById(id).get();
+//            FileInformation fileInformation = fileInformationService.findById(id).orElse(null);
 //
 //            int x = id / 100;
 //            java.io.File filePath = new java.io.File("files/" + x + "/" + id + fileInformation.getExtension());
@@ -121,7 +121,7 @@ public class FileInformationController {
     }
 
     private void deleteFile(int id) {
-//        FileInformation file = fileInformationService.findById(id).get();
+//        FileInformation file = fileInformationService.findById(id).orElse(null);
 //        List<Folder> folders = file.getFolderList();
 //        for (Folder folder : folders) {
 //            folder.getFileList().remove(file);

@@ -20,7 +20,7 @@ public class FileInformationService {
     }
 
     public FileInformation findById(int id) {
-        return fileRepository.findById(id).get();
+        return fileRepository.findById(id).orElse(null);
     }
 
     public void deleteById(int id) {

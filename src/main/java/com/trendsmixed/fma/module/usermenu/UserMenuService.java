@@ -26,7 +26,7 @@ public class UserMenuService {
     }
 
     public UserMenu findById(int id) {
-        return userMenuRepository.findById(id).get();
+        return userMenuRepository.findById(id).orElse(null);
     }
 
     public List<Menu> findTopMenuByUser(User user) {

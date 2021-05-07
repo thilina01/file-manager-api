@@ -30,7 +30,7 @@ public class CumulativeSalesPerKgService {
     }
 
     public CumulativeSalesPerKg findById(int id) {
-        return repository.findById(id).get();
+        return repository.findById(id).orElse(null);
     }
 
     public void deleteById(int id) {

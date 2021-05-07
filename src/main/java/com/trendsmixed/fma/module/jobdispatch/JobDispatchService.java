@@ -20,7 +20,7 @@ public class JobDispatchService {
     }
 
     public JobDispatch findById(int id) {
-        return jobDispatchRepository.findById(id).get();
+        return jobDispatchRepository.findById(id).orElse(null);
     }
 
     public void deleteById(int id) {

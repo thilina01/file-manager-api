@@ -20,7 +20,7 @@ public class DeliveryService {
     }
 
     public Delivery findById(int id) {
-        return deliveryRepository.findById(id).get();
+        return deliveryRepository.findById(id).orElse(null);
     }
 
     public void deleteById(int id) {

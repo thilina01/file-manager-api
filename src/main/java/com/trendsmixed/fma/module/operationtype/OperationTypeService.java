@@ -31,7 +31,7 @@ public class OperationTypeService {
     }
 
     public OperationType findById(int id) {
-        return repository.findById(id).get();
+        return repository.findById(id).orElse(null);
     }
 
     public OperationType findByCode(String code) {

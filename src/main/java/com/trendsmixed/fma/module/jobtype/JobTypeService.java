@@ -31,7 +31,7 @@ public class JobTypeService {
     }
 
     public JobType findById(int id) {
-        return repository.findById(id).get();
+        return repository.findById(id).orElse(null);
     }
 
     public JobType findByCode(String code) {

@@ -20,7 +20,7 @@ public class FolderService {
     }
 
     public Folder findById(int id) {
-        return folderRepository.findById(id).get();
+        return folderRepository.findById(id).orElse(null);
     }
 
     public void deleteById(int id) {

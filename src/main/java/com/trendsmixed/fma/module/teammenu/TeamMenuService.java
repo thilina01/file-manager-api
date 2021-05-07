@@ -26,7 +26,7 @@ public class TeamMenuService {
     }
 
     public TeamMenu findById(int id) {
-        return teamMenuRepository.findById(id).get();
+        return teamMenuRepository.findById(id).orElse(null);
     }
 
     public List<Menu> findTopMenuByTeam(Team team) {

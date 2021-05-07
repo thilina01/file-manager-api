@@ -24,7 +24,7 @@ public class StatusService {
     }
 
     public Status findById(int id) {
-        return statusRepository.findById(id).get();
+        return statusRepository.findById(id).orElse(null);
     }
 
     public void deleteById(int id) {

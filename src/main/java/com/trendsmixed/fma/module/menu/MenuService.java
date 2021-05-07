@@ -25,7 +25,7 @@ public class MenuService {
     }
 
     public Menu findById(int id) {
-        return menuRepository.findById(id).get();
+        return menuRepository.findById(id).orElse(null);
     }
 
     public void deleteById(int id) {

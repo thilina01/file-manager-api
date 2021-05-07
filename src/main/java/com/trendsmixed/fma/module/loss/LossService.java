@@ -24,7 +24,7 @@ public class LossService {
     }
 
     public Loss findById(int id) {
-        return lossRepository.findById(id).get();
+        return lossRepository.findById(id).orElse(null);
     }
 
     public void deleteById(int id) {
