@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <springProperty name="logstashHost" source="logstash.host"/>
+    <springProperty name="logstashTcpPort" source="logstash.tcp.port"/>
+    <springProperty name="appName" source="app.name"/>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="root-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<!--        <file>${LOG_PATH}/${appName}.log</file>-->
+        <encoder>
+            <pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${appName}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>1MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>10MB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="error-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+<!--        <file>${LOG_PATH}/${appName}-error.log</file>-->
+        <encoder>
+            <pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${appName}-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>1MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>10MB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="access-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<!--        <file>${LOG_PATH}/${appName}-access.log</file>-->
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${appName}-access-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>1MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>10MB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="access-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+        <destination>${logstashHost}:${logstashTcpPort}</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"app":"${appName}","logType":"access"}</customFields>
+        </encoder>
+    </appender>
+
+    <appender name="root-log-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+        <destination>${logstashHost}:${logstashTcpPort}</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"app":"${appName}","logType":"app"}</customFields>
+        </encoder>
+    </appender>
+
+    <appender name="error-log-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <destination>${logstashHost}:${logstashTcpPort}</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"app":"${appName}","logType":"error"}</customFields>
+        </encoder>
+    </appender>
+
+    <!--    <appender name="stash" class="net.logstash.logback.appender.LogstashAccessUdpSocketAppender">-->
+    <!--        <host>127.0.0.1</host>-->
+    <!--        &lt;!&ndash; port is optional (default value shown) &ndash;&gt;-->
+    <!--        <port>5044</port>-->
+
+    <!--        <layout class="net.logstash.logback.layout.LogstashLayout">-->
+    <!--            <customFields>{"logType":"access"}</customFields>-->
+    <!--        </layout>-->
+    <!--    </appender>-->
+
+    <logger name="com.trendsmixed.fma.module.appsession" level="INFO" additivity="false">
+        <appender-ref ref="access-log"/>
+        <appender-ref ref="access-stash"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="root-log"/>
+        <appender-ref ref="error-log"/>
+        <appender-ref ref="root-log-stash"/>
+        <appender-ref ref="error-log-stash"/>
+    </root>
+</configuration>
