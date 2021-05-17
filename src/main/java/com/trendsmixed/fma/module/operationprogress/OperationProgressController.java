@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.operationprogress;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.controlpoint.ControlPointService;
 import com.trendsmixed.fma.module.job.Job;
@@ -28,18 +29,21 @@ public class OperationProgressController {
     private final JobService jobService;
     private final ControlPointService controlPointService;
 
+    @LogExecution
     @JsonView(OperationProgressView.All.class)
     @GetMapping
     public Iterable<OperationProgress> findAll() {
         return service.findAll();
     }
-    
+
+    @LogExecution
     @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
     @GetMapping("/page")
     Page<OperationProgress> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
-   
+
+    @LogExecution
     @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
     @GetMapping(value = "/controlPointAndSectionAndJobAndProductionDateBetween")
     public Page<OperationProgress> getControlPointAndSectionAndJobAndProductionDateBetweenPage(
@@ -78,6 +82,7 @@ public class OperationProgressController {
         return page;
     }
 
+    @LogExecution
     @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
     @PostMapping("/pageBySection")
     Page<OperationProgress> pageBySection(Pageable pageable, @RequestBody Section section) {
@@ -87,6 +92,7 @@ public class OperationProgressController {
         return new Page<>(service.findByOperationProductionControlPointWorkCenterCostCenterSection(section, pageable));
     }
 
+    @LogExecution
     @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
     @PostMapping("/pageByJob")
     Page<OperationProgress> pageByJob(Pageable pageable, @RequestBody Job job) {
@@ -96,6 +102,7 @@ public class OperationProgressController {
         return new Page<>(service.findByOperationJob(job, pageable));
     }
 
+    @LogExecution
     @JsonView(OperationProgressView.AllAndJobAndProductTypeAllAndProductionAndOperationTypeAndControlPointAllAndOperationAndAllAndControlPointAllWorkCenterCostCenterSection.class)
     @PostMapping("/pageByControlPoint")
     Page<OperationProgress> pageByControlPoint(Pageable pageable, @RequestBody ControlPoint controlPoint) {
@@ -105,6 +112,7 @@ public class OperationProgressController {
         return new Page<>(service.findByOperationProductionControlPoint(controlPoint, pageable));
     }
 
+    @LogExecution
     @JsonView(OperationProgressView.All.class)
     @PostMapping
     public OperationProgress save(@RequestBody OperationProgress operationProgress,
@@ -122,6 +130,7 @@ public class OperationProgressController {
         }
     }
 
+    @LogExecution
     @PostMapping("/many")
     public void saveMany(@RequestBody List<OperationProgress> operationProgresses,
             @RequestHeader(value = "email", defaultValue = "") String email) {
@@ -137,6 +146,7 @@ public class OperationProgressController {
         }
     }
 
+    @LogExecution
     @JsonView(OperationProgressView.All.class)
     @GetMapping("/{id}")
     public OperationProgress findOne(@PathVariable("id") int id) {
@@ -150,6 +160,7 @@ public class OperationProgressController {
         service.deleteById(id);
     }
 
+    @LogExecution
     @JsonView(OperationProgressView.All.class)
     @PutMapping("/{id}")
     public OperationProgress updateCustomer(@PathVariable int id, @RequestBody OperationProgress operationProgress,

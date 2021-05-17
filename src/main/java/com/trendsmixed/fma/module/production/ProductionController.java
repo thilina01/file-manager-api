@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.production;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.controlpoint.ControlPoint;
 import com.trendsmixed.fma.module.controlpoint.ControlPointService;
 import com.trendsmixed.fma.module.controlpointtype.ControlPointType;
@@ -47,18 +48,21 @@ public class ProductionController {
     private final ShiftService shiftService;
     private final ShiftTypeService shiftTypeService;
 
+    @LogExecution
     @JsonView(ProductionView.AllAndShiftAndShiftTypeAndControlPointAll.class)
     @GetMapping
     public Iterable<Production> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(ProductionView.AllAndShiftAndShiftTypeAndControlPointAll.class)
     @GetMapping("/page")
     Page<Production> page(Pageable pageable) {
         return new Page(service.findAll(pageable));
     }
 
+    @LogExecution
     @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
     @GetMapping(value = "/controlPointTypeAndSectionAndShiftAndProductionDateBetween")
     public Page<Production> getControlPointTypeAndSectionAndShiftAndProductionDateBetweenPage(
@@ -90,6 +94,7 @@ public class ProductionController {
         return page;
     }
 
+    @LogExecution
     @JsonView(ProductionView.All.class)
     @PostMapping
     public Production save(@RequestBody Production production,
@@ -172,6 +177,7 @@ public class ProductionController {
         }
     }
 
+    @LogExecution
     @JsonView(ProductionView.AllAndShiftAllAndControlPointAndControlPointTypeAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAll.class)
     @PostMapping("/ByProductionDateAndShiftAndControlPoint")
     public Production ByProductionDateAndShiftAndControlPoint(@RequestBody Production production,
@@ -182,6 +188,7 @@ public class ProductionController {
                 production.getShift(), production.getControlPoint());
     }
 
+    @LogExecution
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Production> productions,
                          @RequestHeader(value = "email", defaultValue = "") String email) {
@@ -251,6 +258,7 @@ public class ProductionController {
         }
     }
 
+    @LogExecution
     @JsonView(ProductionView.AllShiftAllShiftTypeAllControlPointAllWorkCenterCostCenterSectionManpowerAllManpowerTypeAllOperationAllJobAllProductTypeAllOperationTypeAllItemAllJobTypeAllProductionEmployeeAllEmployeeAllResourceUtilizationAllMachineAllEmployeeAll.class)
     @GetMapping("/{id}")
     public Production findOne(@PathVariable("id") int id) {
@@ -264,6 +272,7 @@ public class ProductionController {
         service.deleteById(id);
     }
 
+    @LogExecution
     @PutMapping("/{id}")
     public Production updateCustomer(@PathVariable int id, @RequestBody Production production,
                                      @RequestHeader(value = "email", defaultValue = "") String email) {

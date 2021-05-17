@@ -1,6 +1,7 @@
 package com.trendsmixed.fma.module.usermenu;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.menu.Menu;
 import com.trendsmixed.fma.module.user.User;
@@ -20,6 +21,7 @@ public class UserMenuController {
     private final UserService userService;
     private final AppSessionService appSessionService;
 
+    @LogExecution
     @PutMapping
     public List<UserMenu> saveMany(@RequestBody List<UserMenu> userMenus) {
 
@@ -38,6 +40,7 @@ public class UserMenuController {
         }
     }
 
+    @LogExecution
     @PostMapping("toggle/{userId}/{menuId}")
     public void toggle(@PathVariable("userId") int userId, @PathVariable("menuId") int menuId) {
         // System.out.println("RRRRR " + email);
@@ -61,12 +64,14 @@ public class UserMenuController {
         }
     }
 
+    @LogExecution
     @JsonView(UserMenuView.Menu.class)
     @GetMapping("/userId/{userId}")
     public List<UserMenu> findByUserId(@PathVariable("userId") int userId) {
         return userMenuService.findByUser(new User(userId));
     }
 
+    @LogExecution
     @JsonView(UserMenuView.Menu.class)
     @GetMapping("/userEmail/{userEmail}")
     public List<UserMenu> findByUserId(@PathVariable("userEmail") String userEmail) {
@@ -77,6 +82,7 @@ public class UserMenuController {
         return userMenuService.findByUser(new User(user != null ? user.getId() : 0));
     }
 
+    @LogExecution
     @JsonView(UserMenuView.Menu.class)
     @GetMapping("/own")
     public List<UserMenu> own(@RequestHeader(value = "loginTimeMills", defaultValue = "") long loginTimeMills) {

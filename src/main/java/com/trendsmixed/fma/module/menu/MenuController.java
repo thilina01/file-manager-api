@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.menu;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.entity.AppSession;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.menutype.MenuType;
 import com.trendsmixed.fma.module.menutype.MenuTypeService;
@@ -30,18 +31,21 @@ public class MenuController {
     private final TeamService teamService;
     private final TeamMenuService teamMenuService;
 
+    @LogExecution
     @JsonView(MenuView.AllAndSubMenu.class)
     @GetMapping
     public List<Menu> findAll() {
         return menuService.findAll();
     }
 
+    @LogExecution
     @JsonView(MenuView.AllAndSuperMenu.class)
     @GetMapping("/withParent")
     public List<Menu> findAllWithParent() {
         return menuService.findAll();
     }
 
+    @LogExecution
     @JsonView(MenuView.AllAndSubMenu.class)
     @GetMapping("/top")
     public List<Menu> findTop(@RequestHeader(value = "loginTimeMills", defaultValue = "") long loginTimeMills) {
@@ -97,6 +101,7 @@ public class MenuController {
         return menus;
     }
 
+    @LogExecution
     @PostMapping
     public Menu save(@RequestBody Menu menu) {
 
@@ -113,6 +118,7 @@ public class MenuController {
         }
     }
 
+//    @LogExecution
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Menu> menus) {
 
@@ -167,17 +173,20 @@ public class MenuController {
 
     }
 
+    @LogExecution
     @GetMapping("/{id}")
     public Menu findOne(@PathVariable("id") int id) {
         return menuService.findById(id);
     }
 
+    @LogExecution
     @JsonView(MenuView.AllAndSubMenu.class)
     @GetMapping("/menuTypeName/{name}")
     public List<Menu> findByMenuType(@PathVariable("name") String name) {
         return menuService.findByMenuType(menuTypeService.findByName(name));
     }
 
+    @LogExecution
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
@@ -185,6 +194,7 @@ public class MenuController {
 
     }
 
+    @LogExecution
     @PutMapping("/{id}")
     public Menu updateCustomer(@PathVariable int id, @RequestBody Menu menu) {
         

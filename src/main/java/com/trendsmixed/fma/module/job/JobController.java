@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.job;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.item.ItemService;
 import com.trendsmixed.fma.module.jobtype.JobType;
@@ -22,33 +23,37 @@ import java.util.List;
 @RequestMapping("/jobs")
 public class JobController {
 
-    
     private final JobService service;
     private final ItemService itemService;
     private final JobTypeService jobTypeService;
 
+    @LogExecution
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping
     public Iterable<Job> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/page")
     Page<Job> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
 
+    @LogExecution
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
-    
+
+    @LogExecution
     @GetMapping("/combo/item/{id}")
     List<Combo> comboByItem(@PathVariable("id") int itemId) {
         return service.comboByItem(new Item(itemId));
     }
 
+    @LogExecution
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping(value = "/pageByItem")
     public Page<Job> getItem(
@@ -64,6 +69,7 @@ public class JobController {
         return page;
     }
 
+    @LogExecution
     @JsonView(JobView.All.class)
     @PostMapping
     public Job save(@RequestBody Job job) {
@@ -88,10 +94,9 @@ public class JobController {
         }
     }
 
+    @LogExecution
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Job> jobs) {
-
-        
         try {
             List<Job> jobsToSave = new ArrayList<>();
             for (Job job : jobs) {
@@ -131,38 +136,43 @@ public class JobController {
         }
     }
 
+    @LogExecution
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/{id}")
     public Job findOne(@PathVariable("id") int id) {
         return service.findById(id);
     }
 
+    @LogExecution
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/jobNoLike/{query}")
     public Iterable<Job> findByJobNoLike(@PathVariable("query") String query) {
         return service.findByJobNoLike("%"+query+"%");
     }
 
+    @LogExecution
     @JsonView(JobView.AllAndItemAllAndJobTypeAll.class)
     @GetMapping("/jobNo/{jobNo}")
     public Job findByJobNo(@PathVariable("jobNo") String jobNo) {
         return service.findByJobNo(jobNo);
     }
 
+    @LogExecution
     @GetMapping("/table")
     public List findForTable() {
         return service.findForTable();
     }
 
+    @LogExecution
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
         service.deleteById(id);
     }
 
+    @LogExecution
     @PutMapping("/{id}")
     public Job update(@PathVariable int id, @RequestBody Job job) {
-        
         job.setId(id);
         job = service.save(job);
         return job;

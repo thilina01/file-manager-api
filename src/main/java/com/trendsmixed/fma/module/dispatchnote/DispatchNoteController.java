@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.dispatchnote;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatch.Dispatch;
 import com.trendsmixed.fma.module.loadingplan.LoadingPlan;
@@ -22,23 +23,25 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/dispatchNotes")
 public class DispatchNoteController {
-
     
     private final DispatchNoteService service;
     private final LoadingPlanService loadingPlanService;
 
+    @LogExecution
     @JsonView(DispatchNoteView.AllAndCustomerAndLocation.class)
     @GetMapping
     public Iterable<DispatchNote> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomerAndLocation.class)
     @GetMapping("/page")
     Page<DispatchNote> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
-    
+
+    @LogExecution
     @JsonView(DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomerAndLocation.class)
     @GetMapping(value = "/dispatchNote")
     public Page<DispatchNote> getDispatchNotePage(
@@ -56,6 +59,7 @@ public class DispatchNoteController {
         return page;
     }
 
+    @LogExecution
     @JsonView(DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomerAndLocation.class)
     @GetMapping(value = "/dispatchNoteRelease")
     public Page<DispatchNote> getDispatchNoteReleasePage(
@@ -80,29 +84,31 @@ public class DispatchNoteController {
         return page;
     }
 
+    @LogExecution
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
 
+    @LogExecution
     @JsonView(DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddress.class)
     @GetMapping("/customer/{id}")
     public Iterable<DispatchNote> findByCustomer(@PathVariable("id") int id) {
         return service.findByCustomer(new Customer(id));
     }
 
+    @LogExecution
     @JsonView(DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddress.class)
     @GetMapping("/customerAndInvoiceIsNull/{id}")
     public Iterable<DispatchNote> findByCustomerAndInvoiceIsNull(@PathVariable("id") int id) {
         return service.findByCustomerAndInvoiceIsNull(new Customer(id));
     }
-  
+
+    @LogExecution
     @JsonView(DispatchNoteView.AllAndCustomerAndLocation.class)
     @PostMapping
     public DispatchNote save(@RequestBody DispatchNote dispatchNote) {
-        
         try {
-
             List<Dispatch> dispatches = dispatchNote.getDispatchList();
             if (dispatches != null) {
                 for (Dispatch dispatch : dispatches) {
@@ -133,6 +139,7 @@ public class DispatchNoteController {
         }
     }
 
+    @LogExecution
     @JsonView(DispatchNoteView.AllAndCustomerAndLocation.class)
     @PostMapping("/release")
     public DispatchNote saveReleaseInformation(@RequestBody DispatchNote dispatchNote) {
@@ -154,10 +161,9 @@ public class DispatchNoteController {
         }
     }
 
+    @LogExecution
     @PostMapping("/many")
     public void saveMany(@RequestBody List<DispatchNote> dispatchNotes) {
-
-        
         try {
             service.save(dispatchNotes);
         } catch (Throwable e) {
@@ -168,12 +174,14 @@ public class DispatchNoteController {
         }
     }
 
+    @LogExecution
     @JsonView(DispatchNoteView.AllAndLoadingPlanAndLoadingPlanItemAndInvoiceAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomerAndLocation.class)
     @GetMapping("/{id}")
     public DispatchNote findOne(@PathVariable("id") int id) {
         return service.findById(id);
     }
 
+    @LogExecution
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         Iterable<LoadingPlan> loadingPlanList = loadingPlanService.findByDispatchNoteId(id);
@@ -185,10 +193,10 @@ public class DispatchNoteController {
 
     }
 
+    @LogExecution
     @JsonView(DispatchNoteView.AllAndCustomerAndLocation.class)
     @PutMapping("/{id}")
     public DispatchNote updateCustomer(@PathVariable int id, @RequestBody DispatchNote dispatchNote) {
-        
         dispatchNote.setId(id);
         dispatchNote = service.save(dispatchNote);
         return dispatchNote;

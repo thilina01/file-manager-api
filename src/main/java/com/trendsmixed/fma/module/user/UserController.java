@@ -3,6 +3,7 @@ package com.trendsmixed.fma.module.user;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.entity.AppSession;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.module.status.Status;
 import com.trendsmixed.fma.module.status.StatusService;
@@ -24,29 +25,32 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    
     private final UserService service;
     private final MailService mailService;
     private final StatusService statusService;
     private final AppSessionService appSessionService;
 
+    @LogExecution
     @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
     @GetMapping
     public Iterable<User> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
     @GetMapping("/page")
     Page<User> page(Pageable pageable) {
         return service.findAll(pageable);
     }
 
+    @LogExecution
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
 
+    @LogExecution
     @JsonView(UserView.All.class)
     @PostMapping
     public User save(@RequestBody User user) {
@@ -85,12 +89,14 @@ public class UserController {
         }
     }
 
+    @LogExecution
     @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
     @GetMapping("/{id}")
     public User findOne(@PathVariable("id") int id) {
         return service.findById(id);
     }
 
+    @LogExecution
     @JsonView(UserView.AllAndTeamAllAndStatusAll.class)
     @GetMapping("/own")
     public User own(@RequestHeader(value = "loginTimeMills", defaultValue = "") long loginTimeMills) {
@@ -102,12 +108,14 @@ public class UserController {
         throw new Error("No associated session");
     }
 
+    @LogExecution
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
         service.deleteById(id);
     }
 
+    @LogExecution
     @PutMapping("/{id}")
     public User updateCustomer(@PathVariable int id, @RequestBody User user) {
         

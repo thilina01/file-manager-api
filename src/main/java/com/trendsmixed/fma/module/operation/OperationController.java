@@ -3,6 +3,7 @@ package com.trendsmixed.fma.module.operation;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.OperationSummary;
 import com.trendsmixed.fma.dao.view.OperationSummaryView;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.section.Section;
 import com.trendsmixed.fma.module.shift.Shift;
@@ -26,18 +27,21 @@ public class OperationController {
 
     private final OperationService service;
 
+    @LogExecution
     @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
     @GetMapping
     public Iterable<Operation> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
     @GetMapping("/page")
     public Page<Operation> page(Pageable pageable) {
         return new Page(service.findAll(pageable));
     }
 
+    @LogExecution
     @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
     @GetMapping(value = "/sectionAndShiftAndProductionDateBetween")
     public Page<Operation> getSectionAndShiftAndProductionDateBetweenPage(
@@ -63,18 +67,21 @@ public class OperationController {
         return page;
     }
 
+    @LogExecution
     @JsonView(OperationView.AllJobAllJobTypeAllItemAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAll.class)
     @GetMapping(value = "/jobPage", params = {"job"})
     public Page<Operation> jobPage(@RequestParam("job") String job, Pageable pageable) throws ParseException {
         return new Page(service.findByJob(new Job(Integer.valueOf(job)), pageable));
     }
 
+    @LogExecution
     @JsonView(OperationSummaryView.All.class)
     @GetMapping(value = "/summaryByJob", params = {"jobId"})
     public List<OperationSummary> getSummaryByJob(@RequestParam("jobId") int jobId) {
         return service.getSummaryByJob(jobId);
     }
 
+    @LogExecution
     @JsonView(OperationView.All.class)
     @PostMapping
     public Operation save(@RequestBody Operation operation,
@@ -92,6 +99,7 @@ public class OperationController {
         }
     }
 
+    @LogExecution
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Operation> operations,
             @RequestHeader(value = "email", defaultValue = "") String email) {
@@ -107,6 +115,7 @@ public class OperationController {
         }
     }
 
+    @LogExecution
     @JsonView(OperationView.AllJobAllProductionAllProductTypeAllOperationTypeAllLossAllLossReasonAllLossTypeAllOperationProgressAll.class)
     @GetMapping("/{id}")
     public Operation findOne(@PathVariable("id") int id) {
@@ -121,6 +130,7 @@ public class OperationController {
 
     }
 
+    @LogExecution
     @PutMapping("/{id}")
     public Operation updateCustomer(@PathVariable int id, @RequestBody Operation operation,
             @RequestHeader(value = "email", defaultValue = "") String email) {
@@ -130,6 +140,7 @@ public class OperationController {
         return operation;
     }
 
+    @LogExecution
     @GetMapping("/test")
     public List test() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM");

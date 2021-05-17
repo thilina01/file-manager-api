@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.usermenu;
 
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.menu.Menu;
 import com.trendsmixed.fma.module.user.User;
 import lombok.AllArgsConstructor;
