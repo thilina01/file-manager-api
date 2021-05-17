@@ -26,15 +26,15 @@ public class ConsumableCostPerKgService {
     }
 
     public void save(List<ConsumableCostPerKg> consumableCostPerKgs) {
-        repository.save(consumableCostPerKgs);
+        repository.saveAll(consumableCostPerKgs);
     }
 
-    public ConsumableCostPerKg findOne(int id) {
-        return repository.findOne(id);
+    public ConsumableCostPerKg findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

@@ -32,19 +32,19 @@ public class ItemService {
     }
 
     public void save(List<Item> items) {
-        repository.save(items);
+        repository.saveAll(items);
     }
 
-    public Item findOne(int id) {
-        return repository.findOne(id);
+    public Item findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
     public Item findByCode(String code) {
         return repository.findByCode(code);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 

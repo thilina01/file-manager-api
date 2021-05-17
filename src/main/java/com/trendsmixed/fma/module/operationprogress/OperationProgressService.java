@@ -30,15 +30,15 @@ public class OperationProgressService {
     }
 
     public void save(List<OperationProgress> operationProgresses) {
-        repository.save(operationProgresses);
+        repository.saveAll(operationProgresses);
     }
 
-    public OperationProgress findOne(int id) {
-        return repository.findOne(id);
+    public OperationProgress findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Page<OperationProgress> findByOperationProductionProductionDateBetween(Date startDate, Date endDate, Pageable pageable) {

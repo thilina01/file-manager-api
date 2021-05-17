@@ -34,15 +34,15 @@ public class DispatchNoteService {
     }
 
     public void save(List<DispatchNote> dispatchNotes) {
-        repository.save(dispatchNotes);
+        repository.saveAll(dispatchNotes);
     }
 
-    public DispatchNote findOne(int id) {
-        return repository.findOne(id);
+    public DispatchNote findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Iterable<DispatchNote> findByCustomer(Customer customer) {

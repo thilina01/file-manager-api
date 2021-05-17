@@ -31,15 +31,15 @@ public class MailConfigurationService {
     }
 
     public void save(List<MailConfiguration> mailConfigurations) {
-        repository.save(mailConfigurations);
+        repository.saveAll(mailConfigurations);
     }
 
-    public MailConfiguration findOne(int id) {
-        return repository.findOne(id);
+    public MailConfiguration findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

@@ -26,12 +26,12 @@ public class ToolBreakdownService {
         return repository.save(toolBreakdown);
     }
 
-    public ToolBreakdown findOne(int id) {
-        return repository.findOne(id);
+    public ToolBreakdown findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Page<ToolBreakdown>findByToolBreakdownTimeBetween(Date startDate, Date endDate, Pageable pageable) {

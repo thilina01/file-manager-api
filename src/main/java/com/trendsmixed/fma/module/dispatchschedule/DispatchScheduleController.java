@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.dispatchschedule;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.customer.CustomerService;
 import com.trendsmixed.fma.module.item.Item;
@@ -27,34 +28,38 @@ import java.util.List;
 @RequestMapping("/dispatchSchedules")
 public class DispatchScheduleController {
 
-    
     private final DispatchScheduleService service;
     private final JobTypeService jobTypeService;
     private final JobService jobService;
     private final CustomerService customerService;
 
+    @LogExecution
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping
     public Iterable<DispatchSchedule> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping("/page")
     Page<DispatchSchedule> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
 
+    @LogExecution
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
 
+    @LogExecution
     @GetMapping("/comboByCustomer/{id}")
     List<Combo> combo(@PathVariable("id") int id) {
         return service.getComboByCustomer(new Customer(id));
     }
-    
+
+    @LogExecution
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping(value = "/dispatchSchedule")
     public Page<DispatchSchedule> getDispatchSchedule(
@@ -87,6 +92,7 @@ public class DispatchScheduleController {
         return page;
     }
 
+    @LogExecution
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerAllCustomerItemAllAndJobAllAndItemAll.class)
     @PostMapping("/pageByCustomer")
     Page<DispatchSchedule> pageByCustomer(Pageable pageable, @RequestBody Customer customer) {
@@ -95,7 +101,8 @@ public class DispatchScheduleController {
         }
         return new Page<>(service.findBySalesOrderItemSalesOrderCustomer(customer, pageable));
     }
-    
+
+    @LogExecution
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerAllCustomerItemAllAndJobAllAndItemAll.class)
     @PostMapping("/pageByJob")
     Page<DispatchSchedule> pageByJob(Pageable pageable, @RequestBody Job job) {
@@ -105,6 +112,7 @@ public class DispatchScheduleController {
         return new Page<>(service.findByJob(job, pageable));
     }
 
+    @LogExecution
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllAndSalesOrderTypeAllAndCustomerAllCustomerItemAllAndJobAllAndPaintAllAndItemAllAndLoadingPlanItemAllAndLoadingPlanAll.class)
     @GetMapping(value = "/orderInformation")
     public Page<DispatchSchedule> getOrderInformation(
@@ -153,12 +161,11 @@ public class DispatchScheduleController {
         return page;
     }
 
+    @LogExecution
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @PostMapping
     public DispatchSchedule save(@RequestBody DispatchSchedule dispatchSchedule) {
-        
         try {
-
             Job job = dispatchSchedule.getJob();
             if (job != null) {
                 if (job.getId() == null|| job.getId() == 0) {
@@ -170,7 +177,7 @@ public class DispatchScheduleController {
                     job.setJobType(jobTypeService.findByCode("Order"));
                     job.setDispatchScheduleList(new ArrayList<>());
                 } else {
-                    job = jobService.findOne(job.getId());
+                    job = jobService.findById(job.getId());
                 }
             }
 
@@ -185,18 +192,20 @@ public class DispatchScheduleController {
         }
     }
 
+    @LogExecution
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAll.class)
     @GetMapping("/{id}")
     public DispatchSchedule findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
+    @LogExecution
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
-        
-        service.delete(id);
+        service.deleteById(id);
     }
 
+    @LogExecution
     @PutMapping("/{id}")
     public DispatchSchedule update(@PathVariable int id, @RequestBody DispatchSchedule dispatchSchedule) {
         
@@ -205,12 +214,14 @@ public class DispatchScheduleController {
         return dispatchSchedule;
     }
 
+    @LogExecution
     @JsonView(DispatchScheduleView.AllAndSalesOrderItemAllAndSalesOrderAllCustomerItemAllAndJobAllAndItemAllAndPaintAll.class)
     @GetMapping("/salesOrder/{id}")
     public Iterable<DispatchSchedule> findBySalesOrder(@PathVariable("id") int id) {
         return service.findBySalesOrderItemSalesOrder(new SalesOrder(id));
     }
 
+    @LogExecution
     @JsonView(DispatchScheduleView.AllAndJobAndItem.class)
     @GetMapping("/customer/{id}")
     public Iterable<DispatchSchedule> findByCustomer(@PathVariable("id") int id) {

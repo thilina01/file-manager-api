@@ -19,11 +19,11 @@ public class JobDispatchService {
         return jobDispatchRepository.save(dispatch);
     }
 
-    public JobDispatch findOne(int id) {
-        return jobDispatchRepository.findOne(id);
+    public JobDispatch findById(int id) {
+        return jobDispatchRepository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        jobDispatchRepository.delete(id);
+    public void deleteById(int id) {
+        jobDispatchRepository.deleteById(id);
     }
 }

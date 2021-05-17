@@ -26,12 +26,12 @@ public class CreditNoteService {
         return repository.save(creditNote);
     }
 
-    public CreditNote findOne(int id) {
-        return repository.findOne(id);
+    public CreditNote findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
     public List<Combo> getCombo() {
         return repository.getCombo();

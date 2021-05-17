@@ -41,15 +41,15 @@ public class DispatchScheduleService {
     }
 
     public Iterable<DispatchSchedule> save(List<DispatchSchedule> dispatchSchedules) {
-        return repository.save(dispatchSchedules);
+        return repository.saveAll(dispatchSchedules);
     }
 
-    public DispatchSchedule findOne(int id) {
-        return repository.findOne(id);
+    public DispatchSchedule findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Iterable<DispatchSchedule> findBySalesOrderItemSalesOrder(SalesOrder salesOrder) {

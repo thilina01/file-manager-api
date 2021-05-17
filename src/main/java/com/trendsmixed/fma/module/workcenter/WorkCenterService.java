@@ -27,15 +27,15 @@ public class WorkCenterService {
     }
 
     public void save(List<WorkCenter> workCenters) {
-        repository.save(workCenters);
+        repository.saveAll(workCenters);
     }
 
-    public WorkCenter findOne(int id) {
-        return repository.findOne(id);
+    public WorkCenter findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public WorkCenter findByCode(String code) {

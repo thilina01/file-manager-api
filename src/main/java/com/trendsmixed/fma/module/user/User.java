@@ -18,7 +18,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"email"}, name = "UK_USER_EMAIL")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,7 +30,7 @@ public class User implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JsonView(UserView.Email.class)
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     private String email;
     @JsonView(UserView.Name.class)
     @Column(name = "name")

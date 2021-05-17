@@ -31,15 +31,15 @@ public class SupplierService {
     }
 
     public void save(List<Supplier> suppliers) {
-        repository.save(suppliers);
+        repository.saveAll(suppliers);
     }
 
-    public Supplier findOne(int id) {
-        return repository.findOne(id);
+    public Supplier findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Supplier findByCode(String code) {

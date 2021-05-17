@@ -29,15 +29,15 @@ public class DefectService {
     }
 
     public void save(List<Defect> defects) {
-        repository.save(defects);
+        repository.saveAll(defects);
     }
 
-    public Defect findOne(int id) {
-        return repository.findOne(id);
+    public Defect findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Page<Defect>findByDefectDateBetween(Date startDate, Date endDate, Pageable pageable) {

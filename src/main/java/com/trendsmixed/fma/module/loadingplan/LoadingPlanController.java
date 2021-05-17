@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.loadingplan;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.loadingplanitem.LoadingPlanItem;
 import com.trendsmixed.fma.utility.Page;
@@ -19,32 +20,36 @@ import java.util.List;
 @RequestMapping("/loadingPlans")
 public class LoadingPlanController {
 
-    
     private final LoadingPlanService service;
 
+    @LogExecution
     @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomer.class)
     @GetMapping
     public Iterable<LoadingPlan> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomer.class)
     @GetMapping("/page")
     Page<LoadingPlan> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
 
+    @LogExecution
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
 
+    @LogExecution
     @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomer.class)
     @GetMapping("/comboByCustomer/{id}")
     public Iterable<LoadingPlan> findByCustomer(@PathVariable("id") int id) {
         return service.findByCustomer(new Customer(id));
     }
-    
+
+    @LogExecution
     @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomer.class)
     @GetMapping(value = "/customerAndLoadingPlanDateBetween")
     public Page<LoadingPlan> getCustomerAndLoadingPlanDateBetweenPage(
@@ -64,6 +69,7 @@ public class LoadingPlanController {
         return page;
     }
 
+    @LogExecution
     @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPortOfLoadingAndContainerSizeAndAddressAndCustomer.class)
     @PostMapping
     public LoadingPlan save(@RequestBody LoadingPlan loadingPlan) {
@@ -88,19 +94,21 @@ public class LoadingPlanController {
         }
     }
 
+    @LogExecution
     @JsonView(LoadingPlanView.AllAndLoadingPlanItemAndDispatchNoteAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCountryAndPortAndCustomer.class)
     @GetMapping("/{id}")
     public LoadingPlan findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 
+    @LogExecution
     @PutMapping("/{id}")
     public LoadingPlan updateCustomer(@PathVariable int id, @RequestBody LoadingPlan loadingPlan) {
         

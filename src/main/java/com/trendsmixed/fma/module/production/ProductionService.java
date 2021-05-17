@@ -31,15 +31,15 @@ public class ProductionService {
     }
 
     public void save(List<Production> productions) {
-        repository.save(productions);
+        repository.saveAll(productions);
     }
 
-    public Production findOne(int id) {
-        return repository.findOne(id);
+    public Production findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Production findByProductionDateAndShiftAndControlPoint(Date productionDate, Shift shift, ControlPoint controlPoint) {

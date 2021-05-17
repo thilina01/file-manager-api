@@ -33,15 +33,15 @@ public class ExchangeRateService {
     }
 
     public void save(List<ExchangeRate>exchangeRates) {
-        repository.save(exchangeRates);
+        repository.saveAll(exchangeRates);
     }
 
-    public ExchangeRate findOne(int id) {
-        return repository.findOne(id);
+    public ExchangeRate findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public ExchangeRate findOneByCurrencyAndExchangeRateDate(Currency currency, Date exchangeRateDate) {

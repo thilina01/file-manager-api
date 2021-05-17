@@ -31,15 +31,15 @@ public class ItemTypeService {
     }
 
     public void save(List<ItemType> itemTypes) {
-        repository.save(itemTypes);
+        repository.saveAll(itemTypes);
     }
 
-    public ItemType findOne(int id) {
-        return repository.findOne(id);
+    public ItemType findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public ItemType findByName(String name) {

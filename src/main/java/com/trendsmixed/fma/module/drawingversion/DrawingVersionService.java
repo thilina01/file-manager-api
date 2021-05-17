@@ -33,15 +33,15 @@ public class DrawingVersionService {
     }
 
     public void save(List<DrawingVersion>drawingVersions) {
-        repository.save(drawingVersions);
+        repository.saveAll(drawingVersions);
     }
 
-    public DrawingVersion findOne(int id) {
-        return repository.findOne(id);
+    public DrawingVersion findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public DrawingVersion findFirstByItemOrderByVersionDesc(Item item) {

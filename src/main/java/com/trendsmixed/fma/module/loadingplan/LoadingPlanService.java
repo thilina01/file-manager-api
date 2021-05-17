@@ -32,12 +32,12 @@ public class LoadingPlanService {
         return repository.save(loadingPlan);
     }
 
-    public LoadingPlan findOne(int id) {
-        return repository.findOne(id);
+    public LoadingPlan findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Iterable<LoadingPlan> findByCustomer(Customer customer) {

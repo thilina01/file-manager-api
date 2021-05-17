@@ -36,7 +36,7 @@ public class InternalTransferItemService {
     }
 
     public void save(List<InternalTransferItem> internalTransferItemList) {
-        repository.save(internalTransferItemList);
+        repository.saveAll(internalTransferItemList);
     }
 
     public Page<InternalTransferItem>findByInternalTransferNoteNoteDateBetween(Date startDate, Date endDate, Pageable pageable) {
@@ -71,12 +71,12 @@ public class InternalTransferItemService {
         return repository.findByInternalTransferNoteFromLocationAndInternalTransferNoteToLocationAndJobAndInternalTransferNoteNoteDateBetween(fromLocation,toLocation,job, startDate, endDate, pageable);
     }
 
-    public InternalTransferItem findOne(int id) {
-        return repository.findOne(id);
+    public InternalTransferItem findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

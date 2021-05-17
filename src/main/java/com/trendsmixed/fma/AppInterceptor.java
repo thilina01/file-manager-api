@@ -51,11 +51,11 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
 
         if(handler instanceof HandlerMethod){
             HandlerMethod handlerMethod = (HandlerMethod) handler;
-            System.out.println("================PRE 1=================");
+//            System.out.println("================PRE 1=================");
             // System.out.println("handlerMethod : "+handlerMethod);
             // System.out.println("getBean : " + handlerMethod.getBean());
-            System.out.println("getBeanType : " + handlerMethod.getBeanType().getName());
-            System.out.println("================PRE 1 End=============");
+//            System.out.println("getBeanType : " + handlerMethod.getBeanType().getName());
+//            System.out.println("================PRE 1 End=============");
         }
 
         boolean isValid = appSessionService.isValid(request);

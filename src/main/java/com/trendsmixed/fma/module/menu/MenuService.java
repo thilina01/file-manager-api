@@ -21,15 +21,15 @@ public class MenuService {
     }
 
     public List<Menu> save(List<Menu> menus) {
-        return menuRepository.save(menus);
+        return menuRepository.saveAll(menus);
     }
 
-    public Menu findOne(int id) {
-        return menuRepository.findOne(id);
+    public Menu findById(int id) {
+        return menuRepository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        menuRepository.delete(id);
+    public void deleteById(int id) {
+        menuRepository.deleteById(id);
     }
 
     public Menu findByName(String name) {

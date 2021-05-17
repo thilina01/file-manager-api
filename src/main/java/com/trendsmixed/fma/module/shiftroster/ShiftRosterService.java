@@ -31,15 +31,15 @@ public class ShiftRosterService {
     }
 
     public void save(List<ShiftRoster> shifts) {
-        repository.save(shifts);
+        repository.saveAll(shifts);
     }
 
-    public ShiftRoster findOne(int id) {
-        return repository.findOne(id);
+    public ShiftRoster findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public ShiftRoster findByName(String name) {

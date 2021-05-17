@@ -30,16 +30,16 @@ public class OperationTypeService {
         return repository.save(operationType);
     }
 
-    public OperationType findOne(int id) {
-        return repository.findOne(id);
+    public OperationType findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
     public OperationType findByCode(String code) {
         return repository.findByCode(code);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

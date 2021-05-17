@@ -25,15 +25,15 @@ public class ProductionOverheadCostPerKgService {
     }
 
     public void save(List<ProductionOverheadCostPerKg> productionOverheadCostPerKgs) {
-        repository.save(productionOverheadCostPerKgs);
+        repository.saveAll(productionOverheadCostPerKgs);
     }
 
-    public ProductionOverheadCostPerKg findOne(int id) {
-        return repository.findOne(id);
+    public ProductionOverheadCostPerKg findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

@@ -34,15 +34,15 @@ public class SubcontractOperationService {
     }
 
     public void save(List<SubcontractOperation> subcontractOperationList) {
-        repository.save(subcontractOperationList);
+        repository.saveAll(subcontractOperationList);
     }
 
-    public SubcontractOperation findOne(int id) {
-        return repository.findOne(id);
+    public SubcontractOperation findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Iterable<SubcontractOperation> findBySubcontractNote(SubcontractNote subcontractNote) {

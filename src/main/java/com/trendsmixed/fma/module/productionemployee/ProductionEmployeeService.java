@@ -30,15 +30,15 @@ public class ProductionEmployeeService {
     }
 
     public void save(List<ProductionEmployee> productionEmployees) {
-        repository.save(productionEmployees);
+        repository.saveAll(productionEmployees);
     }
 
-    public ProductionEmployee findOne(int id) {
-        return repository.findOne(id);
+    public ProductionEmployee findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Page<ProductionEmployee> findByProductionProductionDateBetweenAndProductionShift(Date startDate, Date endDate, Shift shift, Pageable pageable) {

@@ -31,15 +31,15 @@ public class ContainerSizeService {
     }
 
     public void save(List<ContainerSize> containerSizes) {
-        repository.save(containerSizes);
+        repository.saveAll(containerSizes);
     }
 
-    public ContainerSize findOne(int id) {
-        return repository.findOne(id);
+    public ContainerSize findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public ContainerSize findByName(String name) {

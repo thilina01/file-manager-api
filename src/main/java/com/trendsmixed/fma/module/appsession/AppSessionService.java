@@ -1,17 +1,21 @@
 package com.trendsmixed.fma.module.appsession;
 
+import com.trendsmixed.fma.dao.AccessLog;
 import com.trendsmixed.fma.entity.AppSession;
 import lombok.AllArgsConstructor;
+import net.logstash.logback.argument.StructuredArguments;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.WebUtils;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @AllArgsConstructor
 @Service
 public class AppSessionService {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(AppSessionService.class);
 
     private AppSessionRepository appSessionRepository;
 
@@ -24,7 +28,7 @@ public class AppSessionService {
     }
 
     public AppSession findOne(String email) {
-        return appSessionRepository.findOne(email);
+        return appSessionRepository.findById(email).orElse(null);
     }
 
     public AppSession findFirstByLoginTimeMills(long loginTimeMills) {
@@ -44,16 +48,11 @@ public class AppSessionService {
         String remoteAddress = request.getRemoteAddr();
         String servletPath = request.getServletPath();
         String[] servletPathSplit = servletPath.split("/");
+        String servletPathRoot = (servletPathSplit.length > 1 ? servletPathSplit[1] : "");
         String pathInfo = request.getPathInfo();
-        // System.out.println("Validating: " + email);
-        // System.out.println("RequestURI: " + requestURI);
-        System.out.println("servletPath: " + servletPath);
-        System.out.println("servletPath split: " + (servletPathSplit.length > 1 ? servletPathSplit[1] : ""));
-        // System.out.println("contextPath: " + contextPath);
-        // System.out.println("pathInfo: " + pathInfo);
-        System.out.println("Method: " + methodString);
-        System.out.println("RemoteAddress: " + remoteAddress);
-        System.out.println("loginTimeMills: " + loginTimeMillsString);
+        String queryString = request.getQueryString();
+
+        LOGGER.info("Access Log", StructuredArguments.kv("request", new AccessLog(servletPath, servletPathRoot, methodString, queryString, remoteAddress, loginTimeMillsString)));
 
         if (servletPath.toLowerCase().contains("/login") || servletPath.toLowerCase().contains("/error") || methodString.equalsIgnoreCase("OPTIONS") || (servletPath.toLowerCase().contains("/users") && methodString.equalsIgnoreCase("POST"))) {
             return true;
@@ -64,7 +63,7 @@ public class AppSessionService {
             return false;
         }
 
-        AppSession appSession = findFirstByLoginTimeMills(Long.valueOf(loginTimeMillsString));
+        AppSession appSession = findFirstByLoginTimeMills(Long.parseLong(loginTimeMillsString));
 
         if (appSession == null) {
             System.out.println("AppSession is null ");
@@ -73,7 +72,7 @@ public class AppSessionService {
         }
 
         if (!appSession.getIp().equals(remoteAddress)) {
-            deleteByLoginTimeMills(Long.valueOf(loginTimeMillsString));
+            deleteByLoginTimeMills(Long.parseLong(loginTimeMillsString));
             System.out.println("IP does not match");
             return false;
             // throw new Error("Please Login");

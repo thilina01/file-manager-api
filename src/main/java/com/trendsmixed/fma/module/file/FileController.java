@@ -44,7 +44,7 @@ public class FileController {
     public Download download(@PathVariable("id") int id, HttpServletResponse response) {
         Download download = new Download();
         try {
-            File file = fileService.findOne(id);
+            File file = fileService.findById(id);
 
             int x = id / 100;
             java.io.File filePath = new java.io.File("files/" + x + "/" + id + file.getExtension());
@@ -76,7 +76,7 @@ public class FileController {
             String originalFileName = multipartFile.getOriginalFilename();
             file.setOriginalFileName(originalFileName);
             String extension = originalFileName.substring(originalFileName.lastIndexOf('.'));
-            Folder folder = folderService.findOne(file.getFolderList().get(0).getId());
+            Folder folder = folderService.findById(file.getFolderList().get(0).getId());
 
             file.setUploadDate(new Date());
             file.setExtension(extension);
@@ -130,12 +130,12 @@ public class FileController {
     }
 
     private void deleteFile(int id) {
-        File file = fileService.findOne(id);
+        File file = fileService.findById(id);
         List<Folder> folders = file.getFolderList();
         for (Folder folder : folders) {
             folder.getFileList().remove(file);
             folderService.save(folder);
         }
-        fileService.delete(id);
+        fileService.deleteById(id);
     }
 }

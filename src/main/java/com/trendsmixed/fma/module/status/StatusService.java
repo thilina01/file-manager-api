@@ -20,15 +20,15 @@ public class StatusService {
     }
 
     public List<Status> save(List<Status> statuses) {
-        return statusRepository.save(statuses);
+        return statusRepository.saveAll(statuses);
     }
 
-    public Status findOne(int id) {
-        return statusRepository.findOne(id);
+    public Status findById(int id) {
+        return statusRepository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        statusRepository.delete(id);
+    public void deleteById(int id) {
+        statusRepository.deleteById(id);
     }
 
     public Status findByName(String name) {

@@ -35,15 +35,15 @@ public class InternalTransferNoteService {
     }
 
     public void save(List<InternalTransferNote> internalTransferNoteList) {
-        repository.save(internalTransferNoteList);
+        repository.saveAll(internalTransferNoteList);
     }
 
-    public InternalTransferNote findOne(int id) {
-        return repository.findOne(id);
+    public InternalTransferNote findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Page<InternalTransferNote>findByArrivalTimeBetween(Date startDate, Date endDate, Pageable pageable) {

@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.controlpoint;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.workcenter.WorkCenter;
 import com.trendsmixed.fma.module.workcenter.WorkCenterService;
 import com.trendsmixed.fma.utility.Page;
@@ -16,28 +17,31 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/controlPoints")
 public class ControlPointController {
-
     
     private final ControlPointService service;
     private WorkCenterService workCenterService;
 
+    @LogExecution
     @JsonView(ControlPointView.AllAndControlPointTypeAllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping
     public Iterable<ControlPoint> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(ControlPointView.AllAndControlPointTypeAllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping("/page")
     Page<ControlPoint> page(Pageable pageable) {
         return service.findAll(pageable);
     }
 
+    @LogExecution
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
 
+    @LogExecution
     @JsonView(ControlPointView.AllAndWorkCenterAll.class)
     @PostMapping
     public ControlPoint save(@RequestBody ControlPoint controlPoint) {
@@ -54,10 +58,9 @@ public class ControlPointController {
         }
     }
 
+    @LogExecution
     @PostMapping("/many")
     public void saveMany(@RequestBody List<ControlPoint> controlPoints) {
-
-        
         try {
             for (ControlPoint controlPoint : controlPoints) {
                 controlPoint.setCode(controlPoint.getCode().trim());
@@ -81,19 +84,21 @@ public class ControlPointController {
         }
     }
 
+    @LogExecution
     @JsonView(ControlPointView.AllAndControlPointTypeAllAndWorkCenterAllAndCostCenterAllAndSectionAll.class)
     @GetMapping("/{id}")
     public ControlPoint findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 
+    @LogExecution
     @PutMapping("/{id}")
     public ControlPoint updateCustomer(@PathVariable int id, @RequestBody ControlPoint controlPoint) {
         

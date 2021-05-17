@@ -19,11 +19,11 @@ public class FileTypeService {
         return fileTypeRepository.save(fileType);
     }
 
-    public FileType findOne(int id) {
-        return fileTypeRepository.findOne(id);
+    public FileType findById(int id) {
+        return fileTypeRepository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        fileTypeRepository.delete(id);
+    public void deleteById(int id) {
+        fileTypeRepository.deleteById(id);
     }
 }

@@ -23,13 +23,13 @@ public class JobDispatchController {
 
     @GetMapping("/{id}")
     public JobDispatch findOne(@PathVariable("id") int id) {
-        return jobDispatchService.findOne(id);
+        return jobDispatchService.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        jobDispatchService.delete(id);
+        jobDispatchService.deleteById(id);
 
     }
 

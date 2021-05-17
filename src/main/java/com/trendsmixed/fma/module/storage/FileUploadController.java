@@ -24,7 +24,7 @@ public class FileUploadController {
 
     @GetMapping(value = "/{id}")
     public HttpEntity<FileSystemResource> serveFile(@PathVariable("id") int id) throws IOException {
-        FileInformation fileInformation = fileInformationService.findOne(id);
+        FileInformation fileInformation = fileInformationService.findById(id);
         FileSystemResource fileSystemResource = new FileSystemResource(fileInformation.getPath());
         HttpHeaders header = new HttpHeaders();
         header.setContentType(MediaType.APPLICATION_OCTET_STREAM);

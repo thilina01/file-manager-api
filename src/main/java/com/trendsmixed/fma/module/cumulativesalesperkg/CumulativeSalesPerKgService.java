@@ -26,15 +26,15 @@ public class CumulativeSalesPerKgService {
     }
 
     public void save(List<CumulativeSalesPerKg> countries) {
-        repository.save(countries);
+        repository.saveAll(countries);
     }
 
-    public CumulativeSalesPerKg findOne(int id) {
-        return repository.findOne(id);
+    public CumulativeSalesPerKg findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

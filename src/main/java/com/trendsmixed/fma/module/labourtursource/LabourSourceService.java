@@ -31,15 +31,15 @@ public class LabourSourceService {
     }
 
     public void save(List<LabourSource> labourSources) {
-        repository.save(labourSources);
+        repository.saveAll(labourSources);
     }
 
-    public LabourSource findOne(int id) {
-        return repository.findOne(id);
+    public LabourSource findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public LabourSource findByCode(String code) {

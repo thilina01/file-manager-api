@@ -31,15 +31,15 @@ public class DeliveryTermService {
     }
 
     public void save(List<DeliveryTerm> deliveryTerms) {
-        repository.save(deliveryTerms);
+        repository.saveAll(deliveryTerms);
     }
 
-    public DeliveryTerm findOne(int id) {
-        return repository.findOne(id);
+    public DeliveryTerm findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public DeliveryTerm findByName(String name) {

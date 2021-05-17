@@ -31,15 +31,15 @@ public class SectionTypeService {
     }
 
     public void save(List<SectionType> sectionTypes) {
-        repository.save(sectionTypes);
+        repository.saveAll(sectionTypes);
     }
 
-    public SectionType findOne(int id) {
-        return repository.findOne(id);
+    public SectionType findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public SectionType findByCode(String code) {

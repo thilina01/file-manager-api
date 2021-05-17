@@ -30,12 +30,12 @@ public class ShiftService {
         return repository.save(shift);
     }
 
-    public Shift findOne(int id) {
-        return repository.findOne(id);
+    public Shift findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Shift findByCode(String code) {

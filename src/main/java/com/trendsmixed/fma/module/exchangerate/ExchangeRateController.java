@@ -88,12 +88,12 @@ public class ExchangeRateController {
     @JsonView(ExchangeRateView.AllAndCurrencyAll.class)
     @GetMapping("/{id}")
     public ExchangeRate findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

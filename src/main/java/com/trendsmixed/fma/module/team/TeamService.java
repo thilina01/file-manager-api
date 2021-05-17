@@ -31,15 +31,15 @@ public class TeamService {
     }
 
     public Iterable<Team> save(List<Team> teams) {
-        return repository.save(teams);
+        return repository.saveAll(teams);
     }
 
-    public Team findOne(int id) {
-        return repository.findOne(id);
+    public Team findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Team findByName(String name) {

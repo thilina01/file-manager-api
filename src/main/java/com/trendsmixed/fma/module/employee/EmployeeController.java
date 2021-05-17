@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.employee;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.designation.Designation;
 import com.trendsmixed.fma.module.designation.DesignationService;
 import com.trendsmixed.fma.module.employeecategory.EmployeeCategory;
@@ -24,7 +25,6 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/employees")
 public class EmployeeController {
-
     
     private final EmployeeService service;
     private final DesignationService designationService;
@@ -33,33 +33,36 @@ public class EmployeeController {
     private final SectionService sectionService;
     private final ShiftService shiftService;
 
+    @LogExecution
     @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @GetMapping
     public Iterable<Employee> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @GetMapping("/page")
     Page<Employee> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
 
+    @LogExecution
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
 
+    @LogExecution
     @GetMapping("/customer/{id}")
     public Employee findOneByCustomer(@PathVariable("id") int id) {
         return service.findOneByCustomerListId(id);
     }
 
+    @LogExecution
     @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @PostMapping
     public Employee save(@RequestBody Employee employee) {
-
-        
         try {
             employee = service.save(employee);
             return employee;
@@ -72,10 +75,9 @@ public class EmployeeController {
         }
     }
 
+    @LogExecution
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Employee> employees) {
-        
-
         Designation designation = designationService.findByCode("NA");
         EmployeeCategory employeeCategory = employeeCategoryService.findByCode("NA");
         LabourSource labourSource = labourSourceService.findByCode("NA");
@@ -122,23 +124,25 @@ public class EmployeeController {
         }
     }
 
+    @LogExecution
     @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @GetMapping("/{id}")
     public Employee findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
+    @LogExecution
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 
+    @LogExecution
     @JsonView(EmployeeView.AllAndDesignationAllAndEmployeeCategoryAllAndShiftAllAndSectionAllAndLabourSourceAll.class)
     @PutMapping("/{id}")
     public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
-        
         employee.setId(id);
         employee = service.save(employee);
         return employee;

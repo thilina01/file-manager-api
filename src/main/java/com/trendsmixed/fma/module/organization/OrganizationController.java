@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.organization;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.appsession.AppSessionService;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
@@ -19,23 +20,27 @@ public class OrganizationController {
     private AppSessionService appSessionService;
     private OrganizationService service;
 
+    @LogExecution
     @JsonView(OrganizationView.All.class)
     @GetMapping
     public Iterable<Organization> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(OrganizationView.All.class)
     @GetMapping("/page")
     Page<Organization> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
 
+    @LogExecution
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
 
+    @LogExecution
     @JsonView(OrganizationView.All.class)
     @PostMapping
     public Organization save(@RequestBody Organization organization) {
@@ -52,19 +57,21 @@ public class OrganizationController {
         }
     }
 
+    @LogExecution
     @JsonView(OrganizationView.All.class)
     @GetMapping("/{id}")
     public Organization findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 
+    @LogExecution
     @JsonView(OrganizationView.All.class)
     @PutMapping("/{id}")
     public Organization updateCustomer(@PathVariable int id, @RequestBody Organization organization) {

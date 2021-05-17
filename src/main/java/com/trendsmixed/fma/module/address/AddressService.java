@@ -35,12 +35,12 @@ public class AddressService {
         return repository.save(address);
     }
 
-    public Address findOne(int id) {
-        return repository.findOne(id);
+    public Address findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

@@ -30,12 +30,12 @@ public class CustomerTypeService {
         return repository.save(customerType);
     }
 
-    public CustomerType findOne(int id) {
-        return repository.findOne(id);
+    public CustomerType findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public CustomerType findByCode(String code) {

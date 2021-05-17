@@ -154,7 +154,7 @@ public class CustomerItemController {
     @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     @GetMapping("/{id}")
     public CustomerItem findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
@@ -170,8 +170,8 @@ public class CustomerItemController {
     @GetMapping("/byCustomerIdAndItemId/{customerId}/{itemId}")
     public CustomerItem byCustomerIdAndItemId(@PathVariable("customerId") int customerId,
             @PathVariable("itemId") int itemId) {
-        Customer customer = customerService.findOne(customerId);
-        Item item = itemService.findOne(itemId);
+        Customer customer = customerService.findById(customerId);
+        Item item = itemService.findById(itemId);
         return service.findByCustomerAndItem(customer, item);
     }
 
@@ -179,7 +179,7 @@ public class CustomerItemController {
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email,
             HttpServletRequest request) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 

@@ -27,15 +27,15 @@ public class ControlPointService {
     }
 
     public void save(List<ControlPoint> controlPoints) {
-        repository.save(controlPoints);
+        repository.saveAll(controlPoints);
     }
 
-    public ControlPoint findOne(int id) {
-        return repository.findOne(id);
+    public ControlPoint findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public ControlPoint findByCode(String code) {

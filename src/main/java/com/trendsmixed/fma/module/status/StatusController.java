@@ -60,13 +60,13 @@ public class StatusController {
 
     @GetMapping("/{id}")
     public Status findOne(@PathVariable("id") int id) {
-        return statusService.findOne(id);
+        return statusService.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        statusService.delete(id);
+        statusService.deleteById(id);
 
     }
 

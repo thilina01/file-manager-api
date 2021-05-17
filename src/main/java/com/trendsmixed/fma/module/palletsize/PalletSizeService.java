@@ -26,12 +26,12 @@ public class PalletSizeService {
         return repository.save(palletSize);
     }
 
-    public PalletSize findOne(int id) {
-        return repository.findOne(id);
+    public PalletSize findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
     public List<Combo> getCombo() {
         return repository.getCombo();

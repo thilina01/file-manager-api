@@ -26,15 +26,15 @@ public class LabourTurnoverService {
     }
 
     public void save(List<LabourTurnover> labourTurnovers) {
-        repository.save(labourTurnovers);
+        repository.saveAll(labourTurnovers);
     }
 
-    public LabourTurnover findOne(int id) {
-        return repository.findOne(id);
+    public LabourTurnover findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

@@ -31,15 +31,15 @@ public class CountryService {
     }
 
     public void save(List<Country> countries) {
-        repository.save(countries);
+        repository.saveAll(countries);
     }
 
-    public Country findOne(int id) {
-        return repository.findOne(id);
+    public Country findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Country findByCode(String code) {

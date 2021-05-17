@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.customer;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.address.Address;
 import com.trendsmixed.fma.module.contact.Contact;
 import com.trendsmixed.fma.module.currency.Currency;
@@ -29,23 +30,27 @@ public class CustomerController {
     private final CurrencyService currencyService;
     private final CustomerTypeService customerTypeService;
 
+    @LogExecution
     @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndCustomerItemListAndItemAll.class)
     @GetMapping
     public Iterable<Customer> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(CustomerView.All.class)
     @GetMapping("/page")
     Page<Customer> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
 
+    @LogExecution
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
 
+    @LogExecution
     @PostMapping
     public Customer save(@RequestBody Customer customer) {
 
@@ -81,6 +86,7 @@ public class CustomerController {
         }
     }
 
+    @LogExecution
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Customer> customers) {
 
@@ -147,19 +153,22 @@ public class CustomerController {
         }
     }
 
+    @LogExecution
     @JsonView(CustomerView.AllAndIncotermAllAndCustomerTypeAllAndCurrencyAllAndNotifyPartyAllAndContactAllAndContactTypeAllAndPaymentTermAllAndAddressAllAndAddressTypeAllAndCountryAllAndPortAllAndEmployeeAll.class)
     @GetMapping("/{id}")
     public Customer findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
+    @LogExecution
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id, @RequestHeader(value = "email", defaultValue = "") String email) {
 
-        service.delete(id);
+        service.deleteById(id);
 
     }
 
+    @LogExecution
     @PutMapping("/{id}")
     public Customer updateCustomer(@PathVariable int id, @RequestBody Customer customer,
             @RequestHeader(value = "email", defaultValue = "") String email) {

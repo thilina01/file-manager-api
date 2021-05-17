@@ -31,15 +31,15 @@ public class PaintService {
     }
 
     public void save(List<Paint> paints) {
-        repository.save(paints);
+        repository.saveAll(paints);
     }
 
-    public Paint findOne(int id) {
-        return repository.findOne(id);
+    public Paint findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Paint findByCode(String code) {

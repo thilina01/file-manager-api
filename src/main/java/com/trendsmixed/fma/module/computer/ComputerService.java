@@ -31,15 +31,15 @@ public class ComputerService {
     }
 
     public void save(List<Computer> computers) {
-        repository.save(computers);
+        repository.saveAll(computers);
     }
 
-    public Computer findOne(int id) {
-        return repository.findOne(id);
+    public Computer findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Computer findByCode(String code) {

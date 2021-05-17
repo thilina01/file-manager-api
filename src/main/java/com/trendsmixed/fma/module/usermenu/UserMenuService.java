@@ -1,5 +1,6 @@
 package com.trendsmixed.fma.module.usermenu;
 
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.menu.Menu;
 import com.trendsmixed.fma.module.user.User;
 import lombok.AllArgsConstructor;
@@ -22,23 +23,23 @@ public class UserMenuService {
     }
 
     public List<UserMenu> save(List<UserMenu> userMenus) {
-        return userMenuRepository.save(userMenus);
+        return userMenuRepository.saveAll(userMenus);
     }
 
-    public UserMenu findOne(int id) {
-        return userMenuRepository.findOne(id);
+    public UserMenu findById(int id) {
+        return userMenuRepository.findById(id).orElse(null);
     }
 
     public List<Menu> findTopMenuByUser(User user) {
         return userMenuRepository.findTopMenuByUser(user);
     }
 
-    public void delete(int id) {
-        userMenuRepository.delete(id);
+    public void deleteById(int id) {
+        userMenuRepository.deleteById(id);
     }
 
     public void delete(List<UserMenu> userMenus) {
-        userMenuRepository.delete(userMenus);
+        userMenuRepository.deleteAll(userMenus);
     }
 
     public UserMenu findByUserAndMenu(User user, Menu menu) {

@@ -31,15 +31,15 @@ public class AddressTypeService {
     }
 
     public void save(List<AddressType> addressTypes) {
-        repository.save(addressTypes);
+        repository.saveAll(addressTypes);
     }
 
-    public AddressType findOne(int id) {
-        return repository.findOne(id);
+    public AddressType findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public AddressType findByCode(String code) {

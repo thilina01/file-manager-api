@@ -31,15 +31,15 @@ public class ControlPointTypeService {
     }
 
     public void save(List<ControlPointType> controlPointTypes) {
-        repository.save(controlPointTypes);
+        repository.saveAll(controlPointTypes);
     }
 
-    public ControlPointType findOne(int id) {
-        return repository.findOne(id);
+    public ControlPointType findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public ControlPointType findByCode(String code) {

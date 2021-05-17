@@ -30,12 +30,12 @@ public class ManpowerTypeService {
         return repository.save(manpowerType);
     }
 
-    public ManpowerType findOne(int id) {
-        return repository.findOne(id);
+    public ManpowerType findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public ManpowerType findByCode(String code) {

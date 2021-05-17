@@ -26,15 +26,15 @@ public class ProcessedScrapService {
     }
 
     public void save(List<ProcessedScrap> processedScraps) {
-        repository.save(processedScraps);
+        repository.saveAll(processedScraps);
     }
 
-    public ProcessedScrap findOne(int id) {
-        return repository.findOne(id);
+    public ProcessedScrap findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
 }

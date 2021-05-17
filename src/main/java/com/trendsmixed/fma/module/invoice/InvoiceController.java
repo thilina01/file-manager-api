@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.invoice;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.dao.Combo;
+import com.trendsmixed.fma.log.LogExecution;
 import com.trendsmixed.fma.module.customer.Customer;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNote;
 import com.trendsmixed.fma.module.dispatchnote.DispatchNoteService;
@@ -24,41 +25,50 @@ public class InvoiceController {
     
     private final InvoiceService service;
     private final DispatchNoteService dispatchNoteService;
+
+
+    @LogExecution
     @JsonView(InvoiceView.All.class)
     @GetMapping
     public Iterable<Invoice> findAll() {
         return service.findAll();
     }
 
+    @LogExecution
     @JsonView(InvoiceView.AllAndDispatchNoteAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomerAndIncotermAndInvoiceType.class)
     @GetMapping("/page")
     Page<Invoice> page(Pageable pageable) {
         return new Page<>(service.findAll(pageable));
     }
 
+    @LogExecution
     @GetMapping("/combo")
     List<Combo> combo() {
         return service.getCombo();
     }
 
+    @LogExecution
     @JsonView(InvoiceView.AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency.class)
     @GetMapping(value = "/invoiceDurationPage", params = {"startDate", "endDate"})
     public Page<Invoice> invoiceDurationPage(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
         return new Page(service.findByInvoiceDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
     }
 
+    @LogExecution
     @JsonView(InvoiceView.AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency.class)
     @GetMapping(value = "/customerAndInvoiceDurationPage", params = {"customer", "startDate", "endDate"})
     public Page<Invoice> customerAndInvoiceDurationPage(@RequestParam("customer") String customer, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, Pageable pageable) throws ParseException {
         return new Page(service.findByCustomerAndInvoiceDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
     }
 
+    @LogExecution
     @JsonView(InvoiceView.AllAndCustomerAndInvoiceTypeAndExchangeRateAndCurrency.class)
     @GetMapping(value = "/customerPage", params = {"customer"})
     public Page<Invoice> customerPage( @RequestParam("customer") String customer, Pageable pageable) throws ParseException {
         return new Page(service.findByCustomer(new Customer(Integer.valueOf(customer)), pageable));
     }
-    
+
+    @LogExecution
     @JsonView(InvoiceView.AllAndDispatchNoteAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomerAndIncotermAndInvoiceType.class)
     @GetMapping(value = "/customerAndInvoiceDateBetween")
     public Page<Invoice> getCustomerAndInvoiceDateBetweenPage(
@@ -81,6 +91,7 @@ public class InvoiceController {
         return page;
     }
 
+    @LogExecution
     @JsonView(InvoiceView.All.class)
     @PostMapping
     public Invoice save(@RequestBody Invoice invoice) {
@@ -96,7 +107,7 @@ public class InvoiceController {
                       
                       if (dispatchNotes != null) {
                           for (DispatchNote dispatchNote : dispatchNotes) {
-                            DispatchNote dispatchNoteToUpdate = dispatchNoteService.findOne(dispatchNote.getId());
+                            DispatchNote dispatchNoteToUpdate = dispatchNoteService.findById(dispatchNote.getId());
                             dispatchNoteToUpdate.setInvoice(invoice);
                             dispatchNotesToUpdate.add(dispatchNoteToUpdate);
                           }
@@ -113,19 +124,21 @@ public class InvoiceController {
         }
     }
 
+    @LogExecution
      @JsonView(InvoiceView.AllAndDispatchNoteAndLoadingPlanAndLoadingPlanItemAndDispatchScheduleAndJobAndItemAndSalesOrderItemAndSalesOrderAndCustomerItemAndPackagingSpecificationAndPortOfLoadingAndContainerSizeAndAddressAndCustomerAndIncotermAndInvoiceType.class)
     @GetMapping("/{id}")
     public Invoice findOne(@PathVariable("id") int id) {
-        return service.findOne(id);
+        return service.findById(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         
-        service.delete(id);
+        service.deleteById(id);
 
     }
 
+    @LogExecution
     @PostMapping("/many")
     public void saveMany(@RequestBody List<Invoice> invoices) {
         
@@ -139,6 +152,7 @@ public class InvoiceController {
         }
     }
 
+    @LogExecution
     @JsonView(InvoiceView.All.class)
     @PutMapping("/{id}")
     public Invoice updateCustomer(@PathVariable int id, @RequestBody Invoice invoice) {

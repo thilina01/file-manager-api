@@ -34,15 +34,15 @@ public class SalesOrderService {
     }
 
     public void save(List<SalesOrder> SalesOrder) {
-        repository.save(SalesOrder);
+        repository.saveAll(SalesOrder);
     }
 
-    public SalesOrder findOne(int id) {
-        return repository.findOne(id);
+    public SalesOrder findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public SalesOrder findByid(Integer id) {

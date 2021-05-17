@@ -33,15 +33,15 @@ public class JobService {
     }
 
     public Iterable<Job> save(List<Job> jobs) {
-        return repository.save(jobs);
+        return repository.saveAll(jobs);
     }
 
-    public Job findOne(int id) {
-        return repository.findOne(id);
+    public Job findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 
     public Job findByJobNo(String jobNo) {
