@@ -12,7 +12,7 @@
     </appender>
 
     <appender name="root-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
-<!--        <file>${LOG_PATH}/${appName}.log</file>-->
+        <!--        <file>${LOG_PATH}/${appName}.log</file>-->
         <encoder>
             <pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>
         </encoder>
@@ -30,7 +30,7 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
         </filter>
-<!--        <file>${LOG_PATH}/${appName}-error.log</file>-->
+        <!--        <file>${LOG_PATH}/${appName}-error.log</file>-->
         <encoder>
             <pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>
         </encoder>
@@ -45,7 +45,7 @@
     </appender>
 
     <appender name="access-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
-<!--        <file>${LOG_PATH}/${appName}-access.log</file>-->
+        <!--        <file>${LOG_PATH}/${appName}-access.log</file>-->
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/${appName}-access-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
@@ -57,7 +57,7 @@
     </appender>
 
     <appender name="execution-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
-<!--        <file>${LOG_PATH}/${appName}-access.log</file>/-->
+        <!--        <file>${LOG_PATH}/${appName}-access.log</file>/-->
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/${appName}-execution-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
@@ -72,63 +72,77 @@
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
 
-    <appender name="execution-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
-        <destination>${logstashHost}:${logstashTcpPort}</destination>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <customFields>{"app":"${appName}","logType":"execution"}</customFields>
-        </encoder>
-    </appender>
+    <springProfile name="!dev">
 
-    <appender name="access-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
-        <destination>${logstashHost}:${logstashTcpPort}</destination>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <customFields>{"app":"${appName}","logType":"access"}</customFields>
-        </encoder>
-    </appender>
+        <appender name="execution-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+            <destination>${logstashHost}:${logstashTcpPort}</destination>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <customFields>{"app":"${appName}","logType":"execution"}</customFields>
+            </encoder>
+        </appender>
 
-    <appender name="root-log-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
-        <destination>${logstashHost}:${logstashTcpPort}</destination>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <customFields>{"app":"${appName}","logType":"app"}</customFields>
-        </encoder>
-    </appender>
+        <appender name="access-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+            <destination>${logstashHost}:${logstashTcpPort}</destination>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <customFields>{"app":"${appName}","logType":"access"}</customFields>
+            </encoder>
+        </appender>
 
-    <appender name="error-log-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
-        </filter>
-        <destination>${logstashHost}:${logstashTcpPort}</destination>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <customFields>{"app":"${appName}","logType":"error"}</customFields>
-        </encoder>
-    </appender>
+        <appender name="root-log-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+            <destination>${logstashHost}:${logstashTcpPort}</destination>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <customFields>{"app":"${appName}","logType":"app"}</customFields>
+            </encoder>
+        </appender>
 
-    <!--    <appender name="stash" class="net.logstash.logback.appender.LogstashAccessUdpSocketAppender">-->
-    <!--        <host>127.0.0.1</host>-->
-    <!--        &lt;!&ndash; port is optional (default value shown) &ndash;&gt;-->
-    <!--        <port>5044</port>-->
+        <appender name="error-log-stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>ERROR</level>
+            </filter>
+            <destination>${logstashHost}:${logstashTcpPort}</destination>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <customFields>{"app":"${appName}","logType":"error"}</customFields>
+            </encoder>
+        </appender>
 
-    <!--        <layout class="net.logstash.logback.layout.LogstashLayout">-->
-    <!--            <customFields>{"logType":"access"}</customFields>-->
-    <!--        </layout>-->
-    <!--    </appender>-->
+        <logger name="com.trendsmixed.fma.module.appsession" level="INFO" additivity="false">
+            <appender-ref ref="access-log"/>
+            <appender-ref ref="access-stash"/>
+        </logger>
 
-    <logger name="com.trendsmixed.fma.module.appsession" level="INFO" additivity="false">
-        <appender-ref ref="access-log"/>
-        <appender-ref ref="access-stash"/>
-    </logger>
+        <logger name="com.trendsmixed.fma.log.LogExecutionAspect" level="INFO" additivity="false">
+            <appender-ref ref="execution-stash"/>
+            <appender-ref ref="execution-log"/>
+            <appender-ref ref="Console2"/>
+        </logger>
 
-    <logger name="com.trendsmixed.fma.log.LogExecutionAspect" level="INFO" additivity="false">
-        <appender-ref ref="execution-stash"/>
-        <appender-ref ref="execution-log"/>
-        <appender-ref ref="Console2"/>
-    </logger>
+        <root level="INFO">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="root-log"/>
+            <appender-ref ref="error-log"/>
+            <appender-ref ref="root-log-stash"/>
+            <appender-ref ref="error-log-stash"/>
+        </root>
 
-    <root level="INFO">
-        <appender-ref ref="Console"/>
-        <appender-ref ref="root-log"/>
-        <appender-ref ref="error-log"/>
-        <appender-ref ref="root-log-stash"/>
-        <appender-ref ref="error-log-stash"/>
-    </root>
+    </springProfile>
+
+    <springProfile name="dev">
+
+        <logger name="com.trendsmixed.fma.module.appsession" level="INFO" additivity="false">
+            <appender-ref ref="access-log"/>
+        </logger>
+
+        <logger name="com.trendsmixed.fma.log.LogExecutionAspect" level="INFO" additivity="false">
+            <appender-ref ref="execution-log"/>
+            <appender-ref ref="Console2"/>
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="root-log"/>
+            <appender-ref ref="error-log"/>
+        </root>
+
+    </springProfile>
+
 </configuration>
