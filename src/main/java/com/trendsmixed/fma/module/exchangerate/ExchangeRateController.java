@@ -5,6 +5,8 @@ import com.trendsmixed.fma.dao.Combo;
 import com.trendsmixed.fma.module.currency.Currency;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
+import java.text.ParseException;
+import com.trendsmixed.fma.utility.Format;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,7 +56,24 @@ public class ExchangeRateController {
         return service.findOneByCurrencyAndExchangeRateBetween(new Currency(Integer.valueOf(currencyId)), new Date(startDate), new Date(endDate));
     }
 
-   
+    @JsonView(ExchangeRateView.AllAndCurrencyAll.class)
+    @GetMapping(value = "/currencyAndExchangeRateDateBetween")
+    public Page<ExchangeRate> getByCurrencyAndExchangeRateDateBetweenPage(
+        @RequestParam(value = "currency", required = false, defaultValue = "0") String currency,
+        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
+        Pageable pageable) throws ParseException {
+        Page<ExchangeRate> page ;
+
+        if(currency.equals("0") ){
+            page = new Page(service.findByExchangeRateDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));    
+        } 
+        else{
+            page = new Page(service.findByCurrencyAndExchangeRateDateBetween(new Currency(Integer.valueOf(currency)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
+        }
+        return page;
+    }
+
     @PostMapping
     @JsonView(ExchangeRateView.AllAndCurrencyAll.class)
     public ExchangeRate save(@RequestBody ExchangeRate exchangeRate) {
