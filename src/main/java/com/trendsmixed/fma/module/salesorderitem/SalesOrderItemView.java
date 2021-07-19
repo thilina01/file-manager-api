@@ -42,6 +42,9 @@ public class SalesOrderItemView {
         public interface SalesOrder {
         }
 
+        public interface Job {
+        }
+
         public interface All extends Id, Quantity, Scheduled, UnitPrice, Amount, Remarks, PageView.All {
         }
 

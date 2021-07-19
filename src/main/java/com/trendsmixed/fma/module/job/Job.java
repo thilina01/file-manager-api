@@ -5,6 +5,7 @@ import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
 import com.trendsmixed.fma.module.internaltransferitem.InternalTransferItem;
 import com.trendsmixed.fma.module.item.Item;
 import com.trendsmixed.fma.module.jobtype.JobType;
+import com.trendsmixed.fma.module.salesorderitem.SalesOrderItem;
 import com.trendsmixed.fma.module.subcontractoperation.SubcontractOperation;
 
 import lombok.Data;
@@ -53,6 +54,10 @@ public class Job implements Serializable {
     @JoinColumn(name = "job_type_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private JobType jobType;
+    @JsonView(JobView.SalesOrderItem.class)
+    @JoinColumn(name = "sales_order_item_id", referencedColumnName = "id")
+    @ManyToOne//(optional = false)
+    private SalesOrderItem salesOrderItem;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job")
     private List<DispatchSchedule> dispatchScheduleList;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "job", fetch = FetchType.LAZY)

@@ -176,6 +176,7 @@ public class DispatchScheduleController {
                     job.setJobDate(new Date());
                     job.setJobType(jobTypeService.findByCode("Order"));
                     job.setDispatchScheduleList(new ArrayList<>());
+                    job.setSalesOrderItem(dispatchSchedule.getSalesOrderItem());
                 } else {
                     job = jobService.findById(job.getId());
                 }

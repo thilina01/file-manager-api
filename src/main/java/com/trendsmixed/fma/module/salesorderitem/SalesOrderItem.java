@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.customeritem.CustomerItem;
 import com.trendsmixed.fma.module.delivery.Delivery;
 import com.trendsmixed.fma.module.dispatchschedule.DispatchSchedule;
+import com.trendsmixed.fma.module.job.Job;
 import com.trendsmixed.fma.module.salesorder.SalesOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -59,6 +60,9 @@ public class SalesOrderItem implements Serializable {
     private SalesOrder salesOrder;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
     private List<Delivery> deliveryList;
+    @JsonView(SalesOrderItemView.Job.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
+    private List<Job> jobList;
     @JsonView(SalesOrderItemView.DispatchSchedule.class)
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "salesOrderItem")
     private List<DispatchSchedule> dispatchScheduleList;

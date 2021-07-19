@@ -28,6 +28,9 @@ public class JobView {
     public interface JobType {
     }
 
+    public interface SalesOrderItem {
+    }
+
     public interface AllAndItemAll extends All, Item, ItemView.All {
     }
 
