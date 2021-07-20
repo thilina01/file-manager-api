@@ -9,6 +9,7 @@ import com.trendsmixed.fma.module.operation.OperationView.ProductType;
 import com.trendsmixed.fma.module.operation.OperationView.Production;
 import com.trendsmixed.fma.module.production.ProductionView;
 import com.trendsmixed.fma.module.production.ProductionView.ControlPoint;
+import com.trendsmixed.fma.module.schedule.ScheduleView;
 import com.trendsmixed.fma.module.workcenter.WorkCenterView;
 import com.trendsmixed.fma.utility.PageView;
 
@@ -24,6 +25,9 @@ public class OperationProgressView {
     }
 
     public interface Operation extends OperationView.All {
+    }
+
+    public interface Schedule extends ScheduleView.All {
     }
 
     public interface AllAndProductionAll extends All, Production, ProductionView.All {

@@ -2,6 +2,7 @@ package com.trendsmixed.fma.module.operationprogress;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.trendsmixed.fma.module.operation.Operation;
+import com.trendsmixed.fma.module.schedule.Schedule;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,10 @@ public class OperationProgress implements Serializable {
     @JoinColumn(name = "operation_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Operation operation;
+    @JsonView(OperationProgressView.Schedule.class)
+    @JoinColumn(name = "schedule_id", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private Schedule schedule;
 
     @JsonView(OperationProgressView.All.class)
     public String getDisplay() {
