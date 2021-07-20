@@ -59,3 +59,4 @@ storage
 #IntelliJ IDEA
 .idea
 file-manager-api.iml
+/log/
