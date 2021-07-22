@@ -55,6 +55,36 @@ public class SalesOrderView {
         public interface SalesOrderNumber {
         }
 
+        public interface Action {
+        }
+
+        public interface Address {
+        }
+
+        public interface CurrencyCode {
+        }
+
+        public interface ExchangeRate {
+        }
+
+        public interface Operator {
+        }
+
+        public interface ShippingInstruction {
+        }
+
+        public interface ArBranch {
+        }
+
+        public interface SalesPerson {
+        }
+
+        public interface PaymentTerm {
+        }
+
+        public interface Incoterm {
+        }
+
         public interface Display {
         }
 

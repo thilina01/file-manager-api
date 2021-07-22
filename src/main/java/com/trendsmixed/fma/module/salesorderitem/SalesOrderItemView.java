@@ -36,6 +36,33 @@ public class SalesOrderItemView {
         public interface Remarks {
         }
 
+        public interface Line {
+        }
+
+        public interface LineType {
+        }
+
+        public interface UnitOfMeasure {
+        }
+
+        public interface Value {
+        }
+
+        public interface RequestedShipDate {
+        }
+
+        public interface InitialProposedDate {
+        }
+
+        public interface CompletedDate {
+        }
+
+        public interface Warehouse {
+        }
+
+        public interface Item {
+        }
+
         public interface DispatchSchedule extends DispatchScheduleView.All {
         }
 
