@@ -33,8 +33,8 @@ public class SalesOrderService {
         return repository.save(SalesOrder);
     }
 
-    public void save(List<SalesOrder> SalesOrder) {
-        repository.saveAll(SalesOrder);
+    public Iterable<SalesOrder> save(List<SalesOrder> SalesOrder) {
+        return repository.saveAll(SalesOrder);
     }
 
     public SalesOrder findById(int id) {

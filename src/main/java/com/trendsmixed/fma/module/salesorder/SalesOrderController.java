@@ -13,7 +13,9 @@ import com.trendsmixed.fma.utility.Format;
 import com.trendsmixed.fma.utility.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -169,6 +171,18 @@ public class SalesOrderController {
                 e = e.getCause();
             }
             throw new Error(e.getMessage());
+        }
+    }
+
+    @PostMapping("/many")
+    public Iterable<SalesOrder> saveMany(@RequestBody List<SalesOrder> salesOrders) {
+        try {
+            return service.save(salesOrders);
+        } catch (Throwable e) {
+            while (e.getCause() != null) {
+                e = e.getCause();
+            }
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 
