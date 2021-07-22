@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- *
  * @author Thilina
  */
 @Entity
@@ -19,7 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "customer_item", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"item_id", "customer_id"})})
+        @UniqueConstraint(columnNames = {"item_id", "customer_id"})})
 
 public class CustomerItem implements Serializable {
 
@@ -52,9 +51,9 @@ public class CustomerItem implements Serializable {
     public CustomerItem(int anId) {
         this.id = anId;
     }
-    
+
     @JsonView(CustomerItemView.AllAndCustomerAllAndItemAll.class)
     public String getDisplay() {
-        return code + " : " + item.getCode() ;
+        return code + " : " + (item != null ? item.getCode() : "");
     }
 }
