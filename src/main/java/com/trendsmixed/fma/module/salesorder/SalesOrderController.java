@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping("/salesOrders")
 public class SalesOrderController {
 
-    
+
     private final SalesOrderService service;
     private final SalesOrderItemService salesOrderItemService;
     private final JobTypeService jobTypeService;
@@ -103,22 +103,22 @@ public class SalesOrderController {
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @GetMapping(value = "/salesOrder")
     public Page<SalesOrderItem> getSalesOrder(
-        @RequestParam(value = "customer", required = false, defaultValue = "0") String customer,
-        @RequestParam(value = "salesOrderType", required = false, defaultValue = "0") String salesOrderType,   
-        @RequestParam(value = "customerPoNumber", required = false, defaultValue = "0") String customerPoNumber,   
-        @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
-        @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate, 
-        Pageable pageable) throws ParseException {
-        Page<SalesOrderItem> page ;
-        if(!customerPoNumber.equals("0")){
+            @RequestParam(value = "customer", required = false, defaultValue = "0") String customer,
+            @RequestParam(value = "salesOrderType", required = false, defaultValue = "0") String salesOrderType,
+            @RequestParam(value = "customerPoNumber", required = false, defaultValue = "0") String customerPoNumber,
+            @RequestParam(value = "startDate", required = false, defaultValue = "1970-01-01") String startDate,
+            @RequestParam(value = "endDate", required = false, defaultValue = "2100-12-31") String endDate,
+            Pageable pageable) throws ParseException {
+        Page<SalesOrderItem> page;
+        if (!customerPoNumber.equals("0")) {
             page = new Page(service.findByCustomerPoNumber(customerPoNumber, pageable));
-        }else if(!customer.equals("0")&& !salesOrderType.equals("0")){
+        } else if (!customer.equals("0") && !salesOrderType.equals("0")) {
             page = new Page(service.findByCustomerAndOrderDateBetweenAndSalesOrderType(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new SalesOrderType(Integer.valueOf(salesOrderType)), pageable));
-        }else if(!customer.equals("0")){
+        } else if (!customer.equals("0")) {
             page = new Page(service.findByCustomerAndOrderDateBetween(new Customer(Integer.valueOf(customer)), Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
-        }else if(!salesOrderType.equals("0")){
+        } else if (!salesOrderType.equals("0")) {
             page = new Page(service.findByOrderDateBetweenAndSalesOrderType(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), new SalesOrderType(Integer.valueOf(salesOrderType)), pageable));
-        }else {
+        } else {
             page = new Page(service.findByOrderDateBetween(Format.yyyy_MM_dd.parse(startDate), Format.yyyy_MM_dd.parse(endDate), pageable));
         }
         return page;
@@ -150,15 +150,16 @@ public class SalesOrderController {
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PostMapping
     public SalesOrder save(@RequestBody SalesOrder salesOrder) {
-        
         try {
             List<SalesOrderItem> salesOrderItems = salesOrder.getSalesOrderItemList();
-            for (SalesOrderItem salesOrderItem : salesOrderItems) {
-                if (salesOrderItem.getId() != null) {
-                    SalesOrderItem existingSalesOrderItem = salesOrderItemService.findById(salesOrderItem.getId());
-                    salesOrderItem.setDispatchScheduleList(existingSalesOrderItem != null ? existingSalesOrderItem.getDispatchScheduleList() : new ArrayList<>());
+            if (salesOrderItems != null) {
+                for (SalesOrderItem salesOrderItem : salesOrderItems) {
+                    if (salesOrderItem.getId() != null) {
+                        SalesOrderItem existingSalesOrderItem = salesOrderItemService.findById(salesOrderItem.getId());
+                        salesOrderItem.setDispatchScheduleList(existingSalesOrderItem != null ? existingSalesOrderItem.getDispatchScheduleList() : new ArrayList<>());
+                    }
+                    salesOrderItem.setSalesOrder(salesOrder);
                 }
-                salesOrderItem.setSalesOrder(salesOrder);
             }
             salesOrder = service.save(salesOrder);
             return salesOrder;
@@ -181,7 +182,7 @@ public class SalesOrderController {
     @LogExecution
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
-        
+
         service.deleteById(id);
 
     }
@@ -190,7 +191,7 @@ public class SalesOrderController {
     @JsonView(SalesOrderView.AllAndCustomerAllAndSalesOrderTypeAll.class)
     @PutMapping("/{id}")
     public SalesOrder updateCustomer(@PathVariable int id, @RequestBody SalesOrder salesOrder) {
-        
+
         salesOrder.setId(id);
         salesOrder = service.save(salesOrder);
         return salesOrder;
